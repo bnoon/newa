@@ -6,6 +6,7 @@ sister_info = {'alb' : {'temp': 'ash', 'lwet': 'ash', 'rhum': 'ash', 'prcp': 'as
 'ash' : {'temp': 'alb', 'lwet': 'alb', 'rhum': 'alb', 'prcp': 'alb', 'wspd': 'alb', 'wdir': 'alb', 'srad': 'kno'},
 'aur' : {'temp': 'cu_gfr', 'rhum': 'cu_gfr', 'lwet': 'var', 'prcp': 'cu_gfr', 'wspd': 'cu_gfr', 'wdir': 'cu_gfr', 'srad': 'cu_gfr'},
 'bal' : {'temp': 'ksyr', 'rhum': 'ksyr', 'prcp': 'ksyr', 'wspd': 'ksyr', 'wdir': 'ksyr', 'lwet': 'laf', 'srad': 'laf'},
+'bla' : {'temp': 'bal', 'rhum': 'bal', 'prcp': 'bal', 'wspd': 'bal', 'wdir': 'bal', 'lwet': 'bal', 'srad': 'bal'},
 'bar' : {'temp': 'pul', 'lwet': 'pul', 'prcp': 'pul'},
 'bat' : {'temp': 'pav', 'lwet': 'alb', 'rhum': 'alb', 'prcp': 'pav', 'st4i': 'pav'},
 'bra' : {'temp': 'pul', 'lwet': 'pul', 'rhum': 'pul', 'prcp': 'pul'},
