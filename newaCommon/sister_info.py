@@ -268,6 +268,7 @@ sister_info = {'alb' : {'temp': 'ash', 'lwet': 'ash', 'rhum': 'ash', 'prcp': 'as
 'ct_ewi': {'temp': 'ct_enf', 'rhum': 'ct_enf', 'prcp': 'ct_enf', 'wspd': 'ct_enf', 'wdir': 'ct_enf', 'lwet': 'ct_enf', 'srad': 'ct_enf'},
 'ct_gra': {'temp': 'kbdl', 'rhum': 'kbdl', 'prcp': 'kbdl', 'wspd': 'kbdl', 'wdir': 'kbdl', 'lwet': 'ct_enf', 'srad': 'ct_enf'},
 'ct_ely': {'temp': 'ct_gfy', 'rhum': 'ct_gfy', 'prcp': 'ct_gfy', 'wspd': 'ct_gfy', 'wdir': 'ct_gfy', 'lwet': 'ct_gfy', 'srad': 'ct_gfy'},
+'ct_sto': {'temp': 'ct_tol', 'rhum': 'ct_tol', 'prcp': 'ct_tol', 'lwet': 'ct_tol'},
 '29':   {'temp': '202', 'rhum': '202', 'prcp': '202', 'wspd': '202', 'wdir': '202'},
 '33':   {'temp': '296', 'rhum': '296', 'prcp': '296', 'wspd': '296', 'wdir': '296'},
 '148':  {'rhum': '296', 'prcp': '296', 'wspd': '296', 'wdir': '296'},
