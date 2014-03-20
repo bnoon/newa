@@ -61,6 +61,7 @@ stn_info = {
 'riv': {'name': 'Riverhead (LIHREC)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.96222, 'lon': -72.71611, 'elev': 112, 'network': 'newa', 'state': 'NY'},
 'rom': {'name': 'Romulus (Thirsty Owl)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.69709, 'lon': -76.746448, 'elev': 485, 'network': 'newa', 'state': 'NY'},
 'rvm': {'name': 'Riverhead (MCV)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.98, 'lon': -72.58, 'elev': 54, 'network': 'newa', 'state': 'NY'},
+'rvp': {'name': 'Riverhead (Palmer)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toohigh', 'lat': 40.97, 'lon': -72.63, 'elev': 49, 'network': 'newa', 'state': 'NY'},
 'scr': {'name': 'Scriba', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -76.402453, 'elev': 400.0, 'lat': 43.410025, 'network': 'newa', 'state': 'NY'},
 'sdl': {'name': 'Sodus (Lake)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -77.06239, 'elev': 373, 'lat': 43.252375, 'network': 'newa', 'state': 'NY'},
 'shc': {'name': 'Southold (Corey Creek)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.045194, 'lon': -72.4452, 'elev': 25, 'network': 'newa', 'state': 'NY'},

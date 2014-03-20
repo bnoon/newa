@@ -30,7 +30,6 @@ stn_info_inactive = {
 'pra': {'name': 'Prattsburg', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.266594, 'elev': 1300.0, 'lat': 42.481937, 'network': 'newa', 'state': 'NY'},
 'pul': {'name': 'Pulteney', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -77.170930, 'elev': 1450.0, 'lat': 42.497750, 'network': 'newa', 'state': 'NY'},
 'red': {'name': 'Redhook', 'vars': ['temp', 'lwet', 'prcp', 'rhum','wspd','wdir','srad'], 'srqual': 'ok', 'lon': -73.849695, 'elev': 230.0, 'lat': 42.008868, 'network': 'newa', 'state': 'NY'},
-'rvp': {'name': 'Riverhead (Palmer)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toohigh', 'lat': 40.97, 'lon': -72.63, 'elev': 49, 'network': 'newa', 'state': 'NY'},
 'sav': {'name': 'Savannah', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -76.741219, 'elev': 400.0, 'lat': 43.022533, 'network': 'newa', 'state': 'NY'},
 'val': {'name': 'Valois', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -76.865600000000001, 'elev': 800.0, 'lat': 42.55903, 'network': 'newa', 'state': 'NY'},
 'cam': {'name': 'Cambridge', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -73.38, 'elev': 496.0, 'lat': 43.03, 'network': 'newa', 'state': 'NY'},
