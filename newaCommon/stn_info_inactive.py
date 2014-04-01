@@ -23,6 +23,7 @@ stn_info_inactive = {
 'gro': {'name': 'Groveland', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.801929999999999, 'elev': 590.0, 'lat': 42.660499999999999, 'network': 'newa', 'state': 'NY'},
 'him': {'name': 'Himrod', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.922259999999994, 'elev': 500.0, 'lat': 42.617629999999998, 'network': 'newa', 'state': 'NY'},
 'mex': {'name': 'Mexico', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.230703, 'elev': 400.0, 'lat': 43.459805, 'network': 'newa', 'state': 'NY'},
+'mmi': {'name': 'Middlefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.71083, 'elev': 180,  'lat': 41.49667, 'network': 'newa', 'state': 'CT'},
 'nap': {'name': 'Naples', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.387289999999993, 'elev': 700.0, 'lat': 42.626150000000003, 'network': 'newa', 'state': 'NY'},
 'ovi': {'name': 'Ovid (Hosmer)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -76.74525, 'elev': 590.0, 'lat': 42.68564, 'network': 'newa', 'state': 'NY'},
 'pav': {'name': 'Pavilion', 'vars': ['temp', 'prcp', 'st4i'], 'lon': -77.967309999999998, 'elev': 1100.0, 'lat': 42.831440000000001, 'network': 'newa', 'state': 'NY'},
