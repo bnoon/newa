@@ -18,8 +18,6 @@ stn_info_inactive = {
 'dre': {'name': 'Dresden', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.998130000000003, 'elev': 850.0, 'lat': 42.702179999999998, 'network': 'newa', 'state': 'NY'},
 'ede': {'name': 'Eden', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -78.858780, 'elev': 800.0, 'lat': 42.692416, 'network': 'newa', 'state': 'NY'},
 'fri': {'name': 'Friend', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.192549999999997, 'elev': 1050.0, 'lat': 42.655799999999999, 'network': 'newa', 'state': 'NY'},
-'gai': {'name': 'Gainesville', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -78.162607, 'elev': 1600.0, 'lat': 42.652126, 'network': 'newa', 'state': 'NY'},
-'gen': {'name': 'Geneva', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'st4i'], 'lon': -77.02818, 'elev': 650.0, 'lat': 42.87295, 'network': 'newa', 'state': 'NY'},
 'gra': {'name': 'Granville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -73.331111, 'elev': 670.0, 'lat': 43.412500, 'network': 'newa', 'state': 'NY'},
 'gro': {'name': 'Groveland', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.801929999999999, 'elev': 590.0, 'lat': 42.660499999999999, 'network': 'newa', 'state': 'NY'},
 'him': {'name': 'Himrod', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.922259999999994, 'elev': 500.0, 'lat': 42.617629999999998, 'network': 'newa', 'state': 'NY'},
@@ -47,5 +45,6 @@ stn_info_inactive = {
 '3407': {'name': 'Eastampton, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.9856, 'lon': -74.7469, 'elev': 12, 'network': 'njwx', 'state': 'NJ'},
 '3409': {'name': 'Upper Deerfield (RISE), NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.5037, 'lon': -75.254, 'elev': 26, 'network': 'njwx', 'state': 'NJ'},
 '3405': {'name': 'Fort Monmouth, NJ', 'vars': ['temp', 'rhum', 'wspd', 'wdir'], 'lat': 40.3137, 'lon': -74.049, 'elev': 5, 'network': 'njwx', 'state': 'NJ'},
+'um_tff': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -71.67833, 'elev': 610, 'lat': 42.34611, 'network': 'cu_log', 'state': 'MA'},
 'me_bhb': {'name': 'Bar Harbor, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.389786, 'lon': -68.208026, 'elev': 55, 'network': 'newa', 'state': 'ME'}
 }
