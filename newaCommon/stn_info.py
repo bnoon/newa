@@ -24,6 +24,7 @@ stn_info = {
 'far': {'name': 'Farmington', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'srad', 'wdir'], 'srqual': 'toolow', 'lon': -77.262299999999996, 'elev': 600.0, 'lat': 42.99004, 'network': 'newa', 'state': 'NY'},
 'fay': {'name': 'Fayette 3 Brothers', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toohigh', 'lon': -76.92445, 'elev': 615.0, 'lat': 42.8235, 'network': 'newa', 'state': 'NY'},
 'fre': {'name': 'Freeville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'bad', 'lon': -76.331130000000002, 'elev': 1100.0, 'lat': 42.51914, 'network': 'newa', 'state': 'NY'},
+'fts': {'name': 'Fort Salonga', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 40.897214, 'lon': -73.278708, 'elev': 99, 'network': 'newa', 'state': 'NY'},
 'gai': {'name': 'Gainesville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -78.162607, 'elev': 1600.0, 'lat': 42.652126, 'network': 'newa', 'state': 'NY'},
 'gbe': {'name': 'Geneva (Bejo)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.82755, 'lon': -77.01053, 'elev': 700.0, 'network': 'newa', 'state': 'NY'},
 'gen': {'name': 'Geneva', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'st4i'], 'lon': -77.02818, 'elev': 650.0, 'lat': 42.87295, 'network': 'newa', 'state': 'NY'},
@@ -44,6 +45,7 @@ stn_info = {
 'lol': {'name': 'Lodi (Lamoreaux)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 42.57664, 'lon': -76.85844, 'elev': 853, 'network': 'newa', 'state': 'NY'},
 'los': {'name': 'Lodi (Shalestone)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.87803, 'elev': 522.0, 'lat': 42.56253, 'network': 'newa', 'state': 'NY'},
 'lyn': {'name': 'Lyndonville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'srad', 'wdir'], 'srqual': 'toolow', 'lon': -78.369044000000002, 'elev': 361.0, 'lat': 43.298085, 'network': 'newa', 'state': 'NY'},
+'man': {'name': 'Manorville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 40.860597, 'lon': -72.821942, 'elev': 44, 'network': 'newa', 'state': 'NY'},
 'mar': {'name': 'Marlboro', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'srad', 'wdir'], 'srqual': 'ok', 'lon': -73.984509, 'elev': 390.0, 'lat': 41.590299, 'network': 'newa', 'state': 'NY'},
 'mat': {'name': 'Mattituck (Harbes)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.99, 'lon': -72.59, 'elev': 96, 'network': 'newa', 'state': 'NY'},
 'med': {'name': 'Medina', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.20000, 'lon': -78.39275, 'elev': 600, 'network': 'newa', 'state': 'NY'},
@@ -82,6 +84,7 @@ stn_info = {
 'wmi': {'name': 'Water Mill', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -72.317480, 'elev': 15.0, 'lat': 40.911110, 'network': 'newa', 'state': 'NY'},
 'wmn': {'name': 'Water Mill (North)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.92, 'lon': -72.34, 'elev': 15, 'network': 'newa', 'state': 'NY'},
 'wol': {'name': 'Wolcott', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.876728, 'elev': 280, 'lat': 43.262683, 'network': 'newa', 'state': 'NY'},
+'wi_gay': {'name': 'Gays Mills, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 43.314584, 'lon': -90.841526, 'elev': 942, 'network': 'newa', 'state': 'WI'},
 'vca': {'name': 'Calais, VT','vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.5293, 'elev': 1434, 'lat': 44.3395, 'network': 'newa', 'state': 'VT'},
 'vdu': {'name': 'Dummerston, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.904167, 'lon': -72.568466, 'elev': 561, 'network': 'newa', 'state': 'VT'},
 'vsb': {'name': 'South Burlington, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.2042, 'elev': 233, 'lat': 44.4308, 'network': 'newa', 'state': 'VT'},
@@ -256,5 +259,6 @@ stn_info = {
 'kpvd': {'name': 'Providence, RI', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -71.43333, 'elev': 60.0,  'lat': 41.71667, 'network': 'icao', 'state': 'RI'},
 'kbdr': {'name': 'Bridgeport, CT', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -73.128889999999998, 'elev': 5.0, 'lat': 41.158329999999999, 'network': 'icao', 'state': 'CT'},
 'kdxr': {'name': 'Danbury, CT', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -73.482780000000005, 'elev': 457.0, 'lat': 41.371389999999998, 'network': 'icao', 'state': 'CT'},
-'kbdl': {'name': 'Hartford (Bradley AP), CT', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -72.68, 'elev': 190.0,  'lat': 41.94, 'network': 'icao', 'state': 'CT'}
+'kbdl': {'name': 'Hartford (Bradley AP), CT', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -72.68, 'elev': 190.0,  'lat': 41.94, 'network': 'icao', 'state': 'CT'},
+'kovs': {'name': 'Boscobel, WI', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -89.32, 'elev': 672.0,  'lat': 43.16, 'network': 'icao', 'state': 'WI'}
 }
