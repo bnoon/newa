@@ -77,6 +77,7 @@ stn_info = {
 'som': {'name': 'Somerset', 'vars': ['temp', 'lwet', 'rhum', 'prcp', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -78.626908, 'elev': 318.0, 'lat': 43.325911, 'network': 'newa', 'state': 'NY'},
 'var': {'name': 'Varick (Swedish Hill)', 'vars': ['temp', 'lwet', 'rhum', 'prcp', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.81007, 'elev': 662.0, 'lat': 42.80248, 'network': 'newa', 'state': 'NY'},
 'ver': {'name': 'Versailles', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 42.51640, 'lon': -79.02689, 'elev': 863, 'network': 'newa', 'state': 'NY'},
+'wad': {'name': 'Wading River', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.95, 'lon': -72.81, 'elev': 107, 'network': 'newa', 'state': 'NY'},
 'way': {'name': 'Wayland', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -77.578797, 'elev': 1600.0, 'lat': 42.604968, 'network': 'newa', 'state': 'NY'},
 'wgl': {'name': 'Watkins Glen', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -76.925487, 'elev': 1100.0, 'lat': 42.377077, 'network': 'newa', 'state': 'NY'},
 'wla': {'name': 'Watkins Glen (Lakewood)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.428133, 'lon': -76.9057, 'elev': 906, 'network': 'newa', 'state': 'NY'},
@@ -260,5 +261,5 @@ stn_info = {
 'kbdr': {'name': 'Bridgeport, CT', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -73.128889999999998, 'elev': 5.0, 'lat': 41.158329999999999, 'network': 'icao', 'state': 'CT'},
 'kdxr': {'name': 'Danbury, CT', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -73.482780000000005, 'elev': 457.0, 'lat': 41.371389999999998, 'network': 'icao', 'state': 'CT'},
 'kbdl': {'name': 'Hartford (Bradley AP), CT', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -72.68, 'elev': 190.0,  'lat': 41.94, 'network': 'icao', 'state': 'CT'},
-'kovs': {'name': 'Boscobel, WI', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -89.32, 'elev': 672.0,  'lat': 43.16, 'network': 'icao', 'state': 'WI'}
+'kovs': {'name': 'Boscobel, WI', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -90.6737, 'elev': 672.0,  'lat': 43.16085, 'network': 'icao', 'state': 'WI'}
 }
