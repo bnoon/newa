@@ -68,7 +68,6 @@ stn_info = {
 'rvm': {'name': 'Riverhead (MCV)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.98, 'lon': -72.58, 'elev': 54, 'network': 'newa', 'state': 'NY'},
 'rvp': {'name': 'Riverhead (Palmer)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.97, 'lon': -72.63, 'elev': 49, 'network': 'newa', 'state': 'NY'},
 'sdl': {'name': 'Sodus (Lake)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -77.06239, 'elev': 373, 'lat': 43.252375, 'network': 'newa', 'state': 'NY'},
-'shc': {'name': 'Southold (Corey Creek)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.045194, 'lon': -72.4452, 'elev': 25, 'network': 'newa', 'state': 'NY'},
 'shd': {'name': 'Southold (One Woman)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.08, 'lon': -72.42, 'elev': 29, 'network': 'newa', 'state': 'NY'},
 'she': {'name': 'Sheridan', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.50207, 'lon': -79.20513, 'elev': 750, 'network': 'newa', 'state': 'NY'},
 'shm': {'name': 'Southold (Mudd)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 41.06, 'lon': -72.45, 'elev': 25, 'network': 'newa', 'state': 'NY'},
