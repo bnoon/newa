@@ -1,0 +1,244 @@
+from quixote.directory import Directory
+from quixote import get_request
+from quixote.errors import TraversalError
+
+class RootDirectory(Directory):
+
+	_q_exports = ["","process_input","process_help","update_status","crucifer_disease","crucifer_disease_full",
+				  "cruc_alternaria","cruc_blackleg","cruc_blackrot","cruc_clubroot",
+				  "cruc_wirestem","cruc_downmild","cruc_fusarium","cruc_headrot",
+				  "cruc_lesionnt","cruc_scleroti","cruc_sbcystnt",
+				  "cruc_zclooper","cruc_zicworm","cruc_zaphids","cruc_zdbmoth","cruc_zothrips","cruc_zfleabtl",
+				  "cruc_zsmidge","cruc_zslugs","cruc_zslugs","cruc_zcrmaggot"]
+
+#	put up input page for following
+	def _q_index (self):						#default
+		from newaVegModel_io import crucifer_disease_input
+		return crucifer_disease_input()
+	def crucifer_disease (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input(None)
+		else:
+			from newaVegModel import process_input
+			path = ['crucifer_disease'] + path
+			return process_input(None,path)
+	def crucifer_disease_full (self, path=None) :
+			from newaVegModel_io import crucifer_disease_full
+			return crucifer_disease_full()
+	def cruc_alternaria (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_alternaria')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_alternaria'] + path
+			return process_input(None,path)
+	def cruc_blackleg (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_blackleg')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_blackleg'] + path
+			return process_input(None,path)
+	def cruc_blackrot (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_blackrot')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_blackrot'] + path
+			return process_input(None,path)
+	def cruc_clubroot (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_clubroot')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_clubroot'] + path
+			return process_input(None,path)
+	def cruc_wirestem (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_wirestem')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_wirestem'] + path
+			return process_input(None,path)
+	def cruc_downmild (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_downmild')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_downmild'] + path
+			return process_input(None,path)
+	def cruc_fusarium (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_fusarium')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_fusarium'] + path
+			return process_input(None,path)
+	def cruc_headrot (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_headrot')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_headrot'] + path
+			return process_input(None,path)
+	def cruc_lesionnt (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_lesionnt')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_lesionnt'] + path
+			return process_input(None,path)
+	def cruc_scleroti (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_scleroti')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_scleroti'] + path
+			return process_input(None,path)
+	def cruc_sbcystnt (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_sbcystnt')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_sbcystnt'] + path
+			return process_input(None,path)
+	def cruc_zclooper (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_zclooper')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_zclooper'] + path
+			return process_input(None,path)
+	def cruc_zicworm (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_zicworm')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_zicworm'] + path
+			return process_input(None,path)
+	def cruc_zaphids (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_zaphids')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_zaphids'] + path
+			return process_input(None,path)
+	def cruc_zdbmoth (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_zdbmoth')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_zdbmoth'] + path
+			return process_input(None,path)
+	def cruc_zothrips (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_zothrips')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_zothrips'] + path
+			return process_input(None,path)
+	def cruc_zfleabtl (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_zfleabtl')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_zfleabtl'] + path
+			return process_input(None,path)
+	def cruc_zsmidge (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_zsmidge')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_zsmidge'] + path
+			return process_input(None,path)
+	def cruc_zslugs (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_zslugs')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_zslugs'] + path
+			return process_input(None,path)
+	def cruc_zcrmaggot (self, path=None) :
+		if not path or path == ['']:
+			from newaVegModel_io import crucifer_disease_input
+			return crucifer_disease_input('cruc_zcrmaggot')
+		else:
+			from newaVegModel import process_input
+			path = ['cruc_zcrmaggot'] + path
+			return process_input(None,path)
+
+
+#	received request form to be processed
+	def process_input (self, path=None) :
+		from newaVegModel import process_input
+		request = get_request()
+		return process_input(request,path)
+	def process_help (self, path=None) :
+		from newaVegModel import process_help
+		request = get_request()
+		return process_help(request,path)
+	def update_status (self, path=None) :
+		from newaVegModel import process_update
+		request = get_request()
+		return process_update(request,path)
+
+
+#	process information provided in url
+	def _q_lookup(self, component, path=None):
+		if component == 'process_help':
+			from newaVegModel import process_help
+			if path: 
+				path = [component] + path
+			else:
+				path = [component]
+			return process_help(None,path)
+		else:
+			from newaVegModel import process_input
+			if path: 
+				path = [component] + path
+			else:
+				path = [component]
+			return process_input(None,path)
+
+	def _q_traverse(self, path):
+		assert len(path) > 0
+		component = path[0]
+		if component == 'program':
+			del path[0]
+			assert len(path) > 0
+			component = path[0]
+		path = path[1:]
+		name = self._q_translate(component)
+		if name is not None:
+			obj = getattr(self, name)
+			if not hasattr(obj,'_q_exports'):
+				if path: return obj(path)
+				else:    return obj()
+			else:
+				return obj._q_traverse(path)
+		else:
+			obj = self._q_lookup(component,path)
+			if obj: return obj
+		if obj is None:
+			raise TraversalError(private_msg=('directory %r has no component '
+								'%r' % (self, component)))

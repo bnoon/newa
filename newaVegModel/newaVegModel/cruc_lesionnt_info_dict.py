@@ -1,0 +1,24 @@
+pest_status_management = { 
+'pest_name': "Lesion nematode",
+'time_concern': ["Pre plant","Seedling through harvest","Post harvest"],
+'keychar_oc': "<i>Pratylenchus penetrans</i>",
+'keychar_o':  "<p><b>Key Characteristics: </b>Lesion nematode populations can build on crops in the brassica family causing significant destruction of the root cortical tissues. Lesion nematode is more prevalent where grain cover crops are used in rotations with susceptible cash crops.</p> <p><b>Relative risk: </b>Lesion nematode populations can be damaging if populations are high.</p>",
+'keychar_c':  "",
+'help_links': [],
+'messages': {
+'Pre plant':             { 'datelo': (1,1,0), 'datehi': (4,14,23),
+                           'status': "<i>Pratylenchus penetrans. </i>may be in soil or crop or cruciferous weed debris.",
+                           'management_oc': "",                          
+                           'management_o': "Crop Rotation - Root-lesion nematode has over 400 hosts including many vegetable and grain crops that are planted in rotation with cole crops thus making it difficult to manage lesion nematode strictly using crop rotation once populations have reached damaging levels.  Depending on the size of the infested site, marigold varieties such as &quot;Polynema&quot; and &quot;Nemagone&quot; are very effective at reducing nematode populations, where marigold can be established successfully and weed hosts are managed. <p><ul><li><a href='http://calshort-lamp.cit.cornell.edu/bjorkman/covercrops/index.php' target='_blank'>Why use cover crops in vegetable rotations?</a> <li><a href='http://vegetablemdonline.ppath.cornell.edu/NewsArticles/McNabRotations.htm' target='_blank'>Crop roatation information</a> <li><a href='http://vegetablemdonline.ppath.cornell.edu/NewsArticles/Crop_sequences.htm' target='_blank'>Cropping sequences and root health</a></ul></p> <p>Site selection - Assay soil for nematode infestation, if needed. <ul><li><a href='http://www.nysipm.cornell.edu/grantspgm/projects/proj06/veg/gugino.asp' target='_blank'>On-farm method of assessing nematode population</a> <li><a href='http://www.nysaes.cornell.edu/recommends/Nemasoilsample.pdf' target='_blank'>&quot;How to&quot; instructions for soil sampling for nematode bioassays</a></ul></p> <p>Biofumigant cover crops - Cover crops with a biofumigant effect, may be used for managing root-lesion nematode. It is important to note that many biofumigant crops including Sudangrass, white mustard, and rapeseed are hosts to root-lesion nematode and will increase the population until they are incorporated into the soil as a green manure, at which point their decomposition products are toxic to nematodes. Research has suggested that Sudangrass hybrid &quot;Trudan 8&quot; can be used effectively as a biofumigant to reduce root-lesion nematode populations. Cover crops such as forage pearl millet &quot;CFPM 101&quot; and &quot;Tifgrain 102&quot;, rapeseed &quot;Dwarf Essex&quot;, and ryegrass &quot;Pennant&quot; are poor hosts, and thus will limit the build-up or reduce root-lesion nematode populations when used as a &quot;standard&quot; cover crop.</p> <p>Weeds - Many common weed species including lambsquarters, redroot pigweed, common purslane, common ragweed, common dandelion and wild mustard are also hosts therefore effective weed management is also important.</p>",
+                           'management_c': "No conventional techniques are available."},
+'Seedling through harvest': { 'datelo': (4,15,0), 'datehi': (11,14,23),
+                           'status': "<i>Pratylenchus penetrans </i>may infect plants.",
+                           'management_oc': "",
+                           'management_o': "Scouting - Use a soil bioassay with soybean to assess soil lesion nematode infestation levels. Or, submit the soil sample(s) for nematode analysis at a public or private nematology lab. <ul><li><a href='http://plantclinic.cornell.edu/' target='_blank'>Cornell Plant Disease Diagnostic Clinic</a> <li><a href='http://www.pestid.msu.edu/Default.aspx?tabid=109' target='_blank'>Michigan State Plant Parasitic Nematodes</a></ul> <p>If spraying is necessary choose from: DiTera DF, Nema-Q.</p>",
+                           'management_c': "No conventional techniques are available."},
+'Post harvest':          { 'datelo': (11,15,0), 'datehi': (12,31,23),
+                           'status': "<i>Pratylenchus penetrans. </i>may be in soil or crop or cruciferous weed debris.",
+                           'management_oc': "",
+                           'management_o': "Sanitation - Avoid moving soil from infested fields to un-infested fields via equipment and vehicles, etc.  Also limit/avoid surface run-off from infested fields.",
+                           'management_c': "No conventional techniques are available."}
+} }

@@ -1,0 +1,313 @@
+import sys
+from qpy import h8
+from mx import DateTime
+if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
+from newaCommon_io import display_station_list
+miss = -999
+
+### Add pests here ###
+disease_dict = {'cruc_aaa': '   --- Diseases ---',
+				'cruc_alternaria':'Alternaria',
+			    'cruc_blackleg':  'Black Leg',
+			    'cruc_blackrot':  'Black Rot',
+			    'cruc_clubroot':  'Clubroot',
+			    'cruc_wirestem':  'Wire Stem/Damping Off',
+			    'cruc_downmild':  'Downy Mildew',
+			    'cruc_fusarium':  'Fusarium Yellows',
+			    'cruc_headrot':   'Head Rot of Broccoli',
+			    'cruc_lesionnt':  'Lesion Nematode',
+			    'cruc_scleroti':  'Sclerotinia White Mold',
+			    'cruc_sbcystnt':  'Sugar Beet Cyst Nematode',
+			    'cruc_zaa': '   --- Insects ---',
+			    'cruc_zclooper':  'Cabbage Looper',
+			    'cruc_zicworm':   'Imported Cabbageworm',
+			    'cruc_zaphids':   'Aphids',
+			    'cruc_zdbmoth':   'Diamondback Moth',
+			    'cruc_zothrips':  'Onion Thrips',
+			    'cruc_zfleabtl':  'Flea Beetle',
+			    'cruc_zsmidge':   'Swede Midge',
+			    'cruc_zslugs':    'Slugs',
+			    'cruc_zcrmaggot': 'Cabbage Root Maggot',
+			    'cruc_yaa': '   --- Weeds ---',
+			    'cruc_ycgrounds': 'Common Goundsel',
+			    'cruc_yclambsq':  'Common Lambsquarters',
+			    'cruc_ycpurslane':'Common Purslane',
+			    'cruc_ygalinsoga':'Galinsoga',
+			    'cruc_ynshade':   'Nightshades'
+			   }
+
+############################################
+# Input screen 
+############################################
+def crucifer_disease_input [html] (disease_type=None):
+	'''
+	<!DOCTYPE HTML>
+	<HTML>
+	<HEAD>
+		<TITLE>NEWA Crucifer Models</TITLE>
+		<link type="text/css" rel="stylesheet" href="http://newa.nrcc.cornell.edu/Humanity/ui.all.css">
+		<link type="text/css" rel="stylesheet" href="http://newa.nrcc.cornell.edu/newaVegModel.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/crucifer_disease.js"></script>
+<!-- 
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mapping3.js"></script>
+ -->
+	</head>
+	  
+	<body>	
+	<div class="banner">NEWA Crucifer Models</div>
+
+	<div id="leftbox">
+		<form name="stationLister">
+		Select a pest:
+		<br /><select name="pest" style="max-width:190px;" onChange="update_page();">
+	'''		
+	if not disease_type:
+		'<option value="" selected>Select pest</option>'
+	else:
+		'<option value="">Select disease</option>'
+	ddk = disease_dict.keys()
+	ddk.sort()
+	for distypval in ddk:
+		if disease_type == distypval:
+			'<option value="%s" selected>%s</option>' % (distypval,disease_dict[distypval])
+		else:
+			'<option value="%s">%s</option>' % (distypval,disease_dict[distypval])
+	'</select>'
+	if disease_type == "cruc_zcrmaggot":
+		display_option = "block"
+	else:
+		display_option = "none"
+	'<div id="station_list" style="display:%s;">' % display_option
+	display_station_list()
+	'</div>'
+	'''
+	<p>Date of Interest:
+	<br /><input type="text" name="accend" id="enddpick" value="" />
+	<p><input type="button" value="Calculate" class="button" /></p>
+	<input type="hidden" name="tech_choice" value="conventional">
+	</form>
+	</div>
+
+	<div id="rightbox">
+		<div id="righttabs">
+			<ul>
+	'''
+#				<li><a href="#first"> Map</a></li>
+	'''
+				<li><a href="#second">Results</a></li>
+				<li><a href="#third"> Info</a></li>
+			</ul>
+	'''
+#			<div id="first" style="padding:0px;">
+#				<div id="map" style="width: 635px; height: 560px"></div>
+#			</div>
+	'''
+			<div id="second" class="plain_back" style="padding:3px;">
+				<p>Select pest and date, then press Calculate. Results will appear here.</p>
+			</div>
+			<div id="third"  class="plain_back_l" style="padding:3px 5px;">
+				<p style="text-align:center;">Additional pest information will appear here.</p>
+			</div>
+		</div>
+	</div>
+
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''
+
+def crucifer_disease_full [html] ():
+	'''
+	<!DOCTYPE HTML>
+	<html>
+	<head>
+		<title>Crucifer Models</title>
+	</head>
+	  
+	<body>	
+	<h3>Crucifer Models</h3>
+	<ul>
+		<li>Diseases
+		<ul>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_alternaria/x'>Alternaria</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_blackleg/x'>Black Leg</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_blackrot/x'>Black Rot</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_clubroot/x'>Clubroot</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_downmild/x'>Downy Mildew</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_fusarium/x'>Fusarium Yellows</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_headrot/x'>Head Rot of Broccoli</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_lesionnt/x'>Lesion Nematode</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_scleroti/x'>Sclerotinia White Mold</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_sbcystnt/x'>Sugar Beet Cyst Nematode</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_wirestem/x'>Wire Stem/Damping Off</a></li>
+		</ul>
+		<li>Insects
+		<ul>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_zclooper/x'>Cabbage Looper</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_zicworm/x'>Imported Cabbageworm</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_zaphids/x'>Aphids</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_zdbmoth/x'>Diamondback Moth</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_zothrips/x'>Onion Thrips</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_zfleabtl/x'>Flea Beetle</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_zsmidge/x'>Swede Midge</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_zslugs/x'>Slugs</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_zcrmaggot/gen'>Cabbage Root Maggot</a> (degree days for Geneva)</li>
+		</ul>		
+		<li>Weeds
+		<ul>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_ycgrounds/x'>Common Groundsel</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_yclambsq/x'>Common Lambsquarters</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_ycpurslane/x'>Common Purslane</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_ygalinsoga/x'>Galinsoga</a></li>
+		<li><a href='http://newa.nrcc.cornell.edu/newaVegModel/cruc_ynshade/x'>Nightshades</a></li>
+		</ul>		
+	</ul>
+	</body>
+	</html>
+	'''
+
+
+############################################
+# Output pages
+############################################
+# help page
+def helppage [html] (urls):		
+	if urls: 
+		'<h3>Pest Information</h3>'
+		'<ul>'
+		for desc,url in urls:
+			if len(url) > 0:
+				'<li><a href="%s" target="_blank">%s</a></li>' % (url,desc)
+			elif desc.find("<") >= 0 or desc.find("&") >= 0:
+				'<li>%s</li>' % h8(desc)
+			else:
+				'<li>%s</li>' % (desc)
+		'</ul>'
+	else:
+		'<p>No help available for selection.</p>'
+		
+#--------------------------------------------------------------------------------------------		
+# standard footer
+def add_footer [html] (smry_dict=None,add_logo=None):
+	'''
+	<div class="footer"><b>Disclaimer: These are theoretical predictions 
+	and forecasts.</b> These results should not be substituted for actual 
+	observations of plant growth stage, pest presence, and pest occurrence determined through scouting or insect 
+	pheromone traps.</div>
+	<div class="logo_line">
+	<table>
+	'''
+	if add_logo == 'pmep':
+		'<tr><td align=left width="33%"><a href="http://newa.cornell.edu" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
+		'<td align=center width="34%"><a href="http://treefruitipm.info" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/pmep_logo.jpg" alt="PMEP" width="70" height="25" border="0"></a></td>'
+		'<td align=right width="33%"><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
+	else:
+		'<tr><td align=left><a href="http://newa.cornell.edu" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
+		'<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
+	'</table></div>'
+
+
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		</div>
+		</form>
+		<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+		<script type="text/javascript">
+		try {
+		var pageTracker = _gat._getTracker("UA-8808137-1");
+		pageTracker._trackPageview();
+		} catch(err) {}</script>
+		</body>
+		</html>
+		'''
+
+#--------------------------------------------------------------------------------------------
+# Crucifer results
+def crucifer_results [html] (smry_dict):
+#	all possilbe crop stages in order of appearance in menu
+	all_crop_stages = ['Pre plant','Seedbeds','Emergence','Transplant to harvest','Seed','Seedling/transplant','Cotyledon through mature head','Seedling through mature head','Through mature head','Summer','Seedling through harvest','Post harvest']
+	if smry_dict.has_key('output') and smry_dict['output'] == "standalone":
+#		header if output not going in a tab
+		'''
+		<!DOCTYPE HTML>
+		<html>
+		<head>
+			<meta http-equiv="content-type" content="text/html"/>
+			<title>NEWA Crucifer Pest Models</title>
+			<link type="text/css" rel="stylesheet" href="http://newa.nrcc.cornell.edu/Humanity/ui.all.css">
+			<link type="text/css" rel="stylesheet" href="http://newa.nrcc.cornell.edu/newaVegModel.css">
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+			<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/crucifer_disease.js"></script>
+	    </head>
+		<body>
+		<form action="/newaVegModel/process_input" method="post">
+		<input type="hidden" name="type" value="crucifer_disease" />
+		'''
+		'<input type="hidden" name="stn" value="%s" />' % smry_dict['stn']
+		'<input type="hidden" name="accend" value="%s" />' % smry_dict['accend']
+		'<div class="plain_back results">'
+#		end standalone header
+
+	'<h3>%s</h3>' % (smry_dict['pest_name'])
+	'<input type="hidden" name="pest" value="%s">' % smry_dict['pest']
+	
+	## Put the contents of the Info tab here when not employing tab interface
+	if smry_dict.has_key('output') and smry_dict['output'] == "standalone":
+		'<div class="infoholder">'
+		'<input type="button" id="infolink" class="button" value="View Pest Information" onClick="$(this).parent().hide(); getinfo();" />'
+		'<br />'
+		'</div>'
+		'<div id="third" class="infobox"></div>'
+		
+	### Display crop stage.
+	if smry_dict['crop_stages']:
+		'<b>Crop stage: </b>'
+		'<select name="altref" onChange="updateStatus();">'
+		for stage_item in all_crop_stages:
+			if stage_item in smry_dict['crop_stages']:
+				if stage_item == smry_dict['stage']:
+					'<option value="%s" selected>%s</option>' % (stage_item,stage_item)
+				else:
+					'<option value="%s">%s</option>' % (stage_item,stage_item)
+		'</select>'
+		'<br /><p class="plain_smaller">The crop stage above is estimated. Select the actual <br /> stage and the model will recalculate recommendations.</p>'
+	else:
+		'<b>Crop stage: </b>%s' % smry_dict['stage']
+	
+	### Status and management table
+	'<table class="sm_table">'
+	### table heading
+	'<thead><tr><th width="40%;">Pest Status</th><th width="60%;">Pest Management<br />'
+	'<input type="radio" id="radioc" name="tech_choice" value="conventional" checked onclick="updateStatus();"><label for="radioc">Conventional technique</label>&nbsp;&nbsp;'
+	'<input type="radio" id="radioo" name="tech_choice" value="organic" onclick="updateStatus();"><label for="radioo">Organic technique</label>'
+	'</th></tr></thead>'
+	### table body
+	'<tbody id="manage_status">'
+	'%s' % crucifer_sm_table(smry_dict)
+	'<tbody>'
+	'</table>'
+	add_footer(smry_dict)
+	
+#--------------------------------------------------------------------------------------------		
+# Crucifer update
+def crucifer_sm_table [html] (smry_dict):	
+	### Status and management table
+	if smry_dict['status'].find("<") >= 0 or smry_dict['status'].find("&") >= 0:
+		'<tr><td align="left" valign="top">%s</td>' % h8(smry_dict['status'])	#don't escape messages with anchors or entities
+	else:
+		'<tr><td align="left" valign="top">%s</td>' % smry_dict['status']
+	if smry_dict['manage'].find("<") >= 0 or smry_dict['manage'].find("&") >= 0:
+		'<td align="left" valign="top">%s</td>' % h8(smry_dict['manage'])		#same here
+	else:
+		'<td align="left" valign="top">%s</td>' % smry_dict['manage']
+	'</tr>'

@@ -1,0 +1,25 @@
+pest_status_management = { 
+'pest_name': "Downy Mildew",
+'time_concern': ["Pre plant","Seedling through harvest","Post harvest"],
+'keychar_oc': "<i>Peronospora parasitica</i><p><b>Key Characteristics: </b>",
+'keychar_o':  "Small, yellow leaf spots turn brown with blue or black lace-like markings. Vascular tissue is discolored. In moist weather, look on the underside of leaves for white downy mold. Irregular black spots develop on broccoli. Spores are wind blown. <p><b>Relative Risk: </b>Downy mildew is rarely a problem in New York.</p>",
+'keychar_c':  "Small, yellow leaf spots turn brown with blue or black lace-like markings. Vascular tissue is discolored. In moist weather, look for white downy mold on leaf underside. <p><b>Relative Risk: </b>Downy mildew is rarely a problem in New York.</p>",
+'help_links': [("Penn State fact sheet on crucifer disease ID", "http://www.ppath.cas.psu.edu/EXTENSION/VEGDIS/VegDisases/Identification_files/crucifers.html"), 
+("UMASS DM fact sheet","http://extension.umass.edu/vegetable/diseases/broccoli-downy-mildew")],
+'messages': {
+'Pre plant':             { 'datelo': (1,1,0), 'datehi': (4,14,23),
+                           'status': "<i>Peronospora parasitica </i>may be in crop or cruciferous weed debris.",
+                           'management_oc': "",                          
+                           'management_o': "Crop Rotation - Maintain a minimum of 3 years without cruciferous cover crops, weeds, or crops. <ul><li><a href='http://calshort-lamp.cit.cornell.edu/bjorkman/covercrops/index.php' target='_blank'>Cover crops information</a> <li><a href='http://vegetablemdonline.ppath.cornell.edu/NewsArticles/McNabRotations.htm' target='_blank'>Crop rotation information</a></ul> <p>Site selection - Select a well drained field away from hedgerows or woods that impede air flow and prevent leaves from drying quickly. Avoid fields where brassica plant waste was discarded.</p> <p>Seed treatment: Seed treatments are not generally recommended although the pathogen can be seed-borne, this is not thought to be an important source of the pathogen.</p> <p>Weed hosts - Suspected weed hosts of downy mildew include wild mustard, yellow rocket, hedge mustard, shepherd&#39;s purse, marsh yellowcress, and field pennycress, but the specific strain of downy mildew may vary and some do not affect cabbage.</p>",
+                           'management_c': "Crop rotation - Minimum three years without crucifer crops or cruciferous weeds which include wild radish and wild mustard. Avoid fields where crucifer plant waste has been dumped."},
+'Seedling through harvest': { 'datelo': (4,15,0), 'datehi': (11,14,23),
+                           'status': "<i>Peronospora parasitica </i>may be present in the field in infected plants.",
+                           'management_oc': "",
+                           'management_o': "Scouting - Examine transplants and production fields weekly especially when conditions have been cool and wet. Check lower leaves for symptoms. Record first occurrence and weather conditions for farm history records. If downy mildew begins to develop early in the crop development in a few plants, remove diseased plants from the field and/or initiate a spray program at first sign of disease.  It is not necessary to spray preventatively. <p>If treatment is necessary apply Actinovate AG, Serenade MAX, Serenade ASO, Sonata, Sporatec AG, Trilogy, Basic Copper 53, Champ WG, Cueva Fungicide Concentrate, Nu Cop 50DF, OxiDate, Milstop.</p> <p>Irrigation - Avoid use of overhead irrigation to prevent extended periods of leaf wetness. If watering is necessary, do so in the morning to allow plants to dry during the day. Drip irrigation is recommended.</p>",
+                           'management_c': "Scouting - Record the occurrence and severity of downy mildew. No thresholds have been established. <p>If treatment is necessary apply Actigard 50WG, Quadris F, Bravo Weather Stik or OLF, Acrobat 50WP, Forum SC, Champ F, &#10013;Reason 500SC, Presidio, Aliette WDG, Ridomil Gold Bravo, Phostrol, ProPhyt or OLF, Cabrio EG.</p> <p><a href='http://vegetablemdonline.ppath.cornell.edu/NewsArticles/FungicideResistance.html' target='_blank'>General guidelines for managing fungicide resistance</a></p>"},
+'Post harvest':          { 'datelo': (11,15,0), 'datehi': (12,31,23),
+                           'status': "<i>Peronospora parasitica. </i>may be in crop or cruciferous weed debris.",
+                           'management_oc': "",
+                           'management_o': "Postharvest - Crop debris should be destroyed as soon as possible to remove this source of disease for future plantings and to initiate decomposition. <p>Harvest - Trim outer infected leaves to avoid problems in storage.</p>",
+                           'management_c': "Postharvest - Crop debris should be destroyed as soon as possible to remove this source of disease for other plantings and to initiate decomposition."}
+} }
