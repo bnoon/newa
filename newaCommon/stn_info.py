@@ -139,7 +139,7 @@ stn_info = {
 'ct_gra': {'name': 'Granby, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'bad', 'lat': 41.958341, 'lon': -72.817436, 'elev': 270, 'network': 'newa', 'state': 'CT'},
 'ct_ely': {'name': 'East Lyme, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.353398, 'lon': -72.247315, 'elev': 150, 'network': 'newa', 'state': 'CT'},
 'uc_sto': {'name': 'Storrs (UConn), CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lat': 41.79417, 'lon': -72.22889, 'elev': 663, 'network': 'cu_log', 'state': 'CT'},
-'ct_npr': {'name': 'New Preston, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'lat': 41.665955 'lon': -73.334845, 'elev': 860, 'network': 'newa', 'state': 'CT'},
+'ct_npr': {'name': 'New Preston, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'lat': 41.665955, 'lon': -73.334845, 'elev': 860, 'network': 'newa', 'state': 'CT'},
 '33': {'name': 'Dennis Twp, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.2039, 'lon': -74.8923, 'elev': 5, 'network': 'njwx', 'state': 'NJ'},
 '202': {'name': 'Bethel Mill Park, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.7485, 'lon': -75.1138, 'elev': 30, 'network': 'njwx', 'state': 'NJ'},
 '232': {'name': 'Egg Harbor, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.4227, 'lon': -74.5421, 'elev': 12, 'network': 'njwx', 'state': 'NJ'},
