@@ -1,8 +1,7 @@
 stn_info_inactive = {
-'1fr': {'name': 'Fredonia', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'srad', 'st4i', 'wdir'], 'lon': -79.3125, 'elev': 700.0, 'lat': 42.449710000000003, 'network': 'newa', 'state': 'NY'},
+'1fr': {'name': 'Fredonia', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'st4i', 'wdir'], 'srqual': 'toolow', 'lon': -79.3125, 'elev': 700.0, 'lat': 42.449710000000003, 'network': 'newa', 'state': 'NY'},
 '1lo': {'name': 'Lockport', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -78.762107, 'elev': 478.0, 'lat': 43.187325000000001, 'network': 'newa', 'state': 'NY'},
 '1wi': {'name': 'Williamson (Motts)', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -77.17590, 'elev': 430.0, 'lat': 43.23925, 'network': 'newa', 'state': 'NY'},
-'2wi': {'name': 'Williamson (Mason)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -77.23158, 'elev': 427.0, 'lat': 43.22206, 'network': 'newa', 'state': 'NY'},
 'ark': {'name': 'Arkport', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.703580000000002, 'elev': 1200.0, 'lat': 42.417310000000001, 'network': 'newa', 'state': 'NY'},
 'avo': {'name': 'Avon', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.75, 'elev': 650.0, 'lat': 42.92, 'network': 'newa', 'state': 'NY'},
 'bar': {'name': 'Barrington', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.084785, 'elev': 1089.0, 'lat': 42.551651, 'network': 'newa', 'state': 'NY'},
@@ -28,7 +27,7 @@ stn_info_inactive = {
 'pot': {'name': 'Potter', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -77.191759050000002, 'elev': 915.0, 'lat': 42.715445000000003, 'network': 'newa', 'state': 'NY'},
 'pra': {'name': 'Prattsburg', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.266594, 'elev': 1300.0, 'lat': 42.481937, 'network': 'newa', 'state': 'NY'},
 'pul': {'name': 'Pulteney', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -77.170930, 'elev': 1450.0, 'lat': 42.497750, 'network': 'newa', 'state': 'NY'},
-'red': {'name': 'Redhook', 'vars': ['temp', 'lwet', 'prcp', 'rhum','wspd','wdir','srad'], 'srqual': 'toolow', 'lon': -73.849695, 'elev': 230.0, 'lat': 42.008868, 'network': 'newa', 'state': 'NY'},
+'red': {'name': 'Redhook', 'vars': ['temp', 'lwet', 'prcp', 'rhum','wspd','wdir'], 'srqual': 'toolow', 'lon': -73.849695, 'elev': 230.0, 'lat': 42.008868, 'network': 'newa', 'state': 'NY'},
 'sav': {'name': 'Savannah', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -76.741219, 'elev': 400.0, 'lat': 43.022533, 'network': 'newa', 'state': 'NY'},
 'scr': {'name': 'Scriba', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -76.402453, 'elev': 400.0, 'lat': 43.410025, 'network': 'newa', 'state': 'NY'},
 'shc': {'name': 'Southold (Corey Creek)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.045194, 'lon': -72.4452, 'elev': 25, 'network': 'newa', 'state': 'NY'},
