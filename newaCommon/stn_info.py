@@ -28,7 +28,7 @@ stn_info = {
 'fts': {'name': 'Fort Salonga', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.897214, 'lon': -73.278708, 'elev': 99, 'network': 'newa', 'state': 'NY'},
 'gai': {'name': 'Gainesville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -78.162607, 'elev': 1600.0, 'lat': 42.652126, 'network': 'newa', 'state': 'NY'},
 'gbe': {'name': 'Geneva (Bejo)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.82755, 'lon': -77.01053, 'elev': 700.0, 'network': 'newa', 'state': 'NY'},
-'gen': {'name': 'Geneva', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'st4i'], 'lon': -77.02818, 'elev': 650.0, 'lat': 42.87295, 'network': 'newa', 'state': 'NY'},
+'gen': {'name': 'Geneva', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -77.02818, 'elev': 650.0, 'lat': 42.87295, 'network': 'newa', 'state': 'NY'},
 'gfr': {'name': 'Ithaca (Game Farm Rd)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.44924, 'lon': -76.44905, 'elev': 968, 'network': 'newa', 'state': 'NY'},
 'gui': {'name': 'Guilderland', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -74.017886, 'elev': 390.0, 'lat': 42.721046, 'network': 'newa', 'state': 'NY'},
 'har': {'name': 'Harborcreek, PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -79.9049196, 'elev': 742.0, 'lat': 42.1931232, 'network': 'newa', 'state': 'PA'},
