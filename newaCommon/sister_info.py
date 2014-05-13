@@ -121,6 +121,7 @@ sister_info = {'alb' : {'temp': 'ash', 'lwet': 'ash', 'rhum': 'ash', 'prcp': 'as
 '1wi' : {'temp': '3wi', 'lwet': '3wi', 'rhum': '3wi', 'prcp': '3wi'},
 '2wi' : {'temp': '3wi', 'lwet': '3wi', 'rhum': '3wi', 'prcp': '3wi', 'wspd': '3wi', 'wdir': '3wi', 'srad': 'sdl'},
 '3wi' : {'temp': '2wi', 'lwet': '2wi', 'rhum': '2wi', 'prcp': '2wi', 'wspd': 'sod', 'wdir': 'sod', 'srad': 'sdl'},
+'wbs' : {'temp': '3wi', 'lwet': '3wi', 'rhum': '3wi', 'prcp': '3wi', 'wspd': '3wi', 'wdir': '3wi', 'srad': 'sdl'},
 'avo' : {'temp': 'kroc', 'rhum': 'kroc', 'prcp': 'kroc'},
 'sho' : {'temp': 'cro', 'rhum': 'cro', 'prcp': 'cro', 'wspd': 'cro', 'wdir': 'cro', 'lwet': 'cro', 'srad': 'cro'},
 'mty' : {'temp': 'klwm', 'rhum': 'klwm', 'prcp': 'klwm', 'wspd': 'klwm', 'wdir': 'klwm', 'lwet': 'um_tff', 'srad': 'mam'},
