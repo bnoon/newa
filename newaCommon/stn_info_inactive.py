@@ -35,6 +35,7 @@ stn_info_inactive = {
 'cat': {'name': 'Catatonk', 'vars': ['temp', 'prcp', 'lwet', 'rhum'], 'lon': -76.31, 'elev': 853.0, 'lat': 42.16, 'network': 'newa', 'state': 'NY'},
 'cha': {'name': 'Chateguay', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -74.07, 'elev': 972.0, 'lat': 44.92, 'network': 'newa', 'state': 'NY'},
 'sci': {'name': 'Scipioville', 'vars': ['temp', 'prcp'], 'lon': -76.63, 'elev': 984.0, 'lat': 42.78, 'network': 'newa', 'state': 'NY'},
+'mbo': {'name': 'Bolton, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.418889, 'lon': -71.641389, 'elev': 516, 'network': 'newa', 'state': 'MA'},
 'mre': {'name': 'Rehoboth, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 41.777314, 'lon': -71.320638, 'elev': 16, 'network': 'newa', 'state': 'MA'},
 'wat': {'name': 'Waterport', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -78.214060, 'elev': 330.0, 'lat': 43.34422, 'network': 'newa', 'state': 'NY'},
 '148': {'name': 'Cape May Courthouse, NJ', 'vars': ['prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.1246, 'lon': -74.7873, 'elev': 7, 'network': 'njwx', 'state': 'NJ'},
