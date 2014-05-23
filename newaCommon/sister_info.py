@@ -125,7 +125,7 @@ sister_info = {'alb' : {'temp': 'ash', 'lwet': 'ash', 'rhum': 'ash', 'prcp': 'as
 'avo' : {'temp': 'kroc', 'rhum': 'kroc', 'prcp': 'kroc'},
 'sho' : {'temp': 'cro', 'rhum': 'cro', 'prcp': 'cro', 'wspd': 'cro', 'wdir': 'cro', 'lwet': 'cro', 'srad': 'cro'},
 'mty' : {'temp': 'klwm', 'rhum': 'klwm', 'prcp': 'klwm', 'wspd': 'klwm', 'wdir': 'klwm', 'lwet': 'um_tff', 'srad': 'mam'},
-'mbe' : {'temp': 'msd', 'rhum': 'msd', 'prcp': 'msd', 'wspd': 'msd', 'wdir': 'msd', 'lwet': 'msd', 'srad': 'mwe'},
+'mbe' : {'temp': 'um_cso', 'rhum': 'um_cso', 'prcp': 'um_cso', 'wspd': 'um_cso', 'wdir': 'um_cso', 'lwet': 'um_cso', 'srad': 'um_cso'},
 'msd' : {'temp': 'um_clk', 'rhum': 'um_clk', 'prcp': 'um_clk', 'wspd': 'um_clk', 'wdir': 'um_clk', 'lwet': 'um_clk', 'srad': 'mbe'},
 'hwa' : {'temp': 'vpu', 'rhum': 'vpu', 'prcp': 'vpu', 'wspd': 'vpu', 'wdir': 'vpu', 'lwet': 'vpu', 'srad': 'vpu'},
 'mdr' : {'temp': 'klwm', 'rhum': 'klwm', 'prcp': 'klwm', 'wspd': 'klwm', 'wdir': 'klwm', 'lwet': 'mty', 'srad': 'mty'},
