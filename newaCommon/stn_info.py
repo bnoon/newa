@@ -83,7 +83,7 @@ stn_info = {
 'ver': {'name': 'Versailles', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 42.51640, 'lon': -79.02689, 'elev': 863, 'network': 'newa', 'state': 'NY'},
 'wad': {'name': 'Wading River', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.95, 'lon': -72.81, 'elev': 107, 'network': 'newa', 'state': 'NY'},
 'way': {'name': 'Wayland', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -77.578797, 'elev': 1600.0, 'lat': 42.604968, 'network': 'newa', 'state': 'NY'},
-'wbs': {'name': 'Williamson (Bear Swamp)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 43.250549, 'lon': -77.160323, 'elev': 367, 'network': 'newa', 'state': 'NY'},
+'wbs': {'name': 'Williamson (Bear Swamp)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.250549, 'lon': -77.160323, 'elev': 367, 'network': 'newa', 'state': 'NY'},
 'wgl': {'name': 'Watkins Glen', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -76.925487, 'elev': 1100.0, 'lat': 42.377077, 'network': 'newa', 'state': 'NY'},
 'wla': {'name': 'Watkins Glen (Lakewood)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.428133, 'lon': -76.9057, 'elev': 906, 'network': 'newa', 'state': 'NY'},
 'wlb': {'name': 'Willsboro', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'lwet', 'srad'], 'srqual': 'ok', 'lon': -73.38180, 'elev': 180.0, 'lat': 44.38430, 'network': 'newa', 'state': 'NY'},
