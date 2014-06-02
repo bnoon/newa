@@ -261,7 +261,7 @@ sister_info = {'alb' : {'temp': 'ash', 'lwet': 'ash', 'rhum': 'ash', 'prcp': 'as
 'pa_ntr': {'temp': 'kabe', 'rhum': 'kabe', 'prcp': 'kabe', 'wspd': 'kabe', 'wdir': 'kabe', 'lwet': 'pa_ysp', 'srad': '1029'},
 'pa_rsp': {'temp': 'kaoo', 'rhum': 'kaoo', 'prcp': 'kaoo', 'wspd': 'kaoo', 'wdir': 'kaoo', 'lwet': 'pa_npa', 'srad': 'pa_npa'},
 'me_bhb': {'temp': 'kbhb', 'rhum': 'kbhb', 'prcp': 'kbhb', 'wspd': 'kbhb', 'wdir': 'kbhb', 'srad': 'mam'},
-'pa_sco': {'temp': 'kavp', 'rhum': 'kavp', 'prcp': 'kavp', 'wspd': 'kavp', 'wdir': 'kavp', 'lwet': 'pa_ntr', 'srad': 'pa_ntr'},
+'pa_sco': {'temp': 'kavp', 'rhum': 'kavp', 'prcp': 'kavp', 'wspd': 'kavp', 'wdir': 'kavp', 'lwet': 'pa_ntr', 'srad': '286'},
 'mmi' : {'temp': 'khfd', 'rhum': 'khfd', 'prcp': 'khfd', 'wspd': 'khfd', 'wdir': 'khfd', 'lwet': 'cli', 'srad': 'mwe'},
 'ct_gfy': {'temp': 'ct_nwi', 'rhum': 'ct_nwi', 'prcp': 'ct_nwi', 'wspd': 'ct_nwi', 'wdir': 'ct_nwi', 'lwet': 'ct_nwi', 'srad': 'ct_nwi'},
 'ct_gui': {'temp': 'kbdr', 'rhum': 'kbdr', 'prcp': 'kbdr', 'wspd': 'kbdr', 'wdir': 'kbdr', 'lwet': 'ct_she', 'srad': 'ct_she'},
