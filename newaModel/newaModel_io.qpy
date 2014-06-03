@@ -599,15 +599,15 @@ def apple_scab_log [html] (smry_dict):
 	if smry_dict['pday2'].has_key('infection'):
 		'<TR>'
 		'<td class=plain_back height=38><A href="#events">Infection Events</a></td>'
-		'<td class=%s_back>%s</td>' % (p2_color,smry_dict['pday2']['infection'][0])
-		'<td class=%s_back>%s</td>' % (p1_color,smry_dict['pday1']['infection'][0])
+		'<td class=%s_back>%s</td>' % ('plain','-')
+		'<td class=%s_back>%s</td>' % ('plain','-')
 		'<td class=%s_back>%s</td>' % (d0_color,smry_dict['day0']['infection'][0])
 		'<td style="background-color:darkgray" colspan=5>&nbsp;</td>'
 		'</TR>'
 		'<TR>'
 		'<td class=plain_back height=38>Days to Symptoms</td>'
-		'<td class=%s_back>%s</td>' % (p2_color,smry_dict['pday2']['infection'][1])
-		'<td class=%s_back>%s</td>' % (p1_color,smry_dict['pday1']['infection'][1])
+		'<td class=%s_back>%s</td>' % ('plain','-')
+		'<td class=%s_back>%s</td>' % ('plain','-')
 		'<td class=%s_back>%s</td>' % (d0_color,smry_dict['day0']['infection'][1])
 		'<td style="background-color:darkgray" colspan=5>&nbsp;</td>'
 		'</TR>'
@@ -667,7 +667,7 @@ def apple_scab_log [html] (smry_dict):
 			'<th class=plain_back> Leaf Wetness Estimate (hours)</th>'			
 		else:
 			'<th class=plain_back> Leaf Wetness (hours)</th>'
-		for d in ['pday2','pday1','day0']:
+		for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
 			if smry_dict[d]['wetness'][1] > 0:
 				rcolor = 'redonplain'
 			else:
@@ -677,7 +677,6 @@ def apple_scab_log [html] (smry_dict):
 			else:
 				lwet = '%d'%smry_dict[d]['wetness'][1]
 			'<td class=%s_back>%s</td>' % (rcolor,lwet)
-		'<td class=%s_back colspan=5>&nbsp;</td>' % ('plain')
 		'</TR>'
 
 	'<tr>'
