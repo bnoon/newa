@@ -16,7 +16,6 @@ stn_info_inactive = {
 'ede': {'name': 'Eden', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -78.858780, 'elev': 800.0, 'lat': 42.692416, 'network': 'newa', 'state': 'NY'},
 'fay': {'name': 'Fayette 3 Brothers', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.92445, 'elev': 615.0, 'lat': 42.8235, 'network': 'newa', 'state': 'NY'},
 'fri': {'name': 'Friend', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.192549999999997, 'elev': 1050.0, 'lat': 42.655799999999999, 'network': 'newa', 'state': 'NY'},
-'gra': {'name': 'Granville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -73.331111, 'elev': 670.0, 'lat': 43.412500, 'network': 'newa', 'state': 'NY'},
 'gro': {'name': 'Groveland', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.801929999999999, 'elev': 590.0, 'lat': 42.660499999999999, 'network': 'newa', 'state': 'NY'},
 'him': {'name': 'Himrod', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.922259999999994, 'elev': 500.0, 'lat': 42.617629999999998, 'network': 'newa', 'state': 'NY'},
 'mex': {'name': 'Mexico', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.230703, 'elev': 400.0, 'lat': 43.459805, 'network': 'newa', 'state': 'NY'},

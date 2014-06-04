@@ -32,6 +32,7 @@ stn_info = {
 'gbe': {'name': 'Geneva (Bejo)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.82755, 'lon': -77.01053, 'elev': 700.0, 'network': 'newa', 'state': 'NY'},
 'gen': {'name': 'Geneva', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'toohigh', 'lon': -77.02818, 'elev': 650.0, 'lat': 42.87295, 'network': 'newa', 'state': 'NY'},
 'gfr': {'name': 'Ithaca (Game Farm Rd)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.44924, 'lon': -76.44905, 'elev': 968, 'network': 'newa', 'state': 'NY'},
+'gra': {'name': 'Granville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -73.331111, 'elev': 670.0, 'lat': 43.412500, 'network': 'newa', 'state': 'NY'},
 'gui': {'name': 'Guilderland', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -74.017886, 'elev': 390.0, 'lat': 42.721046, 'network': 'newa', 'state': 'NY'},
 'har': {'name': 'Harborcreek, PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -79.9049196, 'elev': 742.0, 'lat': 42.1931232, 'network': 'newa', 'state': 'PA'},
 'hec': {'name': 'Hector', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.508040, 'lon': -76.877825, 'elev': 800, 'network': 'newa', 'state': 'NY'},
