@@ -1,10 +1,10 @@
 stn_info_inactive = {
 '1fr': {'name': 'Fredonia', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'st4i', 'wdir'], 'srqual': 'toolow', 'lon': -79.3125, 'elev': 700.0, 'lat': 42.449710000000003, 'network': 'newa', 'state': 'NY'},
 '1wi': {'name': 'Williamson (Motts)', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -77.17590, 'elev': 430.0, 'lat': 43.23925, 'network': 'newa', 'state': 'NY'},
-'ark': {'name': 'Arkport', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.70358, 'elev': 1200.0, 'lat': 42.41731, 'network': 'newa', 'state': 'NY'},
+'ark': {'name': 'Arkport', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.703580000000002, 'elev': 1200.0, 'lat': 42.417310000000001, 'network': 'newa', 'state': 'NY'},
 'avo': {'name': 'Avon', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.75, 'elev': 650.0, 'lat': 42.92, 'network': 'newa', 'state': 'NY'},
 'bar': {'name': 'Barrington', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.084785, 'elev': 1089.0, 'lat': 42.551651, 'network': 'newa', 'state': 'NY'},
-'bat': {'name': 'Batavia', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'st4i'], 'lon': -78.15402, 'elev': 900.0, 'lat': 43.02882, 'network': 'newa', 'state': 'NY'},
+'bat': {'name': 'Batavia', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'st4i'], 'lon': -78.154020000000003, 'elev': 900.0, 'lat': 43.028820000000003, 'network': 'newa', 'state': 'NY'},
 'bra': {'name': 'Branchport', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -77.1721, 'elev': 1050.0, 'lat': 42.583799999999997, 'network': 'newa', 'state': 'NY'},
 'cln': {'name': 'Clintondale', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'toolow', 'lon': -74.058165, 'elev': 491.0, 'lat': 41.699821, 'network': 'newa', 'state': 'NY'},
 'cu_aur': {'name': 'Aurora (logger)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -76.659099999999995, 'elev': 830.0, 'lat': 42.734099999999998, 'network': 'cu_log', 'state': 'NY'},
@@ -45,6 +45,5 @@ stn_info_inactive = {
 '3405': {'name': 'Fort Monmouth, NJ', 'vars': ['temp', 'rhum', 'wspd', 'wdir'], 'lat': 40.3137, 'lon': -74.049, 'elev': 5, 'network': 'njwx', 'state': 'NJ'},
 'um_tff': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -71.67833, 'elev': 610, 'lat': 42.34611, 'network': 'cu_log', 'state': 'MA'},
 'mmi': {'name': 'Middlefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.71083, 'elev': 180,  'lat': 41.49667, 'network': 'newa', 'state': 'CT'},
-'ct_gra': {'name': 'Granby, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'bad', 'lat': 41.958341, 'lon': -72.817436, 'elev': 270, 'network': 'newa', 'state': 'CT'},
 'me_bhb': {'name': 'Bar Harbor, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.389786, 'lon': -68.208026, 'elev': 55, 'network': 'newa', 'state': 'ME'}
 }

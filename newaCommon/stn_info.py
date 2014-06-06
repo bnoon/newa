@@ -148,6 +148,7 @@ stn_info = {
 'ct_eha': {'name': 'East Hampton, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.520094, 'lon': -72.444341, 'elev': 422, 'network': 'newa', 'state': 'CT'},
 'ct_mad': {'name': 'Madison, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'lat': 41.295110, 'lon': -72.621420, 'elev': 30, 'network': 'newa', 'state': 'CT'},
 'ct_por': {'name': 'Portland, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'lat': 41.580457, 'lon': -72.618400, 'elev': 303, 'network': 'newa', 'state': 'CT'},
+'ct_gra': {'name': 'Granby, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'bad', 'lat': 41.958341, 'lon': -72.817436, 'elev': 270, 'network': 'newa', 'state': 'CT'},
 '33': {'name': 'Dennis Twp, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.2039, 'lon': -74.8923, 'elev': 5, 'network': 'njwx', 'state': 'NJ'},
 '202': {'name': 'Bethel Mill Park, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.7485, 'lon': -75.1138, 'elev': 30, 'network': 'njwx', 'state': 'NJ'},
 '232': {'name': 'Egg Harbor, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.4227, 'lon': -74.5421, 'elev': 12, 'network': 'njwx', 'state': 'NJ'},
