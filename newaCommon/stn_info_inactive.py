@@ -4,7 +4,7 @@ stn_info_inactive = {
 'ark': {'name': 'Arkport', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.703580000000002, 'elev': 1200.0, 'lat': 42.417310000000001, 'network': 'newa', 'state': 'NY'},
 'avo': {'name': 'Avon', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.75, 'elev': 650.0, 'lat': 42.92, 'network': 'newa', 'state': 'NY'},
 'bar': {'name': 'Barrington', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.084785, 'elev': 1089.0, 'lat': 42.551651, 'network': 'newa', 'state': 'NY'},
-'bat': {'name': 'Batavia', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'st4i'], 'lon': -78.154020000000003, 'elev': 900.0, 'lat': 43.028820000000003, 'network': 'newa', 'state': 'NY'},
+'bat': {'name': 'Batavia', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'st4i'], 'lon': -78.15402, 'elev': 900.0, 'lat': 43.02882, 'network': 'newa', 'state': 'NY'},
 'bra': {'name': 'Branchport', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -77.1721, 'elev': 1050.0, 'lat': 42.583799999999997, 'network': 'newa', 'state': 'NY'},
 'cln': {'name': 'Clintondale', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'toolow', 'lon': -74.058165, 'elev': 491.0, 'lat': 41.699821, 'network': 'newa', 'state': 'NY'},
 'cu_aur': {'name': 'Aurora (logger)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -76.659099999999995, 'elev': 830.0, 'lat': 42.734099999999998, 'network': 'cu_log', 'state': 'NY'},
