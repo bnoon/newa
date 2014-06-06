@@ -1,7 +1,7 @@
 stn_info_inactive = {
 '1fr': {'name': 'Fredonia', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'st4i', 'wdir'], 'srqual': 'toolow', 'lon': -79.3125, 'elev': 700.0, 'lat': 42.449710000000003, 'network': 'newa', 'state': 'NY'},
 '1wi': {'name': 'Williamson (Motts)', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -77.17590, 'elev': 430.0, 'lat': 43.23925, 'network': 'newa', 'state': 'NY'},
-'ark': {'name': 'Arkport', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.703580000000002, 'elev': 1200.0, 'lat': 42.417310000000001, 'network': 'newa', 'state': 'NY'},
+'ark': {'name': 'Arkport', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.70358, 'elev': 1200.0, 'lat': 42.41731, 'network': 'newa', 'state': 'NY'},
 'avo': {'name': 'Avon', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.75, 'elev': 650.0, 'lat': 42.92, 'network': 'newa', 'state': 'NY'},
 'bar': {'name': 'Barrington', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.084785, 'elev': 1089.0, 'lat': 42.551651, 'network': 'newa', 'state': 'NY'},
 'bat': {'name': 'Batavia', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'st4i'], 'lon': -78.15402, 'elev': 900.0, 'lat': 43.02882, 'network': 'newa', 'state': 'NY'},
