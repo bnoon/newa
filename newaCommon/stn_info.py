@@ -8,7 +8,7 @@ stn_info = {
 'aur': {'name': 'Aurora', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.73367, 'lon': -76.65383, 'elev': 840, 'network': 'newa', 'state': 'NY'},
 'bal': {'name': 'Baldwinsville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.17133, 'lon': -76.405, 'elev': 443, 'network': 'newa', 'state': 'NY'},
 'ber': {'name': 'Bergen', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad','st4i'], 'srqual': 'ok', 'lat': 43.085377, 'lon': -77.948586, 'elev': 620, 'network': 'newa', 'state': 'NY'},
-'bla': {'name': 'Baldwinsville (Abbott)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.145093, 'lon': -76.282136, 'elev': 502, 'network': 'newa', 'state': 'NY'},
+'bla': {'name': 'Baldwinsville (Abbott)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.169525, 'lon': -76.400886, 'elev': 502, 'network': 'newa', 'state': 'NY'},
 'brh': {'name': 'Brookhaven Hamlet', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.769289, 'lon': -72.922614, 'elev': 18, 'network': 'newa', 'state': 'NY'},
 'bri': {'name': 'Bridgehampton', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.96, 'lon': -72.31, 'elev': 87, 'network': 'newa', 'state': 'NY'},
 'but': {'name': 'Butler (Tree Crisp)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat':43.067219, 'lon': -76.760174, 'elev': 457, 'network': 'newa', 'state': 'NY'},
