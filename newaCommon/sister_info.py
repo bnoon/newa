@@ -292,6 +292,7 @@ sister_info = {'alb' : {'temp': 'ash', 'lwet': 'ash', 'rhum': 'ash', 'prcp': 'as
 'ct_por': {'temp': 'kbdl', 'rhum': 'kbdl', 'prcp': 'kbdl', 'wspd': 'kbdl', 'wdir': 'kbdl', 'lwet': 'ct_ssm', 'srad': 'ct_ssm'},
 'ct_was': {'temp': 'kdxr', 'rhum': 'kdxr', 'prcp': 'kdxr', 'wspd': 'kdxr', 'wdir': 'kdxr', 'lwet': 'ct_npr', 'srad': 'ct_npr'},
 'ct_mad': {'temp': 'kbdr', 'rhum': 'kbdr', 'prcp': 'kbdr', 'wspd': 'kbdr', 'wdir': 'kbdr', 'lwet': 'ct_gui', 'srad': 'ct_gui'},
+'ct_nha': {'temp': 'kbdl', 'rhum': 'kbdl', 'prcp': 'kbdl', 'wspd': 'kbdl', 'wdir': 'kbdl', 'lwet': 'ct_ssm', 'srad': 'ct_ssm'},
 'uc_sto': {'temp': 'ct_tol', 'rhum': 'ct_tol', 'prcp': 'ct_tol', 'lwet': 'ct_tol'},
 '29':   {'temp': '202', 'rhum': '202', 'prcp': '202', 'wspd': '202', 'wdir': '202'},
 '33':   {'temp': '296', 'rhum': '296', 'prcp': '296', 'wspd': '296', 'wdir': '296'},
