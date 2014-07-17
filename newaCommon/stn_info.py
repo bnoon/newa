@@ -15,6 +15,7 @@ stn_info = {
 'cer': {'name': 'Ceres', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 42.007429, 'lon': -78.299024, 'elev': 1500, 'network': 'newa', 'state': 'NY'},
 'chz': {'name': 'Chazy (Grower)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.429071, 'elev': 167.0, 'lat': 44.861900, 'network': 'newa', 'state': 'NY'},
 'cli': {'name': 'Clifton Park', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.837641, 'elev': 378.0, 'lat': 42.815913, 'network': 'newa', 'state': 'NY'},
+'clw': {'name': 'Clintondale (WG Minard)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'srad', 'wdir'], 'srqual': 'ok', 'lon': -74.054027, 'elev': 577.0, 'lat': 41.693276, 'network': 'newa', 'state': 'NY'},
 'cns': {'name': 'Cutchogue (New Suffolk)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.01, 'lon': -72.48, 'elev': 26, 'network': 'newa', 'state': 'NY'},
 'cro': {'name': 'Crown Point', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.414106, 'elev': 120.0, 'lat': 43.951858, 'network': 'newa', 'state': 'NY'},
 'cut': {'name': 'Cutchogue', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.026664, 'lon': -72.486658, 'elev': 30, 'network': 'newa', 'state': 'NY'},
