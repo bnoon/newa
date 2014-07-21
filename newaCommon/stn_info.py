@@ -89,6 +89,7 @@ stn_info = {
 'wmi': {'name': 'Water Mill', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -72.317480, 'elev': 15.0, 'lat': 40.911110, 'network': 'newa', 'state': 'NY'},
 'wmn': {'name': 'Water Mill (North)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.92, 'lon': -72.34, 'elev': 15, 'network': 'newa', 'state': 'NY'},
 'wol': {'name': 'Wolcott', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.876728, 'elev': 280, 'lat': 43.262683, 'network': 'newa', 'state': 'NY'},
+'yap': {'name': 'Yaphank', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.827944, 'lon': -72.919242, 'elev': 54, 'network': 'newa', 'state': 'NY'},
 'wi_gay': {'name': 'Gays Mills, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.314584, 'lon': -90.841526, 'elev': 942, 'network': 'newa', 'state': 'WI'},
 'vca': {'name': 'Calais, VT','vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.5293, 'elev': 1434, 'lat': 44.3395, 'network': 'newa', 'state': 'VT'},
 'vco': {'name': 'Cornwall, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.962033, 'lon': -73.239449, 'elev': 398, 'network': 'newa', 'state': 'VT'},
