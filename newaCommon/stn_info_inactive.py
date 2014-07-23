@@ -29,7 +29,6 @@ stn_info_inactive = {
 'pul': {'name': 'Pulteney', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -77.170930, 'elev': 1450.0, 'lat': 42.497750, 'network': 'newa', 'state': 'NY'},
 'sav': {'name': 'Savannah', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -76.741219, 'elev': 400.0, 'lat': 43.022533, 'network': 'newa', 'state': 'NY'},
 'scr': {'name': 'Scriba', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -76.402453, 'elev': 400.0, 'lat': 43.410025, 'network': 'newa', 'state': 'NY'},
-'she': {'name': 'Sheridan', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.50207, 'lon': -79.20513, 'elev': 750, 'network': 'newa', 'state': 'NY'},
 'val': {'name': 'Valois', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -76.865600000000001, 'elev': 800.0, 'lat': 42.55903, 'network': 'newa', 'state': 'NY'},
 'cam': {'name': 'Cambridge', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -73.38, 'elev': 496.0, 'lat': 43.03, 'network': 'newa', 'state': 'NY'},
 'cat': {'name': 'Catatonk', 'vars': ['temp', 'prcp', 'lwet', 'rhum'], 'lon': -76.31, 'elev': 853.0, 'lat': 42.16, 'network': 'newa', 'state': 'NY'},
