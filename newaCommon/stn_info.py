@@ -119,6 +119,7 @@ stn_info = {
 'mwe': {'name': 'Westfield, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.185000, 'lon': -72.765000, 'elev': 321, 'network': 'newa', 'state': 'MA'},
 'mbo': {'name': 'Bolton, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'bad', 'lat': 42.418889, 'lon': -71.641389, 'elev': 516, 'network': 'newa', 'state': 'MA'},
 'um_cso': {'name': 'Belchertown, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.35917, 'elev': 638, 'lat': 42.25333, 'network': 'cu_log', 'state': 'MA'},
+'um_clk': {'name': 'Deerfield, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.62333, 'elev': 328, 'lat': 42.56333, 'network': 'cu_log', 'state': 'MA'},
 'um_whs': {'name': 'Boston (Weld Hill), MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i'], 'srqual': 'ok', 'lat': 42.29556, 'lon': -71.13361, 'elev': 151, 'network': 'cu_log', 'state': 'MA'},
 'um_new': {'name': 'Middletown, RI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.529167, 'lon': -71.27250, 'elev': 197, 'network': 'cu_log', 'state': 'RI'},
 'um_bcf': {'name': 'Barnstable County Farm, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.697834, 'lon': -70.288709, 'elev': 53, 'network': 'cu_log', 'state': 'MA'},
