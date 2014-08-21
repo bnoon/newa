@@ -1971,8 +1971,20 @@ def berry_moth_results [html] (smry_dict):
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 			<script type="text/javascript">
 			  $(document).ready(function() {
-				$("#bfdpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "+7d", changeMonth: true, changeYear: true });
+				$("#bfdpick").datepicker({
+					minDate: new Date(2000, 0, 1),
+					maxDate: "+7d",
+					changeMonth: true,
+					changeYear: true
 				});
+				$('#forecast').click(function() {
+					var req_stn = $('input[name=stn]').val();
+					$.get('http://newa.nrcc.cornell.edu/newaUtil/getForecastUrl/'+req_stn, function(data) { 
+						window.open(data);
+					});
+					return false;
+				});
+			  });
 			</script>
 	    </head>
 		<body>
