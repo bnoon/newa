@@ -15,6 +15,7 @@ stn_info_inactive = {
 'cu_lkp': {'name': 'Lake Placid (logger)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -73.980000000000004, 'elev': 1940.0, 'lat': 44.25, 'network': 'cu_log', 'state': 'NY'},
 'dre': {'name': 'Dresden', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.998130000000003, 'elev': 850.0, 'lat': 42.702179999999998, 'network': 'newa', 'state': 'NY'},
 'ede': {'name': 'Eden', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -78.858780, 'elev': 800.0, 'lat': 42.692416, 'network': 'newa', 'state': 'NY'},
+'fay': {'name': 'Fayette 3 Brothers', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.92445, 'elev': 615.0, 'lat': 42.8235, 'network': 'newa', 'state': 'NY'},
 'fri': {'name': 'Friend', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.192549999999997, 'elev': 1050.0, 'lat': 42.655799999999999, 'network': 'newa', 'state': 'NY'},
 'gro': {'name': 'Groveland', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.801929999999999, 'elev': 590.0, 'lat': 42.660499999999999, 'network': 'newa', 'state': 'NY'},
 'him': {'name': 'Himrod', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.922259999999994, 'elev': 500.0, 'lat': 42.617629999999998, 'network': 'newa', 'state': 'NY'},
