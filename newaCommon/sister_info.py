@@ -329,6 +329,8 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 '3409': {'temp': '284', 'rhum': '284', 'prcp': '284', 'wspd': '284', 'wdir': '284'},
 '3411': {'temp': 'kewr', 'rhum': 'kewr', 'prcp': 'kewr', 'wspd': 'kewr', 'wdir': 'kewr', 'srad': '1033'},
 '3479': {'temp': '263', 'rhum': '263', 'prcp': '263', 'wspd': '263', 'wdir': '263'},
+'3481': {'temp': '3404', 'prcp': '3404', 'rhum': '3404', 'wspd': '3404', 'wdir': '3404', 'srad': '3404'},
+'111' : {'temp': 'kteb', 'rhum': 'kteb', 'prcp': 'kteb', 'wspd': 'kteb', 'wdir': 'kteb', 'srad': '3411'},
 '3517': {'temp': '289', 'lwet': '3518', 'prcp': 'kabe', 'rhum': '289', 'wspd': '289', 'wdir': '289'},
 '3518': {'temp': '3521', 'lwet': '3521', 'prcp': '3521', 'rhum': '3521', 'wspd': '3521', 'wdir': '3521'},
 '3519': {'temp': 'kwwd', 'lwet': '3522', 'prcp': 'kwwd', 'rhum': 'kwwd', 'wspd': 'kwwd', 'wdir': 'kwwd'},
