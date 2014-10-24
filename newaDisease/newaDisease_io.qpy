@@ -1,0 +1,2775 @@
+############################################
+# Input screen 
+############################################
+import sys, math
+from mx import DateTime
+if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
+from newaCommon_io import display_station_list, monyr_listing_tall
+miss = -999
+month_abbrev = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+month_list = [(1,"January"),(2,"February"),(3,"March"),(4,"April"),(5,"May"),(6,"June"),
+			  (7,"July"),(8,"August"),(9,"September"),(10,"October"),(11,"November"),(12,"December")]
+
+def potato_inputs [html] (station_type):
+	display_station_list(station_type)
+	now = DateTime.now()
+	'<P>Year:<BR>' 
+	'<select name="year">'
+	'<option value="%d" selected>%d</option>'%(now.year,now.year)
+	for yr in range(now.year-1,1995,-1):
+		'<option value="%d">%d</option>'%(yr,yr)
+	'</select>'
+	'<P>Emergence Date:<BR>'
+	'<select name="month">'
+	for mon_num,mon_name in month_list:
+		if mon_num == 5:
+			'<option value="%d" selected>%s</option>' % (mon_num,mon_name)
+		else:
+			'<option value="%d">%s</option>' % (mon_num,mon_name)
+	'</select>'
+	'<select name="day">'
+	for dy in range(1,32):
+		if dy == 1:
+			'<option value="%d" selected>%d</option>'%(dy,dy)
+		else:
+			'<option value="%d">%d</option>'%(dy,dy)
+	'</select>'
+
+def potato_inputs_simcast [html] (station_type):
+	from potato_dictionary import potatoD
+	from tomato_dictionary import tomatoD
+	display_station_list(station_type)
+	yest = DateTime.now() + DateTime.RelativeDate(days=-1)
+	'<input type="hidden" name="year" value="%s">' % yest.year
+	'<P>Last fungicide application:<BR>'
+	'<select name="month">'
+	for mon_num,mon_name in month_list:
+		if mon_num == yest.month:
+			'<option value="%d" selected>%s</option>' % (mon_num,mon_name)
+		else:
+			'<option value="%d">%s</option>' % (mon_num,mon_name)
+	'</select>'
+	'<select name="day">'
+	for dy in range(1,32):
+		if dy == yest.day:
+			'<option value="%d" selected>%d</option>'%(dy,dy)
+		else:
+			'<option value="%d">%d</option>'%(dy,dy)
+	'</select>'
+
+	'''
+	<P>Crop:</br>
+	<select name="crop" id="crop" onChange="setCultivarMenu();">
+	<option value="potato" SELECTED >Potato</option>
+	<option value="tomato" >Tomato</option>
+	</select>
+	'''
+	potKeys = potatoD.keys()
+	potKeys.sort()
+	'''
+	<div id="potato_options">
+	<P>Cultivar:</br>
+	<select name="potato_cultivar" id="potato_cultivar">
+	<option value="" SELECTED >Select potato cultivar</option>
+	'''
+	for this_key in potKeys :
+		if this_key == "" :
+			continue
+		'<option value="%s" >%s</option>'%(this_key,this_key)
+	'</select>'
+	'</div>'
+
+	tomKeys = tomatoD.keys()
+	tomKeys.sort()
+	'''
+	<div id="tomato_options" style="display:none;">
+	<P>Cultivar:</br>
+	<select name="tomato_cultivar" id="tomato_cultivar">
+	<option value="" SELECTED >Select tomato cultivar</option>
+	'''
+	for this_key in tomKeys :
+		if this_key == "" :
+			continue
+		'<option value="%s" >%s</option>'%(this_key,this_key)
+	'</select>'
+	'</div>'
+
+def onion_inputs [html] (station_type):
+	display_station_list(station_type)
+	now = DateTime.now()
+	'<P>Year:<BR>' 
+	'<select name="year">'
+	'<option value="%d" selected>%d</option>'%(now.year,now.year)
+	for yr in range(now.year-1,1995,-1):
+		'<option value="%d">%d</option>'%(yr,yr)
+	'</select>'
+	'<P>Planting Date:<BR>'
+	'<select name="month">'
+	for mon_num,mon_name in month_list:
+		if mon_num == 4:
+			'<option value="%d" selected>%s</option>' % (mon_num,mon_name)
+		else:
+			'<option value="%d">%s</option>' % (mon_num,mon_name)
+	'</select>'
+	'<select name="day">'
+	for dy in range(1,32):
+		if dy == 21:
+			'<option value="%d" selected>%d</option>'%(dy,dy)
+		else:
+			'<option value="%d">%d</option>'%(dy,dy)
+	'</select>'
+
+def tomato_inputs [html] (station_type):
+	display_station_list(station_type)
+	now = DateTime.now()
+	'<P>Year:<BR>' 
+	'<select name="year">'
+	'<option value="%d" selected>%d</option>'%(now.year,now.year)
+	for yr in range(now.year-1,1995,-1):
+		'<option value="%d">%d</option>'%(yr,yr)
+	'</select>'
+	'<P>Accumulation Start Date:<BR>'
+	'<select name="month">'
+	for mon_num,mon_name in month_list:
+		if mon_num == 5:
+			'<option value="%d" selected>%s</option>' % (mon_num,mon_name)
+		else:
+			'<option value="%d">%s</option>' % (mon_num,mon_name)
+	'</select>'
+	'<select name="day">'
+	for dy in range(1,32):
+		if dy == 1:
+			'<option value="%d" selected>%d</option>'%(dy,dy)
+		else:
+			'<option value="%d">%d</option>'%(dy,dy)
+	'</select>'
+
+def get_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<TITLE>NEWA Page</TITLE>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<STYLE TYPE="text/css">
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   }
+	</STYLE>
+	</HEAD>
+
+	<BODY BGCOLOR="#FFFFFF">
+	<p class="banner">NEWA Page</p>
+	<FORM ACTION="/newaDisease/process_input" METHOD="post">
+	'''
+	display_station_list("eslw")
+	'''
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Product: 
+	<select name="type">
+		<option value="" selected>Select product</option>
+		<option value="apple_lw">Apple Wet/dry conditions</option>
+		<option value="apple_fb">Apple Fire Blight log</option>
+		<option value="alf_weev">Alfalfa Weevil log</option>
+		<option value="potato_lb">Potato Late Blight</option>
+		<option value="potato_pdays">Potato P-Days</option>
+	</select>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Get report" onClick="submit();">
+	</FORM>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def apple_lw_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<TITLE>Apple Wet/Dry Conditions</TITLE>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<STYLE TYPE="text/css">
+	TD
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   font-weight:bold;
+	   }
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   }
+	</STYLE>
+	<script  language="JavaScript">
+		function setSelectValue(oVal) {
+			var oSel = document.stationLister.stn;
+			for ( var i = 0; i < oSel.options.length; i++ ) {
+				if( oSel.options[i].value == oVal ) {
+					oSel.options[i].selected = true;
+				}
+			}
+		}
+	</script>
+	</HEAD>
+
+	<BODY BGCOLOR="#FFFFFF" onload="stationMap('eslw','select_station');">
+	<p class="banner">NEWA Season-long Details of Leaf Wet and Dry Conditions</p>
+	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+	<table border="1" cellspacing="0" cellpadding="5">
+	<tr>
+	<td valign="top">
+	'''
+	display_station_list("eslw")
+	now = DateTime.now()
+	'<P>Year:<BR>' 
+	'<select name="year">'
+	'<option value="%d" selected>%d</option>'%(now.year,now.year)
+	for yr in range(now.year-1,1995,-1):
+		'<option value="%d">%d</option>'%(yr,yr)
+	'</select>'
+	'''
+	<input type="hidden" name="type" value="apple_lw">
+	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+	</td>
+	<td>
+	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+	</td>
+	</tr>
+	</table>
+	</FORM>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+# don't believe following is used
+def apple_fb_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<TITLE>Apple Fire Blight Logs</TITLE>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<STYLE TYPE="text/css">
+	TD
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   font-weight:bold;
+	   }
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   }
+	</STYLE>
+	<script  language="JavaScript">
+		function setSelectValue(oVal) {
+			var oSel = document.stationLister.stn;
+			for ( var i = 0; i < oSel.options.length; i++ ) {
+				if( oSel.options[i].value == oVal ) {
+					oSel.options[i].selected = true;
+				}
+			}
+		}
+	</script>
+	</HEAD>
+
+	<BODY BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
+	<p class="banner">NEWA Apple Fire Blight Logs</p>
+	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+	<table border="1" cellspacing="0" cellpadding="5">
+	<tr>
+	<td valign="top">
+	'''
+	display_station_list()
+	'''
+	<input type="hidden" name="type" value="apple_fb">
+	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+	</td>
+	<td>
+	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+	</td>
+	</tr>
+	</table>
+	</FORM>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def potato_lb_old_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<TITLE>Potato Late Blight</TITLE>
+	<STYLE TYPE="text/css">
+	TD
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   font-weight:bold;
+	   }
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   }
+	</STYLE>
+	<script  language="JavaScript">
+		function setSelectValue(oVal) {
+			var oSel = document.stationLister.stn;
+			for ( var i = 0; i < oSel.options.length; i++ ) {
+				if( oSel.options[i].value == oVal ) {
+					oSel.options[i].selected = true;
+				}
+			}
+		}
+	</script>
+	</HEAD>
+	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
+	<p class="banner">NEWA Potato Late Blight - OLD VERSION</p>
+	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+	<table border="1" cellspacing="0" cellpadding="5">
+	<tr>
+	<td valign="top">
+	'''
+	potato_inputs("rh")
+	'''
+	<input type="hidden" name="type" value="potato_lb_old">
+	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+	</td>
+	<td>
+	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+	</td>
+	</tr>
+	</table>
+	</FORM>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def potato_disease [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<TITLE>Potato Disease Forecasts</TITLE>
+	<STYLE TYPE="text/css">
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   }
+	</STYLE>
+	</HEAD>
+	<BODY BGCOLOR="#FFFFFF">
+	<p class="banner">Welcome to the NEWA Potato Home Page</p>
+	<h2>Late Blight</h2>
+	<ul>
+		<li>Use <a href="http://newatest.nrcc.cornell.edu/newaDisease/potato_lb">Blitecast</a> to help time your first fungicide application.
+		<li>Use <a href="http://newatest.nrcc.cornell.edu/newaDisease/potato_simcast">Simcast</a> to help time later fungicide applications.
+		<li>Sign up for an account with the <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss">Late Blight Decision Support System</a> 
+		for more detailed, farm-specific reports that combine both Blitecast and Simcast forecasts.
+	</ul>
+	<h2>Early Blight</h2>
+	<ul>
+		<li>View <a href="http://newatest.nrcc.cornell.edu/newaDisease/potato_pdays">accumulated P-Day values</a>.
+	</ul>
+	<h2><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively">Using Potato Disease Forecasts Effectively</a></h2>
+	</BODY>
+	</HTML>
+	'''
+
+def potato_lb_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/Humanity_1.8.21/ui.all.css" type="text/css">
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/potato_disease.js"></script>
+	<TITLE>Late Blight Blitecast</TITLE>
+	<STYLE TYPE="text/css">
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt; }
+	#leftbox {
+		position: absolute;
+		margin: 0 0 0 0px;
+		padding: 2px;
+		width: 194px;
+		border: 1px gray solid; }
+	#leftbox p {
+		font-weight: bold; }
+	#rightbox {
+		position: absolute;
+		margin: 0 0 0 200px;
+		padding: 0px;
+		width: 643px;
+		border: 0px gray solid; }
+	</STYLE>
+	<script  language="JavaScript">
+		function setSelectValue(oVal) {
+			var oSel = document.stationLister.stn;
+			for ( var i = 0; i < oSel.options.length; i++ ) {
+				if( oSel.options[i].value == oVal ) {
+					oSel.options[i].selected = true;
+				}
+			}
+		}
+	</script>
+	</HEAD>
+	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
+	<p class="banner">Potato Late Blight Blitecast</p>
+	<div id="leftbox">
+	<FORM ACTION="#" NAME="stationLister">
+	'''
+	potato_inputs("rh")
+	'''
+	<input type="hidden" name="type" id="pest" value="potato_lb">
+	<p><input type="button" value="Get report" class="button">
+	<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
+	</FORM>
+	</div>
+	<div id="rightbox">
+		<div id="righttabs">
+			<ul>
+				<li><a href="#first"> Map</a></li>
+				<li><a href="#second">Results</a></li>
+				<li><a href="#third"> More info</a></li>
+			</ul>
+			<div id="first" style="padding:0px;">
+				<div id="map" style="width: 635px; height: 560px"></div>
+			</div>
+			<div id="second" class="plain_back" style="padding:3px;">
+				<p>Results will appear here.</p>
+			</div>
+			<div id="third"  class="plain_back_l">
+				<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
+			</div>
+		</div>
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def potato_simcast_input [html] (stn_default):
+	'''
+	<HTML>
+	<HEAD>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/Humanity_1.8.21/ui.all.css" type="text/css">
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/potato_disease.js"></script>
+	<TITLE>Simcast</TITLE>
+	<STYLE TYPE="text/css">
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt; }
+	#leftbox {
+		position: absolute;
+		margin: 0 0 0 0px;
+		padding: 2px;
+		width: 194px;
+		border: 1px gray solid; }
+	#leftbox p {
+		font-weight: bold; }
+	#rightbox {
+		position: absolute;
+		margin: 0 0 0 200px;
+		padding: 0px;
+		width: 643px;
+		border: 0px gray solid; }
+	</STYLE>
+	<script type="text/javascript">
+		function setCultivarMenu() {
+			if ($("#crop").val() === 'potato') {
+				$("#potato_options").show();
+				$("#tomato_options").hide();
+			} else {
+				$("#tomato_options").show();
+				$("#potato_options").hide();
+			}
+		}
+		function startup(stn) {
+			setCultivarMenu();
+			if (stn && stn.length > 0) {
+				setSelectValue(stn[0]);
+			}
+		}
+	</script>
+	</HEAD>
+	'''
+	'<BODY BGCOLOR="#FFFFFF" onload="startup(%s);">' % stn_default
+	'''
+	<p class="banner">Potato and Tomato Late Blight Simcast</p>
+	<div id="leftbox">
+	<FORM ACTION="#" NAME="stationLister">
+	'''
+	potato_inputs_simcast("rh")
+	'''
+	<input type="hidden" name="type" id="pest" value="potato_simcast">
+	<p><input type="button" value="Get report" class="button">
+	<p><a href="http://newatest.nrcc.cornell.edu/PotatoCultivarsPop.html" target="_blank">Potato Cultivar Susceptibility</a></p>
+	<p><a href="http://newatest.nrcc.cornell.edu/TomatoCultivarsPop.html" target="_blank">Tomato Cultivar Susceptibility</a></p>
+	<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
+	<p><a href="http://newa.cornell.edu/index.php?page=Using-Tomcast-and-Blitecast-Forecasts-Effectively" target="_blank">Using Tomato Disease Forecasts Effectively</a></p>
+	</FORM>
+	</div>
+	<div id="rightbox">
+		<div id="righttabs">
+			<ul>
+				<li><a href="#first"> Map</a></li>
+				<li><a href="#second">Results</a></li>
+				<li><a href="#third"> More info</a></li>
+			</ul>
+			<div id="first" style="padding:0px;">
+				<div id="map" style="width: 635px; height: 560px"></div>
+			</div>
+			<div id="second" class="plain_back" style="padding:3px;">
+				<p>Results will appear here.</p>
+			</div>
+			<div id="third"  class="plain_back_l">
+				<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
+				<p><a href="http://newa.cornell.edu/index.php?page=Using-Tomcast-and-Blitecast-Forecasts-Effectively" target="_blank">Using Tomato Disease Forecasts Effectively</a></p>
+			</div>
+		</div>
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def potato_pdays_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/Humanity_1.8.21/ui.all.css" type="text/css">
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/potato_disease.js"></script>
+	<TITLE>Potato Early Blight</TITLE>
+	<STYLE TYPE="text/css">
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt; }
+	#leftbox {
+		position: absolute;
+		margin: 0 0 0 0px;
+		padding: 2px;
+		width: 194px;
+		border: 1px gray solid; }
+	#leftbox p {
+		font-weight: bold; }
+	#rightbox {
+		position: absolute;
+		margin: 0 0 0 200px;
+		padding: 0px;
+		width: 643px;
+		border: 0px gray solid; }
+	</STYLE>
+	<script  language="JavaScript">
+		function setSelectValue(oVal) {
+			var oSel = document.stationLister.stn;
+			for ( var i = 0; i < oSel.options.length; i++ ) {
+				if( oSel.options[i].value == oVal ) {
+					oSel.options[i].selected = true;
+				}
+			}
+		}
+	</script>
+	</HEAD>
+	<BODY BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
+	<p class="banner">NEWA Potato Early Blight P-Days</p>
+	<div id="leftbox">
+	<FORM ACTION="#" NAME="stationLister">
+	'''
+	potato_inputs("all")
+	'''
+	<input type="hidden" name="type" id="pest" value="potato_pdays">
+	<p><input type="button" value="Get report" class="button">
+	<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
+	</FORM>
+	</div>
+	<div id="rightbox">
+		<div id="righttabs">
+			<ul>
+				<li><a href="#first"> Map</a></li>
+				<li><a href="#second">Results</a></li>
+				<li><a href="#third"> More info</a></li>
+			</ul>
+			<div id="first" style="padding:0px;">
+				<div id="map" style="width: 635px; height: 560px"></div>
+			</div>
+			<div id="second" class="plain_back" style="padding:3px;">
+				<p>Results will appear here.</p>
+			</div>
+			<div id="third"  class="plain_back_l">
+				<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
+			</div>
+		</div>
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def onion_dis_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<TITLE>Onion Disease Forecast</TITLE>
+	<STYLE TYPE="text/css">
+	TD
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   font-weight:bold;
+	   }
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   }
+	</STYLE>
+	<script  language="JavaScript">
+		function setSelectValue(oVal) {
+			var oSel = document.stationLister.stn;
+			for ( var i = 0; i < oSel.options.length; i++ ) {
+				if( oSel.options[i].value == oVal ) {
+					oSel.options[i].selected = true;
+				}
+			}
+		}
+	</script>
+	</HEAD>
+	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
+	<H1>NEWA Onion Disease Forecast</H1>
+	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+	<table border="1" cellspacing="0" cellpadding="5">
+	<tr>
+	<td valign="top">
+	'''
+	onion_inputs("rh")
+	'''
+	<input type="hidden" name="type" value="onion_dis">
+	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+	</td>
+	<td>
+	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+	</td>
+	</tr>
+	</table>
+	</FORM>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def onion_onlog_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<TITLE>Onion Disease Log</TITLE>
+	<STYLE TYPE="text/css">
+	TD
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   font-weight:bold;
+	   }
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   }
+	</STYLE>
+	<script  language="JavaScript">
+		function setSelectValue(oVal) {
+			var oSel = document.stationLister.stn;
+			for ( var i = 0; i < oSel.options.length; i++ ) {
+				if( oSel.options[i].value == oVal ) {
+					oSel.options[i].selected = true;
+				}
+			}
+		}
+	</script>
+	</HEAD>
+	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
+	<p class="banner">NEWA Onion Disease Log</p>
+	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+	<table border="1" cellspacing="0" cellpadding="5">
+	<tr>
+	<td valign="top">
+	'''
+	onion_inputs("rh")
+	'''
+	<input type="hidden" name="type" value="onion_onlog">
+	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+	</td>
+	<td>
+	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+	</td>
+	</tr>
+	</table>
+	</FORM>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def onion_sbalog_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<TITLE>Onion Blight Alert Log</TITLE>
+	<STYLE TYPE="text/css">
+	TD
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   font-weight:bold;
+	   }
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   }
+	</STYLE>
+	<script  language="JavaScript">
+		function setSelectValue(oVal) {
+			var oSel = document.stationLister.stn;
+			for ( var i = 0; i < oSel.options.length; i++ ) {
+				if( oSel.options[i].value == oVal ) {
+					oSel.options[i].selected = true;
+				}
+			}
+		}
+	</script>
+	</HEAD>
+	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
+	<p class="banner">NEWA Onion Blight Alert Log</p>
+	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+	<table border="1" cellspacing="0" cellpadding="5">
+	<tr>
+	<td valign="top">
+	'''
+	onion_inputs("rh")
+	'''
+	<input type="hidden" name="type" value="onion_sbalog">
+	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+	</td>
+	<td>
+	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+	</td>
+	</tr>
+	</table>
+	</FORM>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def onion_smbalog_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<TITLE>Onion Modified Blight Alert Log</TITLE>
+	<STYLE TYPE="text/css">
+	TD
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   font-weight:bold;
+	   }
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   }
+	</STYLE>
+	<script  language="JavaScript">
+		function setSelectValue(oVal) {
+			var oSel = document.stationLister.stn;
+			for ( var i = 0; i < oSel.options.length; i++ ) {
+				if( oSel.options[i].value == oVal ) {
+					oSel.options[i].selected = true;
+				}
+			}
+		}
+	</script>
+	</HEAD>
+	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
+	<p class="banner">NEWA Onion Modified Blight Alert Log</p>
+	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+	<table border="1" cellspacing="0" cellpadding="5">
+	<tr>
+	<td valign="top">
+	'''
+	onion_inputs("rh")
+	'''
+	<input type="hidden" name="type" value="onion_smbalog">
+	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+	</td>
+	<td>
+	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+	</td>
+	</tr>
+	</table>
+	</FORM>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def tomato_for_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<TITLE>Tomcast</TITLE>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/Humanity_1.8.21/ui.all.css" type="text/css">
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/potato_disease.js"></script>
+	<STYLE TYPE="text/css">
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt; }
+	#leftbox {
+		position: absolute;
+		margin: 0 0 0 0px;
+		padding: 2px;
+		width: 194px;
+		border: 1px gray solid; }
+	#leftbox p {
+		font-weight: bold; }
+	#rightbox {
+		position: absolute;
+		margin: 0 0 0 200px;
+		padding: 0px;
+		width: 643px;
+		border: 0px gray solid; }
+	</STYLE>
+	<script  language="JavaScript">
+		function setSelectValue(oVal) {
+			var oSel = document.stationLister.stn;
+			for ( var i = 0; i < oSel.options.length; i++ ) {
+				if( oSel.options[i].value == oVal ) {
+					oSel.options[i].selected = true;
+				}
+			}
+		}
+	</script>
+	</HEAD>
+	<BODY BGCOLOR="#FFFFFF" onload="stationMap('eslw','select_station');">
+	<p class="banner">NEWA Tomcast (Early Blight, Septoria Leaf Spot, Anthracnose)</p>
+	<div id="leftbox">
+	<FORM ACTION="#" NAME="stationLister">
+	'''
+	tomato_inputs("eslw")
+	'''
+	<input type="hidden" name="type" id="pest" value="tomato_for">
+	<p><input type="button" value="Get report" class="button">
+	<p><a href="http://newa.cornell.edu/index.php?page=Using-Tomcast-and-Blitecast-Forecasts-Effectively" target="_blank">Using Tomato Disease Forecasts Effectively</a></p>
+	</FORM>
+	</div>
+	<div id="rightbox">
+		<div id="righttabs">
+			<ul>
+				<li><a href="#first"> Map</a></li>
+				<li><a href="#second">Results</a></li>
+				<li><a href="#third"> More info</a></li>
+			</ul>
+			<div id="first" style="padding:0px;">
+				<div id="map" style="width: 635px; height: 560px"></div>
+			</div>
+			<div id="second" class="plain_back" style="padding:3px;">
+				<p>Results will appear here.</p>
+			</div>
+			<div id="third"  class="plain_back_l">
+				<p><a href="http://newa.cornell.edu/index.php?page=Using-Tomcast-and-Blitecast-Forecasts-Effectively" target="_blank">Using Tomato Disease Forecasts Effectively</a></p>
+			</div>
+		</div>
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def grape_dis_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<TITLE>Grape Disease Models</TITLE>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<STYLE TYPE="text/css">
+	TD
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   font-weight:bold;
+	   }
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   }
+	</STYLE>
+	<script  language="JavaScript">
+		function setSelectValue(oVal) {
+			var oSel = document.stationLister.stn;
+			for ( var i = 0; i < oSel.options.length; i++ ) {
+				if( oSel.options[i].value == oVal ) {
+					oSel.options[i].selected = true;
+				}
+			}
+		}
+	</script>
+	</HEAD>
+
+	<BODY BGCOLOR="#FFFFFF" onload="stationMap('eslw','select_station');">
+	<p class="banner">NEWA Grape Disease Models</p>
+	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+	<table border="1" cellspacing="0" cellpadding="5">
+	<tr>
+	<td valign="top">
+	'''
+	display_station_list("eslw")
+	now = DateTime.now()
+	'<P>Year:<BR>' 
+	'<select name="year">'
+	'<option value="%d" selected>%d</option>'%(now.year,now.year)
+	for yr in range(now.year-1,1995,-1):
+		'<option value="%d">%d</option>'%(yr,yr)
+	'</select>'
+	'''
+	<input type="hidden" name="type" value="grape_dis">
+	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+	</td>
+	<td>
+	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+	</td>
+	</tr>
+	</table>
+	</FORM>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def alf_weev_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<TITLE>Alfalfa Weevil</TITLE>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<STYLE TYPE="text/css">
+	TD
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   font-weight:bold;
+	   }
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   }
+	</STYLE>
+	<script  language="JavaScript">
+		function setSelectValue(oVal) {
+			var oSel = document.stationLister.stn;
+			for ( var i = 0; i < oSel.options.length; i++ ) {
+				if( oSel.options[i].value == oVal ) {
+					oSel.options[i].selected = true;
+				}
+			}
+		}
+	</script>
+	</HEAD>
+	<BODY BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
+	<p class="banner">NEWA Alfalfa Weevil</p>
+	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+	<table border="1" cellspacing="0" cellpadding="5">
+	<tr>
+	<td valign="top">
+	'''
+	display_station_list()
+	'''
+	<input type="hidden" name="type" value="alf_weev">
+	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+	</td>
+	<td>
+	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+	</td>
+	</tr>
+	</table>
+	</FORM>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def cabbage_maggot_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<TITLE>Cabbage Maggot</TITLE>
+	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/humanity/jquery-ui.css">
+	<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/newaGraph.js"></script>
+	<STYLE TYPE="text/css">
+	body {
+	   font-family: "Arial", "Helvetica", sans-serif;
+	   font-size: 9pt; }
+	#leftbox {
+		position: absolute;
+		margin: 0 0 0 0px;
+		padding: 2px;
+		width: 194px;
+		border: 1px gray solid; }
+	#leftbox p {
+		font-weight: bold; }
+	#rightbox {
+		position: absolute;
+		margin: 0 0 0 200px;
+		padding: 0px;
+		width: 643px;
+		border: 0px gray solid; }
+	</STYLE>
+	<script  language="JavaScript">
+		function setSelectValue(oVal) {
+			var oSel = document.stationLister.stn;
+			for ( var i = 0; i < oSel.options.length; i++ ) {
+				if( oSel.options[i].value == oVal ) {
+					oSel.options[i].selected = true;
+				}
+			}
+		}
+		function getCabbageMaggot() {
+			var req_stn = $("select[name=stn] option:selected").val(),
+				accend = $("#dpick").val(),
+				params = {type: "cabbage_maggot", stn: req_stn, accend: accend};	
+			$("#righttabs").tabs().tabs("option","active",1);
+			$("#second").empty().html('<img src="http://newatest.nrcc.cornell.edu/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
+			$.get("http://newatest.nrcc.cornell.edu/newaDisease/process_input",params,function(data) {
+				$("#loading").fadeOut(500, function() {
+					$(this).remove();
+				});
+				$("#second").html(data);
+				produce_cabbagemaggot_graph();
+				$("#forecast").on("click", function() {
+					$.get("http://newatest.nrcc.cornell.edu/newaUtil/getForecastUrl/"+req_stn, function(fcst) { 
+						window.open(fcst);
+					});
+				});
+			});
+//			$.get('http://newatest.nrcc.cornell.edu/newaDisease/process_help',params,function(helpdata) {
+//				$('#third').html(helpdata);
+//			});
+			return false;
+		}
+		$(document).ready(function() {
+			var myDate = new Date(),
+				todayDate = (myDate.getMonth()+1) + "/" + myDate.getDate() + "/" + myDate.getFullYear();
+			$("#dpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "", changeMonth: true, changeYear: true }).val(todayDate);
+			$("#righttabs").tabs();
+			$("form .button").on("click", function () {
+				getCabbageMaggot();
+			});
+			stationMap("all","select_station");
+			$.get('http://newatest.nrcc.cornell.edu/cabbage_maggot_info.htm',function(helpdata) {
+				$('#third').html(helpdata);
+			});
+		});
+	</script>
+	</HEAD>
+	<body BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
+	<p class="banner">NEWA Cabbage Maggot</p>
+	<div id="leftbox">
+		<FORM ACTION="#" NAME="stationLister">
+	'''
+	display_station_list()
+	'''
+		<p>Date of Interest:
+		<br><input type="text" id="dpick" value="">
+		<input type="hidden" name="pest" value="cabbage_maggot">
+		<p><input type="button" class="button" value="Get report"></p>
+		</FORM>
+	</div>
+	<div id="rightbox">
+		<div id="righttabs">
+			<ul>
+				<li><a href="#first"> Map</a></li>
+				<li><a href="#second">Results</a></li>
+				<li><a href="#third"> More info</a></li>
+			</ul>
+			<div id="first" style="padding:0px;">
+				<div id="map" style="width: 635px; height: 560px"></div>
+			</div>
+			<div id="second" class="plain_back" style="padding:3px;">
+				<p>Results will appear here.</p>
+			</div>
+			<div id="third"  class="plain_back_l">
+				<p>Additional information when available</p>
+			</div>
+		</div>
+	</div>
+
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def onion_maggot_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<TITLE>Onion Maggot</TITLE>
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<STYLE TYPE="text/css">
+	TD
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   font-weight:bold;
+	   }
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   }
+	</STYLE>
+	<script  language="JavaScript">
+		function setSelectValue(oVal) {
+			var oSel = document.stationLister.stn;
+			for ( var i = 0; i < oSel.options.length; i++ ) {
+				if( oSel.options[i].value == oVal ) {
+					oSel.options[i].selected = true;
+				}
+			}
+		}
+	</script>
+	</HEAD>
+	<BODY BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
+	<p class="banner">NEWA Onion Maggot</p>
+	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+	<table border="1" cellspacing="0" cellpadding="5">
+	<tr>
+	<td valign="top">
+	'''
+	display_station_list()
+	'''
+	<input type="hidden" name="type" value="onion_maggot">
+	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+	</td>
+	<td>
+	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+	</td>
+	</tr>
+	</table>
+	</FORM>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+############################################
+# Output pages
+############################################
+def helppage [html] (urls):		
+	if urls: 
+		'<h3>Helpful Information</h3>'
+		'<ul>'
+		for desc,url in urls:
+			if len(url) > 0:
+				'<li><a href="%s" target="_blank">%s</a></li>' % (url,desc)
+			else:
+				'<li>%s</li>' % (desc)
+		'</ul>'
+	else:
+		'<p>No help available for selected pest.</p>'
+		
+#--------------------------------------------------------------------------------------------		
+# standard footer
+def add_footer [html] (smry_dict=None,add_logo=None):
+	'''
+	<div class="plain_smaller_j" style="margin:1em 5%%;"><b>Disclaimer:</b> <i><b>These are theoretical predictions 
+	and forecasts.</b> The theoretical models predicting pest development or disease risk use the weather data 
+	collected (or forecasted) from the weather station location. These results should not be substituted for actual 
+	observations of plant growth stage, pest presence, and disease occurrence determined through scouting or insect 
+	pheromone traps.</i></div>
+	<span style="text-align:center;"><table cellspacing="0" cellpadding="0" border="0" width="97%%">
+	'''
+	
+	if add_logo == 'pmep':
+		'<tr><td align=left width="33%%"><a href="http://newa.cornell.edu" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
+		'<td align=center width="34%%"><a href="http://treefruitipm.info" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/pmep_logo.jpg" alt="PMEP" width="70" height="25" border="0"></a></td>'
+		'<td align=right width="33%%"><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
+	else:
+		'<tr><td align=left><a href="http://newa.cornell.edu" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
+		'<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
+	'</table></span>'
+
+
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		</div>
+		<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+		<script type="text/javascript">
+		try {
+		var pageTracker = _gat._getTracker("UA-8808137-1");
+		pageTracker._trackPageview();
+		} catch(err) {}</script>
+		</body>
+		</html>
+		'''
+# convert wet/dry periods into html and merge with rest of def (single station)
+def apple_lw_html [html] (station_name,last_time,datalines,avail_vars):	
+	'''
+	<html>
+	<head>
+	<title>Apple Wet and Dry Log</title>
+	<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+	</head>
+	<body>
+	<DIV align=center>
+	<table border=0 cellpadding=0 cellspacing=0 width=816 style='border-collapse:collapse;table-layout:fixed'>
+	<col width=140><col width=140><col width=64><col width=64><col width=64><col width=140><col width=140><col width=64>
+	<tr>
+	'''
+	'<td class=header_line height=30 align=left>%s</td>' % station_name
+	'<td class=header_line colspan=5 align=center>Apple Wet and Dry Log %d</td>' % last_time[0]
+	'<td class=red_text colspan=2>Download Time: %d/%d/%d %d:00</td>'%(last_time[1],last_time[2],last_time[0],last_time[3])
+	'''
+	</tr>
+	<tr>
+	  <td colspan=8 class=silver_back height=60>When calculating the length of a wetting period use the following rule: 
+	two successive wetting periods, the first started by rain, should be considered a single, 
+	uninterrupted wet period if the intervening dry period is less than 24 hours, regardless of weather. 
+	Refer to <a href="http://newa.cornell.edu/index.php?page=revised-mills-table" target="_blank">Mills Chart</a> for additional information.</td>
+	</tr>
+	<tr>
+	  <td class=colhead_center height=42>Wet Starting<br>Date Time</td>
+	  <td class=colhead_center>Wet Ending<br>Date Time</td>
+	'''
+	if 'lwet' in avail_vars:
+		'<td class=colhead_center>Hours<br>LW</td>'
+	else:
+		'<td class=colhead_center>Hours<br>Est LW</td>'
+	'''
+	  <td class=colhead_center>Avg<br>Temp F</td>
+	  <td class=colhead_center>Total<br>Rain</td>
+	  <td class=colhead_center>Dry Starting<br>Date Time</td>
+	  <td class=colhead_center>Dry Ending<br>Date Time</td>
+	  <td class=colhead_center>Hours<br>Dry</td>
+	</tr>
+	'''
+	
+	for i in range(len(datalines)-1,-1,-1):		#go from most recent back
+		col = datalines[i].split('\t')
+		'<TR>'
+		'<td class=blue_back height=21>%s</td>'%col[0]
+		'<td class=blue_back>%s</td>'%col[1]
+		'<td class=blue_back>%s</td>'%col[2]
+		'<td class=blue_back>%s</td>'%col[3]
+		'<td class=blue_back>%s</td>'%col[4]
+		'<td class=brown_back>%s</td>'%col[5]
+		'<td class=brown_back>%s</td>'%col[6]
+		'<td class=brown_back>%s</td>'%col[7]
+		'</TR>'
+
+	'''
+	</table>
+	<table border=0 cellspacing=5 cellpadding=5 width=816>
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table>
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''
+
+def apple_fb_html [html] (station_name,last_time,daily_fire):
+	'''
+	<html>
+	<head>
+	<title>Fire Blight Degree Hours Log</title>
+	<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+	</head>
+	<body>
+	<DIV align=center>
+	<table border=0 cellpadding=0 cellspacing=0 width=660 style='border-collapse:collapse;table-layout:fixed'>
+	 <col width=100>
+	 <col width=100>
+	 <col width=100>
+	 <col width=100>
+	 <col width=110>
+	 <col width=150>
+	<tr>
+	'''
+	'  <td class=header_line colspan=6 height=30 align=center>%s - Fire Blight Degree Hours Log %d</td>'%\
+				   (station_name,last_time[0])
+	'''
+	</tr>
+	<tr><td colspan=6>&nbsp;</td></tr>
+	<tr>
+	<td class=colhead_left height=42>Date</td>
+	<td class=colhead_center>Max<BR>Temp (F)</td>
+	<td class=colhead_center>Min<BR>Temp (F)</td>
+	<td class=colhead_center>Accum<br>GDD (50)</td>
+	<td class=colhead_center>Fire Blight<br>Degree Hours</td>
+	<td class=colhead_center>Accum Fire Blight<br>Degree Hours</td>
+	</tr>
+	'''
+	
+	'<TR><td class=red_text colspan=6 height=21>Download Time: %d/%d/%d %d:00</td></tr>'%\
+   		(last_time[1],last_time[2],last_time[0],last_time[3])
+	for i in range(len(daily_fire)-1,-1,-1):		#go from most recent back
+		dt,tmax,tmin,accgdd,fbdh,accfbdh = daily_fire[i]
+		if dt[2]%5 == 0: 
+			color = 'gray'
+		else:
+			color = 'plain'
+		'<TR>'
+		'<td class=%s_back_l>%d/%d/%d</td>' % (color,dt[1],dt[2],dt[0])
+		'<td class=%s_back>%.1f</td>' % (color,round(tmax,1))
+		'<td class=%s_back>%.1f</td>' % (color,round(tmin,1))
+		'<td class=%s_back>%.1f</td>' % (color,round(accgdd,1))
+		'<td class=%s_back>%.1f</td>' % (color,round(fbdh,1))
+		if accfbdh >= 200: 
+			'<td class=redon%s_back>%.1f</td>' % (color,round(accfbdh,1))
+		else:
+			'<td class=%s_back>%.1f</td>' % (color,round(accfbdh,1))
+		'</tr>'
+
+	'''
+	<tr><td colspan=7>&nbsp;</td></tr>
+	<TR>
+	<TD height=70 COLSPAN=7 class=silver_back>
+	<i>&nbsp;&nbsp;&nbsp;Accumulated Fire Blight Degree Hours are "fine tuned" for cool days: running 
+	total reduced by 33% after one day in which the daily max temperature is less than 65&deg;F, 
+	reduced by 50% after two consecutive days below 65&deg;F, and reset to zero after 3 consecutive days 
+	with the daily max temperarture below 65&deg;F or one day with the min temperature below 32&deg;F. 
+	However, no downward adjustments are made once the running total has gone above 400 degree hours.
+	<br>&nbsp;&nbsp;&nbsp;Accum GDD (50) are accumulated growing degree days (base 50&deg;F) since March 1.</i></td>
+	</TR>
+	</table>
+	<table border=0 cellspacing=5 cellpadding=5 width=660>
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table>
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''
+
+def potato_lb_html [html] (station_id,station_name,last_time,wet_periods,summary_table,output):
+	if output == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>Potato Blitecast</title>
+		<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript">
+			function showit() {
+				$("#moreInfo").toggle();
+			}
+		</script>
+		</head>
+		<body>
+		'''
+	'''
+	<DIV align=center>
+	<table id="blight_table" border cellspacing="0" cellpadding="4" width=625 style='border-collapse:collapse;table-layout:fixed'>
+	<col width="28%">
+	'''
+	dateVars = summary_table['dates']
+	length = len(summary_table['dates'])
+	for index in range(length):
+		'<col width="%s%%">' % (72/length)
+	'<tr><td class=header_line_silver_back height=38 colspan=%d align=center>%s - Blitecast Severity Summary</td></tr>'%(length+1,station_name)
+	'''
+	<tr>
+	<th>Date</th>
+	'''
+	for i in range(0,length) :
+		if dateVars[i] < last_time:
+			color = "blue"
+		else:
+			color = "yellow"
+		'<th class="%s_back">%s/%s</th>'%(color,dateVars[i][1],dateVars[i][2])
+	'''
+	</tr>
+	<tr>
+	<th>Severity Values</th>
+	'''
+	criticalValue = 18
+	hasRed = 0
+	hasTan = 0
+	for index in range(length) :
+		value = summary_table['units'][index]
+		if (value >= criticalValue ):
+			color = "red"
+			hasRed = 1
+		else  :
+			color = "#EAD797"
+			hasTan = 1
+		'<td align="center" bgcolor="%s">%d</td>'%(color,value)
+	'</tr>'
+	'</table>'
+	'<table border="0" cellspacing="0" cellpadding="4" width="500px" style="margin-top:1em;border-collapse:collapse;table-layout:fixed">'
+	'<tr><th style="border:1px solid black;" colspan="%s">Key</th></tr>' % (length+1)
+	if (hasTan == 1):
+		'<tr><td style="border:1px solid black;" bgcolor="#EAD797">&nbsp;</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % length
+	if (hasRed == 1):
+		'<tr><th style="border:1px solid black;" bgcolor="red">>=%s</th>'%(criticalValue)
+		'<td style="border:1px solid black;" colspan="%s">Severity unit threshold exceeded. Suggest using <a href="http://newatest.nrcc.cornell.edu/newaDisease/potato_simcast/%s">Simcast</a> once fungicide is applied.</td></tr>' % (length,station_id)
+
+	'<tr><th colspan="%s"><a href="javascript:showit();">More Information</a></th></tr>' % (length+1)
+	'<tr><td colspan="%s" style="padding:0;">' % (length+1)
+	'''
+	<div id="moreInfo" style="padding:4px; border:1px solid black; background-color:#EAD797; display:none;">
+	<p>Dates with a <span class="blue_back">blue background</span> based on observed weather data.
+	'''
+	'<br />Dates with a <span class="yellow_back">yellow background</span> use forecast weather data after %d/%d/%d %d:00.</p>' % (last_time[1],last_time[2],last_time[0],last_time[3])
+	'''
+	<hr />
+	<p>Missing data are estimated from surrounding hours, a nearby station or previous forecast values.</p>
+	<hr />
+	<p>The <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss" target="_blank">Potato/Tomato Late Blight Decision Support System (DSS)</a> 
+	can be used to provide a more detailed, farm-specific analysis of late blight management strategies.</p>
+	</div>
+	</td></tr>
+	</table>
+
+	<table border=0 cellpadding=0 cellspacing=0 width=625 style='margin-top:2em;border-collapse:collapse;table-layout:fixed'>
+	<col width=125><col width=125><col width=90><col width=55><col width=60><col width=60><col width=55><col width=55>
+	<tr>
+	'''
+	'<td class=header_line height=30 colspan=8 align=center>Leaf Wetness and Severity Value Log %d</td>'%(last_time[0])
+	'''
+	</tr>
+	<tr>
+	  <td class=colhead_center>Wet Starting</td>
+	  <td class=colhead_center>Wet Ending</td>
+	  <td class=colhead_center>Hours</td>
+	  <td class=colhead_center>Avg</td>
+	  <td class=colhead_center>Total</td>
+	  <td class=colhead_center>Severity</td>
+	  <td class=colhead_center colspan=2>Accum Severity</td>
+	</tr>
+	<tr>
+	  <td class=colhead_center>Date Time</td>
+	  <td class=colhead_center>Date Time</td>
+	  <td class=colhead_center>RH >= 90%</td>
+	  <td class=colhead_center>Temp F</td>
+	  <td class=colhead_center>Rain</td>
+	  <td class=colhead_center>Value</td>
+	  <td class=colhead_center>7-Day</td>
+	  <td class=colhead_center>Season</td>
+	</tr>
+	'''
+	'<TR>'
+	'<td class=red_text_center colspan=2 height=21>Download Time: %d/%d/%d %d:00'%(last_time[1],last_time[2],last_time[0],last_time[3])
+	'</td></tr>'
+	for i in range(len(wet_periods)-1,-1,-1):		#go from most recent back
+		wet_start,wet_end,wet_hrs,cold_hrs,temp_ave,prcp_tot,severity,weeksev,accumsev = wet_periods[i]
+		if wet_end > last_time:
+			color = 'yellow'
+		elif i%2 == 0:
+			color = 'gray'
+		else:
+			color = 'plain'
+		if prcp_tot == -999:
+			prcp_str = '-'
+		else:
+			prcp_str = '%.2f'%prcp_tot
+		if wet_end == miss:
+			we_str = 'in progress'
+		else:
+			weyr,wemn,wedy,wehr = wet_end
+			we_str = '%d/%d/%d %d:00' % (wemn,wedy,weyr,wehr)
+		wsyr,wsmn,wsdy,wshr = wet_start
+		if temp_ave == -999:
+			ctemp = "-"
+		else:
+			ctemp = "%d" % int(round(temp_ave,0))
+		'<TR>'
+		'<td class=%s_back height=21>%d/%d/%d %d:00</td>'%(color,wsmn,wsdy,wsyr,wshr)
+		'<td class=%s_back>%s</td>'%(color,we_str)
+		'<td class=%s_back>%d</td>'%(color,wet_hrs)
+		'<td class=%s_back>%s</td>'%(color,ctemp)
+		'<td class=%s_back>%s</td>'%(color,prcp_str)
+		'<td class=%s_back>%s</td>'%(color,severity)
+		'<td class=%s_back>%d</td>'%(color,weeksev)
+		'<td class=%s_back>%d</td>'%(color,accumsev)
+		'</TR>'
+	'''
+	</table>
+	<p>Severity Value calculation method updated June 28, 2012. Yellow highlighted periods include forecast data.</p>
+	<table border=0 cellspacing=5 cellpadding=5 width=625>
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table>
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	'''
+	if output == 'standalone':
+		'''
+		</body>
+		</html>
+		'''
+
+def potato_simcast_html [html] (station_name,simcastD):
+	'''
+	<DIV align=center>
+	'''
+	bliteVals = simcastD['bliteVals']
+	bliteCrit = simcastD['bliteCrit']
+	fungicideVals = simcastD['fungicideVals']
+	fungicideCrit = simcastD['fungicideCrit']
+	dateVars = simcastD['dates']
+	bLength = len(bliteVals)
+	fLength = len(fungicideVals)
+	length = min(bLength,fLength)
+	'''
+	<table id="blight_table" border cellspacing="0" cellpadding="4" width=625 style='border-collapse:collapse;table-layout:fixed'>
+	<col width="28%">
+	'''
+	for index in range(length):
+		'<col width="%s%%">' % (72/length)
+	'<tr><td class=header_line_silver_back height=38 colspan=%d align=center>%s - Simcast Summary</td></tr>'%(length+1,station_name)
+	'''
+	<tr>
+	<th>Date</th>
+	'''
+	'<th class="blue_back">%s</th>'%(dateVars[0])
+	for i in range(1,4) :
+		'<th class="yellow_back">%s</th>'%(dateVars[i])
+	for i in range(4,length) :
+		'<th style="background-color:#FFCC00;">%s</th>'%(dateVars[i])
+	'''
+	</tr>
+	<tr>
+	<th>Blight Units</th>
+	'''
+	hasRedBlight = 0
+	hasRedFung = 0
+	hasTan = 0
+	for index in range(length) :
+		value = bliteVals[index]
+		bCritFlg = bliteCrit[index]
+		fCritFlg = fungicideCrit[index]	
+		if (bCritFlg == 1 ):
+			color = "red"
+			hasRedBlight = 1
+		elif bCritFlg == 0  :
+			color = "#EAD797"
+			hasTan = 1
+		'<td align="center" bgcolor="%s">%s</td>'%(color,value)
+	'''
+	</tr>
+	<tr>
+	<th>Fungicide Units</th>
+	'''
+	for index in range(length ) :
+		value = fungicideVals[index]
+		fCritFlg = fungicideCrit[index]
+		bCritFlg = bliteCrit[index]
+		if (fCritFlg == 1):
+			color = "red"
+			hasRedFung = 1
+		elif fCritFlg == 0  :
+			color = "#EAD797"
+			hasTan = 1
+		'<td align="center" bgcolor="%s">%s</td>'%(color,value)
+	'</tr>'
+	'</table>'
+	'<table border="0" cellspacing="0" cellpadding="4" width="500px" style="margin-top:1em;border-collapse:collapse;table-layout:fixed">'
+	'<tr><th style="border:1px solid black;" colspan="%s">Key</th></tr>' % (length+1)
+	if (hasTan == 1):
+		'<tr><td style="border:1px solid black;" bgcolor="#EAD797">&nbsp;</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % length
+	if (hasRedBlight == 1):
+		'<tr><th style="border:1px solid black;" bgcolor="red">>=%s</th>'%(simcastD['criticalBU'])
+		'<td style="border:1px solid black;" colspan="%s">Blight unit threshold exceeded.</td></tr>' % length
+	if (hasRedFung == 1):
+		'<tr><th style="border:1px solid black;" bgcolor="red"><=-%s</th>'%(simcastD['criticalFU'])
+		'<td style="border:1px solid black;" colspan="%s">Fungicide unit threshold exceeded.</td></tr>' % length
+
+	'<tr><th colspan="%s"><a href="javascript:showit();">More Information</a></th></tr>' % (length+1)
+	'<tr><td colspan="%s" style="padding:0;">' % (length+1)
+	'''
+	<div id="moreInfo" style="padding:4px; border:1px solid black; background-color:#EAD797; display:none;">
+	<p>Dates with a <span class="blue_back">blue background</span> generally have observed weather data.
+	<br />Dates with a <span class="yellow_back">yellow background</span> use observed (when available) and forecast temperature, rh and rainfall.
+	<br />Dates with an <span style="background-color:#FFCC00;">orange background</span> use forecast temperature and rh (rainfall not available; assumed zero).</p>
+	<hr />
+	<p>Missing data are estimated from surrounding hours, a nearby station or previous forecast values.</p>
+	<hr />
+	Rules:
+	<ul style="margin-top:0;">
+	<li>Date of 1st fungicide application should be determined by Blitecast.
+	<li>Fungicide Units are calculated after fungicide is applied.
+	<li>Next fungicide application is due when:
+	<ul style="margin-top:0;">
+	<li>It has been at least 5 days since the previous application
+	'''
+	'<li>%d blight units OR -%d fungicide units are reached or exceeded.' % (simcastD['criticalBU'],simcastD['criticalFU'])
+	'''
+	</ul>
+	</ul>
+	<hr />
+	Definition of one day:
+	<ul style="margin-top:0;">
+	<li>A day starts at 12 noon and continues for 24 hours.</li>
+	<li>For example, 6/7 12 noon up to but NOT including 6/8 12 noon is one day.</li>
+	</ul>
+	<hr />
+	<p>The <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss" target="_blank">Potato/Tomato Late Blight Decision Support System (DSS)</a> 
+	can be used to provide a more detailed, farm-specific analysis of late blight management strategies.</p>
+	</div>
+	</td></tr>
+	</table>
+
+	<table border=0 cellspacing=5 cellpadding=5 width=625>
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table>
+
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	'''
+
+def resistant [html] (cultivar):
+	'''
+	<html>
+	<head>
+	<title>Simcast Report</title>
+	<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+	</head>
+	<body>
+	<DIV align=center>
+	'''
+	'<div class="blue_back" style="border:1px solid blue; padding:10px; width:525px;">'
+	'<span>The tomato cultivar you selected, %s, is immune to the recent common strains of Phytophthora infestans. Fungicide \
+	applications against late blight should not be necessary. Alternatively, select a moderately resistant cultivar \
+	(such as Brandywine) in order to schedule precautionary fundicide applications.</span>' % cultivar
+	'</div>'
+	'''
+	<table border=0 cellspacing=5 cellpadding=5 width=625>
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table>
+
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''
+
+def potato_pdays_html [html] (stn_name, daily_pday,output):
+	if output == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>Potato P-Days</title>
+		<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		</head>
+		<body>
+		'''
+	'''
+	<DIV align=center>
+	<table border=0 cellpadding=0 cellspacing=0 width=300 style='border-collapse:collapse;table-layout:fixed'>
+	<col width=100>
+	<col width=100>
+	<col width=100>
+	'''
+	'<tr><td class=header_line height=30 colspan=3 align=center>P-Day Values for %s</td></tr>'%(stn_name)
+	month_links = '<A href=#%s>%s</A>' % (month_abbrev[5],month_abbrev[5])
+	for m in range(6,10):
+		month_links = month_links + ' | <a href=#%s>%s</A>'%(month_abbrev[m],month_abbrev[m])
+	'<tr><td class=plain_back height=30 colspan=3 align=center> %s</td></tr>'%month_links
+
+	for day in range(len(daily_pday)):
+		# add headings before 1st of each month
+		dt0 = daily_pday[day][0]
+		if dt0[2] == 1:
+			'<tr class=colhead_center>'
+			'<td height=40><A NAME=%s></a>Date</td>'%month_abbrev[dt0[1]]
+			'<td>Daily<br>P-Day</td>'
+			'<td>Seasonal<br>Accumulation</td>'
+			'</tr>'
+		if dt0[2]%5 == 0:
+			color = 'gray'
+		else:
+			color = 'plain'
+		'<tr class=%s_back><td>%02d/%02d/%04d</td>'%(color,dt0[1],dt0[2],dt0[0])
+		if len(daily_pday) > day:
+			dt,pday,accum = daily_pday[day]
+		else:
+			dt,pday,accum = miss,miss,miss
+		if dt == dt0:
+			if accum == miss: 
+				saccum = '---'
+			else:
+				saccum = '%.1f'%accum
+			if pday == miss:
+				spday = '---'
+			else:
+				spday = '%.1f'%pday
+		else:
+			saccum = '---'
+			spday = '---'
+		'<td>%s</td><td>%s</td>'%(spday,saccum)
+		'</tr>'
+	'''
+	</table>
+	<table border=0 cellspacing=5 cellpadding=5 width=300>
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table>
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	'''
+	if output == 'standalone':
+		'''
+		</body>
+		</html>
+		'''
+
+def onion_dis_html [html] (station_name,blight_alert,plant_date,alternaria,botrytis,mildew):
+	'''
+	<html>
+	<head>
+	<title>Onion Disease Forecast</title>
+	<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+	</head>
+	<body>
+	<DIV align=center>
+	<table border=0 cellpadding=0 cellspacing=10 width=540>
+	<tr>
+	'''
+	'  <td class=header_line height=30 colspan=6 align=center>%s - Onion Disease Forecast - Last 5 days</td>'%(station_name)
+
+	'''
+	</tr>
+	<tr><td class=plain_back colspan=6><a href="http://newa.nysaes.cornell.edu/public/Using_Onion_Dis_Forecast.htm" target="_blank">Using Disease Forecasts Effectively</a></td></tr>
+	<tr>
+	<td valign='top'>
+		<table border=1 cellpadding=0 cellspacing=0 width=250 style='border-collapse:collapse;table-layout:fixed'>
+		<col width=70>
+		<col width=90>
+		<col width=90>
+		<tr>
+		<td class=colhead_center_blue_back height=42>&nbsp;</td>
+		<td class=colhead_center_blue_back>Blight Alert</td>
+		<td class=colhead_center_blue_back>Modified</td>
+		</tr>
+		<tr>
+		<td class=colhead_center>Date</td>
+		<td class=colhead_center>IPI</td>
+		<td class=colhead_center>IPI</td>
+		</tr>
+	'''
+	'<TR><TD class=gray_back colspan=3 height=30>%s %d Planting</TD></TR>'%(month_abbrev[plant_date.month],plant_date.day)
+	bkeys = blight_alert.keys()
+	bkeys.sort()
+	for i in range(len(bkeys)-1,len(bkeys)-6,-1):		#go from most recent back five days
+		if i >= 0:
+			ba_ipi,mba_ipi = blight_alert[bkeys[i]]
+			yr,mn,dy = bkeys[i]
+			date_str = '%d/%d/%d' % (mn,dy,yr)
+			'<TR>'
+			'<td class=plain_back>%s</td>'%(date_str)
+			'<td class=plain_back>%6.2f</td>'%(ba_ipi)
+			'<td class=plain_back>%6.2f</td>'%(mba_ipi)
+			'</TR>'
+		else:
+			'<TR>'
+			'<td class=plain_back>-</td>'
+			'<td class=plain_back>-</td>'
+			'<td class=plain_back>-</td>'
+			'</TR>'		
+	'''
+		<tr><td class=plain_smaller colspan=3 height=50>Differences between Blight Alert and Modified Blight Alert most 
+		often occur in May and June. Few differences in late season.</td></tr>
+		</table>
+	</td>
+	<td valign='top'>
+		<table border=1 cellpadding=0 cellspacing=0 width=250 style='border-collapse:collapse;table-layout:fixed'>
+		<col width=70>
+		<col width=90>
+		<col width=90>
+		<tr>
+		<td class=colhead_center_blue_back colspan=3 height=42>Botrytis Forecast</td>
+		</tr>
+		<tr>
+		<td class=colhead_center>Date</td>
+		<td class=colhead_center>Spore<BR>Index</td>
+		<td class=colhead_center>Infection<BR>Potential</td>
+		</tr>
+	'''
+	bkeys = botrytis.keys()
+	bkeys.sort()
+	for i in range(len(bkeys)-1,len(bkeys)-6,-1):		#go from most recent back five days
+		if i >= 0:
+			spore_index, bf = botrytis[bkeys[i]]
+			spore_index = '%d'%int(round(spore_index,0))
+			yr,mn,dy = bkeys[i]
+			date_str = '%d/%d/%d' % (mn,dy,yr)
+			'<TR>'
+			'<td class=plain_back>%s</td>'%(date_str)
+			'<td class=plain_back>%s</td>'%(spore_index)
+			'<td class=plain_back>%s</td>'%(bf)
+			'</TR>'
+		else:
+			'<TR>'
+			'<td class=plain_back>-</td>'
+			'<td class=plain_back>-</td>'
+			'<td class=plain_back>-</td>'
+			'</TR>'
+	'''
+		<tr><td class=plain_smaller colspan=3 height=50>SIP=Significant infection potential; IIP=Insignificant infection potential.
+		<BR>Model developed in Michigan.</td></tr>
+		</table>
+	</td>
+	</tr>
+	<tr>
+	<td valign='top'>
+		<table border=1 cellpadding=0 cellspacing=0 width=250 style='border-collapse:collapse;table-layout:fixed'>
+		<col width=70>
+		<col width=180>
+		<tr>
+		<td class=colhead_center_blue_back colspan=2 height=42>Downy Mildew</td>
+		</tr>
+		<tr>
+		<td class=colhead_center>Date</td>
+		<td class=colhead_center>Condition</td>
+		</tr>
+	'''
+	mkeys = mildew.keys()
+	mkeys.sort()
+	for i in range(len(mkeys)-1,len(mkeys)-6,-1):		#go from most recent back five days
+		if i >= 0:
+			mildew_status = mildew[mkeys[i]]
+			yr,mn,dy = mkeys[i]
+			date_str = '%d/%d/%d' % (mn,dy,yr)
+			'<TR>'
+			'<td class=plain_back>%s</td>'%(date_str)
+			'<td class=plain_back>%s</td>'%(mildew_status)
+			'</TR>'
+		else:
+			'<TR>'
+			'<td class=plain_back>-</td>'
+			'<td class=plain_back>-</td>'
+			'</TR>'
+	'''
+		<tr><td class=plain_smaller colspan=3 height=30>Model developed in Canada.</td></tr>
+		</table>
+	</td>
+	<td valign='top'>
+		<table border=1 cellpadding=0 cellspacing=0 width=250 style='border-collapse:collapse;table-layout:fixed'>
+		<col width=70>
+		<col width=90>
+		<col width=90>
+		<tr>
+		<td class=colhead_center_blue_back colspan=3 height=42>Alternaria (Purple Blotch)</td>
+		</tr>
+		<tr>
+		<td class=colhead_center>Date</td>
+		<td class=colhead_center>Index</td>
+		<td class=colhead_center>Risk</td>
+		</tr>
+	'''
+	akeys = alternaria.keys()
+	akeys.sort()
+	for i in range(len(akeys)-1,len(akeys)-6,-1):		#go from most recent back five days
+		if i >= 0:
+			alt_index, alt_risk = alternaria[akeys[i]]
+			alt_index = '%4.1f'%alt_index
+			yr,mn,dy = akeys[i]
+			date_str = '%d/%d/%d' % (mn,dy,yr)
+			'<TR>'
+			'<td class=plain_back>%s</td>'%(date_str)
+			'<td class=plain_back>%s</td>'%(alt_index)
+			'<td class=plain_back>%s</td>'%(alt_risk)
+			'</TR>'
+		else:
+			'<TR>'
+			'<td class=plain_back>-</td>'
+			'<td class=plain_back>-</td>'
+			'<td class=plain_back>-</td>'
+			'</TR>'
+	'''
+	</table>
+	</td>
+	</tr>
+	<tr><td colspan=2>&nbsp;</td></tr>
+	<tr><td class=silver_back colspan=2>
+	Blight Alert recommends a fungicide application for Botrytis leaf blight under the following conditions: 
+	<BR>   - IPI is 7 or greater
+	<BR>   - a forecast for 30% or greater chance of precipitation
+	<BR>   - no fungicide applied in the last 7 days
+	
+	<P>Note: These forecasts are only based on weather at this weather
+	station and the nearby area with similar conditions.  Actual field
+	conditions and disease status may modify the pest management decision.
+	
+	<P>Data are summarized at 6am on the date indicated.
+	</td></tr>
+	<tr><td colspan=2>&nbsp;</td></tr>
+	</table>
+	<table border=0 cellspacing=5 cellpadding=5 width=540>
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table>
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''
+
+def onion_onlog_html [html] (station_name,last_time,alternaria,botrytis,mildew):
+	'''
+	<html>
+	<head>
+	<title>Onion Disease Log</title>
+	<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+	</head>
+	<body>
+	<DIV align=center>
+	<table border=0 cellpadding=0 cellspacing=0 width=500 style='border-collapse:collapse;table-layout:fixed'>
+	 <col width=100>
+	 <col width=75>
+	 <col width=75>
+	 <col width=75>
+	 <col width=75>
+	 <col width=100>
+	<tr>
+	'''
+	'  <td class=header_line height=30 colspan=6 align=center>%s - Onion Disease Log</td>'%(station_name)
+	'''
+	</tr>
+	<tr><td class=plain_back height=30 colspan=6><a href="http://newa.nysaes.cornell.edu/public/Using_Onion_Dis_Forecast.htm" target="_blank">Using Disease Forecasts Effectively</a></td></tr>
+	<tr>
+	<td class=colhead_center rowspan=2 height=42>Date</td>
+	<td class=colhead_center colspan=2>Alternaria</td>
+	<td class=colhead_center colspan=2>Botrytis</td>
+	<td class=colhead_center rowspan=2>Downy Mildew</td>
+	</tr>
+	<tr>
+	<td class=colhead_center>Index</td>
+	<td class=colhead_center>Risk</td>
+	<td class=colhead_center>S Index</td>
+	<td class=colhead_center>Potential</td>
+	</tr>
+	'''
+	mkeys = mildew.keys()
+	mkeys.sort()
+	for i in range(len(mkeys)-1,-1,-1):		#go from most recent back
+		if alternaria.has_key(mkeys[i]):
+			alt_index, alt_risk = alternaria[mkeys[i]]
+			alt_index = '%4.1f'%alt_index
+		else:
+			alt_index = ''
+			alt_risk = ''
+		if botrytis.has_key(mkeys[i]):
+			spore_index, bf = botrytis[mkeys[i]]
+			spore_index = '%d'%int(round(spore_index,0))
+		else:
+			spore_index = ''
+			bf = ''
+		if mildew.has_key(mkeys[i]):
+			mildew_status = mildew[mkeys[i]]
+		else:
+			mildew_status = ''
+		if i%2 == 0: 
+			color = 'gray'
+		else:
+			color = 'plain'
+		yr,mn,dy = mkeys[i]
+		date_str = '%d/%d/%d' % (mn,dy,yr)
+		'<TR>'
+		'<td class=%s_back>%s</td>'%(color,date_str)
+		'<td class=%s_back>%s</td>'%(color,alt_index)
+		'<td class=%s_back>%s</td>'%(color,alt_risk)
+		'<td class=%s_back>%s</td>'%(color,spore_index)
+		'<td class=%s_back>%s</td>'%(color,bf)
+		'<td class=%s_back>%s</td>'%(color,mildew_status)
+		'</TR>'
+	'<TR><td class=red_text colspan=7 height=21>Download Time: %d/%d/%d %d:00</td></tr>'%(last_time[1],last_time[2],last_time[0],last_time[3])
+	'''
+	<tr><td colspan=6>&nbsp;</td></tr>
+	<tr><td colspan=6>SIP=Significant infection potential; IIP=Insignificant infection potential.
+	<BR>Botrytis uses Michigan model.</td></tr>
+	<tr><td colspan=6>&nbsp;</td></tr>
+	</table>
+	<table border=0 cellspacing=5 cellpadding=5 width=500>
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table>
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''
+	
+def onion_balog_html [html] (station_name,last_time,blight_alert,plant_date,type):
+	'''
+	<html>
+	<head>
+	<title>Onion Blight Alert Log</title>
+	<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+	</head>
+	<body>
+	<DIV align=center>
+	<table border=0 cellpadding=0 cellspacing=0 width=300 style='border-collapse:collapse;table-layout:fixed'>
+	 <col width=150>
+	 <col width=150>
+	<tr>
+	'''
+	'  <td class=header_line height=30 colspan=2 align=center>%s - %s Blight Alert Log</td>'%(station_name,type)
+	'''
+	</tr>
+	<tr><td class=plain_back height=30 colspan=2><a href="http://newa.nysaes.cornell.edu/public/Using_Onion_Dis_Forecast.htm" target="_blank">Using Disease Forecasts Effectively</a></td></tr>
+	<tr><td colspan=2>&nbsp;</td></tr>
+	<tr><td>&nbsp;</td><td class=colhead_center_gray_back>Planting Date</td></tr>
+	<tr>
+	<td class=colhead_center rowspan=2>Date</td>
+	'''
+	pd_str = '%d/%d/%d' % (plant_date.month,plant_date.day,plant_date.year)
+	'  <td class=colhead_center_gray_back>%s</td>'%(pd_str)
+	'''
+	</tr>
+	<tr>
+	<td class=colhead_center>IPI</td>
+	</tr>
+	'''
+	bkeys = blight_alert.keys()
+	bkeys.sort()
+	for i in range(len(bkeys)-1,-1,-1):		#go from most recent back
+		ba_ipi,mba_ipi = blight_alert[bkeys[i]]
+		if type == "Modified":
+			ipi = mba_ipi
+		else:
+			ipi = ba_ipi
+		if ipi == miss:
+			ipi = '-'
+		else:
+			ipi = '%6.2f'%ipi
+		if i%2 == 0: 
+			color = 'gray'
+		else:
+			color = 'plain'
+		yr,mn,dy = bkeys[i]
+		'<TR>'
+		'<td class=%s_back>%d/%d/%d</td>'%(color,mn,dy,yr)
+		'<td class=%s_back>%s</td>'%(color,ipi)
+		'</TR>'
+	'<TR><td class=red_text colspan=2 height=21>Download Time: %d/%d/%d %d:00</td></tr>'%(last_time[1],last_time[2],last_time[0],last_time[3])
+	'''
+	<tr><td colspan=5>&nbsp;</td></tr>
+	</table>
+	<table border=0 cellspacing=5 cellpadding=5 width=300>
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table>
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''
+
+def tomato_for_html [html] (station_name,last_time,wet_periods,avail_vars,output):
+	if output == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>Tomcast</title>
+		<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		</head>
+		<body>
+		'''
+	'''
+	<DIV align=center>
+	<table border=0 cellpadding=0 cellspacing=0 width=628 style='border-collapse:collapse;table-layout:fixed'>
+	<col width=140>
+	<col width=140>
+	<col width=70>
+	<col width=70>
+	<col width=69>
+	<col width=69>
+	<col width=70>
+	<tr>
+	'''
+	'  <td class=header_line colspan=4 height=30>%s Tomcast Log</td>'%(station_name)
+	'  <td class=red_text colspan=3>Download Time: %d/%d/%d %d:00</td>'%(last_time[1],last_time[2],last_time[0],last_time[3])
+	'''
+	</tr>
+	<tr><td class=plain_back_l height=30 colspan=2 align=center>
+	<A href=#May>May</A> | <a href=#Jun>Jun</A> | <a href=#Jul>Jul</A> | <a href=#Aug>Aug</A> | <a href=#Sep>Sep</A>
+	</td>
+	<TD class=plain_back_r colspan=5><a href="http://newa.nysaes.cornell.edu/public/Using_tomato_disease_fore.htm" target="_blank">Using Tomato Forecasts Effectively</A></TD>
+	</tr>
+	<tr>
+	  <td class=colhead_center height=42>Wet Starting<br>Date Time</td>
+	  <td class=colhead_center>Wet Ending<br>Date Time</td>
+	'''
+	if 'lwet' in avail_vars:
+		'<td class=colhead_center>Hours<br>LW</td>'
+	else:
+		'<td class=colhead_center>Hours<br>Est LW</td>'
+	'''
+	  <td class=colhead_center>Avg<br>Temp F</td>
+	  <td class=colhead_center>Total<br>Rain</td>
+	  <td class=colhead_center>Daily<br>DSV</td>
+	  <td class=colhead_center>Accum<br>DSV</td>
+	</tr>
+	'''
+	
+	last_month = 0
+	for i in range(len(wet_periods)-1,-1,-1):		#go from most recent back
+		wet_start,wet_end,wet_hrs,temp_ave,prcp_tot,dsv,accum_sv = wet_periods[i]
+		if wet_end == 'in progress':
+			wet_start_parts = wet_start.split('/')
+			this_month = int(wet_start_parts[0])
+		else:
+			wet_end_parts = wet_end.split('/')
+			this_month = int(wet_end_parts[0])
+		if this_month != last_month:
+			'<tr><td colspan=7><A NAME=%s></a></td</tr>'%(month_abbrev[this_month])
+			last_month = this_month
+		if this_month%2 == 0: 
+			color = 'plain'
+		else:
+			color = 'gray'	
+		'<TR>'
+		'<td class=%s_back height=21>%s</td>'%(color,wet_start)
+		'<td class=%s_back>%s</td>'%(color,wet_end)
+		'<td class=%s_back>%s</td>'%(color,wet_hrs)
+		'<td class=%s_back>%s</td>'%(color,temp_ave)
+		'<td class=%s_back>%.2f</td>'%(color,prcp_tot)
+		'<td class=%s_back>%s</td>'%(color,dsv)
+		'<td class=%s_back>%s</td>'%(color,accum_sv)
+		'</TR>'
+	'''
+	</table>
+	<table border=0 cellspacing=5 cellpadding=5 width=628>
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table>
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	'''
+	if output == 'standalone':
+		'''
+		</body>
+		</html>
+		'''
+	
+def grape_dis_html [html] (station_name,last_time,wet_periods,dly_grape):
+	'''
+	<html>
+	<head>
+	<title>Grape Disease Summary</title>
+	<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.fixedheader.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#data").fixedHeader({ width: 700,height: 490 });
+		})
+	</script>
+	</head>
+	<body>
+	<div  class=plain_back style="width: 780px;">
+	'''
+	'<span class=header_line>%s - Grape Disease Summary</span>' % (station_name)
+	'<p><b>Accumulated GDD Base 50</b>'
+	asdt_str = '%d/%d/%d' % (dly_grape[0][0][1],dly_grape[0][0][2],dly_grape[0][0][0])
+	aedt_str = '%d/%d/%d' % (dly_grape[-1][0][1],dly_grape[-1][0][2],dly_grape[-1][0][0])
+	'<br/>%s through %s: %d</p>' % (asdt_str,aedt_str,int(round(dly_grape[-1][2],0)))
+	'<p><b>Powdery Mildew</b>'
+	for i in range(0,4):
+		indx = len(dly_grape)-i-1
+		if indx >= 0:
+			dt,dgdd,agdd,pm = dly_grape[indx]
+			dt_str = '%d/%d/%d' % (dt[1],dt[2],dt[0])
+			'<br/>%s %s' % (dt_str,pm)
+	'''
+	</p>
+	<p class=header_line>Leaf Wetness Periods</p>
+	</div>
+
+	<table id="data" class="fixedTable">
+	<thead>
+	<tr>
+	  <th class=colhead_center>Starting<br>Date/Time</td>
+	  <th class=colhead_center>Ending<br>Date/Time</td>
+	  <th class=colhead_center>Hours<br>LW</td>
+	  <th class=colhead_center>Avg<br>Temp</td>
+	  <th class=colhead_center>Total<br>Rain</td>
+	  <th class=colhead_center>Phomopsis</td>
+	  <th class=colhead_center>Black Rot</td>
+	</tr>
+	</thead>
+	<tbody>
+	'''
+	# report leaf wetness periods
+	'<TR><td class=red_text colspan=7 height=21>Download Time: %d/%d/%d %d:00</td></tr>'%\
+	   (last_time[1],last_time[2],last_time[0],last_time[3])
+	for i in range(len(wet_periods)-1,-1,-1):		#go from most recent back
+		if i%2 == 0: 
+			color = 'gray'
+		else:
+			color = 'plain'
+		wet_start,wet_end,wet_hrs,temp_ave,prcp_tot,phomopsis,blackrot = wet_periods[i]
+		if wet_end == miss:
+			we_str = 'in progress'
+		else:
+			weyr,wemn,wedy,wehr = wet_end
+			we_str = '%d/%d/%d %d:00' % (wemn,wedy,weyr,wehr)
+		wsyr,wsmn,wsdy,wshr = wet_start
+		wet_start_dt = DateTime.DateTime(wsyr,wsmn,wsdy,wshr)
+		# wet period starts at the beginning of this hour
+		wet_start_dt = wet_start_dt + DateTime.RelativeDate(hours=-1) 
+		ws_str = '%d/%d/%d %d:01' % (wet_start_dt.month,wet_start_dt.day,wet_start_dt.year,wet_start_dt.hour)
+		
+		'<td class=%s_back>%s</td>'%(color,ws_str)
+		'<td class=%s_back>%s</td>'%(color,we_str)
+		'<td class=%s_back>%d</td>'%(color,wet_hrs)
+		'<td class=%s_back>%.1f</td>'%(color,temp_ave)
+		'<td class=%s_back>%.2f</td>'%(color,prcp_tot)
+		if phomopsis == "Infection":
+			txtcol = 'redon'
+		else:
+			txtcol = ''
+		'<td class=%s%s_back>%s</td>'%(txtcol,color,phomopsis)
+		if blackrot == "Infection":
+			txtcol = 'redon'
+		else:
+			txtcol = ''
+		'<td class=%s%s_back>%s</td>'%(txtcol,color,blackrot)
+		'</TR>'
+	'''
+	</tbody>
+	</table>
+	<table border=0 cellspacing=5 cellpadding=5 width=700>
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''
+	
+def alf_weev_html [html] (stn_name,daily_degday):
+	'''
+	<html>
+	<head>
+	<title>Alfalfa Weevil Degree Days</title>
+	<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+	</head>
+	<body>
+	<DIV align=left>
+	<table border=0 cellpadding=0 cellspacing=0 width=390 style='border-collapse:collapse;table-layout:fixed'>
+	<col width=130>
+	<col width=130>
+	<col width=130>
+	'''
+	'<tr><td class=header_line height=30 colspan=3 align=center>Degree Days for %s</td></tr>'%(stn_name)
+	'<tr class=colhead_center>'
+	'<td height=40>Date</td>'
+	'<td>Daily Base 48<br>Degree Days</td>'
+	'<td>Seasonal<br>Accumulation</td>'
+	'</tr>'
+	lislen = len(daily_degday)
+	for day in range(lislen-1,lislen-8,-1):
+		if day >= 0:
+			dt0,tmax,tmin,ddval,accum = daily_degday[day]
+			'<tr class=plain_back><td>%02d/%02d/%04d</td>'%(dt0[1],dt0[2],dt0[0])
+			if accum == miss: 
+				saccum = '---'
+			else:
+				saccum = '%d'%int(round(accum))
+			if ddval == miss:
+				sddval = '---'
+			else:
+				sddval = '%d'%int(round(ddval))
+			'<td>%s</td><td>%s</td>'%(sddval,saccum)
+			'</tr>'
+	'''
+	<tr><td class=plain_back height=30 colspan=3 align=center><hr size=7></td></tr>
+	<tr><td class=plain_back height=40 colspan=3 align=center>Degree Days for Peak (50&#37;) Occurrence of<BR>Alfalfa Weevil Stages (Source: R.I. Carruthers)</td></tr>
+	<tr class=colhead_center>
+	<td height=30>Stage or Event</td>
+	<td colspan=2>Degree Days - Base 48</td>
+	</tr>
+	<tr class=plain_back><td>eggs hatch</td><td colspan=2>280</td></tr>
+	<tr class=plain_back><td>instar 1</td><td colspan=2>315</td></tr>
+	<tr class=plain_back><td>instar 2</td><td colspan=2>395</td></tr>
+	<tr class=plain_back><td>instar 3</td><td colspan=2>470</td></tr>
+	<tr class=plain_back><td>instar 4</td><td colspan=2>550</td></tr>
+	<tr class=plain_back><td>cocooning</td><td colspan=2>600</td></tr>
+	<tr class=plain_back><td>pupa</td><td colspan=2>725</td></tr>
+	<tr class=plain_back><td>adult emergence</td><td colspan=2>815</td></tr>
+	<tr><td class=plain_back height=30 colspan=3 align=center><hr size=7></td></tr>
+	</table>
+	<table border=0 cellspacing=5 cellpadding=5 width=390>
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table>
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''
+
+def cabbage_maggot_html [html] (stn_name,smry_dict,degday_dict):
+	se = 288
+	se25 = 366
+	se50 = 452
+	errse50 = 14
+	se75 = 547
+	se95 = 697
+	f1 = 809
+	errf1 = 59
+	f2 = f1+915
+	errf2 = 38
+	f3 = f2+838
+	errf3 = 6
+	f4 = f3+718
+	redmsg = False
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>Cabbage Maggot Degree-Days</title>
+		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/humanity/jquery-ui.css">
+		<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		</head>
+		<body>
+		'''
+	'''
+	<DIV align=center>
+	<table border=1 cellpadding=4 cellspacing=0 width="100%" style='border-collapse:collapse; table-layout:fixed; margin-top:0.5em;'>
+	<col width=122><col width=62><col width=62><col width=62><col width=62><col width=62><col width=62><col width=62><col width=62>
+	'''
+	'<tr><td class=header_line_silver_back colspan=9 height=38 align=center>Cabbage Maggot Degree-Days (Base 40&deg;F) for %s</td></tr>' % (stn_name)
+	'''
+	<tr>
+	<td class=plain_back>&nbsp;</td>
+	<th class=blue_back>Past</th>
+	<th class=blue_back>Past</th>
+	<th class=blue_back>Current</th>
+	<th class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast">Forecast Details</button></th>
+	</tr>
+	<tr>
+	'''
+	'<th class=plain_back>Date</th>'
+	'<td class=%s_back>%s</td>' % ('blue',smry_dict['pday2']['date'])
+	'<td class=%s_back>%s</td>' % ('blue',smry_dict['pday1']['date'])
+	'<td class=%s_back>%s</td>' % ('blue',smry_dict['day0']['date'])
+	'<td class=%s_back>%s</td>' % ('palegoldenrod',smry_dict['fday1']['date'])
+	'<td class=%s_back>%s</td>' % ('palegoldenrod',smry_dict['fday2']['date'])
+	'<td class=%s_back>%s</td>' % ('palegoldenrod',smry_dict['fday3']['date'])
+	'<td class=%s_back>%s</td>' % ('palegoldenrod',smry_dict['fday4']['date'])
+	'<td class=%s_back>%s</td>' % ('palegoldenrod',smry_dict['fday5']['date'])
+	'</tr>'
+	'<tr>'
+	'<th class=plain_back> Daily Degree-Days </th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['dday'] == miss or smry_dict[d]['dday'] == 'NA':
+			dval = '-'
+		else:
+			dval = '%d' % smry_dict[d]['dday']
+		'<td class=%s_back>%s</td>' % ('plain',dval)
+	'</tr>'
+	'<tr>'
+	'<th class=plain_back> Seasonal Accumulation </th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['accdday'] == miss or smry_dict[d]['accdday'] == "NA":
+			nval = '-'
+			color = "plain"
+		else:
+			nval = '%d' % smry_dict[d]['accdday']
+			if smry_dict[d]['accdday'] >= se50 - errse50 and smry_dict[d]['accdday'] <= se50 + errse50:
+				color = 'red'
+			elif smry_dict[d]['accdday'] >= se50+f1 - errf1 and smry_dict[d]['accdday'] <= se50+f1 + errf1:
+				color = 'red'
+			elif smry_dict[d]['accdday'] >= se50+f2 - errf2 and smry_dict[d]['accdday'] <= se50+f2 + errf2:
+				color = 'red'
+			elif smry_dict[d]['accdday'] >= se50+f3 - errf3 and smry_dict[d]['accdday'] <= se50+f3 + errf3:
+				color = 'red'
+			else:
+				color = "plain"
+			if color == "red": redmsg = True
+		'<td class=%s_back>%s</td>' % (color,nval)
+	'</tr>'
+	'<tr>'
+	if smry_dict['pday2']['accdday'] <= f1:
+		'<th class=plain_back> Generation<br><span style="font-size:80%;font-weight:normal;">(OW=overwintering)</span></th>'
+	else:
+		'<th class=plain_back> Generation </th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		color = "plain"
+		if smry_dict[d]['accdday'] == miss or smry_dict[d]['accdday'] == "NA":
+			gen = '-'
+		elif smry_dict[d]['accdday'] <= f1:
+			gen = 'OW'
+		elif smry_dict[d]['accdday'] <= f2:
+			gen = 'First'
+		elif smry_dict[d]['accdday'] <= f3:
+			gen = 'Second'
+		elif smry_dict[d]['accdday'] <= f4:
+			gen = 'Third'
+		else:
+			gen = 'Fourth'
+		'<td class=%s_back>%s</td>' % (color,gen)
+	'</tr>'
+	if smry_dict['pday2']['accdday'] <= f1:
+		'<tr>'
+		'<th class=plain_back> Spring Emergence </th>'
+		for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+			if smry_dict[d]['accdday'] == miss or smry_dict[d]['accdday'] == "NA" or smry_dict[d]['accdday'] > f1:
+				pct = '-'
+			elif smry_dict[d]['accdday'] < se:
+				pct = "0%"
+			elif smry_dict[d]['accdday'] <= se95:
+				pct = "%d%%" % int(round(math.log(smry_dict[d]['accdday']/286.39)/0.0093, 0))
+			elif smry_dict[d]['accdday'] <= f1:
+				pct = "%d%%" % (95 + int(round((smry_dict[d]['accdday']-se95)*5.0/(f1-se95), 0)))
+			'<td class=%s_back>%s</td>' % ('plain',pct)
+		'</tr>'
+	if redmsg:
+		'<tr><td colspan=9 style="font-size:80%;color:red;text-align:center;">Red cells indicate estimated 50% emergence (peak flight).</td></tr>'
+	'''
+	<tr><td colspan=9>
+	<div id="chart_area">CHART</div>
+	</td></tr>
+	<tr><td colspan=9 style="text-align:center; padding:5px; font-size:85%;">
+	Peak flights (50% emergence) are indicated by red lines.
+	Seedlings, transplants or root crops present around the time of peak flights, 
+	the date when the black line crosses the red line, should be protected by 
+	an insecticide treatment or with row covers. Insecticides are applied just prior to planting; 
+	row covers must be in place well before adults begin to emerge. 
+	<a href="http://vegcrops.cudss.org/PDS.aspx?PestID=16&CropID=1" target="_blank">Pesticide Information</a>.
+	</td></tr>
+	</table>
+	</div>
+	'''
+	'<div id="dd_dict" style="display:none;">%s</div>' % degday_dict
+	add_footer(smry_dict)
+
+# cabbage maggot end (Oct 15-Dec 31)
+def cabbage_maggot_dormant [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>Cabbage Maggot</title>
+		<link rel="stylesheet" type="text/css" href="http://newa.nrcc.cornell.edu/newa_styles.css">
+		</head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		'''
+	'<h3>Cabbage Maggot Degree Days</h3>'
+	'<p>Risk of new cabbage maggot infestation is negligible after October 15.</p>'
+	add_footer(smry_dict)
+
+def onion_maggot_html [html] (stn_name,daily_degday):
+	'''
+	<html>
+	<head>
+	<title>Onion Maggot Degree Days</title>
+	<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+	</head>
+	<body>
+	<DIV align=left>
+	<table border=0 cellpadding=0 cellspacing=0 width=390 style='border-collapse:collapse;table-layout:fixed'>
+	<col width=130>
+	<col width=130>
+	<col width=130>
+	'''
+	'<tr><td class=header_line height=30 colspan=3 align=center>Degree Days for %s</td></tr>'%(stn_name)
+	'<tr class=colhead_center>'
+	'<td height=40>Date</td>'
+	'<td>Daily Base 40&deg;F<br>Degree Days</td>'
+	'<td>Seasonal<br>Accumulation</td>'
+	'</tr>'
+	lislen = len(daily_degday)
+	for day in range(lislen-1,lislen-8,-1):
+		if day >= 0:
+			dt0,tmax,tmin,ddval,accum = daily_degday[day]
+			'<tr class=plain_back><td>%02d/%02d/%04d</td>'%(dt0[1],dt0[2],dt0[0])
+			if accum == miss: 
+				saccum = '---'
+			else:
+				saccum = '%d'%int(round(accum))
+			if ddval == miss:
+				sddval = '---'
+			else:
+				sddval = '%d'%int(round(ddval))
+			'<td>%s</td><td>%s</td>'%(sddval,saccum)
+			'</tr>'
+	'''
+	<tr><td class=plain_back height=30 colspan=3 align=center><hr size=7></td></tr>
+	<tr><th class=plain_back height=40 colspan=3 align=center>Onion Maggot Flight Peaks</th></tr>
+	<tr class=colhead_center>
+	<td height=30>Flight Peak</td>
+	<td colspan=2>Accumulated Degree Days</td>
+	</tr>
+	<tr class=plain_back><td>1st Peak</td><td colspan=2>700</td></tr>
+	<tr class=plain_back><td>2nd Peak</td><td colspan=2>1960</td></tr>
+	<tr class=plain_back><td>3rd Peak</td><td colspan=2>3240</td></tr>
+	<tr><td class=plain_back height=30 colspan=3 align=center><hr size=7></td></tr>
+	</table>
+	<table border=0 cellspacing=5 cellpadding=5 width=390>
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table>
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''

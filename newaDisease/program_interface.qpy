@@ -1,0 +1,185 @@
+from quixote.directory import Directory
+from quixote import get_request
+from quixote.errors import TraversalError
+
+class RootDirectory(Directory):
+
+	_q_exports = ["","get_input","process_input","process_help","apple_lw","apple_fb",
+	              "potato_lb","potato_lb_old","potato_simcast","potato_pdays","potato_disease",
+	              "alf_weev","cabbage_maggot","onion_maggot",
+	              "onion_dis","onion_onlog","onion_sbalog","onion_smbalog",
+	              "tomato_for","grape_dis"]
+
+#	put up input page for following
+	def _q_index (self):						#default
+		from newaDisease_io import get_input
+		return get_input()
+	def get_input (self) :
+		from newaDisease_io import get_input
+		return get_input()
+	def apple_lw (self, path=None) :
+		if not path or path == ['']:
+			from newaDisease_io import apple_lw_input
+			return apple_lw_input()
+		else:
+			from newaDisease import process_input
+			path = ['apple_lw'] + path
+			return process_input(None,path)
+	def apple_fb (self, path=None) :
+		if not path or path == ['']:
+			from newaDisease_io import apple_fb_input
+			return apple_fb_input()
+		else:
+			from newaDisease import process_input
+			path = ['apple_fb'] + path
+			return process_input(None,path)
+	def potato_disease (self, path=None) :
+		from newaDisease_io import potato_disease
+		if not path or path == ['']:
+			return potato_disease()
+		else:
+			return potato_disease()
+	def potato_lb (self, path=None) :
+		if not path or path == ['']:
+			from newaDisease_io import potato_lb_input
+			return potato_lb_input()
+		else:
+			from newaDisease import process_input
+			path = ['potato_lb'] + path
+			return process_input(None,path)
+	def potato_simcast (self, path=None) :
+		from newaDisease_io import potato_simcast_input
+		if not path or path == ['']:
+			return potato_simcast_input('')
+		else:
+			return potato_simcast_input(path)
+	def potato_lb_old (self, path=None) :
+		if not path or path == ['']:
+			from newaDisease_io import potato_lb_old_input
+			return potato_lb_old_input()
+		else:
+			from newaDisease import process_input
+			path = ['potato_lb_old'] + path
+			return process_input(None,path)
+	def potato_pdays (self, path=None) :
+		if not path or path == ['']:
+			from newaDisease_io import potato_pdays_input
+			return potato_pdays_input()
+		else:
+			from newaDisease import process_input
+			path = ['potato_pdays'] + path
+			return process_input(None,path)
+	def onion_dis (self, path=None) :
+		if not path or path == ['']:
+			from newaDisease_io import onion_dis_input
+			return onion_dis_input()
+		else:
+			from newaDisease import process_input
+			path = ['onion_dis'] + path
+			return process_input(None,path)
+	def onion_onlog (self, path=None) :
+		if not path or path == ['']:
+			from newaDisease_io import onion_onlog_input
+			return onion_onlog_input()
+		else:
+			from newaDisease import process_input
+			path = ['onion_onlog'] + path
+			return process_input(None,path)
+	def onion_sbalog (self, path=None) :
+		if not path or path == ['']:
+			from newaDisease_io import onion_sbalog_input
+			return onion_sbalog_input()
+		else:
+			from newaDisease import process_input
+			path = ['onion_sbalog'] + path
+			return process_input(None,path)
+	def onion_smbalog (self, path=None) :
+		if not path or path == ['']:
+			from newaDisease_io import onion_smbalog_input
+			return onion_smbalog_input()
+		else:
+			from newaDisease import process_input
+			path = ['onion_smbalog'] + path
+			return process_input(None,path)
+	def tomato_for (self, path=None) :
+		if not path or path == ['']:
+			from newaDisease_io import tomato_for_input
+			return tomato_for_input()
+		else:
+			from newaDisease import process_input
+			path = ['tomato_for'] + path
+			return process_input(None,path)
+	def grape_dis (self, path=None) :
+		if not path or path == ['']:
+			from newaDisease_io import grape_dis_input
+			return grape_dis_input()
+		else:
+			from newaDisease import process_input
+			path = ['grape_dis'] + path
+			return process_input(None,path)
+	def alf_weev (self, path=None) :
+		if not path or path == ['']:
+			from newaDisease_io import alf_weev_input
+			return alf_weev_input()
+		else:
+			from newaDisease import process_input
+			path = ['alf_weev'] + path
+			return process_input(None,path)
+	def cabbage_maggot (self, path=None) :
+		if not path or path == ['']:
+			from newaDisease_io import cabbage_maggot_input
+			return cabbage_maggot_input()
+		else:
+			from newaDisease import process_input
+			path = ['cabbage_maggot'] + path
+			return process_input(None,path)
+	def onion_maggot (self, path=None) :
+		if not path or path == ['']:
+			from newaDisease_io import onion_maggot_input
+			return onion_maggot_input()
+		else:
+			from newaDisease import process_input
+			path = ['onion_maggot'] + path
+			return process_input(None,path)
+
+#	received request form to be processed
+	def process_input (self, path=None) :
+		from newaDisease import process_input
+		request = get_request()
+		return process_input(request,None)
+	def process_help (self, path=None) :
+		from newaDisease import process_help
+		request = get_request()
+		return process_help(request,None)
+
+#	process information provided in url
+	def _q_lookup(self, component, path=None):
+		from newaDisease import process_input
+		if path: 
+			path = [component] + path
+		else:
+			path = [component]
+		return process_input(None,path)
+
+	def _q_traverse(self, path):
+		assert len(path) > 0
+		component = path[0]
+		if component == 'program':
+			del path[0]
+			assert len(path) > 0
+			component = path[0]
+		path = path[1:]
+		name = self._q_translate(component)
+		if name is not None:
+			obj = getattr(self, name)
+			if not hasattr(obj,'_q_exports'):
+				if path: return obj(path)
+				else:    return obj()
+			else:
+				return obj._q_traverse(path)
+		else:
+			obj = self._q_lookup(component,path)
+			if obj: return obj
+		if obj is None:
+			raise TraversalError(private_msg=('directory %r has no component '
+								'%r' % (self, component)))
