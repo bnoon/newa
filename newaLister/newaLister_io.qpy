@@ -1,0 +1,973 @@
+############################################
+# Input screen 
+############################################
+import sys
+from mx import DateTime
+if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
+from newaCommon_io import display_station_list, build_station_list, build_inactive_list, station_listing, monyr_listing_tall, monyr_listing
+miss = -999
+month_list = [(1,"January"),(2,"February"),(3,"March"),(4,"April"),(5,"May"),(6,"June"),
+			  (7,"July"),(8,"August"),(9,"September"),(10,"October"),(11,"November"),(12,"December")]
+
+def get_weapage_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<TITLE>Weather Data Page</TITLE>
+	<link rel="stylesheet" href="http://newa.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mapping3.js"></script>
+	<STYLE TYPE="text/css">
+	TD
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   font-weight:bold;
+	   }
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   margin: 0px;
+	   }
+	</STYLE>
+	</HEAD>
+
+	<BODY BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
+	<p class="banner">NEWA Weather Data Page</p>
+	<FORM ACTION="/newaLister/process_input" METHOD="post" NAME="stationLister">
+	<table border="1" cellspacing="0" cellpadding="5">
+	<tr>
+	<td valign="top">
+	'''
+	display_station_list()
+	'''
+	<P>Listing type: <BR>
+	<select name="type">
+		<option value="dly" selected>Daily data</option>
+		<option value="hly">Hourly data</option>
+		<option value="dd4c">Degree Days - 4 C</option>
+		<option value="dd32">Degree Days - Base 32</option>
+		<option value="dd40">Degree Days - Base 40</option>
+		<option value="dd43">Degree Days - Base 43</option>
+		<option value="dd45">Degree Days - Base 45</option>
+		<option value="dd48">Degree Days - Base 48</option>
+		<option value="dd50">Degree Days - Base 50</option>
+		<option value="dd8650">Degree Days - 86/50</option>
+		<option value="dd55">Degree Days - Base 55</option>
+		<option value="dd4714">Degree Days - Base 47.14</option>
+		<option value="dd143c">Degree Days - Base 14.3 deg C</option>
+		<option value="dd43be">Degree Days - Base 43 BE</option>
+		<option value="dd50be">Degree Days - Base 50 BE</option>
+	</select>
+	'''
+	monyr_listing_tall()
+	'''
+	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;"></p>
+	<p><a href="http://newa.cornell.edu/index.php?page=about-degree-days" target="blank">About degree days</a></p>
+	</td>
+	<td>
+	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+	</td>
+	</tr>
+	</table>
+	</FORM>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def get_rawdat_input [html] ():
+	now = DateTime.now()
+	'''
+	<HTML>
+	<HEAD>
+	<TITLE>Hourly Weather Data Page</TITLE>
+	<STYLE TYPE="text/css">
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   margin: 0px;
+	   }
+	TD,TH
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 8pt;
+	   }
+	</STYLE>
+	</HEAD>
+
+	<BODY BGCOLOR="#FFFFFF">
+	<H1>NEWA Hourly Weather Data Page</H1>
+	<FORM ACTION="/newaLister/process_input" METHOD="post">
+	<p><i>Select a station, month and year from the drop-down menus and click "Get report":</i><p>
+	'''
+	'<p>&nbsp;&nbsp;&nbsp;Station: ' 
+	station_list = build_station_list()
+	inactive_list = build_inactive_list()
+	station_listing(station_list, inactive_list)
+	'''
+	<input type="hidden" name="type" value="hly">
+	'''
+	monyr_listing()
+	'''
+	&nbsp;&nbsp;&nbsp;<input type="button" value="Get report" onClick="submit();">
+	</FORM>
+	<p><i>... or make a selection below from NEWA stations for the current year:</i>
+	<p><table cellpadding="2">
+	'''
+	for stn, stn_name in station_list:
+		if not (len(stn) == 4 and stn[0:1] == 'k'):
+			'<tr><th align="left">%s</th>' % stn_name
+			for mon_num,mon_name in month_list:
+				if mon_num <= now.month:
+					'<td><A HREF="http://newa.nrcc.cornell.edu/newaLister/hly/%s/%d/%d">%s</A> |</td>' % (stn,now.year,mon_num,mon_name[0:3])
+			'</tr>'
+
+	'''
+	</table>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def get_sumpag_input [html] ():
+	now = DateTime.now()
+	'''
+	<HTML>
+	<HEAD>
+	<TITLE>Daily Weather Data Page</TITLE>
+	<STYLE TYPE="text/css">
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   margin: 0px;
+	   }
+	TD,TH
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 8pt;
+	   }
+	</STYLE>
+	</HEAD>
+
+	<BODY BGCOLOR="#FFFFFF">
+	<H2>NEWA Daily Weather Data Page</H2>
+	<FORM ACTION="/newaLister/process_input" METHOD="post">
+	<p><i>Select a station, month and year from the drop-down menus and click "Get report":</i><p>
+	'''
+	'<p>&nbsp;&nbsp;&nbsp;Station: ' 
+	station_list = build_station_list()
+	inactive_list = build_inactive_list()
+	station_listing(station_list, inactive_list)
+	'''
+	<input type="hidden" name="type" value="dly">
+	'''
+	monyr_listing()
+	'''
+	&nbsp;&nbsp;&nbsp;<input type="button" value="Get report" onClick="submit();">
+	</FORM>
+	<p><i>... or make a selection below from NEWA stations for the current year:</i>
+	<p><table cellpadding="2">
+	'''
+	
+	for stn, stn_name in station_list:
+		if len(stn) == 3:
+			'<tr><th align="left">%s</th>' % stn_name
+			for mon_num,mon_name in month_list:
+				if mon_num <= now.month:
+					'<td><A HREF="http://newa.nrcc.cornell.edu/newaLister/dly/%s/%d/%d">%s</A> |</td>' % (stn,now.year,mon_num,mon_name[0:3])
+			'</tr>'
+
+	'''
+	</table>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def get_dday_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<TITLE>Degree Day Data Page</TITLE>
+	<link rel="stylesheet" href="http://newa.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mapping3.js"></script>
+	<STYLE TYPE="text/css">
+	TD
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   font-weight:bold;
+	   }
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   margin: 0px;
+	   }
+	</STYLE>
+	</HEAD>
+
+	<BODY BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
+	<p class="banner">NEWA Degree Day Data Page</p>
+	<FORM ACTION="/newaLister/process_input" METHOD="post" NAME="stationLister">
+	<table border="1" cellspacing="0" cellpadding="5">
+	<tr>
+	<td valign="top">
+	'''
+	display_station_list()
+	'''
+	<P>Degree day type: <BR>
+	<select name="type">
+		<option value="dd4c">Degree Days - 4 C</option>
+		<option value="dd32">Degree Days - Base 32</option>
+		<option value="dd40">Degree Days - Base 40</option>
+		<option value="dd43">Degree Days - Base 43</option>
+		<option value="dd45">Degree Days - Base 45</option>
+		<option value="dd48">Degree Days - Base 48</option>
+		<option value="dd50" selected>Degree Days - Base 50</option>
+		<option value="dd8650">Degree Days - 86/50</option>
+		<option value="dd55">Degree Days - Base 55</option>
+		<option value="dd4714">Degree Days - Base 47.14</option>
+		<option value="dd143c">Degree Days - Base 14.3 deg C</option>
+		<option value="dd43be">Degree Days - Base 43 BE</option>
+		<option value="dd50be">Degree Days - Base 50 BE</option>
+	</select>
+	'''
+	monyr_listing_tall()
+	'''
+	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+	<p><a href="http://newa.cornell.edu/index.php?page=about-degree-days" target="blank">About degree days</a></p>
+	</td>
+	<td>
+	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+	</td>
+	</tr>
+	</table>
+	</FORM>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def get_dday55_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<TITLE>Degree Day Base 55 Data Page</TITLE>
+	<link rel="stylesheet" href="http://newa.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mapping3.js"></script>
+	<STYLE TYPE="text/css">
+	TD
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   font-weight:bold;
+	   }
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   margin: 0px;
+	   }
+	</STYLE>
+	</HEAD>
+
+	<BODY BGCOLOR="#FFFFFF"  onload="stationMap('all','select_station');">
+	<p class="banner">NEWA Degree Day Base 55 Data Page</p>
+	<FORM ACTION="/newaLister/process_input" METHOD="post" NAME="stationLister">
+	<table border="1" cellspacing="0" cellpadding="5">
+	<tr>
+	<td valign="top">
+	'''
+	display_station_list()
+	'<input type="hidden" name="type" value="dd55">'
+	monyr_listing_tall()
+	'''
+	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+	</td>
+	<td>
+	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+	</td>
+	</tr>
+	</table>
+	</FORM>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+def get_dday40_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<TITLE>Degree Day Base 40 Data Page</TITLE>
+	<link rel="stylesheet" href="http://newa.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mapping3.js"></script>
+	<STYLE TYPE="text/css">
+	TD
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   font-weight:bold;
+	   }
+	BODY
+	   {
+	   font-family: 'Arial', 'Helvetica', sans-serif;
+	   font-size: 9pt;
+	   margin: 0px;
+	   }
+	</STYLE>
+	</HEAD>
+
+	<BODY BGCOLOR="#FFFFFF"  onload="stationMap('all','select_station');">
+	<p class="banner">NEWA Degree Day Base 40 Data Page</p>
+	<FORM ACTION="/newaLister/process_input" METHOD="post" NAME="stationLister">
+	<table border="1" cellspacing="0" cellpadding="5">
+	<tr>
+	<td valign="top">
+	'''
+	display_station_list()
+	'<input type="hidden" name="type" value="dd40">'
+	monyr_listing_tall()
+	'''
+	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+	</td>
+	<td>
+	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+	</td>
+	</tr>
+	</table>
+	</FORM>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
+
+############################################
+# Output pages
+############################################
+# convert daily into html and merge with rest of template
+def dly_list_html [html] (stn,station_name,year,month,daily_data,monthly_data,avail_vars,numcols,miss):		
+	vdict = {'tave': ('Avg',   'Temp (F)'),  'tmax': ('Max',   'Temp (F)'),
+			 'tmin': ('Min',   'Temp (F)'),  'prcp': ('Total', 'Rain (in)'),
+			 'lwet': ('LW',    'Hours'),     'rhum': ('RH',    'Hrs &gt;= 90%'),
+			 'wspd': ('Avg Wind',   'Speed (mph)'),
+			 'srad': ('Solar Rad','(langley)'),  'st4a': ('Avg Soil','Temp (F)'),
+			 'st4x': ('Max Soil','Temp (F)'), 'st4n': ('Min Soil','Temp (F)'),}
+	'''
+	<html>
+	<head>
+	<title>Daily Data Summary</title>
+	<link   type="text/css" rel="stylesheet" href="http://newa.nrcc.cornell.edu/newa_styles.css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.fixedheader.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#data").fixedHeader({ width: 700,height: 535 });
+		})
+	</script>
+	</head>
+	<body>
+	'''
+	'<table id="data" class="fixedTable">'
+#	column headings
+	'<thead>'
+	'<tr>'
+	'<th class=colhead_center>Date</th>'
+	if 'temp' in avail_vars:
+		for var in ['tave','tmax','tmin']:
+			vname,vunit = vdict[var]
+			'<th class=colhead_center>%s<br>%s</th>'%(vname,vunit)
+	for var in ['lwet','prcp','rhum','wspd','srad']:
+		if var in avail_vars:
+			vname,vunit = vdict[var]
+			'<th class=colhead_center>%s<br>%s</th>'%(vname,vunit)
+	if 'st4i' in avail_vars:
+		for var in ['st4a','st4x','st4n']:
+			vname,vunit = vdict[var]
+			'<th class=colhead_center>%s<br>%s</th>'%(vname,vunit)
+	'</tr>'
+	'</thead>'
+
+	estimates = 0
+
+#	data lines
+	'<tbody>'
+	'<tr><th colspan=%d>%s - Daily Data Summary</th></tr>' % (numcols+1, station_name)
+	for i in range(len(daily_data)):
+		dly_dt,tave,tmax,tmin,prcp,lwet,rhum,wspd,srad,st4a,st4x,st4n,dflags = daily_data[i]
+		temp_eflag, prcp_eflag, lwet_eflag, rhum_eflag, wspd_eflag, wdir_eflag, srad_eflag, st4i_eflag = dflags
+		if dly_dt[0] == year and dly_dt[1] == month:
+			if dly_dt[2]%5 == 0:
+				color = 'gray'
+			else:
+				color = 'plain'
+			row = '<TR>'
+			row = row + '<td class=%s_back>%d/%d/%d</td>'%(color,dly_dt[1],dly_dt[2],dly_dt[0])
+			if 'temp' in avail_vars:
+				if temp_eflag == 'E':
+					style = '_est'
+					estimates = estimates+1
+				else:
+					style = ''
+				if tave != miss:
+					row = row + '<td class=%s_back%s>%.1f</td>'%(color,style,tave)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+				if tmax != miss:
+					row = row + '<td class=%s_back%s>%.1f</td>'%(color,style,tmax)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+				if tmin != miss:
+					row = row + '<td class=%s_back%s>%.1f</td>'%(color,style,tmin)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			if 'lwet' in avail_vars:
+				if lwet_eflag == 'E':
+					style = '_est'
+					estimates = estimates+1
+				else:
+					style = ''
+				if lwet != miss:
+					row = row + '<td class=%s_back%s>%d</td>'%(color,style,lwet)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			if 'prcp' in avail_vars:
+				if prcp_eflag == 'E':
+					style = '_est'
+					estimates = estimates+1
+				else:
+					style = ''
+				if prcp != miss:
+					row = row + '<td class=%s_back%s>%.2f</td>'%(color,style,prcp)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			if 'rhum' in avail_vars:
+				if rhum_eflag == 'E':
+					style = '_est'
+					estimates = estimates+1
+				else:
+					style = ''
+				if rhum != miss:
+					row = row + '<td class=%s_back%s>%d</td>'%(color,style,rhum)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			if 'wspd' in avail_vars:
+				if wspd_eflag == 'E':
+					style = '_est'
+					estimates = estimates+1
+				else:
+					style = ''
+				if wspd != miss:
+					row = row + '<td class=%s_back%s>%.1f</td>'%(color,style,wspd)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			if 'srad' in avail_vars:
+				if srad_eflag == 'E':
+					style = '_est'
+					estimates = estimates+1
+				else:
+					style = ''
+				if srad != miss:
+					row = row + '<td class=%s_back%s>%d</td>'%(color,style,srad)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			if 'st4i' in avail_vars:
+				if st4i_eflag == 'E':
+					style = '_est'
+					estimates = estimates+1
+				else:
+					style = ''
+				if st4a != miss:
+					row = row + '<td class=%s_back%s>%.1f</td>'%(color,style,st4a)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+				if st4x != miss:
+					row = row + '<td class=%s_back%s>%.1f</td>'%(color,style,st4x)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+				if st4n != miss:
+					row = row + '<td class=%s_back%s>%.1f</td>'%(color,style,st4n)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			row = row + '</TR>'
+			'%s'%row
+	if len(monthly_data) > 0:
+		tave_smry,tmax_smry,tmin_smry,prcp_smry,lwet_smry,rhum_smry,wspd_smry,\
+		   srad_smry,st4a_smry,st4x_smry,st4n_smry = monthly_data
+		row = '<TR>'
+		row = row + '<td class=colhead_center height=45>Monthly<br>Summary</td>'
+		if 'temp' in avail_vars:
+			if tave_smry != miss:
+				row = row + '<td class=plain_back>%.1f</td>'%tave_smry
+			else:
+				row = row + '<td class=plain_back>-</td>'
+			if tmax_smry != miss:
+				row = row + '<td class=plain_back>%.1f</td>'%tmax_smry
+			else:
+				row = row + '<td class=plain_back>-</td>'
+			if tmin_smry != miss:
+				row = row + '<td class=plain_back>%.1f</td>'%tmin_smry
+			else:
+				row = row + '<td class=plain_back>-</td>'
+		if 'lwet' in avail_vars:
+			if lwet_smry!= miss:
+				row = row + '<td class=plain_back>%d</td>'%lwet_smry
+			else:
+				row = row + '<td class=plain_back>-</td>'
+		if 'prcp' in avail_vars:
+			if prcp_smry != miss:
+				row = row + '<td class=plain_back>%.2f</td>'%prcp_smry
+			else:
+				row = row + '<td class=plain_back>-</td>'
+		if 'rhum' in avail_vars:
+			if rhum_smry != miss:
+				row = row + '<td class=plain_back>%d</td>'%rhum_smry
+			else:
+				row = row + '<td class=plain_back>-</td>'
+		if 'wspd' in avail_vars:
+			if wspd_smry != miss:
+				row = row + '<td class=plain_back>%.1f</td>'%wspd_smry
+			else:
+				row = row + '<td class=plain_back>-</td>'
+		if 'srad' in avail_vars:
+			if srad_smry != miss:
+				row = row + '<td class=plain_back>%d</td>'%srad_smry
+			else:
+				row = row + '<td class=plain_back>-</td>'
+		if 'st4i' in avail_vars:
+			if st4a_smry != miss:
+				row = row + '<td class=plain_back>%.1f</td>'%st4a_smry
+			else:
+				row = row + '<td class=plain_back>-</td>'
+			if st4x_smry != miss:
+				row = row + '<td class=plain_back>%.1f</td>'%st4x_smry
+			else:
+				row = row + '<td class=plain_back>-</td>'
+			if st4n_smry != miss:
+				row = row + '<td class=plain_back>%.1f</td>'%st4n_smry
+			else:
+				row = row + '<td class=plain_back>-</td>'
+		row = row + '</TR>'
+		'%s'%row
+
+	'''
+	</tbody>
+	</table>
+
+	<p style="text-align:center;"><table cellspacing="0" cellpadding="0" border="0" width="700px">
+	'''
+	if estimates > 0:
+		'<tr><td colspan="2" class=plain_back>Values in <span class=plain_back_est>brown italics</span> include estimated data. '
+		'<a href="http://newa.nrcc.cornell.edu/newaLister/est_info/%s/%d/%d" target="_blank">More information</a>' % (stn,year,month)
+		' is available on the estimation technique.</td></tr>' 
+	'''
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table></p>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''
+		
+#--------------------------------------------------------------------------------------------		
+# convert hourly data into html and merge with rest of template
+def hly_list_html [html] (stn,station_name,year,month,hourly_data,avail_vars,miss,station_type):
+	from newaLister import calc_dewpoint
+	vdict = {'temp': ('Temp','(F)'),         'prcp': ('Rain','(inches)'),
+			 'lwet': ('LW','(minutes)'),     'eslw': ('Est LW','(minutes)'),     'rhum': ('RH','%'),
+			 'dwpt': ('Dewpoint','(F)'),     'wspd': ('Wind Spd','(mph)'),    'wdir': ('Wind Dir','(degrees)'),
+			 'srad': ('Solar Rad','(langley)'), 'st4i': ('Soil Temp','(F)') }
+	'''
+	<html>
+	<head>
+	<title>Hourly Data Summary</title>
+	<link   type="text/css" rel="stylesheet" href="http://newa.nrcc.cornell.edu/newa_styles.css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.fixedheader.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#data").fixedHeader({ width: 700, height: 490 });
+		})
+	</script>
+	</head>
+	<body>
+	'''
+	'<table id="data" class="fixedTable">'
+#	column heads
+	'<thead>'
+	'<tr>'
+	'<th class=colhead_center>Date/Time</th>'
+	for var in ['temp','lwet','prcp','rhum','dwpt','wspd','wdir','srad','st4i','eslw']:
+		if var in avail_vars:
+			vname,vunit = vdict[var]
+			'<th class=colhead_center>%s<br>%s</th>'%(vname,vunit)
+	'</tr>'
+	'</thead>'
+	
+	estimates = 0
+	
+#	data lines
+	'<tbody>'
+	'<tr><th colspan=%d>%s - Hourly Data Summary</th><tr>' % (len(avail_vars)+1,station_name)
+	for i in range(len(hourly_data)-1,-1,-1):
+		hly_dt,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags = hourly_data[i]
+		temp_eflag, prcp_eflag, lwet_eflag, rhum_eflag, wspd_eflag, wdir_eflag, srad_eflag, st4i_eflag = eflags
+		if hly_dt[0] == year and hly_dt[1] == month:
+			if hly_dt[2]%2 == 0:
+				color = 'gray'
+			else:
+				color = 'plain'
+			row = '<TR>'
+			row = row + '<td class=%s_back>%02d/%02d/%04d %02d:00</td>'%(color,hly_dt[1],hly_dt[2],hly_dt[0],hly_dt[3])
+			if 'temp' in avail_vars:
+				if temp != miss:
+					if temp_eflag == 'I' or temp_eflag == 'S' or temp_eflag == 'N':
+						style = '_est'
+						estimates = estimates+1
+					else:
+						style = ''
+					row = row + '<td class=%s_back%s>%.1f</td>'%(color,style,temp)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			if 'lwet' in avail_vars:
+				if lwet != miss:
+					if lwet_eflag == 'I' or lwet_eflag == 'S':
+						style = '_est'
+						estimates = estimates+1
+					else:
+						style = ''
+					row = row + '<td class=%s_back%s>%d</td>'%(color,style,lwet)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			if 'prcp' in avail_vars:
+				if prcp != miss:
+					if prcp_eflag == 'I' or prcp_eflag == 'S':
+						style = '_est'
+						estimates = estimates+1
+					else:
+						style = ''
+					row = row + '<td class=%s_back%s>%.2f</td>'%(color,style,prcp)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			if 'rhum' in avail_vars:
+				if rhum != miss:
+					if rhum_eflag == 'I' or rhum_eflag == 'S' or temp_eflag == 'N':
+						style = '_est'
+						estimates = estimates+1
+					else:
+						style = ''
+					row = row + '<td class=%s_back%s>%d</td>'%(color,style,int(round(rhum,0)))
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			if 'dwpt' in avail_vars:
+				dewpt = calc_dewpoint(temp,rhum)
+				if dewpt != miss:
+					if temp_eflag == 'I' or temp_eflag == 'S' or rhum_eflag == 'I' or rhum_eflag == 'S':
+						style = '_est'
+						estimates = estimates+1
+					else:
+						style = ''
+					row = row + '<td class=%s_back%s>%d</td>'%(color,style,int(round(dewpt,0)))
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			if 'wspd' in avail_vars:
+				if wspd != miss:
+					if wspd_eflag == 'I' or wspd_eflag == 'S':
+						style = '_est'
+						estimates = estimates+1
+					else:
+						style = ''
+					row = row + '<td class=%s_back%s>%.1f</td>'%(color,style,wspd)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			if 'wdir' in avail_vars:
+				if wdir != miss:
+					if wdir_eflag == 'I' or wdir_eflag == 'S':
+						style = '_est'
+						estimates = estimates+1
+					else:
+						style = ''
+					row = row + '<td class=%s_back%s>%d</td>'%(color,style,wdir)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			if 'srad' in avail_vars:
+				if srad != miss:
+					if srad_eflag == 'I' or srad_eflag == 'S':
+						style = '_est'
+						estimates = estimates+1
+					else:
+						style = ''
+					row = row + '<td class=%s_back%s>%d</td>'%(color,style,srad)
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			if 'st4i' in avail_vars:
+				if st4i != miss:
+					if st4i_eflag == 'I' or st4i_eflag == 'S':
+						style = '_est'
+						estimates = estimates+1
+					else:
+						style = ''
+					row = row + '<td class=%s_back%s>%d</td>'%(color,style,int(round(st4i,0)))
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			if 'eslw' in avail_vars:
+				if rhum != miss:
+					if rhum >= 90 or prcp > 0.00:
+						eslw = 60.
+					else:
+						eslw = 0.
+					if rhum_eflag == 'I' or rhum_eflag == 'S':
+						style = '_est'
+						estimates = estimates+1
+					else:
+						style = ''
+					row = row + '<td class=%s_back%s>%d</td>'%(color,style,int(round(eslw,0)))
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+
+			row = row + '</TR>'
+			'%s'%row
+
+	'''
+	</tbody>
+	</table>
+	<p style="text-align:center;"><table border=0 cellspacing=5 cellpadding=5 width="700px">
+	'''
+	if estimates > 0:
+		'<tr><td colspan="2" class=plain_back>Values in <span class=plain_back_est>brown italics</span> were estimated from adjacent hours or a nearby location. '
+		'<a href="http://newa.nrcc.cornell.edu/newaLister/est_info/%s/0000/%d" target="_blank">More information</a>' % (stn,month)
+		' is available on the estimation technique.</td></tr>' 
+	'''
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table></p>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''
+
+#--------------------------------------------------------------------------------------------		
+# convert daily degree day data into html and merge with rest of template
+def degday_list_html [html] (stn,station_name,year,month,degday_data,degday_miss,miss,smry_type):		
+	type_title = {"dd4c":   "Base 4 deg C",
+				  "dd32":   "Base 32", 
+				  "dd40":   "Base 40",
+				  "dd43":   "Base 43",
+				  "dd45":   "Base 45",
+				  "dd48":   "Base 48",
+				  "dd50":   "Base 50",
+				  "dd8650": "86/50",
+				  "dd55":   "Base 55",
+				  "dd4714": "Base 47.14",
+				  "dd143c": "Base 14.3 deg C",
+				  "dd43be": "Base 43 BE",
+				  "dd50be": "Base 50 BE" }
+	'''
+	<html>
+	<head>
+	<title>Daily Degree Day Summary</title>
+	<link   type="text/css" rel="stylesheet" href="http://newa.nrcc.cornell.edu/newa_styles.css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.fixedheader.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#data").fixedHeader({ width: 701,height: 535 });
+		})
+	</script>
+	</head>
+	<body>
+	'''
+	'<table id="data" class="fixedTable">'
+#	column headings
+	'<thead>'
+	'<tr>'
+	'<th class=colhead_center rowspan=2>Date</th>'
+	'<th class=colhead_center rowspan=2>Max<br>Temp</th>'
+	'<th class=colhead_center rowspan=2>Min<br>Temp</th>'
+	'<th class=colhead_center rowspan=2>Daily DD<br>%s</th>' % type_title[smry_type]
+	'<th class=colhead_center colspan=4>Accumulation Since</th>'
+	'</tr>'
+	'<tr>'
+	'<th class=colhead_center>Jan 1</th>'
+	'<th class=colhead_center>Mar 1</th>'
+	'<th class=colhead_center>Apr 1</th>'
+	'<th class=colhead_center>May 1</th>'
+	'</tr>'
+	'</thead>'
+
+	estimates = 0
+
+#	data lines
+	'<tbody>'
+	'<tr><th colspan=8>%s - Daily Degree Day Summary</th></tr>' % (station_name)
+	for i in range(len(degday_data)):
+		dly_dt,tmax,tmin,ddval,accum_jan1,accum_mar1,accum_apr1,accum_may1,ddflags = degday_data[i]
+		dly_flag,jan1_flag,mar1_flag,apr1_flag,may1_flag = ddflags
+		if dly_dt[0] == year and dly_dt[1] == month:
+			if dly_dt[2]%5 == 0:
+				color = 'gray'
+			else:
+				color = 'plain'
+			row = '<TR>'
+			row = row + '<td class=%s_back>%d/%d/%d</td>'%(color,dly_dt[1],dly_dt[2],dly_dt[0])
+			for value,flag in [(tmax,dly_flag),(tmin,dly_flag),(ddval,dly_flag),(accum_jan1,jan1_flag),(accum_mar1,mar1_flag),(accum_apr1,apr1_flag),(accum_may1,may1_flag)]:
+				if flag == 'E':
+					style = '_est'
+					estimates = estimates+1
+				else:
+					style = ''
+				if value != miss:
+					row = row + '<td class=%s_back%s>%.1f</td>'%(color,style,round(value,1))
+				else:
+					row = row + '<td class=%s_back>-</td>'%(color)
+			row = row + '</TR>'
+			'%s'%row
+
+	'''
+	</tbody>
+	</table>
+	<table border=0 cellspacing=0 cellpadding=5 width="700px" style="margin-top: 20px;">
+	'''
+	jan1_miss,mar1_miss,apr1_miss,may1_miss = degday_miss
+	if jan1_miss > 0:
+		'<tr><td colspan="2" class=plain_back>'
+		misslines = 'The accumulation since January 1 has %s missing days.' % jan1_miss
+		if mar1_miss > 0:
+			misslines = misslines + '<br>The accumulation since March 1 has %s missing days.' % mar1_miss
+			if apr1_miss > 0:
+				misslines = misslines + '<br>The accumulation since April 1 has %s missing days.' % mar1_miss
+				if may1_miss > 0:
+					misslines = misslines + '<br>The accumulation since May 1 has %s missing days.' % may1_miss
+		'%s</td></tr>' % misslines
+	if estimates > 0:
+		'<tr><td colspan="2" class=plain_back>Values in <span class=plain_back_est>brown italics</span> include estimated data. '
+		'<a href="http://newa.nrcc.cornell.edu/newaLister/est_info/%s/%d/%d" target="_blank">More information</a>' % (stn,year,month)
+		' is available on the estimation technique.</td></tr>' 
+	'''
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''
+	
+#--------------------------------------------------------------------------------------------		
+# provide information on estimation technique
+def estimation_info [html] (stn,station_name,var_sister,year,month):		
+	vname = {'temp': 'Temperature',        'prcp': 'Precipitation',
+			 'lwet': 'Leaf Wetness',        'rhum': 'Relative Humidity',
+			 'dwpt': 'Dewpoint',           'wspd': 'Wind Speed',        'wdir': 'Wind Direction',
+			 'srad': 'Solar Radiation',    'st4i': 'Soil Temperature' }
+	'''
+	<html>
+	<head>
+	<title>Estimation</title>
+	<link rel="STYLESHEET" type="text/css" href="http://newa.nrcc.cornell.edu/newa_styles.css">
+	</head>
+	<body>
+	<h1>Data Estimation</h1>
+	<p>Data are occasionally missing in a data record. In order to provide as complete a record as possible,
+	NEWA attempts to estimate missing values in a two-step process. 
+	<ol>
+	<li>The data record is examined for a non-missing value in the previous hour and the 
+	next hour. If both are found, an average of the two values is used as an estimate.</li>
+	<li>If there are no values available for either the immediately preceding or proceeding hours, data for a
+	nearby (or "sister") weather station are examined. If a data value is available for the desired hour, it is used
+	as a replacement. </li>
+	</ol>
+	<p>For precipitation and wind direction, data extrapolation is not a valid method. Missing precipitation
+	and wind direction data are sourced from the designated sister weather station.
+	'''
+	if len(var_sister):
+		'<p>For %s the following sister stations are assigned:'%station_name
+		'<ul>'
+		for var,sister_name in var_sister:
+			'<li>%s: %s</li>' % (vname[var],sister_name)
+		'</ul>'
+	if year != 0:
+		'<p><a href="http://newa.nrcc.cornell.edu/newaLister/hly/%s/%s/%s">View the hourly data</a> to see which hours are missing ' %(stn,year,month)
+		'and the estimates (shown in <span class=plain_back_est>brown italics</span>) that are used as replacements.'
+	else:
+		'<p><a href="http://newa.nrcc.cornell.edu/newaLister/rawdat">View the hourly data</a> to see which hours are missing and ' 
+		'the estimates (shown in <span class=plain_back_est>brown italics</span>) that are used as replacements.'
+	'''
+	<table border=0 cellspacing=5 cellpadding=5 width='100%'>
+	<tr><td align=left><a href="http://newa.nysaes.cornell.edu" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>
+	<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>
+	</table>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''	
