@@ -31,7 +31,6 @@ stn_info_inactive = {
 'pul': {'name': 'Pulteney', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -77.170930, 'elev': 1450.0, 'lat': 42.497750, 'network': 'newa', 'state': 'NY'},
 'sav': {'name': 'Savannah', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -76.741219, 'elev': 400.0, 'lat': 43.022533, 'network': 'newa', 'state': 'NY'},
 'scr': {'name': 'Scriba', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -76.402453, 'elev': 400.0, 'lat': 43.410025, 'network': 'newa', 'state': 'NY'},
-'shc': {'name': 'Southold (Corey Creek)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.045194, 'lon': -72.4452, 'elev': 25, 'network': 'newa', 'state': 'NY'},
 'shm': {'name': 'Southold (Mudd)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 41.06, 'lon': -72.45, 'elev': 25, 'network': 'newa', 'state': 'NY'},
 'wol': {'name': 'Wolcott', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.876728, 'elev': 280, 'lat': 43.262683, 'network': 'newa', 'state': 'NY'},
 'val': {'name': 'Valois', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -76.8656, 'elev': 800.0, 'lat': 42.55903, 'network': 'newa', 'state': 'NY'},
