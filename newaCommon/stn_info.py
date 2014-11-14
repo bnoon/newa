@@ -4,6 +4,7 @@ stn_info = {
 '3wi': {'name': 'Williamson (Demarree)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -77.142499999999998, 'elev': 300.0, 'lat': 43.276150000000001, 'network': 'newa', 'state': 'NY'},
 'alb': {'name': 'Albion', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -78.134927, 'elev': 430.0, 'lat': 43.275135, 'network': 'newa', 'state': 'NY'},
 'arm': {'name': 'Arkport (Mahany)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toohigh', 'lon': -77.68430, 'elev': 1300.0, 'lat': 42.42882, 'network': 'newa', 'state': 'NY'},
+'ash': {'name': 'Ashwood', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -78.309579999999997, 'elev': 330.0, 'lat': 43.338540000000002, 'network': 'newa', 'state': 'NY'},
 'aur': {'name': 'Aurora', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.73367, 'lon': -76.65383, 'elev': 840, 'network': 'newa', 'state': 'NY'},
 'bal': {'name': 'Baldwinsville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.169525, 'lon': -76.400886, 'elev': 443, 'network': 'newa', 'state': 'NY'},
 'ber': {'name': 'Bergen', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad','st4i'], 'srqual': 'ok', 'lat': 43.085377, 'lon': -77.948586, 'elev': 620, 'network': 'newa', 'state': 'NY'},
