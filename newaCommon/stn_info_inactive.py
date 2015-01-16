@@ -24,7 +24,6 @@ stn_info_inactive = {
 'mex': {'name': 'Mexico', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.230703, 'elev': 400.0, 'lat': 43.459805, 'network': 'newa', 'state': 'NY'},
 'nap': {'name': 'Naples', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.387289999999993, 'elev': 700.0, 'lat': 42.626150000000003, 'network': 'newa', 'state': 'NY'},
 'nea': {'name': 'North Easton', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.00515, 'lon': -73.5495, 'elev': 490, 'network': 'newa', 'state': 'NY'},
-'ovi': {'name': 'Ovid (Hosmer)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -76.74525, 'elev': 590.0, 'lat': 42.68564, 'network': 'newa', 'state': 'NY'},
 'pav': {'name': 'Pavilion', 'vars': ['temp', 'prcp', 'st4i'], 'lon': -77.967309999999998, 'elev': 1100.0, 'lat': 42.831440000000001, 'network': 'newa', 'state': 'NY'},
 'pot': {'name': 'Potter', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -77.191759050000002, 'elev': 915.0, 'lat': 42.715445000000003, 'network': 'newa', 'state': 'NY'},
 'pra': {'name': 'Prattsburg', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.266594, 'elev': 1300.0, 'lat': 42.481937, 'network': 'newa', 'state': 'NY'},
