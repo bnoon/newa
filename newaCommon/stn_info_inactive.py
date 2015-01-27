@@ -38,6 +38,7 @@ stn_info_inactive = {
 'sci': {'name': 'Scipioville', 'vars': ['temp', 'prcp'], 'lon': -76.63, 'elev': 984.0, 'lat': 42.78, 'network': 'newa', 'state': 'NY'},
 'wat': {'name': 'Waterport', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -78.214060, 'elev': 330.0, 'lat': 43.34422, 'network': 'newa', 'state': 'NY'},
 'mre': {'name': 'Rehoboth, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 41.777314, 'lon': -71.320638, 'elev': 16, 'network': 'newa', 'state': 'MA'},
+'mst': {'name': 'Stow, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 42.409444, 'lon': -71.513889, 'elev': 239, 'network': 'newa', 'state': 'MA', 'county': 'Middlesex', 'climate_div': 'MA02'},
 '148': {'name': 'Cape May Courthouse, NJ', 'vars': ['prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.1246, 'lon': -74.7873, 'elev': 7, 'network': 'njwx', 'state': 'NJ'},
 '198': {'name': 'Hammonton, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.64, 'lon': -74.75, 'elev': 21, 'network': 'njwx', 'state': 'NJ'},
 '3407': {'name': 'Eastampton, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.9856, 'lon': -74.7469, 'elev': 12, 'network': 'njwx', 'state': 'NJ'},
