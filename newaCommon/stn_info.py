@@ -87,7 +87,6 @@ stn_info = {
 'wlb': {'name': 'Willsboro', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'lwet', 'srad'], 'srqual': 'ok', 'lon': -73.38180, 'elev': 180.0, 'lat': 44.38430, 'network': 'newa', 'state': 'NY'},
 'wmi': {'name': 'Water Mill', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -72.317480, 'elev': 15.0, 'lat': 40.911110, 'network': 'newa', 'state': 'NY'},
 'wmn': {'name': 'Water Mill (North)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.92, 'lon': -72.34, 'elev': 15, 'network': 'newa', 'state': 'NY'},
-'wol': {'name': 'Wolcott', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.876728, 'elev': 280, 'lat': 43.262683, 'network': 'newa', 'state': 'NY'},
 'yap': {'name': 'Yaphank', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.827944, 'lon': -72.919242, 'elev': 54, 'network': 'newa', 'state': 'NY'},
 'wi_gay': {'name': 'Gays Mills, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.314584, 'lon': -90.841526, 'elev': 942, 'network': 'newa', 'state': 'WI'},
 'vca': {'name': 'Calais, VT','vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.5293, 'elev': 1434, 'lat': 44.3395, 'network': 'newa', 'state': 'VT'},
@@ -121,6 +120,7 @@ stn_info = {
 'um_new': {'name': 'Middletown, RI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.529167, 'lon': -71.27250, 'elev': 197, 'network': 'cu_log', 'state': 'RI'},
 'um_bcf': {'name': 'Barnstable County Farm, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.697834, 'lon': -70.288709, 'elev': 53, 'network': 'cu_log', 'state': 'MA'},
 'um_tff': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -71.67833, 'elev': 610, 'lat': 42.34611, 'network': 'cu_log', 'state': 'MA'},
+'um_ces': {'name': 'Weston (Case Estates), MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -71.29889, 'elev': 246, 'lat': 42.35806, 'network': 'cu_log', 'state': 'MA'},
 'pa_big': {'name': 'Biglerville (Hollabaugh), PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat':39.946944, 'lon': -77.247222, 'elev': 732, 'network': 'newa', 'state': 'PA'},
 'pa_npa': {'name': 'New Paris (Boyer), PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.105321, 'lon': -78.629474, 'elev': 1556, 'network': 'newa', 'state': 'PA'},
 'pa_ysp': {'name': 'York Springs (Lerew), PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat':40.038978, 'lon': -77.136408, 'elev': 740, 'network': 'newa', 'state': 'PA'},
@@ -155,6 +155,7 @@ stn_info = {
 'ct_cha': {'name': 'Chaplin, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'lat': 41.752520, 'lon': -72.103485, 'elev': 592, 'network': 'newa', 'state': 'CT'},
 'ct_new': {'name': 'Newtown, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'lat': 41.404534, 'lon': -73.287750, 'elev': 400, 'network': 'newa', 'state': 'CT'},
 'ct_nca': {'name': 'New Canaan, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'lat': 41.132771, 'lon': -73.484614, 'elev': 274, 'network': 'newa', 'state': 'CT'},
+'ia_ccy': {'name': 'Central City, IA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.224159, 'lon': -91.494571, 'elev': 958, 'network': 'newa', 'state': 'IA'},
 '33': {'name': 'Dennis Twp, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.2039, 'lon': -74.8923, 'elev': 5, 'network': 'njwx', 'state': 'NJ'},
 '202': {'name': 'Bethel Mill Park, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.7485, 'lon': -75.1138, 'elev': 30, 'network': 'njwx', 'state': 'NJ'},
 '232': {'name': 'Egg Harbor, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.4227, 'lon': -74.5421, 'elev': 12, 'network': 'njwx', 'state': 'NJ'},
@@ -286,5 +287,9 @@ stn_info = {
 'kbdr': {'name': 'Bridgeport, CT', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -73.128889999999998, 'elev': 5.0, 'lat': 41.158329999999999, 'network': 'icao', 'state': 'CT'},
 'kdxr': {'name': 'Danbury, CT', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -73.482780000000005, 'elev': 457.0, 'lat': 41.371389999999998, 'network': 'icao', 'state': 'CT'},
 'kbdl': {'name': 'Hartford (Bradley AP), CT', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -72.68, 'elev': 190.0,  'lat': 41.94, 'network': 'icao', 'state': 'CT'},
-'kovs': {'name': 'Boscobel, WI', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -90.6737, 'elev': 672.0,  'lat': 43.16085, 'network': 'icao', 'state': 'WI'}
+'kovs': {'name': 'Boscobel, WI', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -90.6737, 'elev': 672.0,  'lat': 43.16085, 'network': 'icao', 'state': 'WI'},
+'koma': {'name': 'Omaha, NE,', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -95.8992, 'elev': 982,  'lat': 41.3103, 'network': 'icao', 'state': 'NE'},
+'klnk': {'name': 'Lincoln Airport, NE', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -96.7475, 'elev': 1190.0,  'lat': 40.8508, 'network': 'icao', 'state': 'NE'},
+'kcid': {'name': 'Cedar Rapids, IA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -91.7167, 'elev': 868.0,  'lat': 41.8833, 'network': 'icao', 'state': 'IA'},
+'kiow': {'name': 'Iowa City, IA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -91.5431, 'elev': 650.0,  'lat': 41.6328, 'network': 'icao', 'state': 'IA'}
 }
