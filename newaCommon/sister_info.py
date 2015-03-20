@@ -152,6 +152,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'um_new' : {'temp': 'kpve', 'rhum': 'kpvd', 'prcp': 'kpvd', 'wspd': 'kpvd', 'wdir': 'kpvd', 'lwet': 'meb', 'srad': 'meb'},
 'um_bcf' : {'temp': 'khya', 'rhum': 'khya', 'prcp': 'khya', 'wspd': 'khya', 'wdir': 'khya', 'lwet': 'meb'},
 'um_ces' : {'temp': 'mwa', 'rhum': 'mwa', 'prcp': 'mwa', 'wspd': 'mwa', 'wdir': 'mwa', 'lwet': 'mwa', 'srad': 'mwa'},
+'un_nec' : {'temp': 'koma', 'prcp': 'koma', 'rhum': 'koma', 'wspd': 'koma', 'wdir': 'koma', 'srad': 'ia_ccy'},
 'cu_aur' : {'temp': 'cu_gfr', 'rhum': 'cu_gfr', 'prcp': 'cu_gfr', 'st4i': 'cu_gfr', 'wspd': 'cu_gfr', 'wdir': 'cu_gfr', 'srad': 'cu_gfr'},
 'cu_chz' : {'temp': 'chz', 'rhum': 'chz', 'prcp': 'chz', 'wspd': 'chz', 'wdir': 'chz', 'st4i': 'cu_wlb', 'srad': 'cu_wlb'},
 'cu_gfr' : {'temp': 'ith', 'prcp': 'ith', 'rhum': 'ith', 'st4i': 'cu_aur', 'wspd': 'ith', 'wdir': 'ith', 'srad': 'aur'},

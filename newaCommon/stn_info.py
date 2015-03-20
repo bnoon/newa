@@ -156,6 +156,7 @@ stn_info = {
 'ct_new': {'name': 'Newtown, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'lat': 41.404534, 'lon': -73.287750, 'elev': 400, 'network': 'newa', 'state': 'CT'},
 'ct_nca': {'name': 'New Canaan, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'lat': 41.132771, 'lon': -73.484614, 'elev': 274, 'network': 'newa', 'state': 'CT'},
 'ia_ccy': {'name': 'Central City, IA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.224159, 'lon': -91.494571, 'elev': 958, 'network': 'newa', 'state': 'IA'},
+'un_nec': {'name': 'Nebraska City 2N, NE', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -95.8833, 'elev': 1076.0, 'lat': 40.7000, 'network': 'cu_log', 'state': 'NE'},
 '33': {'name': 'Dennis Twp, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.2039, 'lon': -74.8923, 'elev': 5, 'network': 'njwx', 'state': 'NJ'},
 '202': {'name': 'Bethel Mill Park, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.7485, 'lon': -75.1138, 'elev': 30, 'network': 'njwx', 'state': 'NJ'},
 '232': {'name': 'Egg Harbor, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.4227, 'lon': -74.5421, 'elev': 12, 'network': 'njwx', 'state': 'NJ'},
