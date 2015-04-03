@@ -5,7 +5,6 @@ stn_info_inactive = {
 'avo': {'name': 'Avon', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.75, 'elev': 650.0, 'lat': 42.92, 'network': 'newa', 'state': 'NY'},
 'bar': {'name': 'Barrington', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.084785, 'elev': 1089.0, 'lat': 42.551651, 'network': 'newa', 'state': 'NY'},
 'bat': {'name': 'Batavia', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'st4i'], 'lon': -78.154020000000003, 'elev': 900.0, 'lat': 43.028820000000003, 'network': 'newa', 'state': 'NY'},
-'but': {'name': 'Butler (Tree Crisp)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat':43.067219, 'lon': -76.760174, 'elev': 457, 'network': 'newa', 'state': 'NY'},
 'cln': {'name': 'Clintondale', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'toolow', 'lon': -74.058165, 'elev': 491.0, 'lat': 41.699821, 'network': 'newa', 'state': 'NY'},
 'cu_aur': {'name': 'Aurora (logger)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -76.659099999999995, 'elev': 830.0, 'lat': 42.734099999999998, 'network': 'cu_log', 'state': 'NY'},
 'cu_chz': {'name': 'Chazy (Miner)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -73.466399999999993, 'elev': 201.0, 'lat': 44.8872, 'network': 'cu_log', 'state': 'NY'},
