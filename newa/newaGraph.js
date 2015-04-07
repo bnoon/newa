@@ -15,7 +15,6 @@ function defineGraphOptions(options) {
 		yaxis_array = [{
 			title: {
 				style: {
-					fontWeight: "bold",
 					color: darkColor
 				}
 			},
@@ -41,7 +40,6 @@ function defineGraphOptions(options) {
 		}, {
 			title: {
 				style: {
-					fontWeight: "bold",
 					color: darkColor
 				}
 			},
@@ -73,6 +71,7 @@ function defineGraphOptions(options) {
 		},
 		title: {
 			style: {
+					fontSize: "15px",
 				color: darkColor
 			}
 		},
@@ -186,7 +185,7 @@ function produce_tp_graph(params, obs_dict) {
 			data_series[0].push([date_val, null, null]);
 		}
 		if (obs_dict.prcp[d] !== -999) {
-			data_series[1].push([date_val, obs_dict.prcp[d]]);
+			data_series[1].push([date_val, Math.round(obs_dict.prcp[d]*100)/100]);
 		} else {
 			data_series[1].push([date_val, null]);
 		}
@@ -201,7 +200,7 @@ function produce_tp_graph(params, obs_dict) {
 				data_series[2].push([date_val, null, null]);
 			}
 			if (obs_dict.fprcp[d] !== -999) {
-				data_series[3].push([date_val, obs_dict.fprcp[d]]);
+				data_series[3].push([date_val, Math.round(obs_dict.fprcp[d]*100)/100]);
 			} else {
 				data_series[3].push([date_val, null]);
 			}
@@ -212,16 +211,14 @@ function produce_tp_graph(params, obs_dict) {
 		color: 'blue',
 		name: 'Daily lowest and highest hourly temperatures',
 		type: 'columnrange',
-		tooltip: { valueSuffix: "F", valueDecimals: 0 },
 		zIndex: 3,
 		turboThreshold: data_series[0].length
 	}, {
 		data: data_series[1],
-		color: 'lightgreen',
+		color: '#328332',
 		name: 'Daily precipitation',
 		type: 'column',
 		yAxis: 1,
-		tooltip: { valueSuffix: " inches", valueDecimals: 2 },
 		zIndex: 2,
 		turboThreshold: data_series[1].length
 	});
@@ -231,7 +228,6 @@ function produce_tp_graph(params, obs_dict) {
 			color: 'brown',
 			name: 'Forecast lowest and highest hourly temperatures',
 			type: 'columnrange',
-			tooltip: { valueSuffix: "F", valueDecimals: 0 },
 			zIndex: 3,
 			turboThreshold: data_series[2].length
 		}, {
@@ -240,7 +236,6 @@ function produce_tp_graph(params, obs_dict) {
 			name: 'Forecast precipitation',
 			type: 'column',
 			yAxis: 1,
-			tooltip: { valueSuffix: " inches", valueDecimals: 2 },
 			zIndex: 2,
 			turboThreshold: data_series[3].length
 		});
@@ -271,6 +266,19 @@ function produce_tp_graph(params, obs_dict) {
 	$.extend(graphOptions.xAxis, {
 		plotLines: [{value: ymdToUTC(params.biofix), color: "green", dashStyle: "dash", width: 2, zIndex: 1}]
 	});
+	$.extend(graphOptions.tooltip, {
+		formatter: function () {
+			var tts = "<b>" + Highcharts.dateFormat('%A, %B %e, %Y', this.x) + "<\/b>";
+			$.each(this.points, function (i, point) {
+				if (point.series.tooltipOptions.pointFormat.length) {
+					tts += '<br \/><span style="color:' + point.series.color + ';">' + point.series.name + ': ' +
+						(point.series.name.search("precipitation") >= 0 ? (point.y + ' inches') : 
+						(point.point.low + ' F to ' + point.point.high + ' F')) + '<\/span>';
+				}
+			});
+			return tts;
+		}
+	});
 	$("#tp_chart_area").highcharts(graphOptions);
 }
 
@@ -283,7 +291,7 @@ function produce_applescab_graph(params, obs_dict, ascospore_dict) {
 	for (d = 0; d < ascospore_dict.dates.length; d += 1) {
 		date_val = ymdToUTC(ascospore_dict.dates[d]);
 		if (ascospore_dict.maturity[d] !== -999) {
-			data_series[0].push([date_val, ascospore_dict.maturity[d]]);
+			data_series[0].push([date_val, Math.round(ascospore_dict.maturity[d])]);
 			if (ascospore_dict.maturity[d] >= 95 && data_series.length === 2) {
 				data_series.push([[date_val, parseInt(ascospore_dict.maturity[d], 10)]]);
 			}
@@ -293,7 +301,7 @@ function produce_applescab_graph(params, obs_dict, ascospore_dict) {
 		if (ascospore_dict.maturity[d] !== -999 && ascospore_dict.error[d] !== -999) {
 			lo_error = Math.max(0.0, ascospore_dict.maturity[d] - ascospore_dict.error[d]);
 			hi_error = Math.min(100.0, ascospore_dict.maturity[d] + ascospore_dict.error[d]);
-			data_series[1].push([date_val, lo_error, hi_error]);
+			data_series[1].push([date_val, Math.round(lo_error), Math.round(hi_error)]);
 		} else {
 			data_series[1].push([date_val, null, null]);
 		}
@@ -303,16 +311,14 @@ function produce_applescab_graph(params, obs_dict, ascospore_dict) {
 		color: 'red',
 		name: 'Ascospore Maturity',
 		type: 'line',
-		tooltip: { valueSuffix: " percent", valueDecimals: 0 },
 		zIndex: 3,
 		turboThreshold: data_series[0].length
 	}, {
 		data: data_series[1],
 		color: 'pink',
-		name: 'Uncertainity',
+		name: 'Uncertainty',
 		type: 'arearange',
 		yAxis: 1,
-		tooltip: { valueSuffix: " percent", valueDecimals: 0 },
 		zIndex: 2,
 		turboThreshold: data_series[1].length
 	});
@@ -363,6 +369,20 @@ function produce_applescab_graph(params, obs_dict, ascospore_dict) {
 		labels: { enabled: false },
 		plotLines: [{value: ymdToUTC(params.biofix), color: "green", dashStyle: "dash", width: 2, zIndex: 1}]
 	});
+	$.extend(graphOptions.tooltip, {
+		formatter: function () {
+			var tts = "<b>" + Highcharts.dateFormat('%A, %B %e, %Y', this.x) + "<\/b>";
+			$.each(this.points, function (i, point) {
+				if (point.series.tooltipOptions.pointFormat.length) {
+					tts += '<br \/><span style="color:' + point.series.color + ';">' + point.series.name + ': ' +
+						(point.series.name.search("Maturity") >= 0 ? (point.y + ' percent') : 
+						(point.point.low + ' percent to ' + point.point.high + ' percent')) + '<\/span>';
+				}
+			});
+			return tts;
+		}
+	});
+
 	$("#dis_chart_area").highcharts(graphOptions);
 	if (data_series.length === 3) {
 		$('<div id="message_area" style="width:430;border:1px solid red;margin:0 80px;padding:5px;font-size:90%;"><\/div>').insertAfter("#dis_chart_area");
