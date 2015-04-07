@@ -700,7 +700,6 @@ def get_fcst_data (stn, requested_var, start_date_dt, end_date_dt):
 
 #------------
 
-
 def get_hourly_data (native_id, requested_var, start_date_dt, end_date_dt, hourly_data, fcst_data, station_type='newa'):
 	est_tsvars = {}
 	dataForEst = {}
