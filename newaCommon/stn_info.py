@@ -160,12 +160,13 @@ stn_info = {
 'ct_cha': {'name': 'Chaplin, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.752520, 'lon': -72.103485, 'elev': 592, 'network': 'newa', 'state': 'CT'},
 'ct_new': {'name': 'Newtown, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.404534, 'lon': -73.287750, 'elev': 400, 'network': 'newa', 'state': 'CT'},
 'ct_nca': {'name': 'New Canaan, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.132771, 'lon': -73.484614, 'elev': 274, 'network': 'newa', 'state': 'CT'},
-'ct_nia': {'name': 'Niantic, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'lat': 41.349326, 'lon': -72.213006, 'elev': 28, 'network': 'newa', 'state': 'CT'},
+'ct_nia': {'name': 'Niantic, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.349326, 'lon': -72.213006, 'elev': 28, 'network': 'newa', 'state': 'CT'},
+'ct_sto': {'name': 'Storrs (Research Farm), CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'lat': 41.7941049, 'lon': -72.230211, 'elev': 669, 'network': 'newa', 'state': 'CT'},
 'nh_hol': {'name': 'Hollis, NH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.739297, 'lon': -71.579226, 'elev': 104, 'network': 'newa', 'state': 'NH'},
 'ia_ccy': {'name': 'Central City, IA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.224159, 'lon': -91.494571, 'elev': 958, 'network': 'newa', 'state': 'IA'},
 'un_nec': {'name': 'Nebraska City 2N, NE', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -95.8833, 'elev': 1076.0, 'lat': 40.7000, 'network': 'cu_log', 'state': 'NE'},
 'mn_wbl': {'name': 'White Bear Lake, MN', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 45.106320, 'lon': -92.955087, 'elev': 955, 'network': 'newa', 'state': 'MN'},
-'md_wdb': {'name': 'Woodbine, MD', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', ], 'lat': 39.31527, 'lon': -77.10401, 'elev': 628, 'network': 'newa', 'state': 'MD'},
+'md_wdb': {'name': 'Woodbine, MD', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 39.31527, 'lon': -77.10401, 'elev': 628, 'network': 'newa', 'state': 'MD'},
 '33': {'name': 'Dennis Twp, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.2039, 'lon': -74.8923, 'elev': 5, 'network': 'njwx', 'state': 'NJ'},
 '202': {'name': 'Bethel Mill Park, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.7485, 'lon': -75.1138, 'elev': 30, 'network': 'njwx', 'state': 'NJ'},
 '232': {'name': 'Egg Harbor, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.4227, 'lon': -74.5421, 'elev': 12, 'network': 'njwx', 'state': 'NJ'},
@@ -312,5 +313,7 @@ stn_info = {
 'koma': {'name': 'Omaha, NE', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -95.8992, 'elev': 982,  'lat': 41.3103, 'network': 'icao', 'state': 'NE'},
 'klnk': {'name': 'Lincoln Airport, NE', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -96.7475, 'elev': 1190.0,  'lat': 40.8508, 'network': 'icao', 'state': 'NE'},
 'kcid': {'name': 'Cedar Rapids, IA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -91.7167, 'elev': 868.0,  'lat': 41.8833, 'network': 'icao', 'state': 'IA'},
-'kiow': {'name': 'Iowa City, IA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -91.5431, 'elev': 650.0,  'lat': 41.6328, 'network': 'icao', 'state': 'IA'}
+'kiow': {'name': 'Iowa City, IA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -91.5431, 'elev': 650.0,  'lat': 41.6328, 'network': 'icao', 'state': 'IA'},
+'kavl': {'name': 'Asheville, NC', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 35.4319, 'lon': -82.5375, 'elev': 2117, 'network': 'icao', 'state': 'NC'},
+'kclt': {'name': 'Charlotte, NC', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 35.2236, 'lon': -80.9553, 'elev': 728, 'network': 'icao', 'state': 'NC'}
 }
