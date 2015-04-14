@@ -543,7 +543,7 @@ class Apple (Base,Models):
 
 	#--------------------------------------------------------------------------------------------		
 	# add average temps
-	def add_temprain (self,smry_dict,end_date_dt,daily_data):
+	def add_temprain (self,smry_dict,end_date_dt,daily_data,getpops=True):
 		try:
 			day0 =  end_date_dt + DateTime.RelativeDate(hour=0,minute=0,second=0)
 			pday1 = day0 + DateTime.RelativeDate(days=-1)
@@ -598,6 +598,9 @@ class Apple (Base,Models):
 			for i in range(len(daily_data)):
 				dly_dt,tave_hr,tmax,tmin,prcp,pop12,rhum,wspd,srad,qpf,st4x,st4n,dflags = daily_data[i]
 				theDate_dt = DateTime.DateTime(dly_dt[0],dly_dt[1],dly_dt[2],0,0,0)
+				if not getpops:
+					pop12 = []
+					qpf = prcp
 				if day0 == theDate_dt:
 					smry_dict['day0']['avgtemp'] = tave_hr
 					smry_dict['day0']['qpf'] = qpf
@@ -1148,7 +1151,6 @@ class Apple (Base,Models):
 	#	check ascospore maturity (percent)
 	def ascospore_calcs (self,dd_data,daily_data):
 		ascospore_dict = {}
-		avgtemp_list = []
 		date95 = None
 		all_released = None
 		try:
@@ -1159,7 +1161,6 @@ class Apple (Base,Models):
 			minus6_list = [minus6_dt.year,minus6_dt.month,minus6_dt.day]
 			for i in range(len(daily_data)):
 				dly_dt,tave_hr,tmax,tmin,prcp,lwet,rhum,wspd,srad,st4a,st4x,st4n,dflags = daily_data[i]
-				avgtemp_list.append([dly_dt,tave_hr])
 				if dly_dt == minus6_list:
 					daily_prec.append(daily_data[i][4])
 					daily_prec.append(daily_data[i+1][4])
@@ -1198,7 +1199,7 @@ class Apple (Base,Models):
 						all_released = dly_dt
 		except:
 			print_exception()
-		return ascospore_dict, avgtemp_list, date95, all_released
+		return ascospore_dict, date95, all_released
 		
 	#--------------------------------------------------------------------------------------------		
 	# add acsospore maturity to dictionary for today, yesterday and day before
@@ -1569,13 +1570,14 @@ class Apple (Base,Models):
 	#	obtain everything necessary for apple scab summary
 	def run_apple_scab (self,stn,end_date_dt,greentip,output,estimate):
 		try:
+			now = DateTime.now()
 			from phen_events import phen_events_dict		
 			smry_dict = {}
 			smry_dict['output'] = output
 			smry_dict['stn'] = stn
 			if not estimate:
 				estimate = "no"
-			if not end_date_dt: end_date_dt = DateTime.now()
+			if not end_date_dt: end_date_dt = now
 			smry_dict['accend'] = end_date_dt
 			
 			if end_date_dt >= DateTime.DateTime(end_date_dt.year,11,1):		#off-season
@@ -1606,6 +1608,13 @@ class Apple (Base,Models):
 
 			smry_dict['greentip'] = greentip
 			smry_dict = self.setup_dates (smry_dict,end_date_dt)
+			
+			# just use observed data (no forecast) in years other than the current
+			if end_date_dt.year != now.year:
+				smry_dict['this_year'] = False
+				end_date_dt = end_date_dt + DateTime.RelativeDate(days = +6)
+			else:
+				smry_dict['this_year'] = True
 
 			# obtain hourly and daily data
 			start_date_dt = DateTime.DateTime(end_date_dt.year,3,1,1)	#Leave this March 1			
@@ -1632,31 +1641,40 @@ class Apple (Base,Models):
 #			else:
 #				return newaCommon_io.errmsg('Insufficient data for model calculations.')
 				
-			### now add the forecast data and do calculations again using observed and forecast data
-			start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
-			end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6)
-			hourly_data = self.add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt,True)
-			daily_data = self.hrly_to_dly(hourly_data)
-			wd_periods = self.get_wetdry(hourly_data,download_time,estimate)
+			### now add the forecast data and do calculations again using observed and forecast data (current year)
+			if smry_dict['this_year']:
+				start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
+				end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6)
+				hourly_data = self.add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt,True)
+				daily_data = self.hrly_to_dly(hourly_data)
+				wd_periods = self.get_wetdry(hourly_data,download_time,estimate)
+				if len(wd_periods) > 0:
+					# combine wet periods and determine infection events
+					infection_events, restat = self.get_infection(wd_periods,mills_chart)
+			else:
+				start_fcst_dt = end_date_dt + DateTime.RelativeDate(hours = +1)
+				end_fcst_dt = end_date_dt	
+				end_date_dt = end_date_dt + DateTime.RelativeDate(days = -6)
+				wd_periods = obs_wd_periods			
+				if len(wd_periods) > 0:
+					# combine wet periods and determine infection events
+					infection_events = obs_infection_events
 
-			if len(wd_periods) > 0:
-				# combine wet periods and determine infection events
-				infection_events, restat = self.get_infection(wd_periods,mills_chart)
-				smry_dict = self.check_infection(infection_events,end_date_dt,download_time,smry_dict)
+			smry_dict = self.check_infection(infection_events,end_date_dt,download_time,smry_dict)
 
 			# calculate base 0C degree days for ascospore maturity
 			dd_data = self.degday_calcs(daily_data,greentip,end_fcst_dt,'dd0c', "prcp")
 			
 			if len(dd_data) > 0:
 				# calculate ascospore maturity
-				ascospore_dict,avgtemp_list,smry_dict['date95'],smry_dict['all_released'] = self.ascospore_calcs(dd_data,daily_data)
+				ascospore_dict,smry_dict['date95'],smry_dict['all_released'] = self.ascospore_calcs(dd_data,daily_data)
 				# add ascospore maturity to summary dictionary
 				smry_dict = self.addascospore(ascospore_dict, smry_dict)
 				# get wetness events for output
 				wetness_dict = self.wetness_event_calcs(hourly_data,start_date_dt,end_fcst_dt,start_fcst_dt,stn,estimate)
 				smry_dict = self.add_wetness(smry_dict,wetness_dict,start_date_dt,end_date_dt)
 				# add daily average temperatures, rain amount and pops to output
-				smry_dict = self.add_temprain(smry_dict,end_date_dt,daily_data)
+				smry_dict = self.add_temprain(smry_dict,end_date_dt,daily_data,smry_dict['this_year'])
 			else:
 				return self.nodata(stn, station_name, start_date_dt, end_date_dt)
 

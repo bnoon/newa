@@ -556,9 +556,13 @@ def apple_scab_log [html] (smry_dict):
 	<td class=blue_back>Past</td>
 	<td class=blue_back>Past</td>
 	<td class=blue_back>Current</td>
-	<td class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast">Forecast Details</button></td>
-	</tr>
 	'''
+	if smry_dict['this_year']:
+		'<td class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast">Forecast Details</button></td>'
+	else:
+		'<td class=palegoldenrod_back colspan=5>Ensuing 5 Days</td>'
+	'</tr>'
+
 	'<tr>'
 	'<td class=blue_back>%s</td>' % smry_dict['pday2']['date']
 	'<td class=blue_back>%s</td>' % smry_dict['pday1']['date']
@@ -616,9 +620,13 @@ def apple_scab_log [html] (smry_dict):
 	<td class=blue_back>Past</td>
 	<td class=blue_back>Past</td>
 	<td class=blue_back>Current</td>
-	<td class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast">Forecast Details</button></td>
-	</tr>
 	'''
+	if smry_dict['this_year']:
+		'<td class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast">Forecast Details</button></td>'
+	else:
+		'<td class=palegoldenrod_back colspan=5>Ensuing 5 Days</td>'
+	'</tr>'
+
 	'<tr>'
 	'<td class=blue_back>%s</td>' % smry_dict['pday2']['date']
 	'<td class=blue_back>%s</td>' % smry_dict['pday1']['date']
@@ -782,21 +790,22 @@ def apple_scab_log [html] (smry_dict):
 		'<td class=%s_back>%s</td>' % (rcolor,rain)
 	'</TR>'
 	
-	'<tr>'	
-	'<td class=plain_back> Rain Prob (%)<br>Night|Day&nbsp;<img src="http://newatest.nrcc.cornell.edu/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(1);"></td>'
-	'<td class=plain_back>&nbsp;</td>'
-	'<td class=plain_back>&nbsp;</td>'
-	for d in ['day0','fday1','fday2','fday3','fday4','fday5']:
-		if smry_dict[d]['pops']['am'] == miss:
-			am_rain = '-'
-		else:
-			am_rain = '%s' % smry_dict[d]['pops']['am']
-		if smry_dict[d]['pops']['pm'] == miss:
-			pm_rain = '-'
-		else:
-			pm_rain = '%s' % smry_dict[d]['pops']['pm']
-		'<td class=plain_back_smaller_c>%s | %s</td>' % (am_rain,pm_rain)
-	'</TR>'
+	if smry_dict['this_year']:
+		'<tr>'	
+		'<td class=plain_back> Rain Prob (%)<br>Night|Day&nbsp;<img src="http://newatest.nrcc.cornell.edu/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(1);"></td>'
+		'<td class=plain_back>&nbsp;</td>'
+		'<td class=plain_back>&nbsp;</td>'
+		for d in ['day0','fday1','fday2','fday3','fday4','fday5']:
+			if smry_dict[d]['pops']['am'] == miss:
+				am_rain = '-'
+			else:
+				am_rain = '%s' % smry_dict[d]['pops']['am']
+			if smry_dict[d]['pops']['pm'] == miss:
+				pm_rain = '-'
+			else:
+				pm_rain = '%s' % smry_dict[d]['pops']['pm']
+			'<td class=plain_back_smaller_c>%s | %s</td>' % (am_rain,pm_rain)
+		'</tr>'
 
 	'<tr>'
 	'<td class=plain_back_smaller colspan=2 style="border-right:hidden; border-left:hidden; border-bottom:hidden">&nbsp;</td>'
