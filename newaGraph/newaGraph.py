@@ -1,4 +1,5 @@
 #!/usr/local/bin/python
+
 import sys, os, math
 from mx import DateTime
 from print_exception import print_exception
@@ -70,7 +71,7 @@ def tp_for_grf(stn, daily_data, smry_dict, start_date_dt, end_date_dt):
 #--------------------------------------------------------------------------------------------		
 # gather data for daily (obs and forecast) temp and ppt plots
 # this version already has forecast data merged
-def tp_for_grf2(daily_data, start_date_dt, start_fcst_dt):
+def tp_for_grf2(daily_data, start_date_dt, start_fcst_dt, useqpf=True):
 	obs_dict = {}
 	forecast_data = None
 	start_fcst_dt = start_fcst_dt + DateTime.RelativeDate(hour=0,minute=0,second=0)
@@ -86,6 +87,7 @@ def tp_for_grf2(daily_data, start_date_dt, start_fcst_dt):
 		for dly_dt,tave_hr,tmax,tmin,prcp,lwet,rhum,wspd,srad,qpf,st4x,st4n,dflags in daily_data:
 			this_day_dt = DateTime.DateTime(dly_dt[0],dly_dt[1],dly_dt[2])
 			if this_day_dt < start_date_dt: continue
+			if not useqpf: qpf = prcp
 			if tmax != miss and tmin != miss:
 				if this_day_dt < start_fcst_dt:
 					mint.append(int(round(tmin,0)))
@@ -274,10 +276,11 @@ def run_fire_blight_plots (stn,end_date_dt,firstblossom,orchard_history,output):
 # obtain everything necessary for apple scab plots
 def run_apple_scab_plots (stn,end_date_dt,greentip,output):
 	try:
+		now = DateTime.now()
 		smry_dict = {}
 		smry_dict['biofix_name'] = 'Greentip'
 		daily_data = None
-		if not end_date_dt: end_date_dt = DateTime.now()
+		if not end_date_dt: end_date_dt = now
 		start_date_dt = DateTime.DateTime(end_date_dt.year,3,15,0)	
 
 		end_date_dt = min(end_date_dt, DateTime.DateTime(end_date_dt.year,6,15,23))
@@ -293,23 +296,35 @@ def run_apple_scab_plots (stn,end_date_dt,greentip,output):
 				if ret_bf_date: greentip = ret_bf_date
 					
 		smry_dict['biofix'] = "%s-%s-%s" % (greentip.year,greentip.month,greentip.day)
+		
+		# just use observed data (no forecast) in years other than the current
+		if end_date_dt.year != now.year:
+			this_year = False
+			end_date_dt = end_date_dt + DateTime.RelativeDate(days = +6)
+		else:
+			this_year = True
 
 		# obtain hourly and daily data
 		start_date_dt = DateTime.DateTime(end_date_dt.year,3,1,1)	#Leave this March 1			
 		hourly_data, daily_data, download_time, station_name, avail_vars = newaCommon.Base().get_hddata2 (stn, start_date_dt, end_date_dt)
 		smry_dict['station_name'] = station_name
-		# now add the forecast data
-		start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
-		end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6)
-		hourly_data = newaModel.Models().add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt,True)
-		daily_data = newaModel.Apple().hrly_to_dly(hourly_data)
+		
+		if this_year:
+			# now add the forecast data
+			start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
+			end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6)
+			hourly_data = newaModel.Models().add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt,True)
+			daily_data = newaModel.Apple().hrly_to_dly(hourly_data)
+		else:
+			start_fcst_dt = end_date_dt + DateTime.RelativeDate(hours = +1)
+			end_fcst_dt = end_date_dt
 		
 		# format for plot routine
 		if greentip:
 			start_date_grf = greentip + DateTime.RelativeDate(days = -6)
 		else:
 			start_date_grf = start_date_dt
-		obs_dict = tp_for_grf2(daily_data, start_date_grf, start_fcst_dt)
+		obs_dict = tp_for_grf2(daily_data, start_date_grf, start_fcst_dt, this_year)
 			
 		# calculate base 0C degree days for ascospore maturity
 		if greentip:
