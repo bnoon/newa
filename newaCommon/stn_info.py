@@ -61,7 +61,7 @@ stn_info = {
 'nel': {'name': 'North East Lab, PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.22834, 'lon': -79.85432, 'elev': 680, 'network': 'newa', 'state': 'PA'},
 'noa': {'name': 'Appleton, North', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -78.665660000000003, 'elev': 300.0, 'lat': 43.344029999999997, 'network': 'newa', 'state': 'NY'},
 'npt': {'name': 'Northport (Richters)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.884686, 'lon': -73.294411, 'elev': 213, 'network': 'newa', 'state': 'NY'},
-'ovi': {'name': 'Ovid (Hosmer)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -76.74525, 'elev': 590.0, 'lat': 42.68564, 'network': 'newa', 'state': 'NY'},
+'ovi': {'name': 'Ovid (Hosmer)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.74525, 'elev': 590.0, 'lat': 42.68564, 'network': 'newa', 'state': 'NY'},
 'per': {'name': 'Peru', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.512769, 'elev': 370.0, 'lat': 44.566692, 'network': 'newa', 'state': 'NY'},
 'poe': {'name': 'Portland Escarpment', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.34944, 'lon': -79.47194, 'elev': 1076, 'network': 'newa', 'state': 'NY'},
 'por': {'name': 'Portland', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -79.487296, 'elev': 700.0, 'lat': 42.371481, 'network': 'newa', 'state': 'NY'},
