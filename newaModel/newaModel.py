@@ -87,6 +87,129 @@ class Models(Base):
 		return daily_data	
 	
 	#--------------------------------------------------------------------------------------------		
+	def hrly_to_dly (self,hourly_data):
+		daily_data = []
+		lt_end_hour = 23
+		miss=-999
+		try:		
+	#		init counters
+			temp_sum = 0.
+			temp_cnt = 0.
+			temp_max = -9999.
+			temp_min = 9999.
+			prcp_sum = 0.
+			prcp_cnt = 0.
+			qpf_sum = 0.
+			qpf_cnt = 0.
+			pop12_list = []
+			rhum_sum = 0.
+			rhum_cnt = 0.
+			temp_dflag = ''
+			prcp_dflag = ''
+			pop12_dflag = ''
+			rhum_dflag = ''
+			qpf_dflag = ''
+			wdir_dflag = ''
+			srad_dflag = ''
+			st4i_dflag = ''
+				
+			for theTime,tempv,prcpv,pop12v,rhumv,miss,miss,miss,miss,eflags in hourly_data:
+				temp_eflag, prcp_eflag, pop12_eflag, rhum_eflag, wspd_eflag, wdir_eflag, srad_eflag, st4i_eflag = eflags
+				theDate = DateTime.DateTime(*theTime)
+
+	#			do calculations for daily data
+				if tempv != miss:
+					temp_sum = temp_sum + tempv
+					if tempv > temp_max: temp_max = copy.deepcopy(tempv)
+					if tempv < temp_min: temp_min = copy.deepcopy(tempv)
+					temp_cnt = temp_cnt + 1
+					if temp_eflag in ['S','I','F']: temp_dflag = 'E'
+				if prcpv != miss:
+					prcp_sum = prcp_sum + prcpv
+					prcp_cnt = prcp_cnt + 1
+					if prcp_eflag != "P":
+						qpf_sum = qpf_sum + prcpv
+						qpf_cnt = qpf_cnt + 1
+					if prcp_eflag in ['S','I','F']:
+						prcp_dflag = 'E'
+						qpf_dflag = 'E'
+				if pop12v != miss:
+					pop12_list.append((theDate.hour,int(pop12v)))
+					if pop12_eflag in ['S','I','F']: pop12_dflag = 'E'
+				if rhumv != miss:
+					if rhumv >= 90: rhum_sum = rhum_sum + 1
+					rhum_cnt = rhum_cnt + 1
+					if rhum_eflag in ['S','I','F']: rhum_dflag = 'E'
+				
+	#			end of "day" update
+				last_hr = lt_end_hour-theDate.dst
+				if last_hr == 24:
+					last_hr = 0
+					day_diff = -1
+				else:
+					day_diff = 0
+				if theDate.hour == last_hr:
+					if temp_cnt > 0:
+						dly_temp_ave = temp_sum/temp_cnt
+						dly_temp_max = temp_max
+						dly_temp_min = temp_min
+					else:
+						dly_temp_ave = miss
+						dly_temp_max = miss
+						dly_temp_min = miss
+					if prcp_cnt > 0:
+						dly_prcp_tot = prcp_sum
+					else:
+						dly_prcp_tot = miss
+					if qpf_cnt > 0:
+						dly_qpf_tot = qpf_sum
+					else:
+						dly_qpf_tot = miss
+					if len(pop12_list) > 0:
+						dly_pop12 = pop12_list
+					else:
+						dly_pop12 = []
+					if rhum_cnt > 0:
+						dly_rhum_hrs = rhum_sum
+					else:
+						dly_rhum_hrs = miss
+					
+	#				save daily data
+					if day_diff == 0:
+						ddt = theDate
+					else:
+						ddt = theDate + DateTime.RelativeDate(days=day_diff)
+					dflags = (temp_dflag, prcp_dflag, pop12_dflag, rhum_dflag, qpf_dflag, wdir_dflag, srad_dflag, st4i_dflag)
+					daily_data.append(([ddt.year,ddt.month,ddt.day], 
+							 dly_temp_ave, dly_temp_max, dly_temp_min, dly_prcp_tot, dly_pop12, \
+							 dly_rhum_hrs, miss, miss, dly_qpf_tot, miss, \
+							 miss, dflags))
+					
+					temp_sum = 0.
+					temp_cnt = 0.
+					temp_max = -9999.
+					temp_min = 9999.
+					prcp_sum = 0.
+					prcp_cnt = 0.
+					qpf_sum = 0.
+					qpf_cnt = 0.
+					pop12_list = []
+					rhum_sum = 0.
+					rhum_cnt = 0.
+					temp_dflag = ''
+					prcp_dflag = ''
+					pop12_dflag = ''
+					rhum_dflag = ''
+					qpf_dflag = ''
+					wdir_dflag = ''
+					srad_dflag = ''
+					st4i_dflag = ''
+		except:
+			print_exception()
+	
+		return daily_data
+
+	#--------------------------------------------------------------------------------------------		
 	# calculate hourly integrated degree days from hourly temperature values
 	def hidd_calcs (self,hourly_data,start_date,end_date,dd_type):
 		degday_data = []
@@ -168,6 +291,10 @@ class Models(Base):
 			prcp_sum = 0.
 			prcp_cnt = 0.
 			for theTime,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags in hourly_data:
+				temp_eflag, prcp_eflag, pop12_eflag, rhum_eflag, wspd_eflag, wdir_eflag, srad_eflag, st4i_eflag = eflags
+				# don't use precip estimated from pop12
+				if prcp_eflag == "P":
+					prcp = miss			
 				if lwet == miss and rhum != miss:
 					if rhum >= 90 or prcp > 0.00:
 						lwet = 60
@@ -677,129 +804,6 @@ class Apple (Base,Models):
 			print_exception()
 		return smry_dict
 
-	#--------------------------------------------------------------------------------------------		
-	def hrly_to_dly (self,hourly_data):
-		daily_data = []
-		lt_end_hour = 23
-		miss=-999
-		try:		
-	#		init counters
-			temp_sum = 0.
-			temp_cnt = 0.
-			temp_max = -9999.
-			temp_min = 9999.
-			prcp_sum = 0.
-			prcp_cnt = 0.
-			qpf_sum = 0.
-			qpf_cnt = 0.
-			pop12_list = []
-			rhum_sum = 0.
-			rhum_cnt = 0.
-			temp_dflag = ''
-			prcp_dflag = ''
-			pop12_dflag = ''
-			rhum_dflag = ''
-			qpf_dflag = ''
-			wdir_dflag = ''
-			srad_dflag = ''
-			st4i_dflag = ''
-				
-			for theTime,tempv,prcpv,pop12v,rhumv,miss,miss,miss,miss,eflags in hourly_data:
-				temp_eflag, prcp_eflag, pop12_eflag, rhum_eflag, wspd_eflag, wdir_eflag, srad_eflag, st4i_eflag = eflags
-				theDate = DateTime.DateTime(*theTime)
-
-	#			do calculations for daily data
-				if tempv != miss:
-					temp_sum = temp_sum + tempv
-					if tempv > temp_max: temp_max = copy.deepcopy(tempv)
-					if tempv < temp_min: temp_min = copy.deepcopy(tempv)
-					temp_cnt = temp_cnt + 1
-					if temp_eflag in ['S','I','F']: temp_dflag = 'E'
-				if prcpv != miss:
-					prcp_sum = prcp_sum + prcpv
-					prcp_cnt = prcp_cnt + 1
-					if prcp_eflag != "P":
-						qpf_sum = qpf_sum + prcpv
-						qpf_cnt = qpf_cnt + 1
-					if prcp_eflag in ['S','I','F']:
-						prcp_dflag = 'E'
-						qpf_dflag = 'E'
-				if pop12v != miss:
-					pop12_list.append((theDate.hour,int(pop12v)))
-					if pop12_eflag in ['S','I','F']: pop12_dflag = 'E'
-				if rhumv != miss:
-					if rhumv >= 90: rhum_sum = rhum_sum + 1
-					rhum_cnt = rhum_cnt + 1
-					if rhum_eflag in ['S','I','F']: rhum_dflag = 'E'
-				
-	#			end of "day" update
-				last_hr = lt_end_hour-theDate.dst
-				if last_hr == 24:
-					last_hr = 0
-					day_diff = -1
-				else:
-					day_diff = 0
-				if theDate.hour == last_hr:
-					if temp_cnt > 0:
-						dly_temp_ave = temp_sum/temp_cnt
-						dly_temp_max = temp_max
-						dly_temp_min = temp_min
-					else:
-						dly_temp_ave = miss
-						dly_temp_max = miss
-						dly_temp_min = miss
-					if prcp_cnt > 0:
-						dly_prcp_tot = prcp_sum
-					else:
-						dly_prcp_tot = miss
-					if qpf_cnt > 0:
-						dly_qpf_tot = qpf_sum
-					else:
-						dly_qpf_tot = miss
-					if len(pop12_list) > 0:
-						dly_pop12 = pop12_list
-					else:
-						dly_pop12 = []
-					if rhum_cnt > 0:
-						dly_rhum_hrs = rhum_sum
-					else:
-						dly_rhum_hrs = miss
-					
-	#				save daily data
-					if day_diff == 0:
-						ddt = theDate
-					else:
-						ddt = theDate + DateTime.RelativeDate(days=day_diff)
-					dflags = (temp_dflag, prcp_dflag, pop12_dflag, rhum_dflag, qpf_dflag, wdir_dflag, srad_dflag, st4i_dflag)
-					daily_data.append(([ddt.year,ddt.month,ddt.day], 
-							 dly_temp_ave, dly_temp_max, dly_temp_min, dly_prcp_tot, dly_pop12, \
-							 dly_rhum_hrs, miss, miss, dly_qpf_tot, miss, \
-							 miss, dflags))
-					
-					temp_sum = 0.
-					temp_cnt = 0.
-					temp_max = -9999.
-					temp_min = 9999.
-					prcp_sum = 0.
-					prcp_cnt = 0.
-					qpf_sum = 0.
-					qpf_cnt = 0.
-					pop12_list = []
-					rhum_sum = 0.
-					rhum_cnt = 0.
-					temp_dflag = ''
-					prcp_dflag = ''
-					pop12_dflag = ''
-					rhum_dflag = ''
-					qpf_dflag = ''
-					wdir_dflag = ''
-					srad_dflag = ''
-					st4i_dflag = ''
-		except:
-			print_exception()
-	
-		return daily_data
-
 ##### APPLE SCAB #####
 	#--------------------------------------------------------------------------------------------		
 	# build Revised Mills Table as python dictionary
@@ -1042,7 +1046,7 @@ class Apple (Base,Models):
 
 	#--------------------------------------------------------------------------------------------		
 #	get infection information for today, yesterday and day before
-	def check_infection (self,infection_events,end_date_dt,download_time,smry_dict):
+	def check_infection (self,infection_events,end_date_dt,last_data_dt,smry_dict):
 		try:
 			# today (day0), yesterday (pday1), day before (pday2)
 			day0 = end_date_dt
@@ -1054,25 +1058,46 @@ class Apple (Base,Models):
 			fday3 = day0 + DateTime.RelativeDate(days=+3)
 			fday4 = day0 + DateTime.RelativeDate(days=+4)
 			fday5 = day0 + DateTime.RelativeDate(days=+5)
-			download_dt = DateTime.DateTime(*download_time)
 
 			# build list of dates with infection (listed by end date)
 			event_list = []
 			for istart,iend,ihrs,itemp,iprec,ldys,icomb in infection_events:
+				istart_dt = DateTime.DateTime(*istart)
 				iend_dt = DateTime.DateTime(*iend)
-				event_list.append((iend_dt,ldys))
+				event_list.append((istart_dt,iend_dt,ldys))
 				
-			smry_dict['day0']['infection']  = ('No','-')
-			smry_dict['pday1']['infection']  = ('No','-')
-			smry_dict['pday2']['infection']  = ('No','-')
-			smry_dict['fday1']['infection']  = ('No','-')
-			smry_dict['fday2']['infection']  = ('No','-')
-			smry_dict['fday3']['infection']  = ('No','-')
-			smry_dict['fday4']['infection']  = ('No','-')
-			smry_dict['fday5']['infection']  = ('No','-')
+#				print istart,iend,ihrs,itemp,iprec,ldys,icomb
 				
+			smry_dict['day0']['infection']  = ('-','-')
+			smry_dict['pday1']['infection']  = ('-','-')
+			smry_dict['pday2']['infection']  = ('-','-')
+			smry_dict['fday1']['infection']  = ('-','-')
+			smry_dict['fday2']['infection']  = ('-','-')
+			smry_dict['fday3']['infection']  = ('-','-')
+			smry_dict['fday4']['infection']  = ('-','-')
+			smry_dict['fday5']['infection']  = ('-','-')
+						
+			if day0 <= last_data_dt:
+				smry_dict['day0']['infection']  = ('No','-')
+			if pday1 <= last_data_dt:
+				smry_dict['pday1']['infection']  = ('No','-')
+			if pday2 <= last_data_dt:
+				smry_dict['pday2']['infection']  = ('No','-')
+			if fday1 <= last_data_dt:
+				smry_dict['fday1']['infection']  = ('No','-')
+			if fday2 <= last_data_dt:
+				smry_dict['fday2']['infection']  = ('No','-')
+			if fday3 <= last_data_dt:
+				smry_dict['fday3']['infection']  = ('No','-')
+			if fday4 <= last_data_dt:
+				smry_dict['fday4']['infection']  = ('No','-')
+			if fday5 <= last_data_dt:
+				smry_dict['fday5']['infection']  = ('No','-')
+			
 			# check for infections 
-			for iend_dt,ldys in event_list:
+			for istart_dt,iend_dt,ldys in event_list:
+				start_ymd = istart_dt + DateTime.RelativeDate(hour=0,minute=0,second=0)
+				end_ymd = iend_dt + DateTime.RelativeDate(hour=0,minute=0,second=0)
 				if ldys == 9:
 					ldystr = "9-10"
 				elif ldys == 12:
@@ -1081,24 +1106,14 @@ class Apple (Base,Models):
 					ldystr = "-"
 				else:
 					ldystr = "%d"%ldys
-				if day0.day==iend_dt.day and day0.month==iend_dt.month and day0.year==iend_dt.year:
-					smry_dict['day0']['infection'] = ('Yes',ldystr)
-					continue
-				if pday1.day==iend_dt.day and pday1.month==iend_dt.month and pday1.year==iend_dt.year:
-					smry_dict['pday1']['infection'] = ('Yes',ldystr)
-					continue
-				if pday2.day==iend_dt.day and pday2.month==iend_dt.month and pday2.year==iend_dt.year:
-					smry_dict['pday2']['infection'] = ('Yes',ldystr)
-				if fday1.day==iend_dt.day and fday1.month==iend_dt.month and fday1.year==iend_dt.year:
-					smry_dict['fday1']['infection'] = ('Yes',ldystr)
-				if fday2.day==iend_dt.day and fday2.month==iend_dt.month and fday2.year==iend_dt.year:
-					smry_dict['fday2']['infection'] = ('Yes',ldystr)
-				if fday3.day==iend_dt.day and fday3.month==iend_dt.month and fday3.year==iend_dt.year:
-					smry_dict['fday3']['infection'] = ('Yes',ldystr)
-				if fday4.day==iend_dt.day and fday4.month==iend_dt.month and fday4.year==iend_dt.year:
-					smry_dict['fday4']['infection'] = ('Yes',ldystr)
-				if fday5.day==iend_dt.day and fday5.month==iend_dt.month and fday5.year==iend_dt.year:
-					smry_dict['fday5']['infection'] = ('Yes',ldystr)
+					
+				for td,std in [(day0,'day0'),(pday1,'pday1'),(pday2,'pday2'),(fday1,'fday1'),(fday2,'fday2'),(fday3,'fday3'),(fday4,'fday4'),(fday5,'fday5')]:
+					if td == end_ymd:
+						smry_dict[std]['infection'] = ('Yes',ldystr)
+						continue
+					elif td >= start_ymd and td < end_ymd:
+						smry_dict[std]['infection'] = ('Combined','-')
+						continue
 		except:
 			print_exception()
 		return smry_dict
@@ -1660,7 +1675,14 @@ class Apple (Base,Models):
 					# combine wet periods and determine infection events
 					infection_events = obs_infection_events
 
-			smry_dict = self.check_infection(infection_events,end_date_dt,download_time,smry_dict)
+			last_data_dt = start_date_dt + DateTime.RelativeDate(hours = -1)
+			for i in range(len(hourly_data), 0, -1):
+				theTime,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags = hourly_data[i-1]
+				if temp != miss or prcp != miss or lwet != miss or rhum != miss:
+					last_data_dt = DateTime.DateTime(*theTime)
+					break
+
+			smry_dict = self.check_infection(infection_events,end_date_dt,last_data_dt,smry_dict)
 
 			# calculate base 0C degree days for ascospore maturity
 			dd_data = self.degday_calcs(daily_data,greentip,end_fcst_dt,'dd0c', "prcp")
@@ -2456,8 +2478,9 @@ class Grape (Base,Apple,Models):
 
 	#--------------------------------------------------------------------------------------------		
 	# add infection events to dictionary
-	def add_infection_events (self,smry_dict,pmildew_list,infect_list,start_date_dt,end_date_dt,download_time):
+	def add_infection_events (self,smry_dict,pmildew_list,infect_list,start_date_dt,end_date_dt,download_time,last_prcp_dt):
 		try:
+			no_prcp_day = last_prcp_dt + DateTime.RelativeDate(days = +1,hour=0,minute=0,second=0)
 			day0 =  end_date_dt + DateTime.RelativeDate(hour=0,minute=0,second=0)
 			pday1 = day0 + DateTime.RelativeDate(days=-1)
 			pday2 = day0 + DateTime.RelativeDate(days=-2)
@@ -2491,26 +2514,53 @@ class Grape (Base,Apple,Models):
 			smry_dict['fday4']['brot'] = 'NA'
 			smry_dict['fday5']['brot'] = 'NA'
 
-
 			download_dt = DateTime.DateTime(*download_time)
-			if day0 <= download_dt:
+			if day0 < no_prcp_day and day0 <= download_dt:
 				smry_dict['day0']['phom']  = 'No infection'
 				smry_dict['day0']['brot']  = 'No infection'
-			if pday1 <= download_dt:
+				smry_dict['day0']['pmil']  = 'No infection'
+			if pday1 < no_prcp_day and pday1 <= download_dt:
 				smry_dict['pday1']['phom'] = 'No infection'
 				smry_dict['pday1']['brot'] = 'No infection'
-			if pday2 <= download_dt:
+				smry_dict['pday1']['pmil'] = 'No infection'
+			if pday2 < no_prcp_day and pday2 <= download_dt:
 				smry_dict['pday2']['phom'] = 'No infection'
 				smry_dict['pday2']['brot'] = 'No infection'
-
+				smry_dict['pday2']['pmil'] = 'No infection'
+			if fday1 < no_prcp_day and fday1 <= download_dt:
+				smry_dict['fday1']['phom'] = 'No infection'
+				smry_dict['fday1']['brot'] = 'No infection'
+				smry_dict['fday1']['pmil'] = 'No infection'
+			if fday2 < no_prcp_day and fday2 <= download_dt:
+				smry_dict['fday2']['phom'] = 'No infection'
+				smry_dict['fday2']['brot'] = 'No infection'
+				smry_dict['fday2']['pmil'] = 'No infection'
+			if fday3 < no_prcp_day and fday3 <= download_dt:
+				smry_dict['fday3']['phom'] = 'No infection'
+				smry_dict['fday3']['brot'] = 'No infection'
+				smry_dict['fday3']['pmil'] = 'No infection'
+			if fday4 < no_prcp_day and fday4 <= download_dt:
+				smry_dict['fday4']['phom'] = 'No infection'
+				smry_dict['fday4']['brot'] = 'No infection'
+				smry_dict['fday4']['pmil'] = 'No infection'
+			if fday5 < no_prcp_day and fday5 <= download_dt:
+				smry_dict['fday5']['phom'] = 'No infection'
+				smry_dict['fday5']['brot'] = 'No infection'
+				smry_dict['fday5']['pmil'] = 'No infection'
+				
 			# add pmildew for last three days, forecast next 5 days
 			for dt,pm in pmildew_list:
 				theDate_dt = DateTime.DateTime(*dt) + DateTime.RelativeDate(hour=0,minute=0,second=0)
 				for td,std in [(day0,'day0'),(pday1,'pday1'),(pday2,'pday2'),(fday1,'fday1'),(fday2,'fday2'),(fday3,'fday3'),(fday4,'fday4'),(fday5,'fday5')]:
 					if td == theDate_dt: 
 						smry_dict[std]['pmil'] = pm
+						continue
 			# same for phomopsis and black rot
 			for wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect in infect_list:
+			
+				print wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect
+			
+				start_dt = DateTime.DateTime(*wet_start) + DateTime.RelativeDate(hour=0,minute=0,second=0)
 				if wet_end == miss:
 					theDate_dt = download_dt + DateTime.RelativeDate(hour=0,minute=0,second=0)
 				else:
@@ -2519,6 +2569,11 @@ class Grape (Base,Apple,Models):
 					if td == theDate_dt: 
 						if smry_dict[std]['phom'] != "Infection": smry_dict[std]['phom'] = ph_infect
 						if smry_dict[std]['brot'] != "Infection": smry_dict[std]['brot'] = br_infect
+						continue
+					elif td >= start_dt and td < theDate_dt:
+						if ph_infect == "Infection": smry_dict[std]['phom'] = "Combined"
+						if br_infect == "Infection": smry_dict[std]['brot'] = "Combined"
+						continue						
 		except:
 			print_exception()
 		return smry_dict
@@ -2748,11 +2803,12 @@ class Grape (Base,Apple,Models):
             		   ('1in_shoot','1 inch shoot'),('bud_swell','Bud swell'),('early','Preseason')]  #ordered latest to earliest
 
 		try:
+			now = DateTime.now()
 			smry_dict = {}
 			pmildew_list = []
 			smry_dict['output'] = output
 			smry_dict['stn'] = stn
-			if not end_date_dt: end_date_dt = DateTime.now()
+			if not end_date_dt: end_date_dt = now
 			start_date_dt = DateTime.DateTime(end_date_dt.year,3,25,1)
 			smry_dict['accend'] = end_date_dt
 			
@@ -2793,28 +2849,22 @@ class Grape (Base,Apple,Models):
 					break
 			else:
 				smry_dict['pmildew_manage'] = None
+				
+			# just use observed data (no forecast) in years other than the current
+			if end_date_dt.year != now.year:
+				smry_dict['this_year'] = False
+				end_date_dt = end_date_dt + DateTime.RelativeDate(days = +6)
+			else:
+				smry_dict['this_year'] = True
 
 			# obtain hourly and daily data
 			hourly_data, daily_data, download_time, station_name, avail_vars = self.get_hddata2 (stn, start_date_dt, end_date_dt)
 			smry_dict['station_name'] = station_name
 			smry_dict['last_time'] = download_time
 			
-			# check for powdery mildew infections
-			if len(daily_data) > 0:
-				# add daily forecast data
-				start_fcst_dt = DateTime.DateTime(*daily_data[-1][0]) + DateTime.RelativeDate(days = +1)
-				end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +5)
-				daily_data = self.add_dly_fcst(stn,daily_data,start_fcst_dt,end_fcst_dt)
-				for dt,tave,tmax,tmin,prcp,lwet,rhum,wspd,srad,st4a,st4x,st4n,dflags in daily_data:
-					pm = self.get_pmildew(prcp,(tmax+tmin)/2.)
-					pmildew_list.append((dt,pm))
-			else:
-				return self.nodata(stn, station_name, start_date_dt, end_date_dt)
-					
-			if len(hourly_data) > 0: 
+			# build observed wet_periods and infection_list based only on observed data
+			if len(hourly_data) > 0:
 				# pick out wet periods and combine them into combined events
-#				smry_dict['wet_periods'] = self.get_wetting(hourly_data)
-#				infect_list = self.get_grape_infection(smry_dict['wet_periods'])
 				indiv_list = self.get_wet_periods(hourly_data)
 				combined_list = self.combine_wet_periods(indiv_list)
 				
@@ -2837,8 +2887,54 @@ class Grape (Base,Apple,Models):
 			else:
 				return self.nodata(stn, station_name, start_date_dt, end_date_dt)
 
+			# now add in the forecast data
+			if smry_dict['this_year']:
+				start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
+				end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6)
+				hourly_data = self.add_hrly_fcst(stn,hourly_data,start_fcst_dt, end_fcst_dt,False)
+				daily_data = self.hrly_to_dly(hourly_data)
+			else:
+				start_fcst_dt = end_date_dt + DateTime.RelativeDate(hours = +1)
+				end_fcst_dt = end_date_dt
+				end_date_dt = end_date_dt + DateTime.RelativeDate(days = -6)
+
+			# check for powdery mildew infections
+			if len(daily_data) > 0:
+				# add daily forecast data
+				#start_fcst_dt = DateTime.DateTime(*daily_data[-1][0]) + DateTime.RelativeDate(days = +1)
+				#end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +5)
+				#daily_data = self.add_dly_fcst(stn,daily_data,start_fcst_dt,end_fcst_dt)
+				for dt,tave,tmax,tmin,prcp,pop12,rhum,miss,miss,qpf,miss,miss,dflags in daily_data:
+					pm = self.get_pmildew(qpf,(tmax+tmin)/2.)
+					pmildew_list.append((dt,pm))
+			else:
+				return self.nodata(stn, station_name, start_date_dt, end_date_dt)
+			
+			# now do calculations with hourly forecast data included		
+			if len(hourly_data) > 0:
+				# pick out wet periods and combine them into combined events
+				indiv_list = self.get_wet_periods(hourly_data)
+				combined_list = self.combine_wet_periods(indiv_list)
+				
+				# determine which combined events are infection events
+				infect_list = []
+				for wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined in combined_list:
+					ph_infect = self.get_phomop(wet_hrs,avg_temp,prec_sum)
+					br_infect = self.get_blackrot(wet_hrs,avg_temp,prec_sum)
+					if ph_infect == 'Infection' or br_infect == 'Infection':
+						infect_list.append((wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect))
+			else:
+				return self.nodata(stn, station_name, start_date_dt, end_date_dt)
+
 			# build dictionary for infection event table
-			smry_dict = self.add_infection_events(smry_dict,pmildew_list,infect_list,start_date_dt,end_date_dt,download_time)
+			last_prcp_dt = start_date_dt + DateTime.RelativeDate(hours = -1)
+			for i in range(len(hourly_data), 0, -1):
+				theTime,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags = hourly_data[i-1]
+				temp_eflag, prcp_eflag, pop12_eflag, rhum_eflag, wspd_eflag, wdir_eflag, srad_eflag, st4i_eflag = eflags
+				if prcp != miss and prcp_eflag != "P":
+					last_prcp_dt = DateTime.DateTime(*theTime)
+					break
+			smry_dict = self.add_infection_events(smry_dict,pmildew_list,infect_list,start_date_dt,end_date_dt,hourly_data[-1][0],last_prcp_dt)
 
 			# send results for display
 			return newaModel_io.grape_disease_results(smry_dict)

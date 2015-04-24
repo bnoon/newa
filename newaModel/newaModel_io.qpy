@@ -484,7 +484,7 @@ def apple_scab_log [html] (smry_dict):
 		<script type="text/javascript">
 		  $(document).ready(function() {
 			$('#dpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: "", changeMonth: true, changeYear: true });
-			$('#forecast').click(function() {
+			$('button.forecast').click(function() {
 				req_stn = $('input[name=stn]').val();
 				$.get('http://newatest.nrcc.cornell.edu/newaUtil/getForecastUrl/'+req_stn, function(data) { 
 					window.open(data);
@@ -558,7 +558,7 @@ def apple_scab_log [html] (smry_dict):
 	<td class=blue_back>Current</td>
 	'''
 	if smry_dict['this_year']:
-		'<td class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast">Forecast Details</button></td>'
+		'<td class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button forecast">Forecast Details</button></td>'
 	else:
 		'<td class=palegoldenrod_back colspan=5>Ensuing 5 Days</td>'
 	'</tr>'
@@ -622,7 +622,7 @@ def apple_scab_log [html] (smry_dict):
 	<td class=blue_back>Current</td>
 	'''
 	if smry_dict['this_year']:
-		'<td class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast">Forecast Details</button></td>'
+		'<td class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button forecast">Forecast Details</button></td>'
 	else:
 		'<td class=palegoldenrod_back colspan=5>Ensuing 5 Days</td>'
 	'</tr>'
@@ -639,10 +639,10 @@ def apple_scab_log [html] (smry_dict):
 	'</tr>'
 
 	if smry_dict['pday2'].has_key('infection'):
-		if smry_dict['pday2']['infection'][0] == 'Yes':
+		if smry_dict['pday2']['infection'][0] in ['Yes','Combined']:
 			p2_color = 'red'
-		elif smry_dict['pday2']['wetness'][1] > 8:
-			f2_color = 'yellow'
+#		elif smry_dict['pday2']['wetness'][1] > 8:
+#			f2_color = 'yellow'
 		elif smry_dict['pday2']['infection'][0] == 'No':
 			p2_color = 'green'
 		else:
@@ -650,10 +650,10 @@ def apple_scab_log [html] (smry_dict):
 	else:
 		p2_color = 'plain'
 	if smry_dict['pday1'].has_key('infection'):
-		if smry_dict['pday1']['infection'][0] == 'Yes':
+		if smry_dict['pday1']['infection'][0] in ['Yes','Combined']:
 			p1_color = 'red'
-		elif smry_dict['pday1']['wetness'][1] > 8:
-			p1_color = 'yellow'
+#		elif smry_dict['pday1']['wetness'][1] > 8:
+#			p1_color = 'yellow'
 		elif smry_dict['pday1']['infection'][0] == 'No':
 			p1_color = 'green'
 		else:
@@ -661,10 +661,10 @@ def apple_scab_log [html] (smry_dict):
 	else:
 		p1_color = 'plain'
 	if smry_dict['day0'].has_key('infection'):
-		if smry_dict['day0']['infection'][0] == 'Yes':
+		if smry_dict['day0']['infection'][0] in ['Yes','Combined']:
 			d0_color = 'red'
-		elif smry_dict['day0']['wetness'][1] > 8:
-			d0_color = 'yellow'
+#		elif smry_dict['day0']['wetness'][1] > 8:
+#			d0_color = 'yellow'
 		elif smry_dict['day0']['infection'][0] == 'No':
 			d0_color = 'green'	
 		else:
@@ -672,10 +672,10 @@ def apple_scab_log [html] (smry_dict):
 	else:
 		d0_color = 'plain'
 	if smry_dict['fday1'].has_key('infection'):
-		if smry_dict['fday1']['infection'][0] == 'Yes':
+		if smry_dict['fday1']['infection'][0] in ['Yes','Combined']:
 			f1_color = 'red'
-		elif smry_dict['fday1']['wetness'][1] > 8:
-			f1_color = 'yellow'
+#		elif smry_dict['fday1']['wetness'][1] > 8:
+#			f1_color = 'yellow'
 		elif smry_dict['fday1']['infection'][0] == 'No':
 			f1_color = 'green'	
 		else:
@@ -683,10 +683,10 @@ def apple_scab_log [html] (smry_dict):
 	else:
 		f1_color = 'plain'
 	if smry_dict['fday2'].has_key('infection'):
-		if smry_dict['fday2']['infection'][0] == 'Yes':
+		if smry_dict['fday2']['infection'][0] in ['Yes','Combined']:
 			f2_color = 'red'
-		elif smry_dict['fday2']['wetness'][1] > 8:
-			f2_color = 'yellow'
+#		elif smry_dict['fday2']['wetness'][1] > 8:
+#			f2_color = 'yellow'
 		elif smry_dict['fday2']['infection'][0] == 'No':
 			f2_color = 'green'	
 		else:
@@ -694,10 +694,10 @@ def apple_scab_log [html] (smry_dict):
 	else:
 		f2_color = 'plain'
 	if smry_dict['fday3'].has_key('infection'):
-		if smry_dict['fday3']['infection'][0] == 'Yes':
+		if smry_dict['fday3']['infection'][0]in ['Yes','Combined']:
 			f3_color = 'red'
-		elif smry_dict['fday3']['wetness'][1] > 8:
-			f3_color = 'yellow'
+#		elif smry_dict['fday3']['wetness'][1] > 8:
+#			f3_color = 'yellow'
 		elif smry_dict['fday3']['infection'][0] == 'No':
 			f3_color = 'green'	
 		else:
@@ -705,10 +705,10 @@ def apple_scab_log [html] (smry_dict):
 	else:
 		f3_color = 'plain'
 	if smry_dict['fday4'].has_key('infection'):
-		if smry_dict['fday4']['infection'][0] == 'Yes':
+		if smry_dict['fday4']['infection'][0] in ['Yes','Combined']:
 			f4_color = 'red'
-		elif smry_dict['fday4']['wetness'][1] > 8:
-			f4_color = 'yellow'
+#		elif smry_dict['fday4']['wetness'][1] > 8:
+#			f4_color = 'yellow'
 		elif smry_dict['fday4']['infection'][0] == 'No':
 			f4_color = 'green'	
 		else:
@@ -716,22 +716,22 @@ def apple_scab_log [html] (smry_dict):
 	else:
 		f4_color = 'plain'
 	if smry_dict['fday5'].has_key('infection'):
-		if smry_dict['fday5']['infection'][0] == 'Yes':
+		if smry_dict['fday5']['infection'][0] in ['Yes','Combined']:
 			f5_color = 'red'
-		elif smry_dict['fday5']['wetness'][1] > 8:
-			f5_color = 'yellow'
+#		elif smry_dict['fday5']['wetness'][1] > 8:
+#			f5_color = 'yellow'
 		elif smry_dict['fday5']['infection'][0] == 'No':
 			f5_color = 'green'	
 		else:
 			f5_color = 'plain'
 	else:
 		f5_color = 'plain'
-
+		
 	if smry_dict['pday2'].has_key('infection'):
 		'<TR>'
 		'<td class=plain_back height=38><A href="#events">Infection Events</a></td>'
-		'<td class=%s_back>%s</td>' % ('plain',' ')
-		'<td class=%s_back>%s</td>' % ('plain',' ')
+		'<td class=%s_back>%s</td>' % (p2_color,smry_dict['pday2']['infection'][0])
+		'<td class=%s_back>%s</td>' % (p1_color,smry_dict['pday1']['infection'][0])
 		'<td class=%s_back>%s</td>' % (d0_color,smry_dict['day0']['infection'][0])
 		'<td class=%s_back>%s</td>' % (f1_color,smry_dict['fday1']['infection'][0])
 		'<td class=%s_back>%s</td>' % (f2_color,smry_dict['fday2']['infection'][0])
@@ -741,8 +741,8 @@ def apple_scab_log [html] (smry_dict):
 		'</TR>'
 		'<TR>'
 		'<td class=plain_back height=38>Days to Symptoms</td>'
-		'<td class=%s_back>%s</td>' % ('plain',' ')
-		'<td class=%s_back>%s</td>' % ('plain',' ')
+		'<td class=%s_back>%s</td>' % (p2_color,smry_dict['pday2']['infection'][1])
+		'<td class=%s_back>%s</td>' % (p1_color,smry_dict['pday1']['infection'][1])
 		'<td class=%s_back>%s</td>' % (d0_color,smry_dict['day0']['infection'][1])
 		'<td class=%s_back>%s</td>' % (f1_color,smry_dict['fday1']['infection'][1])
 		'<td class=%s_back>%s</td>' % (f2_color,smry_dict['fday2']['infection'][1])
@@ -751,16 +751,16 @@ def apple_scab_log [html] (smry_dict):
 		'<td class=%s_back>%s</td>' % (f5_color,smry_dict['fday5']['infection'][1])
 		'</TR>'
 
-	'<tr>'	
-	'<td class=plain_back> Average Temp (F)</td>'
-	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
-		rcolor = 'plain'
-		if smry_dict[d]['avgtemp'] == miss:
-			avgt = ' '
-		else:
-			avgt = '%d'%round(smry_dict[d]['avgtemp'],0)
-		'<td class=%s_back>%s</td>' % (rcolor,avgt)
-	'</TR>'
+#	'<tr>'	
+#	'<td class=plain_back> Average Temp (F)</td>'
+#	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+#		rcolor = 'plain'
+#		if smry_dict[d]['avgtemp'] == miss:
+#			avgt = ' '
+#		else:
+#			avgt = '%d'%round(smry_dict[d]['avgtemp'],0)
+#		'<td class=%s_back>%s</td>' % (rcolor,avgt)
+#	'</TR>'
 	
 	if smry_dict['pday2']['wetness'][1] != miss or smry_dict['pday1']['wetness'][1] != miss or smry_dict['day0']['wetness'][1] != miss:
 		'<tr>'	
@@ -815,29 +815,42 @@ def apple_scab_log [html] (smry_dict):
 	'</table>'
 
 	'<div id="moreinfo" title="" class="plain_back_l"> </div>'
+	
+	'''
+	<p class="plain_back_j">
+	Apple scab infection events, shown in red above, are calculated beginning with 0.01 inch of rain. The word "Combined" in the 
+	above table means the wetting event on this day is being combined with another wetting event. To calculate the 
+	length of a wetting period, we use the following rule: two successive wetting periods, the first started by rain, should be 
+	considered a single, uninterrupted wet period if the intervening dry period is less than 24 hours. <b>When an infection event is 
+	in the 5-day forecast, the actual weather data logged may or may not translate into an actual infection event. Therefore, the 
+	table output may change once actual weather data is logged.</b></p>
 
+	'''
 	if not late_season and not smry_dict['all_released'] and \
 		   ((smry_dict['day0'].has_key('infection') and smry_dict['day0']['infection'][0] == 'Yes') or \
+		   (smry_dict['fday1'].has_key('infection') and smry_dict['fday1']['infection'][0] == 'Yes') or \
+		   (smry_dict['fday2'].has_key('infection') and smry_dict['fday2']['infection'][0] == 'Yes') or \
+		   (smry_dict['fday3'].has_key('infection') and smry_dict['fday3']['infection'][0] == 'Yes') or \
+		   (smry_dict['fday4'].has_key('infection') and smry_dict['fday4']['infection'][0] == 'Yes') or \
+		   (smry_dict['fday5'].has_key('infection') and smry_dict['fday5']['infection'][0] == 'Yes') or \
 		   (smry_dict['pday1'].has_key('infection') and smry_dict['pday1']['infection'][0] == 'Yes') or \
 		   (smry_dict['pday2'].has_key('infection') and smry_dict['pday2']['infection'][0] == 'Yes')):
 			'<p class="redtext_j">'
 			'An apple scab infection period has been predicted and ascospores are mature. Ensure that young leaves and fruit are protected. '
 			'<a href="http://treefruitipm.info/PesticidesForPest.aspx?PestID=23" target="_blank">Click here</a> for pesticide information.'
 			'</p>'		
-	'''
 
+	'''
 	<p class="plain_back_j">
 	Ascospores, which cause primary scab, discharge during rain. Both ascospores and conidia, which cause secondary 
 	scab, infect at similar rates. A single set of conditions, the 
-	<a href="http://newa.cornell.edu/index.php?page=revised-mills-table" target="_blank">Revised Mills Table</a>, can be used for determining 
-	infection events for both primary and secondary infections.</p> 
-	<p class="plain_back_j">Longer wetting, beyond the minimum times for a given temperature specified in the 
+	<a href="http://newa.cornell.edu/index.php?page=revised-mills-table" target="_blank">Revised Mills Table</a>, can be used for 
+	determining infection events for both primary and secondary infections.</p> 
+	<p class="plain_back_l">
+	Once infection is predicted, ensure that susceptible tissues are adequately protected 
+	with a fungicide. Longer wetting, beyond the minimum times for a given temperature specified in the 
 	<a href="http://newa.cornell.edu/index.php?page=revised-mills-table" target="blank">Revised Mills Table</a>, often 
-	results in more disease. Apple scab infection events are calculated beginning with 0.01 inch of rain. Two 
-	successive wetting periods are considered a single, uninterrupted wetting period if the intervening dry period 
-	is less than 24 hours.</p>
-	<p class="plain_back_l">Once infection is predicted, ensure that susceptible tissues are adequately protected 
-	with a fungicide. <a href="http://treefruitipm.info/PesticidesForPest.aspx?PestID=23" target="_blank">
+	results in more disease. <a href="http://treefruitipm.info/PesticidesForPest.aspx?PestID=23" target="_blank">
 	Pesticide Information</a>.</p>
 	
 	'''
@@ -2335,12 +2348,15 @@ def grape_dis_results [html] (smry_dict):
 		# wet period starts at the beginning of this hour
 		wet_start_dt = wet_start_dt + DateTime.RelativeDate(hours=-1) 
 		ws_str = '%s %d %d:01' % (month_abb[wet_start_dt.month],wet_start_dt.day,wet_start_dt.hour)
-		
+		if prcp_tot == miss:
+			cprcp_tot = "Unknown"
+		else:
+			cprcp_tot = "%.2f"%prcp_tot
 		'<td class=%s_back_smaller_c>%s</td>'%(color,ws_str)
 		'<td class=%s_back_smaller_c>%s</td>'%(color,we_str)
 		'<td class=%s_back_smaller_c>%d</td>'%(color,wet_hrs)
 		'<td class=%s_back_smaller_c>%.1f</td>'%(color,temp_ave)
-		'<td class=%s_back_smaller_c>%.2f</td>'%(color,prcp_tot)
+		'<td class=%s_back_smaller_c>%s</td>'%(color,cprcp_tot)
 		if phomopsis == "Infection":
 			txtcol = 'redon'
 		else:
@@ -2869,7 +2885,10 @@ def grape_disease_results [html] (smry_dict):
 	'<td class=blue_back>Past</td>'
 	'<td class=blue_back>Past</td>'
 	'<td class=blue_back>Current</td>'
-	'<td class=palegoldenrod_back colspan=5>Grape Disease 5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast">Forecast Details</button></td>'
+	if smry_dict['this_year']:
+		'<td class=palegoldenrod_back colspan=5>Grape Disease 5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast">Forecast Details</button></td>'
+	else:
+		'<td class=palegoldenrod_back colspan=5>Ensuing 5 Days</td>'
 	'</tr>'
 	'<tr>'
 	'<td class=blue_back>%s</td>' % smry_dict['pday2']['date']
@@ -2889,6 +2908,9 @@ def grape_disease_results [html] (smry_dict):
 		elif smry_dict[d]['phom'] == 'No infection':
 			rcolor = 'green'
 			dval = 'No'
+		elif smry_dict[d]['phom'] == 'Combined':
+			rcolor = 'red'
+			dval = 'Combined'
 		elif smry_dict[d]['phom'] == 'No infect; temp<46':
 			rcolor = 'yellow'
 			dval = 'No; temp&lt;46'
@@ -2924,6 +2946,9 @@ def grape_disease_results [html] (smry_dict):
 		elif smry_dict[d]['brot'] == 'No infection':
 			rcolor = 'green'
 			dval = 'No'
+		elif smry_dict[d]['brot'] == 'Combined':
+			rcolor = 'red'
+			dval = 'Combined'
 		elif smry_dict[d]['brot'] == 'No infect; temp<50':
 			rcolor = 'yellow'
 			dval = 'No; temp&lt;50'
