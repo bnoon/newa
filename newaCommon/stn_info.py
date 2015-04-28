@@ -328,6 +328,7 @@ stn_info = {
 'kstc': {'name': 'St Cloud, MN', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 45.5433, 'lon': -94.0514, 'elev': 1032, 'network': 'icao', 'state': 'MN'},
 'kfsd': {'name': 'Sioux Falls, SD', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 43.5778, 'lon': -96.7539, 'elev': 1428, 'network': 'icao', 'state': 'SD'},
 'kovs': {'name': 'Boscobel, WI', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -90.6737, 'elev': 672.0,  'lat': 43.16085, 'network': 'icao', 'state': 'WI'},
+'klse': {'name': 'La Crosse, WI', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 43.8789, 'lon': -91.2528, 'elev': 652, 'network': 'icao', 'state': 'WI'},
 'koma': {'name': 'Omaha, NE', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -95.8992, 'elev': 982,  'lat': 41.3103, 'network': 'icao', 'state': 'NE'},
 'klnk': {'name': 'Lincoln Airport, NE', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -96.7475, 'elev': 1190.0,  'lat': 40.8508, 'network': 'icao', 'state': 'NE'},
 'kcid': {'name': 'Cedar Rapids, IA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -91.7167, 'elev': 868.0,  'lat': 41.8833, 'network': 'icao', 'state': 'IA'},
