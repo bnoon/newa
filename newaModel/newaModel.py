@@ -562,6 +562,101 @@ class Apple (Base,Models):
 			print_exception()
 		return wetness_data
 
+	# calculate wetting variables and avg temp during wet hours from hourly values
+	def wettemp_event_calcs (self,hourly_data,start_date,end_date,start_fcst,stn,estimate="no"):
+		wetness_data = []
+		try:
+			dly_rain = 0.
+			dly_rain_msg = 0
+			dly_lwet = 0.
+			dly_lwet_msg = 0
+			dly_dew = 0.
+			dly_dew_msg = 0
+			dly_temp = 0.
+			dly_temp_cnt = 0.
+			dly_temp_msg = 0
+			start_date = start_date + DateTime.RelativeDate(days=+1)		#start wetness calcs day after biofix
+			start_date = start_date + DateTime.RelativeDate(hour=0,minute=0,second=0)
+			end_date = end_date + DateTime.RelativeDate(hour=23,minute=59,second=59)
+			for theTime,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags in hourly_data:
+				temp_eflag, prcp_eflag, lwet_eflag, rhum_eflag, wspd_eflag, wdir_eflag, srad_eflag, st4i_eflag = eflags
+				########################################################################
+				# only thing different when estimate is "yes" - always estimate lwet   #
+				########################################################################
+				if estimate == "yes":
+					if rhum == miss:
+						lwet = miss
+					elif rhum >= 90 or prcp > 0.00:
+						lwet = 60
+					else:
+						lwet = 0
+				else:
+					if lwet == miss and rhum != miss:
+						if rhum >= 90 or prcp > 0.00:
+							lwet = 60
+						else:
+							lwet = 0
+				this_date = DateTime.DateTime(*theTime)
+				if this_date >= start_date and this_date <= end_date:
+					if prcp != miss:
+						dly_rain = dly_rain+prcp
+					else:
+						dly_rain_msg = dly_rain_msg+1
+					if lwet != miss:
+						if lwet > 0:
+							dly_lwet = dly_lwet+1
+							if temp != miss:
+								dly_temp = dly_temp + temp
+								dly_temp_cnt = dly_temp_cnt + 1
+							else:
+								dly_temp_msg = dly_temp_msg + 1
+					else:
+						dly_lwet_msg = dly_lwet_msg + 1
+						dly_temp_msg = dly_temp_msg + 1
+						
+					# determine if there was dew formation		
+					#  First, adjust relative humidity for icao stations and forecast values for all stations
+					if (this_date >= start_fcst or (len(stn) == 4 and stn[0:1].upper() == 'K')) and rhum != miss:
+						rh = rhum/(rhum*0.0047+0.53)
+					else:
+						rh = rhum
+					# determine dewpoint temperature
+					dwpt = self.calc_dewpoint(temp,rh)
+					# estimate dew formation if difference between temp and dewpoint is <= 3 degrees and it is not raining
+					if dwpt != miss and temp != miss:
+						if temp-dwpt <= 3 and prcp == 0.00:
+							dly_dew = dly_dew+1
+					else:
+						dly_dew_msg = dly_dew_msg+1
+						
+		#			save daily values
+					if theTime[3] == 23:
+						if dly_rain_msg >= 5: dly_rain = miss
+						if dly_lwet_msg >= 2: dly_lwet = miss
+						if dly_dew_msg >= 2: dly_dew = miss
+						if dly_temp_msg >= 2 or dly_temp_cnt == 0:
+							dly_temp = miss
+						else:
+							dly_temp = dly_temp / dly_temp_cnt
+						
+						wetness_data.append((theTime[:3],dly_rain,dly_lwet,dly_dew,dly_temp))
+						dly_rain = 0.
+						dly_rain_msg = 0
+						dly_lwet = 0.
+						dly_lwet_msg = 0
+						dly_dew = 0.
+						dly_dew_msg = 0
+						dly_temp = 0.
+						dly_temp_cnt = 0.
+						dly_temp_msg = 0
+		#	get last partial day
+			if theTime[3] != 23:
+				wetness_data.append((theTime[:3],dly_rain,dly_lwet,dly_dew))
+		except:
+			print 'Error calculating degree hours'
+			print_exception()
+		return wetness_data
+
 	#--------------------------------------------------------------------------------------------		
 	# add wetness events to dictionary
 	def add_wetness (self,smry_dict,wetness,start_date_dt,end_date_dt):
@@ -603,6 +698,51 @@ class Apple (Base,Models):
 					smry_dict['fday4']['wetness'] = (dly_rain, dly_lwet, dly_dew)
 				elif fday5 == theDate_dt:
 					smry_dict['fday5']['wetness'] = (dly_rain, dly_lwet, dly_dew)
+		except:
+			print_exception()
+		return smry_dict
+
+	#--------------------------------------------------------------------------------------------		
+	# add wetness events (including avgtemp during wet hours) to dictionary
+	def add_wettemp (self,smry_dict,wetness,start_date_dt,end_date_dt):
+		try:
+			day0 =  end_date_dt + DateTime.RelativeDate(hour=0,minute=0,second=0)
+			pday1 = day0 + DateTime.RelativeDate(days=-1)
+			pday2 = day0 + DateTime.RelativeDate(days=-2)
+			fday1 = day0 + DateTime.RelativeDate(days=+1)
+			fday2 = day0 + DateTime.RelativeDate(days=+2)
+			fday3 = day0 + DateTime.RelativeDate(days=+3)
+			fday4 = day0 + DateTime.RelativeDate(days=+4)
+			fday5 = day0 + DateTime.RelativeDate(days=+5)
+
+			smry_dict['day0']['wetness']  = (miss,miss,miss,miss)
+			smry_dict['pday1']['wetness'] = (miss,miss,miss,miss)
+			smry_dict['pday2']['wetness'] = (miss,miss,miss,miss)
+			smry_dict['fday1']['wetness'] = (miss,miss,miss,miss)
+			smry_dict['fday2']['wetness'] = (miss,miss,miss,miss)
+			smry_dict['fday3']['wetness'] = (miss,miss,miss,miss)
+			smry_dict['fday4']['wetness'] = (miss,miss,miss,miss)
+			smry_dict['fday5']['wetness'] = (miss,miss,miss,miss)
+
+			# add wetness events for last three days, forecast next 5 days
+			for theDate,dly_rain,dly_lwet,dly_dew,dly_temp in wetness:
+				theDate_dt = DateTime.DateTime(*theDate) + DateTime.RelativeDate(hour=0,minute=0,second=0)
+				if day0 == theDate_dt:
+					smry_dict['day0']['wetness'] =  (dly_rain, dly_lwet, dly_dew, dly_temp)
+				elif pday1 == theDate_dt:
+					smry_dict['pday1']['wetness'] = (dly_rain, dly_lwet, dly_dew, dly_temp)
+				elif pday2 == theDate_dt:
+					smry_dict['pday2']['wetness'] = (dly_rain, dly_lwet, dly_dew, dly_temp)
+				elif fday1 == theDate_dt:
+					smry_dict['fday1']['wetness'] = (dly_rain, dly_lwet, dly_dew, dly_temp)
+				elif fday2 == theDate_dt:
+					smry_dict['fday2']['wetness'] = (dly_rain, dly_lwet, dly_dew, dly_temp)
+				elif fday3 == theDate_dt:
+					smry_dict['fday3']['wetness'] = (dly_rain, dly_lwet, dly_dew, dly_temp)
+				elif fday4 == theDate_dt:
+					smry_dict['fday4']['wetness'] = (dly_rain, dly_lwet, dly_dew, dly_temp)
+				elif fday5 == theDate_dt:
+					smry_dict['fday5']['wetness'] = (dly_rain, dly_lwet, dly_dew, dly_temp)
 		except:
 			print_exception()
 		return smry_dict
@@ -1693,9 +1833,9 @@ class Apple (Base,Models):
 				# add ascospore maturity to summary dictionary
 				smry_dict = self.addascospore(ascospore_dict, smry_dict)
 				# get wetness events for output
-				wetness_dict = self.wetness_event_calcs(hourly_data,start_date_dt,end_fcst_dt,start_fcst_dt,stn,estimate)
-				smry_dict = self.add_wetness(smry_dict,wetness_dict,start_date_dt,end_date_dt)
-				# add daily average temperatures, rain amount and pops to output
+				wetness_dict = self.wettemp_event_calcs(hourly_data,start_date_dt,end_fcst_dt,start_fcst_dt,stn,estimate)
+				smry_dict = self.add_wettemp(smry_dict,wetness_dict,start_date_dt,end_date_dt)
+				# add daily average temperatures (no longer used in output), rain amount and pops to output
 				smry_dict = self.add_temprain(smry_dict,end_date_dt,daily_data,smry_dict['this_year'])
 			else:
 				return self.nodata(stn, station_name, start_date_dt, end_date_dt)

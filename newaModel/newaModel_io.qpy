@@ -527,6 +527,15 @@ def apple_scab_log [html] (smry_dict):
 	}
 	</script>
 	'''
+	day0_dt = DateTime.DateTime(*smry_dict['day0']['ymd']) + DateTime.RelativeDate(hour=23,minute=0,second=0)
+	pday1_dt = DateTime.DateTime(*smry_dict['pday1']['ymd']) + DateTime.RelativeDate(hour=23,minute=0,second=0)
+	lasttime_dt = DateTime.DateTime(*smry_dict['last_time']) + DateTime.RelativeDate(minute=0,second=0)
+	if lasttime_dt <= pday1_dt:
+		current_class = "palegoldenrod_back"
+	elif lasttime_dt < day0_dt:
+		current_class = "bluegoldstriped_back"
+	else:
+		current_class = "blue_back"
 	if smry_dict['last_time'][1] >= 7:
 		late_season = 1
 	else:
@@ -555,18 +564,19 @@ def apple_scab_log [html] (smry_dict):
 	<td class=header_line height=30 align=center rowspan=2> </td>
 	<td class=blue_back>Past</td>
 	<td class=blue_back>Past</td>
-	<td class=blue_back>Current</td>
 	'''
 	if smry_dict['this_year']:
+		'<td class=%s>Current</td>'%current_class
 		'<td class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button forecast">Forecast Details</button></td>'
 	else:
+		'<td class=blue_back>Current</td>'
 		'<td class=palegoldenrod_back colspan=5>Ensuing 5 Days</td>'
 	'</tr>'
 
 	'<tr>'
 	'<td class=blue_back>%s</td>' % smry_dict['pday2']['date']
 	'<td class=blue_back>%s</td>' % smry_dict['pday1']['date']
-	'<td class=blue_back>%s</td>' % smry_dict['day0']['date']
+	'<td class=%s>%s</td>' % (current_class,smry_dict['day0']['date'])
 	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday1']['date']
 	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday2']['date']
 	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday3']['date']
@@ -619,18 +629,19 @@ def apple_scab_log [html] (smry_dict):
 	<td class=header_line height=30 align=center rowspan=2> </td>
 	<td class=blue_back>Past</td>
 	<td class=blue_back>Past</td>
-	<td class=blue_back>Current</td>
 	'''
 	if smry_dict['this_year']:
+		'<td class=%s>Current</td>'%current_class
 		'<td class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button forecast">Forecast Details</button></td>'
 	else:
+		'<td class=blue_back>Current</td>'
 		'<td class=palegoldenrod_back colspan=5>Ensuing 5 Days</td>'
 	'</tr>'
 
 	'<tr>'
 	'<td class=blue_back>%s</td>' % smry_dict['pday2']['date']
 	'<td class=blue_back>%s</td>' % smry_dict['pday1']['date']
-	'<td class=blue_back>%s</td>' % smry_dict['day0']['date']
+	'<td class=%s>%s</td>' % (current_class,smry_dict['day0']['date'])
 	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday1']['date']
 	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday2']['date']
 	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday3']['date']
@@ -751,16 +762,16 @@ def apple_scab_log [html] (smry_dict):
 		'<td class=%s_back>%s</td>' % (f5_color,smry_dict['fday5']['infection'][1])
 		'</TR>'
 
-#	'<tr>'	
-#	'<td class=plain_back> Average Temp (F)</td>'
-#	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
-#		rcolor = 'plain'
-#		if smry_dict[d]['avgtemp'] == miss:
-#			avgt = ' '
-#		else:
-#			avgt = '%d'%round(smry_dict[d]['avgtemp'],0)
-#		'<td class=%s_back>%s</td>' % (rcolor,avgt)
-#	'</TR>'
+	'<tr>'	
+	'<td class=plain_back> Average Temp (F) for wet hours</td>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		rcolor = 'plain'
+		if smry_dict[d]['wetness'][3] == miss:
+			avgt = ' '
+		else:
+			avgt = '%d'%round(smry_dict[d]['wetness'][3],0)
+		'<td class=%s_back>%s</td>' % (rcolor,avgt)
+	'</TR>'
 	
 	if smry_dict['pday2']['wetness'][1] != miss or smry_dict['pday1']['wetness'][1] != miss or smry_dict['day0']['wetness'][1] != miss:
 		'<tr>'	
