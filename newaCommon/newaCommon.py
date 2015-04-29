@@ -6,9 +6,9 @@ from sister_info import sister_info
 import ucanCallMethods
 from bsddb import hashopen
 from cPickle import loads
-if '/Users/kle1/progs/Morecs/morecs_hourly' not in sys.path: sys.path.insert(1,'/Users/kle1/progs/Morecs/morecs_hourly')
+if '/Users/keith/progs/Morecs/morecs_hourly' not in sys.path: sys.path.insert(1,'/Users/keith/progs/Morecs/morecs_hourly')
 from solar_main_routine import SOLAR_MAIN
-if '/Users/kle1/progs/Morecs/morecs_hourly/Apple_ET' not in sys.path: sys.path.insert(1,'/Users/kle1/progs/Morecs/morecs_hourly/Apple_ET')
+if '/Users/keith/progs/Morecs/morecs_hourly/Apple_ET' not in sys.path: sys.path.insert(1,'/Users/keith/progs/Morecs/morecs_hourly/Apple_ET')
 from solar_fcst2 import solar_main_fcst2
 
 sta_por = { "1fr": ('20010323','20100330'),  "1wi": ('19970401','99991231'),  "alb": ('20001224','99991231'),
@@ -50,7 +50,7 @@ def get_metadata (station_id,id_type=None):
 				id_type = 'njwx'
 			elif len(station_id) == 4:
 				id_type = 'icao'
-			elif station_id[0:3] == "cu_" or station_id[0:3] == "um_" or station_id[0:3] == "uc_":
+			elif station_id[0:3] == "cu_" or station_id[0:3] == "um_" or station_id[0:3] == "uc_" or station_id[0:3] == "un_":
 				id_type = 'cu_log'
 			elif len(station_id) == 3 or len(station_id) == 6:
 				id_type = 'newa'
@@ -239,6 +239,18 @@ def estmiss (var,hindx,miss):
 	return replacement
 	
 #--------------------------------------------------------------------------------------------		
+def getSR(sid, date) :
+	import urllib2, json
+	params = {'sid':sid, 'sdate':date, 'edate':date}
+	req = urllib2.Request('http://adhoc.rcc-acis.org/SolarRadiation',
+		  json.dumps(params), {'Content-Type':'application/json'})
+	response = urllib2.urlopen(req)
+	try:
+		return json.loads(response.read())
+	except:
+		return miss
+
+#--------------------------------------------------------------------------------------------		
 def sister_est(stn,var,var_date,end_period,tsvars,dataForEst, datesForEst, vflagsForEst):
 	replacement = miss
 	try:
@@ -253,7 +265,7 @@ def sister_est(stn,var,var_date,end_period,tsvars,dataForEst, datesForEst, vflag
 				elif len(sister) == 4:
 					station_type = 'icao'
 					est_staid = sister.upper()
-				elif sister[0:3] == "cu_" or sister[0:3] == "um_" or sister[0:3] == "uc_":
+				elif sister[0:3] == "cu_" or sister[0:3] == "um_" or sister[0:3] == "uc_" or sister[0:3] == "un_":
 					station_type = 'cu_log'
 					est_staid,station_name = get_metadata (sister, station_type)
 				elif len(sister) == 3 or len(sister) == 6:
@@ -261,10 +273,21 @@ def sister_est(stn,var,var_date,end_period,tsvars,dataForEst, datesForEst, vflag
 					est_staid,station_name = get_metadata (sister, station_type)
 				else:
 					return replacement
-				est0 = initHourlyVar (est_staid, var, miss, station_type)
-				tsvars[var] = {}
-				tsvars[var]['tsv'] = est0
-				tsvars[var]['ed'] = None
+					
+				if var == 'srad' and station_type == 'icao':
+					estdate = "%04d%02d%02d%02d" % (var_date[0],var_date[1],var_date[2],var_date[3])
+					replacement_dict = getSR(est_staid, estdate)
+					if replacement_dict == miss:
+						replacement = miss
+					else:
+						replacement = float(replacement_dict['data'][0][1])
+#					print "replacement for",stn,"using",est_staid,"for",estdate,"is",replacement
+					return replacement, tsvars, dataForEst, datesForEst, vflagsForEst
+				else:
+					est0 = initHourlyVar (est_staid, var, miss, station_type)
+					tsvars[var] = {}
+					tsvars[var]['tsv'] = est0
+					tsvars[var]['ed'] = None
 			
 			if (not datesForEst.has_key(var) or var_date not in datesForEst[var]) and tsvars[var]['ed'] != end_period:
 				the_hr = (var_date[0],var_date[1],var_date[2],var_date[3])
@@ -293,7 +316,7 @@ def get_fcst_hour (stn, requested_var, date_dt):
 	try:
 		if requested_var in ['temp','rhum']:
 			stn = stn.upper()
-			forecast_db = hashopen('/Users/kle1/NDFD/hourly_forecasts.db','r')		
+			forecast_db = hashopen('/Users/keith/NDFD/hourly_forecasts.db','r')		
 			stn_dict = loads(forecast_db[stn])
 			forecast_db.close()
 			if stn_dict.has_key(requested_var):					
@@ -676,7 +699,7 @@ def get_fcst_data (stn, requested_var, start_date_dt, end_date_dt):
 									(end_date_dt.year,end_date_dt.month,end_date_dt.day,end_date_dt.hour))
 		else:
 			stn = stn.upper()
-			forecast_db = hashopen('/Users/kle1/NDFD/hourly_forecasts.db','r')		
+			forecast_db = hashopen('/Users/keith/NDFD/hourly_forecasts.db','r')		
 			stn_dict = loads(forecast_db[stn])
 			forecast_db.close()
 			if stn_dict.has_key(requested_var):
@@ -890,7 +913,7 @@ class Base:
 				station_type = 'njwx'
 			elif len(stn) == 4:
 				station_type = 'icao'
-			elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_":
+			elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_" or stn[0:3] == "un_":
 				station_type = 'cu_log'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
@@ -924,7 +947,7 @@ class Base:
 				station_type = 'njwx'
 			elif len(stn) == 4:
 				station_type = 'icao'
-			elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_":
+			elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_" or stn[0:3] == "un_":
 				station_type = 'cu_log'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
@@ -957,7 +980,7 @@ class Base:
 				station_type = 'njwx'
 			elif len(stn) == 4:
 				station_type = 'icao'
-			elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_":
+			elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_" or stn[0:3] == "un_":
 				station_type = 'cu_log'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
@@ -989,7 +1012,7 @@ class Base:
 				station_type = 'njwx'
 			elif len(stn) == 4:
 				station_type = 'icao'
-			elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_":
+			elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_" or stn[0:3] == "un_":
 				station_type = 'cu_log'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
@@ -1024,7 +1047,7 @@ class Base:
 				station_type = 'njwx'
 			elif len(stn) == 4:
 				station_type = 'icao'
-			elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_":
+			elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_" or stn[0:3] == "un_":
 				station_type = 'cu_log'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'

@@ -386,5 +386,5 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 '3523': {'temp': '3406', 'lwet': '3521', 'prcp': '3521', 'rhum': '3406', 'wspd': '3406', 'wdir': '3406'},
 'ia_ccy': {'temp': 'kcid', 'rhum': 'kcid', 'prcp': 'kcid', 'wspd': 'kcid', 'wdir': 'kcid', 'lwet': 'wi_gay', 'srad': 'wi_gay'},
 'md_wdb': {'temp': 'kbwi', 'rhum': 'kbwi', 'prcp': 'kbwi', 'wspd': 'kbwi', 'wdir': 'kbwi', 'lwet': 'pa_big', 'srad': 'pa_big'},
-'nc_hen': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'md_wdb', 'srad': 'md_wdb'}
+'nc_hen': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'md_wdb', 'srad': 'kavl'}
 }
