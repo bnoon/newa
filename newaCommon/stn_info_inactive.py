@@ -45,7 +45,10 @@ stn_info_inactive = {
 '3405': {'name': 'Fort Monmouth, NJ', 'vars': ['temp', 'rhum', 'wspd', 'wdir'], 'lat': 40.3137, 'lon': -74.049, 'elev': 5, 'network': 'njwx', 'state': 'NJ'},
 '3523': {'name': 'Working Dog Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 40.2315, 'lon': -74.5377, 'elev': 121, 'network': 'njwx', 'state': 'NJ'},
 '3521': {'name': 'Terhune Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 40.3218, 'lon': -74.7293, 'elev': 187, 'network': 'njwx', 'state': 'NJ'},
+'3517': {'name': 'Alba Vineyards, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 40.6146, 'lon': -75.1663, 'elev': 238, 'network': 'njwx', 'state': 'NJ'},
+'3522': {'name': 'Bellview Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 39.5360, 'lon': -74.9345, 'elev': 115, 'network': 'njwx', 'state': 'NJ'},
 'mno': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.345831, 'lon': -71.677843, 'elev': 610, 'network': 'newa', 'state': 'MA'},
 'mmi': {'name': 'Middlefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.71083, 'elev': 180,  'lat': 41.49667, 'network': 'newa', 'state': 'CT'},
+'ct_ewi': {'name': 'East Windsor, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.870777, 'lon': -72.530493, 'elev': 220, 'network': 'newa', 'state': 'CT'},
 'me_bhb': {'name': 'Bar Harbor, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.389786, 'lon': -68.208026, 'elev': 55, 'network': 'newa', 'state': 'ME'}
 }

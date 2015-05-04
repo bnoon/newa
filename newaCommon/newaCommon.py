@@ -245,10 +245,7 @@ def getSR(sid, date) :
 	req = urllib2.Request('http://adhoc.rcc-acis.org/SolarRadiation',
 		  json.dumps(params), {'Content-Type':'application/json'})
 	response = urllib2.urlopen(req)
-	try:
-		return json.loads(response.read())
-	except:
-		return miss
+	return json.loads(response.read())
 
 #--------------------------------------------------------------------------------------------		
 def sister_est(stn,var,var_date,end_period,tsvars,dataForEst, datesForEst, vflagsForEst):
@@ -277,7 +274,7 @@ def sister_est(stn,var,var_date,end_period,tsvars,dataForEst, datesForEst, vflag
 				if var == 'srad' and station_type == 'icao':
 					estdate = "%04d%02d%02d%02d" % (var_date[0],var_date[1],var_date[2],var_date[3])
 					replacement_dict = getSR(est_staid, estdate)
-					if replacement_dict == miss:
+					if replacement_dict['data'][0][1] == "M":
 						replacement = miss
 					else:
 						replacement = float(replacement_dict['data'][0][1])
