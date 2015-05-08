@@ -6,6 +6,7 @@ stn_info_inactive = {
 'bar': {'name': 'Barrington', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.084785, 'elev': 1089.0, 'lat': 42.551651, 'network': 'newa', 'state': 'NY'},
 'bat': {'name': 'Batavia', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'st4i'], 'lon': -78.154020000000003, 'elev': 900.0, 'lat': 43.028820000000003, 'network': 'newa', 'state': 'NY'},
 'cln': {'name': 'Clintondale', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'toolow', 'lon': -74.058165, 'elev': 491.0, 'lat': 41.699821, 'network': 'newa', 'state': 'NY'},
+'clw': {'name': 'Clintondale (WG Minard)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'srad', 'wdir'], 'srqual': 'ok', 'lon': -74.054027, 'elev': 577.0, 'lat': 41.693276, 'network': 'newa', 'state': 'NY'},
 'cu_aur': {'name': 'Aurora (logger)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -76.659099999999995, 'elev': 830.0, 'lat': 42.734099999999998, 'network': 'cu_log', 'state': 'NY'},
 'cu_chz': {'name': 'Chazy (Miner)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -73.466399999999993, 'elev': 201.0, 'lat': 44.8872, 'network': 'cu_log', 'state': 'NY'},
 'cu_val': {'name': 'Valatie', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -73.677599999999998, 'elev': 300.0, 'lat': 42.43, 'network': 'cu_log', 'state': 'NY'},
