@@ -187,7 +187,7 @@ stn_info = {
 'mn_lac': {'name': 'La Crescent, MN', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.858199, 'lon': -91.318371, 'elev': 1231, 'network': 'newa', 'state': 'MN'},
 'mn_sha': {'name': 'Shafer, MN', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 45.352665, 'lon': -92.753021, 'elev': 938, 'network': 'newa', 'state': 'MN'},
 'mn_elg': {'name': 'Elgin, MN', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.1364, 'lon': -92.242435, 'elev': 1050, 'network': 'newa', 'state': 'MN'},
-'mn_gra': {'name': 'Grand Rapids, MN', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 47.242450, 'lon': -93.492838, 'elev': 1289, 'network': 'newa', 'state': 'MN'},
+'mn_gra': {'name': 'Grand Rapids, MN', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 47.242450, 'lon': -93.492838, 'elev': 1289, 'network': 'newa', 'state': 'MN'},
 'nj_pri': {'name': 'Princeton (Terhune), NJ', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.3218, 'lon': -74.7292, 'elev': 186, 'network': 'newa', 'state': 'NJ'},
 'nj_elk': {'name': 'Elk Township, NJ', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 39.6664019, 'lon': -75.184658, 'elev': 136, 'network': 'newa', 'state': 'NJ'},
 'nj_mil': {'name': 'Milford, NJ', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.585858, 'lon': -75.157788, 'elev': 123, 'network': 'newa', 'state': 'NJ'},

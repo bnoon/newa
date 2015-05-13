@@ -346,7 +346,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'mn_sha': {'temp': 'kmsp', 'rhum': 'kmsp', 'prcp': 'kmsp', 'wspd': 'kmsp', 'wdir': 'kmsp', 'lwet': 'wi_gay', 'srad': 'wi_gay'},
 'mn_lac': {'temp': 'klse', 'rhum': 'klse', 'prcp': 'klse', 'wspd': 'klse', 'wdir': 'klse', 'lwet': 'wi_gay', 'srad': 'wi_gay'},
 'mn_elg': {'temp': 'krst', 'rhum': 'krst', 'prcp': 'krst', 'wspd': 'krst', 'wdir': 'krst', 'lwet': 'wi_gay', 'srad': 'wi_gay'},
-'mn_gra': {'temp': 'kgpz', 'rhum': 'kgpz', 'prcp': 'kgpz', 'wspd': 'kgpz', 'wdir': 'kgpz', 'lwet': 'wi_gay', 'srad': 'wi_gay'},
+'mn_gra': {'temp': 'kgpz', 'rhum': 'kdlh', 'prcp': 'kdlh', 'wspd': 'kgpz', 'wdir': 'kgpz', 'lwet': 'wi_gay', 'srad': 'wi_gay'},
 'nj_pri': {'temp': 'kttn', 'rhum': 'kttn', 'prcp': 'kttn', 'wspd': 'kttn', 'wdir': 'kttn', 'lwet': 'nj_elk', 'srad': '3406'},
 'nj_elk': {'temp': '202', 'rhum': '202', 'prcp': '202', 'wspd': '202', 'wdir': '202', 'lwet': 'nj_pri', 'srad': '1034'},
 'nj_mil': {'temp': '289', 'rhum': '289', 'prcp': '289', 'wspd': '289', 'wdir': '289', 'lwet': 'nj_pri', 'srad': '289'},
