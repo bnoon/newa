@@ -31,6 +31,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'dun' : {'temp': 'kpeo', 'rhum': 'kpeo', 'prcp': 'kpeo', 'wspd': 'kpeo', 'wdir': 'kpeo', 'lwet': 'bar', 'srad': 'wla'},
 'ede' : {'temp': 'kbuf', 'rhum': 'kbuf', 'prcp': 'kbuf', 'lwet': 'bat'},
 'elb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kno', 'wspd': 'kno', 'wdir': 'kno', 'srad': 'kno'},
+'emo' : {'temp': 'khwv', 'rhum': 'khwv', 'prcp': 'khwv', 'wspd': 'khwv', 'wdir': 'khwv', 'lwet': 'man', 'srad': 'man'},
 'far' : {'temp': 'gbe', 'lwet': 'gbe', 'rhum': 'gbe', 'prcp': 'gbe', 'wspd': 'gbe', 'wdir': 'gbe', 'srad': 'gbe'},
 'fay' : {'temp': 'gbe', 'rhum': 'gbe', 'prcp': 'gbe', 'wspd': 'var', 'wdir': 'var', 'lwet': 'gbe', 'srad': 'var'},
 'fis' : {'temp': 'kpou', 'rhum': 'kpou', 'prcp': 'kpou', 'wspd': 'kpou', 'wdir': 'kpou', 'lwet': 'mar', 'srad': 'mar'},
