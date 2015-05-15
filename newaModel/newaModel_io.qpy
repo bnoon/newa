@@ -737,7 +737,7 @@ def apple_scab_log [html] (smry_dict):
 			f5_color = 'plain'
 	else:
 		f5_color = 'plain'
-		
+
 	if smry_dict['pday2'].has_key('infection'):
 		'<TR>'
 		'<td class=plain_back height=38><A href="#events">Infection Events</a></td>'
@@ -1138,8 +1138,12 @@ def fire_blight_log [html] (smry_dict):
 	'&nbsp;&nbsp;<input type="text" name="firstblossom" id="fbdpick" value="%s" onChange="%s">' % (mdy_bf,action)
 	'''
 	</p>
-	<p class="plain_smaller"><i>First blossom open date above is estimated based on degree day accumulations or user input.
-	<br>Enter the actual date for blocks of interest and the model will calculate the protection period during bloom more accurately.</i></p>
+	<p class="plain_smaller"><i><b>First blossom open date above is estimated </b>based on degree day accumulations. 
+	<u><span style="color:red;">Infection cannot occur without 
+	open blossoms.</span></u> If the predicted bloom date is incorrect, <b>enter the actual date for blocks of interest</b> and the model 
+	will calculate the protection period during bloom more accurately. If bloom in your orchard has not yet occurred, continue to check 
+	Cougarblight daily and monitor your bloom. If bloom in your orchard has not yet occurred, enter a future bloom date, up to five days 
+	into the future, to gauge fire blight risk potential.</i></p>
 
 	<p><b>Orchard Blight History:</b>
 	'''
@@ -1314,7 +1318,8 @@ def fire_blight_log [html] (smry_dict):
 	'<tr>'
 	'<td class=plain_back_smaller colspan=3 style="border-right:hidden; border-left:hidden; border-bottom:hidden">NA - data not available</td>'
 	'<td class=plain_back colspan=3 style="border-right:hidden; border-left:hidden; border-bottom:hidden"><button class="button" id="fbgraph">Cougarblight Charts</button></td>'
-	'<td class=red_text colspan=3 style="border-right:hidden; border-left:hidden; border-bottom:hidden">Download Time: %d/%d/%d %d:00</td>'%(smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0],smry_dict['last_time'][3])
+	if smry_dict.has_key("last_time"):
+		'<td class=red_text colspan=3 style="border-right:hidden; border-left:hidden; border-bottom:hidden">Download Time: %d/%d/%d %d:00</td>'%(smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0],smry_dict['last_time'][3])
 	'</tr>'
 	'</table>'
 	if accum_msg:

@@ -1923,11 +1923,14 @@ class Apple (Base,Models):
 
 			# obtain hourly data
 			hourly_data, download_time, station_name, avail_vars = self.get_hourly2 (stn, start_date_dt, end_date_dt)
+			if not download_time:
+				start_fcst_dt = start_date_dt
+			else:
+				start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
+			end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6)
+			hourly_data = self.add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
 
 			if len(hourly_data) > 0:
-				start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
-				end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6)
-				hourly_data = self.add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
 				# calculate degree hours using Tim Smith's table
 				deghrs = self.deghr_calcs(hourly_data,start_date_dt,end_fcst_dt)
 				# determine risk
@@ -1950,7 +1953,8 @@ class Apple (Base,Models):
 			smry_dict['orchard_history'] = orchard_history
 			smry_dict['selbutton'] = selbutton
 			smry_dict['station_name'] = station_name
-			smry_dict['last_time'] = download_time
+			if download_time:
+				smry_dict['last_time'] = download_time
 			smry_dict['ddaccum'] = ddaccum
 			smry_dict['ddmiss'] = ddmiss
 			smry_dict['message'] = 'At bloom, apples and pears become susceptible to fire blight blossom infections. First blossom open usually occurs once %d to %d degree days (DD) base 43 have accumulated from January 1.' % (phen_events_dict['macph_bloom_43']['dd'][2],phen_events_dict['macph_bloom_43']['dd'][3])
@@ -2696,10 +2700,8 @@ class Grape (Base,Apple,Models):
 						smry_dict[std]['pmil'] = pm
 						continue
 			# same for phomopsis and black rot
-			for wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect in infect_list:
-			
-				print wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect
-			
+			for wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect in infect_list:			
+#				print wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect
 				start_dt = DateTime.DateTime(*wet_start) + DateTime.RelativeDate(hour=0,minute=0,second=0)
 				if wet_end == miss:
 					theDate_dt = download_dt + DateTime.RelativeDate(hour=0,minute=0,second=0)
