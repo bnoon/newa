@@ -19,6 +19,7 @@ stn_info_inactive = {
 'gro': {'name': 'Groveland', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.801929999999999, 'elev': 590.0, 'lat': 42.660499999999999, 'network': 'newa', 'state': 'NY'},
 'him': {'name': 'Himrod', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.922259999999994, 'elev': 500.0, 'lat': 42.617629999999998, 'network': 'newa', 'state': 'NY'},
 'loc': {'name': 'Ransomville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'toolow', 'lon': -78.901556999999997, 'elev': 387.0, 'lat': 43.187325000000001, 'network': 'newa', 'state': 'NY'},
+'lol': {'name': 'Lodi (Lamoreaux)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.57664, 'lon': -76.85844, 'elev': 853, 'network': 'newa', 'state': 'NY'},
 'los': {'name': 'Lodi (Shalestone)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.87803, 'elev': 522.0, 'lat': 42.56253, 'network': 'newa', 'state': 'NY'},
 'mex': {'name': 'Mexico', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.230703, 'elev': 400.0, 'lat': 43.459805, 'network': 'newa', 'state': 'NY'},
 'nap': {'name': 'Naples', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.387289999999993, 'elev': 700.0, 'lat': 42.626150000000003, 'network': 'newa', 'state': 'NY'},
