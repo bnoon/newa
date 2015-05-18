@@ -77,7 +77,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'nel' : {'temp': 'nee', 'rhum': 'nee', 'prcp': 'nee', 'wspd': 'nee', 'wdir': 'nee', 'lwet': 'nee', 'srad': 'nee'},
 'npt' : {'temp': 'kisp', 'rhum': 'kisp', 'prcp': 'kisp', 'wspd': 'kisp', 'wdir': 'kisp', 'lwet': 'brh', 'srad': 'brh'},
 'npz' : {'temp': 'hig', 'lwet': 'hig', 'rhum': 'hig', 'prcp': 'hig', 'wspd': 'hig', 'wdir': 'hig', 'srad': 'hig'},
-'ovi' : {'temp': 'lol', 'rhum': 'lol', 'prcp': 'lol', 'wspd': 'lol', 'wdir': 'lol', 'lwet': 'lol', 'srad': 'lol'},
+'ovi' : {'temp': 'lod', 'rhum': 'lod', 'prcp': 'lod', 'wspd': 'lod', 'wdir': 'lod', 'lwet': 'lod', 'srad': 'lod'},
 'pav' : {'temp': 'bat', 'prcp': 'bat', 'st4i': 'bat'},
 'per' : {'temp': 'chz', 'rhum': 'chz', 'prcp': 'chz', 'wspd': 'chz', 'wdir': 'chz', 'srad': 'vsh', 'lwet': 'chz'},
 'por' : {'temp': 'kdkk', 'rhum': 'kdkk', 'prcp': 'kdkk', 'wspd': 'kdkk', 'wdir': 'kdkk', 'lwet': 'poe', 'srad': 'poe'},
