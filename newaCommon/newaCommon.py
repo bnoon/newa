@@ -282,6 +282,11 @@ def sister_est(stn,var,var_date,end_period,tsvars,dataForEst, datesForEst, vflag
 					return replacement, tsvars, dataForEst, datesForEst, vflagsForEst
 				else:
 					est0 = initHourlyVar (est_staid, var, miss, station_type)
+					
+#					ADDED 5/18/2015 -kle					
+					if var == 'srad' and (est0.getUnits()).find('langley') < 0: 
+						est0.setUnits('langley/hour')
+					
 					tsvars[var] = {}
 					tsvars[var]['tsv'] = est0
 					tsvars[var]['ed'] = None
