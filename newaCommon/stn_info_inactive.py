@@ -51,6 +51,5 @@ stn_info_inactive = {
 '3522': {'name': 'Bellview Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 39.5360, 'lon': -74.9345, 'elev': 115, 'network': 'njwx', 'state': 'NJ'},
 'mno': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.345831, 'lon': -71.677843, 'elev': 610, 'network': 'newa', 'state': 'MA'},
 'mmi': {'name': 'Middlefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.71083, 'elev': 180,  'lat': 41.49667, 'network': 'newa', 'state': 'CT'},
-'ct_ewi': {'name': 'East Windsor, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.870777, 'lon': -72.530493, 'elev': 220, 'network': 'newa', 'state': 'CT'},
 'me_bhb': {'name': 'Bar Harbor, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.389786, 'lon': -68.208026, 'elev': 55, 'network': 'newa', 'state': 'ME'}
 }

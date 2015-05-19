@@ -169,6 +169,7 @@ stn_info = {
 'ct_swo': {'name': 'South Woodstock MS, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'bad', 'lat': 41.928673, 'lon': -71.956196, 'elev': 421, 'network': 'newa', 'state': 'CT'},
 'ct_pla': {'name': 'Plainville MS, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'lat': 41.684327, 'lon': -72.885093, 'elev': 246, 'network': 'newa', 'state': 'CT'},
 'ct_was': {'name': 'Washington, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.602175, 'lon': -73.306449, 'elev': 868, 'network': 'newa', 'state': 'CT'},
+'ct_ewi': {'name': 'East Windsor, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.870777, 'lon': -72.530493, 'elev': 220, 'network': 'newa', 'state': 'CT'},
 'nh_hol': {'name': 'Hollis, NH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.739297, 'lon': -71.579226, 'elev': 104, 'network': 'newa', 'state': 'NH'},
 'ia_ccy': {'name': 'Central City, IA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.224159, 'lon': -91.494571, 'elev': 958, 'network': 'newa', 'state': 'IA'},
 'il_pgr': {'name': 'Poplar Grove, IL', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.391312, 'lon': -88.800936, 'elev': 916, 'network': 'newa', 'state': 'IL'},
