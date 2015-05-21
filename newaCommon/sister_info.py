@@ -80,6 +80,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'ovi' : {'temp': 'lod', 'rhum': 'lod', 'prcp': 'lod', 'wspd': 'lod', 'wdir': 'lod', 'lwet': 'lod', 'srad': 'lod'},
 'pav' : {'temp': 'bat', 'prcp': 'bat', 'st4i': 'bat'},
 'per' : {'temp': 'chz', 'rhum': 'chz', 'prcp': 'chz', 'wspd': 'chz', 'wdir': 'chz', 'srad': 'vsh', 'lwet': 'chz'},
+'phe' : {'temp': 'gen', 'rhum': 'gen', 'prcp': 'gen', 'wspd': 'gen', 'wdir': 'gen', 'lwet': 'gen', 'srad': 'gen'},
 'por' : {'temp': 'kdkk', 'rhum': 'kdkk', 'prcp': 'kdkk', 'wspd': 'kdkk', 'wdir': 'kdkk', 'lwet': 'poe', 'srad': 'poe'},
 'pr5' : {'temp': 'por', 'rhum': 'por', 'prcp': 'por', 'wspd': 'por', 'wdir': 'por', 'srad': 'por', 'lwet': 'por'},
 'poe' : {'temp': 'por', 'rhum': 'por', 'prcp': 'por', 'wspd': 'por', 'wdir': 'por', 'srad': 'por', 'lwet': 'por'},
