@@ -42,6 +42,7 @@ stn_info = {
 'hec': {'name': 'Hector', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.508040, 'lon': -76.877825, 'elev': 800, 'network': 'newa', 'state': 'NY'},
 'hig': {'name': 'Highland HVL', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.966990, 'elev': 436.0, 'lat': 41.746139, 'network': 'newa', 'state': 'NY'},
 'hud': {'name': 'Hudson', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'srad', 'wdir'], 'srqual': 'ok', 'lon': -73.8303834, 'elev': 216.0, 'lat': 42.1910246, 'network': 'newa', 'state': 'NY'},
+'int': {'name': 'Interlaken (Airy Acres)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.636288, 'lon': -76.725271, 'elev': 242, 'network': 'newa', 'state': 'NY'},
 'ith': {'name': 'Ithaca Cornell Orchards', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toohigh', 'lon': -76.461786, 'elev': 902.0, 'lat': 42.444543, 'network': 'newa', 'state': 'NY'},
 'ken': {'name': 'Kendall (Zingler)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.345406, 'lon': -78.034467, 'elev': 308, 'network': 'newa', 'state': 'NY'},
 'kno': {'name': 'Knowlesville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -78.301944, 'elev': 524.0, 'lat': 43.225833, 'network': 'newa', 'state': 'NY'},
