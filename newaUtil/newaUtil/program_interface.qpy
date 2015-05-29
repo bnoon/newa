@@ -1,0 +1,93 @@
+from mx import DateTime
+from quixote.directory import Directory
+from quixote import get_request
+from quixote.errors import TraversalError
+
+stationList_cache = {}
+stationInfo_cache = {}
+
+class RootDirectory(Directory):
+
+	_q_exports = ["","process_input","stationList","diseaseStations","getForecastUrl","stationMap","zoomStationMap","stationInfo","stationModels"]
+
+#	put up input page for following
+	def _q_index (self):						#default
+		from newaUtil import process_input
+		return process_input()
+	def stationMap (self) :
+		from newaUtil_io import station_map
+		return station_map()
+	def stationList (self, path=None) :
+		ltype = path[0]
+		if stationList_cache.has_key(ltype):
+			results = stationList_cache[ltype]
+		else:
+			wholepath = ['stationList'] + path
+			from newaUtil import process_input
+			results = process_input(None,wholepath)
+			stationList_cache[ltype] = results
+		return results
+	def zoomStationMap (self, path=None) :
+		from newaUtil_io import zoom_station_map
+		return zoom_station_map(path[0])
+	def stationInfo (self, path=None) :
+		stn = path[0]
+		now = DateTime.now()
+		if stationInfo_cache.has_key(stn) and stationInfo_cache[stn][0] > now:
+			results = stationInfo_cache[stn][1]
+		else:
+			wholepath = ['stationInfo'] + path
+			from newaUtil import process_input
+			results = process_input(None,wholepath)
+			if now.minute < 8:
+				expires = now + DateTime.RelativeDate(minute=8)
+			else:
+				expires = now + DateTime.RelativeDate(hours=+1,minute=8)
+			stationInfo_cache[stn] = (expires,results)
+		return results
+	def stationModels (self, path=None) :
+		from newaUtil import process_input
+		path = ['stationModels'] + path
+		return process_input(None,path)
+	def diseaseStations (self, path=None) :
+		from newaUtil import process_input
+		path = ['diseaseStations'] + path
+		return process_input(None,path)
+	def getForecastUrl (self, path=None) :
+		from newaUtil import process_input
+		path = ['getForecastUrl'] + path
+		return process_input(None,path)
+
+#	received request form to be processed
+
+#	process information provided in url
+	def _q_lookup(self, component, path=None):
+		from newaUtil import process_input
+		if path: 
+			path = [component] + path
+		else:
+			path = [component]
+		return process_input(None,path)
+
+	def _q_traverse(self, path):
+		assert len(path) > 0
+		component = path[0]
+		if component == 'program':
+			del path[0]
+			assert len(path) > 0
+			component = path[0]
+		path = path[1:]
+		name = self._q_translate(component)
+		if name is not None:
+			obj = getattr(self, name)
+			if not hasattr(obj,'_q_exports'):
+				if path: return obj(path)
+				else:    return obj()
+			else:
+				return obj._q_traverse(path)
+		else:
+			obj = self._q_lookup(component,path)
+			if obj: return obj
+		if obj is None:
+			raise TraversalError(private_msg=('directory %r has no component '
+								'%r' % (self, component)))
