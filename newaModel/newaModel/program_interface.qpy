@@ -1,0 +1,209 @@
+from quixote.directory import Directory
+from quixote import get_request
+from quixote.errors import TraversalError
+
+class RootDirectory(Directory):
+
+	_q_exports = ["","process_input","process_help","updateStatus","apple_scab","apple_scab_estlw","fire_blight","sooty_blotch","apple_disease",
+	"berry_moth","dmcast","grape_dis","grape_disease","update_grape_status",
+	"apple_stlm","apple_ofm","apple_cm","apple_pc","apple_oblr","apple_maggot","apple_pest",
+	"apple_biofix","apple_biofix_process"]
+
+#	put up input page for following
+	def _q_index (self):						#default
+		from newaModel_io import apple_disease_input
+		return apple_disease_input()
+	def apple_scab (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import apple_disease_input
+			return apple_disease_input('apple_scab')
+		else:
+			from newaModel import process_input
+			path = ['apple_scab'] + path
+			return process_input(None,path)
+	def apple_scab_estlw (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import apple_scab_estlw_input
+			return apple_scab_estlw_input()
+		else:
+			from newaModel import process_input
+			path = ['apple_scab_estlw'] + path
+			return process_input(None,path)
+	def fire_blight (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import apple_disease_input
+			return apple_disease_input('fire_blight')
+		else:
+			from newaModel import process_input
+			path = ['fire_blight'] + path
+			return process_input(None,path)
+	def sooty_blotch (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import apple_disease_input
+			return apple_disease_input('sooty_blotch')
+		else:
+			from newaModel import process_input
+			path = ['sooty_blotch'] + path
+			return process_input(None,path)
+	def berry_moth (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import grape_disease_input
+			return grape_disease_input('berry_moth')
+		else:
+			from newaModel import process_input
+			path = ['berry_moth'] + path
+			return process_input(None,path)
+	def grape_dis (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import grape_disease_input
+			return grape_disease_input('grape_dis')
+		else:
+			from newaModel import process_input
+			path = ['grape_dis'] + path
+			return process_input(None,path)
+	def dmcast (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import grape_disease_input
+			return grape_disease_input('dmcast')
+		else:
+			from newaModel import process_input
+			path = ['dmcast'] + path
+			return process_input(None,path)
+	def apple_stlm (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import apple_pest_input
+			return apple_pest_input('apple-stlm')
+		else:
+			from newaModel import process_input
+			path = ['apple-stlm'] + path
+			return process_input(None,path)
+	def apple_ofm (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import apple_pest_input
+			return apple_pest_input('apple-ofm')
+		else:
+			from newaModel import process_input
+			path = ['apple-ofm'] + path
+			return process_input(None,path)
+	def apple_cm (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import apple_pest_input
+			return apple_pest_input('apple-cm')
+		else:
+			from newaModel import process_input
+			path = ['apple-cm'] + path
+			return process_input(None,path)
+	def apple_pc (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import apple_pest_input
+			return apple_pest_input('apple-pc')
+		else:
+			from newaModel import process_input
+			path = ['apple-pc'] + path
+			return process_input(None,path)
+	def apple_oblr (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import apple_pest_input
+			return apple_pest_input('apple-oblr')
+		else:
+			from newaModel import process_input
+			path = ['apple-oblr'] + path
+			return process_input(None,path)
+	def apple_maggot (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import apple_pest_input
+			return apple_pest_input('apple-maggot')
+		else:
+			from newaModel import process_input
+			path = ['apple-maggot'] + path
+			return process_input(None,path)
+	def apple_disease (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import apple_disease_input
+			return apple_disease_input(None)
+		else:
+			from newaModel import process_input
+			path = ['apple_disease'] + path
+			return process_input(None,path)
+	def grape_disease (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import grape_disease_input
+			return grape_disease_input(None)
+		else:
+			from newaModel import process_input
+			path = ['grape_disease'] + path
+			return process_input(None,path)
+	def apple_pest (self, path=None) :
+		if not path or path == ['']:
+			from newaModel_io import apple_pest_input
+			return apple_pest_input(None)
+		else:
+			from newaModel import process_input
+			path = ['apple_pest'] + path
+			return process_input(None,path)
+	def apple_biofix (self) :
+		from newaInput import apple_biofix_input
+		return apple_biofix_input()
+
+
+#	received request form to be processed
+	def apple_biofix_process (self) :
+		from newaInput import apple_biofix_process
+		request = get_request()
+		return apple_biofix_process(request)
+	def process_input (self, path=None) :
+		from newaModel import process_input
+		request = get_request()
+		return process_input(request,path)
+	def process_help (self, path=None) :
+		from newaModel import process_help
+		request = get_request()
+		return process_help(request,path)
+	def updateStatus (self, path=None) :
+		from newaModel import updateStatus
+		request = get_request()
+		return updateStatus(request,path)
+	def update_grape_status (self, path=None) :
+		from newaModel import update_grape_status
+		request = get_request()
+		return update_grape_status(request,path)
+
+#	process information provided in url
+	def _q_lookup(self, component, path=None):
+		if component == 'process_help':
+			from newaModel import process_help
+			if path: 
+				path = [component] + path
+			else:
+				path = [component]
+			return process_help(None,path)
+		else:
+			from newaModel import process_input
+			if path: 
+				path = [component] + path
+			else:
+				path = [component]
+			return process_input(None,path)
+
+	def _q_traverse(self, path):
+		assert len(path) > 0
+		component = path[0]
+		if component == 'program':
+			del path[0]
+			assert len(path) > 0
+			component = path[0]
+		path = path[1:]
+		name = self._q_translate(component)
+		if name is not None:
+			obj = getattr(self, name)
+			if not hasattr(obj,'_q_exports'):
+				if path: return obj(path)
+				else:    return obj()
+			else:
+				return obj._q_traverse(path)
+		else:
+			obj = self._q_lookup(component,path)
+			if obj: return obj
+		if obj is None:
+			raise TraversalError(private_msg=('directory %r has no component '
+								'%r' % (self, component)))

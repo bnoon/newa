@@ -1,0 +1,17 @@
+pest_status_management = { 
+'pest_name': "Black Rot",
+'messages': {
+'page_dormant': { 'stages': ["dormant","early","bud_swell"],
+                  'management': "Removal of the black, raisin-like mummies from the canopy during pruning is a critical component of black rot management programs. It significantly reduces overwintering inoculum and disease pressure for the coming season. Drop mummies to the ground and bury them by cultivation or cover them with mulch."},
+'get_ready':    { 'stages': ["1in_shoot","3in_shoot"],
+                  'management': "Bury mummies by cultivating or mulching within the row. A reminder - under NY conditions, berries are <a href='../grapes/blackrot_var_table.html' target='_blank'>highly susceptible</a> to black rot from cap fall until 3-4 weeks (Concord) or 4-5 weeks (Riesling, Chardonnay) later, gradually losing susceptibility and finally becoming highly resistant after another 2 weeks."},
+'start':        { 'stages': ["10in_shoot"],
+                  'management': "If severe black rot developed during the previous year or if the vineyard has a <a href='../grapes/blackrot_var_table.html' target='_blank'>history of consistent black rot development</a>, <a href='http://ipmguidelines.org/grapes/' target='_blank'>a spray</a> two weeks before bloom (10 inch shoot growth) may be beneficial, particularly if infection events are being logged."},
+'peak_1':       { 'stages': ["imm_prebloom","bloom","1st_postbloom"],
+                  'management': "Do not delay black rot sprays beyond this stage. The immediate prebloom through early postbloom periods are critical for management of black rot. Keep track of infections events and <a href='http://ipmguidelines.org/grapes/' target='_blank'>maintain fungicide protection accordingly</a>. Concords can become infected up to 6 weeks after the last cap has fallen, and <i>V. vinifera</i> varieties up through 7 weeks postbloom."},
+'peak_2':       { 'stages': ["2nd_postbloom"],
+                  'management': "Scout vineyards for black rot. If black rot symptoms are visible on leaves or fruit, this second post-bloom application is potentially critical if <a href='http://ipmguidelines.org/grapes/' target='_blank'>infection events are being logged and forecasted</a>. Virtually complete control has been provided in the vast majority of vineyards when the bloom sprays have been followed by the second postbloom application. Fruit become highly resistant about 5-8 weeks after bloom, depending on <a href='../grapes/blackrot_var_table.html' target='_blank'>the variety</a> and year. In general, <i>Labrusca</i> fruit appear to become resistant about 1-2 weeks earlier than <i>V. vinifera</i> varieties. "},
+'maintenance':  { 'stages': ["bunch_closure"],
+                  'management': "Berries become highly resistant to infection by about 5 (Concord) to 7 (<i>V. vinifera</i>) weeks after the start of bloom. Experience has shown that it is usually possible to end black rot spray programs after the second postbloom application IF the disease has been well managed until then. Scout vineyards for black rot. If black rot symptoms are visible on fruit, <a href='http://ipmguidelines.org/grapes/' target='_blank'>fungicide protection</a> to cover infection events through July may be necessary to limit disease spread within clusters. "},
+'passed':       { 'stages': ["veraison","harvest"],
+                  'management': "Black rot fungicide sprays are no longer necessary."} } }

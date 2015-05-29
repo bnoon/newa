@@ -1,0 +1,96 @@
+def apple_biofix_input [html] (biofix_dict):
+	lw_station_list = [("alb","Albion"), ("noa", "Appleton (north)"), ("soa", "Appleton (south)"),
+		("bar", "Barrington"), ("bat", "Batavia"), ("bra", "Branchport"), ("chz", "Chazy"),
+		("cli", "Clifton Park"), ("cln", "Clintondale"), ("cro", "Crown Point"), ("dre", "Dresden"),
+		("ede", "Eden"), ("elb", "Elba"), ("far", "Farmington"), ("1fr", "Fredonia"),
+		("fre", "Freeville"), ("fri", "Friend"), ("gen", "Geneva"),
+		("gui", "Guilderland"), ("him", "Himrod"), ("hud", "Hudson"),
+		("ith", "Ithaca"), ("kno", "Knowlesville"), ("lan", "Lansing"), ("1lo", "Lockport"),
+		("lyn", "Lyndonville"), ("mar", "Marlboro"), ("mex", "Mexico"), ("nap", "Naples"),
+		("per", "Peru"), ("pot", "Potter"), 
+		("pul", "Pulteney"), ("loc", "Ransomville"), ("red", "Red Hook"), ("sav", "Savannah"),
+		("sod", "Sodus"), ("val", "Valois"), ("wat", "Waterport"),
+		("wgl", "Watkins Glen"), ("1wi", "Williamson (Motts)"), ("mmi", "Middlefield, CT") ]
+
+	'''
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+			"http://www.w3.org/TR/html4/strict.dtd">
+	<html>
+	<head>
+	<title>Apple Biofix Input Page</title>
+	<link rel="STYLESHEET" type="text/css" href="http://newa.nrcc.cornell.edu/newa_styles.css">
+	</head>
+	<body>
+	<FORM ACTION="/newaModel/apple_biofix_process" METHOD="post">
+	<div class=plain_smaller>
+	<table border="1" cellpadding="1" cellspacing="0">
+		<tr>
+			<th colSpan="8" class="header_line">Apple Pest Biofix Dates</th>
+		</tr>
+		<tr><td colspan="8" class="redongray_back">Enter dates in the form mm/dd, for example April 10 is 4/10</td></tr>
+		<tr>
+			<th>IPM Concern</th>
+			<th class="palegreen_back">Apple Scab</th>
+			<th class="pink_back">Fire Blight</th>
+			<th class="silver_back">Oriental Fruit Moth</th>
+			<th class="plain_back">Plum Curculio</th>
+			<th class="brown_back">Codling Moth</th>
+			<th class="blue_back">Obliquebanded Leafroller<BR>1st Summer Gen.</th>
+			<th class="palegoldenrod_back">Spotted Tentiform<BR>Leafminer 2nd Gen.</th>
+		</tr>
+		<tr>
+			<th>Biofix</th>
+			<th class="palegreen_back">50% Green Tip<BR>McIntosh</th>
+			<th class="pink_back">First Blossom<BR>Open</th>
+			<th class="silver_back">First Sustained<BR>Trap Catch</th>
+			<th class="plain_back">90% Petal Fall<BR>McIntosh</th>
+			<th class="brown_back">First Sustained<BR>Trap Catch</th>
+			<th class="blue_back">First Sustained<BR>Trap Catch</th>
+			<th class="palegoldenrod_back">First Sustained<BR>Trap Catch</th>
+		</tr>
+		<tr>
+			<th>Historical Biofix,<BR>Geneva, NY</th>
+			<td></td>
+			<td>5/4</td>
+			<td>5/2</td>
+			<td>5/18</td>
+			<td>5/19</td>
+			<td>6/10</td>
+			<td>6/15</td>
+		</tr>
+	'''
+	for sta_id,sta_name in lw_station_list:
+		'<tr>'
+		'<td>%s</td>' % sta_name
+		for typ in ['as','fb','ofm','pc','cm','oblr','stlm']:
+			if biofix_dict.has_key('%s-%s'%(sta_id,typ)) and biofix_dict['%s-%s'%(sta_id,typ)] != '':
+				curval =  biofix_dict['%s-%s'%(sta_id,typ)]
+				'<TD ALIGN="center"><INPUT TYPE="text" NAME="%s-%s" size="6" value=%s></TD>' % (sta_id,typ,curval)
+			else:
+				'<TD ALIGN="center"><INPUT TYPE="text" NAME="%s-%s" size="6"></TD>' % (sta_id,typ)
+		'</tr>'
+	'''
+	</table>
+	</div>
+	<P><INPUT TYPE="submit" NAME="submit field" VALUE="Submit">
+	   <INPUT type="submit" NAME="submit field" VALUE="Exit-Don't Save">
+	</FORM>
+	</body>
+	</html>
+	'''
+	
+def apple_biofix_results [html] (msg):
+	'''
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+			"http://www.w3.org/TR/html4/strict.dtd">
+	<html>
+	<head>
+		<title>Apple Biofix Input Page</title>
+	</head>
+	<body>
+	'''
+	'%s' % msg
+	'''
+	</body>
+	</html>
+	'''

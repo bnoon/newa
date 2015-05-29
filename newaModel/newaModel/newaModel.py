@@ -2700,7 +2700,7 @@ class Grape (Base,Apple,Models):
 						smry_dict[std]['pmil'] = pm
 						continue
 			# same for phomopsis and black rot
-			for wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect in infect_list:			
+			for wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect in infect_list:
 #				print wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect
 				start_dt = DateTime.DateTime(*wet_start) + DateTime.RelativeDate(hour=0,minute=0,second=0)
 				if wet_end == miss:
@@ -3243,8 +3243,8 @@ def process_help (request,path):
 		elif smry_type == 'fire_blight' or (smry_type == 'apple_disease' and pest == 'fire_blight'):
 			return newaModel_io.helppage([("The Development and Use of CougarBlight","http://county.wsu.edu/chelan-douglas/agriculture/treefruit/Pages/CougarBlight_Model_Overview.aspx"),
 										   ("CougarBlight 2010","http://county.wsu.edu/chelan-douglas/agriculture/treefruit/Pages/Cougar_Blight_2010.aspx"),
-										   ("Notes on first blossom open biofix","http://newatest.nrcc.cornell.edu/appfbnotes_pop.htm"),
-										   ("Highly susceptible apple varieties and rootstocks","http://newatest.nrcc.cornell.edu/appsusvar_pop.htm"),
+										   ("Notes on first blossom open biofix","http://newa.nrcc.cornell.edu/appfbnotes_pop.htm"),
+										   ("Highly susceptible apple varieties and rootstocks","http://newa.nrcc.cornell.edu/appsusvar_pop.htm"),
 										   ("Pesticide information","http://treefruitipm.info/PesticidesForPest.aspx?PestID=20"),
 										   ("Pest Management Guidelines for Commercial Tree Fruit Production","http://ipmguidelines.org/TreeFruits/content/CH11/default.asp"),
 										   ("Fire Blight Fact Sheet (html)","http://nysipm.cornell.edu/factsheets/treefruit/diseases/fb/fb.asp"),
@@ -3306,8 +3306,8 @@ def process_help (request,path):
 			                               ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references")
 										   ])
 		elif smry_type == 'dmcast' or (smry_type == 'grape_disease' and pest == 'dmcast'):
-			return newaModel_io.helppage([("DMCast Notes","http://newatest.nrcc.cornell.edu/dmcast/dmcast_notes.html"),
-			                               ("NEWA Model References","http://newatest.cornell.edu/index.php?page=newa-pest-forecast-model-references")
+			return newaModel_io.helppage([("DMCast Notes","http://newa.nrcc.cornell.edu/dmcast/dmcast_notes.html"),
+			                               ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references")
 			                               ])
 		else:
 			return newaCommon_io.errmsg('Error processing input')
