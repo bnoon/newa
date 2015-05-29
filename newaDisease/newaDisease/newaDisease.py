@@ -366,7 +366,7 @@ class Potato (Base, general_simcast):
 				station_type = 'njwx'
 			elif len(stn) == 4:
 				station_type = 'icao'
-			elif stn[0:3] == 'cu_' or stn[0:3] == 'um_':
+			elif stn[0:3] == 'cu_' or stn[0:3] == 'um_' or stn[0:3] == "un_" or stn[0:3] == "uc_":
 				station_type = 'cu_log'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
@@ -1879,6 +1879,7 @@ def process_input (request,path):
 				year = None
 				month = None
 				day = None
+				accend = None
 			except IndexError:
 				raise program_exit('Error processing request - index error')
 			except:

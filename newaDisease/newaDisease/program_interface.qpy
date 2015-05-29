@@ -126,13 +126,13 @@ class RootDirectory(Directory):
 			path = ['alf_weev'] + path
 			return process_input(None,path)
 	def cabbage_maggot (self, path=None) :
-		if not path or path == ['']:
-			from newaDisease_io import cabbage_maggot_input
-			return cabbage_maggot_input()
-		else:
-			from newaDisease import process_input
-			path = ['cabbage_maggot'] + path
-			return process_input(None,path)
+#		if not path or path == ['']:
+		from newaDisease_io import cabbage_maggot_input
+		return cabbage_maggot_input()
+#		else:
+#			from newaDisease import process_input
+#			path = ['cabbage_maggot'] + path
+#			return process_input(None,path)
 	def onion_maggot (self, path=None) :
 		if not path or path == ['']:
 			from newaDisease_io import onion_maggot_input
