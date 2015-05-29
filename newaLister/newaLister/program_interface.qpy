@@ -1,0 +1,68 @@
+from quixote.directory import Directory
+from quixote import get_request
+from quixote.errors import TraversalError
+
+class RootDirectory(Directory):
+
+	_q_exports = ["","process_input","wea_page","rawdat","sumpag","dday","dday55","dday40"]
+
+#	put up input page for following
+	def _q_index (self, path=None):						#default
+		from newaLister_io import get_weapage_input
+		return get_weapage_input()
+	def wea_page (self, path=None) :
+		from newaLister_io import get_weapage_input
+		return get_weapage_input()
+	def rawdat (self, path=None) :
+		from newaLister_io import get_rawdat_input
+		return get_rawdat_input()
+	def sumpag (self, path=None) :
+		from newaLister_io import get_sumpag_input
+		return get_sumpag_input()
+	def dday (self, path=None) :
+		from newaLister_io import get_dday_input
+		return get_dday_input()
+	def dday55 (self, path=None) :
+		from newaLister_io import get_dday55_input
+		return get_dday55_input()
+	def dday40 (self, path=None) :
+		from newaLister_io import get_dday40_input
+		return get_dday40_input()
+
+#	received request form to be processed
+	def process_input (self, path=None) :
+		from newaLister import process_input
+		request = get_request()
+		return process_input(request,None)
+
+#	process information provided in url
+	def _q_lookup(self, component, path=None):
+		from newaLister import process_input
+		if path: 
+			path = [component] + path
+		else:
+			path = [component]
+		return process_input(None,path)
+
+	def _q_traverse(self, path):
+		assert len(path) > 0
+		component = path[0]
+		if component == 'program':
+			del path[0]
+			assert len(path) > 0
+			component = path[0]
+		path = path[1:]
+		name = self._q_translate(component)
+		if name is not None:
+			obj = getattr(self, name)
+			if not hasattr(obj,'_q_exports'):
+				if path: return obj(path)
+				else:    return obj()
+			else:
+				return obj._q_traverse(path)
+		else:
+			obj = self._q_lookup(component,path)
+			if obj: return obj
+		if obj is None:
+			raise TraversalError(private_msg=('directory %r has no component '
+								'%r' % (self, component)))

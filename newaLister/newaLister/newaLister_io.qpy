@@ -790,7 +790,7 @@ def hly_list_html [html] (stn,station_name,year,month,hourly_data,avail_vars,mis
 	<p style="text-align:center;"><table border=0 cellspacing=5 cellpadding=5 width="700px">
 	'''
 	if estimates > 0:
-		'<tr><td colspan="2" class=plain_back>Values in <span class=plain_back_est>brown italics</span> were estimated from adjacent hours or a nearby location. '
+		'<tr><td colspan="2" class=plain_back>Values in <span class=plain_back_est>brown italics</span> were estimated. '
 		'<a href="http://newa.nrcc.cornell.edu/newaLister/est_info/%s/0000/%d" target="_blank">More information</a>' % (stn,month)
 		' is available on the estimation technique.</td></tr>' 
 	'''
@@ -934,13 +934,16 @@ def estimation_info [html] (stn,station_name,var_sister,year,month):
 	<body>
 	<h1>Data Estimation</h1>
 	<p>Data are occasionally missing in a data record. In order to provide as complete a record as possible,
-	NEWA attempts to estimate missing values in a two-step process. 
+	NEWA attempts to estimate missing values in a three-step process. 
 	<ol>
 	<li>The data record is examined for a non-missing value in the previous hour and the 
 	next hour. If both are found, an average of the two values is used as an estimate.</li>
 	<li>If there are no values available for either the immediately preceding or proceeding hours, data for a
 	nearby (or "sister") weather station are examined. If a data value is available for the desired hour, it is used
 	as a replacement. </li>
+	<li>If there are no values available for the sister station and the missing variable is either temperature or relative
+	humidity and the date of interest is within the current year, data from the NWS National Digital Forecast Database
+	archive are examined. If a data value is available for the desired hour, it is used as a replacement. </li>
 	</ol>
 	<p>For precipitation and wind direction, data extrapolation is not a valid method. Missing precipitation
 	and wind direction data are sourced from the designated sister weather station.
