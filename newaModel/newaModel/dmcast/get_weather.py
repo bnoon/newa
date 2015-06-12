@@ -239,7 +239,18 @@ class newa_vars(newa_weather) :
 		self.lwet_minor = 0
 		newa_weather.__init__(self,stn_id)
 
-
+class njwx_vars(newa_weather) :
+	def __init__(self,stn_id) :
+		self.type = 'njwx'
+		self.tmp_major = 23
+		self.tmp_minor = 0
+		self.rh_major = 24
+		self.rh_minor = 0
+		self.prcp_major = 5
+		self.prcp_minor = 0
+		self.lwet_major = 118
+		self.lwet_minor = 0
+		newa_weather.__init__(self,stn_id)
 	
 class culog_vars(newa_weather) :
 	def __init__(self,stn) :
@@ -255,9 +266,7 @@ class culog_vars(newa_weather) :
 		newa_weather.__init__(self,stn)
 		
 		
-		
-		
-		
+				
 class general_dm_weather(object) :
 
 	def __init__(self,stn,eDate,sister) :
@@ -281,10 +290,13 @@ class general_dm_weather(object) :
 
 
 	def get_tsvar_class(self,stn) :
-		if len(stn) == 4 :
+		if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
+			obj = njwx_vars(stn)
+			return obj
+		elif len(stn) == 4 :
 			obj = icao_weather(stn)
 			return obj
-		elif len(stn) == 6 and (stn[0:3] == "cu_" or stn[0:3] == "um_") :
+		elif len(stn) == 6 and (stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_" or stn[0:3] == "un_") :
 			obj = culog_vars(stn)
 			return obj
 		elif len(stn) == 3 or len(stn) == 6 :
