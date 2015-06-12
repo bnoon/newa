@@ -336,6 +336,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'ct_mid': {'temp': 'ct_por', 'rhum': 'ct_por', 'prcp': 'ct_por', 'wspd': 'ct_por', 'wdir': 'ct_por', 'lwet': 'ct_por', 'srad': 'ct_por'},
 'ct_pla': {'temp': 'ct_ssm', 'rhum': 'ct_ssm', 'prcp': 'ct_ssm', 'wspd': 'ct_ssm', 'wdir': 'ct_ssm', 'lwet': 'ct_ssm', 'srad': 'ct_ssm'},
 'ct_swo': {'temp': 'ct_woo', 'rhum': 'ct_woo', 'prcp': 'ct_woo', 'wspd': 'ct_woo', 'wdir': 'ct_woo', 'lwet': 'ct_woo', 'srad': 'ct_woo'},
+'ct_gos': {'temp': 'ct_nha', 'rhum': 'ct_nha', 'prcp': 'ct_nha', 'wspd': 'ct_nha', 'wdir': 'ct_nha', 'lwet': 'ct_nha', 'srad': 'ct_nha'},
 'uc_sto': {'temp': 'ct_tol', 'rhum': 'ct_tol', 'prcp': 'ct_tol', 'wspd': 'ct_tol', 'wdir': 'ct_tol', 'lwet': 'ct_tol', 'srad': 'ct_tol'},
 'mn_wbl': {'temp': 'kmsp', 'rhum': 'kmsp', 'prcp': 'kmsp', 'wspd': 'kmsp', 'wdir': 'kmsp', 'lwet': 'wi_gay', 'srad': 'wi_gay'},
 'mn_lkc': {'temp': 'krst', 'rhum': 'krst', 'prcp': 'krst', 'wspd': 'krst', 'wdir': 'krst', 'lwet': 'wi_gay', 'srad': 'wi_gay'},
