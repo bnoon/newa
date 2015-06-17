@@ -611,3 +611,109 @@ function produce_cabbagemaggot_graph() {
 		$("#chart_area").highcharts(graphOptions);
 	}
 }
+
+function produce_onionmaggot_graph() {
+	var date_val, d, ymd, lastvalue,
+		data_series = [],
+		degday_dict = {},
+		ow = 390,
+		ow_peak = 735,
+		f1 = 1218,
+		f1_peak = 1752,
+		f2 = 2415,
+		f2_peak = 2975,
+		plotlines = [
+			{value: ow, label: {text: "Overwintering Emergence", style: {color: "darkblue"}}, color: "darkblue", dashStyle: "ShortDot", width: 1, zIndex: 3},
+			{value: ow_peak, label: {style: {color: "darkred"}}, color: "red", dashStyle: "ShortDot", width: 1, zIndex: 3},
+			{value: f1, label: {text: "First Generation", style: {color: "darkblue"}}, color: "darkblue", dashStyle: "ShortDot", width: 1, zIndex: 3},
+			{value: f1_peak, label: {style: {color: "red", fontSize:'80%'}}, color: "red", dashStyle: "ShortDot", width: 1, zIndex: 3},
+			{value: f2, label: {text: "Second Generation", style: {color: "darkblue"}}, color: "darkblue", dashStyle: "ShortDot", width: 1, zIndex: 3},
+			{value: f2_peak, label: {style: {color: "red", fontSize:'80%'}}, color: "red", dashStyle: "ShortDot", width: 1, zIndex: 3},
+		],
+		graphOptions = defineGraphOptions({'yaxisCnt': 1});
+		
+	if ($("#dd_dict").text().length) {
+		degday_dict = $.parseJSON($("#dd_dict").text().replace(/\(/g, "[").replace(/\)/g, "]"));
+		lastvalue = degday_dict[degday_dict.length-1][4];
+		for (d = 0; d < degday_dict.length; d += 1) {
+			ymd = degday_dict[d][0]
+			date_val = Date.UTC(ymd[0], ymd[1] - 1, ymd[2], 0)
+			if (degday_dict[d][4] !== -999) {
+				data_series.push([date_val, degday_dict[d][4]]);
+			} else {
+				data_series.push([date_val, null]);
+			}
+		}
+		graphOptions.series.push({
+			data: data_series,
+			color: 'black',
+			name: 'Accumulated Degree-Days',
+			type: 'line',
+			zIndex: 4,
+			turboThreshold: data_series.length
+		});
+		$.extend(graphOptions.chart, {
+			height: 250,
+			width: 620,
+			spacingBottom: 5
+		});
+		$.extend(graphOptions.credits, {
+			enabled: false
+		});
+		$.extend(graphOptions.legend, {
+			enabled: false
+		});
+		$.extend(graphOptions.title, {
+			text: "Accumulated Onion Maggot Degree-Days (Base 40&deg;F)",
+			useHTML: true
+		});
+		$.extend(graphOptions.title.style, {
+			fontSize: "13px"
+		});
+		$.extend(graphOptions.xAxis, {
+			gridZIndex: 2
+		});
+		$.extend(graphOptions.xAxis.dateTimeLabelFormats, {
+			hour: "%b %e -",
+			day: "%b %e",
+			week: "%b %e",
+			month: "%b %e"
+		});
+		$.extend(graphOptions.yAxis.labels, {
+			formatter: function () {
+				 return Highcharts.numberFormat(this.value, 0);
+			}
+		});
+		$.extend(graphOptions.yAxis.title, {
+			text: "Accumulated Degree-Days"
+		});
+		$.extend(graphOptions.yAxis.title.style, {
+			fontWeight: "normal"
+		});
+		$.extend(graphOptions.tooltip, {
+			formatter: function () {
+				var tts = "<b>" + Highcharts.dateFormat('%a, %B %e, %Y', this.x) + "<\/b>" +
+					"<br \/>Accumulated degree-days: " + Highcharts.numberFormat(this.y, 0);
+				return tts;
+			}
+		});
+		if (lastvalue <= f1 && lastvalue !== -999) {
+			$.extend(plotlines[1].label, {text: "Peak Overwintering Generation"});
+		} else if (lastvalue < f2) {
+			$.extend(plotlines[3].label, {text: "Peak First Generation"});
+		} else {
+			$.extend(plotlines[5].label, {text: "Peak Second Generation"});
+		}
+		$.extend(graphOptions.yAxis, {
+			min: 0,
+			minRange: 500,
+			endOnTick: false,
+			plotLines: plotlines,
+			plotBands: [
+				{from: ow, to: f1, color: "rgba(205,133,63,0.9)", zIndex: 2},
+				{from: f1, to: f2, color: "rgba(218,165,32,0.9)", zIndex: 2}
+			]
+		});
+		$("#chart_area").highcharts(graphOptions);
+	}
+}

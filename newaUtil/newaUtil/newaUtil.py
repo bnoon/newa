@@ -102,7 +102,24 @@ def run_diseaseStations (disease):
 			    ("krut", "Rutland, VT Airport"), ("kddh", "Bennington, VT Airport"), ("kaqw", "North Adams, MA Airport"),
 			    ("kpsf", "Pittsfield, MA Airport"), ("kdxr", "Danbury, CT Airport"), ("kbdr", "Bridgeport, CT Airport"),
 			    ("kfwn", "Sussex, NJ Airport"), ("kcdw", "Fairfield, NJ Airport"), ("kteb", "Teterboro, NJ Airport"),
-			    ("kewr", "Newark, NJ Airport"), ("kovs", "Boscobel, WI Airport"), ("kcid", "Cedar Rapids, IA Airport"), 
+				("kmpv", "Montpelier, VT Airport"),  ("kmvl", "Morrisville, VT Airport"),  ("kvsf", "Springfield, VT Airport"),  
+				("k12n", "Andover, NJ Airport"),  ("kacy", "Atlantic City, NJ Airport"), ("kblm", "Farmingdale, NJ Airport"),  
+				("kmiv", "Millville, NJ Airport"),  ("kmmu", "Morristown, NJ Airport"),  ("knel", "Lakehurst NAS, NJ"),  
+				("ksmq", "Somerville, NJ Airport"),  ("kttn", "Trenton, NJ Airport"),  ("kvay", "Mount Holly, NJ Airport"),  
+				("kwri", "McGuire AFB, NJ Airport"),  ("kwwd", "Wildwood, NJ Airport"),  ("kphl", "Philadelphia, PA Airport"),  
+				("kpne", "NE Philadelphia, PA Airport"),  ("kpit", "Pittsburgh, PA Airport"),  ("kmdt", "Middletown Harrisburg, PA Airport"),  
+				("kipt", "Williamsport, PA Airport"),  ("kavp", "Wilkes-Barre, PA Airport"),  ("kabe", "Allentown, PA Airport"),  
+				("kaoo", "Altoona, PA Airport"),  ("krdg", "Reading, PA Airport"),  ("kjst", "Johnstown, PA Airport"),  
+				("kduj", "DuBois, PA Airport"),  ("kilg", "Wilmington, DE Airport"),  ("korh", "Worcester, MA Airport"),  
+				("kore", "Orange, MA Airport"),  ("kpym", "Plymouth, MA Airport"),  ("kbvy", "Beverly, MA Airport"),  
+				("khya", "Hyannis, MA Airport"),  ("kbos", "Boston Logan, MA Airport"),  ("kack", "Nantucket, MA Airport"),  
+				("kcef", "Chicopee Falls, MA Airport"),  ("klwm", "Lawrence, MA Airport"),  ("kbaf", "Westfield, MA Airport"),  
+				("kmqe", "E Milton Blue Hill, MA"),  ("kbed", "Bedford, MA Airport"),  ("kpvc", "Provincetown, MA Airport"),  
+				("ktan", "Taunton, MA Airport"),  ("kowd", "Norwood, MA Airport"),  ("kfmh", "Falmouth Otis AFB, MA"),  
+				("kfit", "Fitchburg, MA Airport"),  ("kmvy", "Vineyard Haven, MA Airport"),  ("kewb", "New Bedford, MA Airport"),  
+				("kcqx", "Chatham, MA Airport"),  ("kuuu", "Newport, RI Airport"),  ("kpvd", "Providence, RI Airport"),  
+				("kbdl", "Hartford (Bradley AP), CT"),  ("kstl", "St. Louis, MO Airport"), ("kgpz", "Grand Rapids, MN Airport"),
+  			    ("kewr", "Newark, NJ Airport"), ("kovs", "Boscobel, WI Airport"), ("kcid", "Cedar Rapids, IA Airport"), 
 			    ("kiow", "Iowa City, IA Airport"), ("koma", "Omaha, NE Airport"), ("klnk", "Lincoln, NE Airport"),
 			    ("kcon", "Concord, NH Airport"), ("kash", "Nashua, NH Airport"), ("kmht", "Manchester, NH Airport"),
 			    ("kdlh", "Diluth, MN Airport"), ("kmsp", "Minneapolis, MN Airport"), ("krst", "Rochester, MN Airport"),
@@ -235,7 +252,7 @@ def run_stationList(list_options='all'):
 		
 		unsortedKeys = unsortedDict.keys()
 		unsortedKeys.sort()
-		for state in ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','IL']:
+		for state in ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','IL','SD','MO']:
 			for usk in unsortedKeys:
 				if state == unsortedDict[usk]['state']:
 					station_dict['stations'].append(unsortedDict[usk])

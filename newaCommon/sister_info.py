@@ -90,7 +90,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'pra' : {'temp': 'pul', 'rhum': 'pul', 'prcp': 'pul'},
 'ptb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kno', 'wspd': 'kno', 'wdir': 'kno', 'srad': 'kno'},
 'pul' : {'temp': 'bra', 'lwet': 'bra', 'rhum': 'bra', 'prcp': 'bra'},
-'loc' : {'temp': 'soa', 'lwet': 'soa', 'rhum': 'soa', 'prcp': 'soa', 'wspd': 'soa', 'srad': 'soa'},
+'loc' : {'temp': 'som', 'lwet': 'som', 'rhum': 'som', 'prcp': 'som', 'wspd': 'som', 'srad': 'som'},
 'red' : {'temp': 'kpou', 'rhum': 'kpou', 'prcp': 'kpou', 'lwet': 'hud', 'wspd': 'kpou', 'wdir': 'kpou', 'srad': 'hud'},
 'rip' : {'temp': 'por', 'rhum': 'por', 'prcp': 'por', 'lwet': 'por', 'wspd': 'por', 'wdir': 'por', 'srad': 'por'},
 'riv' : {'temp': 'rvp', 'rhum': 'rvp', 'prcp': 'rvp', 'lwet': 'rvp', 'wspd': 'rvp', 'wdir': 'rvp', 'srad': 'rvp'},

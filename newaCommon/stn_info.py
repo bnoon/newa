@@ -85,7 +85,6 @@ stn_info = {
 'she': {'name': 'Sheridan', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.50207, 'lon': -79.20513, 'elev': 750, 'network': 'newa', 'state': 'NY'},
 'shm': {'name': 'Southold (Mudd)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 41.06, 'lon': -72.45, 'elev': 25, 'network': 'newa', 'state': 'NY'},
 'sil': {'name': 'Silver Creek', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.54247, 'lon': -79.19673, 'elev': 608, 'network': 'newa', 'state': 'NY'},
-'soa': {'name': 'Appleton, South', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -78.651778, 'elev': 330.0, 'lat': 43.310440, 'network': 'newa', 'state': 'NY'},
 'sod': {'name': 'Sodus', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'toolow', 'lon': -77.078962, 'elev': 450.0, 'lat': 43.171946, 'network': 'newa', 'state': 'NY'},
 'som': {'name': 'Somerset', 'vars': ['temp', 'lwet', 'rhum', 'prcp', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -78.626908, 'elev': 318.0, 'lat': 43.325911, 'network': 'newa', 'state': 'NY'},
 'var': {'name': 'Varick (Swedish Hill)', 'vars': ['temp', 'lwet', 'rhum', 'prcp', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.81007, 'elev': 662.0, 'lat': 42.80248, 'network': 'newa', 'state': 'NY'},

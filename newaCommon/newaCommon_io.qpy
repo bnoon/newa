@@ -1,0 +1,207 @@
+import sys
+from mx import DateTime
+month_list = [(1,"January"),(2,"February"),(3,"March"),(4,"April"),(5,"May"),(6,"June"),
+			  (7,"July"),(8,"August"),(9,"September"),(10,"October"),(11,"November"),(12,"December")]
+
+def display_station_list [html] (list_type='all',state='all'):
+	from stn_info import stn_info
+	state = state.upper()
+	if state == 'ALL':
+		state_list = ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','SD','MO']
+	else:
+		state_list = [state]
+	sortdict = {}
+	# flop to sort by name
+	for k in stn_info.keys():
+		if state != 'ALL' and stn_info[k].has_key('state') and stn_info[k]['state'] != state: continue
+		if list_type == 'lw':
+			if 'lwet' in stn_info[k]['vars']:
+				sortdict[stn_info[k]['name']] = {}
+				sortdict[stn_info[k]['name']]['id'] = k
+				sortdict[stn_info[k]['name']]['state'] = stn_info[k]['state']
+		elif list_type == 'rh' :
+			if 'rhum' in stn_info[k]['vars']:
+				sortdict[stn_info[k]['name']] = {}
+				sortdict[stn_info[k]['name']]['id'] = k
+				sortdict[stn_info[k]['name']]['state'] = stn_info[k]['state']
+		elif list_type == 'eslw' :
+			if 'lwet' in stn_info[k]['vars'] or 'rhum' in stn_info[k]['vars']:
+				sortdict[stn_info[k]['name']] = {}
+				sortdict[stn_info[k]['name']]['id'] = k
+				sortdict[stn_info[k]['name']]['state'] = stn_info[k]['state']
+		elif list_type == 'lwrh':
+			if 'rhum' in stn_info[k]['vars'] and 'lwet' in stn_info[k]['vars']:
+				sortdict[stn_info[k]['name']] = {}
+				sortdict[stn_info[k]['name']]['id'] = k
+				sortdict[stn_info[k]['name']]['state'] = stn_info[k]['state']
+		elif list_type == 'goodsr':
+			if stn_info[k].has_key('srqual') and stn_info[k]['srqual'] == 'ok':
+				sortdict[stn_info[k]['name']] = {}
+				sortdict[stn_info[k]['name']]['id'] = k
+				sortdict[stn_info[k]['name']]['state'] = stn_info[k]['state']
+		elif list_type == 'srad':
+			if 'srad' in stn_info[k]['vars'] or stn_info[k]['network'] == 'icao':
+				sortdict[stn_info[k]['name']] = {}
+				sortdict[stn_info[k]['name']]['id'] = k
+				sortdict[stn_info[k]['name']]['state'] = stn_info[k]['state']
+		else:
+			sortdict[stn_info[k]['name']] = {}
+			sortdict[stn_info[k]['name']]['id'] = k
+			sortdict[stn_info[k]['name']]['state'] = stn_info[k]['state']
+	sky = sortdict.keys()
+	sky.sort()
+	'<p>Weather Station:'
+	'<br><select name="stn">'	
+	'<option value="" selected>Select station</option>'
+	for st in state_list:
+		for k in sky:
+			if sortdict[k]['state'] == st:
+				'<option value="%s">%s</option>' % (sortdict[k]['id'],k)
+	'</select>'
+
+def build_station_list (list_type='all',state='all'):
+	from stn_info import stn_info
+	state = state.upper()
+	if state == 'ALL':
+		state_list = ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','SD','MO']
+	else:
+		state_list = [state]
+	sortdict = {}
+	# flop to sort by name
+	for k in stn_info.keys():
+		if state != 'ALL' and stn_info[k].has_key('state') and stn_info[k]['state'] != state: continue
+		if list_type == 'lw':
+			if 'lwet' in stn_info[k]['vars']:
+				sortdict[stn_info[k]['name']] = {}
+				sortdict[stn_info[k]['name']]['id'] = k
+				sortdict[stn_info[k]['name']]['state'] = stn_info[k]['state']
+		elif list_type == 'rh' :
+			if 'rhum' in stn_info[k]['vars']:
+				sortdict[stn_info[k]['name']] = {}
+				sortdict[stn_info[k]['name']]['id'] = k
+				sortdict[stn_info[k]['name']]['state'] = stn_info[k]['state']
+		elif list_type == 'lwrh':
+			if 'rhum' in stn_info[k]['vars'] and 'lwet' in stn_info[k]['vars']:
+				sortdict[stn_info[k]['name']] = {}
+				sortdict[stn_info[k]['name']]['id'] = k
+				sortdict[stn_info[k]['name']]['state'] = stn_info[k]['state']
+		else:
+			sortdict[stn_info[k]['name']] = {}
+			sortdict[stn_info[k]['name']]['id'] = k
+			sortdict[stn_info[k]['name']]['state'] = stn_info[k]['state']
+	sky = sortdict.keys()
+	sky.sort()
+	station_list = []
+	for st in state_list:
+		for k in sky:
+			if sortdict[k]['state'] == st:
+				'<option value="%s">%s</option>' % (sortdict[k]['id'],k)
+				station_list.append((sortdict[k]['id'],k))
+	return station_list
+
+def build_inactive_list ():
+	from stn_info_inactive import stn_info_inactive as stn_info
+	sortdict = {}
+	# flop to sort by name
+	for k in stn_info.keys():
+		sortdict[stn_info[k]['name']] = {}
+		sortdict[stn_info[k]['name']]['id'] = k
+		sortdict[stn_info[k]['name']]['state'] = stn_info[k]['state']
+	sky = sortdict.keys()
+	sky.sort()
+	station_list = []
+	for st in ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','SD','MO']:
+		for k in sky:
+			if sortdict[k]['state'] == st:
+				station_list.append((sortdict[k]['id'],k))
+	return station_list
+
+def station_listing [html] (station_list, inactive_list):
+	'<select name="stn">'
+	'<option value="" selected>Select station</option>'
+	for stn, stn_name in station_list:
+		'<option value="%s">%s</option>' % (stn,stn_name)
+	'<option value="">-Inactive stations:-</option>'
+	for stn, stn_name in inactive_list:
+		'<option value="%s">%s</option>' % (stn,stn_name)
+	'</select>'
+
+def monyr_listing [html] ():
+	now = DateTime.now()
+	'&nbsp;&nbsp;&nbsp;Month: '
+	'<select name="month">'
+	for mon_num,mon_name in month_list:
+		if now.month == mon_num:
+			'<option value="%d" selected>%s</option>' % (mon_num,mon_name)
+		else:
+			'<option value="%d">%s</option>' % (mon_num,mon_name)
+	'</select>'
+	'&nbsp;&nbsp;&nbsp;Year:' 
+	'<select name="year">'
+	'<option value="%d" selected>%d</option>'%(now.year,now.year)
+	for yr in range(now.year-1,1995,-1):
+		'<option value="%d">%d</option>'%(yr,yr)
+	'</select>'
+
+def monyr_listing_tall [html] ():
+	now = DateTime.now()
+	'<P>Month: <BR>'
+	'<select name="month">'
+	for mon_num,mon_name in month_list:
+		if now.month == mon_num:
+			'<option value="%d" selected>%s</option>' % (mon_num,mon_name)
+		else:
+			'<option value="%d">%s</option>' % (mon_num,mon_name)
+	'</select>'
+	'<P>Year:<BR>' 
+	'<select name="year">'
+	'<option value="%d" selected>%d</option>'%(now.year,now.year)
+	for yr in range(now.year-1,1995,-1):
+		'<option value="%d">%d</option>'%(yr,yr)
+	'</select>'
+
+############################################
+
+def errmsg [html] (msg):
+	'''
+	<html>
+	<head>
+	<title>Error</title>
+	</head>
+	<body>
+	'''
+	'%s'%msg
+	'''
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''
+
+#--------------------------------------------------------------------------------------------		
+# no data message: optional additional information
+def nodata [html] (add_line=None):		
+	'''
+	<html>
+	<head>
+	<title>No data</title>
+	</head>
+	<body>
+	Data for the selected station/month/year are not available.
+	'''
+	if add_line: '<BR>&nbsp;&nbsp;&nbsp;%s'%add_line
+	'''
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</body>
+	</html>
+	'''
+
