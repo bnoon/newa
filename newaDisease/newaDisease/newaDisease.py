@@ -17,14 +17,152 @@ class program_exit (Exception):
 	pass
 
 # add hourly forecast data to end of hourly_data
-def add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt):
+def add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt,estp=False):
 	try:
-		from get_hourly_forecast import get_hourly_forecast
-		forecast_data = get_hourly_forecast(stn,start_fcst_dt,end_fcst_dt)
+		if (estp):
+			from get_hourly_forecast_estp import get_hourly_forecast_estp
+			forecast_data = get_hourly_forecast_estp(stn,start_fcst_dt,end_fcst_dt)		
+		else:
+			from get_hourly_forecast import get_hourly_forecast
+			forecast_data = get_hourly_forecast(stn,start_fcst_dt,end_fcst_dt)		
 		hourly_data = hourly_data+forecast_data
 	except:
 		print_exception()
 	return hourly_data	
+
+#--------------------------------------------------------------------------------------------		
+# add daily forecast data to end of daily_data
+def add_dly_fcst(stn,daily_data,start_fcst_dt,end_fcst_dt):
+	try:
+		from get_daily_forecast import get_daily_forecast
+		forecast_data = get_daily_forecast(stn,start_fcst_dt,end_fcst_dt)
+		daily_data = daily_data+forecast_data
+	except:
+		print_exception()
+	return daily_data	
+
+#--------------------------------------------------------------------------------------------		
+def hrly_to_dly (hourly_data):
+	daily_data = []
+	lt_end_hour = 23
+	miss=-999
+	try:		
+#		init counters
+		temp_sum = 0.
+		temp_cnt = 0.
+		temp_max = -9999.
+		temp_min = 9999.
+		prcp_sum = 0.
+		prcp_cnt = 0.
+		qpf_sum = 0.
+		qpf_cnt = 0.
+		pop12_list = []
+		rhum_sum = 0.
+		rhum_cnt = 0.
+		temp_dflag = ''
+		prcp_dflag = ''
+		pop12_dflag = ''
+		rhum_dflag = ''
+		qpf_dflag = ''
+		wdir_dflag = ''
+		srad_dflag = ''
+		st4i_dflag = ''
+			
+		for theTime,tempv,prcpv,pop12v,rhumv,miss,miss,miss,miss,eflags in hourly_data:
+			temp_eflag, prcp_eflag, pop12_eflag, rhum_eflag, wspd_eflag, wdir_eflag, srad_eflag, st4i_eflag = eflags
+			theDate = DateTime.DateTime(*theTime)
+
+#			do calculations for daily data
+			if tempv != miss:
+				temp_sum = temp_sum + tempv
+				if tempv > temp_max: temp_max = copy.deepcopy(tempv)
+				if tempv < temp_min: temp_min = copy.deepcopy(tempv)
+				temp_cnt = temp_cnt + 1
+				if temp_eflag in ['S','I','F']: temp_dflag = 'E'
+			if prcpv != miss:
+				prcp_sum = prcp_sum + prcpv
+				prcp_cnt = prcp_cnt + 1
+				if prcp_eflag != "P":
+					qpf_sum = qpf_sum + prcpv
+					qpf_cnt = qpf_cnt + 1
+				if prcp_eflag in ['S','I','F']:
+					prcp_dflag = 'E'
+					qpf_dflag = 'E'
+			if pop12v != miss:
+				pop12_list.append((theDate.hour,int(pop12v)))
+				if pop12_eflag in ['S','I','F']: pop12_dflag = 'E'
+			if rhumv != miss:
+				if rhumv >= 90: rhum_sum = rhum_sum + 1
+				rhum_cnt = rhum_cnt + 1
+				if rhum_eflag in ['S','I','F']: rhum_dflag = 'E'
+			
+#			end of "day" update
+			last_hr = lt_end_hour-theDate.dst
+			if last_hr == 24:
+				last_hr = 0
+				day_diff = -1
+			else:
+				day_diff = 0
+			if theDate.hour == last_hr:
+				if temp_cnt > 0:
+					dly_temp_ave = temp_sum/temp_cnt
+					dly_temp_max = temp_max
+					dly_temp_min = temp_min
+				else:
+					dly_temp_ave = miss
+					dly_temp_max = miss
+					dly_temp_min = miss
+				if prcp_cnt > 0:
+					dly_prcp_tot = prcp_sum
+				else:
+					dly_prcp_tot = miss
+				if qpf_cnt > 0:
+					dly_qpf_tot = qpf_sum
+				else:
+					dly_qpf_tot = miss
+				if len(pop12_list) > 0:
+					dly_pop12 = pop12_list
+				else:
+					dly_pop12 = []
+				if rhum_cnt > 0:
+					dly_rhum_hrs = rhum_sum
+				else:
+					dly_rhum_hrs = miss
+				
+#				save daily data
+				if day_diff == 0:
+					ddt = theDate
+				else:
+					ddt = theDate + DateTime.RelativeDate(days=day_diff)
+				dflags = (temp_dflag, prcp_dflag, pop12_dflag, rhum_dflag, qpf_dflag, wdir_dflag, srad_dflag, st4i_dflag)
+				daily_data.append(([ddt.year,ddt.month,ddt.day], 
+						 dly_temp_ave, dly_temp_max, dly_temp_min, dly_prcp_tot, dly_pop12, \
+						 dly_rhum_hrs, miss, miss, dly_qpf_tot, miss, \
+						 miss, dflags))
+				
+				temp_sum = 0.
+				temp_cnt = 0.
+				temp_max = -9999.
+				temp_min = 9999.
+				prcp_sum = 0.
+				prcp_cnt = 0.
+				qpf_sum = 0.
+				qpf_cnt = 0.
+				pop12_list = []
+				rhum_sum = 0.
+				rhum_cnt = 0.
+				temp_dflag = ''
+				prcp_dflag = ''
+				pop12_dflag = ''
+				rhum_dflag = ''
+				qpf_dflag = ''
+				wdir_dflag = ''
+				srad_dflag = ''
+				st4i_dflag = ''
+	except:
+		print_exception()
+
+	return daily_data
 
 #--------------------------------------------------------------------------------------------		
 class Potato (Base, general_simcast):
@@ -366,7 +504,7 @@ class Potato (Base, general_simcast):
 				station_type = 'njwx'
 			elif len(stn) == 4:
 				station_type = 'icao'
-			elif stn[0:3] == 'cu_' or stn[0:3] == 'um_' or stn[0:3] == "un_" or stn[0:3] == "uc_":
+			elif stn[0:3] == 'cu_' or stn[0:3] == 'um_':
 				station_type = 'cu_log'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
@@ -752,7 +890,170 @@ class Apple (Base):
 #			print_exception()
 				
 #--------------------------------------------------------------------------------------------		
-class Onion (Base):
+class Cabbage (Base):
+#	def run_cabbage_maggot (self,stn):
+#		try:
+#			# obtain daily data
+#			end_date_dt = DateTime.now()
+#			start_date_dt = DateTime.DateTime(end_date_dt.year,1,1,1)		
+#			daily_data, station_name = self.get_daily (stn, start_date_dt, end_date_dt)
+#			
+#			if len(daily_data) > 0:
+#				# base 4deg C GDD 
+#				daily_degday = self.degday_calcs (daily_data,start_date_dt,end_date_dt,'dd4c')
+#			else:
+#				return self.nodata (stn, station_name, start_date_dt, end_date_dt)
+#
+#			if len(daily_degday) > 0:
+#				return newaDisease_io.cabbage_maggot_html(station_name,daily_degday)
+#			else:
+#				return self.nodata(stn, station_name, start_date_dt, end_date_dt)
+#		except:
+#			print_exception()
+
+	#  save dates for use later
+	def setup_dates (self,smry_dict,end_date_dt):
+		try:
+			smry_dict['day0'] = {}
+			smry_dict['pday1'] = {}
+			smry_dict['pday2'] = {}
+			smry_dict['fday1'] = {}
+			smry_dict['fday2'] = {}
+			smry_dict['fday3'] = {}
+			smry_dict['fday4'] = {}
+			smry_dict['fday5'] = {}
+			
+			day0 = end_date_dt
+			day0 = day0 + DateTime.RelativeDate(hour=0,minute=0,second=0)
+			pday1 = day0 + DateTime.RelativeDate(days=-1)
+			pday2 = day0 + DateTime.RelativeDate(days=-2)
+			fday1 = day0 + DateTime.RelativeDate(days=+1)
+			fday2 = day0 + DateTime.RelativeDate(days=+2)
+			fday3 = day0 + DateTime.RelativeDate(days=+3)
+			fday4 = day0 + DateTime.RelativeDate(days=+4)
+			fday5 = day0 + DateTime.RelativeDate(days=+5)
+	
+			smry_dict['day0']['ymd']  = (day0.year,day0.month,day0.day)
+			smry_dict['pday1']['ymd'] = (pday1.year,pday1.month,pday1.day)
+			smry_dict['pday2']['ymd'] = (pday2.year,pday2.month,pday2.day)
+			smry_dict['fday1']['ymd'] = (fday1.year,fday1.month,fday1.day)
+			smry_dict['fday2']['ymd'] = (fday2.year,fday2.month,fday2.day)
+			smry_dict['fday3']['ymd'] = (fday3.year,fday3.month,fday3.day)
+			smry_dict['fday4']['ymd'] = (fday4.year,fday4.month,fday4.day)
+			smry_dict['fday5']['ymd'] = (fday5.year,fday5.month,fday5.day)
+	
+			smry_dict['day0']['date']  = '%s %d' % (month_names[day0.month][0:3],day0.day)
+			smry_dict['pday1']['date'] = '%s %d' % (month_names[pday1.month][0:3],pday1.day)
+			smry_dict['pday2']['date'] = '%s %d' % (month_names[pday2.month][0:3],pday2.day)
+			smry_dict['fday1']['date'] = '%s %d' % (month_names[fday1.month][0:3],fday1.day)
+			smry_dict['fday2']['date'] = '%s %d' % (month_names[fday2.month][0:3],fday2.day)
+			smry_dict['fday3']['date'] = '%s %d' % (month_names[fday3.month][0:3],fday3.day)
+			smry_dict['fday4']['date'] = '%s %d' % (month_names[fday4.month][0:3],fday4.day)
+			smry_dict['fday5']['date'] = '%s %d' % (month_names[fday5.month][0:3],fday5.day)
+		except:
+			print_exception()
+		return smry_dict
+
+	#--------------------------------------------------------------------------------------------		
+	# add degree days to dictionary
+	def add_ddays (self,smry_dict,degday_dict,start_date_dt,end_date_dt):
+		try:
+			day0 =  end_date_dt + DateTime.RelativeDate(hour=0,minute=0,second=0)
+			pday1 = day0 + DateTime.RelativeDate(days=-1)
+			pday2 = day0 + DateTime.RelativeDate(days=-2)
+			fday1 = day0 + DateTime.RelativeDate(days=+1)
+			fday2 = day0 + DateTime.RelativeDate(days=+2)
+			fday3 = day0 + DateTime.RelativeDate(days=+3)
+			fday4 = day0 + DateTime.RelativeDate(days=+4)
+			fday5 = day0 + DateTime.RelativeDate(days=+5)
+			smry_dict['day0']['dday']  = 'NA'
+			smry_dict['pday1']['dday'] = 'NA'
+			smry_dict['pday2']['dday'] = 'NA'
+			smry_dict['fday1']['dday'] = 'NA'
+			smry_dict['fday2']['dday'] = 'NA'
+			smry_dict['fday3']['dday'] = 'NA'
+			smry_dict['fday4']['dday'] = 'NA'
+			smry_dict['fday5']['dday'] = 'NA'
+			smry_dict['day0']['accdday']  = 'NA'
+			smry_dict['pday1']['accdday'] = 'NA'
+			smry_dict['pday2']['accdday'] = 'NA'
+			smry_dict['fday1']['accdday'] = 'NA'
+			smry_dict['fday2']['accdday'] = 'NA'
+			smry_dict['fday3']['accdday'] = 'NA'
+			smry_dict['fday4']['accdday'] = 'NA'
+			smry_dict['fday5']['accdday'] = 'NA'
+
+			# add ddays for last three days, forecast next 5 days
+			accum = 0.
+			for theDate,max,min,gdd,prcp in degday_dict:
+				theDate_dt = DateTime.DateTime(*theDate) + DateTime.RelativeDate(hour=0,minute=0,second=0)
+				if accum != miss and gdd != miss: accum = accum + gdd
+				for td,std in [(day0,'day0'),(pday1,'pday1'),(pday2,'pday2'),(fday1,'fday1'),(fday2,'fday2'),(fday3,'fday3'),(fday4,'fday4'),(fday5,'fday5')]:
+					if td == theDate_dt and gdd != miss: 
+						smry_dict[std]['dday'] = int(round(gdd,0))
+						if accum != miss: smry_dict[std]['accdday'] = int(round(accum,0))
+		except:
+			print_exception()
+		return smry_dict
+
+	#--------------------------------------------------------------------------------------------		
+	def run_cabbage_maggot (self,stn,accend):
+		try:
+			now = DateTime.now()
+			if not accend:
+				accend = now
+			smry_dict = {}
+			# obtain daily data
+			end_date_dt = accend
+			midOctober = DateTime.DateTime(end_date_dt.year,10,15,23)
+			if end_date_dt > midOctober:
+				 return newaDisease_io.cabbage_maggot_dormant(smry_dict)
+			start_date_dt = DateTime.DateTime(end_date_dt.year,1,1,1)		
+
+			if end_date_dt.year != now.year:
+				smry_dict['this_year'] = False
+				end_date_dt = end_date_dt + DateTime.RelativeDate(days = +6)
+			else:
+				smry_dict['this_year'] = True
+
+			hourly_data, daily_data, download_time, station_name, avail_vars = self.get_hddata2 (stn, start_date_dt, end_date_dt)
+
+			# add forecast data
+			if smry_dict['this_year']:
+				start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
+				end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6)
+				hourly_data = add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
+				daily_data = hrly_to_dly(hourly_data)
+			else:
+				start_fcst_dt = end_date_dt + DateTime.RelativeDate(hours = +1)
+				end_fcst_dt = end_date_dt	
+				end_date_dt = end_date_dt + DateTime.RelativeDate(days = -6)
+
+
+#			daily_data, station_name = self.get_daily (stn, start_date_dt, end_date_dt)
+#			start_fcst_dt = DateTime.DateTime(*daily_data[-1][0]) + DateTime.RelativeDate(days = +1)
+#			end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +5)
+#			daily_data = add_dly_fcst(stn,daily_data,start_fcst_dt,end_fcst_dt)
+			
+			if len(daily_data) > 0:
+				# base 40degF GDD 
+				degday_dict = self.degday_calcs (daily_data,start_date_dt,end_fcst_dt,'dd40', "accum")
+
+				if len(degday_dict) > 0:
+					# get dates for gdd table
+					smry_dict = self.setup_dates(smry_dict, end_date_dt)
+					# get dd for days of interest (including forecast)
+					smry_dict = self.add_ddays(smry_dict,degday_dict,start_date_dt,end_date_dt)
+					return newaDisease_io.cabbage_maggot_html(station_name,smry_dict,degday_dict)
+				else:
+					return self.nodata(stn, station_name, start_date_dt, end_date_dt)
+			else:
+				return self.nodata (stn, station_name, start_date_dt, end_date_dt)
+		except:
+			print_exception()
+
+#--------------------------------------------------------------------------------------------		
+class Onion (Base, Cabbage):
 	# determine botrytis spore_index for given day
 	def get_bot_sindx(self,d3_temp,d3_vpd):
 		spore_index = miss
@@ -1120,19 +1421,109 @@ class Onion (Base):
 		except:
 			print_exception()
 		return dly_altvar
+		
+	#--------------------------------------------------------------------------------------------		
+	# add pop forecast
+	def add_pops (self,smry_dict,end_date_dt,pops_list):
+		try:
+			day0 =  end_date_dt + DateTime.RelativeDate(hour=0,minute=0,second=0)
+			fday1 = day0 + DateTime.RelativeDate(days=+1)
+			fday2 = day0 + DateTime.RelativeDate(days=+2)
+			fday3 = day0 + DateTime.RelativeDate(days=+3)
+			fday4 = day0 + DateTime.RelativeDate(days=+4)
+			fday5 = day0 + DateTime.RelativeDate(days=+5)
+
+			smry_dict['pops']  = {}
+			smry_dict['pops']['day0'] = {}
+			smry_dict['pops']['pday1'] = {}
+			smry_dict['pops']['pday2'] = {}
+			smry_dict['pops']['fday1'] = {}
+			smry_dict['pops']['fday2'] = {}
+			smry_dict['pops']['fday3'] = {}
+			smry_dict['pops']['fday4'] = {}
+			smry_dict['pops']['fday5'] = {}
+			smry_dict['pops']['day0']['am']  = miss
+			smry_dict['pops']['pday1']['am'] = miss
+			smry_dict['pops']['pday2']['am'] = miss
+			smry_dict['pops']['fday1']['am'] = miss
+			smry_dict['pops']['fday2']['am'] = miss
+			smry_dict['pops']['fday3']['am'] = miss
+			smry_dict['pops']['fday4']['am'] = miss
+			smry_dict['pops']['fday5']['am'] = miss
+			smry_dict['pops']['day0']['pm']  = miss
+			smry_dict['pops']['pday1']['pm'] = miss
+			smry_dict['pops']['pday2']['pm'] = miss
+			smry_dict['pops']['fday1']['pm'] = miss
+			smry_dict['pops']['fday2']['pm'] = miss
+			smry_dict['pops']['fday3']['pm'] = miss
+			smry_dict['pops']['fday4']['pm'] = miss
+			smry_dict['pops']['fday5']['pm'] = miss
+
+			# add pops for today and forecast next 5 days
+			for theDate,qpf,pop in pops_list:
+				if pop != miss:
+					theDate_dt = DateTime.DateTime(*theDate) + DateTime.RelativeDate(hour=0,minute=0,second=0)
+					if theDate[3] < 12:
+						which = 'am'
+					else:
+						which = 'pm'
+					if day0 == theDate_dt:
+						smry_dict['pops']['day0'][which] = pop
+					elif fday1 == theDate_dt:
+						smry_dict['pops']['fday1'][which] = pop
+					elif fday2 == theDate_dt:
+						smry_dict['pops']['fday2'][which] = pop
+					elif fday3 == theDate_dt:
+						smry_dict['pops']['fday3'][which] = pop
+					elif fday4 == theDate_dt:
+						smry_dict['pops']['fday4'][which] = pop
+					elif fday5 == theDate_dt:
+						smry_dict['pops']['fday5'][which] = pop
+		except:
+			print_exception()
+		return smry_dict
 	
 	#--------------------------------------------------------------------------------------------		
-	def run_onion_dis(self,stn,year,month,day,product):
+	def run_onion_dis(self,stn,month,day,product,accend,output):
+		from get_precip_forecast import get_precip_forecast
+		now = DateTime.now()
+		if not accend:
+			accend = now
+		smry_dict = {}
+		smry_dict["output"] = output
 		try:
 			# obtain daily data
-			now = DateTime.now()
+			year = accend.year
 			plant_date = DateTime.DateTime(year,month,day,1)
-			if year == now.year:
-				end_date_dt = now
+			end_date_dt = accend
+			pday3 = end_date_dt + DateTime.RelativeDate(days = -3, hour=1)
+			if plant_date > end_date_dt:
+				return newaCommon_io.errmsg('Plant date must be before date of interest')
+##			midOctober = DateTime.DateTime(end_date_dt.year,10,15,23)
+##			if end_date_dt > midOctober:
+##				return newaDisease_io.onion_dis_dormant(smry_dict)
+			if end_date_dt.year != now.year:
+				smry_dict['this_year'] = False
+				end_date_dt = end_date_dt + DateTime.RelativeDate(days = +6)
 			else:
-				end_date_dt = DateTime.DateTime(year,10,1,1)
-			hourly_data, download_time, station_name = self.get_hourly (stn, plant_date, end_date_dt)
-			
+				smry_dict['this_year'] = True
+			if plant_date > pday3:
+				start_hrly = pday3
+			else:
+				start_hrly = plant_date
+			hourly_data, download_time, station_name = self.get_hourly (stn, start_hrly, end_date_dt)
+			smry_dict['last_time'] = download_time
+
+			# add hourly forecast data
+			if smry_dict['this_year']:
+				start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
+				end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6) + DateTime.RelativeDate(hour=23,minute=0,second=0.0)
+				hourly_data = add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
+			else:
+				start_fcst_dt = end_date_dt + DateTime.RelativeDate(hours = +1)
+				end_fcst_dt = end_date_dt
+				end_date_dt = end_date_dt + DateTime.RelativeDate(days = -6)
+								
 			if len(hourly_data) > 0:
 				# compute daily values needed for later computations
 				daily_onion = self.get_dly_onion(hourly_data)
@@ -1159,7 +1550,136 @@ class Onion (Base):
 
 				if product == 'onion_dis':
 					if len(blight_alert) > 0 or len(alternaria) > 0 or len(botrytis) > 0 or len(mildew) > 0:
-						return newaDisease_io.onion_dis_html(station_name,blight_alert,plant_date,alternaria,botrytis,mildew)
+### new summary table dictionary creation
+						last_day = end_date_dt + DateTime.RelativeDate(hour=23,minute=0,second=0.0)
+						first_day = last_day + DateTime.RelativeDate(days = -6)
+						bot_favorable_count = 0
+						bot_spore_count = 0
+						bot_day_count = 0
+						ba_favorable_count = 0
+						ba_ipi_count = 0
+						ba_day_count = 0
+						mba_favorable_count = 0
+						mba_ipi_count = 0
+						mba_day_count = 0
+						dm_favorable_count = 0
+						dm_day_count = 0
+						pb_favorable_count = 0
+						pb_val_count = 0
+						pb_day_count = 0
+						theDate = first_day
+						while theDate <= last_day:
+							dkey = (theDate.year,theDate.month,theDate.day)
+							if botrytis.has_key(dkey):
+								spore_index, bf = botrytis[dkey]
+								if spore_index != miss:
+									bot_day_count += 1
+									bot_spore_count += spore_index					
+									if spore_index >= 50:
+										bot_favorable_count += 1
+							if blight_alert.has_key(dkey):
+								ba_ipi, mba_ipi = blight_alert[dkey]
+								if ba_ipi != miss:
+									ba_day_count += 1
+									ba_ipi_count += ba_ipi
+									if ba_ipi >= 7:
+										ba_favorable_count += 1
+								if mba_ipi != miss:
+									mba_day_count += 1
+									mba_ipi_count += mba_ipi
+									if mba_ipi >= 7:
+										mba_favorable_count += 1
+							if mildew.has_key(dkey):
+								status = mildew[dkey]
+								if status != 'Unavailable':
+									dm_day_count += 1
+									if status == 'Favorable':
+										dm_favorable_count += 1					
+							if alternaria.has_key(dkey):
+								pbval, pbrisk = alternaria[dkey]
+								if pbval != miss:
+									pb_day_count += 1
+									pb_val_count += pbval
+									if pbval >= 5.7:
+										pb_favorable_count += 1					
+							theDate = theDate + DateTime.RelativeDate(days = +1)
+	
+						if bot_day_count == 7:
+							smry_dict["botrytis_days"] = bot_favorable_count
+						else:
+							smry_dict["botrytis_days"] = '-'
+						if bot_day_count > 0:
+							smry_dict["botrytis_avg"] = int(round(bot_spore_count/bot_day_count))
+						else:
+							smry_dict["botrytis_avg"] = '-'
+						smry_dict["botrytis_today"] = int(round(botrytis[last_day.year,last_day.month,last_day.day][0]))
+						if ba_day_count == 7:
+							smry_dict["blightalert_days"] = ba_favorable_count
+						else:
+							smry_dict["blightalert_days"] = '-'
+						if ba_day_count > 0:
+							smry_dict["blightalert_avg"] = round(ba_ipi_count/ba_day_count, 2)
+						else:
+							smry_dict["blightalert_avg"] = '-'
+						smry_dict["blightalert_today"] = round(blight_alert[last_day.year,last_day.month,last_day.day][0], 2)
+						if mba_day_count == 7:
+							smry_dict["modblightalert_days"] = mba_favorable_count
+						else:
+							smry_dict["modblightalert_days"] = '-'
+						if mba_day_count > 0:
+							smry_dict["modblightalert_avg"] = round(mba_ipi_count/mba_day_count, 2)
+						else:
+							smry_dict["modblightalert_avg"] = '-'
+						smry_dict["modblightalert_today"] = round(blight_alert[last_day.year,last_day.month,last_day.day][1], 2)
+						if dm_day_count == 7:
+							smry_dict["downymildew_days"] = dm_favorable_count
+						else:
+							smry_dict["downywildew_days"] = '-'
+						smry_dict["downymildew_today"] = mildew[last_day.year,last_day.month,last_day.day]
+						if pb_day_count == 7:
+							smry_dict["purpleblotch_days"] = pb_favorable_count
+						else:
+							smry_dict["purpleblotch_days"] = '-'
+						if pb_day_count > 0:
+							smry_dict["purpleblotch_avg"] = round(pb_val_count/pb_day_count, 1)
+						else:
+							smry_dict["purpleblotch_avg"] = '-'
+						smry_dict["purpleblotch_today"] = round(alternaria[last_day.year,last_day.month,last_day.day][0], 1)
+
+						smry_dict['day0'] = {}
+						smry_dict['day0']['date'] = '%s %d' % (month_names[last_day.month][0:3],last_day.day)
+						smry_dict['day0']['ymd'] = (last_day.year,last_day.month,last_day.day)
+						for dy in range(1,6):
+							theDate = last_day + DateTime.RelativeDate(days = +dy)
+							index = 'fday' + str(dy)
+							smry_dict[index] = '%s %d' % (month_names[theDate.month][0:3],theDate.day)
+							index = 'ymd' + str(dy)
+							smry_dict[index] = (theDate.year,theDate.month,theDate.day)
+							index = 'botrytis_fday' + str(dy)
+							smry_dict[index] = int(round(botrytis[theDate.year,theDate.month,theDate.day][0]))
+							index = 'blightalert_fday' + str(dy)
+							smry_dict[index] = round(blight_alert[theDate.year,theDate.month,theDate.day][0], 2)
+							index = 'modblightalert_fday' + str(dy)
+							smry_dict[index] = round(blight_alert[theDate.year,theDate.month,theDate.day][1], 2)
+							index = 'downymildew_fday' + str(dy)
+							smry_dict[index] = mildew[theDate.year,theDate.month,theDate.day]
+							index = 'purpleblotch_fday' + str(dy)
+							smry_dict[index] = round(alternaria[theDate.year,theDate.month,theDate.day][0], 1)
+						# get 12-hour pops
+						pops_list = get_precip_forecast (stn,end_date_dt + DateTime.RelativeDate(hour=0,minute=0,second=0.0),end_fcst_dt)
+						smry_dict = self.add_pops(smry_dict,end_date_dt,pops_list)
+						
+						last_prcp_dt = start_hrly + DateTime.RelativeDate(hours = -1)
+						for i in range(len(hourly_data), 0, -1):
+							theTime,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags = hourly_data[i-1]
+							temp_eflag, prcp_eflag, pop12_eflag, rhum_eflag, wspd_eflag, wdir_eflag, srad_eflag, st4i_eflag = eflags
+							if prcp != miss and prcp_eflag != "P":
+								last_prcp_dt = DateTime.DateTime(*theTime)
+								break
+						smry_dict["last_prcp"] = last_prcp_dt
+						
+						return newaDisease_io.onion_dis_html(station_name,blight_alert,plant_date,alternaria,botrytis,mildew,smry_dict)
+### end new section
 					else:
 						return self.nodata(stn, station_name, plant_date, end_date_dt)
 				elif product == 'onion_onlog':
@@ -1186,7 +1706,63 @@ class Onion (Base):
 			return newaCommon_io.errmsg('Unable to complete request')
 	
 	#--------------------------------------------------------------------------------------------		
-	def run_onion_maggot (self,stn):
+	def run_onion_maggot (self,stn,accend):
+		try:
+			now = DateTime.now()
+			if not accend:
+				accend = now
+			smry_dict = {}
+			# obtain daily data
+			end_date_dt = accend
+			midOctober = DateTime.DateTime(end_date_dt.year,10,15,23)
+			if end_date_dt > midOctober:
+				 return newaDisease_io.onion_maggot_dormant(smry_dict)
+				 
+			if end_date_dt.year != now.year:
+				smry_dict['this_year'] = False
+				end_date_dt = end_date_dt + DateTime.RelativeDate(days = +6)
+			else:
+				smry_dict['this_year'] = True
+				
+			# obtain hourly and daily data
+			start_date_dt = DateTime.DateTime(end_date_dt.year,1,1,1)		
+			hourly_data, daily_data, download_time, station_name, avail_vars = self.get_hddata2 (stn, start_date_dt, end_date_dt)
+
+			# add forecast data
+			if smry_dict['this_year']:
+				start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
+				end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6)
+				hourly_data = add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
+				daily_data = hrly_to_dly(hourly_data)
+			else:
+				start_fcst_dt = end_date_dt + DateTime.RelativeDate(hours = +1)
+				end_fcst_dt = end_date_dt	
+				end_date_dt = end_date_dt + DateTime.RelativeDate(days = -6)
+
+#			daily_data, station_name = self.get_daily (stn, start_date_dt, end_date_dt)
+#			start_fcst_dt = DateTime.DateTime(*daily_data[-1][0]) + DateTime.RelativeDate(days = +1)
+#			end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +5)
+#			daily_data = add_dly_fcst(stn,daily_data,start_fcst_dt,end_fcst_dt)
+			
+			if len(daily_data) > 0:
+				# base 40degF GDD 
+				degday_dict = self.degday_calcs (daily_data,start_date_dt,end_fcst_dt,'dd40', "accum")
+
+				if len(degday_dict) > 0:
+					# get dates for gdd table
+					smry_dict = self.setup_dates(smry_dict, end_date_dt)
+					# get dd for days of interest (including forecast)
+					smry_dict = self.add_ddays(smry_dict,degday_dict,start_date_dt,end_date_dt)
+					return newaDisease_io.onion_maggot_html(station_name,smry_dict,degday_dict)
+				else:
+					return self.nodata(stn, station_name, start_date_dt, end_date_dt)
+			else:
+				return self.nodata (stn, station_name, start_date_dt, end_date_dt)
+		except:
+			print_exception()
+
+	#--------------------------------------------------------------------------------------------		
+	def run_onion_maggot_old (self,stn):
 		try:
 			# obtain daily data
 			end_date_dt = DateTime.now()
@@ -1224,159 +1800,6 @@ class Alfalfa (Base):
 				return newaDisease_io.alf_weev_html(station_name,daily_degday)
 			else:
 				return self.nodata(stn, station_name, start_date_dt, end_date_dt)
-		except:
-			print_exception()
-
-#--------------------------------------------------------------------------------------------		
-class Cabbage (Base):
-#	def run_cabbage_maggot (self,stn):
-#		try:
-#			# obtain daily data
-#			end_date_dt = DateTime.now()
-#			start_date_dt = DateTime.DateTime(end_date_dt.year,1,1,1)		
-#			daily_data, station_name = self.get_daily (stn, start_date_dt, end_date_dt)
-#			
-#			if len(daily_data) > 0:
-#				# base 4deg C GDD 
-#				daily_degday = self.degday_calcs (daily_data,start_date_dt,end_date_dt,'dd4c')
-#			else:
-#				return self.nodata (stn, station_name, start_date_dt, end_date_dt)
-#
-#			if len(daily_degday) > 0:
-#				return newaDisease_io.cabbage_maggot_html(station_name,daily_degday)
-#			else:
-#				return self.nodata(stn, station_name, start_date_dt, end_date_dt)
-#		except:
-#			print_exception()
-
-	#  save dates for use later
-	def setup_dates (self,smry_dict,end_date_dt):
-		try:
-			smry_dict['day0'] = {}
-			smry_dict['pday1'] = {}
-			smry_dict['pday2'] = {}
-			smry_dict['fday1'] = {}
-			smry_dict['fday2'] = {}
-			smry_dict['fday3'] = {}
-			smry_dict['fday4'] = {}
-			smry_dict['fday5'] = {}
-			
-			day0 = end_date_dt
-			day0 = day0 + DateTime.RelativeDate(hour=0,minute=0,second=0)
-			pday1 = day0 + DateTime.RelativeDate(days=-1)
-			pday2 = day0 + DateTime.RelativeDate(days=-2)
-			fday1 = day0 + DateTime.RelativeDate(days=+1)
-			fday2 = day0 + DateTime.RelativeDate(days=+2)
-			fday3 = day0 + DateTime.RelativeDate(days=+3)
-			fday4 = day0 + DateTime.RelativeDate(days=+4)
-			fday5 = day0 + DateTime.RelativeDate(days=+5)
-	
-			smry_dict['day0']['ymd']  = (day0.year,day0.month,day0.day)
-			smry_dict['pday1']['ymd'] = (pday1.year,pday1.month,pday1.day)
-			smry_dict['pday2']['ymd'] = (pday2.year,pday2.month,pday2.day)
-			smry_dict['fday1']['ymd'] = (fday1.year,fday1.month,fday1.day)
-			smry_dict['fday2']['ymd'] = (fday2.year,fday2.month,fday2.day)
-			smry_dict['fday3']['ymd'] = (fday3.year,fday3.month,fday3.day)
-			smry_dict['fday4']['ymd'] = (fday4.year,fday4.month,fday4.day)
-			smry_dict['fday5']['ymd'] = (fday5.year,fday5.month,fday5.day)
-	
-			smry_dict['day0']['date']  = '%s %d' % (month_names[day0.month][0:3],day0.day)
-			smry_dict['pday1']['date'] = '%s %d' % (month_names[pday1.month][0:3],pday1.day)
-			smry_dict['pday2']['date'] = '%s %d' % (month_names[pday2.month][0:3],pday2.day)
-			smry_dict['fday1']['date'] = '%s %d' % (month_names[fday1.month][0:3],fday1.day)
-			smry_dict['fday2']['date'] = '%s %d' % (month_names[fday2.month][0:3],fday2.day)
-			smry_dict['fday3']['date'] = '%s %d' % (month_names[fday3.month][0:3],fday3.day)
-			smry_dict['fday4']['date'] = '%s %d' % (month_names[fday4.month][0:3],fday4.day)
-			smry_dict['fday5']['date'] = '%s %d' % (month_names[fday5.month][0:3],fday5.day)
-		except:
-			print_exception()
-		return smry_dict
-
-	#--------------------------------------------------------------------------------------------		
-	# add daily forecast data to end of daily_data
-	def add_dly_fcst(self,stn,daily_data,start_fcst_dt,end_fcst_dt):
-		try:
-			from get_daily_forecast import get_daily_forecast
-			forecast_data = get_daily_forecast(stn,start_fcst_dt,end_fcst_dt)
-			daily_data = daily_data+forecast_data
-		except:
-			print_exception()
-		return daily_data	
-
-	#--------------------------------------------------------------------------------------------		
-	# add degree days to dictionary
-	def add_ddays (self,smry_dict,degday_dict,start_date_dt,end_date_dt):
-		try:
-			day0 =  end_date_dt + DateTime.RelativeDate(hour=0,minute=0,second=0)
-			pday1 = day0 + DateTime.RelativeDate(days=-1)
-			pday2 = day0 + DateTime.RelativeDate(days=-2)
-			fday1 = day0 + DateTime.RelativeDate(days=+1)
-			fday2 = day0 + DateTime.RelativeDate(days=+2)
-			fday3 = day0 + DateTime.RelativeDate(days=+3)
-			fday4 = day0 + DateTime.RelativeDate(days=+4)
-			fday5 = day0 + DateTime.RelativeDate(days=+5)
-			smry_dict['day0']['dday']  = 'NA'
-			smry_dict['pday1']['dday'] = 'NA'
-			smry_dict['pday2']['dday'] = 'NA'
-			smry_dict['fday1']['dday'] = 'NA'
-			smry_dict['fday2']['dday'] = 'NA'
-			smry_dict['fday3']['dday'] = 'NA'
-			smry_dict['fday4']['dday'] = 'NA'
-			smry_dict['fday5']['dday'] = 'NA'
-			smry_dict['day0']['accdday']  = 'NA'
-			smry_dict['pday1']['accdday'] = 'NA'
-			smry_dict['pday2']['accdday'] = 'NA'
-			smry_dict['fday1']['accdday'] = 'NA'
-			smry_dict['fday2']['accdday'] = 'NA'
-			smry_dict['fday3']['accdday'] = 'NA'
-			smry_dict['fday4']['accdday'] = 'NA'
-			smry_dict['fday5']['accdday'] = 'NA'
-
-			# add ddays for last three days, forecast next 5 days
-			accum = 0.
-			for theDate,max,min,gdd,prcp in degday_dict:
-				theDate_dt = DateTime.DateTime(*theDate) + DateTime.RelativeDate(hour=0,minute=0,second=0)
-				if accum != miss and gdd != miss: accum = accum + gdd
-				for td,std in [(day0,'day0'),(pday1,'pday1'),(pday2,'pday2'),(fday1,'fday1'),(fday2,'fday2'),(fday3,'fday3'),(fday4,'fday4'),(fday5,'fday5')]:
-					if td == theDate_dt and gdd != miss: 
-						smry_dict[std]['dday'] = int(round(gdd,0))
-						if accum != miss: smry_dict[std]['accdday'] = int(round(accum,0))
-		except:
-			print_exception()
-		return smry_dict
-
-	#--------------------------------------------------------------------------------------------		
-	def run_cabbage_maggot (self,stn,accend):
-		try:
-			if not accend:
-				accend = DateTime.now()
-			smry_dict = {}
-			# obtain daily data
-			end_date_dt = accend
-			midOctober = DateTime.DateTime(end_date_dt.year,10,15,23)
-			if end_date_dt > midOctober:
-				 return newaDisease_io.cabbage_maggot_dormant(smry_dict)
-			start_date_dt = DateTime.DateTime(end_date_dt.year,1,1,1)		
-			daily_data, station_name = self.get_daily (stn, start_date_dt, end_date_dt)
-
-			start_fcst_dt = DateTime.DateTime(*daily_data[-1][0]) + DateTime.RelativeDate(days = +1)
-			end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +5)
-			daily_data = self.add_dly_fcst(stn,daily_data,start_fcst_dt,end_fcst_dt)
-			
-			if len(daily_data) > 0:
-				# base 40degF GDD 
-				degday_dict = self.degday_calcs (daily_data,start_date_dt,end_fcst_dt,'dd40', "accum")
-
-				if len(degday_dict) > 0:
-					# get dates for gdd table
-					smry_dict = self.setup_dates(smry_dict, end_date_dt)
-					# get dd for days of interest (including forecast)
-					smry_dict = self.add_ddays(smry_dict,degday_dict,start_date_dt,end_date_dt)
-					return newaDisease_io.cabbage_maggot_html(station_name,smry_dict,degday_dict)
-				else:
-					return self.nodata(stn, station_name, start_date_dt, end_date_dt)
-			else:
-				return self.nodata (stn, station_name, start_date_dt, end_date_dt)
 		except:
 			print_exception()
 
@@ -1988,7 +2411,7 @@ def process_input (request,path):
 			elif smry_type == 'potato_pdays':
 				return Potato().run_potato_pdays(stn,year,month,day,output)
 			elif smry_type in ['onion_dis','onion_onlog','onion_sbalog','onion_smbalog']:
-				return Onion().run_onion_dis(stn,year,month,day,smry_type)
+				return Onion().run_onion_dis(stn,month,day,smry_type,accend,output)
 			elif smry_type == 'tomato_for':
 				return Tomato().run_tomato_for(stn,year,month,day,output)
 			elif smry_type == 'grape_dis':
@@ -1998,7 +2421,7 @@ def process_input (request,path):
 			elif smry_type == 'cabbage_maggot':
 				return Cabbage().run_cabbage_maggot(stn,accend)
 			elif smry_type == 'onion_maggot':
-				return Onion().run_onion_maggot(stn)
+				return Onion().run_onion_maggot(stn,accend)
 			else:
 				return newaCommon_io.errmsg('Error processing form; check input')
 		else:
