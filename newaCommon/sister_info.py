@@ -155,6 +155,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'mno' : {'temp': 'korh', 'rhum': 'korh', 'prcp': 'korh', 'wspd': 'korh', 'wdir': 'korh', 'lwet': 'msw', 'srad': 'msw'},
 'mna' : {'temp': 'klwm', 'rhum': 'klwm', 'prcp': 'klwm', 'wspd': 'klwm', 'wdir': 'klwm', 'lwet': 'mdr', 'srad': 'mty'},
 'mnb' : {'temp': 'msh', 'rhum': 'msh', 'prcp': 'msh', 'wspd': 'msh', 'wdir': 'msh', 'lwet': 'msh', 'srad': 'msh'},
+'mle' : {'temp': 'kfit', 'rhum': 'kfit', 'prcp': 'kfit', 'wspd': 'kfit', 'wdir': 'kfit', 'lwet': 'mbo', 'srad': 'mbo'},
 'nh_hol' : {'temp': 'kash', 'rhum': 'kash', 'prcp': 'kash', 'wspd': 'kash', 'wdir': 'kash', 'lwet': 'mty', 'srad': 'mty'},
 'wi_gay' : {'temp': 'kovs', 'rhum': 'kovs', 'prcp': 'kovs', 'wspd': 'kovs', 'wdir': 'kovs', 'lwet': 'mn_lac', 'srad': 'mn_lac'},
 'um_whs' : {'temp': 'kmqe', 'rhum': 'kmqe', 'prcp': 'kmqe', 'wspd': 'kmqe', 'wdir': 'kmqe', 'lwet': 'msh', 'srad': 'msh'},
