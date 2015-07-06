@@ -1,0 +1,789 @@
+############################################
+# Input screen 
+############################################
+import sys
+from qpy import h8
+from mx import DateTime
+if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
+from newaCommon_io import display_station_list
+miss = -999
+month_abb = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+month_names = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
+
+def apple_et_input [html] ():
+	'''
+	<!DOCTYPE html>
+	<html lang="en">
+	  <head>
+		<meta http-equiv="content-type" content="text/html"/>
+		<title>Cornell Apple ET Model</title>
+		<link rel="stylesheet" type="text/css" href="http://newa.nrcc.cornell.edu/Humanity/ui.all.css">
+		<link rel="stylesheet" href="http://newa.nrcc.cornell.edu/newa_styles.css" type="text/css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mapping3.js"></script>
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/apple_et.js"></script>
+		<style type="text/css">
+			#leftbox {
+				position: absolute;
+				margin: 0 0 0 0px;
+				padding: 2px;
+				width: 194px;
+				border: 1px gray solid; }
+			#rightbox {
+				position: absolute;
+				margin: 0 0 0 200px;
+				padding: 0px;
+				width: 643px;
+				border: 0px gray solid; }
+		</style>
+	  </head>
+	
+	<body onload="update_help();">
+		<div class="banner">Cornell Apple ET Model</div>
+		<div id="leftbox">
+			<form action="#" name="stationLister">
+
+	'''		
+	display_station_list('goodsr', 'all')
+	'''		
+			<p>Select Date:
+				<br><input type="text" name="accend" id="enddpick" value="">
+				<p><input type="button" value="Continue" class="button">
+			</form>
+		</div>
+
+		<div id="rightbox">
+			<div id="righttabs">
+				<ul>
+					<li><a href="#first"> Map</a></li>
+					<li><a href="#second">Results</a></li>
+					<li><a href="#third"> More info</a></li>
+				</ul>
+				<div id="first" style="padding:0px;">
+					<div id="map" style="width: 635px; height: 560px"></div>
+				</div>
+				<div id="second" class="plain_back" style="padding:3px;">
+					Results will appear here.
+				</div>
+				<div id="third"  class="plain_back_l">
+					Helpful information will appear here.
+				</div>
+			</div>
+		</div>
+		<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+		<script type="text/javascript">
+		try {
+		var pageTracker = _gat._getTracker("UA-8808137-1");
+		pageTracker._trackPageview();
+		} catch(err) {}</script>
+	  </body>
+	</html>
+	'''
+
+def apple_thin_input [html] ():
+	'''
+	<!DOCTYPE html>
+	<html lang="en">
+	  <head>
+		<meta http-equiv="content-type" content="text/html"/>
+		<title>Cornell Apple Carbohydrate Thinning Model</title>
+		<link rel="stylesheet" type="text/css" href="http://newa.nrcc.cornell.edu/Humanity/ui.all.css">
+		<link rel="stylesheet" href="http://newa.nrcc.cornell.edu/newa_styles.css" type="text/css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<!-- 
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.fixedheader.js"></script>
+ -->
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mapping3.js"></script>
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/apple_thin.js"></script>
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/apple_thin_graph.js"></script>
+		<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+		<script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
+		<style type="text/css">
+			#leftbox {
+				position: absolute;
+				margin: 0 0 0 0px;
+				padding: 2px;
+				width: 194px;
+				border: 1px gray solid; }
+			#rightbox {
+				position: absolute;
+				margin: 0 0 0 200px;
+				padding: 0px;
+				width: 643px;
+				border: 0px gray solid; }
+		</style>
+	  </head>
+	
+	<body onload="update_help();">
+		<div class="banner">Cornell Apple Carbohydrate Thinning Model</div>
+		<div id="leftbox">
+			<form action="#" name="stationLister">
+
+	'''		
+	display_station_list('goodsr', 'all')
+	'''		
+			<p>Select Date:
+				<br><input type="text" name="accend" id="enddpick" value="">
+				<p><input type="button" value="Continue" class="button">
+			</form>
+		</div>
+
+		<div id="rightbox">
+			<div id="righttabs">
+				<ul>
+					<li><a href="#first"> Map</a></li>
+					<li><a href="#second">Results</a></li>
+					<li><a href="#third"> More info</a></li>
+				</ul>
+				<div id="first" style="padding:0px;">
+					<div id="map" style="width: 635px; height: 560px"></div>
+				</div>
+				<div id="second" class="plain_back" style="padding:3px;">
+					Results will appear here.
+				</div>
+				<div id="third"  class="plain_back_l">
+					Helpful information will appear here.
+				</div>
+			</div>
+		</div>
+		<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+		<script type="text/javascript">
+		try {
+		var pageTracker = _gat._getTracker("UA-8808137-1");
+		pageTracker._trackPageview();
+		} catch(err) {}</script>
+	  </body>
+	</html>
+	'''
+
+############################################
+# Output pages
+############################################
+# help page
+def helppage [html] (urls):		
+	if urls: 
+		'<h3>Helpful Information</h3>'
+		'<ul>'
+		for desc,url in urls:
+			if len(url) > 0:
+				'<li><a href="%s" target="_blank">%s</a></li>' % (url,desc)
+			else:
+				'<li>%s</li>' % (desc)
+		'</ul>'
+	else:
+		'<p>No help available at this time.</p>'
+		
+#--------------------------------------------------------------------------------------------		
+# standard footer
+def add_footer [html] (smry_dict=None,add_logo=None):
+	'''
+	<br />
+	<span style="text-align:center;"><table cellspacing="0" cellpadding="0" border="0" width="97%">
+	'''
+	
+	if add_logo == 'pmep':
+		'<tr><td align=left width="33%"><a href="http://newa.cornell.edu" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
+		'<td align=center width="34%"><a href="http://treefruitipm.info" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/pmep_logo.jpg" alt="PMEP" width="70" height="25" border="0"></a></td>'
+		'<td align=right width="33%"><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
+	else:
+		'<tr><td align=left><a href="http://newa.cornell.edu" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
+		'<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
+	'</table></span>'
+
+
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		</div>
+		<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+		<script type="text/javascript">
+		try {
+		var pageTracker = _gat._getTracker("UA-8808137-1");
+		pageTracker._trackPageview();
+		} catch(err) {}</script>
+		</body>
+		</html>
+		'''
+
+#--------------------------------------------------------------------------------------------		
+# apple et output
+def apple_et_specs [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<!DOCTYPE html>
+		<html lang="en">
+		<head>
+			<title>Cornell Apple ET Model</title>
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+			<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/apple_et.js"></script>
+		</head>
+		<body>
+		'''
+	'''	
+	<style>
+		#second input { text-align:center; }
+		#second button { background-color:#33CC66; display:none;  }
+		.et_table { border-collapse:collapse; border:1px solid black; text-align:center; width:100%; }
+		.et_table th { border:1px solid darkblue; padding:3px; }
+		.et_table td { border:1px solid darkblue; padding:1px; }
+		.et_table caption { border:1px solid black; padding:5px; }
+		.et_table tbody { width: 628px; overflow:scroll; }
+		#results_div { margin-top:2em; }
+	</style>
+	<script>
+		$(function () {
+			$("#calc_button").on('click', function () {
+				apple_et();
+			});
+			$("#inrow").keyup(function () {
+				updateTrees();
+			});
+			$("#betrow").keyup(function () {
+				updateTrees();
+			});
+			$("#trees_acre").keyup(function (e) {
+				if (e.keyCode === 13) {
+					if ($("#calc_button").is(":visible")) {
+						$("#calc_button").trigger('click');
+					}
+				} else if (e.keyCode !== 9) {
+					enterTrees();
+				}
+			}).focus();
+			$("#greentip").datepicker({ changeMonth: true }).change(function () {
+				$("#results_div").empty();
+				$("#calc_button").show().off('click').on('click', function () {
+					apple_et();
+				});
+			});
+		});
+	</script>
+	'''
+	'<h3>Apple ET Model for %s</h3>' % smry_dict['station_name']
+	'''
+	<p id="spec_text">Green tip date below is estimated from growing degree day accumulations. Enter your orchard's green tip date to fine-tune results. 
+	Enter in-row and between-row spacing (or trees/acre) and select age of orchard from menu. Click "Calculate" to obtain results.</p>
+	<table class="et_table">
+		<tr>
+			<th>Green tip date</td>
+			<th>In row spacing</td>
+			<th>Between row spacing</td>
+			<th>Trees per acre</td>
+			<th>Age of orchard</td>
+			<th>Water balance</td>
+		</tr>
+		<tr>
+	'''
+	if smry_dict.has_key('greentip'):
+		'<td><input id="greentip" name="greentip" type="text" size="11" maxlength="10" value="%s" /></td>' % smry_dict['greentip']
+	else:
+		'<td><input id="greentip" name="greentip" type="text" size="11" maxlength="10" value="mm/dd/yyyy" /></td>'
+	'''
+			<td><input id="inrow" type="text" size="3" maxlength="3" /> feet</td>
+			<td><input id="betrow" type="text" size="3" maxlength="3" /> feet</td>
+			<td><input id="trees_acre" type="text" size="5" maxlength="5" /></td>
+			<td>
+				<select id="orchard_age">
+					<option label="Mature" value="mature" selected>Mature</option>
+					<option label="4 year-old" value="4">4 year-old</option>
+					<option label="3 year-old" value="3">3 year-old</option>
+					<option label="2 year-old" value="2">2 year-old</option>
+					<option label="1 year-old" value="1">1 year-old</option>
+				</select>
+			</td>
+	'''
+	if smry_dict.has_key('greentip'):
+		'<td><button id="calc_button">Calculate</button></td>'
+	else:
+		'<td><button id="calc_button" display="none">Calculate</button></td>'
+	'''
+		</tr>
+	</table>
+	<div id="results_div">
+	'''
+	if not smry_dict.has_key('greentip'):
+		'<p>Report cannot be generated before green tip. If green tip has occurred, enter the date of occurrence above.</p>'
+	'''
+	</div>
+	'''
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'</body>'
+		'</html>'
+
+#--------------------------------------------------------------------------------------------		
+# apple et output
+def apple_et_results [html] (smry_dict):
+	if not smry_dict:
+		'<p>Report cannot be generated before green tip. If green tip has occurred, enter the date of occurrence above.</p>'
+		return
+	days = smry_dict['data'].keys()
+	days.sort()
+	'''
+	<table id="results_table" class="et_table">
+		<caption class="header_line_silver_back">Apple Evapotranspiration Model Results</caption>
+		<tbody>
+		<tr class="green_back">
+			<th>Date</th>
+			<td><b>Model ET</b></td>
+			<td colspan=2><b>Orchard ET</b> (gallons)</td>
+			<td colspan=2><b>Rainfall</b></td>
+			<td><b>Irrigation</b></td>
+			<td colspan=2><b>Water Balance</b> (gallons/acre)</td>
+		</tr>
+		<tr class="green_back">
+			<th>&nbsp;</th>
+			<td>liters/tree</td>
+			<td>per tree</td>
+			<td>per acre</td>
+			<td>inches</td>
+			<td>gallons/acre</td>
+			<td>gallons/acre</td>
+			<td>Daily</td>
+			<td>Cumulative</td>
+		</tr>
+		<tr class="blue_back">
+	'''
+	mmdd = smry_dict['data'][days[0]]['date'].split(" ")
+	'<td>%s&nbsp;%s</td>' % (mmdd[0],mmdd[1])
+	'<td id="metl1">%.2f</td>' % round(smry_dict['data'][days[0]]['et'],2)
+	'''
+			<td id="gpt1"></td>
+			<td id="etg1"></td>
+	'''
+	if smry_dict['data'][days[0]]['prcp'] == -999:
+		'<td><input id="raini1" class="raini" type="text" size="5" maxlength="5" value="-" /></td>'
+	else:
+		'<td><input id="raini1" class="raini" type="text" size="5" maxlength="5" value="%.2f" /></td>' % round(smry_dict['data'][days[0]]['prcp'],2)
+	'''
+			<td id="raing1"></td>
+			<td><input id="irrg1" class="irrg" type="text" size="5" maxlength="5" value="0" /></td>
+			<td id="balance1"></td>
+			<td id="cmlbalance1"></td>
+		</tr>
+		<tr class="blue_back">
+	'''
+	mmdd = smry_dict['data'][days[1]]['date'].split(" ")
+	'<td>%s&nbsp;%s</td>' % (mmdd[0],mmdd[1])
+	'<td id="metl2">%.2f</td>' % round(smry_dict['data'][days[1]]['et'],2)
+	'''
+			<td id="gpt2"></td>
+			<td id="etg2"></td>
+	'''
+	if smry_dict['data'][days[1]]['prcp'] == -999:
+		'<td><input id="raini2" class="raini" type="text" size="5" maxlength="5" value="-" /></td>'
+	else:
+		'<td><input id="raini2" class="raini" type="text" size="5" maxlength="5" value="%.2f" /></td>' % round(smry_dict['data'][days[1]]['prcp'],2)
+	'''
+			<td id="raing2"></td>
+			<td><input id="irrg2" class="irrg" type="text" size="5" maxlength="5" value="0" /></td>
+			<td id="balance2"></td>
+			<td id="cmlbalance2"></td>
+		</tr>
+		<tr class="blue_back">
+	'''
+	mmdd = smry_dict['data'][days[2]]['date'].split(" ")
+	'<td>%s&nbsp;%s</td>' % (mmdd[0],mmdd[1])
+	'<td id="metl3">%.2f</td>' % round(smry_dict['data'][days[2]]['et'],2)
+	'''
+			<td id="gpt3"></td>
+			<td id="etg3"></td>
+	'''
+	if smry_dict['data'][days[2]]['prcp'] == -999:
+		'<td><input id="raini3" class="raini" type="text" size="5" maxlength="5" value="-" /></td>'
+	else:
+		'<td><input id="raini3" class="raini" type="text" size="5" maxlength="5" value="%.2f" /></td>' % round(smry_dict['data'][days[2]]['prcp'],2)
+	'''
+			<td id="raing3"></td>
+			<td><input id="irrg3" class="irrg" type="text" size="5" maxlength="5" value="0" /></td>
+			<td id="balance3"></td>
+			<td id="cmlbalance3"></td>
+		</tr>
+		<tr class="blue_back">
+	'''
+	mmdd = smry_dict['data'][days[3]]['date'].split(" ")
+	'<td>%s&nbsp;%s</td>' % (mmdd[0],mmdd[1])
+	'<td id="metl4">%.2f</td>' % round(smry_dict['data'][days[3]]['et'],2)
+	'''
+			<td id="gpt4"></td>
+			<td id="etg4"></td>
+	'''
+	if smry_dict['data'][days[3]]['prcp'] == -999:
+		'<td><input id="raini4" class="raini" type="text" size="5" maxlength="5" value="-" /></td>'
+	else:
+		'<td><input id="raini4" class="raini" type="text" size="5" maxlength="5" value="%.2f" /></td>' % round(smry_dict['data'][days[3]]['prcp'],2)
+	'''
+			<td id="raing4"></td>
+			<td><input id="irrg4" class="irrg" type="text" size="5" maxlength="5" value="0" /></td>
+			<td id="balance4"></td>
+			<td id="cmlbalance4"></td>
+		</tr>
+		<tr class="blue_back">
+	'''
+	mmdd = smry_dict['data'][days[4]]['date'].split(" ")
+	'<td>%s&nbsp;%s</td>' % (mmdd[0],mmdd[1])
+	'<td id="metl5">%.2f</td>' % round(smry_dict['data'][days[4]]['et'],2)
+	'''
+			<td id="gpt5"></td>
+			<td id="etg5"></td>
+	'''
+	if smry_dict['data'][days[4]]['prcp'] == -999:
+		'<td><input id="raini5" class="raini" type="text" size="5" maxlength="5" value="-" /></td>'
+	else:
+		'<td><input id="raini5" class="raini" type="text" size="5" maxlength="5" value="%.2f" /></td>' % round(smry_dict['data'][days[4]]['prcp'],2)
+	'''
+			<td id="raing5"></td>
+			<td><input id="irrg5" class="irrg" type="text" size="5" maxlength="5" value="0" /></td>
+			<td id="balance5"></td>
+			<td id="cmlbalance5"></td>
+		</tr>
+		<tr class="blue_back">
+	'''
+	mmdd = smry_dict['data'][days[5]]['date'].split(" ")
+	'<td>%s&nbsp;%s</td>' % (mmdd[0],mmdd[1])
+	'<td id="metl6">%.2f</td>' % round(smry_dict['data'][days[5]]['et'],2)
+	'''
+			<td id="gpt6"></td>
+			<td id="etg6"></td>
+	'''
+	if smry_dict['data'][days[5]]['prcp'] == -999:
+		'<td><input id="raini6" class="raini" type="text" size="5" maxlength="5" value="-" /></td>'
+	else:
+		'<td><input id="raini6" class="raini" type="text" size="5" maxlength="5" value="%.2f" /></td>' % round(smry_dict['data'][days[5]]['prcp'],2)
+	'''
+			<td id="raing6"></td>
+			<td><input id="irrg6" class="irrg" type="text" size="5" maxlength="5" value="0" /></td>
+			<td id="balance6"></td>
+			<td id="cmlbalance6"></td>
+		</tr>
+		<tr class="blue_back">
+	'''
+	mmdd = smry_dict['data'][days[6]]['date'].split(" ")
+	'<td>%s&nbsp;%s</td>' % (mmdd[0],mmdd[1])
+	'<td id="metl7">%.2f</td>' % round(smry_dict['data'][days[6]]['et'],2)
+	'''
+			<td id="gpt7"></td>
+			<td id="etg7"></td>
+	'''
+	if smry_dict['data'][days[6]]['prcp'] == -999:
+		'<td><input id="raini7" class="raini" type="text" size="5" maxlength="5" value="-" /></td>'
+	else:
+		'<td><input id="raini7" class="raini" type="text" size="5" maxlength="5" value="%.2f" /></td>' % round(smry_dict['data'][days[6]]['prcp'],2)
+	'''
+			<td id="raing7"></td>
+			<td><input id="irrg7" class="irrg" type="text" size="5" maxlength="5" value="0" /></td>
+			<td id="balance7"></td>
+			<td id="cmlbalance7"></td>
+		</tr>
+		<tr class="green_back">
+	'''
+	mmdd = smry_dict['data'][days[7]]['date'].split(" ")
+	'<td>%s&nbsp;%s</td>' % (mmdd[0],mmdd[1])
+	'<td id="metl8">%.2f</td>' % round(smry_dict['data'][days[7]]['et'],2)
+	'''
+			<td id="gpt8"></td>
+			<td id="etg8"></td>
+	'''
+	if smry_dict['data'][days[7]]['prcp'] == -999:
+		'<td><input id="raini8" class="raini" type="text" size="5" maxlength="5" value="-" /></td>'
+	else:
+		'<td><input id="raini8" class="raini" type="text" size="5" maxlength="5" value="%.2f" /></td>' % round(smry_dict['data'][days[7]]['prcp'],2)
+	'''
+			<td id="raing8"></td>
+			<td><input id="irrg8" class="irrg" type="text" size="5" maxlength="5" value="0" /></td>
+			<td id="balance8"></td>
+			<td id="cmlbalance8"></td>
+		</tr>
+		<tr class="palegoldenrod_back">
+	'''
+	mmdd = smry_dict['data'][days[8]]['date'].split(" ")
+	'<td>%s&nbsp;%s</td>' % (mmdd[0],mmdd[1])
+	'<td id="metl9">%.2f</td>' % round(smry_dict['data'][days[8]]['et'],2)
+	'''
+			<td id="gpt9"></td>
+			<td id="etg9"></td>
+	'''
+	if smry_dict['data'][days[8]]['prcp'] == -999:
+		'<td><input id="raini9" class="raini" type="text" size="5" maxlength="5" value="-" /></td>'
+	else:
+		'<td><input id="raini9" class="raini" type="text" size="5" maxlength="5" value="%.2f" /></td>' % round(smry_dict['data'][days[8]]['prcp'],2)
+	'''
+			<td id="raing9"></td>
+			<td><input id="irrg9" class="irrg" type="text" size="5" maxlength="5" value="0" /></td>
+			<td id="balance9"></td>
+			<td id="cmlbalance9"></td>
+		</tr>
+		<tr class="palegoldenrod_back">
+	'''
+	mmdd = smry_dict['data'][days[9]]['date'].split(" ")
+	'<td>%s&nbsp;%s</td>' % (mmdd[0],mmdd[1])
+	'<td id="metl10">%.2f</td>' % round(smry_dict['data'][days[9]]['et'],2)
+	'''
+			<td id="gpt10"></td>
+			<td id="etg10"></td>
+	'''
+	if smry_dict['data'][days[9]]['prcp'] == -999:
+		'<td><input id="raini10" class="raini" type="text" size="5" maxlength="5" value="-" /></td>'
+	else:
+		'<td><input id="raini10" class="raini" type="text" size="5" maxlength="5" value="%.2f" /></td>' % round(smry_dict['data'][days[9]]['prcp'],2)
+	'''
+			<td id="raing10"></td>
+			<td><input id="irrg10" class="irrg" type="text" size="5" maxlength="5" value="0" /></td>
+			<td id="balance10"></td>
+			<td id="cmlbalance10"></td>
+		</tr>
+		<tr class="palegoldenrod_back">
+	'''
+	mmdd = smry_dict['data'][days[10]]['date'].split(" ")
+	'<td>%s&nbsp;%s</td>' % (mmdd[0],mmdd[1])
+	'<td id="metl11">%.2f</td>' % round(smry_dict['data'][days[10]]['et'],2)
+	'''
+			<td id="gpt11"></td>
+			<td id="etg11"></td>
+	'''
+	if smry_dict['data'][days[10]]['prcp'] == -999:
+		'<td><input id="raini11" class="raini" type="text" size="5" maxlength="5" value="-" /></td>'
+	else:
+		'<td><input id="raini11" class="raini" type="text" size="5" maxlength="5" value="%.2f" /></td>' % round(smry_dict['data'][days[10]]['prcp'],2)
+	'''
+			<td id="raing11"></td>
+			<td><input id="irrg11" class="irrg" type="text" size="5" maxlength="5" value="0" /></td>
+			<td id="balance11"></td>
+			<td id="cmlbalance11"></td>
+		</tr>
+		<tr class="palegoldenrod_back">
+	'''
+	mmdd = smry_dict['data'][days[11]]['date'].split(" ")
+	'<td>%s&nbsp;%s</td>' % (mmdd[0],mmdd[1])
+	'<td id="metl12">%.2f</td>' % round(smry_dict['data'][days[11]]['et'],2)
+	'''
+			<td id="gpt12"></td>
+			<td id="etg12"></td>
+	'''
+	if smry_dict['data'][days[11]]['prcp'] == -999:
+		'<td><input id="raini12" class="raini" type="text" size="5" maxlength="5" value="-" /></td>'
+	else:
+		'<td><input id="raini12" class="raini" type="text" size="5" maxlength="5" value="%.2f" /></td>' % round(smry_dict['data'][days[11]]['prcp'],2)
+	'''
+			<td id="raing12"></td>
+			<td><input id="irrg12" class="irrg" type="text" size="5" maxlength="5" value="0" /></td>
+			<td id="balance12"></td>
+			<td id="cmlbalance12"></td>
+		</tr>
+		<tr class="palegoldenrod_back">
+	'''
+	mmdd = smry_dict['data'][days[12]]['date'].split(" ")
+	'<td>%s&nbsp;%s</td>' % (mmdd[0],mmdd[1])
+	'<td id="metl13">%.2f</td>' % round(smry_dict['data'][days[12]]['et'],2)
+	'''
+			<td id="gpt13"></td>
+			<td id="etg13"></td>
+	'''
+	if smry_dict['data'][days[12]]['prcp'] == -999:
+		'<td><input id="raini13" class="raini" type="text" size="5" maxlength="5" value="-" /></td>'
+	else:
+		'<td><input id="raini13" class="raini" type="text" size="5" maxlength="5" value="%.2f" /></td>' % round(smry_dict['data'][days[12]]['prcp'],2)
+	'''
+			<td id="raing13"></td>
+			<td><input id="irrg13" class="irrg" type="text" size="5" maxlength="5" value="0" /></td>
+			<td id="balance13"></td>
+			<td id="cmlbalance13"></td>
+		</tr>
+		<tr class="palegoldenrod_back">
+	'''
+	mmdd = smry_dict['data'][days[13]]['date'].split(" ")
+	'<td>%s&nbsp;%s</td>' % (mmdd[0],mmdd[1])
+	'<td id="metl14">%.2f</td>' % round(smry_dict['data'][days[13]]['et'],2)
+	'''
+			<td id="gpt14"></td>
+			<td id="etg14"></td>
+	'''
+	if smry_dict['data'][days[13]]['prcp'] == -999:
+		'<td><input id="raini14" class="raini" type="text" size="5" maxlength="5" value="-" /></td>'
+	else:
+		'<td><input id="raini14" class="raini" type="text" size="5" maxlength="5" value="%.2f" /></td>' % round(smry_dict['data'][days[13]]['prcp'],2)
+	'''
+			<td id="raing14"></td>
+			<td><input id="irrg14" class="irrg" type="text" size="5" maxlength="5" value="0" /></td>
+			<td id="balance14"></td>
+			<td id="cmlbalance14"></td>
+		</tr>
+		</tbody>
+	</table>
+	<p>You can enter your own rainfall or irrigation amounts and click the "Calculate" button which will appear above to recalculate the water balance.</p>
+	'''
+	add_footer(smry_dict)
+
+#--------------------------------------------------------------------------------------------		
+# apple thinning output
+def apple_thin_specs [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<!DOCTYPE html>
+		<html lang="en">
+		<head>
+			<title>Apple Carbohydrate Thinning Model</title>
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+<!-- 
+			<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.fixedheader.js"></script>
+ -->
+			<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/apple_thin.js"></script>
+			<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/apple_thin_graph.js"></script>
+			<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+			<script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
+		</head>
+		<body>
+		'''
+	'''	
+	<style>
+		#second input { text-align:center; }
+		#second button { background-color:#33CC66; }
+		.thin_table { border-collapse:collapse; border:1px solid black; text-align:center; width:100%; }
+		.thin_table th, .thin_table td { border:1px solid darkblue; padding:3px; }
+		.thin_table caption { border:1px solid black; padding:5px; }
+		.thin_table tbody { width: 628px; overflow:scroll; }
+		#results_div { margin-top:2em; }
+	</style>
+	<script>
+		$(function () {
+			$("#calc_button").on('click', function () {
+				$(this).hide();
+				apple_thin();
+			});
+			$("#greentip").datepicker({ changeMonth: true }).change(function () {
+				$("#results_div").empty();
+				$("#calc_button").show();
+			});
+			$("#bloom").datepicker({ changeMonth: true }).change(function () {
+				$("#results_div").empty();
+				$("#calc_button").show();
+			});
+		});
+	</script>
+	'''
+	'<h3>Apple Carbohydrate Thinning Model for %s</h3>' % smry_dict['station_name']
+	'''
+	<p id="spec_text">Green tip and bloom dates below are estimated from growing degree day accumulations. Enter your orchard's dates to fine-tune results. 
+	Click "Calculate" to obtain results.</p>
+	<table class="thin_table">
+		<tr>
+			<th>Green tip date</td>
+			<th>Bloom date</td>
+			<th>Calculate</td>
+		</tr>
+		<tr>
+	'''
+	if smry_dict.has_key('greentip'):
+		'<td><input id="greentip" name="greentip" type="text" size="11" maxlength="10" value="%s" /></td>' % smry_dict['greentip']
+	else:
+		'<td><input id="greentip" name="greentip" type="text" size="11" maxlength="10" value="mm/dd/yyyy" /></td>'
+	if smry_dict.has_key('bloom'):
+		'<td><input id="bloom" name="bloom" type="text" size="11" maxlength="10" value="%s" /></td>' % smry_dict['bloom']
+	else:
+		'<td><input id="bloom" name="bloom" type="text" size="11" maxlength="10" value="mm/dd/yyyy" /></td>'
+	if smry_dict.has_key('greentip'):
+		'<td><button id="calc_button">Calculate</button></td>'
+	else:
+		'<td><button id="calc_button" style="display:none;">Calculate</button></td>'
+	'''
+		</tr>
+	</table>
+	<div id="results_div">
+	'''
+	if not smry_dict.has_key('greentip'):
+		'<p>Report cannot be generated before green tip. If green tip has occurred, enter the date of occurrence above.</p>'
+	if not smry_dict.has_key('bloom'):
+		'<p>Recommendations will commence with bloom. If bloom has occurred, enter the date of occurrence above.</p>'
+	'''
+	</div>
+	'''
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'</body>'
+		'</html>'
+
+#--------------------------------------------------------------------------------------------		
+# temperature conversion c to f
+def ctof (tempc):
+	if tempc == miss:
+		return miss
+	else:
+		return round((((9.0/5.0) * tempc) + 32.), 0)
+
+#--------------------------------------------------------------------------------------------		
+# apple thin output
+def apple_thin_results [html] (smry_dict):
+	if not smry_dict:
+		'<p>Report cannot be generated before green tip. If green tip has occurred, enter the date of occurrence above.</p>'
+		return
+	days_keys = smry_dict['data'].keys()
+	days_keys.sort()
+	'''
+	<table id="results_table" class="thin_table">
+		<caption class="header_line_silver_back">Apple Carbohydrate Thinning Model Results</caption>
+		<thead>
+		<tr class="green_back">
+			<th rowspan=2>Date</th>
+			<th rowspan=2><b>Max Temp</b><br />(&deg;F)</td>
+			<th rowspan=2><b>Min Temp</b><br />(&deg;F)</td>
+			<th rowspan=2><b>Solar Rad</b><br />(MJ/m2)</td>
+			<th colspan=4><b>Tree Carbohydrate Status (g/day)</b></td>
+			<th rowspan=2><b>Thinning Recommendation</b></td>
+		</tr>
+		<tr class="green_back">
+			<th><b>Production</b></td>
+			<th><b>Demand</b></td>
+			<th><b>Balance</b></td>
+			<th><b>4-Day Ave Balance</b></td>
+		</tr>
+		</thead>
+		<tbody>
+	'''
+	accend = smry_dict['selectedDate']
+	thisDay = smry_dict['greentipDate']
+	bloomDay = smry_dict['bloomDate']
+	if bloomDay:
+		recommendEnd = bloomDay + DateTime.RelativeDate(days=+35)
+	for day in days_keys:
+		if smry_dict['data'][day]['maxt'] == miss or smry_dict['data'][day]['mint'] == miss or smry_dict['data'][day]['srad'] == miss:
+			smry_dict['data'][day]['maxt'] = miss
+			smry_dict['data'][day]['mint'] = miss
+			smry_dict['data'][day]['srad'] = miss
+			smry_dict['data'][day]['dlyCarbonBal'] = miss
+			smry_dict['data'][day]['totalDemand'] = miss
+			smry_dict['data'][day]['thinIndex'] = miss
+		if thisDay < accend:
+			trc = "blue_back"
+		elif thisDay == accend:
+			trc = "green_back"
+		else:
+			trc = "palegoldenrod_back"
+		'<tr class="' + '%s'%trc + '">'
+		'<td>%s/%s</td>' % (thisDay.month, thisDay.day)
+		'<td>%d</td>' % ctof(smry_dict['data'][day]['maxt'])
+		'<td>%d</td>' % ctof(smry_dict['data'][day]['mint'])
+		'<td>%.1f</td>' % round(smry_dict['data'][day]['srad'], 1)
+		'<td>%.2f</td>' % round(smry_dict['data'][day]['dlyCarbonBal'], 2)
+		'<td>%.2f</td>' % round(smry_dict['data'][day]['totalDemand'], 2)
+		'<td class="dly_thin">%.2f</td>' % round(smry_dict['data'][day]['thinIndex'], 2)
+		'<td class="4dy_thin"></td>'
+		if bloomDay and thisDay >= bloomDay and thisDay <= recommendEnd:
+			'<td class="recommend"></td>'
+		else:
+			'<td class="recommend norecommend">-</td>'
+		'</tr>'
+		thisDay = thisDay + DateTime.RelativeDate(days=+1)
+	'''
+		</tbody>
+	</table>
+	<div id="chart_area"></div>
+	'''
+	add_footer(smry_dict)
+
