@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" >
+  <head>
+    <style type="text/css">v\:* {behavior:url(#default#VML);}</style>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Google Maps JavaScript API Example</title>
+    <link href="http://data.rcc-acis.org/Map/map.css" rel="stylesheet" type="text/css" />
+    <script src="http://www.google.com/jsapi"></script>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAYdOz4fjwWGZL7jy4b_9SvBStJMtSJFp7tyvoXtgKd0qQevLlZxQFqa3WVLv4W42TQwK7-2Khkk2Wyg"></script>
+    <script src="http://data.rcc-acis.org/Map/js/dragzoom.js" type="text/javascript"></script>
+    <script src="http://newa.nrcc.cornell.edu/js/mm.js" type="text/javascript"></script>
+    <script src="http://newa.nrcc.cornell.edu/js/jquery-1.2.6.min.js" language="javascript"></script>
+    <script src="http://newa.nrcc.cornell.edu/js/jq_label.js" type="text/javascript"></script>
+    <script src="http://data.rcc-acis.org/Map/js/date.js" language="javascript"></script>
+    <script src="http://data.rcc-acis.org/Map/js/chain-0.2.js" language="javascript"></script>
+    <script src="http://data.rcc-acis.org/Map/js/input-type-date.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+    //<![CDATA[
+
+    (function() {
+      var global = this;
+     
+      // constructor function
+      global.makeStnMap = function(t_container) {
+        var container = t_container;
+        var cur_data = null;
+        var cur_bbox = null;
+        var cur_ymd = null;
+        var mMgr = null;
+
+        // private instance methods   
+        var transform_stn = function(result) {
+          return jQuery.map(result.data, function (d) {
+            if (typeof(d.sIds) == 'undefined' || d.sIds.length == 0) {
+              return jQuery.extend(d,{sId:'none'});
+            } else {
+              return jQuery.extend(d,{sId: d.sIds[0].split(' ')[0]});
+            }
+          });
+        };
+
+        var setup_bindings = function() {
+          $('#stn_list tbody').chain();
+        };
+        
+        var dateChange = function(e) {
+          if ($("#limit_date")[0].checked) {
+            var ymd = $("#date_input").val().split('-').join('');
+            cur_ymd = ymd ? ymd : null;
+            setTimeout(updateLatLon,0);
+          } else {
+            if (cur_ymd != null) {
+              cur_ymd = null;
+              setTimeout(updateLatLon,0);
+            }
+          }
+          return false;
+        };
+        
+        var updateStations = function() {
+          if (cur_data == null) return;
+          mMgr.clearMarkers();
+          var markers = [], mark, datum;
+          var d_idx = (cur_ymd == null) ? -1 : $("#elem")[0].selectedIndex - 1;
+          var px_offset = (d_idx >= 0) ? new GSize(-8,8) : new GSize(-2,2);
+          $.each(cur_data.data, function (i,stn) {
+            if (stn.ll) {
+              var point = new GLatLng(stn.ll[1],stn.ll[0]);
+              if (d_idx >= 0) {
+                datum = stn.data[d_idx];
+                if (datum == -999) { datum = "M"; }
+                mark = new JQLabel(point, datum, 'data_lbl', px_offset);
+              } else {
+                mark = new JQLabel(point, "", 'sm_lbl', px_offset);
+              }
+              mark.stn = stn;
+              mark._events = {
+                hover: [
+                  function (e) { $(this).find('div').addClass('qc'); },
+                  function (e) { $(this).find('div').removeClass('qc'); }
+                  ]
+              }
+              markers.push(mark);
+            }
+          });
+        mMgr.addMarkers(markers, 6);
+        mMgr.refresh();
+          
+        };
+          
+        var updateLatLon = function(sw,ne) {
+          if (typeof(sw) != 'undefined') {
+            cur_bbox = [sw.y,sw.x,ne.y,ne.x];
+          } else {
+            if (cur_bbox == null) { return false; }
+          }
+          $("#latlon").empty().append('<span>Loading...</span>');
+          $('#stn_list tbody').items('replace',[]);
+          var params = {bbox:cur_bbox.join(',')};
+          if ( cur_ymd != null) {
+            params.date = cur_ymd;
+            params.elems = '1,2,4';
+          }
+          $.getJSON('StationList', params,
+                function(result){
+                  if (result.error) {
+                    $("#latlon").empty().append('<span>'+result.error+'</span>');
+                  } else {
+                    cur_data = result;
+                    $("#latlon").empty().append(
+                      '<span>Got '+result.data.length+' stations</span>');
+                    $('#stn_list tbody').items('replace',transform_stn(result));
+                    setTimeout(updateStations,0);
+                  };
+                });
+        };
+        
+        var set_up = function() {
+          if (GBrowserIsCompatible()) {
+            var map = new GMap2(document.getElementById("map"));
+            map.setCenter(new GLatLng(38., -100.), 3);
+            map.setMapType(G_PHYSICAL_MAP);
+            map.addControl(new GSmallMapControl());
+            /* first set of options is for the visual overlay.*/
+            var boxStyleOpts = {
+              opacity: .2,
+              border: "2px solid red"
+            }
+    
+            /* second set of options is for everything else */
+            var otherOpts = {
+              buttonHTML: "<img src='images/zoom-button.gif' />",
+              buttonZoomingHTML: "<img src='images/zoom-button-activated.gif' />",
+              buttonStartingStyle: {width: '24px', height: '24px'}
+            };
+    
+            /* third set of options specifies callbacks */
+            var callbacks = {
+              dragend: function(nw,ne,se,sw,nwpx,nepx,sepx,swpx){
+                var area = (Math.abs(sw.x-ne.x) * Math.abs(sw.y-ne.y));
+                if (area > 100.) {
+                  $("#latlon").empty().append('<span>Select a smaller area</span>');
+                  return false;
+                }
+                setTimeout(function () { updateLatLon(sw,ne); }, 0);
+                }
+            };
+      
+            map.addControl(new DragZoomControl(boxStyleOpts, otherOpts, callbacks));
+            mMgr = new MarkerManager(map);
+
+          }
+          
+          Date.format = "yyyy-mm-dd"
+          var y = (new Date()).addDays(-1);
+          var n_date = y.asString();
+          $("#date_input").attr('max', n_date);
+          $("#date_input").bind('input',dateChange);
+          $("#date_input").change(dateChange);
+          $("#limit_date").change(dateChange);
+          $("#elem").change(updateStations);
+          inputTypeDateInit();
+          setup_bindings();
+        };
+        
+        // public instance methods
+        return {
+          dateChange : dateChange,
+          updateLatLon     : updateLatLon,
+          set_up     : set_up
+        }; 
+     
+      };
+    })();
+    
+    var stnMap = null;
+    $(document).ready(function(){
+        stnMap = makeStnMap("#stn_map");
+        stnMap.set_up();
+    });
+      
+    //]]>
+    </script>
+  </head>
+  <body onunload="GUnload()">
+    <div id="stn_map">
+      <div id="map"></div>
+      <div id="latlon"><span>Select region</span></div>
+      <div id="params">
+        Date: <input id="date_input" name="date" size=10 type="date" min="1900-01-01" step="1" required="required" />
+        <input id="limit_date" type=checkbox value='checker' /><span>Limit to date</span><br>
+        Select the element: <select id="elem" name="elem">
+          <option value='0'>None</option>
+          <option value='1'>Max Temp</option>
+          <option value='2'>Min Temp</option>
+          <option value='4'>Precip</option>
+        </select><br>
+      </div>
+      <div id="stn_list">
+        <table width="95%" border="0">
+        <thead></thead>
+        <tbody>
+            <tr class=item>
+                <td align=left class=name>Name</td>
+                <td align=left class=sId>stn_id</td>
+                <td align=left class=postal>state</td>
+            </tr>
+        </tbody>
+        <tfoot></tfoot>
+        </table>
+      </div>
+
+    </div>
+  </body>
+</html>

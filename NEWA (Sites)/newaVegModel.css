@@ -1,0 +1,104 @@
+form {
+	font-size:1em; }
+select, input {
+	font-size:0.8em; }
+.banner {
+	padding:0px 2px 7px;
+	color:black;
+	font-size:1.25em;
+	font-weight:700;
+	font-family:"Arial", "Helvetica", sans-serif;
+	vertical-align:middle;
+	text-align:left;}
+#leftbox {
+	position: absolute;
+	margin: 0px;
+	padding: 5px 2px 2px 5px;
+	width: 194px;
+	border: 1px gray solid; }
+#rightbox {
+	position: absolute;
+	margin: 0 0 0 203px;
+	padding: 0px;
+	width: 643px;
+	border: 0px gray solid; }
+.results {
+	width:700px; 
+	margin-left:auto; 
+	margin-right:auto; }
+.sm_table {
+	border-collapse: collapse;
+	margin-top:1em;
+	padding:5px; 
+	border:1px black solid;
+	width:100%; }
+.sm_table td, .sm_table th {
+	border:1px black solid;
+	padding:5px; }
+.sm_table label {
+	font-style:italic;
+	color:#AF7817; }
+.footer {
+	margin:1em 5%;
+	padding-top:1px;
+	color:black;
+	font-size:0.8em;
+	font-style:italic;
+	font-family:"Arial", "Helvetica", sans-serif;
+	text-align:justify;}
+div.logo_line {
+	text-align:center; }
+div.logo_line table {
+	margin: 0 auto; 
+	padding:0px;
+	border:0px black solid;
+	width:97%; }
+.button {
+	font-size:0.9em;
+	font-family: "Arial", "Helvetica", sans-serif;
+	text-align:center;
+	margin: 0;
+	padding: 2px 4px 2px 4px;
+	width: 0;		/* for IE only */
+	border: 1px orange solid;
+	overflow: visible;
+	background-color: #FFFFCC;}
+.button[class] { 
+	 /* IE ignores [class] */
+    width: auto; }
+.button:hover {
+	background-color: #FFFF66;
+	color: maroon; }
+.infoholder {
+	margin-bottom:1em; }
+.infobox {
+	margin-bottom:1em;
+	margin-top:0;
+	padding:3px;
+	border:1px black solid;
+	display:none; }
+.infobox ul { 
+	padding:0;
+	margin:3px 5px;
+	list-style-type: none; }
+.infobox h3, .infobox p { 
+	margin:5px;}
+.plain_back {
+	padding:1px;
+	color:black;
+	font-size:1em;
+	font-family:"Times New Roman", serif;
+	text-align:center;}
+.plain_back_l {
+	padding:1px;
+	color:black;
+	font-size:1em;
+	font-family:"Times New Roman", serif;
+	text-align:left;}
+.plain_smaller {
+	margin:3px 0 0 0;
+	color:black;
+	font-size:0.8em;
+	font-style:italic;
+	font-family:"Arial", "Helvetica", sans-serif;
+	text-align:center;}

@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+	<meta http-equiv="content-type" content="text/html"/>
+	<TITLE>NEWA DMCast Models</TITLE>
+	<link rel="stylesheet" type="text/css" href="http://newa.nrcc.cornell.edu/Humanity/ui.all.css">
+	<link rel="stylesheet" href="http://newa.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery-ui-1.7.1.min.js"></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAYdOz4fjwWGZL7jy4b_9SvBStJMtSJFp7tyvoXtgKd0qQevLlZxQFqa3WVLv4W42TQwK7-2Khkk2Wyg" type="text/javascript"></script>
+    <script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mm.js"></script>
+    <script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mapping.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/dmcast.js"></script>
+	<style type="text/css">
+		#leftbox {
+			position: absolute;
+			margin: 0 0 0 0px;
+			padding: 10px;
+			width: 250px;
+			height: 500px;
+			border: 1px gray solid; }
+		#rightbox {
+			position: absolute;
+			margin: 0 0 0 272px;
+			padding: 0px;
+			width: 720px;
+			height: 600px;
+			border: 0px gray solid; }
+	</style>
+  </head>
+
+  <body onunload="GUnload();">
+
+	<H2>NEWA DMCast - Grape Downy Mildew Forecast Model</H2>
+	<div id="leftbox">
+		<form action="#" name="dmcast">
+			<p>Weather Station:<br><select name="stn"><option value="" selected>Select station</option><option value="alb">Albion</option><option value="noa">Appleton, North</option><option value="soa">Appleton, South</option><option value="ash">Ashwood</option><option value="bat">Batavia</option><option value="bra">Branchport</option><option value="chz">Chazy (Grower)</option><option value="cli">Clifton Park</option><option value="cln">Clintondale</option><option value="cro">Crown Point</option><option value="ede">Eden</option><option value="elb">Elba</option><option value="far">Farmington</option><option value="1fr">Fredonia</option><option value="fre">Freeville</option><option value="gen">Geneva</option><option value="gui">Guilderland</option><option value="hud">Hudson</option><option value="ith">Ithaca Cornell Orchards</option><option value="kno">Knowlesville</option><option value="laf">Lafayette</option><option value="1lo">Lockport</option><option value="lyn">Lyndonville</option><option value="mar">Marlboro</option><option value="per">Peru</option><option value="pot">Potter</option><option value="pul">Pulteney</option><option value="loc">Ransomville</option><option value="red">Redhook</option><option value="scr">Scriba</option><option value="sod">Sodus</option><option value="som">Somerset</option><option value="val">Valois</option><option value="wmi">Water Mill</option><option value="wat">Waterport</option><option value="wgl">Watkins Glen</option><option value="3wi">Williamson (Demarree)</option><option value="1wi">Williamson (Motts)</option></select>
+			<p>Final Date of Forecast:
+				<br><input type="text" name="accend" id="enddpick" value="">
+			<p>Choose Cultivar:
+			<br><select name="cultivar">	
+				<option value="64.535.2">64.535.2</option><option value="66.717.4">66.717.4</option><option value="Aurore">Aurore</option><option value="Catawba">Catawba</option><option value="Cayuga White">Cayuga White</option><option value="Chancellor">Chancellor</option><option value="Chardonay">Chardonay</option><option value="Concord" selected>Concord</option><option value="Delaware">Delaware</option><option value="Foch">Foch</option><option value="Gewurztraminer">Gewurztraminer</option><option value="Horizon">Horizon</option><option value="Ives">Ives</option><option value="Melody">Melody</option><option value="Niagara">Niagara</option><option value="Pinot Noir">Pinot Noir</option><option value="Ravat 34">Ravat 34</option><option value="Remaily Seedless">Remaily Seedless</option><option value="Riesling">Riesling</option><option value="Rosette">Rosette</option><option value="Seyval">Seyval</option><option value="Vidal 256">Vidal 256</option><option value="Vignoles">Vignoles</option>
+			</select>
+			<p><input type="button" value="Calculate" class="button">
+		</form>
+	</div>
+
+	<div id="rightbox">
+		<div id="righttabs">
+			<ul>
+				<li><a href="#first"> Map</a></li>
+				<li><a href="#second">Results</a></li>
+				<li><a href="#third"> Help</a></li>
+			</ul>
+			<div id="first" style="padding: 5px;">
+				<div id="map" style="width: 700px; height: 570px"></div>
+			</div>
+			<div id="second" class="plain_back">
+				Results will appear here.
+			</div>
+			<div id="third"  class="plain_back_l">
+				Helpful information will appear here.
+			</div>
+		</div>
+	</div>
+
+  </body>
+</html>
+

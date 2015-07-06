@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<TITLE>Select setting</TITLE>
+<script  language="JavaScript">
+	function setSelectValue(oVal) {
+		var oSel = document.stationLister.stn;
+		for ( var i = 0; i < oSel.options.length; i++ ) {
+			if( oSel.options[i].value == oVal ) {
+				oSel.options[i].selected = true;
+			}
+		}
+	}
+</script>
+</HEAD>
+
+<BODY>
+<H1>NEWA Weather Data Page</H1>
+<h2>Weather Data</h2>
+<MAP NAME="map1">
+	<AREA SHAPE="CIRCLE" COORDS="579,477,8" HREF="javascript:setSelectValue('kfok');" TITLE="Suffolk County">
+	<AREA SHAPE="CIRCLE" COORDS="559,477,5" HREF="javascript:setSelectValue('khwv');" TITLE="Brookhaven">
+	<AREA SHAPE="CIRCLE" COORDS="541,481,5" HREF="javascript:setSelectValue('kisp');" TITLE="Islip">
+	<AREA SHAPE="CIRCLE" COORDS="517,488,7" HREF="javascript:setSelectValue('kfrg');" TITLE="Farmingdale">
+	<AREA SHAPE="CIRCLE" COORDS="631,448,5" HREF="javascript:setSelectValue('kmtp');" TITLE="Montalk">
+	<AREA SHAPE="CIRCLE" COORDS="492,501,6" HREF="javascript:setSelectValue('kjfk');" TITLE="JFK, NY">
+	<AREA SHAPE="CIRCLE" COORDS="483,481,5" HREF="javascript:setSelectValue('klga');" TITLE="LGA, NY">
+	<AREA SHAPE="CIRCLE" COORDS="473,481,5" HREF="javascript:setSelectValue('knyc');" TITLE="Central Park, NY">
+	<AREA SHAPE="CIRCLE" COORDS="494,449,5" HREF="javascript:setSelectValue('khpn');" TITLE="White Plains">
+	<AREA SHAPE="CIRCLE" COORDS="465,400,5" HREF="javascript:setSelectValue('kswf');" TITLE="Newburg Stewart Field">
+	<AREA SHAPE="CIRCLE" COORDS="453,400,5" HREF="javascript:setSelectValue('kmgj');" TITLE="Montgomery">
+	<AREA SHAPE="CIRCLE" COORDS="473,389,5" HREF="javascript:setSelectValue('mar');" TITLE="Marlboro">
+	<AREA SHAPE="CIRCLE" COORDS="483,384,5" HREF="javascript:setSelectValue('kpou');" TITLE="Poughkeepsie">
+	<AREA SHAPE="CIRCLE" COORDS="468,376,6" HREF="javascript:setSelectValue('cln');" TITLE="Clintondale">
+	<AREA SHAPE="CIRCLE" COORDS="411,377,5" HREF="javascript:setSelectValue('kmsv');" TITLE="Monticello">
+	<AREA SHAPE="CIRCLE" COORDS="484,341,6" HREF="javascript:setSelectValue('red');" TITLE="Redhook">
+	<AREA SHAPE="CIRCLE" COORDS="486,319,6" HREF="javascript:setSelectValue('hud');" TITLE="Hudson">
+	<AREA SHAPE="CIRCLE" COORDS="498,292,7" HREF="javascript:setSelectValue('cu_val');" TITLE="Valatie">
+	<AREA SHAPE="CIRCLE" COORDS="488,258,6" HREF="javascript:setSelectValue('kalb');" TITLE="Albany">
+	<AREA SHAPE="CIRCLE" COORDS="483,246,7" HREF="javascript:setSelectValue('cli');" TITLE="Clifton Park">
+	<AREA SHAPE="CIRCLE" COORDS="503,189,6" HREF="javascript:setSelectValue('kgfl');" TITLE="Glens Falls">
+	<AREA SHAPE="CIRCLE" COORDS="518,120,6" HREF="javascript:setSelectValue('cro');" TITLE="Crown Point">
+	<AREA SHAPE="CIRCLE" COORDS="520,72,5"  HREF="javascript:setSelectValue('cu_wlb');" TITLE="Wilsboro">
+	<AREA SHAPE="CIRCLE" COORDS="475,86,7"  HREF="javascript:setSelectValue('cu_lkp');" TITLE="Lake Placid">
+	<AREA SHAPE="CIRCLE" COORDS="538,62,7"  HREF="javascript:setSelectValue('kbtv');" TITLE="Burlington, VT">
+	<AREA SHAPE="CIRCLE" COORDS="507,49,6"  HREF="javascript:setSelectValue('per');" TITLE="Peru">
+	<AREA SHAPE="CIRCLE" COORDS="457,71,7"  HREF="javascript:setSelectValue('kslk');" TITLE="Saranac Lake">
+	<AREA SHAPE="CIRCLE" COORDS="510,11,5"  HREF="javascript:setSelectValue('cu_chz');" TITLE="Chazy(Cornell)">
+	<AREA SHAPE="CIRCLE" COORDS="520,14,7"  HREF="javascript:setSelectValue('chz');" TITLE="Chazy(Grower)">
+	<AREA SHAPE="CIRCLE" COORDS="408,7,5"   HREF="javascript:setSelectValue('kmss');" TITLE="Massena">
+	<AREA SHAPE="CIRCLE" COORDS="341,110,6" HREF="javascript:setSelectValue('kgtb');" TITLE="Wheeler Sack Field">
+	<AREA SHAPE="CIRCLE" COORDS="317,116,7" HREF="javascript:setSelectValue('kart');" TITLE="Watertown">
+	<AREA SHAPE="CIRCLE" COORDS="365,202,7" HREF="javascript:setSelectValue('krme');" TITLE="Griffiss">
+	<AREA SHAPE="CIRCLE" COORDS="313,216,5" HREF="javascript:setSelectValue('ksyr');" TITLE="Syracuse">
+	<AREA SHAPE="CIRCLE" COORDS="292,191,5" HREF="javascript:setSelectValue('kfzy');" TITLE="Fulton">
+	<AREA SHAPE="CIRCLE" COORDS="288,179,5" HREF="javascript:setSelectValue('scr');" TITLE="Scriba">
+	<AREA SHAPE="CIRCLE" COORDS="300,170,6" HREF="javascript:setSelectValue('mex');" TITLE="Mexico">
+	<AREA SHAPE="CIRCLE" COORDS="322,319,5" HREF="javascript:setSelectValue('kbgm');" TITLE="Binghamton">
+	<AREA SHAPE="CIRCLE" COORDS="251,326,7" HREF="javascript:setSelectValue('kelm');" TITLE="Elmira">
+	<AREA SHAPE="CIRCLE" COORDS="298,285,6" HREF="javascript:setSelectValue('fre');" TITLE="Freeville">
+	<AREA SHAPE="CIRCLE" COORDS="285,282,5" HREF="javascript:setSelectValue('kith');" TITLE="Ithaca, airport">
+	<AREA SHAPE="CIRCLE" COORDS="291,297,5" HREF="javascript:setSelectValue('cu_gfr');" TITLE="Ithaca, Cornell">
+	<AREA SHAPE="CIRCLE" COORDS="284,292,5" HREF="javascript:setSelectValue('ith');" TITLE="Ithaca, Cornell Orchards">
+	<AREA SHAPE="CIRCLE" COORDS="274,274,6" HREF="javascript:setSelectValue('lan');" TITLE="Lansing">
+	<AREA SHAPE="CIRCLE" COORDS="270,257,5" HREF="javascript:setSelectValue('cu_aur');" TITLE="Aurora">
+	<AREA SHAPE="CIRCLE" COORDS="264,226,5" HREF="javascript:setSelectValue('sav');" TITLE="Savannah">
+	<AREA SHAPE="CIRCLE" COORDS="238,209,5" HREF="javascript:setSelectValue('sod');" TITLE="Sodus">
+	<AREA SHAPE="CIRCLE" COORDS="231,198,5" HREF="javascript:setSelectValue('1wi');" TITLE="Williamson">
+	<AREA SHAPE="CIRCLE" COORDS="225,227,5" HREF="javascript:setSelectValue('far');" TITLE="Farmington">
+	<AREA SHAPE="CIRCLE" COORDS="242,241,5" HREF="javascript:setSelectValue('gen');" TITLE="Geneva">
+	<AREA SHAPE="CIRCLE" COORDS="245,261,5" HREF="javascript:setSelectValue('dre');" TITLE="Dresden">
+	<AREA SHAPE="CIRCLE" COORDS="250,270,6" HREF="javascript:setSelectValue('him');" TITLE="Himrod">
+	<AREA SHAPE="CIRCLE" COORDS="254,278,6" HREF="javascript:setSelectValue('val');" TITLE="Valois">
+	<AREA SHAPE="CIRCLE" COORDS="257,284,6" HREF="javascript:setSelectValue('wgl');" TITLE="Watkins Glen">
+	<AREA SHAPE="CIRCLE" COORDS="169,331,5" HREF="javascript:setSelectValue('kelz');" TITLE="Wellsville">
+	<AREA SHAPE="CIRCLE" COORDS="192,296,5" HREF="javascript:setSelectValue('ark');" TITLE="Arkport">
+	<AREA SHAPE="CIRCLE" COORDS="222,288,5" HREF="javascript:setSelectValue('pra');" TITLE="Prattsburg">
+	<AREA SHAPE="CIRCLE" COORDS="232,285,5" HREF="javascript:setSelectValue('pul');" TITLE="Pulteney">
+	<AREA SHAPE="CIRCLE" COORDS="240,278,5" HREF="javascript:setSelectValue('bar');" TITLE="Barrington">
+	<AREA SHAPE="CIRCLE" COORDS="239,267,5" HREF="javascript:setSelectValue('kpeo');" TITLE="Penn Yan">
+	<AREA SHAPE="CIRCLE" COORDS="228,258,5" HREF="javascript:setSelectValue('pot');" TITLE="Potter">
+	<AREA SHAPE="CIRCLE" COORDS="228,267,5" HREF="javascript:setSelectValue('fri');" TITLE="Friend">
+	<AREA SHAPE="CIRCLE" COORDS="230,274,5" HREF="javascript:setSelectValue('bra');" TITLE="Branchport">
+	<AREA SHAPE="CIRCLE" COORDS="216,269,5" HREF="javascript:setSelectValue('nap');" TITLE="Naples">
+	<AREA SHAPE="CIRCLE" COORDS="191,278,6" HREF="javascript:setSelectValue('kdsv');" TITLE="Dansville">
+	<AREA SHAPE="CIRCLE" COORDS="201,271,7" HREF="javascript:setSelectValue('way');" TITLE="Wayland">
+	<AREA SHAPE="CIRCLE" COORDS="182,265,5" HREF="javascript:setSelectValue('gro');" TITLE="Groveland">
+	<AREA SHAPE="CIRCLE" COORDS="156,267,5" HREF="javascript:setSelectValue('gai');" TITLE="Gainesville">
+	<AREA SHAPE="CIRCLE" COORDS="173,246,6" HREF="javascript:setSelectValue('pav');" TITLE="Pavilion">
+	<AREA SHAPE="CIRCLE" COORDS="185,229,5" HREF="javascript:setSelectValue('avo');" TITLE="Avon">
+	<AREA SHAPE="CIRCLE" COORDS="194,216,5" HREF="javascript:setSelectValue('kroc');" TITLE="Rochester">
+	<AREA SHAPE="CIRCLE" COORDS="156,224,5" HREF="javascript:setSelectValue('bat');" TITLE="Batavia">
+	<AREA SHAPE="CIRCLE" COORDS="160,212,5" HREF="javascript:setSelectValue('elb');" TITLE="Elba">
+	<AREA SHAPE="CIRCLE" COORDS="160,195,3" HREF="javascript:setSelectValue('alb');" TITLE="Albion">
+	<AREA SHAPE="CIRCLE" COORDS="152,186,6" HREF="javascript:setSelectValue('wat');" TITLE="Waterport">
+	<AREA SHAPE="CIRCLE" COORDS="144,203,6" HREF="javascript:setSelectValue('kno');" TITLE="Knowlesville">
+	<AREA SHAPE="CIRCLE" COORDS="138,190,5" HREF="javascript:setSelectValue('lyn');" TITLE="Lyndonville">
+	<AREA SHAPE="CIRCLE" COORDS="118,184,5" HREF="javascript:setSelectValue('noa');" TITLE="Appleton, North">
+	<AREA SHAPE="CIRCLE" COORDS="118,193,5" HREF="javascript:setSelectValue('soa');" TITLE="Appleton, South">
+	<AREA SHAPE="CIRCLE" COORDS="111,207,4" HREF="javascript:setSelectValue('1lo');" TITLE="Lockport">
+	<AREA SHAPE="CIRCLE" COORDS="98,207,5"  HREF="javascript:setSelectValue('loc');" TITLE="Ransomville">
+	<AREA SHAPE="CIRCLE" COORDS="96,218,6"  HREF="javascript:setSelectValue('kiag');" TITLE="Niagara Falls">
+	<AREA SHAPE="CIRCLE" COORDS="108,235,5" HREF="javascript:setSelectValue('kbuf');" TITLE="Buffalo">
+	<AREA SHAPE="CIRCLE" COORDS="103,263,5" HREF="javascript:setSelectValue('ede');" TITLE="Eden">
+	<AREA SHAPE="CIRCLE" COORDS="71,287,6"  HREF="javascript:setSelectValue('kdkk');" TITLE="Dunkirk">
+	<AREA SHAPE="CIRCLE" COORDS="68,301,6"  HREF="javascript:setSelectValue('1fr');" TITLE="Fredonia">
+	<AREA SHAPE="CIRCLE" COORDS="72,326,6"  HREF="javascript:setSelectValue('kjhw');" TITLE="Jamestown">
+	<AREA SHAPE="CIRCLE" COORDS="4,331,5"   HREF="javascript:setSelectValue('keri');" TITLE="Erie">
+	<AREA SHAPE="CIRCLE" COORDS="122,364,6" HREF="javascript:setSelectValue('kbfd');" TITLE="Bradford">
+</MAP>
+
+
+<IMG SRC="nyloggerairportsites.gif" USEMAP="#map1">
+
+	<FORM NAME="stationLister" ACTION="http://newa.nrcc.cornell.edu/newaLister/program/process_input" METHOD="post">
+	<p>&nbsp;&nbsp;&nbsp;Station: 
+	<select name="stn">
+		<option value="" selected>Select station</option>
+		<option value="alb">Albion</option>
+		<option value="noa">Appleton (north)</option>
+		<option value="soa">Appleton (south)</option>
+
+		<option value="ark">Arkport</option>
+		<option value="bat">Batavia</option>
+		<option value="bra">Branchport</option>
+		<option value="chz">Chazy</option>
+		<option value="cli">Clifton Park</option>
+		<option value="cln">Clintondale</option>
+
+		<option value="dre">Dresden</option>
+		<option value="ede">Eden</option>
+		<option value="elb">Elba</option>
+		<option value="far">Farmington</option>
+		<option value="1fr">Fredonia</option>
+		<option value="fre">Freeville</option>
+
+		<option value="fri">Friend</option>
+		<option value="gai">Gainesville</option>
+		<option value="gen">Geneva</option>
+		<option value="gro">Groveland</option>
+		<option value="gui">Guilderland</option>
+		<option value="him">Himrod</option>
+
+		<option value="ith">Ithaca</option>
+		<option value="kno">Knowlesville</option>
+		<option value="lan">Lansing</option>
+		<option value="loc">Lockport</option>
+		<option value="lyn">Lyndonville</option>
+		<option value="mex">Mexico</option>
+
+		<option value="nap">Naples</option>
+		<option value="pav">Pavilion</option>
+		<option value="pot">Potter</option>
+		<option value="pra">Prattsburg</option>
+		<option value="pul">Pulteney</option>
+		<option value="red">Redhook</option>
+
+		<option value="sav">Savannah</option>
+		<option value="scr">Scriba</option>
+		<option value="sod">Sodus</option>
+		<option value="val">Valois</option>
+		<option value="wat">Waterport</option>
+		<option value="wgl">Watkins Glen
+		<option value="way">Wayland</option>
+
+		<option value="1wi">Williamson (Motts)</option>
+		<option value="">-Inactive stations:-</option>
+		<option value="avo">Avon</option>
+		<option value="bar">Barrington</option>
+		<option value="cam">Cambridge</option>
+		<option value="cat">Catatonk</option>
+
+		<option value="cha">Chateguay</option>
+		<option value="sci">Scipioville</option>
+	</select>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Listing type: 
+	<select name="type">
+		<option value="dly" selected>Daily</option>
+		<option value="hly">Hourly</option>
+
+		<option value="dd4c">Degree Days - 4 C</option>
+		<option value="dd32">Degree Days - Base 32</option>
+		<option value="dd40">Degree Days - Base 40</option>
+		<option value="dd43">Degree Days - Base 43</option>
+		<option value="dd45">Degree Days - Base 45</option>
+		<option value="dd48">Degree Days - Base 48</option>
+
+		<option value="dd50">Degree Days - Base 50</option>
+		<option value="dd8650">Degree Days - 86/50</option>
+		<option value="dd55">Degree Days - Base 55</option>
+		<option value="dd43be">Degree Days - Base 43 BE</option>
+		<option value="dd50be">Degree Days - Base 50 BE</option>
+	</select>
+
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Month: 
+	<select name="month">
+		<option value="0" selected>Select month</option>
+		<option value="1">January</option>
+		<option value="2">February</option>
+		<option value="3">March</option>
+		<option value="4">April</option>
+
+		<option value="5">May</option>
+		<option value="6">June</option>
+		<option value="7">July</option>
+		<option value="8">August</option>
+		<option value="9">September</option>
+		<option value="10">October</option>
+
+		<option value="11">November</option>
+		<option value="12">December</option>
+	</select>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Year: 
+	<select name="year">
+	<option value="2008" selected>2008</option><option value="2007">2007</option><option value="2006">2006</option><option value="2005">2005</option><option value="2004">2004</option><option value="2003">2003</option><option value="2002">2002</option><option value="2001">2001</option><option value="2000">2000</option><option value="1999">1999</option><option value="1998">1998</option><option value="1997">1997</option><option value="1996">1996</option>
+
+	</select>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Get report" onClick="submit();">
+	</FORM>
+	</BODY>
+	</HTML>
+	
