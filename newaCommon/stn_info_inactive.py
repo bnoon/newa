@@ -39,6 +39,7 @@ stn_info_inactive = {
 'wol': {'name': 'Wolcott', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.876728, 'elev': 280, 'lat': 43.262683, 'network': 'newa', 'state': 'NY'},
 'vdu': {'name': 'Dummerston, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.904167, 'lon': -72.568466, 'elev': 561, 'network': 'newa', 'state': 'VT'},
 'vsa': {'name': 'Saxtons River, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.153611, 'lon': -72.533611, 'elev': 802, 'network': 'newa', 'state': 'VT', 'county': 'Windham', 'climate_div': 'VT03'},
+'vsh': {'name': 'Shoreham, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.3517, 'elev': 351,  'lat': 43.8861, 'network': 'newa', 'state': 'VT'},
 'hwa': {'name': 'Walpole, NH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.033333, 'lon': -72.433056, 'elev': 605, 'network': 'newa', 'state': 'NH', 'county': 'Cheshire', 'climate_div': 'NH02'},
 'mre': {'name': 'Rehoboth, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 41.777314, 'lon': -71.320638, 'elev': 16, 'network': 'newa', 'state': 'MA'},
 '148': {'name': 'Cape May Courthouse, NJ', 'vars': ['prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.1246, 'lon': -74.7873, 'elev': 7, 'network': 'njwx', 'state': 'NJ'},
