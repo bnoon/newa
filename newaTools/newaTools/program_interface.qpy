@@ -1,0 +1,79 @@
+from quixote.directory import Directory
+from quixote import get_request
+from quixote.errors import TraversalError
+
+class RootDirectory(Directory):
+
+	_q_exports = ["","process_input","process_help","apple_et","apple_thin"]
+
+#	put up input page for following
+	def _q_index (self):						#default
+		from newaTools_io import apple_et_input
+		return apple_et_input()
+	def apple_et (self, path=None) :
+		if not path or path == ['']:
+			from newaTools_io import apple_et_input
+			return apple_et_input()
+		else:
+			from newaTools import process_input
+			path = ['apple_et'] + path
+			return process_input(None,path)
+	def apple_thin (self, path=None) :
+		if not path or path == ['']:
+			from newaTools_io import apple_thin_input
+			return apple_thin_input()
+		else:
+			from newaTools import process_input
+			path = ['apple_thin'] + path
+			return process_input(None,path)
+
+
+#	received request form to be processed
+	def process_input (self, path=None) :
+		from newaTools import process_input
+		request = get_request()
+		return process_input(request,path)
+	def process_help (self, path=None) :
+		from newaTools import process_help
+		request = get_request()
+		return process_help(request,path)
+
+#	process information provided in url
+	def _q_lookup(self, component, path=None):
+		if component == 'process_help':
+			from newaTools import process_help
+			if path: 
+				path = [component] + path
+			else:
+				path = [component]
+			return process_help(None,path)
+		else:
+			from newaTools import process_input
+			if path: 
+				path = [component] + path
+			else:
+				path = [component]
+			return process_input(None,path)
+
+	def _q_traverse(self, path):
+		assert len(path) > 0
+		component = path[0]
+		if component == 'program':
+			del path[0]
+			assert len(path) > 0
+			component = path[0]
+		path = path[1:]
+		name = self._q_translate(component)
+		if name is not None:
+			obj = getattr(self, name)
+			if not hasattr(obj,'_q_exports'):
+				if path: return obj(path)
+				else:    return obj()
+			else:
+				return obj._q_traverse(path)
+		else:
+			obj = self._q_lookup(component,path)
+			if obj: return obj
+		if obj is None:
+			raise TraversalError(private_msg=('directory %r has no component '
+								'%r' % (self, component)))

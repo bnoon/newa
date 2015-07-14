@@ -1,0 +1,17 @@
+<b>Notes on Dew Calculation</b>
+
+<p>Dew formation is estimated using temperature and relative humidity data. These variables are 
+used to compute the dewpoint temperature. If the difference between the actual temperature and dewpoint temperature is
+3&deg;F or less, the model assumes that dew has formed on plant surfaces. The exception is if rainfall occurred during the
+same hour, in which case dew is not assumed to have occurred. If dew is believed to have formed in at least one hour during the course 
+of the day in question, the result "Yes" will be displayed in the table, otherwise "No" will be displayed. </p>
+
+<b>Notes of Relative Humidity Data Adjustments</b>
+
+<p>Relative humidity (RH) data recorded at airport weather stations are usually not representative of conditions in an agricultural setting.
+Therefore, RH values observed at airports are adjusted in an attempt to make them more applicable for agricultural applications. NWS RH forecast values are 
+also adjusted in the same way for all locations. The formula used for these adjustments is: adjRH = RH / (0.0047*RH + 0.53). 
+This can be expressed graphically as:
+</p>
+
+<P align="center"><img src="http://newa.nrcc.cornell.edu/gifs/rh_graph.png" alt="Graph of RH adjustments" height="327" width="442"></p>

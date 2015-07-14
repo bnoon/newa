@@ -1,0 +1,47 @@
+#map {
+    width: 700px;
+    height: 570px;
+}
+
+div.noaa_lbl {
+    min-width: 10px;
+    min-height: 10px;
+    padding: 2px;
+    border: 0px solid black;
+    background-image: url(gifs/airport.gif);Ê
+}
+div.newa_lbl {
+    min-width: 10px;
+    min-height: 10px;
+    padding: 2px;
+    border: 0px solid black;
+    background-image: url(gifs/newa_small.gif);Ê
+}
+div.culog_lbl {
+    min-width: 10px;
+    min-height: 10px;
+    padding: 2px;
+    border: 0px solid black;
+    background-image: url(gifs/culog.gif);Ê
+}
+
+div.orig_lbl {
+    min-width: 5px;
+    min-height: 5px;
+    padding: 2px;
+    border: 1px solid black;
+    background-color: lightcoral;
+}
+
+div.noaa_lbl.qc {
+    background-color: gold;
+    cursor: pointer;
+}
+div.newa_lbl.qc {
+    background-color: gold;
+    cursor: pointer;
+}
+div.culog_lbl.qc {
+    background-color: gold;
+    cursor: pointer;
+}

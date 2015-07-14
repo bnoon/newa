@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta http-equiv="content-type" content="text/html"/>
+	<style type="text/css">
+		html { height: 100% }
+		body { height: 100%; margin: 0px; padding: 0px }
+	</style>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAQy7dZX01NYjnRFZGLWX_bFvHcqRe3SKw&sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+	var map;
+	function centerMap (latlngCoords) {
+		var center;
+		latlngCoords.longitude = Math.max(latlngCoords.longitude, -78.0);
+		latlngCoords.longitude = Math.min(latlngCoords.longitude, -71.5);
+		latlngCoords.latitude = Math.max(latlngCoords.latitude, 40.5);
+		latlngCoords.latitude = Math.min(latlngCoords.latitude, 44.0);
+		center = new google.maps.LatLng(latlngCoords.latitude,latlngCoords.longitude);
+		map.setCenter(center);
+		$("#msg").remove();
+	}
+	function loadLocation () {
+		var defLocation = {latitude:42.95, longitude:-76.35},
+			position = google.loader.ClientLocation;
+		if (position) {
+			centerMap(position);
+		} else {
+			centerMap(defLocation);
+		}
+	}
+	function getLocation() {
+		$('<div id="msg" style="border:1px solid black; padding:0.25em; position:absolute; left:168px; bottom:0px; width:225px; z-index:1; font-size:0.9em; text-align:center; background-color:red; color:white;"></div>').appendTo($("#map"));
+		$("#msg").text('Trying to determine location...'); 
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition( 
+				function(position) {
+					centerMap(position.coords);
+				}, 
+				loadLocation, 
+				{timeout:5000} 
+			);
+		} else {
+			loadLocation();
+		}
+	}
+	function placeMarkers (cur_data, event_type) {
+		var newaIcon = new google.maps.MarkerImage(
+			'http://newa.nrcc.cornell.edu/gifs/newa_small.png',
+			new google.maps.Size(16,16),
+			new google.maps.Point(0,0),
+			new google.maps.Point(8,8));
+		var airportIcon = new google.maps.MarkerImage(
+			'http://newa.nrcc.cornell.edu/gifs/airport.png',
+			new google.maps.Size(15,15),
+			new google.maps.Point(0,0),
+			new google.maps.Point(8,8));
+		var culogIcon = new google.maps.MarkerImage(
+			'http://newa.nrcc.cornell.edu/gifs/culog.png',
+			new google.maps.Size(14,14),
+			new google.maps.Point(0,0),
+			new google.maps.Point(7,7));
+		var newaShadow = new google.maps.MarkerImage(
+			'http://newa.nrcc.cornell.edu/gifs/newa_small_shdw.png',
+			new google.maps.Size(24,16),
+			new google.maps.Point(0,0),
+			new google.maps.Point(8,8));
+		var airportShadow = new google.maps.MarkerImage(
+			'http://newa.nrcc.cornell.edu/gifs/airport_shdw.png',
+			new google.maps.Size(23,15),
+			new google.maps.Point(0,0),
+			new google.maps.Point(8,8));
+		var culogShadow = new google.maps.MarkerImage(
+			'http://newa.nrcc.cornell.edu/gifs/culog_shdw.png',
+			new google.maps.Size(21,14),
+			new google.maps.Point(0,0),
+			new google.maps.Point(7,7));
+		var marker,
+			markerOptions = {},
+			mapOptions = {
+				zoom: 7,
+				center: new google.maps.LatLng(42.95, -76.35),
+				mapTypeId: google.maps.MapTypeId.TERRAIN,
+				mapTypeControl: true,
+				mapTypeControlOptions: {
+					style: google.maps.MapTypeControlStyle.DROPDOWN_MENU 
+				},
+				streetViewControl: false,
+				scaleControl: true
+			};
+		map = new google.maps.Map(document.getElementById("map"), mapOptions);
+		markerOptions.map = map;
+		$.each(cur_data.stations, function (i,stn) {
+			markerOptions.position = new google.maps.LatLng(stn.lat, stn.lon);
+			markerOptions.title = stn.name;
+			if (stn.network === "newa" || stn.network === "njwx" || ((stn.state === "MA" || stn.state === "RI") && stn.network === "cu_log")) { 
+				markerOptions.icon = newaIcon; 
+				markerOptions.shadow = newaShadow;
+			} else if (stn.network === "cu_log") { 
+				markerOptions.icon = culogIcon; 
+				markerOptions.shadow = culogShadow;
+			} else if (stn.network === "icao") { 
+				markerOptions.icon = airportIcon; 
+				markerOptions.shadow = airportShadow;
+			}
+			marker = new google.maps.Marker(markerOptions);			
+			if (event_type === "station_page") {
+				google.maps.event.addListener(marker, "click", function () {
+					top.location.href="http://newa.cornell.edu/index.php?page=weather-station-page&WeatherStation="+stn.id;
+				});
+			}
+		});
+		getLocation();
+	}
+	function stationMap (list_type,event_type) {
+		list_type = list_type || 'all';
+		event_type = event_type || 'station_page';
+		$.getJSON("http://newa.nrcc.cornell.edu/newaUtil/stationList/"+list_type)
+			.success (function (results) {
+				placeMarkers(results, event_type);
+			})
+			.error (function () {
+				$('<div id="msg" style="border:1px solid black; padding:0.25em; position:absolute; left:168px; bottom:0px; width:225px; z-index:1; font-size:0.9em; text-align:center; background-color:red; color:white;"></div>').appendTo($("#map"));
+				$("#msg").text('Error retrieving station list'); 
+			});
+	}
+	</script>
+	
+  </head>
+  <body onload="stationMap('all', 'station_page');">
+	<div id="map" style="width: 560px; height: 560px"></div>
+  </body>
+</html>

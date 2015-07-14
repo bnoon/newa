@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="STYLESHEET" type="text/css" href="http://newa.nrcc.cornell.edu/Humanity/ui.all.css">
+  <script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery-1.3.2.min.js"></script>
+  <script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery-ui-1.6rc6.min.js"></script>
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.bgiframe.min.js"></script>
+  <script>
+  $(document).ready(function(){
+    $("#shootblight").dialog({
+ 		height: auto,
+		width: 500,
+		autoOpen: false,
+		modal: true,
+		bgiframe: true,
+		buttons: { Close: function() { $(this).dialog('close'); } }
+    });
+  });
+  </script>
+  <script type="text/javascript">
+  	function showbox() {
+  	  var data = '<h3>Shoot Blight Infection for Albion</h3><p>Fire blight symptoms on infected shoots show up when about 90 to 100 degree days base 55F have accumulated after an infection event.</p><p><b>Symptom Occurrence Date: </b><br>January 31 </p><p><b>Approximate Infection Date: </b><br>Cannot be determined</p>'
+  	  $("#shootblight").html(data);
+	  $("#shootblight").dialog('open');
+	}
+  </script>
+</head>
+<body>
+ 
+<input type="button" value="Show dialog" onClick="showbox();" style="background-color:#FFFFCC; font-weight:bold;">
+ 
+<div id="shootblight" title="Shoot Blight Results">Text will go here.</div>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Daily Data Summary</title>
+<link rel="STYLESHEET" type="text/css" href="http://newa.nrcc.cornell.edu/blue/style.css">
+<link rel="STYLESHEET" type="text/css" href="http://newa.nrcc.cornell.edu/newa_styles.css">
+<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#dataTable").tablesorter({sortList:[[0,0]], widgets: ['zebra'], headers: { 1: { sorter:'digit' } , 
+			2: { sorter:'digit' } ,
+			3: { sorter:'digit' } ,
+			4: { sorter:'digit' } ,
+			5: { sorter:'digit' } ,
+			6: { sorter:'digit' } } 
+		});
+	});
+</script>
+</head>
+
+<body>
+<table id="dataTable" class="tablesorter" border=0 cellpadding=0 cellspacing=0 width=679>
+<caption class="header_line">ALBANY AP - Daily Data Summary</caption>
+<col width=97><col width=97><col width=97><col width=97><col width=97><col width=97><col width=97>
+<thead>
+<tr><th>Date</th><th>Avg<br>Temp (F)</th><th>Max<br>Temp (F)</th><th>Min<br>Temp (F)</th><th>Total<br>Rain (in)</th>
+    <th>RH<br>Hrs &gt;= 90%</th><th>Avg Wind<br>Speed (mph)</th></tr>
+</thead>
+<tbody>
+<tr><td>2/1/2009</td><td>27.2</td><td>38.0</td><td>16.0</td><td>0.00</td><td>0</td><td>8.6</td></tr>
+<tr><td>2/2/2009</td><td>31.6</td><td>39.0</td><td>21.0</td><td>0.00</td><td>0</td><td>3.2</td></tr>
+<tr><td>2/3/2009</td><td>24.6</td><td>30.0</td><td>14.0</td><td>0.00</td><td>0</td><td>10.5</td></tr>
+<tr><td>2/4/2009</td><td>11.9</td><td>19.0</td><td>5.0</td><td>0.00</td><td>0</td><td>8.5</td></tr>
+<tr><td>2/5/2009</td><td>9.0</td><td>15.0</td><td>3.0</td><td>0.00</td><td>0</td><td>11.2</td></tr>
+<tr><td>2/6/2009</td><td>13.5</td><td>22.0</td><td>2.0</td><td>0.00</td><td>0</td><td>3.7</td></tr>
+<tr><td>2/7/2009</td><td>25.9</td><td>43.0</td><td>5.0</td><td>0.01</td><td>0</td><td>9.3</td></tr>
+<tr><td>2/8/2009</td><td>39.0</td><td>46.0</td><td>30.0</td><td>0.00</td><td>0</td><td>15.3</td></tr>
+<tr><td>2/9/2009</td><td>30.4</td><td>37.0</td><td>24.0</td><td>0.00</td><td>0</td><td>7.7</td></tr>
+<tr><td>2/10/2009</td><td>30.2</td><td>42.0</td><td>19.0</td><td>0.00</td><td>0</td><td>4.7</td></tr>
+<tr><td>2/11/2009</td><td>41.6</td><td>51.0</td><td>33.0</td><td>0.00</td><td>2</td><td>4.1</td></tr>
+<tr><td>2/12/2009</td><td>40.9</td><td>46.0</td><td>37.0</td><td>0.09</td><td>8</td><td>16.8</td></tr>
+<tr><td>2/13/2009</td><td>27.8</td><td>37.0</td><td>21.0</td><td>0.00</td><td>0</td><td>17.0</td></tr>
+<tr><td>2/14/2009</td><td>26.8</td><td>35.0</td><td>20.0</td><td>0.00</td><td>0</td><td>12.5</td></tr>
+<tr><td>2/15/2009</td><td>26.5</td><td>34.0</td><td>20.0</td><td>0.00</td><td>0</td><td>10.7</td></tr>
+<tr><td>2/16/2009</td><td>26.2</td><td>36.0</td><td>19.0</td><td>0.00</td><td>0</td><td>6.7</td></tr>
+<tr><td>2/17/2009</td><td>27.1</td><td>36.0</td><td>19.0</td><td>0.00</td><td>0</td><td>3.5</td></tr>
+<tr><td>2/18/2009</td><td>27.7</td><td>37.0</td><td>15.0</td><td>0.26</td><td>5</td><td>5.6</td></tr>
+<tr><td>2/19/2009</td><td>31.9</td><td>39.0</td><td>21.0</td><td>0.09</td><td>11</td><td>9.0</td></tr>
+<tr><td>2/20/2009</td><td>23.5</td><td>28.0</td><td>20.0</td><td>0.00</td><td>0</td><td>13.6</td></tr>
+<tr><td>2/21/2009</td><td>27.3</td><td>33.0</td><td>23.0</td><td>0.00</td><td>0</td><td>9.4</td></tr>
+<tr><td>2/22/2009</td><td>32.4</td><td>35.0</td><td>27.0</td><td>0.12</td><td>6</td><td>11.2</td></tr>
+<tr><td>2/23/2009</td><td>23.2</td><td>26.0</td><td>20.0</td><td>0.00</td><td>0</td><td>21.1</td></tr>
+<tr><td>2/24/2009</td><td>20.2</td><td>28.0</td><td>13.0</td><td>0.00</td><td>0</td><td>15.3</td></tr>
+<tr><td>2/25/2009</td><td>25.5</td><td>37.0</td><td>17.0</td><td>0.00</td><td>0</td><td>2.4</td></tr>
+<tr><td>2/26/2009</td><td>36.4</td><td>44.0</td><td>30.0</td><td>0.04</td><td>0</td><td>10.1</td></tr>
+<tr><td>2/27/2009</td><td>44.1</td><td>51.0</td><td>34.0</td><td>0.04</td><td>2</td><td>15.0</td></tr>
+<tr><td>2/28/2009</td><td>23.8</td><td>38.0</td><td>16.0</td><td>0.00</td><td>0</td><td>4.3</td></tr>
+</tbody>
+</table>
+</body>
+</html>

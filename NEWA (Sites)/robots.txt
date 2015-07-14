@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /
+Disallow: /newaLister
+Disallow: /newaModel
+Disallow: /newaDisease
+Disallow: /newaUtil
+Disallow: /newaGraph
+

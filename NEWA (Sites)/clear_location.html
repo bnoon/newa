@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://scacis.rcc-acis.org/js/jquery.cookie_new.js"></script>
+	<script type="text/javascript">
+	
+	function clearCookie() {
+		$.cookie("location", null, {path:"/", domain:"newa.nrcc.cornell.edu"});
+		$.cookie("mlocation", null, {path:"/", domain:"newa.nrcc.cornell.edu"});
+		$.cookie("tlocation", null, {path:"/", domain:"newa.nrcc.cornell.edu"});
+		$("#results").text('Cookie cleared');
+	}
+ 
+	</script>
+  </head>
+  <body onload="clearCookie();">
+	<div id="results"></div>
+  </body>
+</html>
+

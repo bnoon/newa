@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>NEWA Apple Degree Day Calculator</title>
+ 	<link rel="stylesheet" href="http://newa.nrcc.cornell.edu/flora/flora.all.css" type="text/css" media="screen" title="Flora (Default)">
+ 	<link rel="stylesheet" href="http://newa.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery-1.2.6.min.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/ui.core.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/ui.datepicker.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/ui.tabs.js"></script>
+	<script type="text/javascript">
+	  $(document).ready(function() {
+		$('#biodpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '+1d' });
+		$('#enddpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '+1d' });
+   		var myDate = new Date();
+  		var todayDate = (myDate.getMonth()+1) + '/' + myDate.getDate() + '/' + myDate.getFullYear();
+		$('#enddpick').val(todayDate);
+		$('#righttabs > ul').tabs();
+	  });
+	</script>
+
+    <script type="text/javascript"
+       src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAYdOz4fjwWGZL7jy4b_9SvBStJMtSJFp7tyvoXtgKd0qQevLlZxQFqa3WVLv4W42TQwK7-2Khkk2Wyg">
+    </script>
+
+    <script type="text/javascript">
+    function load() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map"));
+        map.setCenter(new GLatLng(43, -76.5), 7);
+        map.addControl(new GLargeMapControl());
+        map.addControl(new GScaleControl());
+        map.addControl (new GMapTypeControl());
+        }
+      }
+    </script>
+
+    <style type="text/css">
+		#leftbox {
+			position: absolute;
+			margin: 0 0 0 0px;
+			padding: 10px;
+			width: 300px;
+			height: 577px;
+			border: 1px gray solid; }
+		#rightbox {
+			position: absolute;
+			margin: 0 0 0 321px;
+			padding: 0px;
+			width: 623px;
+			height: 600px;
+			border: 0px gray solid; }
+  	</style>
+  </head>
+
+  <body onload="load()" onunload="GUnload()">
+	<H1>NEWA Apple Degree Day Calculator</H1>
+	<div id="leftbox">
+  		Select a pest from the list:
+  		<br><select name="pest">	
+			<option value="" selected>Select pest</option>
+			<option value="apple-cm">Codling Moth</option>
+			<option value="apple-ofm">Oriental Fruit Moth</option>
+			<option value="apple-oblr">Obliquebanded Leafroller</option>
+			<option value="apple-pc">Plum Curvculio</option>
+			<option value="apple-stl">Spotted Tentiform Leafminer</option>
+			<option value="apple-maggot">Apple Maggot</option>
+		</select>
+		<p>Weather Station:
+		<br><select name="stn">	
+			<option value="" selected>Select weather station</option>
+			<option value="kalb">Albany Airport</option><option value="alb">Albion</option><option value="noa">Appleton (north)</option><option value="soa">Appleton (south)</option><option value="ark">Arkport</option><option value="cu_aur">Aurora Cornell Logger</option><option value="bar">Barrington</option><option value="bat">Batavia</option><option value="kbgm">Binghamton Airport</option><option value="kbfd">Bradford, PA Airport</option><option value="bra">Branchport</option><option value="khwv">Brookhaven Airport</option><option value="kbuf">Buffalo Airport</option><option value="kbtv">Burlington, VT Airport</option><option value="chz">Chazy</option><option value="cu_chz">Chazy Cornell Logger</option><option value="cli">Clifton Park</option><option value="cln">Clintondale</option><option value="cro">Crown Point</option><option value="kdsv">Dansville Airport</option><option value="dre">Dresden</option><option value="kdkk">Dunkirk Airport</option><option value="ede">Eden</option><option value="elb">Elba</option><option value="kelm">Elmira Airport</option><option value="keri">Erie, PA Airport</option><option value="kfrg">Farmingdale Airport</option><option value="far">Farmington</option><option value="1fr">Fredonia</option><option value="fre">Freeville</option><option value="fri">Friend</option><option value="kfzy">Fulton Airport</option><option value="gai">Gainesville</option><option value="gen">Geneva</option><option value="kgfl">Glens Falls Airport</option><option value="krme">Griffiss Airport</option><option value="gro">Groveland</option><option value="gui">Guilderland</option><option value="him">Himrod</option><option value="hud">Hudson</option><option value="kisp">Islip Airport</option><option value="ith">Ithaca</option><option value="kith">Ithaca Airport</option><option value="cu_gfr">Ithaca Cornell Logger</option><option value="kjhw">Jamestown Airport</option><option value="kno">Knowlesville</option><option value="laf">Lafayette</option><option value="cu_lkp">Lake Placid Cornell Logger</option><option value="lan">Lansing</option><option value="1lo">Lockport</option><option value="lyn">Lyndonville</option><option value="mar">Marlboro</option><option value="kmss">Massena Airport</option><option value="mex">Mexico</option><option value="kmtp">Montauk Airport</option><option value="kmgj">Montgomery Airport</option><option value="kmsv">Monticello Airport</option><option value="nap">Naples</option><option value="knyc">New York - Central Park</option><option value="kjfk">New York - JFK Airport</option><option value="klga">New York - LGA Airport</option><option value="kswf">Newburgh Stewart Field</option><option value="kiag">Niagara Falls Airport</option><option value="pav">Pavilion</option><option value="kpeo">Penn Yan Airport</option><option value="per">Peru</option><option value="pot">Potter</option><option value="kpou">Poughkeepsie Airport</option><option value="pra">Prattsburg</option><option value="pul">Pulteney</option><option value="loc">Ransomville</option><option value="red">Redhook</option><option value="kroc">Rochester Airport</option><option value="kslk">Saranac Lake Airport</option><option value="sav">Savannah</option><option value="scr">Scriba</option><option value="sod">Sodus</option><option value="kfok">Suffolk County Airport</option><option value="ksyr">Syracuse Airport</option><option value="cu_val">Valatie Cornell Logger</option><option value="val">Valois</option><option value="wat">Waterport</option><option value="kart">Watertown Airport</option><option value="wgl">Watkins Glen</option><option value="way">Wayland</option><option value="kelz">Wellsville Airport</option><option value="kgtb">Wheeler Sack Field</option><option value="khpn">White Plains Airport</option><option value="1wi">Williamson (Motts)</option><option value="cu_wlb">Willsboro Cornell Logger</option>
+		</select>
+		<p>Biofix Date:
+		<br><input type="text" name="biofix" id="biodpick" value="3/10/2008" style="width:200px;">
+		<p>Accumulation End Date:
+		<br><input type="text" name="accend" id="enddpick" value="" style="width:200px;">
+		<p><input type="button" value="Calculate" class="button" onClick="$('#righttabs > ul').tabs('select',1);">
+	</div>
+	<div id="rightbox">
+		<div id="righttabs" class="flora">
+			<ul>
+				<li><a href="#first"> <span>Map</span></a></li>
+				<li><a href="#second"><span>Results</span></a></li>
+				<li><a href="#third"> <span>Help</span></a></li>
+			</ul>
+			<div id="first">
+				<div id="map" style="width: 600px; height: 550px"></div>
+			</div>
+			<div id="second">
+				<div class="plain_back">
+				<h3>Apple Pest Degree Day Calculator - Results</h3>
+				
+				<b>Weather Station</b>: Albion
+				<br><b>Date Range:</b> 6/1/2008-6/25/2008
+				
+				<p><b>Obliquebanded Leafroller 1st Summer Generation</b>
+				<br><b>Base Temperature:</b> 43&deg;F
+				<br><b>Threshold:</b> 360
+				<br><b>Accumulated degree days:</b> 786
+				</div>
+				<div class="plain_back_left">
+				<p><b>Theshold reached.</b> Threshold of 360 (DD43) has been reached. Treatment for 1st summer generation of 
+				obliquebanded leafroller should begin as close to 360 DD43 as possible. Once 950 DD43 is reached,
+				treatments for the 1st summer generation are no longer needed.
+				<p><b>Also consider: </b> Sprays applied during this time for apple maggot or 2nd generation oriental fruit 
+				moth may also control 1st summer generation obliquebanded leafroller.
+				</div>
+			</div>
+			<div id="third">
+				<div class="plain_back">
+				<h3>References</h3>
+				</div>
+				<div class="plain_back_left">
+				<p>Onstad, DW, WH Reissig, CA Shoemaker, 1985.
+				<br>Phenology and management of the obliquebanded leafroller (Lepidoptera: Tortrididae) in apple orchards,
+				<i>J. Econ. Entomology, </i>78: 1455-1462.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

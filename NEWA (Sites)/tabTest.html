@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+	<meta http-equiv="content-type" content="text/html"/>
+	<title>NEWA Apple Insect Models</title>
+	<link rel="stylesheet" href="http://newa.nrcc.cornell.edu/humanity/ui.all.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="http://newa.nrcc.cornell.edu/newa_styles.css" type="text/css">
+    <link rel="stylesheet" href="http://newa.nrcc.cornell.edu/map.css" type="text/css" />
+    <script src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAYdOz4fjwWGZL7jy4b_9SvBStJMtSJFp7tyvoXtgKd0qQevLlZxQFqa3WVLv4W42TQwK7-2Khkk2Wyg"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery-ui-1.6rc6.min.js"></script>
+    <script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mm.js"></script>
+    <script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jq_label.js"></script>
+    <script type="text/javascript">
+
+    //<![CDATA[
+
+    (function() {
+      var global = this;
+
+      // constructor function
+      global.makeStnMap = function(t_container) {
+        var container = t_container;
+        var cur_data = null;
+        var mMgr = null;
+
+        // private instance methods   
+        var updateStations = function() {
+          if (cur_data == null) return;
+ 		  mMgr.clearMarkers();
+          var markers = [], mark, datum;
+          var px_offset = new GSize(-5,5);
+          $.each(cur_data.stations, function (i,stn) {
+			  var point = new GLatLng(stn.lat, stn.lon);
+			  if (stn.network == 'cu_log') { mark = new JQLabel(point, "", 'culog_lbl', px_offset); }
+			  else if (stn.network == 'newa') { mark = new JQLabel(point, "", 'newa_lbl', px_offset); }
+			  else { mark = new JQLabel(point, "", 'noaa_lbl', px_offset); }
+              mark.stn = stn;
+			  mark._events = {
+				hover: [
+				  function (e) { 
+				  	$(this).find('div').addClass('qc'); 
+					var oSel = document.applepest.stn;
+					for ( var i = 0; i < oSel.options.length; i++ ) {
+					   if( oSel.options[i].value == 'gen' ) { oSel.options[i].selected = true; }
+					}
+				  },
+				  function (e) { $(this).find('div').removeClass('qc'); }
+				  ]
+			  }
+			  markers.push(mark);
+		  });
+		  mMgr.addMarkers(markers, 6);
+          mMgr.refresh();
+        };
+
+        var updateLatLon = function() {
+          $.getJSON("http://newa.nrcc.cornell.edu/newaUtil/stationList/all", 
+                function(result){
+                  if (result.error) {
+                  } else {
+                    cur_data = result;
+                    setTimeout(updateStations,0);
+                  };
+                });
+         };
+
+        var set_up = function() {
+          if (GBrowserIsCompatible()) {
+            var map = new GMap2(document.getElementById("map"));
+			map.setCenter(new GLatLng(42.9, -76.0), 7);
+            map.setMapType(G_PHYSICAL_MAP);
+            map.addMapType(G_PHYSICAL_MAP)
+			map.addControl(new GLargeMapControl());
+			map.addControl(new GScaleControl());
+			map.addControl (new GHierarchicalMapTypeControl());
+            mMgr = new MarkerManager(map);
+          }
+        };
+        
+        // public instance methods
+        return {
+           updateLatLon : updateLatLon,
+           set_up       : set_up
+        }; 
+      };
+    })();
+    
+    var stnMap = null;
+    //]]>
+    </script>
+
+	<script type="text/javascript">
+	  $(document).ready(function() {
+        stnMap = makeStnMap("#stn_map");
+        stnMap.set_up();
+        stnMap.updateLatLon();
+		$("#enddpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "+1d", changeMonth: true, changeYear: true });
+		var myDate = new Date();
+		var todayDate = (myDate.getMonth()+1) + "/" + myDate.getDate() + "/" + myDate.getFullYear();
+		$("#enddpick").val(todayDate);
+		$("#righttabs").tabs();
+		$("form .button").click(function (evt) {
+			getresults(0);
+			var params = {type: 'apple_pest'};
+			$('select[name=pest]').each(function () { params[this.name] = this.value; });
+			$.get('http://newa.nrcc.cornell.edu/newaTester/process_help',params,function(data) { $('#third').html(data); });
+		});
+	  });
+	</script>
+
+	<script type="text/javascript">
+	function getresults(bfcnt) {
+		var params = {type: 'apple_pest'};
+		$('select[name=pest], select[name=stn], input[name=accend]').each(function () { params[this.name] = this.value; });
+		if (bfcnt >= 1) {
+			$('input[name=bf_date]').each(function () { params[this.name] = this.value; }); }
+		if (bfcnt >= 2) {
+			$('input[name=bf2_date]').each(function () { params[this.name] = this.value; }); }
+		$.get('http://newa.nrcc.cornell.edu/newaTester/process_input',params,function(data) {
+			$("#second").html(data);
+			$("#bfdpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "+7d", changeMonth: true, changeYear: true });
+			$("#bf2dpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "+7d", changeMonth: true, changeYear: true });
+			$('#righttabs').tabs('select',1);
+			});
+		return false;
+		}
+	</script>
+	
+
+	<style type="text/css">
+		#leftbox {
+			position: absolute;
+			margin: 0 0 0 0px;
+			padding: 10px;
+			width: 250px;
+			height: 600px;
+			border: 1px gray solid; }
+		#rightbox {
+			position: absolute;
+			margin: 0 0 0 272px;
+			padding: 0px;
+			width: 720px;
+			height: 600px;
+			border: 0px gray solid; }
+	</style>
+  </head>
+
+  <body onunload="GUnload()">
+	<h3>NEWA Apple Insect Models</h3>
+	<div id="leftbox">
+		<form action="#" name="applepest">
+		Select a pest from the list:
+		<br><select name="pest">	
+			<option value="" selected>Select pest</option>
+			<option value="apple-cm">Codling Moth</option>
+			<option value="apple-ofm">Oriental Fruit Moth</option>
+			<option value="apple-oblr">Obliquebanded Leafroller</option>
+			<option value="apple-pc">Plum Curculio</option>
+			<option value="apple-stlm">Spotted Tentiform Leafminer</option>
+			<option value="apple-maggot">Apple Maggot</option>
+		</select>
+		<p>Weather Station:
+		<br><select name="stn">	
+			<option value="" selected>Select weather station</option>
+			<option value="kalb">Albany Airport</option><option value="alb">Albion</option><option value="noa">Appleton (north)</option><option value="soa">Appleton (south)</option><option value="ark">Arkport</option><option value="cu_aur">Aurora Cornell Logger</option><option value="bar">Barrington</option><option value="bat">Batavia</option><option value="kbgm">Binghamton Airport</option><option value="kbfd">Bradford, PA Airport</option><option value="bra">Branchport</option><option value="khwv">Brookhaven Airport</option><option value="kbuf">Buffalo Airport</option><option value="kbtv">Burlington, VT Airport</option><option value="chz">Chazy</option><option value="cu_chz">Chazy Cornell Logger</option><option value="cli">Clifton Park</option><option value="cln">Clintondale</option><option value="cro">Crown Point</option><option value="kdsv">Dansville Airport</option><option value="dre">Dresden</option><option value="kdkk">Dunkirk Airport</option><option value="ede">Eden</option><option value="elb">Elba</option><option value="kelm">Elmira Airport</option><option value="keri">Erie, PA Airport</option><option value="kfrg">Farmingdale Airport</option><option value="far">Farmington</option><option value="1fr">Fredonia</option><option value="fre">Freeville</option><option value="fri">Friend</option><option value="kfzy">Fulton Airport</option><option value="gai">Gainesville</option><option value="gen">Geneva</option><option value="kgfl">Glens Falls Airport</option><option value="krme">Griffiss Airport</option><option value="gro">Groveland</option><option value="gui">Guilderland</option><option value="him">Himrod</option><option value="hud">Hudson</option><option value="kisp">Islip Airport</option><option value="ith">Ithaca</option><option value="kith">Ithaca Airport</option><option value="cu_gfr">Ithaca Cornell Logger</option><option value="kjhw">Jamestown Airport</option><option value="kno">Knowlesville</option><option value="laf">Lafayette</option><option value="cu_lkp">Lake Placid Cornell Logger</option><option value="lan">Lansing</option><option value="1lo">Lockport</option><option value="lyn">Lyndonville</option><option value="mar">Marlboro</option><option value="kmss">Massena Airport</option><option value="mex">Mexico</option><option value="kmtp">Montauk Airport</option><option value="kmgj">Montgomery Airport</option><option value="kmsv">Monticello Airport</option><option value="nap">Naples</option><option value="knyc">New York - Central Park</option><option value="kjfk">New York - JFK Airport</option><option value="klga">New York - LGA Airport</option><option value="kswf">Newburgh Stewart Field</option><option value="kiag">Niagara Falls Airport</option><option value="pav">Pavilion</option><option value="kpeo">Penn Yan Airport</option><option value="per">Peru</option><option value="pot">Potter</option><option value="kpou">Poughkeepsie Airport</option><option value="pra">Prattsburg</option><option value="pul">Pulteney</option><option value="loc">Ransomville</option><option value="red">Redhook</option><option value="kroc">Rochester Airport</option><option value="kslk">Saranac Lake Airport</option><option value="sav">Savannah</option><option value="scr">Scriba</option><option value="sod">Sodus</option><option value="kfok">Suffolk County Airport</option><option value="ksyr">Syracuse Airport</option><option value="cu_val">Valatie Cornell Logger</option><option value="val">Valois</option><option value="wat">Waterport</option><option value="kart">Watertown Airport</option><option value="wgl">Watkins Glen</option><option value="way">Wayland</option><option value="kelz">Wellsville Airport</option><option value="kgtb">Wheeler Sack Field</option><option value="khpn">White Plains Airport</option><option value="1wi">Williamson (Motts)</option><option value="cu_wlb">Willsboro Cornell Logger</option>
+		</select>
+		<p>Accumulation End Date:
+			<br><input type="text" name="accend" id="enddpick" value="" style="width:200px;">
+		<p><input type="button" value="Calculate" class="button">
+		</form>
+	</div>
+
+	<div id="rightbox">
+		<div id="righttabs">
+			<ul>
+				<li><a href="#first"> Map</a></li>
+				<li><a href="#second">Results</a></li>
+				<li><a href="#third"> Help</a></li>
+			</ul>
+			<div id="first" style="padding:5px; width=700px; width=570px;">
+				<div id="map"></div>
+			</div>
+			<div id="second" class="plain_back">
+				Results will appear here.
+			</div>
+			<div id="third"  class="plain_back_l">
+				Helpful information will appear here.
+			</div>
+		</div>
+	</div>
+  </body>
+</html>
