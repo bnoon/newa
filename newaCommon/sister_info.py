@@ -113,6 +113,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'vco' : {'temp': 'vsh', 'rhum': 'vsh', 'prcp': 'vsh', 'wspd': 'vsh', 'wdir': 'vsh', 'srad': 'vsh', 'lwet': 'vsh'},
 'vdu' : {'temp': 'vpu', 'rhum': 'vpu', 'prcp': 'vpu', 'wspd': 'vpu', 'wdir': 'vpu', 'lwet': 'vpu', 'srad': 'vpu'},
 'ver' : {'temp': 'sil', 'lwet': 'sil', 'rhum': 'sil', 'prcp': 'sil', 'wspd': 'sil', 'wdir': 'sil', 'srad': 'sil'},
+'vlt' : {'temp': 'cas', 'lwet': 'cas', 'rhum': 'cas', 'prcp': 'cas', 'wspd': 'cas', 'wdir': 'cas', 'srad': 'cas'},
 'vsb' : {'temp': 'kbtv', 'rhum': 'kbtv', 'prcp': 'kbtv', 'wspd': 'kbtv', 'wdir': 'kbtv', 'lwet': 'vso', 'srad': 'vso'},
 'vex' : {'temp': 'kbtv', 'rhum': 'kbtv', 'prcp': 'kbtv', 'wspd': 'kbtv', 'wdir': 'kbtv', 'lwet': 'vsb', 'srad': 'vsb'},
 'vsh' : {'temp': 'krut', 'rhum': 'krut', 'prcp': 'krut', 'wspd': 'krut', 'wdir': 'krut', 'lwet': 'cro', 'srad': 'ved'},

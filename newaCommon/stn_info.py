@@ -1,5 +1,4 @@
 stn_info = {
-'1lo': {'name': 'Lockport', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -78.762107, 'elev': 478.0, 'lat': 43.187325000000001, 'network': 'newa', 'state': 'NY'},
 '2wi': {'name': 'Williamson (Mason)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -77.23158, 'elev': 427.0, 'lat': 43.22206, 'network': 'newa', 'state': 'NY'},
 '3wi': {'name': 'Williamson (Demarree)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -77.142499999999998, 'elev': 300.0, 'lat': 43.276150000000001, 'network': 'newa', 'state': 'NY'},
 'acc': {'name': 'Accord', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', ], 'srqual': 'ok', 'lat': 41.807602, 'lon': -74.248764, 'elev': 386, 'network': 'newa', 'state': 'NY'},
@@ -89,6 +88,7 @@ stn_info = {
 'som': {'name': 'Somerset', 'vars': ['temp', 'lwet', 'rhum', 'prcp', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -78.626908, 'elev': 318.0, 'lat': 43.325911, 'network': 'newa', 'state': 'NY'},
 'var': {'name': 'Varick (Swedish Hill)', 'vars': ['temp', 'lwet', 'rhum', 'prcp', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.81007, 'elev': 662.0, 'lat': 42.80248, 'network': 'newa', 'state': 'NY'},
 'ver': {'name': 'Versailles', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 42.51640, 'lon': -79.02689, 'elev': 863, 'network': 'newa', 'state': 'NY'},
+'vlt': {'name': 'Valatie', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.4358, 'lon': -73.6845, 'elev': 306.1, 'network': 'newa', 'state': 'NY'},
 'wad': {'name': 'Wading River', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.95, 'lon': -72.81, 'elev': 107, 'network': 'newa', 'state': 'NY'},
 'way': {'name': 'Wayland', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -77.578797, 'elev': 1600.0, 'lat': 42.604968, 'network': 'newa', 'state': 'NY'},
 'wbs': {'name': 'Williamson (Bear Swamp)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.250549, 'lon': -77.160323, 'elev': 367, 'network': 'newa', 'state': 'NY'},
