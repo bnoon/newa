@@ -3,6 +3,7 @@ stn_info_inactive = {
 '1lo': {'name': 'Lockport', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -78.762107, 'elev': 478.0, 'lat': 43.187325000000001, 'network': 'newa', 'state': 'NY'},
 '1wi': {'name': 'Williamson (Motts)', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -77.17590, 'elev': 430.0, 'lat': 43.23925, 'network': 'newa', 'state': 'NY'},
 'ark': {'name': 'Arkport', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.703580000000002, 'elev': 1200.0, 'lat': 42.417310000000001, 'network': 'newa', 'state': 'NY'},
+'ash': {'name': 'Ashwood', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -78.309579999999997, 'elev': 330.0, 'lat': 43.338540000000002, 'network': 'newa', 'state': 'NY'},
 'avo': {'name': 'Avon', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.75, 'elev': 650.0, 'lat': 42.92, 'network': 'newa', 'state': 'NY'},
 'bar': {'name': 'Barrington', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.084785, 'elev': 1089.0, 'lat': 42.551651, 'network': 'newa', 'state': 'NY'},
 'bat': {'name': 'Batavia', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'st4i'], 'lon': -78.154020000000003, 'elev': 900.0, 'lat': 43.028820000000003, 'network': 'newa', 'state': 'NY'},
@@ -54,5 +55,6 @@ stn_info_inactive = {
 '3522': {'name': 'Bellview Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 39.5360, 'lon': -74.9345, 'elev': 115, 'network': 'njwx', 'state': 'NJ'},
 'mno': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.345831, 'lon': -71.677843, 'elev': 610, 'network': 'newa', 'state': 'MA'},
 'mmi': {'name': 'Middlefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.71083, 'elev': 180,  'lat': 41.49667, 'network': 'newa', 'state': 'CT'},
+'ct_pla': {'name': 'Plainville MS, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'toolow', 'lat': 41.684327, 'lon': -72.885093, 'elev': 246, 'network': 'newa', 'state': 'CT'},
 'me_bhb': {'name': 'Bar Harbor, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.389786, 'lon': -68.208026, 'elev': 55, 'network': 'newa', 'state': 'ME'}
 }
