@@ -119,7 +119,6 @@ stn_info = {
 'mna': {'name': 'North Andover, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.6462, 'lon': -71.0887, 'elev': 180, 'network': 'newa', 'state': 'MA'},
 'mwe': {'name': 'Westfield, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 42.185000, 'lon': -72.765000, 'elev': 321, 'network': 'newa', 'state': 'MA'},
 'mbo': {'name': 'Bolton, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.418889, 'lon': -71.641389, 'elev': 516, 'network': 'newa', 'state': 'MA'},
-'mam': {'name': 'Amesbury, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.871822, 'lon': -70.925278, 'elev': 115, 'network': 'newa', 'state': 'MA', 'county': 'Essex', 'climate_div': 'MA03'},
 'mst': {'name': 'Stow, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.409444, 'lon': -71.513889, 'elev': 239, 'network': 'newa', 'state': 'MA', 'county': 'Middlesex', 'climate_div': 'MA02'},
 'mnb': {'name': 'Northbridge, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.151711, 'lon': -71.680108, 'elev': 444, 'network': 'newa', 'state': 'MA'},
 'mle': {'name': 'Leominster (Sholan Farm), MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.4875, 'lon': -71.7756, 'elev': 720, 'network': 'newa', 'state': 'MA'},
