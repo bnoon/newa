@@ -39,7 +39,6 @@ stn_info_inactive = {
 'sci': {'name': 'Scipioville', 'vars': ['temp', 'prcp'], 'lon': -76.63, 'elev': 984.0, 'lat': 42.78, 'network': 'newa', 'state': 'NY'},
 'wat': {'name': 'Waterport', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -78.214060, 'elev': 330.0, 'lat': 43.34422, 'network': 'newa', 'state': 'NY'},
 'wol': {'name': 'Wolcott', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.876728, 'elev': 280, 'lat': 43.262683, 'network': 'newa', 'state': 'NY'},
-'vdu': {'name': 'Dummerston, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.904167, 'lon': -72.568466, 'elev': 561, 'network': 'newa', 'state': 'VT'},
 'vsa': {'name': 'Saxtons River, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.153611, 'lon': -72.533611, 'elev': 802, 'network': 'newa', 'state': 'VT', 'county': 'Windham', 'climate_div': 'VT03'},
 'vsh': {'name': 'Shoreham, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.3517, 'elev': 351,  'lat': 43.8861, 'network': 'newa', 'state': 'VT'},
 'hwa': {'name': 'Walpole, NH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.033333, 'lon': -72.433056, 'elev': 605, 'network': 'newa', 'state': 'NH', 'county': 'Cheshire', 'climate_div': 'NH02'},
@@ -56,6 +55,5 @@ stn_info_inactive = {
 '3522': {'name': 'Bellview Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 39.5360, 'lon': -74.9345, 'elev': 115, 'network': 'njwx', 'state': 'NJ'},
 'mno': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.345831, 'lon': -71.677843, 'elev': 610, 'network': 'newa', 'state': 'MA'},
 'mmi': {'name': 'Middlefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.71083, 'elev': 180,  'lat': 41.49667, 'network': 'newa', 'state': 'CT'},
-'ct_pla': {'name': 'Plainville MS, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'toolow', 'lat': 41.684327, 'lon': -72.885093, 'elev': 246, 'network': 'newa', 'state': 'CT'},
 'me_bhb': {'name': 'Bar Harbor, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.389786, 'lon': -68.208026, 'elev': 55, 'network': 'newa', 'state': 'ME'}
 }
