@@ -65,7 +65,7 @@ moderately_susceptible = {
 					13:1, 14:1, 15:1, 16:1, 17:1, 18:1,
 					19:1, 20:1, 21:1, 22:1, 23:1, 24:1   },
 	'criticalBU': 35,
-	'criticalFU': 20 }
+	'criticalFU': 17 }
 
 moderately_resistant =  {
 	'hi_tmp': 	 { 16:1, 17:1, 18:1, 19:1, 20:1,
@@ -216,8 +216,7 @@ class general_simcast(object) :
 		self.rh = stnWeather['rh'] 
 		self.prcp = stnWeather['prcpMM']
 		self.flags = stnWeather['flags']
-
-
+		
 	def get_fungicide_times(self,all_fungicide) :
 		self.fungicide = {}
 #		print 'get_fungicide_times',all_fungicide
