@@ -243,7 +243,8 @@ class general_simcast(object) :
 			else :
 				self.report_sTime = self.firstFungicideApp
 		elif (self.firstFungicideApp != None) :
-			self.report_sTime = self.firstFungicideApp
+			# ADDED THREE DAYS BACK - KLE 8/25/2015
+			self.report_sTime = self.firstFungicideApp + DateTime.RelativeDate(days=-3)
 		elif (self.bliteCritTime != None) :
 			self.report_sTime = self.bliteCritTime
 
@@ -666,6 +667,8 @@ class general_simcast(object) :
 				self.criticalTime = self.fungicideTime + DateTime.RelativeDateTime(days=+5)
 				self.criticalDay = DateTime.DateTime(self.criticalTime.year,self.criticalTime.month,self.criticalTime.day)
 
+			print index, self.today, self.eTime
+			print self.rh[index]
 			this_rh = self.rh[index]
 			this_tmp = 	self.tmp[index]
 			this_prcp = self.prcp[index]
@@ -717,6 +720,8 @@ class general_simcast(object) :
 		first_date = self.dates[0]
 		self.sTime = apply(DateTime.Date,first_date)
 		self.eTime = apply(DateTime.Date,last_date)
+		
+		print "in get_weather_data",self.sTime,self.eTime
 
 
 	def process_simcast(self,stn_name,resistance,doseVars,stnWeather) :
