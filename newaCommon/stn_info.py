@@ -152,6 +152,7 @@ stn_info = {
 'ct_npr': {'name': 'New Preston, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.665955, 'lon': -73.334845, 'elev': 860, 'network': 'newa', 'state': 'CT'},
 'ct_woo': {'name': 'Woodstock, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.930842, 'lon': -71.985308, 'elev': 201, 'network': 'newa', 'state': 'CT'},
 'ct_eha': {'name': 'Moodus, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.520094, 'lon': -72.444341, 'elev': 422, 'network': 'newa', 'state': 'CT'},
+'ct_enf': {'name': 'Enfield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.976093, 'lon': -72.504194, 'elev': 250, 'network': 'newa', 'state': 'CT'},
 'ct_mad': {'name': 'Madison, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.295110, 'lon': -72.621420, 'elev': 30, 'network': 'newa', 'state': 'CT'},
 'ct_por': {'name': 'Portland, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.580457, 'lon': -72.618400, 'elev': 303, 'network': 'newa', 'state': 'CT'},
 'ct_gra': {'name': 'Granby, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.958341, 'lon': -72.817436, 'elev': 270, 'network': 'newa', 'state': 'CT'},
