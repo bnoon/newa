@@ -97,7 +97,7 @@ def run_diseaseStations (disease):
 			    ("knyc", "New York - Central Park"), ("kjfk", "New York - JFK Airport"), ("klga", "New York - LGA Airport"), 
 			    ("kiag", "Niagara Falls Airport"), ("kpeo", "Penn Yan Airport"), ("kpou", "Poughkeepsie Airport"), 
 			    ("kroc", "Rochester Airport"), ("kslk", "Saranac Lake Airport"), ("kswf", "Newburgh Stewart Field"), 
-			    ("ksyr", "Syracuse Airport"), ("kfok", "Suffolk County Airport"), ("kart", "Watertown Airport"), 
+			    ("ksyr", "Syracuse Airport"), ("kfok", "Westhampton Beach Airport"), ("kart", "Watertown Airport"), 
 			    ("kgtb", "Wheeler Sack Field"), ("khpn", "White Plains Airport"), ("kelz", "Wellsville Airport"),
 			    ("krut", "Rutland, VT Airport"), ("kddh", "Bennington, VT Airport"), ("kaqw", "North Adams, MA Airport"),
 			    ("kpsf", "Pittsfield, MA Airport"), ("kdxr", "Danbury, CT Airport"), ("kbdr", "Bridgeport, CT Airport"),
