@@ -11,6 +11,9 @@ from mx import DateTime
 import subprocess
 if '/Users/keith/kleWeb/newaModel/newaModel' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaModel/newaModel')
 import newaModel_io
+from bsddb import hashopen
+from cPickle import loads
+
 
 
 
@@ -280,6 +283,7 @@ class general_dm_weather(object) :
 		self.initialize_main_station(stn)
 		self.setup_time(eDate)
 		self.setup_arrays()
+		self.nativeStnID = stn
 
 	def setup_time(self,eDate) :
 		(year,month,day) = eDate
@@ -358,6 +362,24 @@ class general_dm_weather(object) :
 		self.lwet_vals = []
 		self.lwet_flgs = []
 
+#	ndfd data access added 9/23/2015 - kle
+	def get_fcst_data (self, stn, requested_var, requested_time):
+		hourly_fcst = -999
+		try:
+			forecast_db = hashopen('/Users/keith/NDFD/hourly_forecasts.db','r')		
+			stn_dict = loads(forecast_db[stn.upper()])
+			forecast_db.close()
+			if requested_var == 'prcp': requested_var = 'qpf'
+			dkey = tuple(requested_time[0:3])
+			if stn_dict.has_key(requested_var) and stn_dict[requested_var].has_key(dkey):
+				hr = requested_time[3]
+				hourly_fcst = stn_dict[requested_var][dkey][hr]
+#			else:
+#				print 'stn_dict does not have key',stn_dict.has_key(requested_var),stn_dict[requested_var].has_key(dkey)
+		except:
+			print_exception()
+		return hourly_fcst
+
 
 	def get_temperature(self,start,end) :
 		tmp = self.stn.tmp
@@ -387,6 +409,13 @@ class general_dm_weather(object) :
 						flags[index] = 1
 						values[index] = sVals[index]
 						fixed = fixed + 1
+					# added following section 9/23/2015 -kle
+					else:
+						fval = self.get_fcst_data (self.nativeStnID, 'temp', sDates[index])
+						if fval != -999:
+							flags[index] = 1
+							values[index] = fval
+							fixed = fixed + 1
 						
 		self.dates = self.dates + dates
 		self.tmp_vals = self.tmp_vals + values
@@ -421,6 +450,17 @@ class general_dm_weather(object) :
 						flags[index] = 1
 						values[index] = sVals[index]
 						fixed = fixed + 1
+					# added following section 9/23/2015 -kle
+					else:
+						fval = self.get_fcst_data (self.nativeStnID, 'prcp', sDates[index])
+						if fval != -999:
+							flags[index] = 1
+							values[index] = fval
+							fixed = fixed + 1
+						else:
+							flags[index] = 1
+							values[index] = 0.00	#set missing to zero precip
+							fixed = fixed + 1
 						
 		self.prcp_vals = self.prcp_vals + values
 		self.prcp_flgs = self.prcp_flgs + flags
@@ -455,6 +495,13 @@ class general_dm_weather(object) :
 						flags[index] = 1
 						values[index] = sVals[index]
 						fixed = fixed + 1
+					# added following section 9/23/2015 -kle
+					else:
+						fval = self.get_fcst_data (self.nativeStnID, 'rhum', sDates[index])
+						if fval != -999:
+							flags[index] = 1
+							values[index] = fval
+							fixed = fixed + 1
 						
 		self.rh_vals = self.rh_vals + values
 		self.rh_flgs = self.rh_flgs + flags
@@ -468,10 +515,18 @@ class general_dm_weather(object) :
 			if self.lwetVar == None :
 				self.setup_sister_lwet()
 			(sum,values,flags,dates)=self.lwetVar.get_observed(self.lwetVar.lwet,start,end)
+			# if there is no sister lwet, try estimating from RH
 			if sum == 0 :
-				statFlg = 1 
-				raise weatherError
-
+				fixed = 0
+				for index in range(len(values)) :
+					trh = self.rh_vals[index]
+					if trh != -999:
+						flags[index] = 1
+						if trh >= 90:
+							values[index] = 60
+						else:
+							values[index] = 0
+						fixed = fixed + 1
 		elif sum < len(values) :
 			missing_indices = []
 			for index in range(len(flags)) :
@@ -480,7 +535,6 @@ class general_dm_weather(object) :
 			if self.lwetVar == None:
 				self.setup_sister_lwet()
 			(sSum,sVals,sFlgs,sDates)=self.lwetVar.get_observed(self.lwetVar.lwet,start,end)
-
 			if sSum != 0 :
 				fixed = 0
 				for index in missing_indices:
@@ -488,6 +542,16 @@ class general_dm_weather(object) :
 						flags[index] = 1
 						values[index] = sVals[index]
 						fixed = fixed + 1
+					# added following section 9/23/2015 -kle
+					else:
+						trh = self.rh_vals[index]
+						if trh != -999:
+							flags[index] = 1
+							if trh >= 90:
+								values[index] = 60
+							else:
+								values[index] = 0
+							fixed = fixed + 1
 						
 		self.lwet_vals = self.lwet_vals + values
 		self.lwet_flgs = self.lwet_flgs + flags

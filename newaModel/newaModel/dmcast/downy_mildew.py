@@ -165,8 +165,6 @@ class general_dm(object):
 			self.smry_dict['statMsg'] = 'Insufficient data for model'
 			raise get_weather.weatherError
 		(statFlg,self.dates,hours,days,tmp,rh,prcp,lwet,ok) = all_weather
-
-		
 		if test :
 			oFile = open('test_weather.txt','w')
 			for index in range(len(self.dates)) :

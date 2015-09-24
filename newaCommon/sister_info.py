@@ -51,7 +51,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'hig' : {'temp': 'mod', 'lwet': 'mod', 'rhum': 'mod', 'prcp': 'mod', 'wspd': 'mod', 'wdir': 'mod', 'srad': 'mod'},
 'him' : {'temp': 'lod', 'lwet': 'lod', 'prcp': 'lod'},
 'hud' : {'temp': 'cas', 'lwet': 'cas', 'rhum': 'cas', 'prcp': 'cas', 'wspd': 'cu_val', 'wdir': 'cu_val', 'srad': 'cas'},
-'int' : {'temp': 'rom', 'rhum': 'rom', 'prcp': 'rom', 'wspd': 'rom', 'wdir': 'rom', 'lwet': 'rom', 'srad': 'rom'},
+'int' : {'temp': 'rom', 'rhum': 'rom', 'prcp': 'rom', 'wspd': 'rom', 'wdir': 'rom', 'lwet': 'ovi', 'srad': 'rom'},
 'ith' : {'temp': 'cu_gfr', 'prcp': 'cu_gfr', 'lwet': 'fre', 'rhum': 'cu_gfr', 'wspd': 'cu_gfr', 'wdir': 'cu_gfr', 'srad': 'ovi'},
 'ken' : {'temp': 'lyn', 'lwet': 'lyn', 'rhum': 'lyn', 'prcp': 'lyn', 'wspd': 'lyn', 'wdir': 'lyn', 'srad': 'kno'},
 'kin' : {'temp': 'hud', 'rhum': 'hud', 'prcp': 'hud', 'wspd': 'hud', 'wdir': 'hud', 'lwet': 'hud', 'srad': 'hud'},
