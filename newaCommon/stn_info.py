@@ -172,6 +172,7 @@ stn_info = {
 'ct_gos': {'name': 'Goshen, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.792852, 'lon': -73.20965, 'elev': 1255, 'network': 'newa', 'state': 'CT'},
 'ct_pla': {'name': 'Plainville MS, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'toolow', 'lat': 41.684327, 'lon': -72.885093, 'elev': 246, 'network': 'newa', 'state': 'CT'},
 'ct_pre': {'name': 'Preston, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'lat': 41.519728, 'lon': -72.018675, 'elev': 238, 'network': 'newa', 'state': 'CT'},
+'ct_gla': {'name': 'Glastonbury HS, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'lat': 41.701804, 'lon': -72.586423, 'elev': 110, 'network': 'newa', 'state': 'CT'},
 'nh_hol': {'name': 'Hollis, NH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.739297, 'lon': -71.579226, 'elev': 104, 'network': 'newa', 'state': 'NH'},
 'ia_ccy': {'name': 'Central City, IA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.224159, 'lon': -91.494571, 'elev': 958, 'network': 'newa', 'state': 'IA'},
 'il_pgr': {'name': 'Poplar Grove, IL', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.391312, 'lon': -88.800936, 'elev': 916, 'network': 'newa', 'state': 'IL'},
