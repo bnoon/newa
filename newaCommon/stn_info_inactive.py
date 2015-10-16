@@ -50,7 +50,6 @@ stn_info_inactive = {
 'mam': {'name': 'Amesbury, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.871822, 'lon': -70.925278, 'elev': 115, 'network': 'newa', 'state': 'MA', 'county': 'Essex', 'climate_div': 'MA03'},
 'mre': {'name': 'Rehoboth, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 41.777314, 'lon': -71.320638, 'elev': 16, 'network': 'newa', 'state': 'MA'},
 'ct_enf': {'name': 'Enfield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.976093, 'lon': -72.504194, 'elev': 250, 'network': 'newa', 'state': 'CT'},
-'ct_swo': {'name': 'South Woodstock MS, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'bad', 'lat': 41.928673, 'lon': -71.956196, 'elev': 421, 'network': 'newa', 'state': 'CT'},
 '148': {'name': 'Cape May Courthouse, NJ', 'vars': ['prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.1246, 'lon': -74.7873, 'elev': 7, 'network': 'njwx', 'state': 'NJ'},
 '198': {'name': 'Hammonton, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.64, 'lon': -74.75, 'elev': 21, 'network': 'njwx', 'state': 'NJ'},
 '3407': {'name': 'Eastampton, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.9856, 'lon': -74.7469, 'elev': 12, 'network': 'njwx', 'state': 'NJ'},
