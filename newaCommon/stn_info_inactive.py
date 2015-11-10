@@ -21,6 +21,7 @@ stn_info_inactive = {
 'gra': {'name': 'Granville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -73.331111, 'elev': 670.0, 'lat': 43.412500, 'network': 'newa', 'state': 'NY'},
 'gro': {'name': 'Groveland', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.801929999999999, 'elev': 590.0, 'lat': 42.660499999999999, 'network': 'newa', 'state': 'NY'},
 'him': {'name': 'Himrod', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.922259999999994, 'elev': 500.0, 'lat': 42.617629999999998, 'network': 'newa', 'state': 'NY'},
+'ken': {'name': 'Kendall (Zingler)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.345406, 'lon': -78.034467, 'elev': 308, 'network': 'newa', 'state': 'NY'},
 'loc': {'name': 'Ransomville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'toolow', 'lon': -78.901556999999997, 'elev': 387.0, 'lat': 43.187325000000001, 'network': 'newa', 'state': 'NY'},
 'los': {'name': 'Lodi (Shalestone)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.87803, 'elev': 522.0, 'lat': 42.56253, 'network': 'newa', 'state': 'NY'},
 'mex': {'name': 'Mexico', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.230703, 'elev': 400.0, 'lat': 43.459805, 'network': 'newa', 'state': 'NY'},
@@ -45,7 +46,6 @@ stn_info_inactive = {
 'wol': {'name': 'Wolcott', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.876728, 'elev': 280, 'lat': 43.262683, 'network': 'newa', 'state': 'NY'},
 'vex': {'name': 'Essex, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.537492, 'lon': -73.061060, 'elev': 572, 'network': 'newa', 'state': 'VT'},
 'vsa': {'name': 'Saxtons River, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.153611, 'lon': -72.533611, 'elev': 802, 'network': 'newa', 'state': 'VT', 'county': 'Windham', 'climate_div': 'VT03'},
-'ved': {'name': 'East Dorset, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.9909, 'elev': 1339, 'lat': 43.2685, 'network': 'newa', 'state': 'VT'},
 'hwa': {'name': 'Walpole, NH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.033333, 'lon': -72.433056, 'elev': 605, 'network': 'newa', 'state': 'NH', 'county': 'Cheshire', 'climate_div': 'NH02'},
 'mam': {'name': 'Amesbury, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.871822, 'lon': -70.925278, 'elev': 115, 'network': 'newa', 'state': 'MA', 'county': 'Essex', 'climate_div': 'MA03'},
 'mre': {'name': 'Rehoboth, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 41.777314, 'lon': -71.320638, 'elev': 16, 'network': 'newa', 'state': 'MA'},
@@ -62,5 +62,6 @@ stn_info_inactive = {
 'meb': {'name': 'East Bridgewater, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 42.007778, 'lon': -70.943333, 'elev': 40, 'network': 'newa', 'state': 'MA', 'county': 'Plymouth', 'climate_div': 'MA03'},
 'mno': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.345831, 'lon': -71.677843, 'elev': 610, 'network': 'newa', 'state': 'MA'},
 'mmi': {'name': 'Middlefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.71083, 'elev': 180,  'lat': 41.49667, 'network': 'newa', 'state': 'CT'},
+'pa_big': {'name': 'Biglerville (Hollabaugh), PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat':39.946944, 'lon': -77.247222, 'elev': 732, 'network': 'newa', 'state': 'PA'},
 'me_bhb': {'name': 'Bar Harbor, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.389786, 'lon': -68.208026, 'elev': 55, 'network': 'newa', 'state': 'ME'}
 }
