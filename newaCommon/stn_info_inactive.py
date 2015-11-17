@@ -24,6 +24,7 @@ stn_info_inactive = {
 'ken': {'name': 'Kendall (Zingler)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.345406, 'lon': -78.034467, 'elev': 308, 'network': 'newa', 'state': 'NY'},
 'loc': {'name': 'Ransomville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'toolow', 'lon': -78.901556999999997, 'elev': 387.0, 'lat': 43.187325000000001, 'network': 'newa', 'state': 'NY'},
 'los': {'name': 'Lodi (Shalestone)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.87803, 'elev': 522.0, 'lat': 42.56253, 'network': 'newa', 'state': 'NY'},
+'mat': {'name': 'Mattituck (Harbes)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.99, 'lon': -72.59, 'elev': 96, 'network': 'newa', 'state': 'NY'},
 'mex': {'name': 'Mexico', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.230703, 'elev': 400.0, 'lat': 43.459805, 'network': 'newa', 'state': 'NY'},
 'nap': {'name': 'Naples', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.387289999999993, 'elev': 700.0, 'lat': 42.626150000000003, 'network': 'newa', 'state': 'NY'},
 'nea': {'name': 'North Easton', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.00515, 'lon': -73.5495, 'elev': 490, 'network': 'newa', 'state': 'NY'},
@@ -47,7 +48,6 @@ stn_info_inactive = {
 'vex': {'name': 'Essex, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.537492, 'lon': -73.061060, 'elev': 572, 'network': 'newa', 'state': 'VT'},
 'vsa': {'name': 'Saxtons River, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.153611, 'lon': -72.533611, 'elev': 802, 'network': 'newa', 'state': 'VT', 'county': 'Windham', 'climate_div': 'VT03'},
 'hwa': {'name': 'Walpole, NH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.033333, 'lon': -72.433056, 'elev': 605, 'network': 'newa', 'state': 'NH', 'county': 'Cheshire', 'climate_div': 'NH02'},
-'mam': {'name': 'Amesbury, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.871822, 'lon': -70.925278, 'elev': 115, 'network': 'newa', 'state': 'MA', 'county': 'Essex', 'climate_div': 'MA03'},
 'mre': {'name': 'Rehoboth, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 41.777314, 'lon': -71.320638, 'elev': 16, 'network': 'newa', 'state': 'MA'},
 '148': {'name': 'Cape May Courthouse, NJ', 'vars': ['prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.1246, 'lon': -74.7873, 'elev': 7, 'network': 'njwx', 'state': 'NJ'},
 '198': {'name': 'Hammonton, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.64, 'lon': -74.75, 'elev': 21, 'network': 'njwx', 'state': 'NJ'},
@@ -62,6 +62,7 @@ stn_info_inactive = {
 'meb': {'name': 'East Bridgewater, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 42.007778, 'lon': -70.943333, 'elev': 40, 'network': 'newa', 'state': 'MA', 'county': 'Plymouth', 'climate_div': 'MA03'},
 'mno': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.345831, 'lon': -71.677843, 'elev': 610, 'network': 'newa', 'state': 'MA'},
 'mmi': {'name': 'Middlefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.71083, 'elev': 180,  'lat': 41.49667, 'network': 'newa', 'state': 'CT'},
+'ct_nha': {'name': 'New Hartford, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.822502, 'lon': -73.058921, 'elev': 980, 'network': 'newa', 'state': 'CT'},
 'pa_big': {'name': 'Biglerville (Hollabaugh), PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat':39.946944, 'lon': -77.247222, 'elev': 732, 'network': 'newa', 'state': 'PA'},
 'me_bhb': {'name': 'Bar Harbor, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.389786, 'lon': -68.208026, 'elev': 55, 'network': 'newa', 'state': 'ME'}
 }
