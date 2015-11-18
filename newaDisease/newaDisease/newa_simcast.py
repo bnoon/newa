@@ -667,8 +667,6 @@ class general_simcast(object) :
 				self.criticalTime = self.fungicideTime + DateTime.RelativeDateTime(days=+5)
 				self.criticalDay = DateTime.DateTime(self.criticalTime.year,self.criticalTime.month,self.criticalTime.day)
 
-			print index, self.today, self.eTime
-			print self.rh[index]
 			this_rh = self.rh[index]
 			this_tmp = 	self.tmp[index]
 			this_prcp = self.prcp[index]
@@ -720,8 +718,6 @@ class general_simcast(object) :
 		first_date = self.dates[0]
 		self.sTime = apply(DateTime.Date,first_date)
 		self.eTime = apply(DateTime.Date,last_date)
-		
-		print "in get_weather_data",self.sTime,self.eTime
 
 
 	def process_simcast(self,stn_name,resistance,doseVars,stnWeather) :

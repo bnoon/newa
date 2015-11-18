@@ -2044,6 +2044,13 @@ def potato_simcast_html [html] (station_name,simcastD):
 	fLength = len(fungicideVals)
 	length = min(bLength,fLength)
 	'''
+	<p>The NEWA Simcast Late Blight model assumes that fungicide applications were made at 10am
+on the date specified in the user interface. The Potato/Tomato Late Blight Decision 
+Support System (DSS) is a much more robust tool for managing late blight that, among other
+things, allows you to specify the time of fungicide application. The Late Blight DSS is the
+preferred tool for monitoring late blight. More information on the DSS can be found at 
+<a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss">
+http://newa.cornell.edu/index.php?page=potato-late-blight-dss</a>.</p>
 	<table id="blight_table" border cellspacing="0" cellpadding="4" width=625 style='border-collapse:collapse;table-layout:fixed'>
 	<col width="28%">
 	'''

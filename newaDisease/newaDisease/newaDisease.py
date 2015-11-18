@@ -17,14 +17,10 @@ class program_exit (Exception):
 	pass
 
 # add hourly forecast data to end of hourly_data
-def add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt,estp=False):
+def add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt):
 	try:
-		if (estp):
-			from get_hourly_forecast_estp import get_hourly_forecast_estp
-			forecast_data = get_hourly_forecast_estp(stn,start_fcst_dt,end_fcst_dt)		
-		else:
-			from get_hourly_forecast import get_hourly_forecast
-			forecast_data = get_hourly_forecast(stn,start_fcst_dt,end_fcst_dt)		
+		from get_hourly_forecast import get_hourly_forecast
+		forecast_data = get_hourly_forecast(stn,start_fcst_dt,end_fcst_dt)
 		hourly_data = hourly_data+forecast_data
 	except:
 		print_exception()
@@ -1423,109 +1419,19 @@ class Onion (Base, Cabbage):
 		except:
 			print_exception()
 		return dly_altvar
-		
-	#--------------------------------------------------------------------------------------------		
-	# add pop forecast
-	def add_pops (self,smry_dict,end_date_dt,pops_list):
-		try:
-			day0 =  end_date_dt + DateTime.RelativeDate(hour=0,minute=0,second=0)
-			fday1 = day0 + DateTime.RelativeDate(days=+1)
-			fday2 = day0 + DateTime.RelativeDate(days=+2)
-			fday3 = day0 + DateTime.RelativeDate(days=+3)
-			fday4 = day0 + DateTime.RelativeDate(days=+4)
-			fday5 = day0 + DateTime.RelativeDate(days=+5)
-
-			smry_dict['pops']  = {}
-			smry_dict['pops']['day0'] = {}
-			smry_dict['pops']['pday1'] = {}
-			smry_dict['pops']['pday2'] = {}
-			smry_dict['pops']['fday1'] = {}
-			smry_dict['pops']['fday2'] = {}
-			smry_dict['pops']['fday3'] = {}
-			smry_dict['pops']['fday4'] = {}
-			smry_dict['pops']['fday5'] = {}
-			smry_dict['pops']['day0']['am']  = miss
-			smry_dict['pops']['pday1']['am'] = miss
-			smry_dict['pops']['pday2']['am'] = miss
-			smry_dict['pops']['fday1']['am'] = miss
-			smry_dict['pops']['fday2']['am'] = miss
-			smry_dict['pops']['fday3']['am'] = miss
-			smry_dict['pops']['fday4']['am'] = miss
-			smry_dict['pops']['fday5']['am'] = miss
-			smry_dict['pops']['day0']['pm']  = miss
-			smry_dict['pops']['pday1']['pm'] = miss
-			smry_dict['pops']['pday2']['pm'] = miss
-			smry_dict['pops']['fday1']['pm'] = miss
-			smry_dict['pops']['fday2']['pm'] = miss
-			smry_dict['pops']['fday3']['pm'] = miss
-			smry_dict['pops']['fday4']['pm'] = miss
-			smry_dict['pops']['fday5']['pm'] = miss
-
-			# add pops for today and forecast next 5 days
-			for theDate,qpf,pop in pops_list:
-				if pop != miss:
-					theDate_dt = DateTime.DateTime(*theDate) + DateTime.RelativeDate(hour=0,minute=0,second=0)
-					if theDate[3] < 12:
-						which = 'am'
-					else:
-						which = 'pm'
-					if day0 == theDate_dt:
-						smry_dict['pops']['day0'][which] = pop
-					elif fday1 == theDate_dt:
-						smry_dict['pops']['fday1'][which] = pop
-					elif fday2 == theDate_dt:
-						smry_dict['pops']['fday2'][which] = pop
-					elif fday3 == theDate_dt:
-						smry_dict['pops']['fday3'][which] = pop
-					elif fday4 == theDate_dt:
-						smry_dict['pops']['fday4'][which] = pop
-					elif fday5 == theDate_dt:
-						smry_dict['pops']['fday5'][which] = pop
-		except:
-			print_exception()
-		return smry_dict
 	
 	#--------------------------------------------------------------------------------------------		
-	def run_onion_dis(self,stn,month,day,product,accend,output):
-		from get_precip_forecast import get_precip_forecast
-		now = DateTime.now()
-		if not accend:
-			accend = now
-		smry_dict = {}
-		smry_dict["output"] = output
+	def run_onion_dis(self,stn,year,month,day,product):
 		try:
 			# obtain daily data
-			year = accend.year
+			now = DateTime.now()
 			plant_date = DateTime.DateTime(year,month,day,1)
-			end_date_dt = accend
-			pday3 = end_date_dt + DateTime.RelativeDate(days = -3, hour=1)
-			if plant_date > end_date_dt:
-				return newaCommon_io.errmsg('Plant date must be before date of interest')
-##			midOctober = DateTime.DateTime(end_date_dt.year,10,15,23)
-##			if end_date_dt > midOctober:
-##				return newaDisease_io.onion_dis_dormant(smry_dict)
-			if end_date_dt.year != now.year:
-				smry_dict['this_year'] = False
-				end_date_dt = end_date_dt + DateTime.RelativeDate(days = +6)
+			if year == now.year:
+				end_date_dt = now
 			else:
-				smry_dict['this_year'] = True
-			if plant_date > pday3:
-				start_hrly = pday3
-			else:
-				start_hrly = plant_date
-			hourly_data, download_time, station_name = self.get_hourly (stn, start_hrly, end_date_dt)
-			smry_dict['last_time'] = download_time
-
-			# add hourly forecast data
-			if smry_dict['this_year']:
-				start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
-				end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6) + DateTime.RelativeDate(hour=23,minute=0,second=0.0)
-				hourly_data = add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
-			else:
-				start_fcst_dt = end_date_dt + DateTime.RelativeDate(hours = +1)
-				end_fcst_dt = end_date_dt
-				end_date_dt = end_date_dt + DateTime.RelativeDate(days = -6)
-								
+				end_date_dt = DateTime.DateTime(year,10,1,1)
+			hourly_data, download_time, station_name = self.get_hourly (stn, plant_date, end_date_dt)
+			
 			if len(hourly_data) > 0:
 				# compute daily values needed for later computations
 				daily_onion = self.get_dly_onion(hourly_data)
@@ -1552,136 +1458,7 @@ class Onion (Base, Cabbage):
 
 				if product == 'onion_dis':
 					if len(blight_alert) > 0 or len(alternaria) > 0 or len(botrytis) > 0 or len(mildew) > 0:
-### new summary table dictionary creation
-						last_day = end_date_dt + DateTime.RelativeDate(hour=23,minute=0,second=0.0)
-						first_day = last_day + DateTime.RelativeDate(days = -6)
-						bot_favorable_count = 0
-						bot_spore_count = 0
-						bot_day_count = 0
-						ba_favorable_count = 0
-						ba_ipi_count = 0
-						ba_day_count = 0
-						mba_favorable_count = 0
-						mba_ipi_count = 0
-						mba_day_count = 0
-						dm_favorable_count = 0
-						dm_day_count = 0
-						pb_favorable_count = 0
-						pb_val_count = 0
-						pb_day_count = 0
-						theDate = first_day
-						while theDate <= last_day:
-							dkey = (theDate.year,theDate.month,theDate.day)
-							if botrytis.has_key(dkey):
-								spore_index, bf = botrytis[dkey]
-								if spore_index != miss:
-									bot_day_count += 1
-									bot_spore_count += spore_index					
-									if spore_index >= 50:
-										bot_favorable_count += 1
-							if blight_alert.has_key(dkey):
-								ba_ipi, mba_ipi = blight_alert[dkey]
-								if ba_ipi != miss:
-									ba_day_count += 1
-									ba_ipi_count += ba_ipi
-									if ba_ipi >= 7:
-										ba_favorable_count += 1
-								if mba_ipi != miss:
-									mba_day_count += 1
-									mba_ipi_count += mba_ipi
-									if mba_ipi >= 7:
-										mba_favorable_count += 1
-							if mildew.has_key(dkey):
-								status = mildew[dkey]
-								if status != 'Unavailable':
-									dm_day_count += 1
-									if status == 'Favorable':
-										dm_favorable_count += 1					
-							if alternaria.has_key(dkey):
-								pbval, pbrisk = alternaria[dkey]
-								if pbval != miss:
-									pb_day_count += 1
-									pb_val_count += pbval
-									if pbval >= 5.7:
-										pb_favorable_count += 1					
-							theDate = theDate + DateTime.RelativeDate(days = +1)
-	
-						if bot_day_count == 7:
-							smry_dict["botrytis_days"] = bot_favorable_count
-						else:
-							smry_dict["botrytis_days"] = '-'
-						if bot_day_count > 0:
-							smry_dict["botrytis_avg"] = int(round(bot_spore_count/bot_day_count))
-						else:
-							smry_dict["botrytis_avg"] = '-'
-						smry_dict["botrytis_today"] = int(round(botrytis[last_day.year,last_day.month,last_day.day][0]))
-						if ba_day_count == 7:
-							smry_dict["blightalert_days"] = ba_favorable_count
-						else:
-							smry_dict["blightalert_days"] = '-'
-						if ba_day_count > 0:
-							smry_dict["blightalert_avg"] = round(ba_ipi_count/ba_day_count, 2)
-						else:
-							smry_dict["blightalert_avg"] = '-'
-						smry_dict["blightalert_today"] = round(blight_alert[last_day.year,last_day.month,last_day.day][0], 2)
-						if mba_day_count == 7:
-							smry_dict["modblightalert_days"] = mba_favorable_count
-						else:
-							smry_dict["modblightalert_days"] = '-'
-						if mba_day_count > 0:
-							smry_dict["modblightalert_avg"] = round(mba_ipi_count/mba_day_count, 2)
-						else:
-							smry_dict["modblightalert_avg"] = '-'
-						smry_dict["modblightalert_today"] = round(blight_alert[last_day.year,last_day.month,last_day.day][1], 2)
-						if dm_day_count == 7:
-							smry_dict["downymildew_days"] = dm_favorable_count
-						else:
-							smry_dict["downywildew_days"] = '-'
-						smry_dict["downymildew_today"] = mildew[last_day.year,last_day.month,last_day.day]
-						if pb_day_count == 7:
-							smry_dict["purpleblotch_days"] = pb_favorable_count
-						else:
-							smry_dict["purpleblotch_days"] = '-'
-						if pb_day_count > 0:
-							smry_dict["purpleblotch_avg"] = round(pb_val_count/pb_day_count, 1)
-						else:
-							smry_dict["purpleblotch_avg"] = '-'
-						smry_dict["purpleblotch_today"] = round(alternaria[last_day.year,last_day.month,last_day.day][0], 1)
-
-						smry_dict['day0'] = {}
-						smry_dict['day0']['date'] = '%s %d' % (month_names[last_day.month][0:3],last_day.day)
-						smry_dict['day0']['ymd'] = (last_day.year,last_day.month,last_day.day)
-						for dy in range(1,6):
-							theDate = last_day + DateTime.RelativeDate(days = +dy)
-							index = 'fday' + str(dy)
-							smry_dict[index] = '%s %d' % (month_names[theDate.month][0:3],theDate.day)
-							index = 'ymd' + str(dy)
-							smry_dict[index] = (theDate.year,theDate.month,theDate.day)
-							index = 'botrytis_fday' + str(dy)
-							smry_dict[index] = int(round(botrytis[theDate.year,theDate.month,theDate.day][0]))
-							index = 'blightalert_fday' + str(dy)
-							smry_dict[index] = round(blight_alert[theDate.year,theDate.month,theDate.day][0], 2)
-							index = 'modblightalert_fday' + str(dy)
-							smry_dict[index] = round(blight_alert[theDate.year,theDate.month,theDate.day][1], 2)
-							index = 'downymildew_fday' + str(dy)
-							smry_dict[index] = mildew[theDate.year,theDate.month,theDate.day]
-							index = 'purpleblotch_fday' + str(dy)
-							smry_dict[index] = round(alternaria[theDate.year,theDate.month,theDate.day][0], 1)
-						# get 12-hour pops
-						pops_list = get_precip_forecast (stn,end_date_dt + DateTime.RelativeDate(hour=0,minute=0,second=0.0),end_fcst_dt)
-						smry_dict = self.add_pops(smry_dict,end_date_dt,pops_list)
-						
-						last_prcp_dt = start_hrly + DateTime.RelativeDate(hours = -1)
-						for i in range(len(hourly_data), 0, -1):
-							theTime,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags = hourly_data[i-1]
-							temp_eflag, prcp_eflag, pop12_eflag, rhum_eflag, wspd_eflag, wdir_eflag, srad_eflag, st4i_eflag = eflags
-							if prcp != miss and prcp_eflag != "P":
-								last_prcp_dt = DateTime.DateTime(*theTime)
-								break
-						smry_dict["last_prcp"] = last_prcp_dt
-						
-						return newaDisease_io.onion_dis_html(station_name,blight_alert,plant_date,alternaria,botrytis,mildew,smry_dict)
-### end new section
+						return newaDisease_io.onion_dis_html(station_name,blight_alert,plant_date,alternaria,botrytis,mildew)
 					else:
 						return self.nodata(stn, station_name, plant_date, end_date_dt)
 				elif product == 'onion_onlog':
@@ -2413,7 +2190,7 @@ def process_input (request,path):
 			elif smry_type == 'potato_pdays':
 				return Potato().run_potato_pdays(stn,year,month,day,output)
 			elif smry_type in ['onion_dis','onion_onlog','onion_sbalog','onion_smbalog']:
-				return Onion().run_onion_dis(stn,month,day,smry_type,accend,output)
+				return Onion().run_onion_dis(stn,year,month,day,smry_type)
 			elif smry_type == 'tomato_for':
 				return Tomato().run_tomato_for(stn,year,month,day,output)
 			elif smry_type == 'grape_dis':
