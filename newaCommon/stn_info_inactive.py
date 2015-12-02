@@ -54,6 +54,7 @@ stn_info_inactive = {
 '3407': {'name': 'Eastampton, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.9856, 'lon': -74.7469, 'elev': 12, 'network': 'njwx', 'state': 'NJ'},
 '3409': {'name': 'Upper Deerfield (RISE), NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.5037, 'lon': -75.254, 'elev': 26, 'network': 'njwx', 'state': 'NJ'},
 '3405': {'name': 'Fort Monmouth, NJ', 'vars': ['temp', 'rhum', 'wspd', 'wdir'], 'lat': 40.3137, 'lon': -74.049, 'elev': 5, 'network': 'njwx', 'state': 'NJ'},
+'3517': {'name': 'Alba Vineyards, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 40.6146, 'lon': -75.1663, 'elev': 238, 'network': 'njwx', 'state': 'NJ'},
 '3523': {'name': 'Working Dog Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 40.2315, 'lon': -74.5377, 'elev': 121, 'network': 'njwx', 'state': 'NJ'},
 '3521': {'name': 'Terhune Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 40.3218, 'lon': -74.7293, 'elev': 187, 'network': 'njwx', 'state': 'NJ'},
 '3522': {'name': 'Bellview Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 39.5360, 'lon': -74.9345, 'elev': 115, 'network': 'njwx', 'state': 'NJ'},
