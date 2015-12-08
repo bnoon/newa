@@ -408,5 +408,6 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'ia_ccy': {'temp': 'kcid', 'rhum': 'kcid', 'prcp': 'kcid', 'wspd': 'kcid', 'wdir': 'kcid', 'lwet': 'wi_gay', 'srad': 'kcid'},
 'il_pgr': {'temp': 'krfd', 'rhum': 'krfd', 'prcp': 'krfd', 'wspd': 'krfd', 'wdir': 'krfd', 'lwet': 'wi_gay', 'srad': 'wi_gay'},
 'md_wdb': {'temp': 'kbwi', 'rhum': 'kbwi', 'prcp': 'kbwi', 'wspd': 'kbwi', 'wdir': 'kbwi', 'lwet': 'pa_big', 'srad': 'kbwi'},
-'nc_hen': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'md_wdb', 'srad': 'kavl'}
+'nc_hen': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'nc_edn', 'srad': 'kavl'},
+'nc_edn': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'nc_hen', 'srad': 'kavl'}
 }

@@ -175,6 +175,7 @@ stn_info = {
 'un_nec': {'name': 'Nebraska City 2N, NE', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -95.8833, 'elev': 1076.0, 'lat': 40.7000, 'network': 'cu_log', 'state': 'NE'},
 'md_wdb': {'name': 'Woodbine, MD', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 39.31527, 'lon': -77.10401, 'elev': 628, 'network': 'newa', 'state': 'MD'},
 'nc_hen': {'name': 'Hendersonville (Klimstra), NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 35.280923, 'lon': -82.530513, 'elev': 2343, 'network': 'newa', 'state': 'NC'},
+'nc_edn': {'name': 'Edneyville (Lewis Creek), NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 35.368132, 'lon': -82.338506, 'elev': 2223, 'network': 'newa', 'state': 'NC'},
 'mn_wbl': {'name': 'White Bear Lake, MN', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 45.106320, 'lon': -92.955087, 'elev': 955, 'network': 'newa', 'state': 'MN'},
 'mn_lkc': {'name': 'Lake City, MN', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.420187, 'lon': -92.227366, 'elev': 1140, 'network': 'newa', 'state': 'MN'},
 'mn_pre': {'name': 'Preston, MN', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.6825, 'lon': -92.0761, 'elev': 1088, 'network': 'newa', 'state': 'MN'},
