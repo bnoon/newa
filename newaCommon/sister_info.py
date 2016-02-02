@@ -48,7 +48,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'gui' : {'temp': 'kalb', 'rhum': 'kalb', 'prcp': 'kalb', 'wspd': 'kalb', 'wdir': 'kalb', 'lwet': 'cli', 'srad': 'cli'},
 'har' : {'temp': 'keri', 'rhum': 'keri', 'prcp': 'keri', 'wspd': 'keri', 'wdir': 'keri', 'lwet': 'por', 'srad': 'por'},
 'hec' : {'temp': 'lod', 'lwet': 'lod', 'rhum': 'lod', 'prcp': 'lod', 'wspd': 'lod', 'wdir': 'lod', 'srad': 'lod'},
-'hig' : {'temp': 'mod', 'lwet': 'mod', 'rhum': 'mod', 'prcp': 'mod', 'wspd': 'mod', 'wdir': 'mod', 'srad': 'mod'},
+'hig' : {'temp': 'hvl', 'lwet': 'hvl', 'rhum': 'hvl', 'prcp': 'hvl', 'wspd': 'hvl', 'wdir': 'hvl', 'srad': 'hvl'},
 'him' : {'temp': 'lod', 'lwet': 'lod', 'prcp': 'lod'},
 'hud' : {'temp': 'cas', 'lwet': 'cas', 'rhum': 'cas', 'prcp': 'cas', 'wspd': 'cu_val', 'wdir': 'cu_val', 'srad': 'cas'},
 'hvl' : {'temp': 'hig', 'lwet': 'hig', 'rhum': 'hig', 'prcp': 'hig', 'wspd': 'hig', 'wdir': 'hig', 'srad': 'hig'},
