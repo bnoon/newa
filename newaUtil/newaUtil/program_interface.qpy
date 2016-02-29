@@ -8,7 +8,7 @@ stationInfo_cache = {}
 
 class RootDirectory(Directory):
 
-	_q_exports = ["","process_input","stationList","diseaseStations","getForecastUrl","stationMap","zoomStationMap","stationInfo","stationModels"]
+	_q_exports = ["","process_input","stationList","stateStationList","diseaseStations","getForecastUrl","stationMap","stateStationMap","zoomStationMap","stationInfo","stationModels"]
 
 #	put up input page for following
 	def _q_index (self):						#default
@@ -17,6 +17,9 @@ class RootDirectory(Directory):
 	def stationMap (self) :
 		from newaUtil_io import station_map
 		return station_map()
+	def stateStationMap (self, path=None) :
+		from newaUtil_io import stateStation_map
+		return stateStation_map(path[0])
 	def stationList (self, path=None) :
 		ltype = path[0]
 		if stationList_cache.has_key(ltype):
@@ -27,6 +30,10 @@ class RootDirectory(Directory):
 			results = process_input(None,wholepath)
 			stationList_cache[ltype] = results
 		return results
+	def stateStationList (self, path=None) :
+		from newaUtil import process_input
+		path = ['stateStationList'] + path
+		return process_input(None,path)
 	def zoomStationMap (self, path=None) :
 		from newaUtil_io import zoom_station_map
 		return zoom_station_map(path[0])
