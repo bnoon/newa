@@ -1,0 +1,5 @@
+stn_info = {'kcho': {'srqual': 'ok', 'state': 'VA', 'name': 'Charlottesville (Airport)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 38.1386, 'elev': 641, 'lon': -78.4531, 'network': 'icao'},
+'kshd': {'srqual': 'ok', 'state': 'VA', 'name': 'Staunton', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 38.27, 'elev': 1188, 'lon': -78.85, 'network': 'icao'},
+'va_cro': {'name': 'Crozet (Chiles Peach Orchard)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st1i', 'sm1i'], 'lon': -78.748675, 'state': 'VA', 'elev': 922, 'lat': 38.068007, 'network': 'newa'},
+'va_cha': {'name': 'Charlottesville (Carter Mtn Orchard)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st1i', 'sm1i'], 'lon': -78.472665, 'state': 'VA', 'elev': 1148, 'lat': 37.9906478, 'network': 'newa'},
+}
