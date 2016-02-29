@@ -1,0 +1,55 @@
+############################################
+# Output pages
+############################################
+def robots [html] ():
+	'''
+	User-agent: * <br>
+	Disallow: /
+	'''
+
+def station_map [html] ():
+	'''
+	<!DOCTYPE html>
+	<html>
+	  <head>
+		<meta http-equiv="content-type" content="text/html"/>
+		<style type="text/css">
+			html { height: 100% }
+			body { height: 100%; margin: 0px; padding: 0px }
+		</style>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mapping3.js"></script>
+	  </head>
+	  <body onload="stationMap('all','station_page');">
+			<div id="map" style="width: 560px; height: 560px"></div>
+	  </body>
+	</html>
+	'''
+	
+def zoom_station_map [html] (reqstn):
+	'''
+	<!DOCTYPE html>
+	<html>
+	  <head>
+		<meta http-equiv="content-type" content="text/html"/>
+		<style type="text/css">
+			html { height: 100% }
+			body { height: 100%; margin: 0px; padding: 0px }
+		</style>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mapping3.js"></script>
+	  </head>
+	'''
+	setupstr = "zoomStation('%s');" % reqstn
+	'<body onload="%s">' % setupstr
+	'''
+	  <div id="map" style="width: 265px; height: 200px"></div>
+	  </body>
+	</html>
+	'''
