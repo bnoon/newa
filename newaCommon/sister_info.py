@@ -160,6 +160,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'mnb' : {'temp': 'msh', 'rhum': 'msh', 'prcp': 'msh', 'wspd': 'msh', 'wdir': 'msh', 'lwet': 'msh', 'srad': 'msh'},
 'mle' : {'temp': 'kfit', 'rhum': 'kfit', 'prcp': 'kfit', 'wspd': 'kfit', 'wdir': 'kfit', 'lwet': 'mbo', 'srad': 'mbo'},
 'mph' : {'temp': 'kore', 'rhum': 'kore', 'prcp': 'kore', 'wspd': 'kore', 'wdir': 'kore', 'lwet': 'msd', 'srad': 'msd'},
+'mip' : {'temp': 'kbvy', 'rhum': 'kbvy', 'prcp': 'kbvy', 'wspd': 'kbvy', 'wdir': 'kbvy', 'lwet': 'mam', 'srad': 'mam'},
 'nh_hol' : {'temp': 'kash', 'rhum': 'kash', 'prcp': 'kash', 'wspd': 'kash', 'wdir': 'kash', 'lwet': 'mty', 'srad': 'mty'},
 'wi_gay' : {'temp': 'kovs', 'rhum': 'kovs', 'prcp': 'kovs', 'wspd': 'kovs', 'wdir': 'kovs', 'lwet': 'mn_lac', 'srad': 'mn_lac'},
 'um_whs' : {'temp': 'kmqe', 'rhum': 'kmqe', 'prcp': 'kmqe', 'wspd': 'kmqe', 'wdir': 'kmqe', 'lwet': 'msh', 'srad': 'msh'},
@@ -290,8 +291,9 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'kstc': {'temp': 'kmsp', 'rhum': 'kmsp', 'prcp': 'kmsp', 'wspd': 'kmsp', 'wdir': 'kmsp'},
 'kgpz': {'temp': 'kdlh', 'rhum': 'kdlh', 'prcp': 'kdlh', 'wspd': 'kdlh', 'wdir': 'kdlh'},
 'kfsd': {'temp': 'kmsp', 'rhum': 'kmsp', 'prcp': 'kmsp', 'wspd': 'kmsp', 'wdir': 'kmsp'},
-'kavl': {'temp': 'kclt', 'rhum': 'kclt', 'prcp': 'kclt', 'wspd': 'kclt', 'wdir': 'kclt'},
-'kclt': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl'},
+'kavl': {'temp': 'khky', 'rhum': 'khky', 'prcp': 'khky', 'wspd': 'khky', 'wdir': 'khky'},
+'khky': {'temp': 'kclt', 'rhum': 'kclt', 'prcp': 'kclt', 'wspd': 'kclt', 'wdir': 'kclt'},
+'kclt': {'temp': 'khky', 'rhum': 'khky', 'prcp': 'khky', 'wspd': 'khky', 'wdir': 'khky'},
 'klse': {'temp': 'krst', 'rhum': 'krst', 'prcp': 'krst', 'wspd': 'krst', 'wdir': 'krst'},
 'kovs': {'temp': 'klse', 'rhum': 'klse', 'prcp': 'klse', 'wspd': 'klse', 'wdir': 'klse'},
 'krfd': {'temp': 'karr', 'rhum': 'karr', 'prcp': 'karr', 'wspd': 'karr', 'wdir': 'karr'},
@@ -366,6 +368,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'nj_pri': {'temp': 'kttn', 'rhum': 'kttn', 'prcp': 'kttn', 'wspd': 'kttn', 'wdir': 'kttn', 'lwet': '3518', 'srad': '3406'},
 'nj_elk': {'temp': 'kphl', 'rhum': 'kphl', 'prcp': 'kphl', 'wspd': '202', 'wdir': '202', 'lwet': '3520', 'srad': '1034'},
 'nj_mil': {'temp': 'kabe', 'rhum': 'kabe', 'prcp': 'kabe', 'wspd': '289', 'wdir': '289', 'lwet': '3518', 'srad': '289'},
+'nj_blu': {'temp': '1034', 'rhum': '1034', 'prcp': '1034', 'wspd': '1034', 'wdir': '1034', 'lwet': 'nj_elk', 'srad': '1034'},
 'va_cha': {'temp': 'kcho', 'rhum': 'kcho', 'prcp': 'kcho', 'wspd': 'kcho', 'wdir': 'kcho', 'lwet': 'va_cro', 'srad': 'va_cro'},
 'va_cro': {'temp': 'kcho', 'rhum': 'kcho', 'prcp': 'kcho', 'wspd': 'kcho', 'wdir': 'kcho', 'lwet': 'va_cha', 'srad': 'va_cha'},
 '29':   {'temp': '202', 'rhum': '202', 'prcp': '202', 'wspd': '202', 'wdir': '202'},
@@ -415,5 +418,6 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'il_pgr': {'temp': 'krfd', 'rhum': 'krfd', 'prcp': 'krfd', 'wspd': 'krfd', 'wdir': 'krfd', 'lwet': 'wi_gay', 'srad': 'wi_gay'},
 'md_wdb': {'temp': 'kbwi', 'rhum': 'kbwi', 'prcp': 'kbwi', 'wspd': 'kbwi', 'wdir': 'kbwi', 'lwet': 'pa_big', 'srad': 'kbwi'},
 'nc_hen': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'nc_edn', 'srad': 'kavl'},
-'nc_edn': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'nc_hen', 'srad': 'kavl'}
+'nc_mor': {'temp': 'khky', 'rhum': 'khky', 'prcp': 'khky', 'wspd': 'khky', 'wdir': 'khky', 'lwet': 'nc_hen', 'srad': 'nc_hen'},
+'nc_edn': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'nc_hen', 'srad': 'nc_hen'}
 }

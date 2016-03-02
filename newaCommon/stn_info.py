@@ -39,7 +39,7 @@ stn_info = {
 'har': {'name': 'Harborcreek, PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -79.9049196, 'elev': 742.0, 'lat': 42.1931232, 'network': 'newa', 'state': 'PA'},
 'hec': {'name': 'Hector', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.508040, 'lon': -76.877825, 'elev': 800, 'network': 'newa', 'state': 'NY'},
 'hig': {'name': 'Highland HVL', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.966990, 'elev': 436.0, 'lat': 41.746139, 'network': 'newa', 'state': 'NY'},
-'hvl': {'name': 'Highland HVL 2', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 41.132, 'lon': -73.9670, 'elev': 437, 'network': 'newa', 'state': 'NY'},
+'hvl': {'name': 'Highland HVL 2', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 41.75, 'lon': -73.9670, 'elev': 437, 'network': 'newa', 'state': 'NY'},
 'hud': {'name': 'Hudson', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'srad', 'wdir'], 'srqual': 'ok', 'lon': -73.8303834, 'elev': 216.0, 'lat': 42.1910246, 'network': 'newa', 'state': 'NY'},
 'int': {'name': 'Interlaken (Airy Acres)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.636288, 'lon': -76.725271, 'elev': 242, 'network': 'newa', 'state': 'NY'},
 'ith': {'name': 'Ithaca Cornell Orchards', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toohigh', 'lon': -76.461786, 'elev': 902.0, 'lat': 42.444543, 'network': 'newa', 'state': 'NY'},
@@ -120,6 +120,7 @@ stn_info = {
 'mle': {'name': 'Leominster (Sholan Farm), MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.4875, 'lon': -71.7756, 'elev': 720, 'network': 'newa', 'state': 'MA'},
 'mph': {'name': 'Phillipston, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.580777, 'lon': -72.146067, 'elev': 1183, 'network': 'newa', 'state': 'MA'},
 'meb': {'name': 'East Bridgewater, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 42.007778, 'lon': -70.943333, 'elev': 40, 'network': 'newa', 'state': 'MA'},
+'mip': {'name': 'Ipswich (Russell Orchards), MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.661677, 'lon': -70.803066, 'elev': 14, 'network': 'newa', 'state': 'MA'},
 'um_cso': {'name': 'Belchertown, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.35917, 'elev': 638, 'lat': 42.25333, 'network': 'cu_log', 'state': 'MA'},
 'um_clk': {'name': 'Deerfield, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.62333, 'elev': 328, 'lat': 42.56333, 'network': 'cu_log', 'state': 'MA'},
 'um_whs': {'name': 'Boston (Weld Hill), MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i'], 'srqual': 'ok', 'lat': 42.29556, 'lon': -71.13361, 'elev': 151, 'network': 'cu_log', 'state': 'MA'},
@@ -343,6 +344,7 @@ stn_info = {
 'kstl': {'name': 'St. Louis, MO', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.7525, 'lon': -90.3736, 'elev': 531, 'network': 'icao', 'state': 'MO'},
 'kavl': {'name': 'Asheville, NC', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 35.4319, 'lon': -82.5375, 'elev': 2117, 'network': 'icao', 'state': 'NC'},
 'kclt': {'name': 'Charlotte, NC', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 35.2236, 'lon': -80.9553, 'elev': 728, 'network': 'icao', 'state': 'NC'},
+'khky': {'name': 'Hickory, NC', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 35.7425, 'lon': -81.3819, 'elev': 1143, 'network': 'icao', 'state': 'NC'},
 'kcho': {'name': 'Charlottesville (Airport), VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.1386, 'lon': -78.4531, 'elev': 641, 'network': 'icao', 'state': 'VA'},
 'kshd': {'name': 'Staunton, VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.27, 'lon': -78.85, 'elev': 1188, 'network': 'icao', 'state': 'VA'}
 }
