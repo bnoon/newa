@@ -297,6 +297,43 @@ def run_stateStationList(options):
 	except:
 		return newaCommon_io.errmsg('Error processing request')
 
+# FOR A GIVEN STATE, get INACTIVE stations that report element specified in list_options and return list in alpha order by station name
+def run_stateInactiveStationList(options):
+	try:
+		reqvar = options['reqvar']
+		state = options['state']
+		if state == '':
+			state = 'ALL'
+		station_dict = {}
+		station_dict['stations'] = []
+		unsortedDict = {}
+		try:
+			# only line that's different from stateStationList
+			exec("from stn_info_" + state.lower() + "_inactive import stn_info")
+		except:
+			pass
+		for stn in stn_info.keys():
+			if (reqvar == 'lwrh' and 'lwet' in stn_info[stn]['vars'] and 'rhum' in stn_info[stn]['vars']) \
+				or (reqvar == 'eslw' and ('lwet' in stn_info[stn]['vars'] or 'rhum' in stn_info[stn]['vars'])) \
+				or reqvar == 'all' or reqvar in stn_info[stn]['vars']\
+				or (reqvar == 'goodsr' and stn_info[stn].has_key('srqual') and stn_info[stn]['srqual'] == 'ok')\
+				or (reqvar == 'srad' and stn_info[stn]['network'] == 'icao'):
+				sdict = {}
+				sdict['id'] = stn
+				for item in ['lat','lon','elev','name','network','state']:
+					sdict[item] = stn_info[stn][item]
+				unsortedDict[stn_info[stn]['name']] = sdict
+		
+		sortedKeys = unsortedDict.keys()
+		sortedKeys.sort()
+		#return alphabetized list
+		for usk in sortedKeys:
+			station_dict['stations'].append(unsortedDict[usk])
+		json_return = json.dumps(station_dict)
+		return json_return
+	except:
+		return newaCommon_io.errmsg('Error processing request')
+
 # get basic info for a given station
 def run_stationInfo(stn):
 	from get_downloadtime import get_downloadtime
@@ -335,11 +372,11 @@ def run_stationInfo(stn):
 def process_input (request,path):
 	try:
 #	 	retrieve input
-		if path[0] in ['stationList','stateStationList','diseaseStations','getForecastUrl','stationInfo','stationModels']:
+		if path[0] in ['stationList','stateStationList','stateInactiveStationList','diseaseStations','getForecastUrl','stationInfo','stationModels']:
 			try:
 				smry_type = path[0]
 				if len(path) > 1:
-					if path[0] == 'stateStationList':
+					if path[0] == 'stateStationList' or path[0] == 'stateInactiveStationList':
 						list_options = {}
 						list_options['reqvar'] = path[1]
 						if len(path) > 2:
@@ -366,6 +403,8 @@ def process_input (request,path):
 			return run_stationList(list_options)
 		if smry_type == 'stateStationList':
 			return run_stateStationList(list_options)
+		if smry_type == 'stateStationList':
+			return run_stateInactiveStationList(list_options)
 		if smry_type == 'stationInfo':
 			return run_stationInfo(list_options)
 		if smry_type == 'stationModels':
