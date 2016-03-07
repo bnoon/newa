@@ -1,5 +1,4 @@
 stn_info = {
-'2wi': {'name': 'Williamson (Mason)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -77.23158, 'elev': 427.0, 'lat': 43.22206, 'network': 'newa', 'state': 'NY'},
 '3wi': {'name': 'Williamson (Demarree)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -77.142499999999998, 'elev': 300.0, 'lat': 43.276150000000001, 'network': 'newa', 'state': 'NY'},
 'acc': {'name': 'Accord', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', ], 'srqual': 'ok', 'lat': 41.807602, 'lon': -74.248764, 'elev': 386, 'network': 'newa', 'state': 'NY'},
 'alb': {'name': 'Albion', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -78.134927, 'elev': 430.0, 'lat': 43.275135, 'network': 'newa', 'state': 'NY'},
@@ -82,7 +81,6 @@ stn_info = {
 'shd': {'name': 'Southold (One Woman)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.08, 'lon': -72.42, 'elev': 29, 'network': 'newa', 'state': 'NY'},
 'shm': {'name': 'Southold (Mudd)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 41.06, 'lon': -72.45, 'elev': 25, 'network': 'newa', 'state': 'NY'},
 'sil': {'name': 'Silver Creek', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.54247, 'lon': -79.19673, 'elev': 608, 'network': 'newa', 'state': 'NY'},
-'sod': {'name': 'Sodus', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'toolow', 'lon': -77.078962, 'elev': 450.0, 'lat': 43.171946, 'network': 'newa', 'state': 'NY'},
 'som': {'name': 'Somerset', 'vars': ['temp', 'lwet', 'rhum', 'prcp', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -78.626908, 'elev': 318.0, 'lat': 43.325911, 'network': 'newa', 'state': 'NY'},
 'var': {'name': 'Varick (Swedish Hill)', 'vars': ['temp', 'lwet', 'rhum', 'prcp', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.81007, 'elev': 662.0, 'lat': 42.80248, 'network': 'newa', 'state': 'NY'},
 'ver': {'name': 'Versailles', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 42.51640, 'lon': -79.02689, 'elev': 863, 'network': 'newa', 'state': 'NY'},
@@ -128,6 +126,7 @@ stn_info = {
 'um_tff': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -71.67833, 'elev': 610, 'lat': 42.34611, 'network': 'cu_log', 'state': 'MA'},
 'um_ces': {'name': 'Weston (Case Estates), MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -71.29889, 'elev': 246, 'lat': 42.35806, 'network': 'cu_log', 'state': 'MA'},
 'pa_big': {'name': 'Biglerville (Hollabaugh), PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat':39.946944, 'lon': -77.247222, 'elev': 732, 'network': 'newa', 'state': 'PA'},
+'pa_bre': {'name': 'Breinigsville (Grim), PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.5433, 'lon': -75.6622, 'elev': 470, 'network': 'newa', 'state': 'PA'},
 'pa_npa': {'name': 'New Paris (Boyer), PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.105321, 'lon': -78.629474, 'elev': 1556, 'network': 'newa', 'state': 'PA'},
 'pa_ysp': {'name': 'York Springs (Lerew), PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat':40.038978, 'lon': -77.136408, 'elev': 740, 'network': 'newa', 'state': 'PA'},
 'pa_pin': {'name': 'Piney Mountain, PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat':39.977669, 'lon': -77.339694, 'elev': 1217, 'network': 'newa', 'state': 'PA'},
