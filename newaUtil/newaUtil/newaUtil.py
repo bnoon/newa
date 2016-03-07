@@ -285,7 +285,8 @@ def run_stateStationList(options):
 				sdict['id'] = stn
 				for item in ['lat','lon','elev','name','network','state']:
 					sdict[item] = stn_info[stn][item]
-				unsortedDict[stn_info[stn]['name']] = sdict
+				uskey = "%s_%s" % (stn_info[stn]['name'], stn_info[stn]['state'])
+				unsortedDict[uskey] = sdict
 		
 		sortedKeys = unsortedDict.keys()
 		sortedKeys.sort()
@@ -403,7 +404,7 @@ def process_input (request,path):
 			return run_stationList(list_options)
 		if smry_type == 'stateStationList':
 			return run_stateStationList(list_options)
-		if smry_type == 'stateStationList':
+		if smry_type == 'stateInactiveStationList':
 			return run_stateInactiveStationList(list_options)
 		if smry_type == 'stationInfo':
 			return run_stationInfo(list_options)
