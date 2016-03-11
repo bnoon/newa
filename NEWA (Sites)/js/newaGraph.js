@@ -717,3 +717,86 @@ function produce_onionmaggot_graph() {
 		$("#chart_area").highcharts(graphOptions);
 	}
 }
+function produce_accumdegday_graph() {
+	var date_val, d, ymd, lastvalue,
+		data_series = [],
+		degday_dict = {},
+		graphOptions = defineGraphOptions({'yaxisCnt': 1});
+		
+	if ($("#dd_dict").text().length) {
+		degday_dict = $.parseJSON($("#dd_dict").text().replace(/\(/g, "[").replace(/\)/g, "]"));
+		lastvalue = degday_dict[degday_dict.length-1][4];
+		for (d = 0; d < degday_dict.length; d += 1) {
+			ymd = degday_dict[d][0]
+			date_val = Date.UTC(ymd[0], ymd[1] - 1, ymd[2], 0)
+			if (degday_dict[d][4] !== -999) {
+				data_series.push([date_val, degday_dict[d][4]]);
+			} else {
+				data_series.push([date_val, null]);
+			}
+		}
+		graphOptions.series.push({
+			data: data_series,
+			color: 'black',
+			name: 'Accumulated Degree-Days',
+			type: 'line',
+			zIndex: 4,
+			turboThreshold: data_series.length
+		});
+		$.extend(graphOptions.chart, {
+			height: 250,
+			width: 620,
+			spacingBottom: 5
+		});
+		$.extend(graphOptions.credits, {
+			enabled: false
+		});
+		$.extend(graphOptions.legend, {
+			enabled: false
+		});
+		$.extend(graphOptions.title, {
+			text: "Accumulated Degree-Days",
+			useHTML: true
+		});
+		$.extend(graphOptions.title.style, {
+			fontSize: "13px"
+		});
+		$.extend(graphOptions.xAxis, {
+			gridZIndex: 2
+		});
+		$.extend(graphOptions.xAxis.dateTimeLabelFormats, {
+			hour: "%b %e -",
+			day: "%b %e",
+			week: "%b %e",
+			month: "%b %e"
+		});
+		$.extend(graphOptions.yAxis.labels, {
+			formatter: function () {
+				 return Highcharts.numberFormat(this.value, 0);
+			}
+		});
+		$.extend(graphOptions.yAxis.title, {
+			text: "Accumulated Degree-Days"
+		});
+		$.extend(graphOptions.yAxis.title.style, {
+			fontWeight: "normal"
+		});
+		$.extend(graphOptions.tooltip, {
+			formatter: function () {
+				var tts = "<b>" + Highcharts.dateFormat('%a, %B %e, %Y', this.x) + "<\/b>" +
+					"<br \/>Accumulated degree-days: " + Highcharts.numberFormat(this.y, 0);
+				return tts;
+			}
+		});
+		$.extend(graphOptions.yAxis, {
+			min: 0,
+			endOnTick: false,
+		});
+		Highcharts.setOptions({
+		   lang: {
+			  thousandsSep: ''
+		   }
+		});
+		$("#chart_area").highcharts(graphOptions);
+	}
+}
