@@ -184,9 +184,9 @@ function statePlaceMarkers (cur_data, event_type, state) {
 		}
 
 	});
-	if (! $.cookie("mlocation")) { 
-		getLocation();
-	}
+//	if (! $.cookie("mlocation")) { 
+//		getLocation();
+//	}
 }
 
 function buildStationMenu(results, where, state) {
@@ -223,7 +223,7 @@ function stateStationMap (options) {
 	if (options.state && state.toUpperCase() !== 'ALL') {
 		$.jStorage.set("state", state);
 	}
-	$.getJSON("http://newa.nrcc.cornell.edu/newaUtil/stateStationList/"+list_type+"/"+"ALL")
+	$.getJSON("http://newatest.nrcc.cornell.edu/newaUtil/stateStationList/"+list_type+"/"+"ALL")
 		.success( function(results) { statePlaceMarkers(results,event_type,state); } )
 		.error( function() {
 			$('<div id="msg" style="border:1px solid black; padding:0.25em; position:absolute; left:168px; bottom:0px; width:225px; z-index:1; font-size:0.9em; text-align:center; background-color:red; color:white;"></div>').appendTo($("#map"));
@@ -238,6 +238,7 @@ function stateStationMapList (options) {
 		event_type = options.event_type || 'select_station',
 		state = options.state || $.jStorage.get("state"),
 		where = options.where || "#station_area",
+		drawmap = options.drawmap || true,
 		state_list = [
 			['CT', 'Connecticut'],
 			['DC', 'DC'],
@@ -262,9 +263,11 @@ function stateStationMapList (options) {
 			['ALL', 'All states']
 		],
 		showStations = function () {
-			$.getJSON("http://newa.nrcc.cornell.edu/newaUtil/stateStationList/"+list_type+"/"+"ALL")
+			$.getJSON("http://newatest.nrcc.cornell.edu/newaUtil/stateStationList/"+list_type+"/"+"ALL")
 				.success( function(results) {
-					statePlaceMarkers(results, event_type, state);
+					if (drawmap) {
+						statePlaceMarkers(results, event_type, state);
+					}
 					buildStationMenu(results, where, state);
 				})
 				.error( function() {
