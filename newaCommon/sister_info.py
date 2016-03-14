@@ -97,6 +97,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'red' : {'temp': 'kpou', 'rhum': 'kpou', 'prcp': 'kpou', 'lwet': 'hud', 'wspd': 'kpou', 'wdir': 'kpou', 'srad': 'hud'},
 'rip' : {'temp': 'por', 'rhum': 'por', 'prcp': 'por', 'lwet': 'por', 'wspd': 'por', 'wdir': 'por', 'srad': 'por'},
 'riv' : {'temp': 'rvp', 'rhum': 'rvp', 'prcp': 'rvp', 'lwet': 'rvp', 'wspd': 'rvp', 'wdir': 'rvp', 'srad': 'rvp'},
+'rtw' : {'temp': 'kswf', 'rhum': 'kswf', 'prcp': 'kswf', 'lwet': 'mar', 'wspd': 'kswf', 'wdir': 'kswf', 'srad': 'mar'},
 'rvm' : {'temp': 'mat', 'rhum': 'mat', 'prcp': 'mat', 'lwet': 'mat', 'wspd': 'mat', 'wdir': 'mat', 'srad': 'mat'},
 'rvp' : {'temp': 'riv', 'rhum': 'riv', 'prcp': 'riv', 'lwet': 'riv', 'wspd': 'riv', 'wdir': 'riv', 'srad': 'riv'},
 'rom' : {'temp': 'var', 'rhum': 'var', 'prcp': 'var', 'wspd': 'var', 'wdir': 'var', 'lwet': 'var', 'srad': 'var'},
