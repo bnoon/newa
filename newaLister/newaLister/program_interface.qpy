@@ -4,7 +4,7 @@ from quixote.errors import TraversalError
 
 class RootDirectory(Directory):
 
-	_q_exports = ["","process_input","wea_page","rawdat","sumpag","dday","dday55","dday40"]
+	_q_exports = ["","process_input","wea_page","rawdat","sumpag","dday","ddayrange","dday55","dday40"]
 
 #	put up input page for following
 	def _q_index (self, path=None):						#default
@@ -22,6 +22,9 @@ class RootDirectory(Directory):
 	def dday (self, path=None) :
 		from newaLister_io import get_dday_input
 		return get_dday_input()
+	def ddayrange (self, path=None) :
+		from newaLister_io import get_ddayrange_input
+		return get_ddayrange_input()
 	def dday55 (self, path=None) :
 		from newaLister_io import get_dday55_input
 		return get_dday55_input()

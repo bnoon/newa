@@ -7,8 +7,11 @@ import newaLister_io
 if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
 import newaCommon_io
 import newaCommon
+if '/Users/keith/kleWeb/newaDisease/newaDisease' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaDisease/newaDisease')
+import newaDisease
 
 miss = -999
+month_names = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
 class program_exit (Exception):
 	pass
 
@@ -299,6 +302,60 @@ def get_sister_info (stn):
 	return var_sister
 
 #--------------------------------------------------------------------------------------------		
+def run_ddrange(stn,ddtype,accstr,accend):
+	try:
+		base = newaCommon.Base()
+		cabbage = newaDisease.Cabbage()
+		smry_dict = {'ddtype': ddtype.replace("dd", "")}
+		now = DateTime.now()
+		if not accend:
+			accend = now
+		end_date_dt = accend
+		if not accstr:
+			accstr = DateTime.DateTime(end_date_dt.year, 1, 1, 0)
+		start_date_dt = accstr
+
+		if start_date_dt > end_date_dt:
+			return newaCommon_io.errmsg('Start date must be before end data.')
+
+		if end_date_dt.year != now.year:
+			smry_dict['this_year'] = False
+			end_date_dt = end_date_dt + DateTime.RelativeDate(days = +6)
+		else:
+			smry_dict['this_year'] = True
+
+		hourly_data, daily_data, download_time, station_name, avail_vars =  base.get_hddata2 (stn, start_date_dt, end_date_dt)
+		smry_dict['last_time'] = download_time
+
+		# add forecast data
+		if smry_dict['this_year']:
+			start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
+			end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6)
+			hourly_data = newaDisease.add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
+			daily_data = newaDisease.hrly_to_dly(hourly_data)
+		else:
+			start_fcst_dt = end_date_dt + DateTime.RelativeDate(hours = +1)
+			end_fcst_dt = end_date_dt	
+			end_date_dt = end_date_dt + DateTime.RelativeDate(days = -6)
+
+		if len(daily_data) > 0:
+			degday_dict = base.degday_calcs (daily_data,start_date_dt,end_fcst_dt, ddtype, "accum")
+
+			if len(degday_dict) > 0:
+				# get dates for gdd table
+				smry_dict = cabbage.setup_dates(smry_dict, end_date_dt)
+				# get dd for days of interest (including forecast)
+				smry_dict = cabbage.add_ddays(smry_dict,degday_dict,start_date_dt,end_date_dt)
+				return newaLister_io.ddrange_html(station_name,smry_dict,degday_dict)
+			else:
+				return self.nodata(stn, station_name, start_date_dt, end_date_dt)
+		else:
+			return self.nodata (stn, station_name, start_date_dt, end_date_dt)
+	except:
+		print_exception()
+	return
+
+#--------------------------------------------------------------------------------------------		
 def process_input (request,path):
 	try:
 # 		retrieve input
@@ -307,8 +364,34 @@ def process_input (request,path):
 				try:
 					stn = request.form['stn'].strip()
 					smry_type = request.form['type'].strip()
-					month = int(request.form['month'])
-					year = int(request.form['year'])
+					if request.form.has_key('month'):
+						month = int(request.form['month'])
+					else:
+						month = None
+					if request.form.has_key('year'):
+						year = int(request.form['year'])
+					else:
+						year = None					
+					if request.form.has_key('accend'):
+						try:
+							mm,dd,yy = request.form['accend'].split("/")
+							accend = DateTime.DateTime(int(yy),int(mm),int(dd),23)
+						except:
+							accend = None
+					else:
+						accend = None
+					if request.form.has_key('accstr'):
+						try:
+							mm,dd,yy = request.form['accstr'].split("/")
+							accstr = DateTime.DateTime(int(yy),int(mm),int(dd),0)
+						except:
+							accstr = None
+					else:
+						accstr = None
+					if request.form.has_key('ddtype'):
+						ddtype = request.form['ddtype'].strip()
+					else:
+						ddtype = None
 				except:
 					print_exception()
 					raise program_exit('Error processing request')
@@ -343,6 +426,9 @@ def process_input (request,path):
 				raise program_exit('Error processing request')
 		else:
 			return newaCommon_io.errmsg('Error processing input')
+			
+		if smry_type == 'ddrange':
+			return run_ddrange(stn,ddtype,accstr,accend)
 			
 		if year and year == 9999:
 			now = DateTime.now()
