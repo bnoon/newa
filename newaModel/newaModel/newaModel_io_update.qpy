@@ -1,0 +1,3203 @@
+############################################
+# Input screen 
+############################################
+import sys
+from qpy import h8
+from mx import DateTime
+if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
+from newaCommon_io import display_station_list
+miss = -999
+month_abb = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+month_names = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
+
+def apple_disease_input [html] (disease_type=None):
+	'''
+	<HTML>
+	<HEAD>
+		<TITLE>NEWA Apple Disease Models</TITLE>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/humanity/jquery-ui.css" type="text/css">
+		<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping4.js"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/apple_disease.js"></script>
+		<style type="text/css">
+			.ui-helper-reset {
+				font-size:75%; }
+			#leftbox {
+				position: absolute;
+				margin: 0 0 0 0px;
+				padding: 2px;
+				width: 194px;
+				border: 1px gray solid; }
+			#rightbox {
+				position: absolute;
+				margin: 0 0 0 200px;
+				padding: 0px;
+				width: 643px;
+				border: 0px gray solid; }
+		</style>
+	</head>
+	  
+	'''
+	if disease_type:
+		'''
+		<body onload="update_help();">
+		'''
+	else:
+		'''
+		<body>
+		'''		
+	'''
+	<div class="banner">NEWA Apple Disease Models</div>
+		<div id="leftbox">
+			<form action="#" name="stationLister">
+			Select a disease:
+			<br><select name="pest" onChange="update_page();" style="margin-top:5px;">
+	'''		
+	if disease_type != 'fire_blight' and disease_type != 'apple_scab' and disease_type != 'sooty_blotch':
+		'<option value="" selected>Select disease</option>'
+	else:
+		'<option value="">Select disease</option>'
+	for distypval,distypnam in [("fire_blight","Fire Blight"),("apple_scab","Apple Scab"),("sooty_blotch","Sooty Blotch/Flyspeck")]:
+		if disease_type == distypval:
+			'<option value="%s" selected>%s</option>' % (distypval,distypnam)
+		else:
+			'<option value="%s">%s</option>' % (distypval,distypnam)
+	'</select>'
+
+	'''
+			<div id="station_area"></div>		
+			<p>Date of Interest:
+				<br><input type="text" name="accend" id="enddpick" value="">
+			<p><input type="button" value="Calculate" class="button">
+			</form>
+		</div>
+
+		<div id="rightbox">
+			<div id="righttabs">
+				<ul>
+					<li><a href="#first"> Map</a></li>
+					<li><a href="#second">Results</a></li>
+					<li><a href="#third"> More info</a></li>
+				</ul>
+				<div id="first" style="padding:0px;">
+					<div id="map" style="width: 635px; height: 560px"></div>
+				</div>
+				<div id="second" class="plain_back" style="padding:3px;">
+					<p>Results will appear here.</p>
+				</div>
+				<div id="third"  class="plain_back_l">
+					Helpful information will appear here.
+				</div>
+			</div>
+		</div>
+		<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+		<script type="text/javascript">
+		try {
+		var pageTracker = _gat._getTracker("UA-8808137-1");
+		pageTracker._trackPageview();
+		} catch(err) {}</script>
+	  </body>
+	</html>
+	'''
+
+def apple_scab_estlw_input [html] (disease_type="apple_scab_estlw"):
+	'''
+	<HTML>
+	<HEAD>
+		<TITLE>NEWA Apple Disease Models</TITLE>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+		<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/apple_disease.js"></script>
+		<style type="text/css">
+			#leftbox {
+				position: absolute;
+				margin: 0 0 0 0px;
+				padding: 2px;
+				width: 194px;
+				border: 1px gray solid; }
+			#rightbox {
+				position: absolute;
+				margin: 0 0 0 200px;
+				padding: 0px;
+				width: 643px;
+				border: 0px gray solid; }
+		</style>
+	</head>
+	  
+	'''
+	if disease_type:
+		'''
+		<body onload="update_help();">
+		'''
+	else:
+		'''
+		<body>
+		'''		
+	'''
+	<div class="banner">NEWA Apple Disease Models - RESEARCH MODE</div>
+		<div id="leftbox">
+			<form action="#" name="stationLister">
+			Select a disease:
+			<br><select name="pest" onChange="update_page();">
+	'''		
+	for distypval,distypnam in [("apple_scab_estlw","Apple Scab Research")]:
+		if disease_type == distypval:
+			'<option value="%s" selected>%s</option>' % (distypval,distypnam)
+		else:
+			'<option value="%s">%s</option>' % (distypval,distypnam)
+	'</select>'
+	
+	if disease_type== 'sooty_blotch':
+		display_station_list('eslw')
+	else:
+		display_station_list()
+	'''		
+			<p>Date of Interest:
+				<br><input type="text" name="accend" id="enddpick" value="">
+			<p><input type="button" value="Calculate" class="button">
+			</form>
+		</div>
+
+		<div id="rightbox">
+			<div id="righttabs">
+				<ul>
+					<li><a href="#first"> Map</a></li>
+					<li><a href="#second">Results</a></li>
+					<li><a href="#third"> More info</a></li>
+				</ul>
+				<div id="first" style="padding:0px;">
+					<div id="map" style="width: 635px; height: 560px"></div>
+				</div>
+				<div id="second" class="plain_back" style="padding:3px;">
+					<p>Results will appear here.</p>
+				</div>
+				<div id="third"  class="plain_back_l">
+					Helpful information will appear here.
+				</div>
+			</div>
+		</div>
+		<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+		<script type="text/javascript">
+		try {
+		var pageTracker = _gat._getTracker("UA-8808137-1");
+		pageTracker._trackPageview();
+		} catch(err) {}</script>
+	  </body>
+	</html>
+	'''
+
+def grape_disease_input [html] (disease_type=None):
+	from dm_cultivars import cultivars
+	'''
+	<HTML>
+	<HEAD>
+		<TITLE>NEWA Grape Forecast Models</TITLE>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+		<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/grape_disease.js"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.fixedheader.js"></script>
+		<style type="text/css">
+			#leftbox {
+				position: absolute;
+				margin: 0 0 0 0px;
+				padding: 2px;
+				width: 194px;
+				border: 1px gray solid; }
+			#rightbox {
+				position: absolute;
+				margin: 0 0 0 200px;
+				padding: 0px;
+				width: 643px;
+				border: 0px gray solid; }
+		</style>
+	</head>
+	  
+	'''
+	if disease_type:
+		'''
+		<body onload="update_help();">
+		'''
+	else:
+		'''
+		<body>
+		'''		
+	'''
+	<div class="banner">NEWA Grape Forecast Models</div>
+		<div id="leftbox">
+			<form action="#" name="stationLister">
+			Select a disease or insect:
+			<br><select name="pest" style="max-width:190px;" onChange="update_page();">
+	'''		
+	if disease_type != 'berry_moth' and disease_type != 'dmcast' and disease_type != "grape_dis":
+		'<option value="" selected>Select disease or insect</option>'
+	else:
+		'<option value="">Select disease or insect</option>'
+	for distypval,distypnam in [("grape_dis","Grape Diseases"),("dmcast","Downy Mildew (DMCast)"),("berry_moth","Grape Berry Moth")]:
+		if disease_type == distypval:
+			'<option value="%s" selected>%s</option>' % (distypval,distypnam)
+		else:
+			'<option value="%s">%s</option>' % (distypval,distypnam)
+	'</select>'
+	
+	if disease_type == "dmcast":
+		display_station_list(list_type="lwrh")
+		'<p>Final Date of Forecast:'
+		'<br /><input type="text" name="accend" id="enddpick" value="" />'
+		'<p>Choose Cultivar:'
+		'<br /><select name="cultivar">'
+		cltkeys = cultivars.keys()
+		cltkeys.sort()
+		for clt in cltkeys:
+			if clt == "Concord":
+				'<option value="%s" selected>%s</option>' % (clt,clt)
+			else:
+				'<option value="%s">%s</option>' % (clt,clt)
+		'</select>'
+	elif disease_type == "grape_dis":
+		display_station_list('eslw')
+		'<p>Ending Date:'
+		'<br /><input type="text" name="accend" id="enddpick" value="" />'
+	else:
+		display_station_list()
+		'<p>Date of Interest:'
+		'<br /><input type="text" name="accend" id="enddpick" value="" />'
+	'''		
+			<p><input type="button" value="Calculate" class="button" /></p>
+			</form>
+		</div>
+
+		<div id="rightbox">
+			<div id="righttabs">
+				<ul>
+					<li><a href="#first"> Map</a></li>
+					<li><a href="#second">Results</a></li>
+					<li><a href="#third"> More info</a></li>
+				</ul>
+				<div id="first" style="padding:0px;">
+					<div id="map" style="width: 635px; height: 560px"></div>
+				</div>
+				<div id="second" class="plain_back" style="padding:3px;">
+					<p>Results will appear here.</p>
+				</div>
+				<div id="third"  class="plain_back_l">
+					Helpful information will appear here.
+				</div>
+			</div>
+		</div>
+		<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+		<script type="text/javascript">
+		try {
+		var pageTracker = _gat._getTracker("UA-8808137-1");
+		pageTracker._trackPageview();
+		} catch(err) {}</script>
+	  </body>
+	</html>
+	'''
+
+def apple_pest_input [html] (pest_type=None):
+	'''
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html>
+	  <head>
+		<meta http-equiv="content-type" content="text/html"/>
+		<title>NEWA Apple Insect Models</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+		<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/apple_pest.js"></script>
+		<style type="text/css">
+			#leftbox {
+				position: absolute;
+				margin: 0 0 0 0px;
+				padding: 2px;
+				width: 194px;
+				border: 1px gray solid; }
+			#rightbox {
+				position: absolute;
+				margin: 0 0 0 200px;
+				padding: 0px;
+				width: 643px;
+				border: 0px gray solid; }
+		</style>
+	  </head>
+	
+	'''
+	if pest_type:
+		'<body onload="update_help();">'
+	else:
+		'<body>'
+		
+	'''	
+	  <div class="banner">NEWA Apple Insect Models</div>
+		<div id="leftbox">
+			<form action="#" name="stationLister">
+			Select a pest:
+			<br><select name="pest" style="max-width:190px;" onChange="update_help();">	
+
+	'''		
+	if not pest_type:
+		'<option value="" selected>Select pest</option>'
+	else:
+		'<option value="">Select pest</option>'
+	for distypval,distypnam in [("apple-stlm","Spotted Tentiform Leafminer"),("apple-ofm","Oriental Fruit Moth"),("apple-cm","Codling Moth"),("apple-pc","Plum Curculio"),("apple-oblr","Obliquebanded Leafroller"),("apple-maggot","Apple Maggot")]:
+		if pest_type == distypval:
+			'<option value="%s" selected>%s</option>' % (distypval,distypnam)
+		else:
+			'<option value="%s">%s</option>' % (distypval,distypnam)
+	'</select>'
+
+	display_station_list()
+	'''		
+			<p>Accumulation End Date:
+				<br><input type="text" name="accend" id="enddpick" value="">
+				<p><input type="button" value="Calculate" class="button">
+			</form>
+		</div>
+
+		<div id="rightbox">
+			<div id="righttabs">
+				<ul>
+					<li><a href="#first"> Map</a></li>
+					<li><a href="#second">Results</a></li>
+					<li><a href="#third"> More info</a></li>
+				</ul>
+				<div id="first" style="padding:0px;">
+					<div id="map" style="width: 635px; height: 560px"></div>
+				</div>
+				<div id="second" class="plain_back" style="padding:3px;">
+					Results will appear here.
+				</div>
+				<div id="third"  class="plain_back_l">
+					Helpful information will appear here.
+				</div>
+			</div>
+		</div>
+		<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+		<script type="text/javascript">
+		try {
+		var pageTracker = _gat._getTracker("UA-8808137-1");
+		pageTracker._trackPageview();
+		} catch(err) {}</script>
+	  </body>
+	</html>
+	'''
+
+############################################
+# Output pages
+############################################
+# help page
+def helppage [html] (urls):		
+	if urls: 
+		'<h3>Helpful Information</h3>'
+		'<ul>'
+		for desc,url in urls:
+			if len(url) > 0:
+				'<li><a href="%s" target="_blank">%s</a></li>' % (url,desc)
+			else:
+				'<li>%s</li>' % (desc)
+		'</ul>'
+	else:
+		'<p>No help available for selected pest.</p>'
+		
+#--------------------------------------------------------------------------------------------		
+# standard footer
+def add_footer [html] (smry_dict=None,add_logo=None):
+	'''
+	<div class="plain_smaller_j" style="margin:1em 5%;"><b>Disclaimer:</b> <i><b>These are theoretical predictions 
+	and forecasts.</b> The theoretical models predicting pest development or disease risk use the weather data 
+	collected (or forecasted) from the weather station location. These results should not be substituted for actual 
+	observations of plant growth stage, pest presence, and disease occurrence determined through scouting or insect 
+	pheromone traps.</i></div>
+	<span style="text-align:center;"><table cellspacing="0" cellpadding="0" border="0" width="97%">
+	'''
+	
+	if add_logo == 'pmep':
+		'<tr><td align=left width="33%"><a href="http://newa.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
+		'<td align=center width="34%"><a href="http://treefruitipm.info" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/pmep_logo.jpg" alt="PMEP" width="70" height="25" border="0"></a></td>'
+		'<td align=right width="33%"><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
+	else:
+		'<tr><td align=left><a href="http://newa.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
+		'<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
+	'</table></span>'
+
+
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		</div>
+		<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+		<script type="text/javascript">
+		try {
+		var pageTracker = _gat._getTracker("UA-8808137-1");
+		pageTracker._trackPageview();
+		} catch(err) {}</script>
+		</body>
+		</html>
+		'''
+
+#--------------------------------------------------------------------------------------------		
+# footer with credit to Kerik Cox
+def add_kerik_credit [html] ():
+	'''
+	<div class="plain_smaller_j" style="margin:1em 5%;">
+	This disease forecasting model was co-authored and developed in collaboration with Dr. Kerik Cox in the Department of Plant Pathology 
+	and Plant-Microbe Biology at Cornell University in Geneva, New York. Please <a href="mailto:kdc33@cornell.edu">contact Dr. Cox</a> with 
+	any questions regarding the scientific content and recommendations delivered in model outputs.</div>
+	'''
+
+#--------------------------------------------------------------------------------------------		
+# apple scab model output - in season and late season
+def apple_scab_log [html] (smry_dict):	
+	plaction = "window.open('http://treefruitipm.info/PesticidesForPest.aspx?PestID=23', 'popwindow'); return false"
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>NEWA Apple Scab Models</title>
+			<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+		<script type="text/javascript">
+		  $(document).ready(function() {
+			$('#dpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: "", changeMonth: true, changeYear: true });
+			$('button.forecast').click(function() {
+				req_stn = $('input[name=stn]').val();
+				$.get('http://newatest.nrcc.cornell.edu/newaUtil/getForecastUrl/'+req_stn, function(data) { 
+					window.open(data);
+				});
+				return false;
+			});
+			$('#asgraph').click(function() {
+				var paramStr = "type=apple_scab_grf";
+				$('input[name=stn], input[name=accend], input[name=greentip]').each(function () { 
+					paramStr += "&" + this.name + "=" + this.value;
+				});
+				window.open('http://newatest.nrcc.cornell.edu/newaGraph/apple_scab_grf?' + paramStr,"asgraph","resizable=1,scrollbars=1,status=0,toolbar=0,location=0,menubar=0,height=760,width=630");
+				return false;
+			});
+			$("#moreinfo").dialog({
+				height: 400,
+				width: 500,
+				modal: true,
+				autoOpen: false,
+				buttons: { Close: function() { $(this).dialog('close'); } }
+			});
+		  });
+		</script>
+		</head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		<FORM ACTION="/newaModel/process_input" METHOD="post">
+		<input type="hidden" name="type" value="apple_scab">
+		<input type="hidden" name="output" value="standalone">
+		'''
+		'<input type="hidden" name="accend" value="%d/%d/%d">' % (smry_dict['accend'].month,smry_dict['accend'].day,smry_dict['accend'].year)
+		'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
+
+	'''
+	<script type="text/javascript">
+	function show_moreinfo (opt) {
+		if (opt == 1) { $("#moreinfo").load('http://newatest.nrcc.cornell.edu/pops_notes.htm'); }
+		else { $("#moreinfo").load('http://newatest.nrcc.cornell.edu/dew_notes.htm'); }
+		$("#moreinfo").dialog('open');
+	}
+	</script>
+	'''
+	day0_dt = DateTime.DateTime(*smry_dict['day0']['ymd']) + DateTime.RelativeDate(hour=23,minute=0,second=0)
+	pday1_dt = DateTime.DateTime(*smry_dict['pday1']['ymd']) + DateTime.RelativeDate(hour=23,minute=0,second=0)
+	lasttime_dt = DateTime.DateTime(*smry_dict['last_time']) + DateTime.RelativeDate(minute=0,second=0)
+	if lasttime_dt <= pday1_dt:
+		current_class = "palegoldenrod_back"
+	elif lasttime_dt < day0_dt:
+		current_class = "bluegoldstriped_back"
+	else:
+		current_class = "blue_back"
+	if smry_dict['last_time'][1] >= 7:
+		late_season = 1
+	else:
+		late_season = 0
+	if not smry_dict.has_key('all_released'):
+		smry_dict['all_released'] = None
+	
+	'<h3>Apple Scab Results for %s</h3>' % smry_dict['station_name']
+	'<p>The Ascospore Maturity degree day model begins at 50% green tip on McIntosh flower buds \
+	and provides an estimate of the potential for ascospore discharge in the next rain. To recalculate \
+	ascospore maturity for your orchard, enter your green tip date:</p>'
+	'<p><b>Green Tip Date:</b>'
+	mdy_greentip = "%d/%d/%d" % (smry_dict['greentip'].month,smry_dict['greentip'].day,smry_dict['greentip'].year)
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "submit();"
+	else:
+		action = "getapplescab(1);"
+	'&nbsp;&nbsp; <input type="text" name="greentip" id="dpick" value="%s" onChange="%s">' % (mdy_greentip,action)
+	'''
+	<p><table border=1 cellpadding=3 cellspacing=0 width="100%" style='border-collapse:collapse;table-layout:fixed'>
+	<col width=124><col width=62><col width=62><col width=62><col width=63><col width=63><col width=63><col width=63><col width=63>
+	'''
+	'<tr><td class=header_line_silver_back colspan=9 height=38 align=center>Ascospore Maturity Summary</td>'
+	'''
+	<tr>
+	<td class=header_line height=30 align=center rowspan=2> </td>
+	<td class=blue_back>Past</td>
+	<td class=blue_back>Past</td>
+	'''
+	if smry_dict['this_year']:
+		'<td class=%s>Current</td>'%current_class
+		'<td class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button forecast">Forecast Details</button></td>'
+	else:
+		'<td class=blue_back>Current</td>'
+		'<td class=palegoldenrod_back colspan=5>Ensuing 5 Days</td>'
+	'</tr>'
+
+	'<tr>'
+	'<td class=blue_back>%s</td>' % smry_dict['pday2']['date']
+	'<td class=blue_back>%s</td>' % smry_dict['pday1']['date']
+	'<td class=%s>%s</td>' % (current_class,smry_dict['day0']['date'])
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday1']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday2']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday3']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday4']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday5']['date']
+	'</tr>'
+
+	if not late_season:
+		'<tr>'
+		'<td class=plain_back height=38>Ascospore Maturity</td>'
+		'<td class=plain_back>%s</td>' % (smry_dict['pday2']['ascomatur'])
+		'<td class=plain_back>%s</td>' % (smry_dict['pday1']['ascomatur'])
+		'<td class=plain_back>%s</td>' % (smry_dict['day0']['ascomatur'])
+		'<td class=plain_back>%s</td>' % (smry_dict['fday1']['ascomatur'])
+		'<td class=plain_back>%s</td>' % (smry_dict['fday2']['ascomatur'])
+		'<td class=plain_back>%s</td>' % (smry_dict['fday3']['ascomatur'])
+		'<td class=plain_back>%s</td>' % (smry_dict['fday4']['ascomatur'])
+		'<td class=plain_back>%s</td>' % (smry_dict['fday5']['ascomatur'])
+		'</tr>'
+	'<tr>'
+	'<td class=plain_back colspan=9 style="border-right:hidden; border-left:hidden; border-bottom:hidden">'
+	'<button class="button" id="asgraph">Ascospore Maturity Graphs</button>'
+	'</td>'
+	'</tr>'
+	'</table>'
+
+	if late_season and smry_dict['all_released']:
+		'<p>Primary scab season is over. Ascospores were essentially all released on %s %d. ' % (month_names[smry_dict['all_released'][1]],smry_dict['all_released'][2])
+		'Focus on protecting trees from secondary scab infections as needed, based on infection events.</p>'
+	else:
+		if smry_dict.has_key('date95') and smry_dict['date95']:
+			'<p class="redtext_j">'
+			if smry_dict['all_released']:
+				ar_14days = DateTime.DateTime(*smry_dict['all_released']) + DateTime.RelativeDate(days=+14)
+				'Ascospores were essentially all released on %s %d. ' % (month_names[smry_dict['all_released'][1]],smry_dict['all_released'][2])
+				'Orchards are still at risk for conidial infections. Continue to monitor scab infection events and maintain '
+				'spray coverage accordingly for at least two more weeks, or until %s %d. '%(month_names[ar_14days.month],ar_14days.day)
+				'Scout orchards for primary scab infections after this time.'
+			else:
+				'The Ascospore Maturity model predicts that 95% of the spores are matured. At this point, essentially all ascospores will '
+				'be released after a daytime rain of greater than 1/10 inch with temperature above 50&deg;F.'
+			'</p>'
+	'''
+	<p><table border=1 cellpadding=3 cellspacing=0 width="100%" style='border-collapse:collapse;table-layout:fixed'>
+	<col width=124><col width=62><col width=62><col width=62><col width=63><col width=63><col width=63><col width=63><col width=63>
+	'''
+	'<tr><td class=header_line_silver_back colspan=9 height=38 align=center>Infection Events Summary</td>'
+	'''
+	<tr>
+	<td class=header_line height=30 align=center rowspan=2> </td>
+	<td class=blue_back>Past</td>
+	<td class=blue_back>Past</td>
+	'''
+	if smry_dict['this_year']:
+		'<td class=%s>Current</td>'%current_class
+		'<td class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button forecast">Forecast Details</button></td>'
+	else:
+		'<td class=blue_back>Current</td>'
+		'<td class=palegoldenrod_back colspan=5>Ensuing 5 Days</td>'
+	'</tr>'
+
+	'<tr>'
+	'<td class=blue_back>%s</td>' % smry_dict['pday2']['date']
+	'<td class=blue_back>%s</td>' % smry_dict['pday1']['date']
+	'<td class=%s>%s</td>' % (current_class,smry_dict['day0']['date'])
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday1']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday2']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday3']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday4']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday5']['date']
+	'</tr>'
+
+	if smry_dict['pday2'].has_key('infection'):
+		if smry_dict['pday2']['infection'][0] in ['Yes','Combined']:
+			p2_color = 'red'
+#		elif smry_dict['pday2']['wetness'][1] > 8:
+#			f2_color = 'yellow'
+		elif smry_dict['pday2']['infection'][0] == 'No':
+			p2_color = 'green'
+		else:
+			p2_color = 'plain'
+	else:
+		p2_color = 'plain'
+	if smry_dict['pday1'].has_key('infection'):
+		if smry_dict['pday1']['infection'][0] in ['Yes','Combined']:
+			p1_color = 'red'
+#		elif smry_dict['pday1']['wetness'][1] > 8:
+#			p1_color = 'yellow'
+		elif smry_dict['pday1']['infection'][0] == 'No':
+			p1_color = 'green'
+		else:
+			p1_color = 'plain'
+	else:
+		p1_color = 'plain'
+	if smry_dict['day0'].has_key('infection'):
+		if smry_dict['day0']['infection'][0] in ['Yes','Combined']:
+			d0_color = 'red'
+#		elif smry_dict['day0']['wetness'][1] > 8:
+#			d0_color = 'yellow'
+		elif smry_dict['day0']['infection'][0] == 'No':
+			d0_color = 'green'	
+		else:
+			d0_color = 'plain'
+	else:
+		d0_color = 'plain'
+	if smry_dict['fday1'].has_key('infection'):
+		if smry_dict['fday1']['infection'][0] in ['Yes','Combined']:
+			f1_color = 'red'
+#		elif smry_dict['fday1']['wetness'][1] > 8:
+#			f1_color = 'yellow'
+		elif smry_dict['fday1']['infection'][0] == 'No':
+			f1_color = 'green'	
+		else:
+			f1_color = 'plain'
+	else:
+		f1_color = 'plain'
+	if smry_dict['fday2'].has_key('infection'):
+		if smry_dict['fday2']['infection'][0] in ['Yes','Combined']:
+			f2_color = 'red'
+#		elif smry_dict['fday2']['wetness'][1] > 8:
+#			f2_color = 'yellow'
+		elif smry_dict['fday2']['infection'][0] == 'No':
+			f2_color = 'green'	
+		else:
+			f2_color = 'plain'
+	else:
+		f2_color = 'plain'
+	if smry_dict['fday3'].has_key('infection'):
+		if smry_dict['fday3']['infection'][0]in ['Yes','Combined']:
+			f3_color = 'red'
+#		elif smry_dict['fday3']['wetness'][1] > 8:
+#			f3_color = 'yellow'
+		elif smry_dict['fday3']['infection'][0] == 'No':
+			f3_color = 'green'	
+		else:
+			f3_color = 'plain'
+	else:
+		f3_color = 'plain'
+	if smry_dict['fday4'].has_key('infection'):
+		if smry_dict['fday4']['infection'][0] in ['Yes','Combined']:
+			f4_color = 'red'
+#		elif smry_dict['fday4']['wetness'][1] > 8:
+#			f4_color = 'yellow'
+		elif smry_dict['fday4']['infection'][0] == 'No':
+			f4_color = 'green'	
+		else:
+			f4_color = 'plain'
+	else:
+		f4_color = 'plain'
+	if smry_dict['fday5'].has_key('infection'):
+		if smry_dict['fday5']['infection'][0] in ['Yes','Combined']:
+			f5_color = 'red'
+#		elif smry_dict['fday5']['wetness'][1] > 8:
+#			f5_color = 'yellow'
+		elif smry_dict['fday5']['infection'][0] == 'No':
+			f5_color = 'green'	
+		else:
+			f5_color = 'plain'
+	else:
+		f5_color = 'plain'
+
+	if smry_dict['pday2'].has_key('infection'):
+		'<TR>'
+		'<td class=plain_back height=38><A href="#events">Infection Events</a></td>'
+		'<td class=%s_back>%s</td>' % (p2_color,smry_dict['pday2']['infection'][0])
+		'<td class=%s_back>%s</td>' % (p1_color,smry_dict['pday1']['infection'][0])
+		'<td class=%s_back>%s</td>' % (d0_color,smry_dict['day0']['infection'][0])
+		'<td class=%s_back>%s</td>' % (f1_color,smry_dict['fday1']['infection'][0])
+		'<td class=%s_back>%s</td>' % (f2_color,smry_dict['fday2']['infection'][0])
+		'<td class=%s_back>%s</td>' % (f3_color,smry_dict['fday3']['infection'][0])
+		'<td class=%s_back>%s</td>' % (f4_color,smry_dict['fday4']['infection'][0])
+		'<td class=%s_back>%s</td>' % (f5_color,smry_dict['fday5']['infection'][0])
+		'</TR>'
+		'<TR>'
+		'<td class=plain_back height=38>Days to Symptoms</td>'
+		'<td class=%s_back>%s</td>' % (p2_color,smry_dict['pday2']['infection'][1])
+		'<td class=%s_back>%s</td>' % (p1_color,smry_dict['pday1']['infection'][1])
+		'<td class=%s_back>%s</td>' % (d0_color,smry_dict['day0']['infection'][1])
+		'<td class=%s_back>%s</td>' % (f1_color,smry_dict['fday1']['infection'][1])
+		'<td class=%s_back>%s</td>' % (f2_color,smry_dict['fday2']['infection'][1])
+		'<td class=%s_back>%s</td>' % (f3_color,smry_dict['fday3']['infection'][1])
+		'<td class=%s_back>%s</td>' % (f4_color,smry_dict['fday4']['infection'][1])
+		'<td class=%s_back>%s</td>' % (f5_color,smry_dict['fday5']['infection'][1])
+		'</TR>'
+
+	'<tr>'	
+	'<td class=plain_back> Average Temp (F) for wet hours</td>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		rcolor = 'plain'
+		if smry_dict[d]['wetness'][3] == miss:
+			avgt = ' '
+		else:
+			avgt = '%d'%round(smry_dict[d]['wetness'][3],0)
+		'<td class=%s_back>%s</td>' % (rcolor,avgt)
+	'</TR>'
+	
+	if smry_dict['pday2']['wetness'][1] != miss or smry_dict['pday1']['wetness'][1] != miss or smry_dict['day0']['wetness'][1] != miss:
+		'<tr>'	
+		if 'lwet' not in smry_dict['avail_vars']:
+			'<td class=plain_back> Leaf Wetness Estimate (hours)</td>'			
+		else:
+			'<td class=plain_back> Leaf Wetness (hours)</td>'
+		for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+			rcolor = 'plain'
+			if smry_dict[d]['wetness'][1] == miss:
+				lwet = ' '
+			else:
+				lwet = '%d'%smry_dict[d]['wetness'][1]
+			'<td class=%s_back>%s</td>' % (rcolor,lwet)
+		'</TR>'
+
+	'<tr>'	
+	'<td class=plain_back> Rain Amount</td>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		rcolor = 'plain'
+		if smry_dict[d]['qpf'] == miss:
+			rain = ' '
+		elif smry_dict[d]['qpf'] > 0.00 and int(round((smry_dict[d]['qpf']*100.),0)) == 0:
+			rain = 'Trace'
+		else:
+			rain = '%.2f'%round(smry_dict[d]['qpf'],2)
+		'<td class=%s_back>%s</td>' % (rcolor,rain)
+	'</TR>'
+	
+	if smry_dict['this_year']:
+		'<tr>'	
+		'<td class=plain_back> Rain Prob (%)<br>Night|Day&nbsp;<img src="http://newatest.nrcc.cornell.edu/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(1);"></td>'
+		'<td class=plain_back>&nbsp;</td>'
+		'<td class=plain_back>&nbsp;</td>'
+		for d in ['day0','fday1','fday2','fday3','fday4','fday5']:
+			if smry_dict[d]['pops']['am'] == miss:
+				am_rain = '-'
+			else:
+				am_rain = '%s' % smry_dict[d]['pops']['am']
+			if smry_dict[d]['pops']['pm'] == miss:
+				pm_rain = '-'
+			else:
+				pm_rain = '%s' % smry_dict[d]['pops']['pm']
+			'<td class=plain_back_smaller_c>%s | %s</td>' % (am_rain,pm_rain)
+		'</tr>'
+
+	'<tr>'
+	'<td class=plain_back_smaller colspan=2 style="border-right:hidden; border-left:hidden; border-bottom:hidden">&nbsp;</td>'
+	'<td class=plain_back colspan=4 style="border-right:hidden; border-left:hidden; border-bottom:hidden">&nbsp;</td>'
+	'<td class=red_text colspan=3 style="border-right:hidden; border-left:hidden; border-bottom:hidden">Download Time: %d/%d/%d %d:00</td>'%(smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0],smry_dict['last_time'][3])
+	'</tr>'
+	'</table>'
+
+	'<div id="moreinfo" title="" class="plain_back_l"> </div>'
+	
+	'''
+	<p class="plain_back_j">
+	Apple scab infection events, shown in red above, are calculated beginning with 0.01 inch of rain. The word "Combined" in the 
+	above table means the wetting event on this day is being combined with another wetting event. To calculate the 
+	length of a wetting period, we use the following rule: two successive wetting periods, the first started by rain, should be 
+	considered a single, uninterrupted wet period if the intervening dry period is less than 24 hours. <b>When an infection event is 
+	in the 5-day forecast, the actual weather data logged may or may not translate into an actual infection event. Therefore, the 
+	table output may change once actual weather data is logged.</b></p>
+
+	'''
+	if not late_season and not smry_dict['all_released'] and \
+		   ((smry_dict['day0'].has_key('infection') and smry_dict['day0']['infection'][0] == 'Yes') or \
+		   (smry_dict['fday1'].has_key('infection') and smry_dict['fday1']['infection'][0] == 'Yes') or \
+		   (smry_dict['fday2'].has_key('infection') and smry_dict['fday2']['infection'][0] == 'Yes') or \
+		   (smry_dict['fday3'].has_key('infection') and smry_dict['fday3']['infection'][0] == 'Yes') or \
+		   (smry_dict['fday4'].has_key('infection') and smry_dict['fday4']['infection'][0] == 'Yes') or \
+		   (smry_dict['fday5'].has_key('infection') and smry_dict['fday5']['infection'][0] == 'Yes') or \
+		   (smry_dict['pday1'].has_key('infection') and smry_dict['pday1']['infection'][0] == 'Yes') or \
+		   (smry_dict['pday2'].has_key('infection') and smry_dict['pday2']['infection'][0] == 'Yes')):
+			'<p class="redtext_j">'
+			'An apple scab infection period has been predicted and ascospores are mature. Ensure that young leaves and fruit are protected. '
+			'<a href="http://treefruitipm.info/PesticidesForPest.aspx?PestID=23" target="_blank">Click here</a> for pesticide information.'
+			'</p>'		
+
+	'''
+	<p class="plain_back_j">
+	Ascospores, which cause primary scab, discharge during rain. Both ascospores and conidia, which cause secondary 
+	scab, infect at similar rates. A single set of conditions, the 
+	<a href="http://newa.cornell.edu/index.php?page=revised-mills-table" target="_blank">Revised Mills Table</a>, can be used for 
+	determining infection events for both primary and secondary infections.</p> 
+	<p class="plain_back_l">
+	Once infection is predicted, ensure that susceptible tissues are adequately protected 
+	with a fungicide. Longer wetting, beyond the minimum times for a given temperature specified in the 
+	<a href="http://newa.cornell.edu/index.php?page=revised-mills-table" target="blank">Revised Mills Table</a>, often 
+	results in more disease. <a href="http://treefruitipm.info/PesticidesForPest.aspx?PestID=23" target="_blank">
+	Pesticide Information</a>.</p>
+	
+	'''
+	if smry_dict.has_key('infection_events'):
+		'''
+		<p><table border=1 cellpadding=3 cellspacing=0 width="100%" style='border-collapse:collapse;table-layout:fixed'>
+		<col width=150><col width=150><col width=59><col width=59><col width=59><col width=74><col width=74>
+		<tr>
+		'''
+		'<td class=header_line height=30 align=left colspan=7> <a name="events">Apple Scab Infection Events (March 1 - %s %d)</a></td>' % (month_names[smry_dict['last_time'][1]],smry_dict['last_time'][2])
+		'''
+		</tr>
+		<tr>
+		  <td class=colhead_center height=42>Start<br>Date &amp; Time</td>
+		  <td class=colhead_center>End<br>Date &amp; Time</td>
+		  <td class=colhead_center>Wet<br>Hours</td>
+		  <td class=colhead_center>Temp<br>Avg. (F)</td>
+		  <td class=colhead_center>Rain<br>(in.)</td>
+		  <td class=colhead_center>Days to<br>Symptoms</td>
+		  <td class=colhead_center>Combined<br>Event</td>
+		</tr>
+		'''
+		if len(smry_dict['infection_events']) == 0:
+			'<TR><TD class=brown_back height=25 colspan=7> No infection events</TD</TR>'
+		else:
+			for i in range(len(smry_dict['infection_events'])-1,-1,-1):
+				wet_start,wet_end,wet_hrs,avg_temp,prec_sum,ldys,combined = smry_dict['infection_events'][i]
+				'<TR>'
+				yr,mn,dy,hr = wet_start
+				if hr > 12:
+					hr = hr-12
+					ampm = 'PM'
+				elif hr == 12:
+					ampm = 'PM'
+				elif hr == 0:
+					hr = 12
+					ampm = 'AM'
+				else:
+					ampm = 'AM'
+				'<td class=plain_back>%s %d %d:01 %s</td>'%(month_names[mn],dy,hr,ampm)
+				yr,mn,dy,hr = wet_end
+				if hr > 12:
+					hr = hr-12
+					ampm = 'PM'
+				elif hr == 12:
+					ampm = 'PM'
+				elif hr == 0:
+					hr = 12
+					ampm = 'AM'
+				else:
+					ampm = 'AM'
+				'<td class=plain_back>%s %d %d:00 %s</td>'%(month_names[mn],dy,hr,ampm)
+				'<td class=plain_back>%d</td>'%wet_hrs
+				'<td class=plain_back>%d</td>'%round(int(avg_temp))
+				'<td class=plain_back>%.2f</td>'%prec_sum
+				if ldys == 9:
+					ldystr = "9-10"
+				elif ldys == 12:
+					ldystr = "12-13"
+				elif ldys == 0:
+					ldystr = "-"
+				else:
+					ldystr = "%d"%ldys
+				'<td class=plain_back>%s</td>'%ldystr
+				if combined:
+					'<td class=plain_back><A HREF="http://newa.cornell.edu/index.php?page=weather-station-details&WeatherStation=%s&WSDetail=http://newa.nrcc.cornell.edu/newaDisease/apple_lw/%s/%s" target="_blank">Yes</a></td>' % (smry_dict['stn'],smry_dict['stn'],smry_dict['last_time'][0])
+				else:
+					'<td class=plain_back>&nbsp;</td>'
+				'</TR>'
+		'<tr>'
+		'<td class=red_text_center colspan=2> %s conditions last %d hours at download</td>' % smry_dict['stat']
+		'<td class=red_text colspan=5>Download Time: %d/%d/%d %d:00</td>'%(smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0],smry_dict['last_time'][3])
+		'</tr>'
+		'</table>'
+
+	'</form>'
+	add_kerik_credit()
+	add_footer(smry_dict,'pmep')
+
+#--------------------------------------------------------------------------------------------		
+# apple scab - pre-season return
+def apple_scab_early [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>NEWA Apple Scab Model</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+		<script type="text/javascript">
+		  $(document).ready(function() {
+			$('#dpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '', changeMonth: true, changeYear: true });
+		  });
+		</script>
+		</head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		<FORM ACTION="/newaModel/process_input" METHOD="post" name="process">
+		<input type="hidden" name="type" value="apple_disease">
+		<input type="hidden" name="pest" value="apple_scab">
+		<input type="hidden" name="output" value="standalone">
+		'''
+		'<input type="hidden" name="accend" value="%d/%d/%d">' % (smry_dict['accend'].month,smry_dict['accend'].day,smry_dict['accend'].year)
+		'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
+
+	'<H3>Apple Scab Results for %s</H3>' % smry_dict['station_name']
+
+	'<p>%s' % h8(smry_dict['message'])
+	end_date = '%d/%d/%d' % (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0])
+	'<p><b>Accumulated degree days (base 43&deg;F) through %s:</b> %s (%d days missing)</p>' % (end_date,smry_dict['ddaccum'],smry_dict['ddmiss'])
+	'''
+
+	<p><b>Green Tip Date:</b>
+	'''
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "submit();"
+	else:
+		action = "getapplescab(1);"
+	'&nbsp;&nbsp;<input type="text" name="greentip" id="dpick" value="Click to enter" onChange="%s">' % action
+	'''
+	</p>
+	<p class="plain_smaller"><i>Degree day accumulations estimate that greentip may not have occurred yet. <br>If it has, enter the actual date for blocks of interest.</i></p>
+
+	<p><div style="border: thin black solid; padding:5;">
+	<b>Pest Management: </b>Not available.
+	</div></p>
+	</form>
+	'''
+	add_kerik_credit()
+	add_footer(smry_dict,'pmep')
+
+#--------------------------------------------------------------------------------------------		
+# apple scab - dormant (Nov 1-Dec 31)
+def apple_scab_dormant [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>NEWA Apple Scab Model</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		</head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		'''
+	'''
+	<H3>Apple Scab Model</H3>
+	<p>The apple scab season is over. If apple scab was severe, consider an application of 5 percent urea  
+	to the leaf litter or raking and mowing the leaf litter in the fall or spring. These steps will hasten 
+	degradation of the overwintering inoculum in leaf litter.</p>
+	'''
+	add_kerik_credit()
+	add_footer(smry_dict,'pmep')
+
+#--------------------------------------------------------------------------------------------		
+# fire blight summary table
+def fire_blight_log [html] (smry_dict):
+	plaction = "window.open('http://treefruitipm.info/PesticidesForPest.aspx?PestID=20', 'popwindow'); return false"
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>NEWA Fire Blight Model</title>
+			<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+		<script type="text/javascript">
+		  $(document).ready(function() {
+			$('#fbdpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '', changeMonth: true, changeYear: true });
+			$('#ssdpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '', changeMonth: true, changeYear: true });
+			$('#iedpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '', changeMonth: true, changeYear: true });
+			$('#sodpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '', changeMonth: true, changeYear: true });
+			$('#forecast').click(function() {
+				req_stn = $('input[name=stn]').val();
+				$.get('http://newatest.nrcc.cornell.edu/newaUtil/getForecastUrl/'+req_stn, function(data) { 
+					window.open(data);
+				});
+				return false;
+			});
+			$('#fbgraph').click(function() {
+				var paramStr = "type=fire_blight_grf";
+				$('input[name=stn], input[name=accend], input[name=firstblossom], select[name=orchard_history]').each(function () { 
+					paramStr += "&" + this.name + "=" + this.value;
+				});
+				window.open('http://newatest.nrcc.cornell.edu/newaGraph/fire_blight_grf?' + paramStr,"fbgraph","resizable=1,scrollbars=1,status=0,toolbar=0,location=0,menubar=0,height=760,width=630");
+				return false;
+			});
+			$("#moreinfo").dialog({
+				height: 400,
+				width: 500,
+				modal: true,
+				autoOpen: false,
+				buttons: { Close: function() { $(this).dialog('close'); } }
+			});
+		  });
+		</script>
+	
+		<script type="text/javascript">
+		function setandsub (selbut) {
+			switch (selbut)
+			{
+			case 1:
+				document.process.selbutton.value = "biofix";
+				document.process.type.value = "fire_blight";
+				break;
+			case 2:
+				document.process.selbutton.value = "strep";
+				document.process.type.value = "fire_blight";
+				break;
+			case 3:
+				document.process.selbutton.value = "orhist";
+				document.process.type.value = "fire_blight";
+				break;
+			case 4:
+				document.process.selbutton.value = "infect";
+				document.process.type.value = "shoot_blight";
+				window.open('','ShootBlight','height=400,width=520');
+				document.process.target = 'ShootBlight';
+				break;
+			case 5:
+				document.process.selbutton.value = "symptoms";
+				document.process.type.value = "shoot_blight";
+				window.open('','ShootBlight','height=400,width=520');
+				document.process.target = 'ShootBlight';
+				break;
+			default:
+				document.process.selbutton.value = "biofix";
+				document.process.type.value = "fire_blight";
+			}
+			document.process.submit();
+		}
+		</script>	
+		</head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		<FORM ACTION="/newaModel/process_input" METHOD="post" name="process">
+		<input type="hidden" name="type" value="fire_blight">
+		<input type="hidden" name="selbutton" value="0">
+		<input type="hidden" name="output" value="standalone">
+		'''
+		'<input type="hidden" name="accend" value="%d/%d/%d">' % (smry_dict['accend'].month,smry_dict['accend'].day,smry_dict['accend'].year)
+		'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
+
+	'''
+	<script type="text/javascript">
+	function show_moreinfo (opt) {
+		if (opt == 1) { $("#moreinfo").load('http://newatest.nrcc.cornell.edu/pops_notes.htm'); }
+		else { $("#moreinfo").load('http://newatest.nrcc.cornell.edu/dew_notes.htm'); }
+		$("#moreinfo").dialog('open');
+	}
+	</script>
+	'''
+
+	'<H3>Fire Blight Risk Predictions for %s</H3>' % smry_dict['station_name']
+	if not smry_dict['firstblossom']:
+		'<p>%s' % h8(smry_dict['message'])
+		end_date = '%d/%d/%d' % (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0])
+		'<p><b>Accumulated degree days (base 43&deg;F) through %s:</b> %s (%d days missing)</p>' % (end_date,smry_dict['ddaccum'],smry_dict['ddmiss'])
+	'''			
+
+	<p>Blossom blight predictions using the Cougarblight model begin at first blossom open.</p>
+	<p><b>First blossom open date:</b>
+	'''
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "setandsub(1);"
+	else:
+		action = "getfireblight(1);"
+	if smry_dict['firstblossom']:
+		mdy_bf = "%d/%d/%d" % (smry_dict['firstblossom'].month,smry_dict['firstblossom'].day,smry_dict['firstblossom'].year)
+	else:
+		mdy_bf = "Click to enter"
+	'&nbsp;&nbsp;<input type="text" name="firstblossom" id="fbdpick" value="%s" onChange="%s">' % (mdy_bf,action)
+	'''
+	</p>
+	<p class="plain_smaller"><i><b>First blossom open date above is estimated </b>based on degree day accumulations. 
+	<u><span style="color:red;">Infection cannot occur without 
+	open blossoms.</span></u> If the predicted bloom date is incorrect, <b>enter the actual date for blocks of interest</b> and the model 
+	will calculate the protection period during bloom more accurately. If bloom in your orchard has not yet occurred, continue to check 
+	Cougarblight daily and monitor your bloom. If bloom in your orchard has not yet occurred, enter a future bloom date, up to five days 
+	into the future, to gauge fire blight risk potential.</i></p>
+
+	<p><b>Orchard Blight History:</b>
+	'''
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "setandsub(3);"
+	else:
+		action = "getfireblight(3);"
+	'<select name="orchard_history" onChange="%s">' % action
+	orchard_choices = [(1,'No fire blight in your neighborhood last year.'), (2,'Fire blight occurred in your neighborhood last year.'), (3,'Fire blight is now active in your neighborhood.')]
+	for val,lab in orchard_choices:
+		if val == smry_dict['orchard_history']:
+			'<option value="%s" selected>%s</option>' % (val,lab)
+		else:
+			'<option value="%s">%s</option>' % (val,lab)
+	'</select></p>'
+	'<p><span class="plain_smaller"><i>'
+	if smry_dict['orchard_history'] == 2:
+		'The orchard blight history above is the NEWA default. '
+	'Select the actual blight history for your orchard <br />and the model will recalculate recommendations.</i></span></p>'
+	'''
+	</p>
+
+	<p><table border=1 cellpadding=3 cellspacing=0 width="100%" style='border-collapse:collapse; table-layout:fixed;'>
+	<col width=122><col width=62><col width=62><col width=62><col width=62><col width=62><col width=62><col width=62><col width=62>
+	<tr>
+	<td class=header_line_silver_back colspan=9 height=38 align=center>Blossom Blight Summary - Cougarblight</td>
+	</tr>
+	<tr>
+	<td class=plain_back>&nbsp;</td>
+	<th class=blue_back>Past</th>
+	<th class=blue_back>Past</th>
+	<th class=blue_back>Current</th>
+	<th class=palegoldenrod_back colspan=5>Blossom Blight 5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast">Forecast Details</button></th>
+	</tr>
+	<tr>
+
+	'''
+	curr_dt = DateTime.DateTime(*smry_dict['day0']['ymd'])
+	p1 = curr_dt + DateTime.RelativeDate(days=-1)
+	p2 = curr_dt + DateTime.RelativeDate(days=-2)
+	f1 = curr_dt + DateTime.RelativeDate(days=+1)
+	f2 = curr_dt + DateTime.RelativeDate(days=+2)
+	f3 = curr_dt + DateTime.RelativeDate(days=+3)
+	f4 = curr_dt + DateTime.RelativeDate(days=+4)
+	f5 = curr_dt + DateTime.RelativeDate(days=+5)
+	'<th class=plain_back>Date</th>'
+	'<td class=%s_back>%s %d</td>' % ('blue',month_names[p2.month][0:3],p2.day)
+	'<td class=%s_back>%s %d</td>' % ('blue',month_names[p1.month][0:3],p1.day)
+	'<td class=%s_back>%s %d</td>' % ('blue',month_names[curr_dt.month][0:3],curr_dt.day)
+	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f1.month][0:3],f1.day)
+	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f2.month][0:3],f2.day)
+	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f3.month][0:3],f3.day)
+	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f4.month][0:3],f4.day)
+	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f5.month][0:3],f5.day)
+	'</tr>'
+	'<tr>'
+
+	accum_msg = 0
+
+	'<th class=plain_back>4-day DH</th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['risk'][0].find('Extreme') >= 0:
+			rcolor = 'red'
+		elif smry_dict[d]['risk'][0].find('High') >= 0:
+			rcolor = 'orange'
+		elif smry_dict[d]['risk'][0].find('Caution') >= 0:
+			rcolor = 'yellow'
+		elif smry_dict[d]['risk'][0].find('Low') >= 0:
+			rcolor = 'green'
+		else:
+			rcolor = 'plain'
+		if smry_dict[d]['risk'][1] == miss:
+			drisk = '-'
+		else:
+			drisk = '%d'%smry_dict[d]['risk'][1]
+			if smry_dict[d]['risk'][0].find('-day') >= 0:
+				drisk = drisk+'*'
+				accum_msg = 1
+		'<td class=%s_back>%s</td>' % (rcolor,drisk)
+	'</tr>'
+
+	'<tr>'	
+	'<th class=plain_back> Risk Level</th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['risk'][0].find('Extreme') >= 0:
+			rcolor = 'red'
+		elif smry_dict[d]['risk'][0].find('High') >= 0:
+			rcolor = 'orange'
+		elif smry_dict[d]['risk'][0].find('Caution') >= 0:
+			rcolor = 'yellow'
+		elif smry_dict[d]['risk'][0].find('Low') >= 0:
+			rcolor = 'green'
+		else:
+			rcolor = 'plain'
+		if smry_dict[d]['risk'][0].find('-day') >= 0:
+#			nrisk = '%s'%smry_dict[d]['risk'][0][0:5]
+			nrisk = '%s'%smry_dict[d]['risk'][0][6:] + '*'
+		elif smry_dict[d]['risk'][0] == miss:
+			nrisk = '-'
+		else:
+			nrisk = '%s'%smry_dict[d]['risk'][0]
+		'<td class=%s_back>%s</td>' % (rcolor,nrisk)
+	'</TR>'
+
+	'<tr>'
+	'<th class=palegoldenrod_back_l colspan=9> Wetness Events</th>'
+	'</tr>'
+
+	'<tr>'	
+	'<th class=plain_back> Rain Amount</th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['wetness'][0] > 0:
+			rcolor = 'redonplain'
+		else:
+			rcolor = 'plain'
+		if smry_dict[d]['wetness'][0] == miss:
+			rain = 'NA'
+		elif smry_dict[d]['wetness'][0] > 0.00 and int(round((smry_dict[d]['wetness'][0]*100.),0)) == 0:
+			rain = 'Trace'
+		else:
+			rain = '%.2f'%round(smry_dict[d]['wetness'][0],2)
+		'<td class=%s_back>%s</td>' % (rcolor,rain)
+	'</TR>'
+	'<tr>'	
+	'<th class=plain_back> Rain Prob (%)<br>Night|Day&nbsp;<img src="http://newatest.nrcc.cornell.edu/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(1);"></th>'
+	'<td class=plain_back>&nbsp;</td>'
+	'<td class=plain_back>&nbsp;</td>'
+	for d in ['day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['pops']['am'] == miss:
+			am_rain = '-'
+		else:
+			am_rain = '%d' % round(smry_dict[d]['pops']['am'], 0)
+		if smry_dict[d]['pops']['pm'] == miss:
+			pm_rain = '-'
+		else:
+			pm_rain = '%d' % round(smry_dict[d]['pops']['pm'], 0)
+		'<td class=plain_back_smaller_c>%s | %s</td>' % (am_rain,pm_rain)
+	'</TR>'
+	'<tr>'	
+	'<th class=plain_back> Dew &nbsp;<img src="http://newatest.nrcc.cornell.edu/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(0);"></th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['wetness'][2] > 0:
+			rcolor = 'redonplain'
+			dew = 'Yes'
+		elif smry_dict[d]['wetness'][2] == miss:
+			rcolor = 'plain'
+			dew = 'NA'
+		else:
+			rcolor = 'plain'
+			dew = 'No'
+		'<td class=%s_back>%s</td>' % (rcolor,dew)
+	'</TR>'
+	if smry_dict['pday2']['wetness'][1] != miss or smry_dict['pday1']['wetness'][1] != miss or smry_dict['day0']['wetness'][1] != miss:
+		'<tr>'	
+		if 'lwet' not in smry_dict['avail_vars']:
+			'<th class=plain_back> Leaf Wetness Estimate (hours)</th>'			
+		else:
+			'<th class=plain_back> Leaf Wetness (hours)</th>'
+		for d in ['pday2','pday1','day0']:
+			if smry_dict[d]['wetness'][1] > 0:
+				rcolor = 'redonplain'
+			else:
+				rcolor = 'plain'
+			if smry_dict[d]['wetness'][1] == miss:
+				lwet = 'NA'
+			else:
+				lwet = '%d'%smry_dict[d]['wetness'][1]
+			'<td class=%s_back>%s</td>' % (rcolor,lwet)
+		'<td class=%s_back colspan=5>&nbsp;</td>' % ('plain')
+		'</TR>'
+
+	'<tr>'
+	'<td class=plain_back_smaller colspan=3 style="border-right:hidden; border-left:hidden; border-bottom:hidden">NA - data not available</td>'
+	'<td class=plain_back colspan=3 style="border-right:hidden; border-left:hidden; border-bottom:hidden"><button class="button" id="fbgraph">Cougarblight Charts</button></td>'
+	if smry_dict.has_key("last_time"):
+		'<td class=red_text colspan=3 style="border-right:hidden; border-left:hidden; border-bottom:hidden">Download Time: %d/%d/%d %d:00</td>'%(smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0],smry_dict['last_time'][3])
+	'</tr>'
+	'</table>'
+	if accum_msg:
+#		'<br><i>* indicates incomplete accumulation of the 4-day DH total.</i>'
+		'''
+		<br><i>* Indicates incomplete accumulation of the 4-day DH total. The DH value may reach "Caution", "High" or "Extreme" 
+		levels before spanning the 4-day accumulation cut-off time of Cougarblight. In 
+		such cases, you should use the best judgment of actual bloom stages, fire blight orchard history, prior spray applications, 
+		and forecasted weather to make a decision whether to apply a bactericide to protect from blossom infections. For blossom blight 
+		protection, the bactericide must be applied to the open flowers.</i>
+		'''
+
+	'<br><i>Scan 4-day degree hour (DH) totals, risk levels, rain, dew, leaf wetness, and note the infection risk level.</i>'
+
+	'<div id="moreinfo" title="" class="plain_back_l"> </div>'
+
+	'''
+	<p><div class=plain_back_l style="margin-bottom:0px;"><b>Pest Management for Cougarblight Risk Level:</b>
+	<ul style="margin-top:0px; margin-bottom:0px;">
+	<li><i><span class="green_back">Low</span></i> - bactericides probably unnecessary, check the 5-day forecast for warm weather (60&deg;F or higher) and wetting events.</li>
+	<li><i><span class="yellow_back">Caution</span></i> - check the 5-day forecast, expect infection if warm weather continues (60&deg;F or higher) and a wetting event occurs.</li>
+	<li><i><span class="orange_back">High</span></i> - expect infection if there is a wetting event, even a heavy dew.</li>
+	<li><i><span class="red_back">Extreme</span></i> - the blossoms should be protected with streptomycin.</li>
+	</ul>
+	</div>
+	</p>
+	'''
+#	'<p class="plain_back_l"><button onClick="%s" class="button">Pesticide Information</button></p>' % plaction
+	'''
+	<p><b>Streptomycin Applications:</b> Enough heat units may accumulate to put the newly open flowers at risk for infection 
+	if rain or heavy dew then occurs. If you applied streptomycin before all flowers were open, enter the date of the streptomycin 
+	application to recalculate fire blight risk predictions.</p>
+	'''
+	'<p><b>Streptomycin Spray Date:</b> '
+	if smry_dict['strep_spray']:
+		mdy_strep_spray = "%d/%d/%d" % (smry_dict['strep_spray'].month,smry_dict['strep_spray'].day,smry_dict['strep_spray'].year)
+	else:
+		mdy_strep_spray = "Click to enter date"
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "setandsub(2);"
+	else:
+		action = "getfireblight(2);"
+	'&nbsp;&nbsp;<input type="text" name="strep_spray" id="ssdpick" value="%s" onChange="%s">' % (mdy_strep_spray,action)
+	'</p>'
+
+	'''
+	<p><div style="width:628px; border: thin blue solid; padding:5" id="monitoring">
+	<b>Monitoring for Shoot Blight Symptoms:</b> To effectively limit shoot blight damage, strikes should be pruned
+	throughout the terminal growth period. If you have a trauma event such as windy thunderstorm during bloom or a summer hailstorm, begin checking
+	for symptoms 90-100 degree day base 55&deg;F after the event. Enter the date of the infection/weather event:
+	'''
+	'<p><b>Infection Event Date:</b> '
+	if smry_dict.has_key('infection_event') and smry_dict['infection_event']:
+		mdy_infection_date = "%d/%d/%d" % (smry_dict['infection_event'].month,smry_dict['infection_event'].day,smry_dict['infection_event'].year)
+	else:
+		mdy_infection_date = "Click to enter date"
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "setandsub(4);"
+	else:
+		action = "getshootblight(4);"
+	'&nbsp;&nbsp;<input type="text" name="infection_event" id="iedpick" value="%s" onChange="%s">' % (mdy_infection_date,action)
+	'''
+	</p>
+	<p>If you are seeing fire blight symptoms and want to determine approximately when the infection event occurred, enter the 
+	date of symptoms:</p>
+	'''
+	'<p><b>Symptom Occurrence Date:</b> '
+	if smry_dict.has_key('symptoms') and smry_dict['symptoms']:
+		mdy_symptoms = "%d/%d/%d" % (smry_dict['symptoms'].month,smry_dict['symptoms'].day,smry_dict['symptoms'].year)
+	else:
+		mdy_symptoms = "Click to enter date"
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "setandsub(5);"
+	else:
+		action = "getshootblight(5);"
+	'&nbsp;&nbsp;<input type="text" name="symptoms" id="sodpick" value="%s" onChange="%s">' % (mdy_symptoms,action)
+	if smry_dict.has_key('output') and smry_dict['output'] != 'standalone':
+		'<div id="shootblight"></div>'
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		</p>
+		<p class="plain_smaller"><i>Results will be displayed in a pop-up window.</i></p>
+		'''
+	'</div></p>'
+	'</form>'
+	add_kerik_credit()
+	add_footer(smry_dict,'pmep')
+
+#--------------------------------------------------------------------------------------------		
+# fire blight - pre-bloom return
+def fire_blight_early [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>NEWA Fire Blight Model</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+		<script type="text/javascript">
+		  $(document).ready(function() {
+			$('#fbdpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '', changeMonth: true, changeYear: true });
+		  });
+		</script>
+		</head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		<FORM ACTION="/newaModel/process_input" METHOD="post" name="process">
+		<input type="hidden" name="type" value="fire_blight">
+		<input type="hidden" name="selbutton" value="biofix">
+		<input type="hidden" name="output" value="standalone">
+		'''
+		'<input type="hidden" name="accend" value="%d/%d/%d">' % (smry_dict['accend'].month,smry_dict['accend'].day,smry_dict['accend'].year)
+		'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
+
+	'<H3>Fire Blight Risk Predictions for %s</H3>' % smry_dict['station_name']
+
+	'<p>%s' % h8(smry_dict['message'])
+	end_date = '%d/%d/%d' % (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0])
+	'<p><b>Accumulated degree days (base 43&deg;F) through %s:</b> %s (%d days missing)</p>' % (end_date,smry_dict['ddaccum'],smry_dict['ddmiss'])
+	'''
+
+	<p>Blossom blight predictions using the Cougarblight model begin at first blossom open.
+	<p><b>First blossom open date:</b>
+	'''
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "submit();"
+	else:
+		action = "getfireblight(1);"
+	'&nbsp;&nbsp;<input type="text" name="firstblossom" id="fbdpick" value="Click to enter" onChange="%s">' % action
+	'''
+	</p>
+	<p class="plain_smaller"><i>Degree day accumulations estimate that first blossom open date may not have occurred yet. <br>If it has, enter the actual date for blocks of interest.</i></p>
+
+	<p><b>Orchard Blight History:</b>
+	<select name="orchard_history">
+	'''
+	orchard_choices = [(1,'No fire blight in your neighborhood last year.'), (2,'Fire blight occurred in your neighborhood last year.'), (3,'Fire blight is now active in your neighborhood.')]
+	for val,lab in orchard_choices:
+		if val == smry_dict['orchard_history']:
+			'<option value="%s" selected>%s</option>' % (val,lab)
+		else:
+			'<option value="%s">%s</option>' % (val,lab)
+	'''
+	</select></p>
+	<p><span class="plain_smaller"><i>The orchard blight history above is the NEWA default. Select the actual blight history for your orchard.</i></span></p>
+
+	<p><div style="border: thin black solid; padding:5;">
+	<b>Pest Management: </b>Scout orchards for active, oozing fire blight cankers. Prune and remove fire blight infected branches.
+	</div></p>
+	</form>
+	'''
+	add_kerik_credit()
+	add_footer(smry_dict,'pmep')
+
+#--------------------------------------------------------------------------------------------		
+# fire blight - post-petal fall
+def fire_blight_late [html] (smry_dict):
+	plaction = "window.open('http://treefruitipm.info/PesticidesForPest.aspx?PestID=20', 'popwindow'); return false"
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>NEWA Fire Blight Model</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+		<script type="text/javascript">
+		  $(document).ready(function() {
+			$('#fbdpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '', changeMonth: true, changeYear: true });
+			$('#iedpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '', changeMonth: true, changeYear: true });
+			$('#sodpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '', changeMonth: true, changeYear: true });
+		  });
+		</script>
+		<script type="text/javascript">
+			function setandsub (selbut) {
+				switch (selbut)
+				{
+				case 1:
+					document.process.selbutton.value = "biofix";
+					document.process.type.value = "fire_blight";
+					break;
+				case 4:
+					document.process.selbutton.value = "infect";
+					document.process.type.value = "shoot_blight";
+					window.open('','ShootBlight','height=400,width=520');
+					document.process.target = 'ShootBlight';
+					break;
+				case 5:
+					document.process.selbutton.value = "symptoms";
+					document.process.type.value = "shoot_blight";
+					window.open('','ShootBlight','height=400,width=520');
+					document.process.target = 'ShootBlight';
+					break;
+				default:
+					document.process.selbutton.value = "biofix";
+					document.process.type.value = "fire_blight";
+				}
+				document.process.submit();
+			}
+		</script>
+		</head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		<FORM ACTION="/newaModel/process_input" METHOD="post" name="process">
+		<input type="hidden" name="output" value="standalone">
+		'''
+		'<input type="hidden" name="accend" value="%d/%d/%d">' % (smry_dict['accend'].month,smry_dict['accend'].day,smry_dict['accend'].year)
+		'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
+
+	'<H3>Fire Blight Risk Predictions</H3>'
+	'''
+	<p>The period of high risk of blossom blight infection (20% bloom to 80% petal fall) has passed. 
+	If bloom is still present in your orchard, recalculate blossom blight predictions using the Cougarblight model 
+	by entering a first blossom open date.</p>
+
+	<p><b>First blossom open date:</b>
+	'''
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "setandsub(1);"
+	else:
+		action = "getfireblight(1);"
+	'&nbsp;&nbsp;<input type="text" name="firstblossom" id="fbdpick" value="Click to enter" onChange="%s">' % action
+	'''
+	</p>
+	<p class="plain_smaller"><i>Enter the first blossom open date for blocks of interest and the model will calculate the protection period during bloom.</i></p>
+
+	<p><b>Orchard Blight History:</b>
+	<select name="orchard_history">
+	'''
+	orchard_choices = [(1,'No fire blight in your neighborhood last year.'), (2,'Fire blight occurred in your neighborhood last year.'), (3,'Fire blight is now active in your neighborhood.')]
+	for val,lab in orchard_choices:
+		if val == smry_dict['orchard_history']:
+			'<option value="%s" selected>%s</option>' % (val,lab)
+		else:
+			'<option value="%s">%s</option>' % (val,lab)
+	'''
+	</select></p>
+	<p><span class="plain_smaller"><i>The orchard blight history above is the NEWA default. Select the actual blight history for your orchard.</i></span></p>
+
+	'''
+	'<p class="plain_back_l"><button onClick="%s" class="button">Pesticide Information</button></p>' % plaction
+
+	'''
+	<p><div style="border: thin blue solid; padding:5">
+	<b>Monitoring for Shoot Blight Symptoms:</b> To effectively limit shoot blight damage, strikes should be pruned
+	throughout the terminal growth period. If you have a trauma event such as windy thunderstorm during bloom or a summer hailstorm, begin checking
+	for symptoms 90-100 degree day base 55&deg;F after the event. Enter the date of the infection/weather event:
+	'''
+	'<p><b>Infection Event Date:</b> '
+	if smry_dict.has_key('infection_event') and smry_dict['infection_event']:
+		mdy_infection_date = "%d/%d/%d" % (smry_dict['infection_event'].month,smry_dict['infection_event'].day,smry_dict['infection_event'].year)
+	else:
+		mdy_infection_date = "Click to enter date"
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "setandsub(4);"
+	else:
+		action = "getshootblight(4);"
+	'&nbsp;&nbsp;<input type="text" name="infection_event" id="iedpick" value="%s" onChange="%s">' % (mdy_infection_date,action)
+	'''
+	</p>
+	<p>
+	If you are seeing fire blight symptoms and want to determine approximately when the infection event occurred, enter the 
+	date of symptoms:
+	'''
+	'<p><b>Symptom Occurrence Date:</b> '
+	if smry_dict.has_key('symptoms') and smry_dict['symptoms']:
+		mdy_symptoms = "%d/%d/%d" % (smry_dict['symptoms'].month,smry_dict['symptoms'].day,smry_dict['symptoms'].year)
+	else:
+		mdy_symptoms = "Click to enter date"
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "setandsub(5);"
+	else:
+		action = "getshootblight(5);"
+	'&nbsp;&nbsp;<input type="text" name="symptoms" id="sodpick" value="%s" onChange="%s">' % (mdy_symptoms,action)
+	if smry_dict.has_key('output') and smry_dict['output'] != 'standalone':
+		'<div id="shootblight" title="Shoot Blight Results">Shoot Blight results will appear here.</div>'
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		</p>
+		<p class="plain_smaller"><i>Results will be displayed in a pop-up window.</i></p>
+		'''
+	'</div></p>'
+	'</form>'
+	add_kerik_credit()
+	add_footer(smry_dict,'pmep')
+
+#--------------------------------------------------------------------------------------------		
+# fire blight - dormant (Sep 16-Dec 31)
+def fire_blight_dormant [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>NEWA Fire Blight Model</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		</head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		'''
+
+	'<H3>Fire Blight Risk Predictions</H3>'
+	from phen_events import phen_events_dict
+	'<p>At bloom, apples and pears become susceptible to fire blight blossom infections. '
+	'First blossom open usually occurs once %d to %d degree days (DD) base 43 have accumulated from January 1.' % (phen_events_dict['macph_bloom_43']['dd'][2],phen_events_dict['macph_bloom_43']['dd'][3])
+
+	add_kerik_credit()
+	add_footer(smry_dict,'pmep')
+
+#--------------------------------------------------------------------------------------------		
+# shoot blight infection summary 
+def shoot_blight_infection_log [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>NEWA Shoot Blight Model</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		</head>
+		<body>
+		'''
+		'<div class="plain_back" id="sbresults">'
+	else:
+		'<div class="plain_back" id="sbresults">'
+		'<hr color=blue>'
+	'<h3>Shoot Blight Infection for %s</h3>' % smry_dict['station_name']
+	'<p>Fire blight symptoms on infected shoots show up when about 90 to 100 degree days base 55F have accumulated after an infection event.</p>'
+	'<p><b>Infection event: </b><br>%s %d</p>' % (month_names[smry_dict['infection_event'].month],smry_dict['infection_event'].day)
+	if smry_dict['ddaccum']:
+		ddaccum = int(round(smry_dict['ddaccum'],0))
+		'<p><b>Degree Days (base 55 BE) %d/%d through %d/%d: </b><br>%s</p>' % (smry_dict['infection_event'].month,smry_dict['infection_event'].day,smry_dict['last_day_accum'][1],smry_dict['last_day_accum'][2],ddaccum)
+	'<p><b>%s</b></p>' % smry_dict['recommend']
+
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<p>
+		<div style="width:500;">
+		<a href="JavaScript:window.close()">Close window</a>
+		</div>
+		</p>
+		</div>
+		</body>
+		</html>
+		'''
+
+#--------------------------------------------------------------------------------------------		
+# shoot blight sypmptoms summary 
+def shoot_blight_symptoms_log [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>NEWA Shoot Blight Model</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		</head>
+		<body>
+		'''
+		'<div class="plain_back" id="sbresults">'
+	else:
+		'<div class="plain_back" id="sbresults">'
+		'<hr color=blue>'
+	'<h3>Shoot Blight Infection for %s</h3>' % smry_dict['station_name']
+	'<p>Fire blight symptoms on infected shoots show up when about 90 to 100 degree days base 55F have accumulated after an infection event.</p>'
+	'<p><b>Symptom Occurrence Date: </b><br>%s %d</p>' % (month_names[smry_dict['symptoms'].month],smry_dict['symptoms'].day)
+	'<p><b>Approximate Infection Date: </b>'
+	if smry_dict['infection_est']:
+		'<br>%s %d</p>' % (month_names[smry_dict['infection_est'][1]],smry_dict['infection_est'][2])
+		ddaccum = int(round(smry_dict['ddaccum'],0))
+		'<p><b>Degree Days (base 55 BE) %d/%d through %d/%d: </b><br>%s</p>' % (smry_dict['infection_est'][1],smry_dict['infection_est'][2],smry_dict['last_day_accum'][1],smry_dict['last_day_accum'][2],ddaccum)
+	else:
+		'<br>Cannot be determined</p>'
+	
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<p>
+		<div  style="width:500;">
+		<a href="JavaScript:window.close()">Close window</a>
+		</div>
+		</p>
+		</div>
+		</body>
+		</html>
+		'''
+
+#--------------------------------------------------------------------------------------------		
+def apple_pest_results [html] (smry_dict):	
+	from phen_events import phen_events_dict
+	if smry_dict['output'] == "standalone":
+#		header if output not going in a tab
+		'''
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+		  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+		<html>
+		  <head>
+			<meta http-equiv="content-type" content="text/html"/>
+			<title>NEWA Apple Pest Calculator</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+			<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+			<script type="text/javascript">
+			  $(document).ready(function() {
+				$("#bfdpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "+7d", changeMonth: true, changeYear: true });
+				$("#bf2dpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "+7d", changeMonth: true, changeYear: true });
+				$("#bf3dpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "+7d", changeMonth: true, changeYear: true });
+				});
+			</script>
+	    <head>
+		<body>
+		<form action="/newaModel/process_input" method="post">
+		<input type="hidden" name="type" value="apple_pest">
+		<input type="hidden" name="output" value="standalone">
+		'''
+		
+		'<input type="hidden" name="pest" value="%s">' % smry_dict['pest']
+		'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
+		'<input type="hidden" name="accend" value="%s">' % smry_dict['accend']
+#		'<div class="red_text_top"><a href="http://treefruitipm.info/Profiles/External/PesticideList.aspx">Pesticide Information</a></div>'
+		'<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">'
+#		end standalone header
+
+	'''
+	<script type="text/javascript">
+	function updateStatus() {
+		var params = {type: 'apple_pest'};
+		$('input[name=pest], input[name=output], select[name=pest], select[name=altref]').each(function () { params[this.name] = this.value; });
+		$.get('http://newatest.nrcc.cornell.edu/newaModel/updateStatus',params,function(data) { $("#manage_status").html(data); });
+		$('#phen_pic').hide();		
+		$('#ppl').hide();		
+		$('#ppr').hide();
+		return false;
+		}
+	</script>
+	'''
+
+	'<h3>%s Results for %s</h3>' % (smry_dict['pest_name'],smry_dict['station_name'])
+
+	### Messages when you don't have a biofix date yet
+	if not smry_dict['bf_date']:
+		if smry_dict['pest'] == 'apple-pc':
+			'You are approximately %s degree days from petal fall - the critial period for protection.<p>' % (phen_events_dict['macph_pf_43']['dd'][3]-smry_dict['ddaccum'])
+
+		### Put up a biofix date picker when you're getting close to biofix
+		if smry_dict['pest'] == 'apple-pc'     and smry_dict['ddaccum'] >= phen_events_dict['macph_pf_43']['dd'][2] or \
+		   smry_dict['pest'] == 'apple-oblr'   and smry_dict['ddaccum'] >= phen_events_dict['oblr_catch1_43']['dd'][2] or \
+		   smry_dict['pest'] == 'apple-stlm'   and smry_dict['ddaccum'] >= 701 or \
+		   smry_dict['pest'] == 'apple-cm'     and smry_dict['ddaccum'] >= phen_events_dict['cm_catch1_43']['dd'][2] or \
+		   smry_dict['pest'] == 'apple-ofm'    and smry_dict['ddaccum'] >= phen_events_dict['ofm_catch1_43']['dd'][2] or \
+		   smry_dict['pest'] == 'apple-maggot' and smry_dict['ddaccum'] >= phen_events_dict['am_catch1_43']['dd'][2]:
+			if smry_dict['pest'] == 'apple-pc':
+				'<b>90% petal fall on McIntosh apple: </b>'
+			else:
+				'<b>%s: </b>' % smry_dict['biofix_phenology']
+			if smry_dict['output'] == "standalone":
+				action = "submit();"
+			else:
+				action = "getresults(1);"
+			'<input type="text" name="bf_date" id="bfdpick" value="Click to enter" onChange="%s">' % (action)
+			'<p class="plain_smaller"><i>Degree day accumulations estimate that %s may not have occurred yet. If it has, enter the actual date for blocks of interest above and the model will calculate the protection period more accurately.</i></p>' % (smry_dict['biofix_phenology'])
+
+		### Accumulations start Jan 1 before biofix
+		accum_start = '1/1/%s' % smry_dict['last_day'][0]
+
+	### Put up datepicker when you do have a biofix date
+	else:
+		if smry_dict['pest'] == 'apple-pc' and smry_dict['ddaccum'] <= 308:
+			'<p>At petal fall, fruit become susceptible to feeding and oviposition injury. Control measures are only needed until 308 degree days have accumulated since petal fall.</p>'
+			'<b>90% petal fall on McIntosh apple: </b>'
+		else:
+			'<b>%s: </b>' % smry_dict['biofix_phenology']
+		mdy_bf = "%d/%d/%d" % (smry_dict['bf_date'][1],smry_dict['bf_date'][2],smry_dict['bf_date'][0])
+		if smry_dict['output'] == "standalone" and smry_dict['bf2_date']:
+			action = "bf2_date.value=''; bf3_date.value=''; submit();"
+		elif smry_dict['output'] == "standalone":
+			action = "submit();"
+		else:
+			action = "getresults(1);"
+		'<input type="text" name="bf_date" id="bfdpick" value="%s" onChange="%s">' % (mdy_bf,action)
+		if not smry_dict['bf2_date']: '<p class="plain_smaller"><i>%s date above is estimated based on degree day accumulations or user input. Enter the actual date for blocks of interest and the model will calculate the protection period after %s more accurately.</i></p>' % (smry_dict['biofix_phenology'],smry_dict['biofix_phenology'].lower())
+
+		### Accumulations start with biofix 
+		accum_start = smry_dict['biofix_phenology'].lower()
+
+		### Do same with second biofix
+		if not smry_dict['bf2_date']:
+			### Put up a biofix date picker when you're getting close to second biofix
+			if smry_dict['pest'] == 'apple-stlm' and smry_dict['ddaccum'] >= 701 or\
+			   smry_dict['pest'] == 'apple-cm'   and smry_dict['ddaccum'] >= 721 or \
+			   smry_dict['pest'] == 'apple-ofm'  and smry_dict['ddaccum'] >= 701:
+				'<b>%s: </b>' % smry_dict['biofix2_phenology']
+				if smry_dict['output'] == "standalone":
+					action = "submit();"
+				else:
+					action = "getresults(2);"
+				'<input type="text" name="bf2_date" id="bf2dpick" value="Click to enter" onChange="%s">' % (action)
+				'<p class="plain_smaller"><i>Degree day accumulations estimate that %s may not have occurred yet. If it has, enter the actual date for blocks of interest above and the model will calculate the protection period more accurately.</i></p>' % (smry_dict['biofix2_phenology'])
+
+		### Put up another datepicker when the second biofix has been reached
+		else:
+			'<p><b>%s: </b>' % smry_dict['biofix2_phenology']
+			mdy_bf = "%d/%d/%d" % (smry_dict['bf2_date'][1],smry_dict['bf2_date'][2],smry_dict['bf2_date'][0])
+			if smry_dict['output'] == "standalone" and smry_dict['bf3_date']:
+				action = "bf3_date.value=''; submit();"
+			elif smry_dict['output'] == "standalone":
+				action = "submit();"
+			else:
+				action = "getresults(2);"
+			'<input type="text" name="bf2_date" id="bf2dpick" value="%s" onChange="%s">' % (mdy_bf,action)
+			if not smry_dict['bf3_date']: '<p class="plain_smaller"><i>The dates above are estimated based on degree day accumulations or user input. Enter the actual dates for blocks of interest and the model will calculate the protection period more accurately.</i></p>'
+
+			### Accumulations now start with the second biofix
+			accum_start = smry_dict['biofix2_phenology'].lower()
+
+			### Do same with third biofix
+			if not smry_dict['bf3_date']:
+				### Put up a biofix date picker when you're getting close to third biofix
+				if smry_dict['pest'] == 'apple-ofm' and smry_dict['ddaccum'] >= 801:
+					'<b>%s: </b>' % smry_dict['biofix3_phenology']
+					if smry_dict['output'] == "standalone":
+						action = "submit();"
+					else:
+						action = "getresults(3);"
+					'<input type="text" name="bf3_date" id="bf3dpick" value="Click to enter" onChange="%s">' % (action)
+					'<p class="plain_smaller"><i>Degree day accumulations estimate that %s may not have occurred yet. If it has, enter the actual date for blocks of interest above and the model will calculate the protection period more accurately.</i></p>' % (smry_dict['biofix3_phenology'])
+	
+			### Put up another datepicker when the third biofix has been reached
+			else:
+				'<p><b>%s: </b>' % smry_dict['biofix3_phenology']
+				mdy_bf = "%d/%d/%d" % (smry_dict['bf3_date'][1],smry_dict['bf3_date'][2],smry_dict['bf3_date'][0])
+				if smry_dict['output'] == "standalone":
+					action = "submit();"
+				else:
+					action = "getresults(3);"
+				'<input type="text" name="bf3_date" id="bf3dpick" value="%s" onChange="%s">' % (mdy_bf,action)
+				'<p class="plain_smaller"><i>The dates above are estimated based on degree day accumulations or user input. Enter the actual dates for blocks of interest and the model will calculate the protection period more accurately.</i></p>'
+	
+				### Accumulations now start with the third biofix
+				accum_start = smry_dict['biofix3_phenology'].lower()
+
+	### Report number of degree days, unless value if missing (usually occurs when biofix is set to be after end date)
+	if smry_dict['ddaccum'] != miss:
+		end_date = '%d/%d/%d' % (smry_dict['last_day'][1],smry_dict['last_day'][2],smry_dict['last_day'][0])
+		'<p><b>Accumulated degree days (base %s&deg;F) %s through %s:</b> %s (%d days missing)</p>' % (smry_dict['basetemp'],accum_start,end_date,smry_dict['ddaccum'],smry_dict['ddmiss'])
+	elif smry_dict['bf2_date']:
+		'<p>Degree day accumulations will resume on date of %s.</p>' % smry_dict['biofix2_phenology'].lower()
+	else:
+		'<p>Degree day accumulations will resume on date of %s.</p>' % smry_dict['biofix_phenology'].lower()
+
+	### Allow user to change pre-biofix phenology. Model-determined phenology initially selected.
+	if smry_dict['phenology'] and smry_dict['pest'] != "apple-maggot": 
+		if smry_dict['phen_pic']:
+			'<div style="float:  left; width: 100px; height: 50px;" id="ppl">&nbsp;</div>'
+			'<div style="float: right; width:  50px; height: 50px; font-size:8.0pt;" id="ppr">Click to enlarge</div>'
+			'<div style="float: right; width:  50px; height: 50px;" id="phen_pic">'
+			'<a href="http://newatest.nrcc.cornell.edu/gifs/apple/%s.jpg" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/apple/%s_sm.png" alt="%s" width=48 height=48></a>' % (smry_dict['phen_pic'],smry_dict['phen_pic'],smry_dict['phen_pic'])
+			'</div>'
+		'<p><b>Phenological stage: </b>'
+		'<select name="altref" onChange="updateStatus();">'
+		for i in range(len(smry_dict['phen_stages'])-1,-1,-1):
+			stage,stage_dd = smry_dict['phen_stages'][i]
+			if stage == smry_dict['phenology']:
+				'<option value="%s" selected>%s</option>' % (stage.replace(" ","_"),stage)
+			else:
+				'<option value="%s">%s</option>' % (stage.replace(" ","_"),stage)
+		'</select></p>'
+		'<p><span class="plain_smaller"><i>The phenological stage above is estimated. Select the actual <br> stage and the model will recalculate recommendations.</i></span></p>'
+
+	### Display pest stage.
+	'<div class="plain_back" id="manage_status">'
+	if smry_dict['pest_stages']:
+		'<b>Pest stage: </b>'
+		'<select name="altref" onChange="updateStatus();">'
+		for i in range(len(smry_dict['pest_stages'])):
+			stage,stage_name = smry_dict['pest_stages'][i]
+			if stage_name == smry_dict['stage']:
+				'<option value="%s" selected>%s</option>' % (stage,stage_name)
+			else:
+				'<option value="%s">%s</option>' % (stage,stage_name)
+		'</select>'
+		'<p><span class="plain_smaller"><i>The pest stage above is estimated. Select the actual <br> stage and the model will recalculate recommendations.</i></span></p>'
+	else:
+		'<b>Pest stage: </b>%s' % smry_dict['stage']
+	
+	### Pest status and management table
+	'<p><table cellspacing="0" cellpadding="5" border="1" width="100%">'
+	'<tr><th width="40%">Pest Status</th><th width="60%">Pest Management</th></tr>'
+	if smry_dict['status'].find("<a") >= 0:
+		'<tr><td align="left" valign="top">%s</td>' % h8(smry_dict['status'])	#don't escape messages with anchors
+	else:
+		'<tr><td align="left" valign="top">%s</td>' % smry_dict['status']
+	if smry_dict['manage'].find("<a") >= 0:
+		'<td align="left" valign="top">%s</td>' % h8(smry_dict['manage'])		#same here
+	else:
+		'<td align="left" valign="top">%s</td>' % smry_dict['manage']
+	'</tr>'
+	'</table>'
+	'</div>'
+	'</form>'
+	add_footer(smry_dict,'pmep')
+
+#--------------------------------------------------------------------------------------------		
+def apple_status_results [html] (smry_dict):	
+	### Display pest stage.
+	if smry_dict['pest_stages']:
+		'<b>Pest stage: </b>'
+		'<select name="altref" onChange="updateStatus();">'
+		for i in range(len(smry_dict['pest_stages'])):
+			stage,stage_name = smry_dict['pest_stages'][i]
+			if stage_name == smry_dict['stage']:
+				'<option value="%s" selected>%s</option>' % (stage,stage_name)
+			else:
+				'<option value="%s">%s</option>' % (stage,stage_name)
+		'</select>'
+		'<p><span class="plain_smaller"><i>Change the pest stage above and the model will recalculate recommendations.</i></span></p>'
+	else:
+		'<b>Pest stage: </b>%s' % smry_dict['stage']
+	
+	### Pest status and management table
+	'<p><table cellspacing="0" cellpadding="5" border="1" width="100%">'
+	'<tr><th width="40%">Pest Status</th><th width="60%">Pest Management</th></tr>'
+	if smry_dict['status'].find("<a") >= 0:
+		'<tr><td align="left" valign="top">%s</td>' % h8(smry_dict['status'])	#don't escape messages with anchors
+	else:
+		'<tr><td align="left" valign="top">%s</td>' % smry_dict['status']
+	if smry_dict['manage'].find("<a") >= 0:
+		'<td align="left" valign="top">%s</td>' % h8(smry_dict['manage'])		#same here
+	else:
+		'<td align="left" valign="top">%s</td>' % smry_dict['manage']
+	'</tr>'
+	'</table>'
+
+#--------------------------------------------------------------------------------------------		
+def dmcast_results [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>NEWA DMCast Results</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		</head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		'''
+	
+	'<div class="header_line_silver_back">DMCast Results for %s' % smry_dict['station_name']
+	'<p class="header_line_s" style="margin-top:7px;">Final Date of the Forecast: %d %s %d</p></div>' % (smry_dict['accend'].day,month_abb[smry_dict['accend'].month],smry_dict['accend'].year)
+	if smry_dict.has_key("statMsg"):
+		'<p>Error: %s</p>' % smry_dict['statMsg']
+	else:
+		'<div class="gray_back_l" style="margin-top:15px;">'
+		'<div class="header_line_s" style="color:green; text-align:center;">Dates of ELS 12 Growth Stage and Primary Infection by the DMCast Model</div>'
+		'<ul>'
+		if smry_dict['els12']:
+			'<li><b>Eichhorn and Lorenz Stage (ELS) 12</b> for <b>%s</b> was reached on <b>%d %s %d</b></li>' % (smry_dict['cultivar'],smry_dict['els12'].day,month_abb[smry_dict['els12'].month],smry_dict['els12'].year)
+		else:
+			'<li><b>Eichhorn and Lorenz Stage (ELS) 12</b> for <b>%s</b> was <b>NOT</b> reached by %d %s %d</li>' % (smry_dict['cultivar'],smry_dict['accend'].day,month_abb[smry_dict['accend'].month],smry_dict['accend'].year)
+		'<ul>'
+		'<li><i><a href="http://newatest.nrcc.cornell.edu/gifs/eichorn.12.jpg" target=_new>ELS12</a>: Five to six leaves unfolded, inflorescences clearly visible</i></li>'
+		'</ul>'
+		if smry_dict['primary']:
+			'<li><b>Primary infection</b> occurred on <b>%d %s %d</b></li>' % (smry_dict['primary'].day,month_abb[smry_dict['primary'].month],smry_dict['primary'].year)
+			if smry_dict['incubation']:
+				'<li><b>Incubation period</b> for secondary infection cycles was completed on <b>%d %s %d</b></li>' % (smry_dict['incubation'].day,month_abb[smry_dict['incubation'].month],smry_dict['incubation'].year)
+				'<li>Therefore, downy mildew spores for secondary infection are expected to exist in the vineyard after %d %s %d</li>' % (smry_dict['incubation'].day,month_abb[smry_dict['incubation'].month],smry_dict['incubation'].year)
+			else:
+				'<li><b>Incubation period</b> for secondary infection cycles was <b>NOT</b> completed by %d %s %d</li>' % (smry_dict['accend'].day,month_abb[smry_dict['accend'].month],smry_dict['accend'].year)
+		else:
+			'<li><b>Primary infection</b> has <b>NOT</b> occurred by %d %s %d</li>' % (smry_dict['accend'].day,month_abb[smry_dict['accend'].month],smry_dict['accend'].year)
+		'</ul>'
+		'</div>'
+		'<hr style="color:green; background-color:green; height: 5px;" />'
+		
+		warning_keys = smry_dict['warnings'].keys()
+		warning_keys.sort()
+		'<div class="gray_back_l" style="margin-top:15px;">'
+		'<div class="header_line_s" style="color:green; text-align:center;">Downy Mildew Infection Risk Warnings (<img src="http://newatest.nrcc.cornell.edu/gifs/bar.jpg" height=5 width=14>) during the Last 2 Weeks (%s - %s)</div>' % (warning_keys[0],warning_keys[-1])
+		'<table cellpadding="2" cellspacing="0" border="1" width="100%" style="text-align: center; margin-top:10px;">'
+		'<caption style="text-align:center; vertical-align:middle;">'
+		'<img src="http://newatest.nrcc.cornell.edu/gifs/warning.jpg" width=20> Blue bar with green shade indicates minimum conditions for infection were exceeded.<br>'
+		'<img src="http://newatest.nrcc.cornell.edu/gifs/precip.jpg" width=20> P indicates precipitation - rain or snow was observed at that hour.</caption>'
+		'<tr style="background-color: rgb(204, 255, 255);">'
+		'<th rowspan=3>Date</th>'
+		'<th rowspan=2 colspan=24>Hourly Indication of DMCast Warning</th>'
+		'<th colspan=3>Weather during 24-hour Period</th>'
+		'</tr>'
+		'<tr style="background-color: rgb(204, 255, 255);">'
+		'<th rowspan=2>Leaf Wetness (hr.)</th>'
+		'<th rowspan=2>Average Temp (F) During Wetting</th>'
+		'<th rowspan=2>Daily Total Rainfall (in.)</th>'
+		'</tr>'
+		'<tr style="background-color: rgb(204, 255, 255);">'
+		'<th height=22 width=14><small>0</small></th> <th width=14><small>1</small></th>'
+		'<th width=14><small>2</small></th> <th width=14><small>3</small></th><th width=14><small>4</small></th> <th width=14><small>5</small></th>'
+		'<th width=14><small>6</small></th> <th width=14><small>7</small></th><th width=14><small>8</small></th> <th width=14><small>9</small></th>'
+		'<th width=14><small>10</small></th> <th width=14><small>11</small></th><th width=14><small>12</small></th> <th width=14><small>13</small></th>'
+		'<th width=14><small>14</small></th> <th width=14><small>14</small></th><th width=14><small>16</small></th> <th width=14><small>17</small></th>'
+		'<th width=14><small>18</small></th> <th width=14><small>19</small></th><th width=14><small>20</small></th> <th width=14><small>21</small></th>'
+		'<th width=14><small>22</small></th> <th width=14><small>23</small></th></tr> '
+
+		for k in warning_keys:
+			'<tr height="11" align="center"><th>%s</th>' % k
+			for hr in range(0,24):
+				if smry_dict['warnings'][k]['hours'][hr] == "":
+					'<td width="14" valign="bottom"> </td>'
+				elif smry_dict['warnings'][k]['hours'][hr] == "P":
+					'<td width="14" valign="bottom"> <small>P</small></td>'
+				elif smry_dict['warnings'][k]['hours'][hr] == "W":
+					'<td bgcolor="#99ff99" width="14" valign="bottom"><img src="http://newatest.nrcc.cornell.edu/gifs/bar.jpg" height=5 width=14></td>'
+				elif smry_dict['warnings'][k]['hours'][hr] == "WP":
+					'<td bgcolor="#99ff99" width="14" valign="bottom"><small>P</small><img src="http://newatest.nrcc.cornell.edu/gifs/bar.jpg" height=5 width=14></td>'
+			if smry_dict['warnings'][k]['lwet'] == -999:
+				'<td align="right">-&nbsp;</td>'
+			else:
+				'<td align="right">%.1f&nbsp;</td>' % smry_dict['warnings'][k]['lwet']
+			if smry_dict['warnings'][k]['aveTmp'] == -999:
+				'<td align="right">-&nbsp;</td>'
+			else:
+				'<td align="right">%.1f&nbsp;</td>' % smry_dict['warnings'][k]['aveTmp']
+			if smry_dict['warnings'][k]['prcp'] == -999:
+				'<td align="right">-&nbsp;</td>'
+			else:
+				'<td align="right">%.2f&nbsp;</td>' % smry_dict['warnings'][k]['prcp']
+			'</tr>'
+		'</table>'
+		'</div>'
+		'<hr style="color:green; background-color:green; height: 5px;" />'
+		
+		history_keys = smry_dict['history'].keys()
+		history_keys.sort()
+		'<div class="gray_back_l" style="margin-top:15px;">'
+		'<div class="header_line_s" style="color:green; text-align:center;">Downy Mildew Warning History</div>' 
+
+		'<br />Shades indicate incomplete primary infection at the warning events.'
+		'<table border=1 cellpadding="2" cellspacing="0" border="1" style="text-align: center;" width="100%">'
+		'<tr style="background-color: rgb(204, 255, 255);">'
+		'<th rowspan=2>#</th>'
+		'<th rowspan=2>Started on</th>'
+		'<th rowspan=2>Ended on</th>'
+		'<th rowspan=2>Duration<br>(hr)</th>'
+		'<th rowspan=2>Leaf<br>Wetness<br>(hr)</th>'
+		'<th colspan=2>Average Temp<br>During Wetting</th>'
+		'</tr>'
+		'<tr style="background-color: rgb(204, 255, 255);">'
+		'<th>(&deg;C)</th>'
+		'<th>(&deg;F)</th>'
+		'</tr>'
+		for k in history_keys:
+			if smry_dict['history'][k].has_key("incomplete"):
+				'<tr bgcolor="#aaaaaa"><th>%d</th>' % k
+			else:
+				'<tr><th>%d</th>' % k
+			'<th>%s</th>' % smry_dict['history'][k]['start']
+			'<th>%s</th>' % smry_dict['history'][k]['end']
+			'<td align="right">%d&nbsp;</td>' % smry_dict['history'][k]['duration']
+			'<td align="right">%.1f&nbsp;</td>' % smry_dict['history'][k]['lwet']
+			'<td align="right">%.1f&nbsp;</td>' % smry_dict['history'][k]['ave_c']
+			'<td align="right">%.1f&nbsp;</td></tr>' % smry_dict['history'][k]['ave_f']
+		'</table>'
+		'</div>'
+		add_footer(smry_dict)
+		
+#--------------------------------------------------------------------------------------------		
+def berry_moth_results [html] (smry_dict):	
+	from phen_events import phen_events_dict
+	if smry_dict['output'] == "standalone":
+#		header if output not going in a tab
+		'''
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+		  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+		<html>
+		  <head>
+			<meta http-equiv="content-type" content="text/html"/>
+			<title>NEWA Grape Forecast Model</title>
+			<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+			<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+			<script type="text/javascript">
+			  $(document).ready(function() {
+				$("#bfdpick").datepicker({
+					minDate: new Date(2000, 0, 1),
+					maxDate: "+7d",
+					changeMonth: true,
+					changeYear: true
+				});
+				$('#forecast').click(function() {
+					var req_stn = $('input[name=stn]').val();
+					$.get('http://newatest.nrcc.cornell.edu/newaUtil/getForecastUrl/'+req_stn, function(data) { 
+						window.open(data);
+					});
+					return false;
+				});
+			  });
+			</script>
+	    </head>
+		<body>
+		<form action="/newaModel/process_input" method="post">
+		<input type="hidden" name="type" value="grape_disease">
+		<input type="hidden" name="output" value="standalone">
+		'''
+		
+		'<input type="hidden" name="pest" value="%s">' % smry_dict['pest']
+		'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
+		'<input type="hidden" name="accend" value="%s">' % smry_dict['accend']
+		'<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">'
+#		end standalone header
+
+	'<h3>%s Results for %s</h3>' % (smry_dict['pest_name'],smry_dict['station_name'])
+
+	### Messages when you don't have a biofix date yet
+	if not smry_dict['bf_date']:
+		### Accumulations start Jan 1 before biofix
+		accum_start = '1/1/%s' % smry_dict['last_time'][0]
+
+		if smry_dict['ddaccum'] != miss:
+			end_date = '%d/%d/%d' % (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0])
+			'<p><b>Accumulated degree days (base %s&deg;F) %s through %s:</b> %s (%d days missing)</p>' % (smry_dict['basetemp'],accum_start,end_date,smry_dict['ddaccum'],smry_dict['ddmiss'])
+		else:
+			'<p>Degree day accumulations will resume on date of %s.</p>' % smry_dict['biofix_phenology'].lower()
+		### Put up a biofix date picker when you're getting close to biofix
+		if smry_dict['pest'] == 'berry_moth' and smry_dict['ddaccum'] >= phen_events_dict['gbm_bloom_50']['dd'][2]:
+			'<b>%s: </b>' % smry_dict['biofix_phenology']
+			if smry_dict['output'] == "standalone":
+				action = "submit();"
+			else:
+				action = "getberrymoth(1);"
+			'<input type="text" name="bf_date" id="bfdpick" value="Click to enter" onChange="%s">' % (action)
+			'<br /><span class="plain_smaller"><i>Degree day accumulations estimate that %s may not have occurred yet. If it has, enter the actual date for blocks of interest above and the model will calculate the results more accurately.</i></span>' % (smry_dict['biofix_phenology'])
+
+	### Put up datepicker when you do have a biofix date
+	else:
+		'<b>%s: </b>' % smry_dict['biofix_phenology']
+		mdy_bf = "%d/%d/%d" % (smry_dict['bf_date'][1],smry_dict['bf_date'][2],smry_dict['bf_date'][0])
+		if smry_dict['output'] == "standalone":
+			action = "submit();"
+		else:
+			action = "getberrymoth(1);"
+		'<input type="text" name="bf_date" id="bfdpick" value="%s" onChange="%s">' % (mdy_bf,action)
+		'<br /><span class="plain_smaller"><i>%s date above is estimated based on degree day accumulations or user input. Enter the actual date for blocks of interest and the model will calculate the results more accurately.</i></span>' % (smry_dict['biofix_phenology'])
+
+		### Accumulations start with biofix 
+		accum_start = smry_dict['biofix_phenology'].lower()
+
+		### Report number of degree days, unless value if missing (usually occurs when biofix is set to be after end date)
+		if smry_dict['ddaccum'] != miss:
+			end_date = '%d/%d/%d' % (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0])
+			'<p><b>Accumulated degree days (base %s&deg;F) %s through %s:</b> %s (%d days missing)</p>' % (smry_dict['basetemp'],accum_start,end_date,smry_dict['ddaccum'],smry_dict['ddmiss'])
+		else:
+			'<p>Degree day accumulations will resume on date of %s.</p>' % smry_dict['biofix_phenology'].lower()
+
+	'''
+	<table border=1 cellpadding=3 cellspacing=0 width="100%" style='margin:1.5em 0em 1em;border-collapse:collapse;table-layout:fixed'>
+	<col width=124><col width=62><col width=62><col width=62><col width=63><col width=63><col width=63><col width=63><col width=63>
+	'''
+	'<tr><td class=header_line_silver_back colspan=9 height=38 align=center>Daily Degree Days for %s</td>' % smry_dict['station_name']
+	'''
+	<tr>
+	<td class=plain_back bgcolor="#FBB917" height=30 align=center rowspan=2>Base Temp</td>
+	<td class=blue_back>Past</td>
+	<td class=blue_back>Past</td>
+	<td class=blue_back>Current</td>
+	<td class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast">Forecast Details</button></td>
+	</tr>
+	<tr>
+	'''
+	'<td class=blue_back>%s</td>' % smry_dict['pday2']['date']
+	'<td class=blue_back>%s</td>' % smry_dict['pday1']['date']
+	'<td class=blue_back>%s</td>' % smry_dict['day0']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday1']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday2']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday3']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday4']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday5']['date']
+	'</tr>'
+
+	if smry_dict['basetemp'] == 50:
+		ddhead = '50F - GDD'
+	else:
+		ddhead = '47.14F - GBM'
+	'<tr>'
+	'<td class=plain_back height=38>%s</td>' % ddhead
+	'<td class=plain_back>%s</td>' % (smry_dict['pday2']['dday'])
+	'<td class=plain_back>%s</td>' % (smry_dict['pday1']['dday'])
+	'<td class=plain_back>%s</td>' % (smry_dict['day0']['dday'])
+	'<td class=plain_back>%s</td>' % (smry_dict['fday1']['dday'])
+	'<td class=plain_back>%s</td>' % (smry_dict['fday2']['dday'])
+	'<td class=plain_back>%s</td>' % (smry_dict['fday3']['dday'])
+	'<td class=plain_back>%s</td>' % (smry_dict['fday4']['dday'])
+	'<td class=plain_back>%s</td>' % (smry_dict['fday5']['dday'])
+	'</TR>'
+	'<tr>'
+	'<td class=plain_back height=38>Accumulation</td>'
+	'<td class=plain_back>%s</td>' % (smry_dict['pday2']['accdday'])
+	'<td class=plain_back>%s</td>' % (smry_dict['pday1']['accdday'])
+	'<td class=plain_back>%s</td>' % (smry_dict['day0']['accdday'])
+	'<td class=plain_back>%s</td>' % (smry_dict['fday1']['accdday'])
+	'<td class=plain_back>%s</td>' % (smry_dict['fday2']['accdday'])
+	'<td class=plain_back>%s</td>' % (smry_dict['fday3']['accdday'])
+	'<td class=plain_back>%s</td>' % (smry_dict['fday4']['accdday'])
+	'<td class=plain_back>%s</td>' % (smry_dict['fday5']['accdday'])
+	'</TR>'
+
+	'<tr>'
+	'<td class=plain_back_smaller colspan=4 style="border-right:hidden; border-left:hidden; border-bottom:hidden">NA - not available</td>'
+	'<td class=red_text colspan=5 style="border-right:hidden; border-left:hidden; border-bottom:hidden">Download Time: %d/%d/%d %d:00</td>'%(smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0],smry_dict['last_time'][3])
+	'</tr>'
+	'</table>'
+
+	'<div class="plain_back" id="manage_status">'
+	### Display pest stage.
+#	'<b>Pest stage: </b>%s' % smry_dict['stage']
+	
+	### Pest status and management table
+	'<p><table cellspacing="0" cellpadding="5" border="1" width="100%">'
+	'<tr><th width="40%">Pest Status</th><th width="60%">Pest Management</th></tr>'
+	if smry_dict['status'].find("<a") >= 0:
+		'<tr><td align="left" valign="top">%s</td>' % h8(smry_dict['status'])	#don't escape messages with anchors
+	else:
+		'<tr><td align="left" valign="top">%s</td>' % smry_dict['status']
+	if smry_dict['manage'].find("<a") >= 0:
+		'<td align="left" valign="top">%s</td>' % h8(smry_dict['manage'])		#same here
+	else:
+		'<td align="left" valign="top">%s</td>' % smry_dict['manage']
+	'</tr>'
+	'</table>'
+	'</div>'
+	'</form>'
+	add_footer(smry_dict)
+	
+#--------------------------------------------------------------------------------------------		
+def berry_moth_dormant [html] (smry_dict):	
+	if smry_dict['output'] == "standalone":
+#		header if output not going in a tab
+		'''
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+		  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+		<html>
+		  <head>
+			<meta http-equiv="content-type" content="text/html"/>
+			<title>NEWA Grape Forecast Model</title>
+			<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+			<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	    <head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		'''
+#		end standalone header
+
+	'<h3>%s Results</h3>' % (smry_dict['pest_name'])
+	'<div class="plain_back" id="manage_status">'
+	
+	### Pest status and management table
+	'<p><table cellspacing="0" cellpadding="5" border="1" width="100%">'
+	'<tr><th width="40%">Pest Status</th><th width="60%">Pest Management</th></tr>'
+	if smry_dict['status'].find("<a") >= 0:
+		'<tr><td align="left" valign="top">%s</td>' % h8(smry_dict['status'])	#don't escape messages with anchors
+	else:
+		'<tr><td align="left" valign="top">%s</td>' % smry_dict['status']
+	if smry_dict['manage'].find("<a") >= 0:
+		'<td align="left" valign="top">%s</td>' % h8(smry_dict['manage'])		#same here
+	else:
+		'<td align="left" valign="top">%s</td>' % smry_dict['manage']
+	'</tr>'
+	'</table>'
+	'</div>'
+	add_footer(smry_dict)
+	
+#--------------------------------------------------------------------------------------------		
+# Grape diseases
+def grape_dis_results [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+		  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+		<html>
+		<head>
+		<meta http-equiv="content-type" content="text/html"/>
+		<title>NEWA Grape Disease Model</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.fixedheader.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#data").fixedHeader({ width:"100%",height: 490 });
+			})
+		</script>
+		</head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		'''
+
+	'<span class=header_line>Grape Disease Summary for %s</span>' % (smry_dict['station_name'])
+	'<p><b>Accumulated GDD Base 50</b>'
+	asdt_str = '%d/%d/%d' % (smry_dict['daily_grape'][0][0][1],smry_dict['daily_grape'][0][0][2],smry_dict['daily_grape'][0][0][0])
+	aedt_str = '%d/%d/%d' % (smry_dict['daily_grape'][-1][0][1],smry_dict['daily_grape'][-1][0][2],smry_dict['daily_grape'][-1][0][0])
+	'<br/>%s through %s: %d</p>' % (asdt_str,aedt_str,int(round(smry_dict['daily_grape'][-1][2],0)))
+	'<p><b>Powdery Mildew</b>'
+	for i in range(0,4):
+		indx = len(smry_dict['daily_grape'])-i-1
+		if indx >= 0:
+			dt,dgdd,agdd,pm = smry_dict['daily_grape'][indx]
+			dt_str = '%d/%d/%d' % (dt[1],dt[2],dt[0])
+			'<br/>%s %s' % (dt_str,pm)
+	'''
+	</p>
+	<p class=header_line style="margin-bottom:5px;">Leaf Wetness Periods</p>
+
+	<table id="data" class="fixedTable">
+	<thead>
+	<tr>
+	  <th class=colhead_center style="font-size:10pt;">Starting<br>Date/Time</th>
+	  <th class=colhead_center style="font-size:10pt;">Ending<br>Date/Time</th>
+	  <th class=colhead_center style="font-size:10pt;">Hours<br>LW</th>
+	  <th class=colhead_center style="font-size:10pt;">Avg<br>Temp</th>
+	  <th class=colhead_center style="font-size:10pt;">Total<br>Rain</th>
+	  <th class=colhead_center style="font-size:10pt;">Phomopsis</th>
+	  <th class=colhead_center style="font-size:10pt;">Black Rot</th>
+	</tr>
+	</thead>
+	<tbody>
+	'''
+	# report leaf wetness periods
+	'<TR><td class=red_text colspan=7 height=21>Download Time: %d/%d/%d %d:00</td></tr>'%\
+	   (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0],smry_dict['last_time'][3])
+	for i in range(len(smry_dict['wet_periods'])-1,-1,-1):		#go from most recent back
+		if i%2 == 0: 
+			color = 'gray'
+		else:
+			color = 'plain'
+		wet_start,wet_end,wet_hrs,temp_ave,prcp_tot,phomopsis,blackrot = smry_dict['wet_periods'][i]
+		if wet_end == miss:
+			we_str = 'in progress'
+		else:
+			weyr,wemn,wedy,wehr = wet_end
+			we_str = '%s %d %d:00' % (month_abb[wemn],wedy,wehr)
+		wsyr,wsmn,wsdy,wshr = wet_start
+		wet_start_dt = DateTime.DateTime(wsyr,wsmn,wsdy,wshr)
+		# wet period starts at the beginning of this hour
+		wet_start_dt = wet_start_dt + DateTime.RelativeDate(hours=-1) 
+		ws_str = '%s %d %d:01' % (month_abb[wet_start_dt.month],wet_start_dt.day,wet_start_dt.hour)
+		if prcp_tot == miss:
+			cprcp_tot = "Unknown"
+		else:
+			cprcp_tot = "%.2f"%prcp_tot
+		'<td class=%s_back_smaller_c>%s</td>'%(color,ws_str)
+		'<td class=%s_back_smaller_c>%s</td>'%(color,we_str)
+		'<td class=%s_back_smaller_c>%d</td>'%(color,wet_hrs)
+		'<td class=%s_back_smaller_c>%.1f</td>'%(color,temp_ave)
+		'<td class=%s_back_smaller_c>%s</td>'%(color,cprcp_tot)
+		if phomopsis == "Infection":
+			txtcol = 'redon'
+		else:
+			txtcol = ''
+		'<td class=%s%s_back style="font-size:9pt;">%s</td>'%(txtcol,color,phomopsis)
+		if blackrot == "Infection":
+			txtcol = 'redon'
+		else:
+			txtcol = ''
+		'<td class=%s%s_back style="font-size:9pt;">%s</td>'%(txtcol,color,blackrot)
+		'</TR>'
+	'''
+	</tbody>
+	</table>
+	'''
+	add_footer(smry_dict)
+
+#--------------------------------------------------------------------------------------------
+# Grape disease dormant (prior to March 1)
+def grape_dis_dormant [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>NEWA Grape Disease Model</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		</head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		'''
+	'<H3>Grape Disease Model</H3>'
+	'<p>Results from this model will be available beginning March 25.</p>'
+	add_footer(smry_dict)
+	
+#--------------------------------------------------------------------------------------------		
+# sooty blotch summary table
+def sooty_blotch_log [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>NEWA Sooty Blotch/Flyspeck Model</title>
+			<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+		<script type="text/javascript">
+		  $(document).ready(function() {
+			$('#bfdpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '', changeMonth: true, changeYear: true });
+			$('#fadpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '', changeMonth: true, changeYear: true });
+			$('#ahdpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '', changeMonth: true, changeYear: true });
+			$('#forecast').click(function() {
+				req_stn = $('input[name=stn]').val();
+				$.get('http://newatest.nrcc.cornell.edu/newaUtil/getForecastUrl/'+req_stn, function(data) { 
+					window.open(data);
+				});
+				return false;
+			});
+			$("#moreinfo").dialog({
+				height: 400,
+				width: 500,
+				modal: true,
+				autoOpen: false,
+				buttons: { Close: function() { $(this).dialog('close'); } }
+			});
+		  });
+  		  function setandsub (selbut) {
+			switch (selbut)
+			{
+			case 1:
+				document.process.selbutton.value = "biofix";
+				document.process.type.value = "sooty_blotch";
+				break;
+			case 2:
+				document.process.selbutton.value = "fungicide";
+				document.process.type.value = "sooty_blotch";
+				break;
+			default:
+				document.process.selbutton.value = "biofix";
+				document.process.type.value = "sooty_blotch";
+			}
+			document.process.submit();
+		  }
+		</script>	
+		</head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		<FORM ACTION="/newaModel/process_input" METHOD="post" name="process">
+		<input type="hidden" name="type" value="sooty_blotch">
+		<input type="hidden" name="selbutton" value="0">
+		<input type="hidden" name="output" value="standalone">
+		'''
+		'<input type="hidden" name="accend" value="%d/%d/%d">' % (smry_dict['accend'].month,smry_dict['accend'].day,smry_dict['accend'].year)
+		'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
+
+	'''
+	<script type="text/javascript">
+	function show_moreinfo (opt) {
+		if (opt == 1) { $("#moreinfo").load('http://newatest.nrcc.cornell.edu/pops_notes.htm'); }
+		else { $("#moreinfo").load('http://newatest.nrcc.cornell.edu/dew_notes.htm'); }
+		$("#moreinfo").dialog('open');
+	}
+	function showfr() {
+		$("#fung_button").hide();
+		$("#fung_rec").show();
+	}
+	</script>
+	'''
+
+	'<H3>Sooty Blotch and Flyspeck Risk Predictions for %s</H3>' % smry_dict['station_name']
+	if not smry_dict['petalfall']:
+		'<p>%s' % h8(smry_dict['message'])
+		end_date = '%d/%d/%d' % (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0])
+		'<p><b>Accumulated degree days (base 43&deg;F) through %s:</b> %s (%d days missing)</p>' % (end_date,smry_dict['ddaccum'],smry_dict['ddmiss'])
+	'''			
+
+	<p><b>Petal fall date for McIntosh:</b>
+	'''
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "setandsub(1);"
+	else:
+		action = "getsootyblotch(1);"
+	if smry_dict['petalfall']:
+		mdy_bf = "%d/%d/%d" % (smry_dict['petalfall'].month,smry_dict['petalfall'].day,smry_dict['petalfall'].year)
+	else:
+		mdy_bf = "Click to enter"
+	'&nbsp;&nbsp;<input type="text" name="petalfall" id="bfdpick" value="%s" onChange="%s">' % (mdy_bf,action)
+	'''
+	<br><span class="plain_smaller"><i>Petal fall date above is estimated based on degree day accumulations or user input.
+	<br>Enter the actual date for blocks of interest and the model will calculate the accumulated leaf wetness hours since petal fall more accurately.</i></span>
+
+	<p><b>Most recent fungicide application date:</b>
+	'''
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "setandsub(2);"
+	else:
+		action = "getsootyblotch(2);"
+	if smry_dict['fungicide']:
+		mdy_bf = "%d/%d/%d" % (smry_dict['fungicide'].month,smry_dict['fungicide'].day,smry_dict['fungicide'].year)
+	else:
+		mdy_bf = "Click to enter"
+	'&nbsp;&nbsp;<input type="text" name="fungicide" id="fadpick" value="%s" onChange="%s">' % (mdy_bf,action)
+	'<br /><span class="plain_smaller"><i>If petal fall has passed, enter the date of your most recent fungicide application.'
+	'<br />If no fungicide applications have been made, do not enter a date.</i></span>'
+
+	'''
+	<p align="justify">In the Risk Summary table, note the accumulated leaf wetness hours since petal fall (Leaf Wetness Hours) and the Risk Level.
+	Leaf wetness hours, rain events, and the last fungicide application date are taken into consideration in 
+	assessing risk level. To estimate risk in the near future, look at the probability of rain.</p>
+	<p>Consult the Risk Level IPM Guidelines below the <b>Risk Summary</b> table.</p>
+	
+	<p><table border=1 cellpadding=3 cellspacing=0 width="100%" style='border-collapse:collapse; table-layout:fixed;'>
+	<col width=122><col width=62><col width=62><col width=62><col width=62><col width=62><col width=62><col width=62><col width=62>
+	<tr>
+	<td class=header_line_silver_back colspan=9 height=38 align=center>Sooty Blotch and Flyspeck Risk Summary - Northeastern US Model</td>
+	</tr>
+	<tr>
+	<td class=plain_back>&nbsp;</td>
+	<th class=blue_back>Past</th>
+	<th class=blue_back>Past</th>
+	<th class=blue_back>Current</th>
+	<th class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast">Forecast Details</button></th>
+	</tr>
+	<tr>
+
+	'''
+	curr_dt = DateTime.DateTime(*smry_dict['day0']['ymd'])
+	p1 = curr_dt + DateTime.RelativeDate(days=-1)
+	p2 = curr_dt + DateTime.RelativeDate(days=-2)
+	f1 = curr_dt + DateTime.RelativeDate(days=+1)
+	f2 = curr_dt + DateTime.RelativeDate(days=+2)
+	f3 = curr_dt + DateTime.RelativeDate(days=+3)
+	f4 = curr_dt + DateTime.RelativeDate(days=+4)
+	f5 = curr_dt + DateTime.RelativeDate(days=+5)
+	'<th class=plain_back>Date</th>'
+	'<td class=%s_back>%s %d</td>' % ('blue',month_names[p2.month][0:3],p2.day)
+	'<td class=%s_back>%s %d</td>' % ('blue',month_names[p1.month][0:3],p1.day)
+	'<td class=%s_back>%s %d</td>' % ('blue',month_names[curr_dt.month][0:3],curr_dt.day)
+	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f1.month][0:3],f1.day)
+	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f2.month][0:3],f2.day)
+	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f3.month][0:3],f3.day)
+	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f4.month][0:3],f4.day)
+	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f5.month][0:3],f5.day)
+	'</tr>'
+	'<tr>'
+
+	'<th class=plain_back>Days since petal fall</th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['risk'] == 'High':
+			rcolor = 'red'
+		elif smry_dict[d]['risk'] == 'Moderate':
+			rcolor = 'yellow'
+		elif smry_dict[d]['risk'] == 'Low':
+			rcolor = 'green'
+		else:
+			rcolor = 'plain'
+		if smry_dict[d]['pfdys'] == miss:
+			dval = '-'
+		else:
+			dval = '%d'%smry_dict[d]['pfdys']
+		'<td class=%s_back>%s</td>' % (rcolor,dval)
+	'</tr>'
+
+	'<tr>'	
+	if 'lwet' not in smry_dict['avail_vars']:
+		'<th class=plain_back> Accumulated Leaf Wetness Hours Estimate - ALWH</th>'	
+	else:
+		'<th class=plain_back> Accumulated Leaf Wetness Hours - ALWH</th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['risk'] == 'High':
+			rcolor = 'red'
+		elif smry_dict[d]['risk'] == 'Moderate':
+			rcolor = 'yellow'
+		elif smry_dict[d]['risk'] == 'Low':
+			rcolor = 'green'
+		else:
+			rcolor = 'plain'
+		if smry_dict[d]['alwh'] == '-':
+			nval = '-'
+		elif smry_dict[d]['alwh'] == miss:
+			nval = 'NA'
+		else:
+			nval = '%d'%int(smry_dict[d]['alwh'])
+		'<td class=%s_back>%s</td>' % (rcolor,nval)
+	'</TR>'
+
+	'<tr>'
+
+	'<th class=plain_back style="height:2em">Risk Level</th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['risk'] == 'High':
+			rcolor = 'red'
+		elif smry_dict[d]['risk'] == 'Moderate':
+			rcolor = 'yellow'
+		elif smry_dict[d]['risk'] == 'Low':
+			rcolor = 'green'
+		else:
+			rcolor = 'plain'
+		if smry_dict[d]['risk'] == miss:
+			dval = '-'
+		else:
+			dval = smry_dict[d]['risk']
+		'<td class=%s_back>%s</td>' % (rcolor,dval)
+	'</tr>'
+
+	'<tr>'
+	if smry_dict['fungicide']:
+		'<th class=palegoldenrod_back_l colspan=9> Rain Events and Fungicide Depletion Estimate</th>'
+	else:
+		'<th class=palegoldenrod_back_l colspan=9> Rain Events</th>'
+	'</tr>'
+
+	if smry_dict['fungicide']:
+		'<tr>'	
+		'<th class=plain_back> Days since last fungicide application</th>'
+		for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+			if smry_dict[d]['fadys'] == miss:
+				dval = '-'
+			else:
+				dval = '%d'%int(smry_dict[d]['fadys'])
+			'<td class=plain_back>%s</td>' % (dval)
+		'</TR>'
+		'<tr>'	
+		'<th class=plain_back> Rain since last fungicide application</th>'
+		for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+			if smry_dict[d]['farain'] == '-':
+				dval = '-'
+			elif smry_dict[d]['farain'] == miss:
+				dval = 'NA'
+			else:
+				dval = '%.2f'%(smry_dict[d]['farain'])
+			'<td class=plain_back>%s</td>' % (dval)
+		'</TR>'
+	'<tr>'	
+	'<th class=plain_back> Daily rain amount (inches)</th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['rain'] == '-':
+			rain = '-'
+		elif smry_dict[d]['rain'] == miss:
+			rain = 'NA'
+		elif smry_dict[d]['rain'] > 0.00 and int(round((smry_dict[d]['rain']*100.),0)) == 0:
+			rain = 'Trace'
+		else:
+			rain = '%.2f'%round(smry_dict[d]['rain'],2)
+		'<td class=plain_back>%s</td>' % (rain)
+	'</TR>'
+	'<tr>'	
+	'<th class=plain_back> Rain probability (%)<br>Night|Day&nbsp;<img src="http://newatest.nrcc.cornell.edu/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(1);"></th>'
+	'<td class=plain_back>&nbsp;</td>'
+	'<td class=plain_back>&nbsp;</td>'
+	for d in ['day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['pops']['am'] == miss:
+			am_rain = '-'
+		else:
+			am_rain = '%d' % round(smry_dict[d]['pops']['am'], 0)
+		if smry_dict[d]['pops']['pm'] == miss:
+			pm_rain = '-'
+		else:
+			pm_rain = '%d' % round(smry_dict[d]['pops']['pm'], 0)
+		'<td class=plain_back_smaller_c>%s | %s</td>' % (am_rain,pm_rain)
+	'</TR>'
+
+	'<tr>'
+	'<td class=plain_back_smaller colspan=5 style="border-right:hidden; border-left:hidden; border-bottom:hidden">NA - data not available.</td>'
+	'<td class=red_text colspan=4 style="border-right:hidden; border-left:hidden; border-bottom:hidden">Download Time: %d/%d/%d %d:00</td>'%(smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0],smry_dict['last_time'][3])
+	'</tr>'
+	'</table>'
+
+	'<div id="moreinfo" title="" class="plain_back_l"> </div>'
+
+	'''
+	<p><div class=plain_back_l style="margin-bottom:5px;"><b>Risk Level IPM Guidelines for Sooty Blotch and Flyspeck:</b>
+	   <ul style="margin-top:0px; margin-bottom:0px;">
+	      <li>
+	        <div align="left"><span class="plain_back" style="font-weight:bold;">
+	          NO RISK</span> <em> - No action needed.</em></div>
+	      </li>
+	      <li>
+	        <div align="left"><span class="green_back" style="font-weight:bold;">
+	          LOW RISK</span> <em> - If first cover application has not
+	          been made, make first cover fungicide application for apple scab.
+	          Otherwise, no action needed.</em></div>
+	      </li>
+	      <li>
+	        <div align="left"><span class="yellow_back" style="font-weight:bold;">
+	          MODERATE RISK</span> <em> - Check the 5-day forecast; a cover application should be made
+	          if two or more days with precipitation are predicted. See Fungicides below.</em></div>
+	      </li>
+	      <li>
+	        <div align="left"><span class="red_back" style="font-weight:bold;">
+	          HIGH RISK</span> <em> - A cover application for Sooty Blotch and Flyspeck should be made.
+	          See Fungicides below.</em></div>
+	      </li>
+        </ul>
+	</div>
+	</p>
+	'''
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'<div style="border: thin solid blue; padding: 5px; width: 97%;text-align:left;" id="fung_rec">'
+	else:
+		'<div id="fung_button" class="plain_back_l"><button onClick="showfr();" class="button">Fungicides</button></div>'
+		'<div style="border: thin solid blue; padding: 5px; width: 97%; display:none; text-align:left;" id="fung_rec">'
+	'''
+		<span><b>Fungicides for Sooty Blotch and Flyspeck:</b>
+		  To effectively limit fruit finish blemishes from Sooty Blotch and Flyspeck
+			infection consider making a cover application of one of the following
+			fungicides/tank mixes: </span>
+		<ul>
+			<li>4 oz/100 gal Topsin +1 lb/100 gal. Captan 50W (or Captan-80 10 oz/100 gal); or </li>
+			<li>0.67 oz/100 gal Flint 50WG; or </li>
+			<li>1.6 oz/100 gal Sovran WDG; or </li>
+			<li>6.1 oz/100 gal Pristine WG; or </li>
+			<li>1 lb/100 gal Captan 50W (or Captan-80 10 oz/100 gal) +&nbsp; 21 fl. oz./100 gal ProPhyt </li>
+		</ul>
+	</div>
+	</form>
+	'''
+	add_kerik_credit()
+	add_footer(smry_dict,'pmep')
+
+#--------------------------------------------------------------------------------------------		
+# Sooty Blotch/Flyspeck - pre-petal fall return
+def sooty_blotch_early [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>NEWA Sooty Blotch/Flyspeck Model</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+		<script type="text/javascript">
+		  $(document).ready(function() {
+			$('#bfdpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '', changeMonth: true, changeYear: true });
+		  });
+		</script>
+		</head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		<FORM ACTION="/newaModel/process_input" METHOD="post" name="process">
+		<input type="hidden" name="type" value="sooty_blotch">
+		<input type="hidden" name="selbutton" value="biofix">
+		<input type="hidden" name="output" value="standalone">
+		'''
+		'<input type="hidden" name="accend" value="%d/%d/%d">' % (smry_dict['accend'].month,smry_dict['accend'].day,smry_dict['accend'].year)
+		'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
+
+	'<H3>Sooty Blotch and Flyspeck Risk Predictions for %s</H3>' % smry_dict['station_name']
+
+	if smry_dict.has_key('message'):
+		'<p>%s' % h8(smry_dict['message'])
+#	end_date = '%d/%d/%d' % (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0])
+#	'<p><b>Accumulated degree days (base 43&deg;F) through %s:</b> %s (%d days missing)</p>' % (end_date,smry_dict['ddaccum'],smry_dict['ddmiss'])
+	'''
+
+	<p>Sooty Blotch/Flyspeck predictions begin at petal fall.
+	<p><b>Petal fall date for McIntosh:</b>
+	'''
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "submit();"
+	else:
+		action = "getsootyblotch(1);"
+	'&nbsp;&nbsp;<input type="text" name="petalfall" id="bfdpick" value="Click to enter" onChange="%s">' % action
+	'''
+	<br><span class="plain_smaller"><i>Degree day accumulations estimate that petal fall may not have occurred yet. <br>If it has, enter the actual date for blocks of interest.</i></span>
+
+	<p><div style="border: thin black solid; padding:5;">
+	<b>Pest Management: </b>At this time, pest management is unnecessary.
+	</div></p>
+	'''
+
+	add_kerik_credit()
+	add_footer(smry_dict,'pmep')
+	
+#--------------------------------------------------------------------------------------------		
+# Sooty Blotch/Flyspeck - dormant (Sep 16-Dec 31)
+def sooty_blotch_dormant [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>NEWA Sooty Blotch/Flyspeck Model</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		</head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		'''
+
+	'<H3>Sooty Blotch and Flyspeck Risk Predictions</H3>'
+	from phen_events import phen_events_dict
+	'<p>Apples and pears are susceptible to Sooty Blotch/Flyspeck infections from petal fall to harvest. '
+	'Petal fall usually occurs once %d to %d degree days (DD) base 43 have accumulated from January 1.' % (phen_events_dict['macph_pf_43']['dd'][2],phen_events_dict['macph_pf_43']['dd'][3])
+	add_kerik_credit()
+	add_footer(smry_dict,'pmep')
+
+#--------------------------------------------------------------------------------------------		
+def grape_disease_results [html] (smry_dict):	
+	if smry_dict['output'] == "standalone":
+#		header if output not going in a tab
+		'''
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+		  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+		<html>
+		  <head>
+			<meta http-equiv="content-type" content="text/html"/>
+			<title>NEWA Grape Disease Models</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
+			<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+	    <head>
+		<body>
+		<form action="/newaModel/process_input" method="post">
+		<input type="hidden" name="type" value="grape_dis">
+		'''
+		'<input type="hidden" name="accend" value="%s">' % smry_dict['accend']
+		'<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">'
+#		end standalone header
+
+	'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
+	'<input type="hidden" name="output" value="standalone">'
+	'''
+	<script type="text/javascript">
+	function updateStatus() {
+		var params = {type: 'grape_dis'};
+		$('input[name=output], select[name=altref]').each(function () { params[this.name] = this.value; });
+		$.get('http://newatest.nrcc.cornell.edu/newaModel/update_grape_status',params,function(data) { $("#manage_status").html(data); });
+		return false;
+		}
+	function updateTable() {
+		var phenology = $("select[name='altref']").val();
+		if (phenology == 'dormant') {
+			$("#summary_table").hide(); }
+		else {
+			if (phenology=='bloom'||phenology=='imm_prebloom'||phenology=='10in_shoot'||phenology=='3in_shoot'||phenology=='1in_shoot'||phenology=='bud_swell'||phenology=='early') {
+				$("#pmildew_row").show(); }
+			else {
+				$("#pmildew_row").hide(); }
+			$("#summary_table").show(); }
+		return false;
+	}
+	function showInfection() {
+		$("#wetness_events").hide('blind',{},100);
+		$("#wetness_button").html('<button onClick="showWetness();" class="button">Show leaf wetness events log<\/button>');
+		$("#infection_events").show('blind',{},500);
+		$("#infection_button").html('<button onClick="hideInfection();" class="button">Hide grape infection events log<\/button>');
+	}
+	function hideInfection() {
+		$("#infection_events").hide('blind',{},500);
+		$("#infection_button").html('<button onClick="showInfection();" class="button">Show grape infection events log<\/button>');
+	}
+	function showWetness() {
+		$("#infection_events").hide('blind',{},100);
+		$("#infection_button").html('<button onClick="showInfection();" class="button">Show grape infection events log<\/button>');
+		$("#wetness_events").show('blind',{},500);
+		$("#wetness_button").html('<button onClick="hideWetness();" class="button">Hide leaf wetness events log<\/button>');
+	}
+	function hideWetness() {
+		$("#wetness_events").hide('blind',{},500);
+		$("#wetness_button").html('<button onClick="showWetness();" class="button">Show leaf wetness events log<\/button>');
+	}
+	$(document).ready(function() {
+		$('#forecast').click(function() {
+			req_stn = $('input[name=stn]').val();
+			$.get('http://newatest.nrcc.cornell.edu/newaUtil/getForecastUrl/'+req_stn, function(data) { 
+				window.open(data);
+			});
+			return false;
+		});
+		$("#infection_button").html('<button onClick="showInfection();" class="button">Show grape infection events log<\/button>');
+		$("#wetness_button").html('<button onClick="showWetness();" class="button">Show leaf wetness events log<\/button>');
+		updateTable();
+	});
+	</script>
+	'''
+
+	'<h3>Grape Disease Infection Events for %s</h3>' % (smry_dict['station_name'])
+
+	### Summary table
+	'<div id="summary_table" style="padding:5px 0px 5px;">'
+	'<table border=1 cellpadding=3 cellspacing=0 width="100%" style="border-collapse:collapse;table-layout:fixed">'
+	'<col width=124><col width=62><col width=62><col width=62><col width=63><col width=63><col width=63><col width=63><col width=63>'
+	'<tr>'
+	'<td class=header_line height=30 align=center rowspan=2> </td>'
+	'<td class=blue_back>Past</td>'
+	'<td class=blue_back>Past</td>'
+	'<td class=blue_back>Current</td>'
+	if smry_dict['this_year']:
+		'<td class=palegoldenrod_back colspan=5>Grape Disease 5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast">Forecast Details</button></td>'
+	else:
+		'<td class=palegoldenrod_back colspan=5>Ensuing 5 Days</td>'
+	'</tr>'
+	'<tr>'
+	'<td class=blue_back>%s</td>' % smry_dict['pday2']['date']
+	'<td class=blue_back>%s</td>' % smry_dict['pday1']['date']
+	'<td class=blue_back>%s</td>' % smry_dict['day0']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday1']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday2']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday3']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday4']['date']
+	'<td class=palegoldenrod_back>%s</td>' % smry_dict['fday5']['date']
+	'</tr>'
+	'<tr><th class=plain_back style="height:2em;">Phomopsis</th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['phom'] == 'Infection':
+			rcolor = 'red'
+			dval = 'Yes'
+		elif smry_dict[d]['phom'] == 'No infection':
+			rcolor = 'green'
+			dval = 'No'
+		elif smry_dict[d]['phom'] == 'Combined':
+			rcolor = 'red'
+			dval = 'Combined'
+		elif smry_dict[d]['phom'] == 'No infect; temp<46':
+			rcolor = 'yellow'
+			dval = 'No; temp&lt;46'
+		elif smry_dict[d]['phom'] == 'Unknown infect; temp>86':
+			rcolor = 'yellow'
+			dval = 'Unknown; temp&gt;86'
+		else:
+			rcolor = 'plain'
+			dval = '-'
+#			dval = smry_dict[d]['phom']
+		'<td class=%s_back>%s</td>' % (rcolor,dval)
+	'</tr>'
+
+	'<tr id="pmildew_row"><th class=plain_back style="height:2em;">Powdery Mildew</th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['pmil'] == 'Infection':
+			rcolor = 'red'
+			dval = 'Yes'
+		elif smry_dict[d]['pmil'] == 'No infection':
+			rcolor = 'green'
+			dval = 'No'
+		else:
+			rcolor = 'plain'
+			dval = '-'
+		'<td class=%s_back>%s</td>' % (rcolor,dval)
+	'</tr>'
+	
+	'<tr><th class=plain_back style="height:2em;">Black Rot</th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['brot'] == 'Infection':
+			rcolor = 'red'
+			dval = 'Yes'
+		elif smry_dict[d]['brot'] == 'No infection':
+			rcolor = 'green'
+			dval = 'No'
+		elif smry_dict[d]['brot'] == 'Combined':
+			rcolor = 'red'
+			dval = 'Combined'
+		elif smry_dict[d]['brot'] == 'No infect; temp<50':
+			rcolor = 'yellow'
+			dval = 'No; temp&lt;50'
+		elif smry_dict[d]['brot'] == 'Unknown infect; temp>90':
+			rcolor = 'yellow'
+			dval = 'Unknown; temp&gt;90'
+		else:
+			rcolor = 'plain'
+			dval = '-'
+#			dval = smry_dict[d]['brot']
+		'<td class=%s_back>%s</td>' % (rcolor,dval)
+	'</tr>'
+
+	'<tr><td class=plain_back_smaller colspan=9 style="text-align:center;">'
+	'<b>Phomopsis</b> - calculates when weather conditions may allow spores to infect susceptible tissue.'
+	'<br><b>Powdery Mildew</b> - runs from bud break until early bloom; calculates when weather conditions may allow overwintered, primary spores (ascospores) to infect susceptible tissue.'
+	'<br><b>Black Rot</b> - calculates when weather conditions may allow spores to infect susceptible tissue.'
+	'</td></tr>'
+	'</table>'
+	'</div>'
+
+	### Allow user to change  phenology. Model-determined phenology initially selected.
+	'<div class="plain_back" id="manage_status" style="padding:10px 0px 5px;">'
+	if smry_dict['phenology']: 
+		'<b>Phenological stage: </b>'
+		'<select name="altref" onChange="updateTable(); updateStatus();">'
+		for i in range(len(smry_dict['phen_stages'])-1,-1,-1):
+			stage,stage_name = smry_dict['phen_stages'][i]
+			if stage == smry_dict['phenology']:
+				'<option value="%s" selected>%s</option>' % (stage,stage_name)
+			else:
+				'<option value="%s">%s</option>' % (stage,stage_name)
+		'</select>'
+		'<p><span class="plain_smaller"><i>Choose the phenology stage for the grape variety of interest to display management messages. Concord grape phenology is estimated by the model from historical records for this variety.</i></span></p>'
+
+	### Management table
+	'<p><table cellspacing="0" cellpadding="5" border="1" width="100%">'
+	'<tr><th>Disease</th><th>Disease Management</th></tr>'
+	if smry_dict['phomopsis_manage'].find("<a") >= 0 or smry_dict['phomopsis_manage'].find("<i") >= 0:
+		'<tr><td>Phomopsis</td><td align="left" valign="top">%s</td></tr>' % h8(smry_dict['phomopsis_manage'])		#same here
+	else:
+		'<tr><td>Phomopsis</td><td align="left" valign="top">%s</td></tr>' % smry_dict['phomopsis_manage']
+	if smry_dict['pmildew_manage'].find("<a") >= 0 or smry_dict['pmildew_manage'].find("<i") >= 0:
+		'<tr><td>Powdery Mildew</td><td align="left" valign="top">%s</td></tr>' % h8(smry_dict['pmildew_manage'])		#same here
+	else:
+		'<tr><td>Powdery Mildew</td><td align="left" valign="top">%s</td></tr>' % smry_dict['pmildew_manage']
+	if smry_dict['blackrot_manage'].find("<a") >= 0 or smry_dict['blackrot_manage'].find("<i") >= 0:
+		'<tr><td>Black Rot</td><td align="left" valign="top">%s</td></tr>' % h8(smry_dict['blackrot_manage'])		#same here
+	else:
+		'<tr><td>Black Rot</td><td align="left" valign="top">%s</td></tr>' % smry_dict['blackrot_manage']
+	'</table>'
+	'</div>'
+
+	'<div id="infection_button" class="plain_back_l" style="padding:5px 0px; text-align:center; width:50%; float:left;"></div>'
+	'<div id="wetness_button" class="plain_back_l" style="padding:5px 0px; text-align:center; width:50%; float:left;"></div>'
+	'<div style="clear:both;"></div>'
+
+	# Infection event table
+	'''
+	<div id="infection_events" style="padding:5px 0px 5px; display:none;">
+	<table border="1" cellpadding="3" cellspacing="0" width="630" style="border-collapse:collapse; table-layout:fixed;">
+	<col width="79">
+	<col width="79">
+	<col width="55">
+	<col width="55">
+	<col width="55">
+	<col width="108">
+	<col width="108">
+	<col width="60">
+	<thead>
+	<tr>
+	  <td class="header_line" height="30" align="center" colspan="8">Grape Infection Events Log</td>
+	</tr>
+	<tr>
+	  <td class="silver_back_smaller_c" colspan="8">When calculating combined wetting periods we use the following rules: 
+          1) an infection event must start with precipitation, 2) successive wetting periods are
+          combined into a single infection event until a dry period of over 24 hours or a wetting period 
+          with no precipitation is encountered.</td>
+	</tr>
+	<tr>
+	  <th class=colhead_center style="font-size:10pt;">Starting<br>Date/Time</th>
+	  <th class=colhead_center style="font-size:10pt;">Ending<br>Date/Time</th>
+	  <th class=colhead_center style="font-size:10pt;">Hours<br>LW</th>
+	  <th class=colhead_center style="font-size:10pt;">Avg<br>Temp</th>
+	  <th class=colhead_center style="font-size:10pt;">Total<br>Rain</th>
+	  <th class=colhead_center style="font-size:10pt;">Phomopsis</th>
+	  <th class=colhead_center style="font-size:10pt;">Black Rot</th>
+	  <th class=colhead_center style="font-size:10pt;">Combined Event</th>
+	</tr>
+	</thead>
+	<tbody>
+	'''
+	'<TR><td class=red_text colspan=8 height=21>Download Time: %d/%d/%d %d:00</td></tr>'%\
+	   (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0],smry_dict['last_time'][3])
+	for i in range(len(smry_dict['infect_list'])-1,-1,-1):		#go from most recent back
+		if i%2 == 0: 
+			color = 'gray'
+		else:
+			color = 'plain'
+		wet_start,wet_end,wet_hrs,temp_ave,prcp_tot,combined, phomopsis,blackrot = smry_dict['infect_list'][i]
+		if wet_end == miss:
+			we_str = 'in progress'
+		else:
+			weyr,wemn,wedy,wehr = wet_end
+			we_str = '%s %d %d:00' % (month_abb[wemn],wedy,wehr)
+		wsyr,wsmn,wsdy,wshr = wet_start
+		wet_start_dt = DateTime.DateTime(wsyr,wsmn,wsdy,wshr)
+		# wet period starts at the beginning of this hour
+		wet_start_dt = wet_start_dt + DateTime.RelativeDate(hours=-1) 
+		ws_str = '%s %d %d:01' % (month_abb[wet_start_dt.month],wet_start_dt.day,wet_start_dt.hour)
+		
+		'<td class=%s_back_smaller_c>%s</td>'%(color,ws_str)
+		'<td class=%s_back_smaller_c>%s</td>'%(color,we_str)
+		'<td class=%s_back_smaller_c>%d</td>'%(color,wet_hrs)
+		'<td class=%s_back_smaller_c>%.1f</td>'%(color,temp_ave)
+		'<td class=%s_back_smaller_c>%.2f</td>'%(color,prcp_tot)
+		if phomopsis == "Infection":
+			txtcol = 'redon'
+		else:
+			txtcol = ''
+		'<td class=%s%s_back style="font-size:9pt;">%s</td>'%(txtcol,color,phomopsis)
+		if blackrot == "Infection":
+			txtcol = 'redon'
+		else:
+			txtcol = ''
+		'<td class=%s%s_back style="font-size:9pt;">%s</td>'%(txtcol,color,blackrot)
+		if combined == 0:
+			combined_str = 'No'
+		else:
+			combined_str = 'Yes'
+		'<td class=%s_back_smaller_c>%s</td>'%(color,combined_str)
+		'</TR>'
+	'</tbody>'
+	'</table>'
+	'</div>'
+
+	#table of all wetness events
+	'''
+	<div id="wetness_events" style="padding:5px 0px 5px; display:none;">
+	<table border="1" cellpadding="3" cellspacing="0" width="570" style="border-collapse:collapse; table-layout:fixed;">
+	<col width="79">
+	<col width="79">
+	<col width="55">
+	<col width="55">
+	<col width="55">
+	<col width="108">
+	<col width="108">
+	<thead>
+	<tr>
+	  <td class="header_line" height="30" align="center" colspan="7">Leaf Wetness Events Log</td>
+	</tr>
+	<tr>
+	  <th class=colhead_center style="font-size:10pt;">Starting<br>Date/Time</th>
+	  <th class=colhead_center style="font-size:10pt;">Ending<br>Date/Time</th>
+	  <th class=colhead_center style="font-size:10pt;">Hours<br>LW</th>
+	  <th class=colhead_center style="font-size:10pt;">Avg<br>Temp</th>
+	  <th class=colhead_center style="font-size:10pt;">Total<br>Rain</th>
+	  <th class=colhead_center style="font-size:10pt;">Phomopsis</th>
+	  <th class=colhead_center style="font-size:10pt;">Black Rot</th>
+	</tr>
+	</thead>
+	<tbody>
+	'''
+	'<TR><td class=red_text colspan=7 height=21>Download Time: %d/%d/%d %d:00</td></tr>'%\
+	   (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0],smry_dict['last_time'][3])
+	for i in range(len(smry_dict['wet_periods'])-1,-1,-1):		#go from most recent back
+		if i%2 == 0: 
+			color = 'gray'
+		else:
+			color = 'plain'
+		wet_start,wet_end,wet_hrs,temp_ave,prcp_tot,phomopsis,blackrot = smry_dict['wet_periods'][i]
+		if wet_end == miss:
+			we_str = 'in progress'
+		else:
+			weyr,wemn,wedy,wehr = wet_end
+			we_str = '%s %d %d:00' % (month_abb[wemn],wedy,wehr)
+		wsyr,wsmn,wsdy,wshr = wet_start
+		wet_start_dt = DateTime.DateTime(wsyr,wsmn,wsdy,wshr)
+		# wet period starts at the beginning of this hour
+		wet_start_dt = wet_start_dt + DateTime.RelativeDate(hours=-1) 
+		ws_str = '%s %d %d:01' % (month_abb[wet_start_dt.month],wet_start_dt.day,wet_start_dt.hour)
+		
+		'<td class=%s_back_smaller_c>%s</td>'%(color,ws_str)
+		'<td class=%s_back_smaller_c>%s</td>'%(color,we_str)
+		'<td class=%s_back_smaller_c>%d</td>'%(color,wet_hrs)
+		'<td class=%s_back_smaller_c>%.1f</td>'%(color,temp_ave)
+		'<td class=%s_back_smaller_c>%.2f</td>'%(color,prcp_tot)
+		if phomopsis == "Infection":
+			txtcol = 'redon'
+		else:
+			txtcol = ''
+		'<td class=%s%s_back style="font-size:9pt;">%s</td>'%(txtcol,color,phomopsis)
+		if blackrot == "Infection":
+			txtcol = 'redon'
+		else:
+			txtcol = ''
+		'<td class=%s%s_back style="font-size:9pt;">%s</td>'%(txtcol,color,blackrot)
+		'</TR>'
+	'</tbody>'
+	'</table>'
+	'</div>'
+
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone': '</form>'
+	add_footer(smry_dict)
+
+#--------------------------------------------------------------------------------------------		
+def grape_status_results [html] (smry_dict):	
+	if smry_dict['phenology']: 
+		'<b>Phenological stage: </b>'
+		'<select name="altref" onChange="updateTable(); updateStatus();">'
+		for i in range(len(smry_dict['phen_stages'])-1,-1,-1):
+			stage,stage_name = smry_dict['phen_stages'][i]
+			if stage == smry_dict['phenology']:
+				'<option value="%s" selected>%s</option>' % (stage,stage_name)
+			else:
+				'<option value="%s">%s</option>' % (stage,stage_name)
+		'</select></p>'
+		'<p><span class="plain_smaller"><i>Choose the phenology stage for the grape variety of interest to display management messages. Concord grape phenology is estimated by the model from historical records for this variety.</i></span></p>'
+
+	### Pest status and management table
+	'<p><table cellspacing="0" cellpadding="5" border="1" width="100%">'
+	'<tr><th>Disease</th><th>Disease Management</th></tr>'
+	if smry_dict['phomopsis_manage'].find("<a") >= 0 or smry_dict['phomopsis_manage'].find("<i") >= 0:
+		'<tr><td>Phomopsis</td><td align="left" valign="top">%s</td></tr>' % h8(smry_dict['phomopsis_manage'])		#same here
+	else:
+		'<tr><td>Phomopsis</td><td align="left" valign="top">%s</td></tr>' % smry_dict['phomopsis_manage']
+	if smry_dict['pmildew_manage'].find("<a") >= 0 or smry_dict['pmildew_manage'].find("<i") >= 0:
+		'<tr><td>Powdery Mildew</td><td align="left" valign="top">%s</td></tr>' % h8(smry_dict['pmildew_manage'])		#same here
+	else:
+		'<tr><td>Powdery Mildew</td><td align="left" valign="top">%s</td></tr>' % smry_dict['pmildew_manage']
+	if smry_dict['blackrot_manage'].find("<a") >= 0 or smry_dict['blackrot_manage'].find("<i") >= 0:
+		'<tr><td>Black Rot</td><td align="left" valign="top">%s</td></tr>' % h8(smry_dict['blackrot_manage'])		#same here
+	else:
+		'<tr><td>Black Rot</td><td align="left" valign="top">%s</td></tr>' % smry_dict['blackrot_manage']
+	'</table>'
