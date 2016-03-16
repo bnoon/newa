@@ -324,6 +324,11 @@ stn_info = {
 'kdxr': {'name': 'Danbury, CT', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -73.48278, 'elev': 457.0, 'lat': 41.37139, 'network': 'icao', 'state': 'CT'},
 'kbdl': {'name': 'Hartford (Bradley AP), CT', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -72.68, 'elev': 190.0,  'lat': 41.94, 'network': 'icao', 'state': 'CT'},
 'kcon': {'name': 'Concord, NH', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 43.1953, 'lon': -71.5011, 'elev': 346, 'network': 'icao', 'state': 'NH'},
+'keen': {'name': 'Keene, NH', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 42.90, 'lon': -72.26667, 'elev': 487, 'network': 'icao', 'state': 'NH'},
+'klci': {'name': 'Laconia, NH', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 43.56667, 'lon': -71.43333, 'elev': 545, 'network': 'icao', 'state': 'NH'},
+'kdaw': {'name': 'Rochester, NH', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 43.2781, 'lon': -70.9222, 'elev': 323, 'network': 'icao', 'state': 'NH'},
+'kbml': {'name': 'Berlin, NH', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 44.5761, 'lon': -71.1786, 'elev': 1158, 'network': 'icao', 'state': 'NH'},
+'kleb': {'name': 'Lebanon, NH', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 43.6264, 'lon': -72.3047, 'elev': 598, 'network': 'icao', 'state': 'NH'},
 'kash': {'name': 'Nashua, NH', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 42.7824, 'lon': -71.5141, 'elev': 200, 'network': 'icao', 'state': 'NH'},
 'kmht': {'name': 'Manchester, NH', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 42.9333, 'lon': -71.4383, 'elev': 225, 'network': 'icao', 'state': 'NH'},
 'kged': {'name': 'Georgetown, DE', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.6892, 'lon': -75.3592, 'elev': 51, 'network': 'icao', 'state': 'DE'},
@@ -348,6 +353,8 @@ stn_info = {
 'kavl': {'name': 'Asheville, NC', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 35.4319, 'lon': -82.5375, 'elev': 2117, 'network': 'icao', 'state': 'NC'},
 'kclt': {'name': 'Charlotte, NC', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 35.2236, 'lon': -80.9553, 'elev': 728, 'network': 'icao', 'state': 'NC'},
 'khky': {'name': 'Hickory, NC', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 35.7425, 'lon': -81.3819, 'elev': 1143, 'network': 'icao', 'state': 'NC'},
-'kcho': {'name': 'Charlottesville (Airport), VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.1386, 'lon': -78.4531, 'elev': 641, 'network': 'icao', 'state': 'VA'},
+'kafn': {'name': 'Jaffrey, NH', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 42.8050, 'lon': -72.0036, 'elev': 1040, 'network': 'icao', 'state': 'NH'},
+'kgsp': {'name': 'Greer, SC', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 34.8842, 'lon': -82.2208, 'elev': 943, 'network': 'icao', 'state': 'SC'},
+'kcho': {'name': 'Charlottesville (Arpt), VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.1386, 'lon': -78.4531, 'elev': 641, 'network': 'icao', 'state': 'VA'},
 'kshd': {'name': 'Staunton, VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.27, 'lon': -78.85, 'elev': 1188, 'network': 'icao', 'state': 'VA'}
 }
