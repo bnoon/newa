@@ -84,13 +84,15 @@ function statePlaceMarkers (cur_data, event_type, state) {
 		'NC': {lat: 35.5579, lon: -79.3856, zoom: 6, name: 'North Carolina'},
 		'PA': {lat: 40.8786, lon: -77.7985, zoom: 7, name: 'Pennsylvania'},
 		'RI': {lat: 41.6762, lon: -71.5562, zoom: 9, name: 'Rhode Island'},
+		'SC': {lat: 33.6290, lon: -80.9500, zoom: 6, name: 'South Carolina'},
 		'SD': {lat: 43.9169, lon: -100.2282, zoom: 6, name: 'South Dakota'},
 		'VT': {lat: 44.0688, lon: -72.6663, zoom: 7, name: 'Vermont'},
 		'VA': {lat: 37.5229, lon: -78.8531, zoom: 7, name: 'Virginia'},
 		'WV': {lat: 38.6409, lon: -80.6230, zoom: 7, name: 'West Virginia'}, //no stations
-		'WI': {lat: 44.6243, lon: -89.9941, zoom: 6, name: 'Wisconsin'}
+		'WI': {lat: 44.6243, lon: -89.9941, zoom: 6, name: 'Wisconsin'},
+		'ALL':{lat: 42.5000, lon: -75.7000, zoom: 6, name: 'All'},
 	};
-	var stateInfo = stateCenters.hasOwnProperty(state) ? stateCenters[state] : findCenter();
+	var stateInfo = stateCenters.hasOwnProperty(state) ? stateCenters[state] : {lat: 42.5, lon: -75.7, zoom: 6, name: 'All'};
 	var newaIcon = new google.maps.MarkerImage(
 		'http://newa.nrcc.cornell.edu/gifs/newa_small.png',
 		new google.maps.Size(16,16),
@@ -256,6 +258,7 @@ function stateStationMapList (options) {
 			['NY', 'New York'],
 			['PA', 'Pennsylvania'],
 			['RI', 'Rhode Island'],
+			['SC', 'South Carolina'],
 			['SD', 'South Dakota'],
 			['VA', 'Virginia'],
 			['VT', 'Vermont'],
