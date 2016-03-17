@@ -74,6 +74,7 @@ function buildStateStationMenus() {
 			['NY', 'New York'],
 			['PA', 'Pennsylvania'],
 			['RI', 'Rhode Island'],
+			['SC', 'South Carolina'],
 			['SD', 'South Dakota'],
 			['VA', 'Virginia'],
 			['VT', 'Vermont'],
