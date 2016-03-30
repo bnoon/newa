@@ -323,6 +323,8 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'kric': {'temp': 'kakq', 'rhum': 'kakq', 'prcp': 'kakq', 'wspd': 'kakq', 'wdir': 'kakq'},
 'kroa': {'temp': 'klyh', 'rhum': 'klyh', 'prcp': 'klyh', 'wspd': 'klyh', 'wdir': 'klyh'},
 'kwal': {'temp': 'ksby', 'rhum': 'ksby', 'prcp': 'ksby', 'wspd': 'ksby', 'wdir': 'ksby'},
+'kmrb': {'temp': 'khgr', 'rhum': 'khgr', 'prcp': 'khgr', 'wspd': 'khgr', 'wdir': 'khgr'},
+'khgr': {'temp': 'kmrb', 'rhum': 'kmrb', 'prcp': 'kmrb', 'wspd': 'kmrb', 'wdir': 'kmrb'},
 'pa_big': {'temp': 'kmdt', 'rhum': 'kmdt', 'prcp': 'kmdt', 'wspd': 'kmdt', 'wdir': 'kmdt', 'lwet': 'pa_npa', 'srad': 'pa_npa'},
 'pa_pin': {'temp': 'kmdt', 'rhum': 'kmdt', 'prcp': 'kmdt', 'wspd': 'kmdt', 'wdir': 'kmdt', 'lwet': 'pa_big', 'srad': 'pa_big'},
 'pa_ysp': {'temp': 'kmdt', 'rhum': 'kmdt', 'prcp': 'kmdt', 'wspd': 'kmdt', 'wdir': 'kmdt', 'lwet': 'pa_big', 'srad': 'pa_big'},

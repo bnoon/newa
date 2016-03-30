@@ -363,6 +363,8 @@ stn_info = {
 'khky': {'name': 'Hickory, NC', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 35.7425, 'lon': -81.3819, 'elev': 1143, 'network': 'icao', 'state': 'NC'},
 'kafn': {'name': 'Jaffrey, NH', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 42.8050, 'lon': -72.0036, 'elev': 1040, 'network': 'icao', 'state': 'NH'},
 'kgsp': {'name': 'Greer, SC', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 34.8842, 'lon': -82.2208, 'elev': 943, 'network': 'icao', 'state': 'SC'},
+'kmrb': {'name': 'Martinsburg, WV', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 39.4019, 'lon': -77.9844, 'elev': 534, 'network': 'icao', 'state': 'WV'},
+'khgr': {'name': 'Hagerstown, MD', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 39.7078, 'lon': -77.7297, 'elev': 698, 'network': 'icao', 'state': 'MD'},
 'kakq': {'name': 'Wakefield, VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 36.9839, 'lon': -77.0072, 'elev': 109, 'network': 'icao', 'state': 'VA'},
 'kdan': {'name': 'Danville, VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 36.5728, 'lon': -79.3361, 'elev': 571, 'network': 'icao', 'state': 'VA'},
 'khef': {'name': 'Manassas, VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.72139, 'lon': -38.72139, 'elev': 192, 'network': 'icao', 'state': 'VA'},
