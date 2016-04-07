@@ -449,5 +449,6 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'md_wdb': {'temp': 'kbwi', 'rhum': 'kbwi', 'prcp': 'kbwi', 'wspd': 'kbwi', 'wdir': 'kbwi', 'lwet': 'pa_big', 'srad': 'kbwi'},
 'nc_hen': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'nc_edn', 'srad': 'kavl'},
 'nc_mor': {'temp': 'khky', 'rhum': 'khky', 'prcp': 'khky', 'wspd': 'khky', 'wdir': 'khky', 'lwet': 'nc_hen', 'srad': 'nc_hen'},
-'nc_edn': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'nc_hen', 'srad': 'nc_hen'}
+'nc_edn': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'nc_hen', 'srad': 'nc_hen'},
+'nc_mof': {'temp': 'khky', 'rhum': 'khky', 'prcp': 'khky', 'wspd': 'khky', 'wdir': 'khky', 'lwet': 'nc_mor', 'srad': 'nc_mor'},
 }
