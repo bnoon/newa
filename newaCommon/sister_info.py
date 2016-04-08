@@ -126,6 +126,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'vso' : {'temp': 'kbtv', 'rhum': 'kbtv', 'prcp': 'kbtv', 'wspd': 'kbtv', 'wdir': 'kbtv', 'lwet': 'vsb', 'srad': 'vsb'},
 'ved' : {'temp': 'krut', 'rhum': 'krut', 'prcp': 'krut', 'wspd': 'krut', 'wdir': 'krut', 'lwet': 'vsh', 'srad': 'vsh'},
 'vpu' : {'temp': 'vdu', 'rhum': 'vdu', 'prcp': 'vdu', 'wspd': 'vdu', 'wdir': 'vdu', 'lwet': 'vdu', 'srad': 'vdu'},
+'vbe' : {'temp': 'kddh', 'rhum': 'kddh', 'prcp': 'kddh', 'wspd': 'kddh', 'wdir': 'kddh', 'lwet': 'vdu', 'srad': 'vdu'},
 'wat' : {'temp': 'ash', 'lwet': 'ash', 'rhum': 'ash', 'prcp': 'ash', 'wspd': 'ash', 'wdir': 'ash'},
 'wgl' : {'temp': 'wla', 'rhum': 'wla', 'prcp': 'wla', 'wspd': 'wla', 'wdir': 'wla', 'lwet': 'wla', 'srad': 'wla'},
 'wad' : {'temp': 'riv', 'rhum': 'riv', 'prcp': 'riv', 'lwet': 'riv', 'wspd': 'riv', 'wdir': 'riv', 'srad': 'riv'},
