@@ -375,6 +375,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'ct_pre': {'temp': 'ct_gfy', 'rhum': 'ct_gfy', 'prcp': 'ct_gfy', 'wspd': 'ct_gfy', 'wdir': 'ct_gfy', 'lwet': 'ct_gfy', 'srad': 'ct_gfy'},
 'uc_sto': {'temp': 'ct_tol', 'rhum': 'ct_tol', 'prcp': 'ct_tol', 'wspd': 'ct_tol', 'wdir': 'ct_tol', 'lwet': 'ct_tol', 'srad': 'ct_tol'},
 'ct_gla': {'temp': 'ct_sgl', 'rhum': 'ct_sgl', 'prcp': 'ct_sgl', 'wspd': 'ct_sgl', 'wdir': 'ct_sgl', 'lwet': 'ct_sgl', 'srad': 'ct_sgl'},
+'ct_eki': {'temp': 'ct_woo', 'rhum': 'ct_woo', 'prcp': 'ct_woo', 'wspd': 'ct_woo', 'wdir': 'ct_woo', 'lwet': 'ct_woo', 'srad': 'ct_woo'},
 'mn_wbl': {'temp': 'kmsp', 'rhum': 'kmsp', 'prcp': 'kmsp', 'wspd': 'kmsp', 'wdir': 'kmsp', 'lwet': 'wi_gay', 'srad': 'wi_gay'},
 'mn_lkc': {'temp': 'krst', 'rhum': 'krst', 'prcp': 'krst', 'wspd': 'krst', 'wdir': 'krst', 'lwet': 'wi_gay', 'srad': 'wi_gay'},
 'mn_pre': {'temp': 'krst', 'rhum': 'krst', 'prcp': 'krst', 'wspd': 'krst', 'wdir': 'krst', 'lwet': 'wi_gay', 'srad': 'wi_gay'},
