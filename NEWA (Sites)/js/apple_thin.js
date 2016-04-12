@@ -1,7 +1,7 @@
 /*global $, document, stationMap */
 function update_help() {
 	var params = {type: 'apple_thin'};
-	$.get('http://newa.nrcc.cornell.edu/newaTools/process_help', params, function (data) { $('#third').html(data); });
+	$.get('http://newatest.nrcc.cornell.edu/newaTools/process_help', params, function (data) { $('#third').html(data); });
 	return false;
 }
 
@@ -57,14 +57,14 @@ function apple_thin() {
 	$('select[name=stn], input[name=accend], input[name=greentip], input[name=bloom]').each(function () {
 		params[this.name] = this.value;
 	});
-	$('#results_div').empty().show().html('<img src="http://newa.nrcc.cornell.edu/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
-	$('#righttabs').tabs('select', 1);
+	$('#results_div').empty().show().html('<img src="http://newatest.nrcc.cornell.edu/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
+	$('#righttabs').tabs('option', 'active',1);
 	$("tr.dateMsg").empty();
 	dateDiff = (Date.parse(params.bloom) - Date.parse(params.greentip)) / oneday;
 	if (! isNaN(dateDiff) && dateDiff < 21) {
 		$(".thin_table").append("<tr class='dateMsg'><td colspan=3 style='color:red;'>Difference between Green tip and Bloom is less than 21 days. Results may be unreliable.<\/td><\/tr>");
 	}
-	$.get('http://newa.nrcc.cornell.edu/newaTools/process_input', params, function (data) {
+	$.get('http://newatest.nrcc.cornell.edu/newaTools/process_input', params, function (data) {
 		$('#loading').fadeOut(500, function () {
 			$(this).remove();
 		});
@@ -82,9 +82,9 @@ function apple_thin() {
 function apple_thin_specs() {
 	var params = {type: 'apple_thin_specs'};
 	$('select[name=stn], input[name=accend]').each(function () { params[this.name] = this.value; });
-	$('#second').empty().html('<img src="http://newa.nrcc.cornell.edu/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
-	$('#righttabs').tabs('select', 1);
-	$.get('http://newa.nrcc.cornell.edu/newaTools/process_input', params, function (data) {
+	$('#second').empty().html('<img src="http://newatest.nrcc.cornell.edu/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
+	$('#righttabs').tabs('option', 'active',1);
+	$.get('http://newatest.nrcc.cornell.edu/newaTools/process_input', params, function (data) {
 		$('#loading').fadeOut(500, function () {
 			$(this).remove();
 		});
@@ -97,9 +97,19 @@ $(document).ready(function () {
 	var myDate = new Date(),
 		todayDate = (myDate.getMonth() + 1) + "/" + myDate.getDate() + "/" + myDate.getFullYear();
 	$("#enddpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "", changeMonth: true, changeYear: true }).val(todayDate);
-	$("#righttabs").tabs();
+	$("#righttabs").tabs({
+		activate: function () {
+			var center = map.getCenter();
+			google.maps.event.trigger(map, 'resize');
+			map.setCenter(center);
+		}
+	});
 	$("form .button").click(function () {
 		apple_thin_specs();
 	});
-	stationMap('goodsr', 'select_station');
+	stateStationMapList({
+		reqval: 'goodsr',
+		event_type: 'select_station',
+		where: '#station_area'
+	});
 });
