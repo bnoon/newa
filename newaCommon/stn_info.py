@@ -108,6 +108,7 @@ stn_info = {
 'vso': {'name': 'South Hero, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.3033, 'elev': 177,  'lat': 44.6355, 'network': 'newa', 'state': 'VT'},
 'ved': {'name': 'East Dorset, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.9909, 'elev': 1339, 'lat': 43.2685, 'network': 'newa', 'state': 'VT'},
 'vbe': {'name': 'Bennington (SVO), VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.841119, 'lon': -73.218067, 'elev': 1312, 'network': 'newa', 'state': 'VT'},
+'vem': {'name': 'East Montpelier, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat':  44.3182, 'lon':  -72.5070, 'elev':  1162, 'network': 'newa', 'state': ' VT'},
 'mam': {'name': 'Amesbury, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.871822, 'lon': -70.925278, 'elev': 115, 'network': 'newa', 'state': 'MA'},
 'mbe': {'name': 'Belchertown-2, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toohigh', 'lon': -72.35972, 'elev': 623,  'lat': 42.25306, 'network': 'newa', 'state': 'MA'},
 'msd': {'name': 'South Deerfield, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -72.57944, 'elev': 131,  'lat': 42.47972, 'network': 'newa', 'state': 'MA'},

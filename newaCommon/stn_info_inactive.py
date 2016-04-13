@@ -44,7 +44,7 @@ stn_info_inactive = {
 'cha': {'name': 'Chateguay', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -74.07, 'elev': 972.0, 'lat': 44.92, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'sci': {'name': 'Scipioville', 'vars': ['temp', 'prcp'], 'lon': -76.63, 'elev': 984.0, 'lat': 42.78, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'wat': {'name': 'Waterport', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -78.214060, 'elev': 330.0, 'lat': 43.34422, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
-'vca': {'name': 'Calais, VT','vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.5293, 'elev': 1434, 'lat': 44.3395, 'network': 'newa', 'state': 'VT'},
+'vca': {'name': 'Calais, VT','vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.5293, 'elev': 1434, 'lat': 44.3395, 'network': 'newa', 'state': 'VT', 'disconnected': 'yes'},
 'vsa': {'name': 'Saxtons River, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.153611, 'lon': -72.533611, 'elev': 802, 'network': 'newa', 'state': 'VT', 'disconnected': 'yes'},
 'hwa': {'name': 'Walpole, NH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.033333, 'lon': -72.433056, 'elev': 605, 'network': 'newa', 'state': 'NH', 'disconnected': 'yes'},
 '148': {'name': 'Cape May Courthouse, NJ', 'vars': ['prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.1246, 'lon': -74.7873, 'elev': 7, 'network': 'njwx', 'state': 'NJ'},

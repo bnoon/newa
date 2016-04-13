@@ -116,6 +116,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'val' : {'temp': 'wgl', 'lwet': 'wgl', 'rhum': 'wgl', 'prcp': 'wgl'},
 'var' : {'temp': 'rom', 'rhum': 'rom', 'prcp': 'rom', 'wspd': 'rom', 'wdir': 'rom', 'lwet': 'rom', 'srad': 'rom'},
 'vca' : {'temp': 'kmpv', 'rhum': 'kmpv', 'prcp': 'kmpv', 'wspd': 'kmpv', 'wdir': 'kmpv', 'lwet': 'vsb', 'srad': 'vsb'},
+'vem' : {'temp': 'kmpv', 'rhum': 'kmpv', 'prcp': 'kmpv', 'wspd': 'kmpv', 'wdir': 'kmpv', 'lwet': 'vex', 'srad': 'vex'},
 'vco' : {'temp': 'vsh', 'rhum': 'vsh', 'prcp': 'vsh', 'wspd': 'vsh', 'wdir': 'vsh', 'srad': 'vsh', 'lwet': 'vsh'},
 'vdu' : {'temp': 'vpu', 'rhum': 'vpu', 'prcp': 'vpu', 'wspd': 'vpu', 'wdir': 'vpu', 'lwet': 'vpu', 'srad': 'vpu'},
 'ver' : {'temp': 'sil', 'lwet': 'sil', 'rhum': 'sil', 'prcp': 'sil', 'wspd': 'sil', 'wdir': 'sil', 'srad': 'sil'},
