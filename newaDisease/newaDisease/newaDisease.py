@@ -17,10 +17,14 @@ class program_exit (Exception):
 	pass
 
 # add hourly forecast data to end of hourly_data
-def add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt):
+def add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt,estp=False):
 	try:
-		from get_hourly_forecast import get_hourly_forecast
-		forecast_data = get_hourly_forecast(stn,start_fcst_dt,end_fcst_dt)
+		if (estp):
+			from get_hourly_forecast_estp import get_hourly_forecast_estp
+			forecast_data = get_hourly_forecast_estp(stn,start_fcst_dt,end_fcst_dt)		
+		else:
+			from get_hourly_forecast import get_hourly_forecast
+			forecast_data = get_hourly_forecast(stn,start_fcst_dt,end_fcst_dt)		
 		hourly_data = hourly_data+forecast_data
 	except:
 		print_exception()
@@ -447,7 +451,7 @@ class Potato (Base, general_simcast):
 			start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
 			end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6) + DateTime.RelativeDate(hour=23,minute=0,second=0.0)
 			hourly_data = add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
-
+			
 			if len(hourly_data) > 0:
 				# pick out wet and dry periods
 				wet_periods = self.get_wetting_rh(hourly_data,stn)   ### new version instituted 6/18/2008 ##revised again 9/29/2011
@@ -1419,19 +1423,109 @@ class Onion (Base, Cabbage):
 		except:
 			print_exception()
 		return dly_altvar
+		
+	#--------------------------------------------------------------------------------------------		
+	# add pop forecast
+	def add_pops (self,smry_dict,end_date_dt,pops_list):
+		try:
+			day0 =  end_date_dt + DateTime.RelativeDate(hour=0,minute=0,second=0)
+			fday1 = day0 + DateTime.RelativeDate(days=+1)
+			fday2 = day0 + DateTime.RelativeDate(days=+2)
+			fday3 = day0 + DateTime.RelativeDate(days=+3)
+			fday4 = day0 + DateTime.RelativeDate(days=+4)
+			fday5 = day0 + DateTime.RelativeDate(days=+5)
+
+			smry_dict['pops']  = {}
+			smry_dict['pops']['day0'] = {}
+			smry_dict['pops']['pday1'] = {}
+			smry_dict['pops']['pday2'] = {}
+			smry_dict['pops']['fday1'] = {}
+			smry_dict['pops']['fday2'] = {}
+			smry_dict['pops']['fday3'] = {}
+			smry_dict['pops']['fday4'] = {}
+			smry_dict['pops']['fday5'] = {}
+			smry_dict['pops']['day0']['am']  = miss
+			smry_dict['pops']['pday1']['am'] = miss
+			smry_dict['pops']['pday2']['am'] = miss
+			smry_dict['pops']['fday1']['am'] = miss
+			smry_dict['pops']['fday2']['am'] = miss
+			smry_dict['pops']['fday3']['am'] = miss
+			smry_dict['pops']['fday4']['am'] = miss
+			smry_dict['pops']['fday5']['am'] = miss
+			smry_dict['pops']['day0']['pm']  = miss
+			smry_dict['pops']['pday1']['pm'] = miss
+			smry_dict['pops']['pday2']['pm'] = miss
+			smry_dict['pops']['fday1']['pm'] = miss
+			smry_dict['pops']['fday2']['pm'] = miss
+			smry_dict['pops']['fday3']['pm'] = miss
+			smry_dict['pops']['fday4']['pm'] = miss
+			smry_dict['pops']['fday5']['pm'] = miss
+
+			# add pops for today and forecast next 5 days
+			for theDate,qpf,pop in pops_list:
+				if pop != miss:
+					theDate_dt = DateTime.DateTime(*theDate) + DateTime.RelativeDate(hour=0,minute=0,second=0)
+					if theDate[3] < 12:
+						which = 'am'
+					else:
+						which = 'pm'
+					if day0 == theDate_dt:
+						smry_dict['pops']['day0'][which] = pop
+					elif fday1 == theDate_dt:
+						smry_dict['pops']['fday1'][which] = pop
+					elif fday2 == theDate_dt:
+						smry_dict['pops']['fday2'][which] = pop
+					elif fday3 == theDate_dt:
+						smry_dict['pops']['fday3'][which] = pop
+					elif fday4 == theDate_dt:
+						smry_dict['pops']['fday4'][which] = pop
+					elif fday5 == theDate_dt:
+						smry_dict['pops']['fday5'][which] = pop
+		except:
+			print_exception()
+		return smry_dict
 	
 	#--------------------------------------------------------------------------------------------		
-	def run_onion_dis(self,stn,year,month,day,product):
+	def run_onion_dis(self,stn,month,day,product,accend,output):
+		from get_precip_forecast import get_precip_forecast
+		now = DateTime.now()
+		if not accend:
+			accend = now
+		smry_dict = {}
+		smry_dict["output"] = output
 		try:
 			# obtain daily data
-			now = DateTime.now()
+			year = accend.year
 			plant_date = DateTime.DateTime(year,month,day,1)
-			if year == now.year:
-				end_date_dt = now
+			end_date_dt = accend
+			pday3 = end_date_dt + DateTime.RelativeDate(days = -3, hour=1)
+			if plant_date > end_date_dt:
+				return newaCommon_io.errmsg('Plant date must be before date of interest')
+##			midOctober = DateTime.DateTime(end_date_dt.year,10,15,23)
+##			if end_date_dt > midOctober:
+##				return newaDisease_io.onion_dis_dormant(smry_dict)
+			if end_date_dt.year != now.year:
+				smry_dict['this_year'] = False
+				end_date_dt = end_date_dt + DateTime.RelativeDate(days = +6)
 			else:
-				end_date_dt = DateTime.DateTime(year,10,1,1)
-			hourly_data, download_time, station_name = self.get_hourly (stn, plant_date, end_date_dt)
-			
+				smry_dict['this_year'] = True
+			if plant_date > pday3:
+				start_hrly = pday3
+			else:
+				start_hrly = plant_date
+			hourly_data, download_time, station_name = self.get_hourly (stn, start_hrly, end_date_dt)
+			smry_dict['last_time'] = download_time
+
+			# add hourly forecast data
+			if smry_dict['this_year']:
+				start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
+				end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6) + DateTime.RelativeDate(hour=23,minute=0,second=0.0)
+				hourly_data = add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
+			else:
+				start_fcst_dt = end_date_dt + DateTime.RelativeDate(hours = +1)
+				end_fcst_dt = end_date_dt
+				end_date_dt = end_date_dt + DateTime.RelativeDate(days = -6)
+								
 			if len(hourly_data) > 0:
 				# compute daily values needed for later computations
 				daily_onion = self.get_dly_onion(hourly_data)
@@ -1458,7 +1552,136 @@ class Onion (Base, Cabbage):
 
 				if product == 'onion_dis':
 					if len(blight_alert) > 0 or len(alternaria) > 0 or len(botrytis) > 0 or len(mildew) > 0:
-						return newaDisease_io.onion_dis_html(station_name,blight_alert,plant_date,alternaria,botrytis,mildew)
+### new summary table dictionary creation
+						last_day = end_date_dt + DateTime.RelativeDate(hour=23,minute=0,second=0.0)
+						first_day = last_day + DateTime.RelativeDate(days = -6)
+						bot_favorable_count = 0
+						bot_spore_count = 0
+						bot_day_count = 0
+						ba_favorable_count = 0
+						ba_ipi_count = 0
+						ba_day_count = 0
+						mba_favorable_count = 0
+						mba_ipi_count = 0
+						mba_day_count = 0
+						dm_favorable_count = 0
+						dm_day_count = 0
+						pb_favorable_count = 0
+						pb_val_count = 0
+						pb_day_count = 0
+						theDate = first_day
+						while theDate <= last_day:
+							dkey = (theDate.year,theDate.month,theDate.day)
+							if botrytis.has_key(dkey):
+								spore_index, bf = botrytis[dkey]
+								if spore_index != miss:
+									bot_day_count += 1
+									bot_spore_count += spore_index					
+									if spore_index >= 50:
+										bot_favorable_count += 1
+							if blight_alert.has_key(dkey):
+								ba_ipi, mba_ipi = blight_alert[dkey]
+								if ba_ipi != miss:
+									ba_day_count += 1
+									ba_ipi_count += ba_ipi
+									if ba_ipi >= 7:
+										ba_favorable_count += 1
+								if mba_ipi != miss:
+									mba_day_count += 1
+									mba_ipi_count += mba_ipi
+									if mba_ipi >= 7:
+										mba_favorable_count += 1
+							if mildew.has_key(dkey):
+								status = mildew[dkey]
+								if status != 'Unavailable':
+									dm_day_count += 1
+									if status == 'Favorable':
+										dm_favorable_count += 1					
+							if alternaria.has_key(dkey):
+								pbval, pbrisk = alternaria[dkey]
+								if pbval != miss:
+									pb_day_count += 1
+									pb_val_count += pbval
+									if pbval >= 5.7:
+										pb_favorable_count += 1					
+							theDate = theDate + DateTime.RelativeDate(days = +1)
+	
+						if bot_day_count == 7:
+							smry_dict["botrytis_days"] = bot_favorable_count
+						else:
+							smry_dict["botrytis_days"] = '-'
+						if bot_day_count > 0:
+							smry_dict["botrytis_avg"] = int(round(bot_spore_count/bot_day_count))
+						else:
+							smry_dict["botrytis_avg"] = '-'
+						smry_dict["botrytis_today"] = int(round(botrytis[last_day.year,last_day.month,last_day.day][0]))
+						if ba_day_count == 7:
+							smry_dict["blightalert_days"] = ba_favorable_count
+						else:
+							smry_dict["blightalert_days"] = '-'
+						if ba_day_count > 0:
+							smry_dict["blightalert_avg"] = round(ba_ipi_count/ba_day_count, 2)
+						else:
+							smry_dict["blightalert_avg"] = '-'
+						smry_dict["blightalert_today"] = round(blight_alert[last_day.year,last_day.month,last_day.day][0], 2)
+						if mba_day_count == 7:
+							smry_dict["modblightalert_days"] = mba_favorable_count
+						else:
+							smry_dict["modblightalert_days"] = '-'
+						if mba_day_count > 0:
+							smry_dict["modblightalert_avg"] = round(mba_ipi_count/mba_day_count, 2)
+						else:
+							smry_dict["modblightalert_avg"] = '-'
+						smry_dict["modblightalert_today"] = round(blight_alert[last_day.year,last_day.month,last_day.day][1], 2)
+						if dm_day_count == 7:
+							smry_dict["downymildew_days"] = dm_favorable_count
+						else:
+							smry_dict["downywildew_days"] = '-'
+						smry_dict["downymildew_today"] = mildew[last_day.year,last_day.month,last_day.day]
+						if pb_day_count == 7:
+							smry_dict["purpleblotch_days"] = pb_favorable_count
+						else:
+							smry_dict["purpleblotch_days"] = '-'
+						if pb_day_count > 0:
+							smry_dict["purpleblotch_avg"] = round(pb_val_count/pb_day_count, 1)
+						else:
+							smry_dict["purpleblotch_avg"] = '-'
+						smry_dict["purpleblotch_today"] = round(alternaria[last_day.year,last_day.month,last_day.day][0], 1)
+
+						smry_dict['day0'] = {}
+						smry_dict['day0']['date'] = '%s %d' % (month_names[last_day.month][0:3],last_day.day)
+						smry_dict['day0']['ymd'] = (last_day.year,last_day.month,last_day.day)
+						for dy in range(1,6):
+							theDate = last_day + DateTime.RelativeDate(days = +dy)
+							index = 'fday' + str(dy)
+							smry_dict[index] = '%s %d' % (month_names[theDate.month][0:3],theDate.day)
+							index = 'ymd' + str(dy)
+							smry_dict[index] = (theDate.year,theDate.month,theDate.day)
+							index = 'botrytis_fday' + str(dy)
+							smry_dict[index] = int(round(botrytis[theDate.year,theDate.month,theDate.day][0]))
+							index = 'blightalert_fday' + str(dy)
+							smry_dict[index] = round(blight_alert[theDate.year,theDate.month,theDate.day][0], 2)
+							index = 'modblightalert_fday' + str(dy)
+							smry_dict[index] = round(blight_alert[theDate.year,theDate.month,theDate.day][1], 2)
+							index = 'downymildew_fday' + str(dy)
+							smry_dict[index] = mildew[theDate.year,theDate.month,theDate.day]
+							index = 'purpleblotch_fday' + str(dy)
+							smry_dict[index] = round(alternaria[theDate.year,theDate.month,theDate.day][0], 1)
+						# get 12-hour pops
+						pops_list = get_precip_forecast (stn,end_date_dt + DateTime.RelativeDate(hour=0,minute=0,second=0.0),end_fcst_dt)
+						smry_dict = self.add_pops(smry_dict,end_date_dt,pops_list)
+						
+						last_prcp_dt = start_hrly + DateTime.RelativeDate(hours = -1)
+						for i in range(len(hourly_data), 0, -1):
+							theTime,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags = hourly_data[i-1]
+							temp_eflag, prcp_eflag, pop12_eflag, rhum_eflag, wspd_eflag, wdir_eflag, srad_eflag, st4i_eflag = eflags
+							if prcp != miss and prcp_eflag != "P":
+								last_prcp_dt = DateTime.DateTime(*theTime)
+								break
+						smry_dict["last_prcp"] = last_prcp_dt
+						
+						return newaDisease_io.onion_dis_html(station_name,blight_alert,plant_date,alternaria,botrytis,mildew,smry_dict)
+### end new section
 					else:
 						return self.nodata(stn, station_name, plant_date, end_date_dt)
 				elif product == 'onion_onlog':
@@ -1583,19 +1806,159 @@ class Alfalfa (Base):
 			print_exception()
 
 #--------------------------------------------------------------------------------------------		
-class Tomato (Base):
+class Tomato (Base, general_simcast):
+	# determine severity unit value  FROM POTATO
+	def get_severity(self,wet_hrs,temp_ave,cold_hrs,continuation):
+		wet_hrs = wet_hrs - cold_hrs
+		severity = miss
+		try:
+			itemp = round(temp_ave,0)
+			if itemp < 46:
+				return 0
+			elif itemp > 85:
+				return miss
+			if (continuation):
+				if itemp >= 46 and itemp <= 53:
+					severity = int((wet_hrs+9)/9)
+				elif itemp >= 54 and itemp <= 59:
+					severity = int((wet_hrs+5)/6)
+				elif itemp >= 60 and itemp <= 85:
+					if wet_hrs == 21: 
+						severity = 5	#doesn't fit formula
+					else:
+						severity = int((wet_hrs+3)/5)
+			else:
+				if itemp >= 46 and itemp <= 53:
+					severity = int((wet_hrs-13)/3)
+				elif itemp >= 54 and itemp <= 59:
+					severity = int((wet_hrs-10)/3)
+				elif itemp >= 60 and itemp <= 85:
+					if wet_hrs == 22 or wet_hrs == 23: 
+						severity = 4	#doesn't fit formula
+					else:
+						severity = int((wet_hrs-7)/3)
+			if severity < 0: severity = 0
+		except:
+			print_exception()
+		return severity
+
+	# determine wet and dry periods from hourly data provided FROM POTATO
+	def get_wetting_rh (self,hourly_data,stn):
+		wet_periods = []
+		try:
+			wet_hrs = 0
+			cold_hrs = 0
+			temp_sum = 0.
+			temp_cnt = 0.
+			prcp_sum = 0.
+			prcp_cnt = 0.
+			severity_sum = 0.
+			date_sev = []
+			for theTime,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags in hourly_data:
+				# Adjust relative humidity for icao stations and forecast data
+				if (eflags[3] == "F" or (len(stn) == 4 and stn[0:1].upper() == 'K')) and rhum != miss:
+#					rhum = rhum/(rhum*0.0047+0.53)						 replaced with following to match Laura - 8/25/2011 kle
+					rhum = min(100,rhum+15)
+				if (rhum < 90 and wet_hrs > 0) or wet_hrs-cold_hrs == 24:
+					#end wetting period ...
+					wet_end = theTime
+					if temp_cnt > 0:
+						temp_ave = temp_sum/temp_cnt
+					else:
+						temp_ave = miss
+					if prcp_cnt > 0:
+						prcp_tot = prcp_sum
+					else:
+						prcp_tot = miss
+					if len(wet_periods) > 0 and wet_start == wet_periods[-1][1]:
+						continuation = 1
+					else:
+						continuation = 0
+					severity = self.get_severity(wet_hrs,temp_ave,cold_hrs,continuation)
+					wet_end_dt = DateTime.DateTime(wet_end[0],wet_end[1],wet_end[2],wet_end[3])
+					if severity != miss: 
+						severity_sum = severity_sum + severity
+						date_sev.append((wet_end_dt,severity))
+					else:
+						severity = 'n/a'
+					severity_week = 0.
+					for i in range(len(date_sev)-1,-1,-1):
+						ldt,lsev = date_sev[i]
+						if (wet_end_dt-ldt).days > 7:
+							break
+						else:
+							severity_week = severity_week+lsev
+					wet_periods.append((wet_start,wet_end,wet_hrs,cold_hrs,temp_ave,prcp_tot,severity,severity_week,severity_sum))
+					wet_hrs = 0
+					cold_hrs = 0
+					temp_sum = 0.
+					temp_cnt = 0.
+					prcp_sum = 0.
+					prcp_cnt = 0.					
+				if rhum >= 90:
+					wet_hrs = wet_hrs + 1
+					if wet_hrs == 1: 
+						wet_start = theTime
+					if temp != miss:
+						if temp >= 46:
+							temp_sum = temp_sum + temp
+							temp_cnt = temp_cnt + 1
+						else:
+							cold_hrs = cold_hrs + 1
+					if prcp != miss:
+						prcp_sum = prcp_sum + prcp
+						prcp_cnt = prcp_cnt + 1
+	#		end period in progress
+			if wet_hrs > 0:
+				wet_end = theTime
+				if temp_cnt > 0:
+					temp_ave = temp_sum/temp_cnt
+				else:
+					temp_ave = miss
+				if prcp_cnt > 0:
+					prcp_tot = prcp_sum
+				else:
+					prcp_tot = miss
+				if len(wet_periods) > 0 and wet_start == wet_periods[-1][1]:
+					continuation = 1
+				else:
+					continuation = 0
+				severity = self.get_severity(wet_hrs,temp_ave,cold_hrs,continuation)
+				wet_end_dt = DateTime.DateTime(theTime[0],theTime[1],theTime[2],theTime[3])
+				if severity != miss: 
+					severity_sum = severity_sum + severity
+					date_sev.append((wet_end_dt,severity))
+				else:
+					severity = 'n/a'
+				severity_week = 0.
+				for i in range(len(date_sev)-1,-1,-1):
+					ldt,lsev = date_sev[i]
+					if (wet_end_dt-ldt).days > 7:
+						break
+					else:
+						severity_week = severity_week+lsev
+				wet_periods.append((wet_start,wet_end,wet_hrs,cold_hrs,temp_ave,prcp_tot,severity,severity_week,severity_sum))
+		except:
+			print_exception()
+		return wet_periods
+
 	# determine wet periods - need 3 consecutive dry hours to end wetting period
-	def get_wetting (self,hourly_data):
+	def get_wetting (self,hourly_data,stn):
 		wet_periods = []
 		try:
 			wet_hrs = 0
 			dry_hrs = 0
 			for theTime,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags in hourly_data:
+				# Adjust relative humidity for icao stations and forecast data
+				if (eflags[3] == "F" or (len(stn) == 4 and stn[0:1].upper() == 'K')) and rhum != miss:
+					rhum = rhum/(rhum*0.0047+0.53)
 				if lwet == miss and rhum != miss:
 					if rhum >= 90 or prcp > 0.00:
 						lwet = 60
 					else:
 						lwet = 0
+				if lwet != miss:
+					last_hour = theTime
 				if lwet > 0:
 					if dry_hrs > 0:
 						wet_hrs = wet_hrs + dry_hrs
@@ -1614,26 +1977,23 @@ class Tomato (Base):
 							dry_hrs = 0
 	#		end period in progress
 			if wet_hrs > 0:
-				if dry_hrs == 0: wet_end = miss
+				wet_end = (DateTime.DateTime(*theTime) + DateTime.RelativeDate(hours=-(dry_hrs+1),minute=1)).tuple()[:5]
+## changed this line to above 11/16/2015 -kle				if dry_hrs == 0: wet_end = miss
 				wet_periods.append((wet_start,wet_end))
 		except:
 			print_exception()
-		return wet_periods
+		return wet_periods, last_hour
 		
 	#--------------------------------------------------------------------------------------------		
-	# split wet periods longer than 24 hours at the end of the calendar day
+	# split wet periods longer than 24 hours at 12 noon
 	def refine_wetperiods (self,wet_periods,download_time):
 		refined_periods = []
 		try:
 			for i in range(len(wet_periods)):
 				ws,we = wet_periods[i][0],wet_periods[i][1]
 				ws_dt = DateTime.DateTime(*ws)
-				if we != miss:
-					we_dt = DateTime.DateTime(*we)
-					num_hrs = round((we_dt-ws_dt).hours,0)
-				else:
-					dl_dt = DateTime.DateTime(*download_time) 
-					num_hrs = round((dl_dt-ws_dt).hours,0)
+				we_dt = DateTime.DateTime(*we)
+				num_hrs = round((we_dt-ws_dt).hours,0)
 					
 				if num_hrs <= 24:
 					refined_periods.append(wet_periods[i])
@@ -1641,7 +2001,10 @@ class Tomato (Base):
 					while num_hrs > 24:
 						new_start = wet_periods[i][0]
 						ns_dt = DateTime.DateTime(*new_start)
-						ne_dt = ns_dt + DateTime.RelativeDate(days=+1,hour=0,minute=0)
+						if ns_dt.hour >= 12:
+							ne_dt = ns_dt + DateTime.RelativeDate(days=+1,hour=12,minute=0)
+						else:
+							ne_dt = ns_dt + DateTime.RelativeDate(hour=12,minute=0)
 						new_end = ne_dt.tuple()[:5]
 						refined_periods.append((new_start,new_end))
 						wet_periods[i] = ((new_end[0],new_end[1],new_end[2],new_end[3],1),wet_periods[i][1])
@@ -1659,6 +2022,7 @@ class Tomato (Base):
 	# gather weather data for wet periods
 	def get_weather (self,hourly_data, wet_periods):
 		wet_data = []
+		wet_data_short = []
 		try:
 			accum_sv = 0
 			wet_hrs = 0
@@ -1669,10 +2033,7 @@ class Tomato (Base):
 			thePeriod = 0
 			ws,we = wet_periods[thePeriod]
 			ws_dt = DateTime.DateTime(*ws) + DateTime.RelativeDate(hours=+1,minute=0)
-			if we == miss:
-				we_dt = DateTime.now()
-			else:
-				we_dt = DateTime.DateTime(*we)
+			we_dt = DateTime.DateTime(*we)
 			for theTime,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags in hourly_data:
 				theTime_dt = DateTime.DateTime(*theTime)
 				if theTime_dt >= ws_dt and theTime_dt <= we_dt:
@@ -1696,6 +2057,7 @@ class Tomato (Base):
 					dsv = self.get_tomato_severity (temp_ave,wet_hrs)
 					if dsv != miss: accum_sv = accum_sv + dsv
 					wet_data.append((self.format_date(ws),self.format_date(we),wet_hrs,temp_ave,prcp_tot,dsv,accum_sv))
+					wet_data_short.append((DateTime.DateTime(*ws),DateTime.DateTime(*we),accum_sv))
 					wet_hrs = 0
 					temp_sum = 0.
 					temp_cnt = 0.
@@ -1705,10 +2067,7 @@ class Tomato (Base):
 					if thePeriod < len(wet_periods):
 						ws,we = wet_periods[thePeriod]
 						ws_dt = DateTime.DateTime(*ws) + DateTime.RelativeDate(hours=+1,minute=0)
-						if we == miss:
-							we_dt = DateTime.now()
-						else:
-							we_dt = DateTime.DateTime(*we)
+						we_dt = DateTime.DateTime(*we)
 					else:
 						break
 	#		end period in progress
@@ -1724,10 +2083,11 @@ class Tomato (Base):
 					prcp_tot = miss
 				dsv = self.get_tomato_severity (temp_ave,wet_hrs)
 				if dsv != miss: accum_sv = accum_sv + dsv
-				wet_data.append((self.format_date(ws),self.format_date(we),wet_hrs,temp_ave,prcp_tot,dsv,accum_sv))
+				wet_data.append((self.format_date(ws),self.format_date(we),wet_hrs,temp_ave,prcp_tot,dsv,accum_sv))				
+				wet_data_short.append((DateTime.DateTime(*ws),DateTime.DateTime(*we),accum_sv))
 		except:
 			print_exception()
-		return wet_data
+		return wet_data, wet_data_short
 	
 	#--------------------------------------------------------------------------------------------		
 	# tomcast severity value
@@ -1770,35 +2130,215 @@ class Tomato (Base):
 		except:
 			print_exception()
 		return datehr_str
+
+	#--------------------------------------------------------------------------------------------		
+	# convert from wet periods to values for each of current and next 6 days		
+	def get_daily_accum(self, wet_data_short, end_date_dt, last_hour):
+		daily_vals = {}
+		last_hour_dt = DateTime.DateTime(*last_hour)
+		for dy in range(-1, 7):
+			eval_dt = end_date_dt + DateTime.RelativeDate(days=+dy, hour=12, minute=0, second=0)
+			fd = '%02d/%02d' % (eval_dt.month, eval_dt.day)
+			if eval_dt > last_hour_dt:
+				daily_vals[fd] = 'NA'
+				continue
+			last_val = 0
+			for ws_dt, we_dt, val in wet_data_short:
+				if eval_dt < ws_dt:
+					daily_vals[fd] = last_val
+					break
+				elif eval_dt > ws_dt and eval_dt < we_dt:
+					daily_vals[fd] = '%d*'%val		# in progress
+					break
+				elif eval_dt == we_dt:
+					daily_vals[fd] = val
+					break
+				elif eval_dt > we_dt:
+					daily_vals[fd] = val		# need to do this in case the date is after the last wet end date
+					last_val = val
+				else:
+					print "I do not think this can happen"
+		return daily_vals
+		
+	#--------------------------------------------------------------------------------------------		
+	# find last value precip amount		
+	def getLastPrecip(self, hourly_data):
+		last_pcpn = None
+		for theTime,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags in hourly_data:
+			if prcp != miss:
+				last_pcpn = theTime
+		return last_pcpn
 	
 	#--------------------------------------------------------------------------------------------		
-	def run_tomato_for (self,stn,year,month,day,output):
+	def run_tomato_for (self,subtype,stn,year,month,day,emerg_dt,cultivar,accend,output):
 		try:
-			now = DateTime.now()
-			start_date = DateTime.DateTime(year,month,day,1)
-			if year == now.year:
-				end_date_dt = now
-			else:
-				end_date_dt = DateTime.DateTime(year,10,1,1)
+			simcastD = {}
+			bliteD = {}
+			smry_dict = {'output': output}
+			log_dict = {}
 
-			# obtain all hourly data for station
-			hourly_data, download_time, station_name, avail_vars = self.get_hourly2 (stn, start_date, end_date_dt)
+	# this is tomcast
+			if accend:
+				end_date_dt = accend + DateTime.RelativeDate(hour=12,minute=0,second=0)
+			else:
+				end_date_dt = DateTime.now()
+				year = end_date_dt.year
+			start_date = DateTime.DateTime(year,month,day,10)
 			
+			if start_date > end_date_dt:
+				return newaCommon_io.errmsg('Cannot have future transplant or fungicide dates')
+				
+			# obtain all hourly data for station
+			end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6) + DateTime.RelativeDate(hour=23,minute=0,second=0)
+			hourly_data, download_time, station_name, avail_vars = self.get_hourly2 (stn, start_date, end_fcst_dt)
+			log_dict = {'download_time':download_time, 'avail_vars':avail_vars}
+			start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
+			# append any available forecast data after end of observed data
+			if end_fcst_dt >= start_fcst_dt:
+				hourly_data = add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
+				
 			if len(hourly_data) > 0: 
 				# pick out wet periods
-				initial_wet_periods = self.get_wetting(hourly_data)
+				initial_wet_periods, last_hour = self.get_wetting(hourly_data, stn)
 				# refine wet periods (break into chunks no longer than 24 hours)
 				wet_periods = self.refine_wetperiods(initial_wet_periods,download_time)
 				
 				if len(wet_periods) > 0:
 					# get weather data for each (refined) wet period
-					wet_data = self.get_weather (hourly_data, wet_periods)
-					# convert to html and write to file
-					return newaDisease_io.tomato_for_html(station_name,download_time,wet_data,avail_vars,output)
+					log_dict['wet_data'], wet_data_short = self.get_weather (hourly_data, wet_periods)
+					# get the accum sv for today and next 6 days
+					smry_dict['daily_accums'] = self.get_daily_accum(wet_data_short, end_date_dt, last_hour)
 				else:
 					return self.nodata(stn, station_name, start_date, end_date_dt)
+					
+				# get last (forecast) value with precip amt
+				smry_dict['lastqpf'] = self.getLastPrecip(hourly_data)
 			else:
 				return self.nodata(stn, station_name, start_date, end_date_dt)
+	# end tomcast
+				
+	# this is blitecast
+			if subtype == 'blitecast':
+				if emerg_dt < start_date:
+					# need more data than we did for Tomcast
+					start_date = emerg_dt
+					if start_date > end_date_dt:
+						return newaCommon_io.errmsg('Cannot have future emergence dates')
+					hourly_data, download_time, station_name, avail_vars = self.get_hourly2 (stn, start_date, end_fcst_dt)
+					if end_fcst_dt >= start_fcst_dt:
+						hourly_data = add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)					
+				if len(hourly_data) > 0:
+					# pick out wet and dry periods
+					wet_periods = self.get_wetting_rh(hourly_data,stn)   ### new version instituted 6/18/2008 ##revised again 9/29/2011
+					if len(wet_periods) > 0:
+						# fill summary table
+#						save_date = end_fcst_dt + DateTime.RelativeDate(days = -7)
+#						summary_table = {'dates' : [], 'units' : []}
+#						for i in range(0,8):
+#							summary_table['dates'].append((save_date.year,save_date.month,save_date.day,23))
+#							summary_table['units'].append(miss)
+#							save_date = save_date + DateTime.RelativeDate(days = +1)
+#						summary_table['units'][0] = 0
+						bwet_data_short = []
+						for sTime,eTime,skip,skip,skip,skip,skip,skip,sevunits in wet_periods:
+							bwet_data_short.append((DateTime.DateTime(*sTime),DateTime.DateTime(*eTime),int(round(sevunits,0))))
+#							if (eTime[0:3] < summary_table['dates'][0][0:3]):
+#								summary_table['units'][0] = sevunits
+#							else:
+#								for i in range(0,8):
+#									if eTime[0:3] == summary_table['dates'][i][0:3]:
+#										summary_table['units'][i] = sevunits
+#										break
+#						for i in range(1,8):
+#							if summary_table['units'][i] == miss:
+#								summary_table['units'][i] = summary_table['units'][i-1]
+#						for i in range(len(summary_table['dates'])):
+#							idt = summary_table['dates'][i]
+#							zdt = "%02d/%02d" % (idt[1],idt[2])
+#							bliteD['daily_accums'][zdt] = int(round(summary_table['units'][i]))			
+						bliteD['daily_accums'] = self.get_daily_accum(bwet_data_short, end_date_dt, last_hour)
+						bliteD["wet_periods"] = wet_periods
+						
+	# this is simcast
+			elif subtype == 'simcast':
+				# obtain resisance of cultivar
+				(resistance,maturity) = self.get_potato_status(cultivar)
+				if resistance == "":
+					return newaCommon_io.errmsg('Need to select a cultivar')
+				elif resistance == 'resistant':
+					simcastD['resistant'] = True
+					simcastD['cultivar'] = cultivar
+				else:
+					# get station name from metadata
+					# determine station type
+					if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
+						station_type = 'njwx'
+					elif len(stn) == 4:
+						station_type = 'icao'
+					elif stn[0:3] == 'cu_' or stn[0:3] == 'um_' or stn[0:3] == "un_" or stn[0:3] == "uc_":
+						station_type = 'cu_log'
+					elif len(stn) == 3 or len(stn) == 6:
+						station_type = 'newa'
+					else:
+						print 'Cannot determine station type for %s'%stn
+						return newaCommon_io.errmsg('Invalid station selection')
+		
+					#initialize weather data dictionary
+					stnWeather = {'dates': [], 'forecastDayDate': None, 'tmpF': [], 'flags': [], 'prcpMM': [], 'rh': [] }
+
+					# last fungicide application
+					fDate = "%d/%d/%d" % (month,day,year)
+					fDate_dt =  start_date
+
+					# setup dates (terminology different than above)
+					start_date_dt = end_date_dt + DateTime.RelativeDate(hour=0,minute=0,second=0.0)
+					stnWeather['forecastDayDate'] = (start_date_dt.year,start_date_dt.month,start_date_dt.day)
+					download_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours=+1)
+##					stnWeather['forecastDayDate'] = (download_dt.year, download_dt.month, download_dt.day)
+					end_date_dt = start_date_dt + DateTime.RelativeDate(days=+6) + DateTime.RelativeDate(hour=23,minute=0,second=0.0)
+	
+					# get hourly data
+					start_input_dt = min(start_date_dt, fDate_dt)
+					###### ADDED FOLLOWING #####
+					start_input_dt = start_input_dt + DateTime.RelativeDate(days=-3)
+					hourly_data = collect_hourly_input(stn, start_input_dt, end_date_dt, ['temp','prcp','rhum'], station_type)
+					ks = hourly_data.keys()
+					# and format it for simcast use
+					if len(ks) > 0:
+						ks.sort()
+						for key_date in ks:
+							#these times are in LT. Convert to EST for simcast.
+							theTime_dt = DateTime.DateTime(*key_date)
+							theTime_dt = theTime_dt + DateTime.RelativeDate(hours=-theTime_dt.dst)
+							est = (theTime_dt.year,theTime_dt.month,theTime_dt.day,theTime_dt.hour)
+							stnWeather['dates'].append(est)
+							stnWeather['tmpF'].append(hourly_data[key_date]['temp'][0])
+							if hourly_data[key_date]['prcp'][0] != -999:
+								prcp = inch_to_mm.convert(hourly_data[key_date]['prcp'][0])
+							else:
+								prcp = -999
+							stnWeather['prcpMM'].append(prcp)
+							if hourly_data[key_date]['rhum'][1] == "F" or station_type == 'icao' and hourly_data[key_date]['rhum'][0] != miss:
+								stnWeather['rh'].append(min(100,hourly_data[key_date]['rhum'][0]+15))
+							else:
+								stnWeather['rh'].append(hourly_data[key_date]['rhum'][0])
+							stnWeather['flags'].append(hourly_data[key_date]['prcp'][1])
+						simcastD = self.process_simcast(station_name,resistance,fDate,stnWeather)
+						simcastD['resistant'] = False
+					else:
+						return newaCommon_io.nodata()
+
+					if not simcastD.has_key('length') or simcastD['length'] <= 0:
+						return newaCommon_io.nodata()
+					simcastD['daily_accums'] = {}
+					for i in range(0, simcastD['length']):
+						zmmdd = simcastD['dates'][i].split('/')
+						zdt = "%02d/%02d" % (int(zmmdd[0]),int(zmmdd[1]))
+						simcastD['daily_accums'][zdt] = [simcastD['bliteVals'][i], simcastD['bliteCrit'][i], simcastD['fungicideVals'][i], simcastD['fungicideCrit'][i]]						
+			# end simcast
+			
+			# send off data to results page
+			return newaDisease_io.tomato_for_html(station_name,smry_dict,log_dict,simcastD,bliteD)
 		except:
 			print_exception()
 			return newaCommon_io.errmsg('Unable to complete request')
@@ -2050,6 +2590,18 @@ def process_input (request,path):
 							accend = None
 					else:
 						accend = None
+					if request.form.has_key('emonth'):
+						emonth = int(request.form['emonth'])
+					else:
+						emonth = None
+					if request.form.has_key('eday'):
+						eday = int(request.form['eday'])
+					else:
+						eday = None
+					if request.form.has_key('subtype'):
+						subtype = request.form['subtype']
+					else:
+						subtype = None
 					if request.form.has_key('potato_cultivar'):
 						potato_cultivar = request.form['potato_cultivar']
 					else:
@@ -2170,6 +2722,11 @@ def process_input (request,path):
 		if year and year == 9999:
 			now = DateTime.now()
 			year = now.year
+		
+		if emonth and eday:
+			emerg_dt = DateTime.DateTime(year,int(emonth),int(eday),10)
+		else:
+			emerg_dt = None
 
 # 		send input to appropriate routine
 		if stn:
@@ -2190,9 +2747,9 @@ def process_input (request,path):
 			elif smry_type == 'potato_pdays':
 				return Potato().run_potato_pdays(stn,year,month,day,output)
 			elif smry_type in ['onion_dis','onion_onlog','onion_sbalog','onion_smbalog']:
-				return Onion().run_onion_dis(stn,year,month,day,smry_type)
+				return Onion().run_onion_dis(stn,month,day,smry_type,accend,output)
 			elif smry_type == 'tomato_for':
-				return Tomato().run_tomato_for(stn,year,month,day,output)
+				return Tomato().run_tomato_for(subtype,stn,year,month,day,emerg_dt,tomato_cultivar,accend,output)
 			elif smry_type == 'grape_dis':
 				return Grape().run_grape_dis(stn,year)
 			elif smry_type == 'alf_weev':

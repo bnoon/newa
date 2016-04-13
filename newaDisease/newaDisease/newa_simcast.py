@@ -151,6 +151,7 @@ class general_simcast(object) :
 			self.blightList.append(blightUnits)
 			self.blightDateList.append(dateString)
 			self.blightCritList.append(critFlag)
+		print 'end of saveBlightTableValues',self.blightList
 			
 
 	def update_blightTableValues(self,monthDay) :
@@ -183,6 +184,7 @@ class general_simcast(object) :
 			self.blightDateList.append(monthDay)
 			self.blightList.append(last_blight_value)
 			self.blightCritList.append(last_crit_value)
+		print 'end of update_blightTableValues',self.blightList
 
 
 	def saveFungicideTableValues(self,fungicideUnit) :
@@ -352,6 +354,9 @@ class general_simcast(object) :
 
 				sDate = (self.wet_start.year,self.wet_start.month,self.wet_start.day,self.wet_start.hour)
 				eDate = (self.wet_end.year,self.wet_end.month,self.wet_end.day,self.wet_end.hour)
+				
+#				print 'in check_wet_counter',TmpType,sDate,eDate
+				
 				# --------------------------------------------------
 				# Update 7/7/2011:
 				# weather changed  to local time in  weather programs
@@ -394,6 +399,7 @@ class general_simcast(object) :
 					#
 					# We are saving the following for disease alerts
 					#
+					
 					if ( (eTime >=self.forecast_sTime) and (eTime <=self.final_fc_eTime )) :
 						self.fc_blight_date = "%s/%s"%(eTime.month,eTime.day)
 						self.fc_blight = self.postFung_blight_units
@@ -406,7 +412,6 @@ class general_simcast(object) :
 				self.init_wet_counters()
 			except :
 				print_exception()
-				print 'hours',self.rh_hours
 				sys.exit()
 
 	def fix_day(self) :
@@ -667,6 +672,8 @@ class general_simcast(object) :
 				self.criticalTime = self.fungicideTime + DateTime.RelativeDateTime(days=+5)
 				self.criticalDay = DateTime.DateTime(self.criticalTime.year,self.criticalTime.month,self.criticalTime.day)
 
+#			print '   in loop_through_days',self.today,index,self.rh[index]
+
 			this_rh = self.rh[index]
 			this_tmp = 	self.tmp[index]
 			this_prcp = self.prcp[index]
@@ -713,15 +720,17 @@ class general_simcast(object) :
 		self.forecast_day3 = self.forecast_sTime + DateTime.RelativeDate(days=+3)
 		last_date = self.dates[-1]
 		(yyyy,mm,dd,hh) = last_date
-		self.fc_end = "%s/%s/%s"%(mm,dd,yyyy)
+		self.fc_end = "%s/%s/%s"%(mm,dd,yyyy)		#not used -KLE
 			 
 		first_date = self.dates[0]
 		self.sTime = apply(DateTime.Date,first_date)
 		self.eTime = apply(DateTime.Date,last_date)
+		self.eTime = self.eTime + DateTime.RelativeDate(hours=-1)	# circumvent dst problems
 
 
 	def process_simcast(self,stn_name,resistance,doseVars,stnWeather) :
 #		print 'here in general simcast'
+		print 'stnWeather:',stnWeather #####
 		resultsD = {'length':0}
 
 		try:
@@ -738,7 +747,7 @@ class general_simcast(object) :
 					forecastDayDate = stnWeather['forecastDayDate']
 					self.forecast_sTime = apply(DateTime.Date,forecastDayDate)
 				self.final_fc_eTime = self.forecast_sTime + DateTime.RelativeDate(days=+3)
-		
+						
 				self.identify_blight_dictionary(resistance)
 				self.get_fungicide_times(doseVars)
 				self.get_blitecast_time()
@@ -747,6 +756,7 @@ class general_simcast(object) :
 			resultsD = self.finish_up()
 		except:
 			print_exception()
+		print 'resultsD', resultsD #####
 		return resultsD
 
 			
