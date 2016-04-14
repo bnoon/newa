@@ -142,6 +142,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 '2wi' : {'temp': '3wi', 'lwet': '3wi', 'rhum': '3wi', 'prcp': '3wi', 'wspd': '3wi', 'wdir': '3wi', 'srad': 'sdl'},
 '3wi' : {'temp': '2wi', 'lwet': '2wi', 'rhum': '2wi', 'prcp': '2wi', 'wspd': 'sod', 'wdir': 'sod', 'srad': 'sdl'},
 'wbs' : {'temp': '3wi', 'lwet': '3wi', 'rhum': '3wi', 'prcp': '3wi', 'wspd': '3wi', 'wdir': '3wi', 'srad': 'sdl'},
+'wor' : {'temp': '3wi', 'lwet': '3wi', 'rhum': '3wi', 'prcp': '3wi', 'wspd': '3wi', 'wdir': '3wi', 'srad': '3wi'},
 'avo' : {'temp': 'kroc', 'rhum': 'kroc', 'prcp': 'kroc'},
 'sho' : {'temp': 'cro', 'rhum': 'cro', 'prcp': 'cro', 'wspd': 'cro', 'wdir': 'cro', 'lwet': 'cro', 'srad': 'cro'},
 'mbe' : {'temp': 'um_cso', 'rhum': 'um_cso', 'prcp': 'um_cso', 'wspd': 'um_cso', 'wdir': 'um_cso', 'lwet': 'um_cso', 'srad': 'um_cso'},
