@@ -2562,6 +2562,8 @@ def process_help (request,path):
 def process_input (request,path):
 	try:
 #	 	retrieve input
+		emonth = None
+		eday = None
 		if path is None:
 			if request and request.form:
 				try:

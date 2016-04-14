@@ -4,11 +4,12 @@ from quixote.errors import TraversalError
 
 class RootDirectory(Directory):
 
-	_q_exports = ["","get_input","process_input","process_help","apple_lw","apple_fb",
+	_q_exports = ["","get_input","process_input","process_help","apple_lw",
 	              "potato_lb","potato_lb_old","potato_simcast","potato_pdays","potato_disease",
 	              "alf_weev","cabbage_maggot","onion_maggot",
 	              "onion_dis","onion_onlog","onion_sbalog","onion_smbalog",
-	              "tomato_for","grape_dis"]
+	              "tomato_for"]
+	#removed 'grape_dis','apple_fb' - 4/14/16 kle
 
 #	put up input page for following
 	def _q_index (self):						#default
@@ -102,13 +103,13 @@ class RootDirectory(Directory):
 			path = ['onion_smbalog'] + path
 			return process_input(None,path)
 	def tomato_for (self, path=None) :
-		if not path or path == ['']:
-			from newaDisease_io import tomato_for_input
-			return tomato_for_input()
-		else:
-			from newaDisease import process_input
-			path = ['tomato_for'] + path
-			return process_input(None,path)
+#		if not path or path == ['']:
+		from newaDisease_io import tomato_for_input
+		return tomato_for_input()
+#		else:
+#			from newaDisease import process_input
+#			path = ['tomato_for'] + path
+#			return process_input(None,path)
 	def grape_dis (self, path=None) :
 		if not path or path == ['']:
 			from newaDisease_io import grape_dis_input
@@ -126,10 +127,12 @@ class RootDirectory(Directory):
 			path = ['alf_weev'] + path
 			return process_input(None,path)
 	def cabbage_maggot (self, path=None) :
-#		if not path or path == ['']:
-		from newaDisease_io import cabbage_maggot_input
-		return cabbage_maggot_input()
-#		else:
+		if not path or path == ['']:
+			from newaDisease_io import cabbage_maggot_input
+			return cabbage_maggot_input()
+		else:
+			from newaDisease_io import cabbage_maggot_input
+			return cabbage_maggot_input()
 #			from newaDisease import process_input
 #			path = ['cabbage_maggot'] + path
 #			return process_input(None,path)

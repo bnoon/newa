@@ -193,11 +193,12 @@ def apple_lw_input [html] ():
 	<HEAD>
 	<TITLE>Apple Wet/Dry Conditions</TITLE>
 	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping4.js"></script>
 	<STYLE TYPE="text/css">
 	TD
 	   {
@@ -212,25 +213,24 @@ def apple_lw_input [html] ():
 	   }
 	</STYLE>
 	<script  language="JavaScript">
-		function setSelectValue(oVal) {
-			var oSel = document.stationLister.stn;
-			for ( var i = 0; i < oSel.options.length; i++ ) {
-				if( oSel.options[i].value == oVal ) {
-					oSel.options[i].selected = true;
-				}
-			}
-		}
+		$(document).ready(function() {
+			stateStationMapList({
+				reqval: 'eslw',
+				event_type: 'select_station',
+				where: '#station_area'
+			});
+		});
 	</script>
 	</HEAD>
 
-	<BODY BGCOLOR="#FFFFFF" onload="stationMap('eslw','select_station');">
+	<BODY BGCOLOR="#FFFFFF">
 	<p class="banner">NEWA Season-long Details of Leaf Wet and Dry Conditions</p>
 	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
 	<table border="1" cellspacing="0" cellpadding="5">
 	<tr>
 	<td valign="top">
+	<div id="station_area"></div>
 	'''
-	display_station_list("eslw")
 	now = DateTime.now()
 	'<P>Year:<BR>' 
 	'<select name="year">'
@@ -258,69 +258,69 @@ def apple_lw_input [html] ():
 	</HTML>
 	'''
 # don't believe following is used
-def apple_fb_input [html] ():
-	'''
-	<HTML>
-	<HEAD>
-	<TITLE>Apple Fire Blight Logs</TITLE>
-	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
-	<STYLE TYPE="text/css">
-	TD
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   font-weight:bold;
-	   }
-	BODY
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   }
-	</STYLE>
-	<script  language="JavaScript">
-		function setSelectValue(oVal) {
-			var oSel = document.stationLister.stn;
-			for ( var i = 0; i < oSel.options.length; i++ ) {
-				if( oSel.options[i].value == oVal ) {
-					oSel.options[i].selected = true;
-				}
-			}
-		}
-	</script>
-	</HEAD>
-
-	<BODY BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
-	<p class="banner">NEWA Apple Fire Blight Logs</p>
-	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
-	<table border="1" cellspacing="0" cellpadding="5">
-	<tr>
-	<td valign="top">
-	'''
-	display_station_list()
-	'''
-	<input type="hidden" name="type" value="apple_fb">
-	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
-	</td>
-	<td>
-	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
-	</td>
-	</tr>
-	</table>
-	</FORM>
-	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
-	<script type="text/javascript">
-	try {
-	var pageTracker = _gat._getTracker("UA-8808137-1");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>
-	</BODY>
-	</HTML>
-	'''
+#def apple_fb_input [html] ():
+#	'''
+#	<HTML>
+#	<HEAD>
+#	<TITLE>Apple Fire Blight Logs</TITLE>
+#	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+#	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+#	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+#	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+#	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+#	<STYLE TYPE="text/css">
+#	TD
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt;
+#	   font-weight:bold;
+#	   }
+#	BODY
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt;
+#	   }
+#	</STYLE>
+#	<script  language="JavaScript">
+#		function setSelectValue(oVal) {
+#			var oSel = document.stationLister.stn;
+#			for ( var i = 0; i < oSel.options.length; i++ ) {
+#				if( oSel.options[i].value == oVal ) {
+#					oSel.options[i].selected = true;
+#				}
+#			}
+#		}
+#	</script>
+#	</HEAD>
+#
+#	<BODY BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
+#	<p class="banner">NEWA Apple Fire Blight Logs</p>
+#	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+#	<table border="1" cellspacing="0" cellpadding="5">
+#	<tr>
+#	<td valign="top">
+#	'''
+#	display_station_list()
+#	'''
+#	<input type="hidden" name="type" value="apple_fb">
+#	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+#	</td>
+#	<td>
+#	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+#	</td>
+#	</tr>
+#	</table>
+#	</FORM>
+#	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+#	<script type="text/javascript">
+#	try {
+#	var pageTracker = _gat._getTracker("UA-8808137-1");
+#	pageTracker._trackPageview();
+#	} catch(err) {}</script>
+#	</BODY>
+#	</HTML>
+#	'''
 
 def potato_lb_old_input [html] ():
 	'''
@@ -1104,77 +1104,77 @@ def tomato_for_input [html] ():
 	</BODY>
 	</HTML>
 	'''
-
-def grape_dis_input [html] ():
-	'''
-	<HTML>
-	<HEAD>
-	<TITLE>Grape Disease Models</TITLE>
-	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
-	<STYLE TYPE="text/css">
-	TD
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   font-weight:bold;
-	   }
-	BODY
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   }
-	</STYLE>
-	<script  language="JavaScript">
-		function setSelectValue(oVal) {
-			var oSel = document.stationLister.stn;
-			for ( var i = 0; i < oSel.options.length; i++ ) {
-				if( oSel.options[i].value == oVal ) {
-					oSel.options[i].selected = true;
-				}
-			}
-		}
-	</script>
-	</HEAD>
-
-	<BODY BGCOLOR="#FFFFFF" onload="stationMap('eslw','select_station');">
-	<p class="banner">NEWA Grape Disease Models</p>
-	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
-	<table border="1" cellspacing="0" cellpadding="5">
-	<tr>
-	<td valign="top">
-	'''
-	display_station_list("eslw")
-	now = DateTime.now()
-	'<P>Year:<BR>' 
-	'<select name="year">'
-	'<option value="%d" selected>%d</option>'%(now.year,now.year)
-	for yr in range(now.year-1,1995,-1):
-		'<option value="%d">%d</option>'%(yr,yr)
-	'</select>'
-	'''
-	<input type="hidden" name="type" value="grape_dis">
-	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
-	</td>
-	<td>
-	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
-	</td>
-	</tr>
-	</table>
-	</FORM>
-	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
-	<script type="text/javascript">
-	try {
-	var pageTracker = _gat._getTracker("UA-8808137-1");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>
-	</BODY>
-	</HTML>
-	'''
+#don't believe following is used any more
+#def grape_dis_input [html] ():
+#	'''
+#	<HTML>
+#	<HEAD>
+#	<TITLE>Grape Disease Models</TITLE>
+#	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+#	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+#	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+#	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
+#	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+#	<STYLE TYPE="text/css">
+#	TD
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt;
+#	   font-weight:bold;
+#	   }
+#	BODY
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt;
+#	   }
+#	</STYLE>
+#	<script  language="JavaScript">
+#		function setSelectValue(oVal) {
+#			var oSel = document.stationLister.stn;
+#			for ( var i = 0; i < oSel.options.length; i++ ) {
+#				if( oSel.options[i].value == oVal ) {
+#					oSel.options[i].selected = true;
+#				}
+#			}
+#		}
+#	</script>
+#	</HEAD>
+#
+#	<BODY BGCOLOR="#FFFFFF" onload="stationMap('eslw','select_station');">
+#	<p class="banner">NEWA Grape Disease Models</p>
+#	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+#	<table border="1" cellspacing="0" cellpadding="5">
+#	<tr>
+#	<td valign="top">
+#	'''
+#	display_station_list("eslw")
+#	now = DateTime.now()
+#	'<P>Year:<BR>' 
+#	'<select name="year">'
+#	'<option value="%d" selected>%d</option>'%(now.year,now.year)
+#	for yr in range(now.year-1,1995,-1):
+#		'<option value="%d">%d</option>'%(yr,yr)
+#	'</select>'
+#	'''
+#	<input type="hidden" name="type" value="grape_dis">
+#	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+#	</td>
+#	<td>
+#	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+#	</td>
+#	</tr>
+#	</table>
+#	</FORM>
+#	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+#	<script type="text/javascript">
+#	try {
+#	var pageTracker = _gat._getTracker("UA-8808137-1");
+#	pageTracker._trackPageview();
+#	} catch(err) {}</script>
+#	</BODY>
+#	</HTML>
+#	'''
 
 def alf_weev_input [html] ():
 	'''
@@ -1182,11 +1182,12 @@ def alf_weev_input [html] ():
 	<HEAD>
 	<TITLE>Alfalfa Weevil</TITLE>
 	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping4.js"></script>
 	<STYLE TYPE="text/css">
 	TD
 	   {
@@ -1201,25 +1202,22 @@ def alf_weev_input [html] ():
 	   }
 	</STYLE>
 	<script  language="JavaScript">
-		function setSelectValue(oVal) {
-			var oSel = document.stationLister.stn;
-			for ( var i = 0; i < oSel.options.length; i++ ) {
-				if( oSel.options[i].value == oVal ) {
-					oSel.options[i].selected = true;
-				}
-			}
-		}
+		$(document).ready(function() {
+			stateStationMapList({
+				reqval: 'all',
+				event_type: 'select_station',
+				where: '#station_area'
+			});
+		});
 	</script>
 	</HEAD>
-	<BODY BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
+	<BODY BGCOLOR="#FFFFFF">
 	<p class="banner">NEWA Alfalfa Weevil</p>
 	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
 	<table border="1" cellspacing="0" cellpadding="5">
 	<tr>
 	<td valign="top">
-	'''
-	display_station_list()
-	'''
+	<div id="station_area"></div>
 	<input type="hidden" name="type" value="alf_weev">
 	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
 	</td>
@@ -1245,14 +1243,15 @@ def cabbage_maggot_input [html] ():
 	<HEAD>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<TITLE>Cabbage Maggot</TITLE>
-	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/humanity/jquery-ui.css">
-	<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/humanity/jquery-ui.css" type="text/css">
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping4.js"></script>
 	<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
 	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/newaGraph.js"></script>
 	<STYLE TYPE="text/css">
@@ -1275,14 +1274,6 @@ def cabbage_maggot_input [html] ():
 		border: 0px gray solid; }
 	</STYLE>
 	<script  language="JavaScript">
-		function setSelectValue(oVal) {
-			var oSel = document.stationLister.stn;
-			for ( var i = 0; i < oSel.options.length; i++ ) {
-				if( oSel.options[i].value == oVal ) {
-					oSel.options[i].selected = true;
-				}
-			}
-		}
 		function getCabbageMaggot() {
 			var req_stn = $("select[name=stn] option:selected").val(),
 				accend = $("#dpick").val(),
@@ -1301,33 +1292,38 @@ def cabbage_maggot_input [html] ():
 					});
 				});
 			});
-//			$.get('http://newatest.nrcc.cornell.edu/newaDisease/process_help',params,function(helpdata) {
-//				$('#third').html(helpdata);
-//			});
 			return false;
 		}
 		$(document).ready(function() {
 			var myDate = new Date(),
 				todayDate = (myDate.getMonth()+1) + "/" + myDate.getDate() + "/" + myDate.getFullYear();
 			$("#dpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "", changeMonth: true, changeYear: true }).val(todayDate);
-			$("#righttabs").tabs();
+			$("#righttabs").tabs({
+				activate: function () {
+					var center = map.getCenter();
+					google.maps.event.trigger(map, 'resize');
+					map.setCenter(center);
+				}
+			});
 			$("form .button").on("click", function () {
 				getCabbageMaggot();
 			});
-			stationMap("all","select_station");
+			stateStationMapList({
+				reqval: 'all',
+				event_type: 'select_station',
+				where: '#station_area'
+			});
 			$.get('http://newatest.nrcc.cornell.edu/cabbage_maggot_info.htm',function(helpdata) {
 				$('#third').html(helpdata);
 			});
 		});
 	</script>
 	</HEAD>
-	<body BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
+	<body BGCOLOR="#FFFFFF">
 	<p class="banner">NEWA Cabbage Maggot</p>
 	<div id="leftbox">
 		<FORM ACTION="#" NAME="stationLister">
-	'''
-	display_station_list()
-	'''
+		<div id="station_area"></div>
 		<p>Date of Interest:
 		<br><input type="text" id="dpick" value="">
 		<input type="hidden" name="pest" value="cabbage_maggot">
@@ -1369,14 +1365,15 @@ def onion_maggot_input [html] ():
 	<HEAD>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<TITLE>Onion Maggot</TITLE>
-	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/humanity/jquery-ui.css">
-	<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/humanity/jquery-ui.css" type="text/css">
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping4.js"></script>
 	<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
 	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/newaGraph.js"></script>
 	<STYLE TYPE="text/css">
@@ -1399,14 +1396,6 @@ def onion_maggot_input [html] ():
 		border: 0px gray solid; }
 	</STYLE>
 	<script  language="JavaScript">
-		function setSelectValue(oVal) {
-			var oSel = document.stationLister.stn;
-			for ( var i = 0; i < oSel.options.length; i++ ) {
-				if( oSel.options[i].value == oVal ) {
-					oSel.options[i].selected = true;
-				}
-			}
-		}
 		function getOnionMaggot() {
 			var req_stn = $("select[name=stn] option:selected").val(),
 				accend = $("#dpick").val(),
@@ -1431,24 +1420,32 @@ def onion_maggot_input [html] ():
 			var myDate = new Date(),
 				todayDate = (myDate.getMonth()+1) + "/" + myDate.getDate() + "/" + myDate.getFullYear();
 			$("#dpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "", changeMonth: true, changeYear: true }).val(todayDate);
-			$("#righttabs").tabs();
+			$("#righttabs").tabs({
+				activate: function () {
+					var center = map.getCenter();
+					google.maps.event.trigger(map, 'resize');
+					map.setCenter(center);
+				}
+			});
 			$("form .button").on("click", function () {
 				getOnionMaggot();
 			});
-			stationMap("all","select_station");
+			stateStationMapList({
+				reqval: 'all',
+				event_type: 'select_station',
+				where: '#station_area'
+			});
 			$.get('http://newatest.nrcc.cornell.edu/onion_maggot_info.htm',function(helpdata) {
 				$('#third').html(helpdata);
 			});
 		});
 	</script>
 	</HEAD>
-	<body BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
+	<body BGCOLOR="#FFFFFF">
 	<p class="banner">NEWA Onion Maggot</p>
 	<div id="leftbox">
 		<FORM ACTION="#" NAME="stationLister">
-	'''
-	display_station_list()
-	'''
+		<div id="station_area"></div>
 		<p>Date of Interest:
 		<br><input type="text" id="dpick" value="">
 		<input type="hidden" name="pest" value="onion_maggot">
@@ -1490,14 +1487,15 @@ def onion_dis_input [html] ():
 	<HEAD>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<TITLE>Onion Disease</TITLE>
-	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/humanity/jquery-ui.css">
-	<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/humanity/jquery-ui.css" type="text/css">
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping4.js"></script>
 	<style TYPE="text/css">
 	body {
 	   font-family: "Arial", "Helvetica", sans-serif;
@@ -1520,14 +1518,6 @@ def onion_dis_input [html] ():
 		padding: 10px 1px; }
 	</style>
 	<script  language="JavaScript">
-		function setSelectValue(oVal) {
-			var oSel = document.stationLister.stn;
-			for ( var i = 0; i < oSel.options.length; i++ ) {
-				if( oSel.options[i].value == oVal ) {
-					oSel.options[i].selected = true;
-				}
-			}
-		}
 		function getOnionDis() {
 			var req_stn = $("select[name=stn] option:selected").val(),
 				plant_mon =  $("select[name=month] option:selected").val(),
@@ -1556,23 +1546,33 @@ def onion_dis_input [html] ():
 			var myDate = new Date(),
 				todayDate = (myDate.getMonth()+1) + "/" + myDate.getDate() + "/" + myDate.getFullYear();
 			$("#dpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "", changeMonth: true, changeYear: true }).val(todayDate);
-			$("#righttabs").tabs();
+			$("#righttabs").tabs({
+				activate: function () {
+					var center = map.getCenter();
+					google.maps.event.trigger(map, 'resize');
+					map.setCenter(center);
+				}
+			});
 			$("form .button").on("click", function () {
 				getOnionDis();
 			});
-			stationMap("rh","select_station");
+			stateStationMapList({
+				reqval: 'rh',
+				event_type: 'select_station',
+				where: '#station_area'
+			});
 			$.get('http://newatest.nrcc.cornell.edu/onion_dis_info.htm',function(helpdata) {
 				$('#third').html(helpdata);
 			});
 		});
 	</script>
 	</HEAD>
-	<body BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
+	<body BGCOLOR="#FFFFFF">
 	<p class="banner">NEWA Onion Disease</p>
 	<div id="leftbox">
 		<FORM ACTION="#" NAME="stationLister">
+		<div id="station_area"></div>
 	'''
-	display_station_list('rh')
 	'<p>Planting Date:<br />'
 	'<select name="month">'
 	for mon_num,mon_name in month_list:
@@ -1614,69 +1614,6 @@ def onion_dis_input [html] ():
 		</div>
 	</div>
 
-	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
-	<script type="text/javascript">
-	try {
-	var pageTracker = _gat._getTracker("UA-8808137-1");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>
-	</BODY>
-	</HTML>
-	'''
-
-def onion_maggot_old_input [html] ():
-	'''
-	<HTML>
-	<HEAD>
-	<TITLE>Onion Maggot</TITLE>
-	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
-	<STYLE TYPE="text/css">
-	TD
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   font-weight:bold;
-	   }
-	BODY
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   }
-	</STYLE>
-	<script  language="JavaScript">
-		function setSelectValue(oVal) {
-			var oSel = document.stationLister.stn;
-			for ( var i = 0; i < oSel.options.length; i++ ) {
-				if( oSel.options[i].value == oVal ) {
-					oSel.options[i].selected = true;
-				}
-			}
-		}
-	</script>
-	</HEAD>
-	<BODY BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
-	<p class="banner">NEWA Onion Maggot</p>
-	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
-	<table border="1" cellspacing="0" cellpadding="5">
-	<tr>
-	<td valign="top">
-	'''
-	display_station_list()
-	'''
-	<input type="hidden" name="type" value="onion_maggot">
-	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
-	</td>
-	<td>
-	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
-	</td>
-	</tr>
-	</table>
-	</FORM>
 	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
 	<script type="text/javascript">
 	try {
@@ -3055,6 +2992,10 @@ def tomato_for_html [html] (stn_name,smry_dict,log_dict, simcastD, bliteD):
 		else:
 			wet_end_parts = wet_end.split('/')
 			this_month = int(wet_end_parts[0])
+		if prcp_tot == -999:
+			prcp_str = '-'
+		else:
+			prcp_str = '%.2f' % prcp_tot
 		if this_month != last_month:
 			'<tr><td colspan=7><A NAME=%s></a></td</tr>'%(month_abbrev[this_month])
 			last_month = this_month
@@ -3067,7 +3008,7 @@ def tomato_for_html [html] (stn_name,smry_dict,log_dict, simcastD, bliteD):
 		'<td class=%s_back>%s</td>'%(color,wet_end)
 		'<td class=%s_back>%s</td>'%(color,wet_hrs)
 		'<td class=%s_back>%s</td>'%(color,temp_ave)
-		'<td class=%s_back>%.2f</td>'%(color,prcp_tot)
+		'<td class=%s_back>%s</td>'%(color,prcp_str)
 		'<td class=%s_back>%s</td>'%(color,dsv)
 		'<td class=%s_back>%s</td>'%(color,accum_sv)
 		'</TR>'
