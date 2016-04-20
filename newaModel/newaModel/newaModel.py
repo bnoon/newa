@@ -4,10 +4,10 @@ import sys, copy, math
 from mx import DateTime
 from print_exception import print_exception
 import newaModel_io
-if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
+if '/Users/kle1/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/kle1/kleWeb/newaCommon')
 import newaCommon_io
 from newaCommon import *
-if '/Users/keith/NDFD' not in sys.path: sys.path.insert(1,'/Users/keith/NDFD')
+if '/Users/kle1/NDFD' not in sys.path: sys.path.insert(1,'/Users/kle1/NDFD')
 
 miss = -999
 month_names = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -2124,32 +2124,37 @@ class Apple (Base,Models):
 			# determine information needed for calculations for particular pest
 			if pest == 'apple-pc':
 				from pc_info_dict import pest_status_management	
-				biofix_dd = phen_events_dict['macph_pf_43']['dd'][3]
+				biofix_dd = 303			#updated from 580 for base 50 petal fall  3/2016
 				biofix2_dd = 99999
 			elif pest == 'apple-oblr':
 				from oblr_info_dict import pest_status_management	
-				biofix_dd = phen_events_dict['oblr_catch1_43']['dd'][3]
+				biofix_dd = 1212 		#updated from phen_events_dict['oblr_catch1_43']['dd'][3]  4/2016
 				biofix2_dd = 99999
 			elif pest == 'apple-stlm':
 				from stlm_info_dict import pest_status_management	
-				biofix_dd = 701			#use phenology through 700 degree days
-				biofix2_dd = 1200
+				biofix_dd = 274			#updated from 701 (use phenology through 700 degree days)  4/2016
+				biofix2_dd = 977		#updated from 1200  4/2016
 				biofix3_dd = 99999
 			elif pest == 'apple-cm':
 				from cm_info_dict import pest_status_management	
-				biofix_dd = 611
-				biofix2_dd = 1500
+				biofix_dd = 404			#updated from 611 for base 50 3/2016
+				biofix2_dd = 1501
 				biofix3_dd = 99999
 			elif pest == 'apple-ofm':
 				from ofm_info_dict import pest_status_management	
-				biofix_dd = 450
-				biofix2_dd = 1100
-				biofix3_dd = 1500
+				biofix_dd = 378			#updated from 450  4/2016
+				biofix2_dd = 1066		#updated from 1100  4/2016
+				biofix3_dd = 2436		#updated from 1500  4/2016
 				biofix4_dd = 99999
 			elif pest == 'apple-maggot':
 				from am_info_dict import pest_status_management	
-				biofix_dd = phen_events_dict['am_catch1_43']['dd'][3]
+				biofix_dd = 1297		#updated from 2116 for base 50 3/2016
 				biofix2_dd = 99999
+			elif pest == 'apple-sjs':
+				from sjs_info_dict import pest_status_management	
+				biofix_dd = 340
+				biofix2_dd = 1057
+				biofix3_dd = 99999
 			else:
 				return newaCommon_io.errmsg('A model is not available for the pest you selected.')
 				
@@ -2193,18 +2198,14 @@ class Apple (Base,Models):
 					biofix_status = "post_biofix"
 					bf_miss = None
 				else:
-					if not bf_date and pest_status_management['biofix_abbrev']:
-						bf_date = self.get_biofix(stn,pest_status_management['biofix_abbrev'],start_date_dt.year)	#check file
+#					biofix file no longer maintained, so comment following 2 lines
+#					if not bf_date and pest_status_management['biofix_abbrev']:
+#						bf_date = self.get_biofix(stn,pest_status_management['biofix_abbrev'],start_date_dt.year)	#check file
 					if bf_date and bf_date <= end_date_dt:
-						if pest == 'apple-stlm':
-							phenology = None
-							biofix_status = 'pre_biofix'
-							bf_miss = None
-						else:
-							start_date_dt = bf_date
-							phenology = biofix_phenology
-							biofix_status = "post_biofix"
-							bf_miss = None
+						start_date_dt = bf_date
+						phenology = biofix_phenology
+						biofix_status = "post_biofix"
+						bf_miss = None
 					elif bf_date and bf_date > end_date_dt:
 						phenology = None
 						biofix_status = "pre_biofix"
@@ -2221,27 +2222,31 @@ class Apple (Base,Models):
 			if len(daily_data) > 0:
 				# calculate base 43 degree days for phenology
 				if biofix_status == 'pre_biofix':
-					smry_dict['basetemp'] = 43					#always 43 for phenology
+					if pest in ['apple-pc', 'apple-maggot', 'apple-cm', 'apple-sjs']:
+						smry_dict['basetemp'] = 50
+					else:
+						smry_dict['basetemp'] = 43
 					dd_type = 'dd%dbe' % smry_dict['basetemp']
 					ret_bf_date, ddaccum, ddmiss = self.accum_degday(daily_data, start_date_dt, end_date_dt, dd_type, biofix_dd, stn, station_name)
-					if pest == 'apple-stlm' and ret_bf_date:
-						if not bf_date:		#past period using phenology, now get real biofix
-							biofix_dd = phen_events_dict['stlm_catch1_43']['dd'][3]
-							bf_date, ddaccum, bf_miss = self.accum_degday(daily_data, start_date_dt, end_date_dt, dd_type, biofix_dd, stn, station_name)
-						biofix_status = 'post_biofix'
-						phenology = biofix_phenology						
-					elif ret_bf_date and not bf_date:
+					if ret_bf_date and not bf_date:
 						bf_miss = ddmiss
 						bf_date = ret_bf_date
 						biofix_status = 'post_biofix'
 						phenology = biofix_phenology
 					else:
+						ret_date, pddaccum, ddmiss = self.accum_degday(daily_data, start_date_dt, end_date_dt, 'dd43be', biofix_dd, stn, station_name)
 						phen_stages = []		#order latest to earliest
-						phen_stages.append(("Post Petal Fall",580))
-						for phen in ['macph_pf_43','macph_bloom_43','macph_pink_43','macph_tightcluster_43','macph_halfgreen_43','macph_greentip_43','macph_st_43','macph_dormant_43']:
+						if pest == 'apple-stlm':
+							phen_list = ['macph_pink_43','macph_tightcluster_43','macph_halfgreen_43','macph_greentip_43','macph_st_43','macph_dormant_43']
+						elif pest == 'apple-ofm':
+							phen_list = ['macph_bloom_43','macph_pink_43','macph_tightcluster_43','macph_halfgreen_43','macph_greentip_43','macph_st_43','macph_dormant_43']
+						else:
+							phen_stages.append(("Post Petal Fall",580))
+							phen_list = ['macph_pf_43','macph_bloom_43','macph_pink_43','macph_tightcluster_43','macph_halfgreen_43','macph_greentip_43','macph_st_43','macph_dormant_43']
+						for phen in phen_list:
 							phen_stages.append((phen_events_dict[phen]['name'],phen_events_dict[phen]['dd'][2]))
 						for stage,stage_dd in phen_stages:
-							if ddaccum >= stage_dd:
+							if pddaccum >= stage_dd:
 								phenology = stage
 								break
 
@@ -2379,6 +2384,8 @@ class Apple (Base,Models):
 				from cm_info_dict import pest_status_management	
 			elif pest == 'apple-maggot':
 				from am_info_dict import pest_status_management	
+			elif pest == 'apple-sjs':
+				from sjs_info_dict import pest_status_management	
 			else:
 				return newaCommon_io.errmsg('A model is not available for the pest you selected.')
 							
@@ -2700,7 +2707,7 @@ class Grape (Base,Apple,Models):
 						smry_dict[std]['pmil'] = pm
 						continue
 			# same for phomopsis and black rot
-			for wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect in infect_list:
+			for wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect in infect_list:			
 #				print wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect
 				start_dt = DateTime.DateTime(*wet_start) + DateTime.RelativeDate(hour=0,minute=0,second=0)
 				if wet_end == miss:
@@ -3232,7 +3239,7 @@ def process_help (request,path):
 		elif smry_type == 'apple_scab_estlw':
 			return newaModel_io.helppage(None)
 		elif smry_type == 'apple_scab' or (smry_type == 'apple_disease' and pest == 'apple_scab'):
-			return newaModel_io.helppage([("Pest Management Guidelines for Commercial Tree Fruit Production","http://ipmguidelines.org/TreeFruits/content/CH11/default.asp"),
+			return newaModel_io.helppage([("Pest Management Guidelines for Commercial Tree Fruit Production","http://ipmguidelines.org"),
 										   ("Apple Scab Fact Sheet","http://nysipm.cornell.edu/factsheets/treefruit/diseases/as/as.asp"),
 										   ("Pesticide information","http://treefruitipm.info/PesticidesForPest.aspx?PestID=23"),
 			                               ("Cornell Fruit Resources - Tree Fruit IPM","http://www.fruit.cornell.edu/tree_fruit/IPMGeneral.html"),
@@ -3243,10 +3250,10 @@ def process_help (request,path):
 		elif smry_type == 'fire_blight' or (smry_type == 'apple_disease' and pest == 'fire_blight'):
 			return newaModel_io.helppage([("The Development and Use of CougarBlight","http://county.wsu.edu/chelan-douglas/agriculture/treefruit/Pages/CougarBlight_Model_Overview.aspx"),
 										   ("CougarBlight 2010","http://county.wsu.edu/chelan-douglas/agriculture/treefruit/Pages/Cougar_Blight_2010.aspx"),
-										   ("Notes on first blossom open biofix","http://newa.nrcc.cornell.edu/appfbnotes_pop.htm"),
-										   ("Highly susceptible apple varieties and rootstocks","http://newa.nrcc.cornell.edu/appsusvar_pop.htm"),
+										   ("Notes on first blossom open biofix","http://newatest.nrcc.cornell.edu/appfbnotes_pop.htm"),
+										   ("Highly susceptible apple varieties and rootstocks","http://newatest.nrcc.cornell.edu/appsusvar_pop.htm"),
 										   ("Pesticide information","http://treefruitipm.info/PesticidesForPest.aspx?PestID=20"),
-										   ("Pest Management Guidelines for Commercial Tree Fruit Production","http://ipmguidelines.org/TreeFruits/content/CH11/default.asp"),
+										   ("Pest Management Guidelines for Commercial Tree Fruit Production","http://ipmguidelines.org"),
 										   ("Fire Blight Fact Sheet (html)","http://nysipm.cornell.edu/factsheets/treefruit/diseases/fb/fb.asp"),
 										   ("Fire Blight Fact Sheet (pdf)","http://nysipm.cornell.edu/factsheets/treefruit/diseases/fb/fb.pdf"),
 										   ("Cornell Fruit Resources - Tree Fruit IPM","http://www.fruit.cornell.edu/tree_fruit/IPMGeneral.html"),
@@ -3258,7 +3265,7 @@ def process_help (request,path):
 		elif smry_type == 'sooty_blotch' or (smry_type == 'apple_disease' and pest == 'sooty_blotch'):
 			return newaModel_io.helppage([
 #											("Notes on petal fall biofix - not available",""),
-										   ("Pest Management Guidelines for Commercial Tree Fruit Production","http://ipmguidelines.org/TreeFruits/content/CH11/default.asp"),
+										   ("Pest Management Guidelines for Commercial Tree Fruit Production","http://ipmguidelines.org"),
 										   ("Sooty Blotch/Flyspeck Fact Sheet (html)","http://nysipm.cornell.edu/factsheets/treefruit/diseases/sbfs/sbfs.asp"),
 										   ("Sooty Blotch/Flyspeck Fact Sheet (pdf)","http://nysipm.cornell.edu/factsheets/treefruit/diseases/sbfs/sbfs.pdf"),
 #										   ("More information about Sooty Blotch/Flyspeck - not available",""),
@@ -3270,16 +3277,16 @@ def process_help (request,path):
 			return newaModel_io.helppage(None)
 		elif smry_type == 'apple_pest':		
 			pest_names = {"stlm": "Spotted Tentiform Leafminer", "ofm":"Oriental Fruit Moth", "cm":"Codling Moth",
-						  "pc":"Plum Curculio", "oblr":"Obliquebanded Leafroller", "am":"Apple Maggot"}
-			pest_id = {"stlm": 40, "ofm":24, "cm":24, "pc":28, "oblr":36, "am":19}
+						  "pc":"Plum Curculio", "oblr":"Obliquebanded Leafroller", "sjs":"San Jose Scale", "am":"Apple Maggot"}
+			pest_id = {"stlm": 40, "ofm":24, "cm":24, "sjs":39, "pc":28, "oblr":36, "am":19}
 			pest_abb = pest[pest.find('-')+1:]
 			if pest_abb == 'maggot': pest_abb = 'am'
-			help_list = [("Pest Management Guidelines","http://ipmguidelines.org/TreeFruits/content/CH11/default.asp"),
+			help_list = [("Pest Management Guidelines","http://ipmguidelines.org"),
 			             ("%s Fact Sheet"%(pest_names[pest_abb]),"http://nysipm.cornell.edu/factsheets/treefruit/pests/%s/%s.asp"%(pest_abb,pest_abb)),
 			             ("Cornell Fruit Resources - Tree Fruit IPM","http://www.fruit.cornell.edu/tree_fruit/IPMGeneral.html"),
 						 ("Pesticide Information","http://treefruitipm.info/PesticidesForPest.aspx?PestID=%d"%(pest_id[pest_abb])),
 			             ("NEWA Default Biofix Dates","http://newa.cornell.edu/index.php?page=default-biofix-dates"),
-			             ("Degree Day Accumulations Table","http://ipmguidelines.org/TreeFruits/content/CH07/default-3.asp"),
+			             ("Degree Day Accumulations Table","http://ipmguidelines.org"),
 			             ("Hudson Valley Scouting Reports and Trap Data","http://hudsonvf.cce.cornell.edu/scoutingreport.html"),
 			             ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references")
 						 ]
@@ -3290,13 +3297,13 @@ def process_help (request,path):
 			return newaModel_io.helppage([("Risk Assessment of Grape Berry Moth and Guidelines for Management of the Eastern Grape Leafhopper (pdf)","http://nysipm.cornell.edu/publications/grapeman/files/risk.pdf"),
 										   ("Grape Berry Moth IPM fact sheet","http://nysipm.cornell.edu/factsheets/grapes/pests/gbm/gbm.asp"),
 										   ("Grape Berry Moth IPM fact sheet (pdf)","http://nysipm.cornell.edu/factsheets/grapes/pests/gbm/gbm.pdf"),
-										   ("New York and Pennsylvania Pest Management Guidelines for Grapes","http://ipmguidelines.org/grapes/"),
+										   ("New York and Pennsylvania Pest Management Guidelines for Grapes","http://ipmguidelines.org"),
 										   ("Production Guide for Organic Grapes (pdf)","http://nysipm.cornell.edu/organic_guide/grapes.pdf"),
 										   ("Elements of IPM for Grapes in New York State","http://nysipm.cornell.edu/elements/grapes.asp"),
 			                               ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references")
 										   ])
 		elif smry_type == 'grape_dis' or (smry_type == 'grape_disease' and pest == 'grape_dis'):
-			return newaModel_io.helppage([("New York and Pennsylvania Pest Management Guidelines for Grapes","http://ipmguidelines.org/grapes/"),
+			return newaModel_io.helppage([("New York and Pennsylvania Pest Management Guidelines for Grapes","http://ipmguidelines.org"),
 										   ("Black Rot IPM Fact Sheet","http://nysipm.cornell.edu/factsheets/grapes/diseases/grape_br.pdf"),
 										   ("Phomopsis Cane and Leaf Spot IPM Fact Sheet","http://nysipm.cornell.edu/factsheets/grapes/diseases/phomopsis.pdf"),
 										   ("Grapevine Powdery Mildew IPM Fact Sheet","http://nysipm.cornell.edu/factsheets/grapes/diseases/grape_pm.pdf"),
@@ -3306,8 +3313,8 @@ def process_help (request,path):
 			                               ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references")
 										   ])
 		elif smry_type == 'dmcast' or (smry_type == 'grape_disease' and pest == 'dmcast'):
-			return newaModel_io.helppage([("DMCast Notes","http://newa.nrcc.cornell.edu/dmcast/dmcast_notes.html"),
-			                               ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references")
+			return newaModel_io.helppage([("DMCast Notes","http://newatest.nrcc.cornell.edu/dmcast/dmcast_notes.html"),
+			                               ("NEWA Model References","http://newatest.cornell.edu/index.php?page=newa-pest-forecast-model-references")
 			                               ])
 		else:
 			return newaCommon_io.errmsg('Error processing input')
