@@ -383,7 +383,7 @@ stn_info = {
 'khgr': {'name': 'Hagerstown, MD', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 39.7078, 'lon': -77.7297, 'elev': 698, 'network': 'icao', 'state': 'MD'},
 'kakq': {'name': 'Wakefield, VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 36.9839, 'lon': -77.0072, 'elev': 109, 'network': 'icao', 'state': 'VA'},
 'kdan': {'name': 'Danville, VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 36.5728, 'lon': -79.3361, 'elev': 571, 'network': 'icao', 'state': 'VA'},
-'khef': {'name': 'Manassas, VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.72139, 'lon': -38.72139, 'elev': 192, 'network': 'icao', 'state': 'VA'},
+'khef': {'name': 'Manassas, VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.72139, 'lon': -77.51528, 'elev': 192, 'network': 'icao', 'state': 'VA'},
 'kiad': {'name': 'Dulles Airport, VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.9408, 'lon': -77.4636, 'elev': 290, 'network': 'icao', 'state': 'VA'},
 'klyh': {'name': 'Lynchburg, VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 37.3208, 'lon': -79.2067, 'elev': 940, 'network': 'icao', 'state': 'VA'},
 'kntu': {'name': 'Oceana, VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 36.8167, 'lon': -76.0333, 'elev': 23, 'network': 'icao', 'state': 'VA'},

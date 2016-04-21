@@ -12,57 +12,63 @@ function setSelectValue(clickedStn) {
 }
 
 function centerMap (latlngCoords) {
-	var center;
-	latlngCoords.longitude = Math.max(latlngCoords.longitude, -100.0);
-	latlngCoords.longitude = Math.min(latlngCoords.longitude, -71.5);
-	latlngCoords.latitude = Math.max(latlngCoords.latitude, 35.5);
-	latlngCoords.latitude = Math.min(latlngCoords.latitude, 46.3);
-	center = new google.maps.LatLng(latlngCoords.latitude,latlngCoords.longitude);
+	var center = new google.maps.LatLng(latlngCoords.latitude,latlngCoords.longitude);
+	google.maps.event.trigger(map, 'resize');
 	map.setCenter(center);
-	$("#msg").empty().text('Click here to save location')
-		 .click(function() {
-			$("#msg").empty().hide(); 
-			center = map.getCenter();
-			$.cookie("mlocation", JSON.stringify({latitude:center.lat(), longitude:center.lng()}), {expires:180, path:"/", domain:"newa.nrcc.cornell.edu"});
-		 }); 
 }
 
-function loadLocation () {
-	var defLocation = {latitude:42.95, longitude:-76.35},
-		position = google.loader.ClientLocation;
-	if (position) {
-		centerMap(position);
-	} else {
-		centerMap(defLocation);
-	}
-}
+//function centerMap (latlngCoords) {
+//	var center;
+//	latlngCoords.longitude = Math.max(latlngCoords.longitude, -100.0);
+//	latlngCoords.longitude = Math.min(latlngCoords.longitude, -71.5);
+//	latlngCoords.latitude = Math.max(latlngCoords.latitude, 35.5);
+//	latlngCoords.latitude = Math.min(latlngCoords.latitude, 46.3);
+//	center = new google.maps.LatLng(latlngCoords.latitude,latlngCoords.longitude);
+//	map.setCenter(center);
+//	$("#msg").empty().text('Click here to save location')
+//		 .click(function() {
+//			$("#msg").empty().hide(); 
+//			center = map.getCenter();
+//			$.cookie("mlocation", JSON.stringify({latitude:center.lat(), longitude:center.lng()}), {expires:180, path:"/", domain:"newa.nrcc.cornell.edu"});
+//		 }); 
+//}
 
-function getLocation() {
-	$('<div id="msg" style="border:1px solid black; padding:0.25em; position:absolute; left:168px; bottom:0px; width:225px; height:3em; z-index:1; font-size:0.9em; text-align:center; background-color:red; color:white;"></div>').appendTo($("#map"));
-	$("#msg").text('Trying to determine location...'); 
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition( 
-			function(position) {
-				centerMap(position.coords);
-			}, 
-			loadLocation, 
-			{timeout:5000} 
-		);
-	} else {
-		loadLocation();
-	}
-}
+//function loadLocation () {
+//	var defLocation = {latitude:42.95, longitude:-76.35},
+//		position = google.loader.ClientLocation;
+//	if (position) {
+//		centerMap(position);
+//	} else {
+//		centerMap(defLocation);
+//	}
+//}
 
-function findCenter() {
-	var mc,
-		center = {lat: 42.5, lon: -75.7, zoom: 6},
-		myCookie = $.cookie("mlocation");
-	if (myCookie) { 
-		mc = JSON.parse(myCookie);
-		center = {lat: mc.latitude, lon: mc.longitude, zoom: 6};
-	}
-	return center;
-}
+//function getLocation() {
+//	$('<div id="msg" style="border:1px solid black; padding:0.25em; position:absolute; left:168px; bottom:0px; width:225px; height:3em; z-index:1; font-size:0.9em; text-align:center; background-color:red; color:white;"></div>').appendTo($("#map"));
+//	$("#msg").text('Trying to determine location...'); 
+//	if (navigator.geolocation) {
+//		navigator.geolocation.getCurrentPosition( 
+//			function(position) {
+//				centerMap(position.coords);
+//			}, 
+//			loadLocation, 
+//			{timeout:5000} 
+//		);
+//	} else {
+//		loadLocation();
+//	}
+//}
+
+//function findCenter() {
+//	var mc,
+//		center = {lat: 42.5, lon: -75.7, zoom: 6},
+//		myCookie = $.cookie("mlocation");
+//	if (myCookie) { 
+//		mc = JSON.parse(myCookie);
+//		center = {lat: mc.latitude, lon: mc.longitude, zoom: 6};
+//	}
+//	return center;
+//}
 
 function statePlaceMarkers (cur_data, event_type, state) {
 	var stateCenters = {
@@ -88,7 +94,7 @@ function statePlaceMarkers (cur_data, event_type, state) {
 		'SD': {lat: 43.9169, lon: -100.2282, zoom: 6, name: 'South Dakota'},
 		'VT': {lat: 44.0688, lon: -72.6663, zoom: 7, name: 'Vermont'},
 		'VA': {lat: 37.5229, lon: -78.8531, zoom: 7, name: 'Virginia'},
-		'WV': {lat: 38.6409, lon: -80.6230, zoom: 7, name: 'West Virginia'}, //no stations
+		'WV': {lat: 38.6409, lon: -80.6230, zoom: 7, name: 'West Virginia'},
 		'WI': {lat: 44.6243, lon: -89.9941, zoom: 6, name: 'Wisconsin'},
 		'AL': {lat: 32.6174, lon: -86.6795, zoom: 6, name:' Alabama'},
 		'ALL':{lat: 42.5000, lon: -75.7000, zoom: 6, name: 'All'},
