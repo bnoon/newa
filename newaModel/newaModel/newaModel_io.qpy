@@ -328,8 +328,10 @@ def apple_pest_input [html] (pest_type=None):
 		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
+		<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
 		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping4.js"></script>
 		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/apple_pest.js"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/newaGraph.js"></script>
 		<style type="text/css">
 			.ui-helper-reset {
 				font-size:75%; }
@@ -1755,7 +1757,34 @@ def apple_pest_results [html] (smry_dict):
 		$('#ppl').hide();		
 		$('#ppr').hide();
 		return false;
-		}
+	}
+	$(document).ready(function() {
+		var pest = $("select[name=pest]").val(),
+			ddbase = $.inArray(pest, ['apple-pc', 'apple-maggot', 'apple-cm', 'apple-sjs']) >= 0 ? '50' : '43',
+			params = {
+				type: 'ddrange',
+				accend: $("#enddpick").val(),
+				ddtype: 'dd' + ddbase + 'be',
+				stn: $("select[name=stn]").val()
+			};
+		$.get('http://newatest.nrcc.cornell.edu/newaLister/process_input', params, function(data) {
+			$("#ddtable").html(data);
+			$("#ddtable div:last").remove();
+			$("#ddtable table tr td.header_line_silver_back").parent().hide();
+			$("#ddtable table tr:nth-of-type(4) th").html('Daily Degree Days<br>(Base ' + ddbase + 'BE)');
+			$("#ddtable table tr:nth-of-type(5) th").html('Accumulation since January 1');
+			$("#ddtable table tr:last").css("text-align","center");
+//			$("#chart_area").html('<button class="button" id="showgraph">Show Degree Day Graph</button>');
+			$("#chart_area").html('<a id="showgraph" href="#">Show Degree Day Graph</a>');
+			$('#showgraph').click(produce_accumdegday_graph);
+			$('#forecast').click(function() {
+				req_stn = $('select[name=stn] option:selected').val();
+				$.get('http://newatest.nrcc.cornell.edu/newaUtil/getForecastUrl/'+req_stn, function(data) { 
+					window.open(data);
+				});
+			});
+		});
+	});
 	</script>
 	'''
 
@@ -1764,15 +1793,16 @@ def apple_pest_results [html] (smry_dict):
 	### Messages when you don't have a biofix date yet
 	if not smry_dict['bf_date']:
 		if smry_dict['pest'] == 'apple-pc':
-			'You are approximately %s degree days from petal fall - the critial period for protection.<p>' % (phen_events_dict['macph_pf_43']['dd'][3]-smry_dict['ddaccum'])
+			'You are approximately %s degree days from petal fall - the critial period for protection.<p>' % (phen_events_dict['macph_pf_50']['dd'][3]-smry_dict['ddaccum'])
 
 		### Put up a biofix date picker when you're getting close to biofix
-		if smry_dict['pest'] == 'apple-pc'     and smry_dict['ddaccum'] >= phen_events_dict['macph_pf_43']['dd'][2] or \
+		if smry_dict['pest'] == 'apple-pc'     and smry_dict['ddaccum'] >= phen_events_dict['macph_pf_50']['dd'][2] or \
 		   smry_dict['pest'] == 'apple-oblr'   and smry_dict['ddaccum'] >= phen_events_dict['oblr_catch1_43']['dd'][2] or \
-		   smry_dict['pest'] == 'apple-stlm'   and smry_dict['ddaccum'] >= 701 or \
-		   smry_dict['pest'] == 'apple-cm'     and smry_dict['ddaccum'] >= phen_events_dict['cm_catch1_43']['dd'][2] or \
+		   smry_dict['pest'] == 'apple-stlm'   and smry_dict['ddaccum'] >= phen_events_dict['stlm_catch1_43']['dd'][2] or \
+		   smry_dict['pest'] == 'apple-cm'     and smry_dict['ddaccum'] >= phen_events_dict['cm_catch1_50']['dd'][2] or \
 		   smry_dict['pest'] == 'apple-ofm'    and smry_dict['ddaccum'] >= phen_events_dict['ofm_catch1_43']['dd'][2] or \
-		   smry_dict['pest'] == 'apple-maggot' and smry_dict['ddaccum'] >= phen_events_dict['am_catch1_43']['dd'][2]:
+		   smry_dict['pest'] == 'apple-sjs'    and smry_dict['ddaccum'] >= phen_events_dict['sjs_catch1_50']['dd'][2] or \
+		   smry_dict['pest'] == 'apple-maggot' and smry_dict['ddaccum'] >= phen_events_dict['am_catch1_50']['dd'][2]:
 			if smry_dict['pest'] == 'apple-pc':
 				'<b>90% petal fall on McIntosh apple: </b>'
 			else:
@@ -1789,8 +1819,8 @@ def apple_pest_results [html] (smry_dict):
 
 	### Put up datepicker when you do have a biofix date
 	else:
-		if smry_dict['pest'] == 'apple-pc' and smry_dict['ddaccum'] <= 308:
-			'<p>At petal fall, fruit become susceptible to feeding and oviposition injury. Control measures are only needed until 308 degree days have accumulated since petal fall.</p>'
+		if smry_dict['pest'] == 'apple-pc' and smry_dict['ddaccum'] <= 150:
+			'<p>At petal fall, fruit become susceptible to feeding and oviposition injury. Control measures are only needed until 150 degree days have accumulated since petal fall.</p>'
 			'<b>90% petal fall on McIntosh apple: </b>'
 		else:
 			'<b>%s: </b>' % smry_dict['biofix_phenology']
@@ -1810,9 +1840,10 @@ def apple_pest_results [html] (smry_dict):
 		### Do same with second biofix
 		if not smry_dict['bf2_date']:
 			### Put up a biofix date picker when you're getting close to second biofix
-			if smry_dict['pest'] == 'apple-stlm' and smry_dict['ddaccum'] >= 701 or\
-			   smry_dict['pest'] == 'apple-cm'   and smry_dict['ddaccum'] >= 721 or \
-			   smry_dict['pest'] == 'apple-ofm'  and smry_dict['ddaccum'] >= 701:
+			if smry_dict['pest'] == 'apple-stlm' and smry_dict['ddaccum'] >= 977 or\
+			   smry_dict['pest'] == 'apple-cm'   and smry_dict['ddaccum'] >= 1501 or \
+			   smry_dict['pest'] == 'apple-sjs'  and smry_dict['ddaccum'] >= 1057 or \
+			   smry_dict['pest'] == 'apple-ofm'  and smry_dict['ddaccum'] >= 1241:
 				'<b>%s: </b>' % smry_dict['biofix2_phenology']
 				if smry_dict['output'] == "standalone":
 					action = "submit();"
@@ -1840,7 +1871,7 @@ def apple_pest_results [html] (smry_dict):
 			### Do same with third biofix
 			if not smry_dict['bf3_date']:
 				### Put up a biofix date picker when you're getting close to third biofix
-				if smry_dict['pest'] == 'apple-ofm' and smry_dict['ddaccum'] >= 801:
+				if smry_dict['pest'] == 'apple-ofm' and smry_dict['ddaccum'] >= 1820:
 					'<b>%s: </b>' % smry_dict['biofix3_phenology']
 					if smry_dict['output'] == "standalone":
 						action = "submit();"
@@ -1871,6 +1902,9 @@ def apple_pest_results [html] (smry_dict):
 		'<p>Degree day accumulations will resume on date of %s.</p>' % smry_dict['biofix2_phenology'].lower()
 	else:
 		'<p>Degree day accumulations will resume on date of %s.</p>' % smry_dict['biofix_phenology'].lower()
+		
+	### Placeholder for degree table and graph
+	'<div id="ddtable" style="margin-bottom:1em;"></div>'
 
 	### Allow user to change pre-biofix phenology. Model-determined phenology initially selected.
 	if smry_dict['phenology'] and smry_dict['pest'] != "apple-maggot": 
