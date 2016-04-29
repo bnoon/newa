@@ -1104,6 +1104,90 @@ def tomato_for_input [html] ():
 	</BODY>
 	</HTML>
 	'''
+
+def potato_for_input [html] ():
+	'''
+	<HTML>
+	<HEAD>
+	<TITLE>Potato Disease Forecasts</TITLE>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/humanity/jquery-ui.css" type="text/css">
+	<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping4.js"></script>
+	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/pottom_disease.js"></script>
+	<style TYPE="text/css">
+	body {
+		font-family: 'Arial', 'Helvetica', sans-serif;
+		font-size: 9pt;
+		background-color: "white"; }
+	#leftbox {
+		position: absolute;
+		margin: 0 0 0 0px;
+		padding: 2px;
+		width: 194px;
+		border: 1px gray solid; }
+	#leftbox p {
+		font-weight: bold; }
+	#rightbox {
+		position: absolute;
+		margin: 0 0 0 200px;
+		padding: 0px;
+		width: 643px;
+		border: 0px gray solid; }
+	</style>
+	</head>
+	<body>
+	<p class="banner">NEWA Potato Disease Forecast</p>
+	<div id="leftbox">
+		<input type="hidden" id="pest" value="potato_for">
+		<p style="margin-bottom:3px;">Date of Interest:</p>
+		<input type="text" id="dpick" value="">
+		<p><input type="button" value="Get report" class="button getReport" style="display:none;">
+		<div id="useEffBox" style="text-align:center;padding:5px;border:0 solid red;">
+			<p style="display:none; margin:0 0 5px;">Must read for best first fungicide decision:</p>
+			<a href="#" id="usepotatoeffectively">Using Potato Disease Forecasts Effectively</a>
+		</div>
+	</div>
+	<div id="rightbox">
+		<div id="righttabs">
+			<ul>
+				<li><a href="#first"> Map</a></li>
+				<li><a href="#second">Results</a></li>
+				<li><a href="#third"> More info</a></li>
+			</ul>
+			<div id="first" style="padding:0px;">
+				<div id="map" style="width: 635px; height: 560px"></div>
+			</div>
+			<div id="second" class="plain_back" style="padding:3px;">
+				<p>Results will appear here.</p>
+			</div>
+			<div id="third"  class="plain_back_l">
+			<p><a href="http://newatest.nrcc.cornell.edu/Using-Potato-Forecasts-Effectively.html">Using Potato Disease Forecasts Effectively</a></p>
+			<a href="http://newatest.nrcc.cornell.edu/Using-Potato-Forecasts-Effectively.html">Using Potato Disease Forecasts Effectively</a>
+			</div>
+		</div>
+	</div>
+	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function () {
+		$("#usepotatoeffectively").on('click', function(e) {
+			e.preventDefault();
+			$('#righttabs').tabs('option', 'active', 2);
+		});
+	});
+	try {
+	var pageTracker = _gat._getTracker("UA-8808137-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	</BODY>
+	</HTML>
+	'''
+
 #don't believe following is used any more
 #def grape_dis_input [html] ():
 #	'''
@@ -3172,6 +3256,356 @@ def tomato_for_html [html] (stn_name,smry_dict,log_dict, simcastD, bliteD):
 	'''
 	add_footer(smry_dict)
 	
+	
+	
+	
+def potato_for_html [html] (stn_name,smry_dict, pday_list, simcastD, bliteD):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>Potato Disease Forecasts</title>
+		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/humanity/jquery-ui.css">
+		<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		</head>
+		<body>
+		'''
+	'''
+	<DIV align=center>
+	<table border=1 cellpadding=4 style='width:100%; border-collapse:collapse; table-layout:auto; margin-top:0.5em; margin-bottom:0.5em;'>
+	'''
+	last_time = smry_dict['download_time']
+	### results
+	download_dt = DateTime.DateTime(*smry_dict['download_time']) + DateTime.RelativeDate(minute=0,second=0)
+	lastqpf_dt = DateTime.DateTime(*smry_dict['lastqpf']) + DateTime.RelativeDate(minute=0,second=0)
+	if len(simcastD) and simcastD.has_key("daily_accums"):
+		days = simcastD['daily_accums'].keys()
+	elif len(bliteD) and bliteD.has_key("daily_accums"):
+		days = bliteD['daily_accums'].keys()
+	else:
+		return	
+	days.sort()
+	'<tbody>'
+	'<tr><td class=header_line_silver_back colspan=9 height=38 align=center>Potato Disease Forecast for %s</td></tr>' % (stn_name)
+	'<tr>'
+	'<td class=plain_back rowspan=2 style="font-weight:bold; width:35%;">Forecast</td>'
+
+	md = days[0].split("/")
+	tdt = DateTime.DateTime(download_dt.year, int(md[0]), int(md[1]), 12, 0, 0)
+	if tdt <= download_dt:
+		color = 'blue'
+	else:
+		color = 'yellow'
+	'<th class=%s_back>Yesterday</th>'%color
+	md = days[1].split("/")
+	tdt = DateTime.DateTime(download_dt.year, int(md[0]), int(md[1]), 12, 0, 0)
+	if tdt <= download_dt:
+		color = 'blue'
+	elif tdt > lastqpf_dt:
+		color = 'orange'
+	else:
+		color = 'yellow'
+	'<th class=blue_back>Today</th>'%color
+	
+	md = days[2].split("/")
+	tdt2 = DateTime.DateTime(download_dt.year, int(md[0]), int(md[1]), 12, 0, 0)
+
+	if download_dt < tdt2:
+		'<th class=palegoldenrod_back colspan=6>6-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast" style="margin-top:0.2em;">Forecast Details</button></th>'
+	else:
+		'<th class=blue_back colspan=6>Ensuing 6 Days</th>'		
+	'</tr>'
+	'<tr>'
+	for dy in days:
+		md = dy.split("/")
+		tdt = DateTime.DateTime(download_dt.year, int(md[0]), int(md[1]), 12, 0, 0)
+		if tdt <= download_dt:
+			color = 'blue'
+		elif tdt > lastqpf_dt:
+			color = 'brown'
+		else:
+			color = 'yellow'
+		'<td class=%s_back>%d/%d</td>' % (color, int(md[0]), int(md[1]))	
+	'</tr>'
+	'<tr>'
+	'<th class=plain_back style="font-weight:normal;">Early blight P-Days<br>'
+	'<button class="button" id="showPotLog" style="font-size:8pt; padding: 1px 2px 1px 2px; margin:0.25em 0.5em;">Show p-day log</button></th>'
+	needfoot = False
+	hasTanTC = 0
+	hasRedTC = 0
+	for d in days:
+		mm,dd = d.split('/')
+		dval = '-'
+		for pd in range(len(pday_list)):
+			if pday_list[pd][0][1] == int(mm) and pday_list[pd][0][2] == int(dd):
+				dval = int(round(pday_list[pd][2], 0))
+				break
+		if dval == '-' or dval < 300:
+			color = 'palegoldenrod'
+			hasTanTC = 1
+		else:
+			color = 'red'
+			hasRedTC = 1
+		'<td class=%s_back>%s</td>' % (color, dval)
+	'</tr>'
+
+	### SIMCAST output lines
+	hasRedBlight = 0
+	hasRedFung = 0
+	hasTan = 0
+	hasRed = 0
+	if len(simcastD) and simcastD.has_key("daily_accums"):
+		'<tr>'
+		'<th class=plain_back style="font-weight:normal;">Late blight Simcast<br/>Blight Units'
+		for d in days:
+			value = simcastD['daily_accums'][d][0]
+			bCritFlg = simcastD['daily_accums'][d][1]
+			if (bCritFlg == 1 ):
+				color = "red"
+				hasRedBlight = 1
+			elif bCritFlg == 0  :
+				color = 'palegoldenrod'
+				hasTan = 1
+			else:
+				color = 'plain'
+			'<td class=%s_back>%s</td>'%(color,value)
+		'</tr>'
+		'<tr>'
+		'<th class=plain_back style="font-weight:normal;">Late blight Simcast<br/>Fungicide Units'
+		for d in days:
+			value = simcastD['daily_accums'][d][2]
+			fCritFlg = simcastD['daily_accums'][d][3]
+			if (fCritFlg == 1):
+				color = "red"
+				hasRedFung = 1
+			elif fCritFlg == 0  :
+				color = 'palegoldenrod'
+				hasTan = 1
+			else:
+				color = 'plain'
+			'<td class=%s_back>%s</td>'%(color,value)
+		'</tr>'
+	### or BLITECAST output lines
+	elif len(bliteD):
+		'<tr>'
+		'<th class=plain_back style="font-weight:normal;">Late Blight Blitecast<br>Severity Values'
+		'<button class="button" id="showBliteLog" style="font-size:8pt; padding: 1px 2px 1px 2px; margin:0.25em 0.5em;">Show severity value log</button></th>'
+		criticalValue = 18
+		for d in days:
+			value = bliteD['daily_accums'][d]
+			if isinstance(value, str) and value.find('*') >= 0:
+				needfoot = True
+				testvalue = int(value.replace('*',''))
+			else:
+				testvalue = value
+			if testvalue >= criticalValue and testvalue != 'NA':
+				color = "red"
+				hasRed = 1
+			else  :
+				color = "palegoldenrod"
+				hasTan = 1
+			'<td class=%s_back>%s</td>'%(color,value)
+		'</tr>'
+	'</tbody>'
+	'<tfoot>'
+	'<tr><td colspan=9 style="font-size:80%;font-style:italic;">'
+	if needfoot:
+		'* indicates wet period in progress; reported value is for forecasted end of wet period.<br/>'
+	'Observed data available through %d/%d/%d %d:00.</td></tr>' % (download_dt.month,download_dt.day,download_dt.year,download_dt.hour)
+	'</tfoot>'
+	'</table>'
+	
+	### p-day log ###
+	'<table id="pdayTable" style="padding:5px; border:1px solid black; width:300px; border-collapse:collapse;table-layout:fixed; margin-top:0.5em; margin-bottom:0.5em; display:none;">'
+	'<col width=100>'
+	'<col width=100>'
+	'<col width=100>'
+	'<tr><td colspan=3 style="font-size:75%; text-align:center;"><input type="button" class="button" id="closePotLog" value="Close P-Day Log" /></td></tr>'
+
+	'<tr><td class=header_line height=30 colspan=3 align=center>P-Day Values</td></tr>'
+	for day in range(len(pday_list)):
+		# add headings before 1st of each month
+		dt0 = pday_list[day][0]
+		if dt0[2] == 1:
+			'<tr class=colhead_center>'
+			'<td height=40>Date</td>'%month_abbrev[dt0[1]]
+			'<td>Daily<br>P-Day</td>'
+			'<td>Seasonal<br>Accumulation</td>'
+			'</tr>'
+		if dt0[2]%5 == 0:
+			color = 'gray'
+		else:
+			color = 'plain'
+		'<tr class=%s_back><td>%02d/%02d/%04d</td>'%(color,dt0[1],dt0[2],dt0[0])
+		if len(pday_list) > day:
+			dt,pday,accum = pday_list[day]
+		else:
+			dt,pday,accum = miss,miss,miss
+		if dt == dt0:
+			if accum == miss: 
+				saccum = '---'
+			else:
+				saccum = '%.1f'%accum
+			if pday == miss:
+				spday = '---'
+			else:
+				spday = '%.1f'%pday
+		else:
+			saccum = '---'
+			spday = '---'
+		'<td>%s</td><td>%s</td>'%(spday,saccum)
+		'</tr>'
+	'</table>'
+	### end p-day log ###
+	
+	### blitecast log
+	if len(bliteD):		
+		wet_periods = bliteD['wet_periods']
+		'''	
+		<table id='blitecastTable' style='padding:5px; border:1px solid black; width:100%; border-collapse:collapse;table-layout:fixed; margin-top:0.5em; margin-bottom:0.5em; display:none;'>
+		<col width=20%>
+		<col width=20%>
+		<col width=13%>
+		<col width=9%>
+		<col width=10%>
+		<col width=10%>
+		<col width=9%>
+		<col width=9%>
+		<tbody>
+		<tr><td colspan=8 style="text-align:center;font-size:75%;"><input type="button" class="button" id="closeBliteLog" value="Close Bligecast Log" /></td></tr>
+		<tr>
+		'''
+		'<td class=header_line height=30 colspan=8 align=center>Blitecast Leaf Wetness and Severity Value Log %d</td>'%(last_time[0])
+		'''
+		</tr>
+		<tr>
+		  <td class=colhead_center>Wet Starting</td>
+		  <td class=colhead_center>Wet Ending</td>
+		  <td class=colhead_center>Hours</td>
+		  <td class=colhead_center>Avg</td>
+		  <td class=colhead_center>Total</td>
+		  <td class=colhead_center>Severity</td>
+		  <td class=colhead_center colspan=2>Accum Severity</td>
+		</tr>
+		<tr>
+		  <td class=colhead_center>Date Time</td>
+		  <td class=colhead_center>Date Time</td>
+		  <td class=colhead_center>RH >= 90%</td>
+		  <td class=colhead_center>Temp F</td>
+		  <td class=colhead_center>Rain</td>
+		  <td class=colhead_center>Value</td>
+		  <td class=colhead_center>7-Day</td>
+		  <td class=colhead_center>Season</td>
+		</tr>
+		'''
+		'<TR>'
+		'<td class=red_text_center colspan=2 height=21>Download Time: %d/%d/%d %d:00'%(last_time[1],last_time[2],last_time[0],last_time[3])
+		'</td></tr>'
+		for i in range(len(wet_periods)-1,-1,-1):		#go from most recent back
+			wet_start,wet_end,wet_hrs,cold_hrs,temp_ave,prcp_tot,severity,weeksev,accumsev = wet_periods[i]
+			if wet_end > last_time:
+				color = 'yellow'
+			elif i%2 == 0:
+				color = 'gray'
+			else:
+				color = 'plain'
+			if prcp_tot == -999:
+				prcp_str = '-'
+			else:
+				prcp_str = '%.2f'%prcp_tot
+			if wet_end == miss:
+				we_str = 'in progress'
+			else:
+				weyr,wemn,wedy,wehr = wet_end
+				we_str = '%d/%d/%d %d:00' % (wemn,wedy,weyr,wehr)
+			wsyr,wsmn,wsdy,wshr = wet_start
+			if temp_ave == -999:
+				ctemp = "-"
+			else:
+				ctemp = "%d" % int(round(temp_ave,0))
+			'<TR>'
+			'<td class=%s_back height=21>%d/%d/%d %d:00</td>'%(color,wsmn,wsdy,wsyr,wshr)
+			'<td class=%s_back>%s</td>'%(color,we_str)
+			'<td class=%s_back>%d</td>'%(color,wet_hrs)
+			'<td class=%s_back>%s</td>'%(color,ctemp)
+			'<td class=%s_back>%s</td>'%(color,prcp_str)
+			'<td class=%s_back>%s</td>'%(color,severity)
+			'<td class=%s_back>%d</td>'%(color,weeksev)
+			'<td class=%s_back>%d</td>'%(color,accumsev)
+			'</TR>'
+		'</tbody>'
+		'<tfoot>'
+		'<tr><td colspan=8 style="font-size:80%; font-style:italic; text-align:center;">Severity Value calculation method updated June 28, 2012. Yellow highlighted periods include forecast data.</td></tr>'
+		'</tfoot>'
+		'</table>'
+
+	### simcast/blitecast additional output
+	if len(simcastD) or len(bliteD):
+		length = 8 ##**************
+		if len(simcastD):
+			'<p>The NEWA Simcast Late Blight model assumes that fungicide applications were made at 11am \
+			on the date specified in the user interface. The Potato/Tomato Late Blight Decision \
+			Support System (DSS) is a much more robust tool for managing late blight that, among other \
+			things, allows you to specify the time of fungicide application. The Late Blight DSS is the \
+			preferred tool for monitoring late blight. More information on the DSS can be found at \
+			<a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss"> \
+			http://newa.cornell.edu/index.php?page=potato-late-blight-dss</a>.</p>'
+
+		'<table border="0" cellspacing="0" cellpadding="4" width="500px" style="margin-top:1em;border-collapse:collapse;table-layout:fixed">'
+		'<tr><th style="border:1px solid black;" colspan="%s">P-Days Key</th></tr>' % (length+1)
+		if (hasTanTC == 1):
+			'<tr><td style="border:1px solid black;" class="palegoldenrod_back">&lt;300</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % length
+		if (hasRedTC == 1):
+			'<tr><th style="border:1px solid black;" bgcolor="red">>=300</th>'
+			'<td style="border:1px solid black;" colspan="%s">P-Day threshold exceeded.</td></tr>' % (length)
+		if len(simcastD):
+			'<tr><th style="border:1px solid black;" colspan="%s">Simcast Key</th></tr>' % (length+1)
+			if (hasTan == 1):
+				'<tr><td style="border:1px solid black;" class="palegoldenrod_back">&nbsp;</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % length
+		else:
+			'<tr><th style="border:1px solid black;" colspan="%s">Blitecast Key</th></tr>' % (length+1)
+			if (hasTan == 1):
+				'<tr><td style="border:1px solid black;" class="palegoldenrod_back">&lt;%s</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % (criticalValue,length)
+		if (hasRedBlight == 1):
+			'<tr><th style="border:1px solid black;" bgcolor="red">>=%s</th>'%(simcastD['criticalBU'])
+			'<td style="border:1px solid black;" colspan="%s">Blight unit threshold exceeded.</td></tr>' % length
+		if (hasRedFung == 1):
+			'<tr><th style="border:1px solid black;" bgcolor="red"><=-%s</th>'%(simcastD['criticalFU'])
+			'<td style="border:1px solid black;" colspan="%s">Fungicide unit threshold exceeded.</td></tr>' % length
+		if (hasRed == 1):
+			'<tr><th style="border:1px solid black;" bgcolor="red">>=%s</th>'%(criticalValue)
+			'<td style="border:1px solid black;" colspan="%s">Severity value threshold exceeded.</td></tr>' % (length)
+
+		'<tr><th colspan="%s"><a href="javascript:showit();">More Information</a></th></tr>' % (length+1)
+		'<tr><td colspan="%s" style="padding:0;">' % (length+1)
+		'''
+		<div id="moreInfo" style="padding:4px; border:1px solid black; background-color:#EAD797; display:none;">
+		<p>Dates with a <span class="blue_back">blue background</span> generally have observed weather data.
+		<br />Dates with a <span class="yellow_back">yellow background</span> use observed (when available) and forecast temperature, rh and rainfall.
+		<br />Dates with an <span class="brown_back">brown background</span> use forecast temperature and rh (rainfall not available; assumed zero).</p>
+		<hr />
+		<p>Missing data are estimated from surrounding hours, a nearby station or previous forecast values.</p>
+		<hr />
+		Definition of one day:
+		<ul style="margin-top:0;">
+		<li>A day starts at 12 noon and continues for 24 hours.</li>
+		<li>For example, 6/7 12 noon up to but NOT including 6/8 12 noon is one day.</li>
+		</ul>
+		<hr />
+		<p>The <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss" target="_blank">Potato/Tomato Late Blight Decision Support System (DSS)</a> 
+		can be used to provide a more detailed, farm-specific analysis of late blight management strategies.</p>
+		</div>
+		</td></tr>
+		</table>
+	</div>
+	'''
+	add_footer(smry_dict)
+	
+	
+	
+	
 def grape_dis_html [html] (station_name,last_time,wet_periods,dly_grape):
 	'''
 	<html>
@@ -3516,6 +3950,13 @@ def onion_maggot_html [html] (stn_name,smry_dict,degday_dict):
 		<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/newaGraph.js"></script>
+		<script>
+			$(document).ready(function() {	
+				produce_onionmaggot_graph();			
+			});
+		</script>
 		</head>
 		<body>
 		'''
