@@ -1726,6 +1726,8 @@ def apple_pest_results [html] (smry_dict):
 			<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+			<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+			<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/newaGraph.js"></script>
 			<script type="text/javascript">
 			  $(document).ready(function() {
 				$("#bfdpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "+7d", changeMonth: true, changeYear: true });
@@ -1741,8 +1743,6 @@ def apple_pest_results [html] (smry_dict):
 		'''
 		
 		'<input type="hidden" name="pest" value="%s">' % smry_dict['pest']
-		'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
-		'<input type="hidden" name="accend" value="%s">' % smry_dict['accend']
 #		'<div class="red_text_top"><a href="http://treefruitipm.info/Profiles/External/PesticideList.aspx">Pesticide Information</a></div>'
 		'<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">'
 #		end standalone header
@@ -1763,9 +1763,9 @@ def apple_pest_results [html] (smry_dict):
 			ddbase = $.inArray(pest, ['apple-pc', 'apple-maggot', 'apple-cm', 'apple-sjs']) >= 0 ? '50' : '43',
 			params = {
 				type: 'ddrange',
-				accend: $("#enddpick").val(),
+				accend: $("input[name=accend]").val(),
 				ddtype: 'dd' + ddbase + 'be',
-				stn: $("select[name=stn]").val()
+				stn: $("input[name=stn]").val()
 			};
 		$.get('http://newatest.nrcc.cornell.edu/newaLister/process_input', params, function(data) {
 			$("#ddtable").html(data);
@@ -1788,6 +1788,8 @@ def apple_pest_results [html] (smry_dict):
 	</script>
 	'''
 
+	'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
+	'<input type="hidden" name="accend" value="%s">' % smry_dict['accend']
 	'<h3>%s Results for %s</h3>' % (smry_dict['pest_name'],smry_dict['station_name'])
 
 	### Messages when you don't have a biofix date yet

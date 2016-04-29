@@ -2115,9 +2115,8 @@ class Apple (Base,Models):
 			if not accend:
 				accend = DateTime.now()
 				
-			if output == 'standalone':
-				smry_dict['stn'] = stn
-				smry_dict['accend'] = accend
+			smry_dict['stn'] = stn
+			smry_dict['accend'] = accend
 
 			from phen_events import phen_events_dict
 
