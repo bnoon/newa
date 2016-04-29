@@ -22,7 +22,6 @@ stn_info_inactive = {
 'him': {'name': 'Himrod', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.922259999999994, 'elev': 500.0, 'lat': 42.617629999999998, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'lkp': {'name': 'Lake Placid', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.273768, 'lon': -73.94865, 'elev': 1680, 'network': 'newa', 'state': 'NY'},
 'los': {'name': 'Lodi (Shalestone)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.87803, 'elev': 522.0, 'lat': 42.56253, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
-'lyn': {'name': 'Lyndonville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'srad', 'wdir'], 'srqual': 'ok', 'lon': -78.369044000000002, 'elev': 361.0, 'lat': 43.298085, 'network': 'newa', 'state': 'NY'},
 'mat': {'name': 'Mattituck (Harbes)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.99, 'lon': -72.59, 'elev': 96, 'network': 'newa', 'state': 'NY'},
 'mex': {'name': 'Mexico', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.230703, 'elev': 400.0, 'lat': 43.459805, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'nap': {'name': 'Naples', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.387289999999993, 'elev': 700.0, 'lat': 42.626150000000003, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},

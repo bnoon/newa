@@ -54,6 +54,7 @@ stn_info = {
 'loc': {'name': 'Ransomville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'toolow', 'lon': -78.901556999999997, 'elev': 387.0, 'lat': 43.187325000000001, 'network': 'newa', 'state': 'NY'},
 'lod': {'name': 'Lodi (Standing Stone)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.874138, 'elev': 719.0, 'lat': 42.543054, 'network': 'newa', 'state': 'NY'},
 'lol': {'name': 'Lodi (Lamoreaux)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.57664, 'lon': -76.85844, 'elev': 853, 'network': 'newa', 'state': 'NY'},
+'lyn': {'name': 'Lyndonville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'srad', 'wdir'], 'srqual': 'ok', 'lon': -78.369044000000002, 'elev': 361.0, 'lat': 43.298085, 'network': 'newa', 'state': 'NY'},
 'man': {'name': 'Manorville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.860597, 'lon': -72.821942, 'elev': 44, 'network': 'newa', 'state': 'NY'},
 'mar': {'name': 'Marlboro', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'srad', 'wdir'], 'srqual': 'ok', 'lon': -73.984509, 'elev': 390.0, 'lat': 41.590299, 'network': 'newa', 'state': 'NY'},
 'med': {'name': 'Medina', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.20000, 'lon': -78.39275, 'elev': 600, 'network': 'newa', 'state': 'NY'},
