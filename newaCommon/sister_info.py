@@ -460,5 +460,6 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'nc_mor': {'temp': 'khky', 'rhum': 'khky', 'prcp': 'khky', 'wspd': 'khky', 'wdir': 'khky', 'lwet': 'nc_hen', 'srad': 'nc_hen'},
 'nc_edn': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'nc_hen', 'srad': 'nc_hen'},
 'nc_esm': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'nc_hen', 'srad': 'nc_hen'},
+'nc_emm': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'nc_hen', 'srad': 'nc_hen'},
 'nc_mof': {'temp': 'khky', 'rhum': 'khky', 'prcp': 'khky', 'wspd': 'khky', 'wdir': 'khky', 'lwet': 'nc_mor', 'srad': 'nc_mor'},
 }
