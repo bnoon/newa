@@ -204,7 +204,7 @@ stn_info = {
 'nc_esm': {'name': 'Edneyville (Sugarloaf Mtn), NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 35.391921, 'lon': -82.275268, 'elev': 2964, 'network': 'newa', 'state': 'NC'},
 'nc_mor': {'name': 'Morganton (Apple Hill Orchard), NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 35.668366, 'lon': -81.660265, 'elev': 1421, 'network': 'newa', 'state': 'NC'},
 'nc_mof': {'name': 'Moravian Falls, NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'],'srqual': 'ok', 'lat': 36.038122, 'lon': -81.206226, 'elev': 2241, 'network': 'newa', 'state': 'NC'},
-'nc_emm': {'name': 'Edneyville (M&M Berry Farm), NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'],'srqual': 'ok', 'lat': 35.215961, 'lon': -82.214553, 'elev': 906, 'network': 'newa', 'state': 'NC'},
+'nc_emm': {'name': 'Edneyville (M&M Berry Farm), NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'],'srqual': 'ok', 'lat': 35.359935, 'lon': -82.357588, 'elev': 2230, 'network': 'newa', 'state': 'NC’},
 'nc_eaw': {'name': 'Edneyville (Apple Wedge), NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'],'srqual': 'ok', 'lat': 35.40492, 'lon': -82.35360, 'elev': 2248, 'network': 'newa', 'state': 'NC'},
 'nc_fla': {'name': 'Flat Rock (Richmind), NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'],'srqual': 'ok', 'lat': 35.307008, 'lon': -82.370352, 'elev': 2264, 'network': 'newa', 'state': 'NC'},
 'mn_wbl': {'name': 'White Bear Lake, MN', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 45.106320, 'lon': -92.955087, 'elev': 955, 'network': 'newa', 'state': 'MN'},
