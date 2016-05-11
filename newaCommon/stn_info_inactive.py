@@ -34,7 +34,7 @@ stn_info_inactive = {
 'rvm': {'name': 'Riverhead (MCV)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.98, 'lon': -72.58, 'elev': 54, 'network': 'newa', 'state': 'NY'},
 'sav': {'name': 'Savannah', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -76.741219, 'elev': 400.0, 'lat': 43.022533, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'scr': {'name': 'Scriba', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -76.402453, 'elev': 400.0, 'lat': 43.410025, 'network': 'newa', 'state': 'NY'},
-'soa': {'name': 'Appleton, South', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -78.651778, 'elev': 330.0, 'lat': 43.310440, 'network': 'newa', 'state': 'NY'},
+'soa': {'name': 'Appleton, South', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -78.651778, 'elev': 330.0, 'lat': 43.310440, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'val': {'name': 'Valois', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -76.8656, 'elev': 800.0, 'lat': 42.55903, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'yap': {'name': 'Yaphank', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.827944, 'lon': -72.919242, 'elev': 54, 'network': 'newa', 'state': 'NY'},
 'cam': {'name': 'Cambridge', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -73.38, 'elev': 496.0, 'lat': 43.03, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
