@@ -217,8 +217,6 @@ def run_stationModels(stn):
 					whole_url = "http://newa.nrcc.cornell.edu/"+murl+"/"+stn
 					if murl == "newaDisease/onion_dis" or murl == "newaDisease/onion_onlog" or murl == "newaDisease/onion_smbalog" or murl == "newaDisease/onion_sbalog":
 						whole_url = whole_url+"/9999"
-					elif murl == "newaDisease/tomato_for":
-						whole_url = whole_url+"/9999/5"
 					elif murl == "newaDisease/potato_pdays" or murl == "newaDisease/potato_lb":
 						whole_url = whole_url+"/9999/5/1"
 					model_list.append([mtitle,whole_url])
@@ -252,7 +250,7 @@ def run_stationList(list_options='all'):
 		
 		unsortedKeys = unsortedDict.keys()
 		unsortedKeys.sort()
-		for state in ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','IL','SD','MO']:
+		for state in ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','IL','SD','MO','VA','SC','WV','AL']:
 			for usk in unsortedKeys:
 				if state == unsortedDict[usk]['state']:
 					station_dict['stations'].append(unsortedDict[usk])

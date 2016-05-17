@@ -19,7 +19,7 @@ def get_weapage_input [html] ():
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping4.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mapping4.js"></script>
 	<STYLE TYPE="text/css">
 	TD
 	   {
@@ -91,7 +91,7 @@ def get_rawdat_input [html] ():
 	<TITLE>Hourly Weather Data Page</TITLE>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/lister_interface.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/lister_interface.js"></script>
 	<STYLE TYPE="text/css">
 	BODY
 	   {
@@ -144,7 +144,7 @@ def get_sumpag_input [html] ():
 	<TITLE>Daily Weather Data Page</TITLE>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/lister_interface.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/lister_interface.js"></script>
 	<STYLE TYPE="text/css">
 	BODY
 	   {
@@ -199,7 +199,7 @@ def get_dday_input [html] ():
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping4.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mapping4.js"></script>
 	<STYLE TYPE="text/css">
 	TD
 	   {
@@ -274,8 +274,8 @@ def get_ddayrange_input [html] ():
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
 	<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping4.js"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/newaGraph.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mapping4.js"></script>
+	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/newaGraph.js"></script>
 	<style type="text/css">
 		.ui-helper-reset {
 			font-size:75%; }
@@ -306,9 +306,9 @@ def get_ddayrange_input [html] ():
 		});
 		params.accstr = $("#strdpick").val();
 		params.accend = $("#enddpick").val();
-		$('#second').empty().html('<img src="http://newatest.nrcc.cornell.edu/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
+		$('#second').empty().html('<img src="http://newa.nrcc.cornell.edu/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
 		$('#righttabs').tabs('option', 'active', 1);
-		$.get('http://newatest.nrcc.cornell.edu/newaLister/process_input', params, function (data) {
+		$.get('http://newa.nrcc.cornell.edu/newaLister/process_input', params, function (data) {
 			$('#loading').fadeOut(500, function () {
 				$(this).remove();
 			});
@@ -316,7 +316,7 @@ def get_ddayrange_input [html] ():
 			produce_accumdegday_graph();
 			$('#forecast').click(function() {
 				req_stn = $('select[name=stn] option:selected').val();
-				$.get('http://newatest.nrcc.cornell.edu/newaUtil/getForecastUrl/'+req_stn, function(data) { 
+				$.get('http://newa.nrcc.cornell.edu/newaUtil/getForecastUrl/'+req_stn, function(data) { 
 					window.open(data);
 				});
 			});
@@ -1058,13 +1058,16 @@ def estimation_info [html] (stn,station_name,var_sister,year,month):
 	<body>
 	<h1>Data Estimation</h1>
 	<p>Data are occasionally missing in a data record. In order to provide as complete a record as possible,
-	NEWA attempts to estimate missing values in a two-step process. 
+	NEWA attempts to estimate missing values in a three-step process. 
 	<ol>
 	<li>The data record is examined for a non-missing value in the previous hour and the 
 	next hour. If both are found, an average of the two values is used as an estimate.</li>
 	<li>If there are no values available for either the immediately preceding or proceeding hours, data for a
 	nearby (or "sister") weather station are examined. If a data value is available for the desired hour, it is used
 	as a replacement. </li>
+	<li>If there are no values available for the sister station and the missing variable is either temperature or relative
+	humidity and the date of interest is within the current year, data from the NWS National Digital Forecast Database
+	archive are examined. If a data value is available for the desired hour, it is used as a replacement. </li>
 	</ol>
 	<p>For precipitation and wind direction, data extrapolation is not a valid method. Missing precipitation
 	and wind direction data are sourced from the designated sister weather station.
@@ -1102,7 +1105,7 @@ def ddrange_html [html] (stn_name,smry_dict,degday_dict):
 		<head>
 		<title>NEWA Degree Day Calculator</title>
 		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/humanity/jquery-ui.css">
-		<link rel="STYLESHEET" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<link rel="STYLESHEET" type="text/css" href="http://newa.nrcc.cornell.edu/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		</head>
