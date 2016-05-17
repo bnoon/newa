@@ -49,6 +49,7 @@ def get_weapage_input [html] ():
 		<option value="hly">Hourly data</option>
 		<option value="dd4c">Degree Days - 4 C</option>
 		<option value="dd32">Degree Days - Base 32</option>
+		<option value="dd39">Degree Days - Base 39</option>
 		<option value="dd40">Degree Days - Base 40</option>
 		<option value="dd43">Degree Days - Base 43</option>
 		<option value="dd45">Degree Days - Base 45</option>
@@ -227,6 +228,7 @@ def get_dday_input [html] ():
 	<select name="type">
 		<option value="dd4c">Degree Days - 4 C</option>
 		<option value="dd32">Degree Days - Base 32</option>
+		<option value="dd39">Degree Days - Base 39</option>
 		<option value="dd40">Degree Days - Base 40</option>
 		<option value="dd43">Degree Days - Base 43</option>
 		<option value="dd45">Degree Days - Base 45</option>
@@ -358,6 +360,7 @@ def get_ddayrange_input [html] ():
 	<select name="ddtype">
 		<option value="dd4c">Degree Days - 4 C</option>
 		<option value="dd32">Degree Days - Base 32</option>
+		<option value="dd39">Degree Days - Base 39</option>
 		<option value="dd40">Degree Days - Base 40</option>
 		<option value="dd43">Degree Days - Base 43</option>
 		<option value="dd45">Degree Days - Base 45</option>
@@ -936,6 +939,7 @@ def hly_list_html [html] (stn,station_name,year,month,hourly_data,avail_vars,mis
 def degday_list_html [html] (stn,station_name,year,month,degday_data,degday_miss,miss,smry_type):		
 	type_title = {"dd4c":   "Base 4 deg C",
 				  "dd32":   "Base 32", 
+				  "dd39":   "Base 39",
 				  "dd40":   "Base 40",
 				  "dd43":   "Base 43",
 				  "dd45":   "Base 45",

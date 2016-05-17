@@ -476,7 +476,7 @@ def process_input (request,path):
 			elif smry_type == 'hly':	
 				if 'dwpt' not in avail_vars and 'temp' in avail_vars and 'rhum' in avail_vars: avail_vars.append('dwpt')
 				return newaLister_io.hly_list_html(stn,station_name,year,month,hourly_data,avail_vars,miss,station_type)
-			if smry_type in ['dd4c','dd143c','dd32','dd40','dd43','dd45','dd48','dd50','dd8650','dd55','dd43be','dd50be','dd4714']:
+			if smry_type in ['dd4c','dd143c','dd32','dd39','dd40','dd43','dd45','dd48','dd50','dd8650','dd55','dd43be','dd50be','dd4714']:
 				degday_data, degday_miss = degday_summary(daily_data,year,month,smry_type)
 				if len(degday_data) == 0:
 		#			no data - try to provide additional information
