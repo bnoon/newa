@@ -108,7 +108,7 @@ $(document).ready(function () {
 		apple_thin_specs();
 	});
 	stateStationMapList({
-		reqval: 'goodsr',
+		reqvar: 'goodsr',
 		event_type: 'select_station',
 		where: '#station_area'
 	});
