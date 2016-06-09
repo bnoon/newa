@@ -23,7 +23,6 @@ stn_info_inactive = {
 'him': {'name': 'Himrod', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.922259999999994, 'elev': 500.0, 'lat': 42.617629999999998, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'lkp': {'name': 'Lake Placid', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.273768, 'lon': -73.94865, 'elev': 1680, 'network': 'newa', 'state': 'NY'},
 'los': {'name': 'Lodi (Shalestone)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.87803, 'elev': 522.0, 'lat': 42.56253, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
-'mat': {'name': 'Mattituck (Harbes)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.99, 'lon': -72.59, 'elev': 96, 'network': 'newa', 'state': 'NY'},
 'mex': {'name': 'Mexico', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.230703, 'elev': 400.0, 'lat': 43.459805, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'nap': {'name': 'Naples', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.387289999999993, 'elev': 700.0, 'lat': 42.626150000000003, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'nea': {'name': 'North Easton', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.00515, 'lon': -73.5495, 'elev': 490, 'network': 'newa', 'state': 'NY'},
@@ -59,6 +58,7 @@ stn_info_inactive = {
 '3520': {'name': 'Tomasello Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 39.6569, 'lon': -74.8347, 'elev': 105, 'network': 'njwx', 'state': 'NJ', 'disconnected': 'yes'},
 'mno': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.345831, 'lon': -71.677843, 'elev': 610, 'network': 'newa', 'state': 'MA', 'disconnected': 'yes'},
 'mmi': {'name': 'Middlefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.71083, 'elev': 180,  'lat': 41.49667, 'network': 'newa', 'state': 'CT', 'disconnected': 'yes'},
+'um_ces': {'name': 'Weston (Case Estates), MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -71.29889, 'elev': 246, 'lat': 42.35806, 'network': 'cu_log', 'state': 'MA', 'disconnected': 'yes'},
 'um_new': {'name': 'Middletown, RI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.529167, 'lon': -71.27250, 'elev': 197, 'network': 'cu_log', 'state': 'RI', 'disconnected': 'yes'},
 'me_bhb': {'name': 'Bar Harbor, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.389786, 'lon': -68.208026, 'elev': 55, 'network': 'newa', 'state': 'ME', 'disconnected': 'yes'}
 }
