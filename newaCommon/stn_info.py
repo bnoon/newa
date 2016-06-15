@@ -134,6 +134,7 @@ stn_info = {
 'mph': {'name': 'Phillipston, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.580777, 'lon': -72.146067, 'elev': 1183, 'network': 'newa', 'state': 'MA'},
 'meb': {'name': 'East Bridgewater, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.007778, 'lon': -70.943333, 'elev': 40, 'network': 'newa', 'state': 'MA'},
 'mip': {'name': 'Ipswich (Russell Orchards), MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 42.661677, 'lon': -70.803066, 'elev': 14, 'network': 'newa', 'state': 'MA'},
+'mum': {'name': 'Amherst (UM ALC), MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'bad', 'lat': 42.4015, 'lon': -72.5269, 'elev': 200, 'network': 'newa', 'state': 'MA'},
 'um_cso': {'name': 'Belchertown, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.35917, 'elev': 638, 'lat': 42.25333, 'network': 'cu_log', 'state': 'MA'},
 'um_clk': {'name': 'Deerfield, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.62333, 'elev': 328, 'lat': 42.56333, 'network': 'cu_log', 'state': 'MA'},
 'um_whs': {'name': 'Boston (Weld Hill), MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i'], 'srqual': 'ok', 'lat': 42.29556, 'lon': -71.13361, 'elev': 151, 'network': 'cu_log', 'state': 'MA'},
