@@ -405,7 +405,7 @@ def potato_disease [html] ():
 	<ul>
 		<li>Use <a href="http://newatest.nrcc.cornell.edu/newaDisease/potato_lb">Blitecast</a> to help time your first fungicide application.
 		<li>Use <a href="http://newatest.nrcc.cornell.edu/newaDisease/potato_simcast">Simcast</a> to help time later fungicide applications.
-		<li>Sign up for an account with the <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss">Late Blight Decision Support System</a> 
+		<li>Sign up for an account with the <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss">BlightPro Decision Support System</a> 
 		for more detailed, farm-specific reports that combine both Blitecast and Simcast forecasts.
 	</ul>
 	<h2>Early Blight</h2>
@@ -1147,11 +1147,9 @@ def potato_for_input [html] ():
 		<input type="hidden" id="pest" value="potato_for">
 		<p style="margin-bottom:3px;">Date of Interest:</p>
 		<input type="text" id="dpick" value="">
-		<p><input type="button" value="Get report" class="button getReport" style="display:none;">
-		<div id="useEffBox" style="text-align:center;padding:5px;border:0 solid red;">
-			<p style="display:none; margin:0 0 5px;">Must read for best first fungicide decision:</p>
-			<a href="#" id="usepotatoeffectively">Using Potato Disease Forecasts Effectively</a>
-		</div>
+		<p><input type="button" value="Get report" class="button getReport" style="display:none;"></p>
+		<p style="text-align:center;font-weight:normal;"><a href="#" id="usepotatoeffectively">Using Potato Disease Forecasts Effectively</a></p>
+		<p style="text-align:center;font-weight:normal;"><a style="display:none;" href="#" id="reset_link">Start over</a></p>
 	</div>
 	<div id="rightbox">
 		<div id="righttabs">
@@ -1174,12 +1172,6 @@ def potato_for_input [html] ():
 	</div>
 	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function () {
-		$("#usepotatoeffectively").on('click', function(e) {
-			e.preventDefault();
-			$('#righttabs').tabs('option', 'active', 2);
-		});
-	});
 	try {
 	var pageTracker = _gat._getTracker("UA-8808137-1");
 	pageTracker._trackPageview();
@@ -1969,7 +1961,7 @@ def potato_lb_html [html] (station_id,station_name,last_time,wet_periods,summary
 	if (hasTan == 1):
 		'<tr><td style="border:1px solid black;" bgcolor="#EAD797">&nbsp;</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % length
 	if (hasRed == 1):
-		'<tr><th style="border:1px solid black;" bgcolor="red">>=%s</th>'%(criticalValue)
+		'<tr><th style="border:1px solid black;" bgcolor="red">>= %s</th>'%(criticalValue)
 		'<td style="border:1px solid black;" colspan="%s">Severity unit threshold exceeded. Suggest using <a href="http://newatest.nrcc.cornell.edu/newaDisease/potato_simcast/%s">Simcast</a> once fungicide is applied.</td></tr>' % (length,station_id)
 
 	'<tr><th colspan="%s"><a href="javascript:showit();">More Information</a></th></tr>' % (length+1)
@@ -1983,7 +1975,7 @@ def potato_lb_html [html] (station_id,station_name,last_time,wet_periods,summary
 	<hr />
 	<p>Missing data are estimated from surrounding hours, a nearby station or previous forecast values.</p>
 	<hr />
-	<p>The <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss" target="_blank">Potato/Tomato Late Blight Decision Support System (DSS)</a> 
+	<p>The <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss" target="_blank">BlightPro Decision Support System (DSS)</a> 
 	can be used to provide a more detailed, farm-specific analysis of late blight management strategies.</p>
 	</div>
 	</td></tr>
@@ -2086,9 +2078,9 @@ def potato_simcast_html [html] (station_name,simcastD):
 	length = min(bLength,fLength)
 	'''
 	<p>The NEWA Simcast Late Blight model assumes that fungicide applications were made at 10am
-on the date specified in the user interface. The Potato/Tomato Late Blight Decision 
-Support System (DSS) is a much more robust tool for managing late blight that, among other
-things, allows you to specify the time of fungicide application. The Late Blight DSS is the
+on the date specified in the user interface. The BlightPro Decision 
+Support System (DSS) is a more robust tool for managing late blight that, among other
+things, allows you to specify the time of fungicide application. The BlightPro DSS is the
 preferred tool for monitoring late blight. More information on the DSS can be found at 
 <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss">
 http://newa.cornell.edu/index.php?page=potato-late-blight-dss</a>.</p>
@@ -2149,10 +2141,10 @@ http://newa.cornell.edu/index.php?page=potato-late-blight-dss</a>.</p>
 	if (hasTan == 1):
 		'<tr><td style="border:1px solid black;" bgcolor="#EAD797">&nbsp;</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % length
 	if (hasRedBlight == 1):
-		'<tr><th style="border:1px solid black;" bgcolor="red">>=%s</th>'%(simcastD['criticalBU'])
+		'<tr><th style="border:1px solid black;" bgcolor="red">>= %s</th>'%(simcastD['criticalBU'])
 		'<td style="border:1px solid black;" colspan="%s">Blight unit threshold exceeded.</td></tr>' % length
 	if (hasRedFung == 1):
-		'<tr><th style="border:1px solid black;" bgcolor="red"><=-%s</th>'%(simcastD['criticalFU'])
+		'<tr><th style="border:1px solid black;" bgcolor="red"><= -%s</th>'%(simcastD['criticalFU'])
 		'<td style="border:1px solid black;" colspan="%s">Fungicide unit threshold exceeded.</td></tr>' % length
 
 	'<tr><th colspan="%s"><a href="javascript:showit();">More Information</a></th></tr>' % (length+1)
@@ -2184,7 +2176,7 @@ http://newa.cornell.edu/index.php?page=potato-late-blight-dss</a>.</p>
 	<li>For example, 6/7 12 noon up to but NOT including 6/8 12 noon is one day.</li>
 	</ul>
 	<hr />
-	<p>The <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss" target="_blank">Potato/Tomato Late Blight Decision Support System (DSS)</a> 
+	<p>The <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss" target="_blank">BlightPro Decision Support System (DSS)</a> 
 	can be used to provide a more detailed, farm-specific analysis of late blight management strategies.</p>
 	</div>
 	</td></tr>
@@ -2369,6 +2361,15 @@ def onion_dis_html [html] (station_name,blight_alert,plant_date,alternaria,botry
 		<body>
 		'''
 	'''
+	<script type="text/javascript">
+		function showit() {
+			$("#showInfo").toggle();
+		}
+		function show_moreinfo () {
+			$("#moreinfo").load('http://newatest.nrcc.cornell.edu/pops_notes.htm');
+			$("#moreinfo").dialog('open');
+		}
+	</script>
 	<table id="results_table" border=1 style='border-collapse:collapse; table-layout:fixed; margin-top:0.5em; width:100%;'>
 	'''
 	'<tr><td class=header_line_silver_back colspan=10 height=38 align=center>Onion Disease for %s</td></tr>' % (station_name)
@@ -2394,7 +2395,7 @@ def onion_dis_html [html] (station_name,blight_alert,plant_date,alternaria,botry
 		if smry_dict['ymd' + i] <= last_prcp_ymd:
 			dcol = "yellow"
 		else:
-			dcol = 'palegoldenrod'
+			dcol = 'brown'
 		'<td class=%s_back>%s</td>' % (dcol,smry_dict['fday' + i])
 	'</tr>'
 
@@ -2417,7 +2418,7 @@ def onion_dis_html [html] (station_name,blight_alert,plant_date,alternaria,botry
 		
 	'''
 	<tr>
-	<th rowspan=3 class="plain_back">Botrytis leaf blight</th>
+	<th rowspan=2 class="plain_back">Botrytis leaf blight</th>
 	<td class="plain_back">Michigan Botrytis forecast (BLB)</td>
 	'''
 	'<td class=%s_back>%s</td>' % (sevenDayColor(smry_dict["botrytis_days"]), smry_dict["botrytis_days"])
@@ -2432,26 +2433,23 @@ def onion_dis_html [html] (station_name,blight_alert,plant_date,alternaria,botry
 		if fdyval == miss:
 			fdyval = "-"
 		'<td class=%s_back>%s</td>' % (diseaseColor("botrytis", fdyval), fdyval)
-	'''
-	<tr>
-	<td class="plain_back">Blight Alert (IPI)</td>
-	'''
-	'<td class=%s_back>%s</td>' % (sevenDayColor(smry_dict["blightalert_days"]), smry_dict["blightalert_days"])
-	'<td class="%s_back double_right">%s</td>' % (disease7Color("blightalert7", smry_dict["blightalert_avg"]), smry_dict["blightalert_avg"])
-	smry = smry_dict["blightalert_today"]
-	if smry == miss:
-		smry = "-"
-	'<td class=%s_back>%s</td>' % (diseaseColor("blightalert", smry), smry)
-	for dy in range(1,6):
-		index = 'blightalert_fday' + str(dy)
-		fdyval = smry_dict[index]
-		if fdyval == miss:
-			fdyval = "-"
-		'<td class=%s_back>%s</td>' % (diseaseColor("blightalert", fdyval), fdyval)
-	'''
-	<tr>
-	<td class="plain_back">Modified Blight Alert (IPI)</td>
-	'''
+#	'<!--<tr>'
+#	'<td class="plain_back">Blight Alert (IPI)</td>'
+#	'<td class=%s_back>%s</td>' % (sevenDayColor(smry_dict["blightalert_days"]), smry_dict["blightalert_days"])
+#	'<td class="%s_back double_right">%s</td>' % (disease7Color("blightalert7", smry_dict["blightalert_avg"]), smry_dict["blightalert_avg"])
+#	smry = smry_dict["blightalert_today"]
+#	if smry == miss:
+#		smry = "-"
+#	'<td class=%s_back>%s</td>' % (diseaseColor("blightalert", smry), smry)
+#	for dy in range(1,6):
+#		index = 'blightalert_fday' + str(dy)
+#		fdyval = smry_dict[index]
+#		if fdyval == miss:
+#			fdyval = "-"
+#		'<td class=%s_back>%s</td>' % (diseaseColor("blightalert", fdyval), fdyval)
+#	'</tr> -->'
+	'<tr>'
+	'<td class="plain_back">Modified Blight Alert (IPI)</td>'
 	'<td class=%s_back>%s</td>' % (sevenDayColor(smry_dict["modblightalert_days"]), smry_dict["modblightalert_days"])
 	'<td class="%s_back double_right">%s</td>' % (disease7Color("blightalert7", smry_dict["modblightalert_avg"]), smry_dict["modblightalert_avg"])
 	smry = smry_dict["modblightalert_today"]
@@ -2520,7 +2518,7 @@ def onion_dis_html [html] (station_name,blight_alert,plant_date,alternaria,botry
 	<td colspan=6 class="plain_back">
 		<u>Threshold Levels</u>
 		<br />Michigan Botrytis: BLB &ge; 50 
-		<br />Blight Alert: IPI &ge; 7
+		<!--<br />Blight Alert: IPI &ge; 7-->
 		<br />Modified Blight Alert: IPI &ge; 7
 		<br />Purple Blotch: PRI &ge; 5.7
 		<table class="color_guide" border=1 style='border-collapse:collapse; table-layout:fixed; margin:10px auto 0;'>
@@ -2533,11 +2531,21 @@ def onion_dis_html [html] (station_name,blight_alert,plant_date,alternaria,botry
 	</tr>
 	<tr>
 	<td colspan=10 style="text-align:center;"><button class="button" id="gotomoreinfo">What does this mean?</button></td></tr>
+	<tr><th colspan=10><a href="javascript:showit();">More Information</a></th></tr>
+	<tr><td colspan=10 style="padding:0;">
+	<div id="showInfo" style="padding:4px; border:1px solid black; background-color:palegoldenrod; display:none;">
+	<p>Dates with a <span class="blue_back">blue background</span> generally have observed weather data.
+	<br />Dates with a <span class="yellow_back">yellow background</span> use observed (when available) and forecast temperature, rh and rainfall.
+	<br />Dates with an <span class="brown_back">brown background</span> use forecast temperature and rh (rainfall not available; assumed zero).</p>
+	<hr />
+	<p>Missing data are estimated from surrounding hours, a nearby station or previous forecast values.</p>
+	</div>
+	</td></tr>
 	</table>
 	
-	<div id="moreinfo" class="plain_back_l"></div>
-
-	<hr>
+	<div id="moreinfo"></div>
+	
+	<!-- <hr>
 	<hr>
 	<p><b><u>The following tables are for model evaluation only. They will not appear in the final product.</u></b></p>
 	<table border=0 cellpadding=0 cellspacing=5>
@@ -2672,7 +2680,7 @@ def onion_dis_html [html] (station_name,blight_alert,plant_date,alternaria,botry
 		</table>
 	</td>
 	</tr>
-	</table>
+	</table> -->
 	<script type="text/javascript">
 	function show_moreinfo () {
 		$("#moreinfo").dialog({
@@ -3112,7 +3120,7 @@ def tomato_for_html [html] (stn_name,smry_dict,log_dict, simcastD, bliteD):
 		<col width=9%>
 		<col width=9%>
 		<tbody>
-		<tr><td colspan=8 style="text-align:center;font-size:75%;"><input type="button" class="button" id="closeBliteLog" value="Close Bligecast Log" /></td></tr>
+		<tr><td colspan=8 style="text-align:center;font-size:75%;"><input type="button" class="button" id="closeBliteLog" value="Close Blitecast Log" /></td></tr>
 		<tr>
 		'''
 		'<td class=header_line height=30 colspan=8 align=center>Blitecast Leaf Wetness and Severity Value Log %d</td>'%(last_time[0])
@@ -3191,9 +3199,9 @@ def tomato_for_html [html] (stn_name,smry_dict,log_dict, simcastD, bliteD):
 			length = 8 ##**************
 			if len(simcastD):
 				'<p>The NEWA Simcast Late Blight model assumes that fungicide applications were made at 11am \
-				on the date specified in the user interface. The Potato/Tomato Late Blight Decision \
-				Support System (DSS) is a much more robust tool for managing late blight that, among other \
-				things, allows you to specify the time of fungicide application. The Late Blight DSS is the \
+				on the date specified in the user interface. The BlightPro Decision \
+				Support System (DSS) is a more robust tool for managing late blight that, among other \
+				things, allows you to specify the time of fungicide application. The BlightPro DSS is the \
 				preferred tool for monitoring late blight. More information on the DSS can be found at \
 				<a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss"> \
 				http://newa.cornell.edu/index.php?page=potato-late-blight-dss</a>.</p>'
@@ -3202,33 +3210,33 @@ def tomato_for_html [html] (stn_name,smry_dict,log_dict, simcastD, bliteD):
 			'<tr><th style="border:1px solid black;" colspan="%s">TOMCAST Key</th></tr>' % (length+1)
 			if len(simcastD):
 				if (hasTanTC == 1):
-					'<tr><td style="border:1px solid black;" class="palegoldenrod_back">&lt;15</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % length
+					'<tr><td style="border:1px solid black;" class="palegoldenrod_back">&lt; 15</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % length
 				if (hasRedTC == 1):
-					'<tr><th style="border:1px solid black;" bgcolor="pink">>=15</th>'
+					'<tr><th style="border:1px solid black;" bgcolor="pink">>= 15</th>'
 					'<td style="border:1px solid black;" colspan="%s">DSV threshold exceeded, if last fungicide application was a mancozeb fungicide.</td></tr>' % (length)
 				if (hasPinkTC == 1):
-					'<tr><th style="border:1px solid black;" bgcolor="red">>=22</th>'
+					'<tr><th style="border:1px solid black;" bgcolor="red">>= 22</th>'
 					'<td style="border:1px solid black;" colspan="%s">DSV threshold exceeded.</td></tr>' % (length)
 				'<tr><th style="border:1px solid black;" colspan="%s">Simcast Key</th></tr>' % (length+1)
 				if (hasTan == 1):
 					'<tr><td style="border:1px solid black;" class="palegoldenrod_back">&nbsp;</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % length
 			else:
 				if (hasTanTC == 1):
-					'<tr><td style="border:1px solid black;" class="palegoldenrod_back">&lt;25</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % length
+					'<tr><td style="border:1px solid black;" class="palegoldenrod_back">&lt; 25</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % length
 				if (hasRedTC == 1):
-					'<tr><th style="border:1px solid black;" bgcolor="red">>=25</th>'
+					'<tr><th style="border:1px solid black;" bgcolor="red">>= 25</th>'
 					'<td style="border:1px solid black;" colspan="%s">DSV threshold exceeded.</td></tr>' % (length)
 				'<tr><th style="border:1px solid black;" colspan="%s">Blitecast Key</th></tr>' % (length+1)
 				if (hasTan == 1):
 					'<tr><td style="border:1px solid black;" class="palegoldenrod_back">&lt;%s</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % (criticalValue,length)
 			if (hasRedBlight == 1):
-				'<tr><th style="border:1px solid black;" bgcolor="red">>=%s</th>'%(simcastD['criticalBU'])
+				'<tr><th style="border:1px solid black;" bgcolor="red">>= %s</th>'%(simcastD['criticalBU'])
 				'<td style="border:1px solid black;" colspan="%s">Blight unit threshold exceeded.</td></tr>' % length
 			if (hasRedFung == 1):
-				'<tr><th style="border:1px solid black;" bgcolor="red"><=-%s</th>'%(simcastD['criticalFU'])
+				'<tr><th style="border:1px solid black;" bgcolor="red"><= -%s</th>'%(simcastD['criticalFU'])
 				'<td style="border:1px solid black;" colspan="%s">Fungicide unit threshold exceeded.</td></tr>' % length
 			if (hasRed == 1):
-				'<tr><th style="border:1px solid black;" bgcolor="red">>=%s</th>'%(criticalValue)
+				'<tr><th style="border:1px solid black;" bgcolor="red">>= %s</th>'%(criticalValue)
 				'<td style="border:1px solid black;" colspan="%s">Severity value threshold exceeded.</td></tr>' % (length)
 
 			'<tr><th colspan="%s"><a href="javascript:showit();">More Information</a></th></tr>' % (length+1)
@@ -3247,7 +3255,7 @@ def tomato_for_html [html] (stn_name,smry_dict,log_dict, simcastD, bliteD):
 			<li>For example, 6/7 12 noon up to but NOT including 6/8 12 noon is one day.</li>
 			</ul>
 			<hr />
-			<p>The <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss" target="_blank">Potato/Tomato Late Blight Decision Support System (DSS)</a> 
+			<p>The <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss" target="_blank">BlightPro Decision Support System (DSS)</a> 
 			can be used to provide a more detailed, farm-specific analysis of late blight management strategies.</p>
 			</div>
 			</td></tr>
@@ -3474,7 +3482,7 @@ def potato_for_html [html] (stn_name,smry_dict, pday_list, simcastD, bliteD):
 		<col width=9%>
 		<col width=9%>
 		<tbody>
-		<tr><td colspan=8 style="text-align:center;font-size:75%;"><input type="button" class="button" id="closeBliteLog" value="Close Bligecast Log" /></td></tr>
+		<tr><td colspan=8 style="text-align:center;font-size:75%;"><input type="button" class="button" id="closeBliteLog" value="Close Blitecast Log" /></td></tr>
 		<tr>
 		'''
 		'<td class=header_line height=30 colspan=8 align=center>Blitecast Leaf Wetness and Severity Value Log %d</td>'%(last_time[0])
@@ -3546,9 +3554,9 @@ def potato_for_html [html] (stn_name,smry_dict, pday_list, simcastD, bliteD):
 		length = 8 ##**************
 		if len(simcastD):
 			'<p>The NEWA Simcast Late Blight model assumes that fungicide applications were made at 11am \
-			on the date specified in the user interface. The Potato/Tomato Late Blight Decision \
-			Support System (DSS) is a much more robust tool for managing late blight that, among other \
-			things, allows you to specify the time of fungicide application. The Late Blight DSS is the \
+			on the date specified in the user interface. The BlightPro Decision \
+			Support System (DSS) is a more robust tool for managing late blight that, among other \
+			things, allows you to specify the time of fungicide application. The BlightPro DSS is the \
 			preferred tool for monitoring late blight. More information on the DSS can be found at \
 			<a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss"> \
 			http://newa.cornell.edu/index.php?page=potato-late-blight-dss</a>.</p>'
@@ -3556,7 +3564,7 @@ def potato_for_html [html] (stn_name,smry_dict, pday_list, simcastD, bliteD):
 		'<table border="0" cellspacing="0" cellpadding="4" width="500px" style="margin-top:1em;border-collapse:collapse;table-layout:fixed">'
 		'<tr><th style="border:1px solid black;" colspan="%s">P-Days Key</th></tr>' % (length+1)
 		if (hasTanTC == 1):
-			'<tr><td style="border:1px solid black;" class="palegoldenrod_back">&lt;300</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % length
+			'<tr><td style="border:1px solid black;" class="palegoldenrod_back">&lt; 300</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % length
 		if (hasRedTC == 1):
 			'<tr><th style="border:1px solid black;" bgcolor="red">>=300</th>'
 			'<td style="border:1px solid black;" colspan="%s">P-Day threshold exceeded.</td></tr>' % (length)
@@ -3567,15 +3575,15 @@ def potato_for_html [html] (stn_name,smry_dict, pday_list, simcastD, bliteD):
 		else:
 			'<tr><th style="border:1px solid black;" colspan="%s">Blitecast Key</th></tr>' % (length+1)
 			if (hasTan == 1):
-				'<tr><td style="border:1px solid black;" class="palegoldenrod_back">&lt;%s</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % (criticalValue,length)
+				'<tr><td style="border:1px solid black;" class="palegoldenrod_back">&lt; %s</td><td style="border:1px solid black;" colspan="%s">Below threshold.</td></tr>' % (criticalValue,length)
 		if (hasRedBlight == 1):
-			'<tr><th style="border:1px solid black;" bgcolor="red">>=%s</th>'%(simcastD['criticalBU'])
+			'<tr><th style="border:1px solid black;" bgcolor="red">>= %s</th>'%(simcastD['criticalBU'])
 			'<td style="border:1px solid black;" colspan="%s">Blight unit threshold exceeded.</td></tr>' % length
 		if (hasRedFung == 1):
-			'<tr><th style="border:1px solid black;" bgcolor="red"><=-%s</th>'%(simcastD['criticalFU'])
+			'<tr><th style="border:1px solid black;" bgcolor="red"><= -%s</th>'%(simcastD['criticalFU'])
 			'<td style="border:1px solid black;" colspan="%s">Fungicide unit threshold exceeded.</td></tr>' % length
 		if (hasRed == 1):
-			'<tr><th style="border:1px solid black;" bgcolor="red">>=%s</th>'%(criticalValue)
+			'<tr><th style="border:1px solid black;" bgcolor="red">>= %s</th>'%(criticalValue)
 			'<td style="border:1px solid black;" colspan="%s">Severity value threshold exceeded.</td></tr>' % (length)
 
 		'<tr><th colspan="%s"><a href="javascript:showit();">More Information</a></th></tr>' % (length+1)
@@ -3594,7 +3602,7 @@ def potato_for_html [html] (stn_name,smry_dict, pday_list, simcastD, bliteD):
 		<li>For example, 6/7 12 noon up to but NOT including 6/8 12 noon is one day.</li>
 		</ul>
 		<hr />
-		<p>The <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss" target="_blank">Potato/Tomato Late Blight Decision Support System (DSS)</a> 
+		<p>The <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss" target="_blank">BlightPro Decision Support System (DSS)</a> 
 		can be used to provide a more detailed, farm-specific analysis of late blight management strategies.</p>
 		</div>
 		</td></tr>

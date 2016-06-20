@@ -42,9 +42,8 @@ def add_dly_fcst(stn,daily_data,start_fcst_dt,end_fcst_dt):
 	return daily_data	
 
 #--------------------------------------------------------------------------------------------		
-def hrly_to_dly (hourly_data):
+def hrly_to_dly (hourly_data, lt_end_hour = 23):
 	daily_data = []
-	lt_end_hour = 23
 	miss=-999
 	try:		
 #		init counters
@@ -762,7 +761,7 @@ class Potato (Pottom):
 	# get pdays
 	def run_pdays(self, stn, station_name, hourly_data, start_date_dt, end_date_dt):
 		daily_pday = []
-		daily_data = hrly_to_dly(hourly_data)
+		daily_data = hrly_to_dly(hourly_data, 12)	#end day at 12 noon
 		if len(daily_data) > 0:
 			saccum = 0.
 			# do calculations
@@ -785,6 +784,8 @@ class Potato (Pottom):
 			
 	#--------------------------------------------------------------------------------------------		
 	def run_potato_for (self,subtype,stn,year,month,day,emerg_dt,cultivar,accend,output):
+		#year,month,day is either first tissue emergence (BC) or last fungicide (SC)
+		#emerg_dt is crop emergence date for both
 		try:
 			simcastD = {}
 			bliteD = {}
@@ -798,7 +799,15 @@ class Potato (Pottom):
 				year = end_date_dt.year
 				
 			if emerg_dt > end_date_dt:
-				return newaCommon_io.errmsg('Cannot have future emergence date')
+				return newaCommon_io.errmsg('Cannot have future crop emergence date')
+			
+			#start date for bc and sc	
+			start_date = DateTime.DateTime(year,month,day,10)
+			if start_date > end_date_dt:
+				if subtype == 'blitecast':
+					return newaCommon_io.errmsg('Cannot have future tissue emergence date')
+				else:
+					return newaCommon_io.errmsg('Cannot have future fungicide date')
 			
 			# obtain all hourly data for station
 			end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6) + DateTime.RelativeDate(hour=23,minute=0,second=0)
@@ -821,12 +830,17 @@ class Potato (Pottom):
 				
 	# this is blitecast
 			if subtype == 'blitecast':
-				bliteD = self.run_blitecast(stn, hourly_data, bliteD, end_date_dt, last_hour)
+				if emerg_dt != start_date:
+					# need different data than we did for pdays
+					hourly_data, download_time, station_name, avail_vars = self.get_hourly2 (stn, start_date, end_fcst_dt)
+					if end_fcst_dt >= start_fcst_dt:
+						hourly_data = add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)					
+				if len(hourly_data) > 0:
+					bliteD = self.run_blitecast(stn, hourly_data, bliteD, end_date_dt, last_hour)
 	# end blitecast
 						
 	# this is simcast
 			elif subtype == 'simcast':
-				start_date = DateTime.DateTime(year,month,day,10)
 				if start_date > end_date_dt:
 					return newaCommon_io.errmsg('Cannot have future fungicide date')
 				simcastD = self.run_simcast(stn, station_name, simcastD, cultivar, month, day, year, start_date, end_date_dt, download_time)					

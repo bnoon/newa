@@ -8,7 +8,7 @@ class RootDirectory(Directory):
 	              "potato_lb","potato_lb_old","potato_simcast","potato_pdays","potato_disease",
 	              "alf_weev","cabbage_maggot","onion_maggot",
 	              "onion_dis","onion_onlog","onion_sbalog","onion_smbalog",
-	              "tomato_for"]
+	              "tomato_for","potato_for"]
 	#removed 'grape_dis','apple_fb' - 4/14/16 kle
 
 #	put up input page for following
@@ -110,6 +110,9 @@ class RootDirectory(Directory):
 #			from newaDisease import process_input
 #			path = ['tomato_for'] + path
 #			return process_input(None,path)
+	def potato_for (self, path=None) :
+		from newaDisease_io import potato_for_input
+		return potato_for_input()
 	def grape_dis (self, path=None) :
 		if not path or path == ['']:
 			from newaDisease_io import grape_dis_input

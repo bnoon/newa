@@ -417,7 +417,8 @@
 	width: 0;		/* for IE only */
 	border: 1px orange solid;
 	overflow: visible;
-	background-color: #FFFFCC;}
+	background-color: #FFFFCC;
+	cursor:pointer; }
 .button[class] 
 	{ /* IE ignores [class] */
     width: auto;
