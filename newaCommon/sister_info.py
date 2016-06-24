@@ -416,6 +416,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'va_cro': {'temp': 'kcho', 'rhum': 'kcho', 'prcp': 'kcho', 'wspd': 'kcho', 'wdir': 'kcho', 'lwet': 'va_cha', 'srad': 'va_cha'},
 'va_red': {'temp': 'kcho', 'rhum': 'kcho', 'prcp': 'kcho', 'wspd': 'kcho', 'wdir': 'kcho', 'lwet': 'va_cro', 'srad': 'va_cro'},
 'va_bat': {'temp': 'kcho', 'rhum': 'kcho', 'prcp': 'kcho', 'wspd': 'kcho', 'wdir': 'kcho', 'lwet': 'va_cro', 'srad': 'va_cro'},
+'va_was': {'temp': 'kiad', 'rhum': 'kiad', 'prcp': 'kiad', 'wspd': 'kiad', 'wdir': 'kiad', 'lwet': 'va_cro', 'srad': 'va_cro'},
 'ne_gre': {'temp': 'koma', 'rhum': 'koma', 'prcp': 'koma', 'wspd': 'koma', 'wdir': 'koma', 'lwet': 'mn_och', 'srad': 'un_nec'},
 '29':   {'temp': '202', 'rhum': '202', 'prcp': '202', 'wspd': '202', 'wdir': '202', 'srad': '3529'},
 '33':   {'temp': '296', 'rhum': '296', 'prcp': '296', 'wspd': '296', 'wdir': '296'},
