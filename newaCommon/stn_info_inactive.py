@@ -20,6 +20,7 @@ stn_info_inactive = {
 'fri': {'name': 'Friend', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.192549999999997, 'elev': 1050.0, 'lat': 42.655799999999999, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'gra': {'name': 'Granville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -73.331111, 'elev': 670.0, 'lat': 43.412500, 'network': 'newa', 'state': 'NY'},
 'gro': {'name': 'Groveland', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.801929999999999, 'elev': 590.0, 'lat': 42.660499999999999, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
+'hig': {'name': 'Highland HVL', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.966990, 'elev': 436.0, 'lat': 41.746139, 'network': 'newa', 'state': 'NY'},
 'him': {'name': 'Himrod', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.922259999999994, 'elev': 500.0, 'lat': 42.617629999999998, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'lkp': {'name': 'Lake Placid', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.273768, 'lon': -73.94865, 'elev': 1680, 'network': 'newa', 'state': 'NY'},
 'los': {'name': 'Lodi (Shalestone)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.87803, 'elev': 522.0, 'lat': 42.56253, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
