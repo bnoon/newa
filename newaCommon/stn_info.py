@@ -173,7 +173,6 @@ stn_info = {
 'ct_gra': {'name': 'Granby, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.958341, 'lon': -72.817436, 'elev': 270, 'network': 'newa', 'state': 'CT'},
 'ct_heb': {'name': 'Hebron, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.684921, 'lon': -72.392705, 'elev': 593, 'network': 'newa', 'state': 'CT'},
 'ct_har': {'name': 'Harwinton-Burlington, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.781196, 'lon': -72.989213, 'elev': 847, 'network': 'newa', 'state': 'CT'},
-'ct_cha': {'name': 'Chaplin, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.752520, 'lon': -72.103485, 'elev': 592, 'network': 'newa', 'state': 'CT'},
 'ct_new': {'name': 'Newtown, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.404534, 'lon': -73.287750, 'elev': 400, 'network': 'newa', 'state': 'CT'},
 'ct_nca': {'name': 'New Canaan, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'toolow', 'lat': 41.132771, 'lon': -73.484614, 'elev': 274, 'network': 'newa', 'state': 'CT'},
 'ct_nia': {'name': 'Niantic, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.349326, 'lon': -72.213006, 'elev': 28, 'network': 'newa', 'state': 'CT'},
