@@ -54,7 +54,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'him' : {'temp': 'lod', 'lwet': 'lod', 'prcp': 'lod'},
 'hud' : {'temp': 'cas', 'lwet': 'cas', 'rhum': 'cas', 'prcp': 'cas', 'wspd': 'cu_val', 'wdir': 'cu_val', 'srad': 'cas'},
 'hvl' : {'temp': 'hig', 'lwet': 'hig', 'rhum': 'hig', 'prcp': 'hig', 'wspd': 'hig', 'wdir': 'hig', 'srad': 'mar'},
-'int' : {'temp': 'rom', 'rhum': 'ovi', 'prcp': 'rom', 'wspd': 'rom', 'wdir': 'rom', 'lwet': 'ovi', 'srad': 'rom'},
+'int' : {'temp': 'rom', 'rhum': 'rbg', 'prcp': 'ovi', 'wspd': 'rom', 'wdir': 'rom', 'lwet': 'ovi', 'srad': 'rom'},
 'ith' : {'temp': 'cu_gfr', 'prcp': 'cu_gfr', 'lwet': 'fre', 'rhum': 'cu_gfr', 'wspd': 'cu_gfr', 'wdir': 'cu_gfr', 'srad': 'ovi'},
 'kee' : {'temp': 'kslk', 'rhum': 'kslk', 'prcp': 'kslk', 'wspd': 'kslk', 'wdir': 'kslk', 'lwet': 'wlb', 'srad': 'wlb'},
 'ken' : {'temp': 'lyn', 'lwet': 'lyn', 'rhum': 'lyn', 'prcp': 'lyn', 'wspd': 'lyn', 'wdir': 'lyn', 'srad': 'kno'},
@@ -123,6 +123,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'vdu' : {'temp': 'vpu', 'rhum': 'vpu', 'prcp': 'vpu', 'wspd': 'vpu', 'wdir': 'vpu', 'lwet': 'vpu', 'srad': 'vpu'},
 'ver' : {'temp': 'sil', 'lwet': 'sil', 'rhum': 'sil', 'prcp': 'sil', 'wspd': 'sil', 'wdir': 'sil', 'srad': 'sil'},
 'vlt' : {'temp': 'cas', 'lwet': 'cas', 'rhum': 'cas', 'prcp': 'cas', 'wspd': 'cas', 'wdir': 'cas', 'srad': 'cas'},
+'vrf' : {'temp': 'cas', 'lwet': 'cas', 'rhum': 'cas', 'prcp': 'cas', 'wspd': 'cas', 'wdir': 'cas', 'srad': 'cas'},
 'vsb' : {'temp': 'kbtv', 'rhum': 'kbtv', 'prcp': 'kbtv', 'wspd': 'kbtv', 'wdir': 'kbtv', 'lwet': 'vso', 'srad': 'vso'},
 'vex' : {'temp': 'kbtv', 'rhum': 'kbtv', 'prcp': 'kbtv', 'wspd': 'kbtv', 'wdir': 'kbtv', 'lwet': 'vsb', 'srad': 'vsb'},
 'vsh' : {'temp': 'krut', 'rhum': 'krut', 'prcp': 'krut', 'wspd': 'krut', 'wdir': 'krut', 'lwet': 'cro', 'srad': 'ved'},
@@ -478,4 +479,5 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'nc_eaw': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'nc_edn', 'srad': 'nc_edn'},
 'nc_fla': {'temp': 'kavl', 'rhum': 'kavl', 'prcp': 'kavl', 'wspd': 'kavl', 'wdir': 'kavl', 'lwet': 'nc_edn', 'srad': 'nc_edn'},
 'nc_mof': {'temp': 'khky', 'rhum': 'khky', 'prcp': 'khky', 'wspd': 'khky', 'wdir': 'khky', 'lwet': 'nc_mor', 'srad': 'nc_mor'},
+'ew_men': {'temp': 'ktol', 'rhum': 'ktol', 'prcp': 'ktol', 'wspd': 'ktol', 'wdir': 'ktol', 'lwet': 'il_woo', 'srad': 'il_woo'},
 }
