@@ -7,7 +7,6 @@ stn_info_inactive = {
 'bar': {'name': 'Barrington', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.084785, 'elev': 1089.0, 'lat': 42.551651, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'bat': {'name': 'Batavia', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'st4i'], 'lon': -78.154020000000003, 'elev': 900.0, 'lat': 43.028820000000003, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'bri': {'name': 'Bridgehampton', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.96, 'lon': -72.31, 'elev': 87, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
-'chm': {'name': 'Champlain (Leducs Green Acres)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 44.975916, 'lon': -73.419842, 'elev': 173, 'network': 'newa', 'state': 'NY'},
 'cln': {'name': 'Clintondale', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'toolow', 'lon': -74.058165, 'elev': 491.0, 'lat': 41.699821, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'clw': {'name': 'Clintondale (WG Minard)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'srad', 'wdir'], 'srqual': 'ok', 'lon': -74.054027, 'elev': 577.0, 'lat': 41.693276, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'cut': {'name': 'Cutchogue', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.026664, 'lon': -72.486658, 'elev': 30, 'network': 'newa', 'state': 'NY'},

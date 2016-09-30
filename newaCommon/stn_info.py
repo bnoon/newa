@@ -21,6 +21,7 @@ stn_info = {
 'crc': {'name': 'Chazy (Rusty Creek)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 44.9356, 'lon': -73.4189, 'elev': 140, 'network': 'newa', 'state': 'NY'},
 'cli': {'name': 'Clifton Park', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.837641, 'elev': 378.0, 'lat': 42.815913, 'network': 'newa', 'state': 'NY'},
 'cng': {'name': 'Canton (Greenwood)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 44.671842, 'lon': -75.148409, 'elev': 354, 'network': 'newa', 'state': 'NY'},
+'chm': {'name': 'Champlain (Leducs Green Acres)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 44.975916, 'lon': -73.419842, 'elev': 173, 'network': 'newa', 'state': 'NY'},
 'cho': {'name': 'Coeymans Hollow (Stanton)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 42.5050, 'lon': -73.8982, 'elev': 720, 'network': 'newa', 'state': 'NY'},
 'cns': {'name': 'Cutchogue (New Suffolk)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.01, 'lon': -72.48, 'elev': 26, 'network': 'newa', 'state': 'NY'},
 'cro': {'name': 'Crown Point', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.414106, 'elev': 120.0, 'lat': 43.951858, 'network': 'newa', 'state': 'NY'},
