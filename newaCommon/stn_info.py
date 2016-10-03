@@ -170,7 +170,6 @@ stn_info = {
 'ct_gui': {'name': 'Guilford, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.293201, 'lon': -72.694292, 'elev': 58, 'network': 'newa', 'state': 'CT'},
 'ct_sgl': {'name': 'S. Glastonbury, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.652024, 'lon': -72.576445, 'elev': 350, 'network': 'newa', 'state': 'CT'},
 'ct_nwi': {'name': 'North Windham, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 41.721570, 'lon': -72.167526, 'elev': 301, 'network': 'newa', 'state': 'CT'},
-'ct_rid': {'name': 'Ridgefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.291379, 'lon': -73.462419, 'elev': 670, 'network': 'newa', 'state': 'CT'},
 'ct_she': {'name': 'Shelton, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.332251, 'lon': -73.172193, 'elev': 400, 'network': 'newa', 'state': 'CT'},
 'ct_ssm': {'name': 'Southington (Shuttle Meadow), CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.636917, 'lon': -72.839023, 'elev': 450, 'network': 'newa', 'state': 'CT'},
 'ct_ssu': {'name': 'Southington (Sunnymount), CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.558953, 'lon': -72.943323, 'elev': 650, 'network': 'newa', 'state': 'CT'},
