@@ -200,7 +200,6 @@ stn_info = {
 'ct_swo': {'name': 'South Woodstock MS, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'bad', 'lat': 41.928673, 'lon': -71.956196, 'elev': 421, 'network': 'newa', 'state': 'CT'},
 'ct_eki': {'name': 'East Killingly, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.871175, 'lon': -71.809891, 'elev': 748, 'network': 'newa', 'state': 'CT'},
 'ct_nha': {'name': 'New Hartford, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.799465, 'lon': -73.016757, 'elev': 932, 'network': 'newa', 'state': 'CT'},
-'ct_oak': {'name': 'Oakdale School, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.470199, 'lon': -72.192813, 'elev': 499, 'network': 'newa', 'state': 'CT'},
 'ct_leb': {'name': 'Lebanon, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.625186, 'lon': -72.23729, 'elev': 515, 'network': 'newa', 'state': 'CT'},
 'ct_ell': {'name': 'Ellington, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.917283, 'lon': -72.458236, 'elev': 246, 'network': 'newa', 'state': 'CT'},
 'ct_rid': {'name': 'Ridgefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.291379, 'lon': -73.462419, 'elev': 670, 'network': 'newa', 'state': 'CT'},

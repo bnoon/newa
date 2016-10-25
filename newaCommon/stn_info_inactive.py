@@ -68,6 +68,7 @@ stn_info_inactive = {
 'ct_cha': {'name': 'Chaplin, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.752520, 'lon': -72.103485, 'elev': 592, 'network': 'newa', 'state': 'CT'},
 'ct_gra': {'name': 'Granby, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.958341, 'lon': -72.817436, 'elev': 270, 'network': 'newa', 'state': 'CT'},
 'ct_ham': {'name': 'Hamden, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.380279, 'lon': -72.912015, 'elev': 83, 'network': 'newa', 'state': 'CT'},
+'ct_oak': {'name': 'Oakdale School, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.470199, 'lon': -72.192813, 'elev': 499, 'network': 'newa', 'state': 'CT'},
 'va_bat': {'name': 'Batesville (Crown Orchard), VA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 37.974299, 'lon': -78.730016, 'elev': 832, 'network': 'newa', 'state': 'VA'},
 'um_tff': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -71.67833, 'elev': 610, 'lat': 42.34611, 'network': 'cu_log', 'state': 'MA'},
 'um_ces': {'name': 'Weston (Case Estates), MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -71.29889, 'elev': 246, 'lat': 42.35806, 'network': 'cu_log', 'state': 'MA', 'disconnected': 'yes'},
