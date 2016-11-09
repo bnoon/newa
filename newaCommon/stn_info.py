@@ -17,7 +17,6 @@ stn_info = {
 'cas': {'name': 'Castleton', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.537142, 'lon': -73.710530, 'elev': 288, 'network': 'newa', 'state': 'NY'},
 'cer': {'name': 'Ceres', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 42.007429, 'lon': -78.299024, 'elev': 1500, 'network': 'newa', 'state': 'NY'},
 'chz': {'name': 'Chazy (Grower)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.429071, 'elev': 167.0, 'lat': 44.861900, 'network': 'newa', 'state': 'NY'},
-'czy': {'name': 'Chazy (Miner)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'lwet', 'srad'], 'srqual': 'ok', 'lon': -73.4705, 'elev': 201.0, 'lat': 44.886, 'network': 'newa', 'state': 'NY'},
 'crc': {'name': 'Chazy (Rusty Creek)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 44.9356, 'lon': -73.4189, 'elev': 140, 'network': 'newa', 'state': 'NY'},
 'cli': {'name': 'Clifton Park', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.837641, 'elev': 378.0, 'lat': 42.815913, 'network': 'newa', 'state': 'NY'},
 'cng': {'name': 'Canton (Greenwood)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 44.671842, 'lon': -75.148409, 'elev': 354, 'network': 'newa', 'state': 'NY'},

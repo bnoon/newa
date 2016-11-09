@@ -12,6 +12,7 @@ stn_info_inactive = {
 'cut': {'name': 'Cutchogue', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.026664, 'lon': -72.486658, 'elev': 30, 'network': 'newa', 'state': 'NY'},
 'cu_aur': {'name': 'Aurora (logger)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -76.659099999999995, 'elev': 830.0, 'lat': 42.734099999999998, 'network': 'cu_log', 'state': 'NY', 'disconnected': 'yes'},
 'cu_chz': {'name': 'Chazy (Miner)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -73.466399999999993, 'elev': 201.0, 'lat': 44.8872, 'network': 'cu_log', 'state': 'NY', 'disconnected': 'yes'},
+'czy': {'name': 'Chazy (Miner)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'lwet', 'srad'], 'srqual': 'ok', 'lon': -73.4705, 'elev': 201.0, 'lat': 44.886, 'network': 'newa', 'state': 'NY'},
 'cu_val': {'name': 'Valatie', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -73.677599999999998, 'elev': 300.0, 'lat': 42.43, 'network': 'cu_log', 'state': 'NY', 'disconnected': 'yes'},
 'cu_wlb': {'name': 'Willsboro', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -73.381799999999998, 'elev': 180.0, 'lat': 44.384300000000003, 'network': 'cu_log', 'state': 'NY', 'disconnected': 'yes'},
 'cu_lkp': {'name': 'Lake Placid (logger)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -73.980000000000004, 'elev': 1940.0, 'lat': 44.25, 'network': 'cu_log', 'state': 'NY', 'disconnected': 'yes'},
