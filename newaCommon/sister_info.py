@@ -32,6 +32,7 @@ sister_info = {'alb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kn
 'dre' : {'temp': 'gbe', 'lwet': 'gbe', 'prcp': 'gbe'},
 'drs' : {'temp': 'kpeo', 'rhum': 'kpeo', 'prcp': 'kpeo', 'wspd': 'kpeo', 'wdir': 'kpeo', 'lwet': 'gbe', 'srad': 'gbe'},
 'dun' : {'temp': 'kpeo', 'rhum': 'kpeo', 'prcp': 'kpeo', 'wspd': 'kpeo', 'wdir': 'kpeo', 'lwet': 'bar', 'srad': 'wla'},
+'eag' : {'temp': 'kddh', 'rhum': 'kddh', 'prcp': 'kddh', 'wspd': 'kddh', 'wdir': 'kddh', 'lwet': 'vbe', 'srad': 'vbe'},
 'ede' : {'temp': 'kbuf', 'rhum': 'kbuf', 'prcp': 'kbuf', 'lwet': 'bat'},
 'elb' : {'temp': 'kno', 'lwet': 'kno', 'rhum': 'kno', 'prcp': 'kno', 'wspd': 'kno', 'wdir': 'kno', 'srad': 'kno'},
 'emo' : {'temp': 'khwv', 'rhum': 'khwv', 'prcp': 'khwv', 'wspd': 'khwv', 'wdir': 'khwv', 'lwet': 'man', 'srad': 'man'},
