@@ -235,6 +235,7 @@ stn_info = {
 'nj_blu': {'name': 'Blue Anchor (Sharrott Winery), NJ', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 39.677, 'lon': -74.874, 'elev': 131, 'network': 'newa', 'state': 'NJ'},
 'va_bat': {'name': 'Batesville (Crown Orchard), VA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 37.974299, 'lon': -78.730016, 'elev': 832, 'network': 'newa', 'state': 'VA'},
 'va_cha': {'name': 'Charlottesville (Carter Mtn Orchard), VA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st1i', 'sm1i'], 'srqual': 'ok', 'lat': 37.9906478, 'lon': -78.472665, 'elev': 1148, 'network': 'newa', 'state': 'VA'},
+'va_cov': {'name': 'Covesville (Purvis Orchard), VA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 37.868371, 'lon': -78.717696, 'elev': 747, 'network': 'newa', 'state': 'VA'},
 'va_cro': {'name': 'Crozet (Chiles Peach Orchard), VA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st1i', 'sm1i'], 'srqual': 'ok', 'lat': 38.068007, 'lon': -78.748675, 'elev': 922, 'network': 'newa', 'state': 'VA'},
 'va_oak': {'name': 'Oak Grove (Ingleside)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 38.153703, 'lon': -77.004929, 'elev': 178, 'network': 'newa', 'state': 'VA'},
 'va_red': {'name': 'Red Hill, VA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 37.954253, 'lon': -78.613412, 'elev': 676, 'network': 'newa', 'state': 'VA'},
