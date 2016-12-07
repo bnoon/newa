@@ -1059,7 +1059,8 @@ def tomato_for_input [html] ():
 	</style>
 	</head>
 	<body>
-	<p class="banner">NEWA Tomato Disease Forecast</p>
+	<p><span class="banner">NEWA Tomato Disease Forecast</span>
+	<br><span>Late blight, early blight, septoria leaf spot, anthracnose</span></p>
 	<div id="leftbox">
 		<input type="hidden" id="pest" value="tomato_for">
 		<p style="margin-bottom:3px;">Date of Interest:</p>
@@ -1142,7 +1143,8 @@ def potato_for_input [html] ():
 	</style>
 	</head>
 	<body>
-	<p class="banner">NEWA Potato Disease Forecast</p>
+	<p><span class="banner">NEWA Potato Disease Forecast</span>
+	<br><span>Late blight, early blight</span></p>
 	<div id="leftbox">
 		<input type="hidden" id="pest" value="potato_for">
 		<p style="margin-bottom:3px;">Date of Interest:</p>
@@ -1644,7 +1646,8 @@ def onion_dis_input [html] ():
 	</script>
 	</HEAD>
 	<body BGCOLOR="#FFFFFF">
-	<p class="banner">NEWA Onion Disease</p>
+	<p><span class="banner">NEWA Onion Disease forecast</span>
+	<br><span>Botrytis leaf blight, downy mildew, purple blotch</span></p>
 	<div id="leftbox">
 		<FORM ACTION="#" NAME="stationLister">
 		<div id="station_area"></div>
