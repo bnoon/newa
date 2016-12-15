@@ -2706,7 +2706,7 @@ class Grape (Base,Apple,Models):
 						smry_dict[std]['pmil'] = pm
 						continue
 			# same for phomopsis and black rot
-			for wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect in infect_list:			
+			for wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect in infect_list:
 #				print wet_start,wet_end,wet_hrs,avg_temp,prec_sum,combined,ph_infect,br_infect
 				start_dt = DateTime.DateTime(*wet_start) + DateTime.RelativeDate(hour=0,minute=0,second=0)
 				if wet_end == miss:
@@ -3303,12 +3303,12 @@ def process_help (request,path):
 										   ])
 		elif smry_type == 'grape_dis' or (smry_type == 'grape_disease' and pest == 'grape_dis'):
 			return newaModel_io.helppage([("New York and Pennsylvania Pest Management Guidelines for Grapes","http://ipmguidelines.org"),
-										   ("Black Rot IPM Fact Sheet","http://nysipm.cornell.edu/factsheets/grapes/diseases/grape_br.pdf"),
-										   ("Phomopsis Cane and Leaf Spot IPM Fact Sheet","http://nysipm.cornell.edu/factsheets/grapes/diseases/phomopsis.pdf"),
-										   ("Grapevine Powdery Mildew IPM Fact Sheet","http://nysipm.cornell.edu/factsheets/grapes/diseases/grape_pm.pdf"),
-										   ("IPM Fact Sheets for Grapes","http://nysipm.cornell.edu/factsheets/grapes/default.asp"),
+										   ("Black Rot IPM Fact Sheet","http://hdl.handle.net/1813/43076"),
+										   ("Phomopsis Cane and Leaf Spot IPM Fact Sheet","http://hdl.handle.net/1813/43104"),
+										   ("Grapevine Powdery Mildew IPM Fact Sheet","http://hdl.handle.net/1813/43121"),
+#										   ("IPM Fact Sheets for Grapes","http://nysipm.cornell.edu/factsheets/grapes/default.asp"),
 										   ("Cornell Fruit Resources - Grapes","http://www.fruit.cornell.edu/grape/index.html"),
-										   ("Elements of IPM for Grapes in New York State","http://nysipm.cornell.edu/elements/grapes.asp"),
+#										   ("Elements of IPM for Grapes in New York State","http://nysipm.cornell.edu/elements/grapes.asp"),
 			                               ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references")
 										   ])
 		elif smry_type == 'dmcast' or (smry_type == 'grape_disease' and pest == 'dmcast'):

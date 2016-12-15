@@ -2880,13 +2880,13 @@ def grape_disease_results [html] (smry_dict):
 		$('input[name=output], select[name=altref]').each(function () { params[this.name] = this.value; });
 		$.get('http://newatest.nrcc.cornell.edu/newaModel/update_grape_status',params,function(data) { $("#manage_status").html(data); });
 		return false;
-		}
+	}
 	function updateTable() {
 		var phenology = $("select[name='altref']").val();
 		if (phenology == 'dormant') {
 			$("#summary_table").hide(); }
 		else {
-			if (phenology=='bloom'||phenology=='imm_prebloom'||phenology=='10in_shoot'||phenology=='3in_shoot'||phenology=='1in_shoot'||phenology=='bud_swell'||phenology=='early') {
+			if (phenology=='imm_prebloom'||phenology=='10in_shoot'||phenology=='3in_shoot'||phenology=='1in_shoot'||phenology=='bud_swell'||phenology=='early') {
 				$("#pmildew_row").show(); }
 			else {
 				$("#pmildew_row").hide(); }
@@ -3018,14 +3018,14 @@ def grape_disease_results [html] (smry_dict):
 
 	'<tr><td class=plain_back_smaller colspan=9 style="text-align:center;">'
 	'<b>Phomopsis</b> - calculates when weather conditions may allow spores to infect susceptible tissue.'
-	'<br><b>Powdery Mildew</b> - runs from bud break until early bloom; calculates when weather conditions may allow overwintered, primary spores (ascospores) to infect susceptible tissue.'
+	'<br><b>Powdery Mildew</b> - calculates primary infection when weather conditions may allow overwintered, primary spores (ascospores) to infect susceptible tissue; runs from bud break until pre-bloom. Once primary infections have occurred, secondary infections (disease spread) are possible every day. The threat is greatest when temperatures are between 65 to 90 degrees F and is particularly high when conditions are cloudy.'
 	'<br><b>Black Rot</b> - calculates when weather conditions may allow spores to infect susceptible tissue.'
 	'</td></tr>'
 	'</table>'
 	'</div>'
 
 	### Allow user to change  phenology. Model-determined phenology initially selected.
-	'<div class="plain_back" id="manage_status" style="padding:10px 0px 5px;">'
+	'<div class="plain_back" style="padding:1em 0px 0px;">'
 	if smry_dict['phenology']: 
 		'<b>Phenological stage: </b>'
 		'<select name="altref" onChange="updateTable(); updateStatus();">'
@@ -3037,7 +3037,9 @@ def grape_disease_results [html] (smry_dict):
 				'<option value="%s">%s</option>' % (stage,stage_name)
 		'</select>'
 		'<p><span class="plain_smaller"><i>Choose the phenology stage for the grape variety of interest to display management messages. Concord grape phenology is estimated by the model from historical records for this variety.</i></span></p>'
+	'</div>'
 
+	'<div class="plain_back" id="manage_status" style="padding:0px 0px 5px;">'
 	### Management table
 	'<p><table cellspacing="0" cellpadding="5" border="1" width="100%">'
 	'<tr><th>Disease</th><th>Disease Management</th></tr>'
@@ -3210,18 +3212,6 @@ def grape_disease_results [html] (smry_dict):
 
 #--------------------------------------------------------------------------------------------		
 def grape_status_results [html] (smry_dict):	
-	if smry_dict['phenology']: 
-		'<b>Phenological stage: </b>'
-		'<select name="altref" onChange="updateTable(); updateStatus();">'
-		for i in range(len(smry_dict['phen_stages'])-1,-1,-1):
-			stage,stage_name = smry_dict['phen_stages'][i]
-			if stage == smry_dict['phenology']:
-				'<option value="%s" selected>%s</option>' % (stage,stage_name)
-			else:
-				'<option value="%s">%s</option>' % (stage,stage_name)
-		'</select></p>'
-		'<p><span class="plain_smaller"><i>Choose the phenology stage for the grape variety of interest to display management messages. Concord grape phenology is estimated by the model from historical records for this variety.</i></span></p>'
-
 	### Pest status and management table
 	'<p><table cellspacing="0" cellpadding="5" border="1" width="100%">'
 	'<tr><th>Disease</th><th>Disease Management</th></tr>'

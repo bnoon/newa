@@ -65,7 +65,7 @@ function getgrapedis() {
 	$.get('http://newatest.nrcc.cornell.edu/newaModel/process_input',params,function(data) {
 		$('#loading').fadeOut(500, function() { $(this).remove(); });
 		$("#second").html(data);
-		$('#data').fixedHeader({ width: "100%",height: 490 });
+//		$('#data').fixedHeader({ width: "100%",height: 490 });
 	});
 	return false;
 }
@@ -100,7 +100,7 @@ $(document).ready(function() {
 		elem = 'all';
 	}
 	stateStationMapList({
-		reqval: elem,
+		reqvar: elem,
 		event_type: 'select_station',
 		where: '#station_area'
 	});
