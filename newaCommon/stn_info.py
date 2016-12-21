@@ -34,7 +34,6 @@ stn_info = {
 'emo': {'name': 'East Moriches', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.801728, 'lon': -72.769788, 'elev': 30, 'network': 'newa', 'state': 'NY'},
 'fai': {'name': 'Fairville (The Apple Shed)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.130064, 'lon': -77.095780, 'elev': 509, 'network': 'newa', 'state': 'NY'},
 'far': {'name': 'Farmington', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'toolow', 'lon': -77.262299999999996, 'elev': 600.0, 'lat': 42.99004, 'network': 'newa', 'state': 'NY'},
-'fis': {'name': 'Fishkill', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.517978, 'lon': -73.824541, 'elev': 114, 'network': 'newa', 'state': 'NY'},
 'fre': {'name': 'Freeville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'bad', 'lon': -76.331130000000002, 'elev': 1100.0, 'lat': 42.51914, 'network': 'newa', 'state': 'NY'},
 'fts': {'name': 'Fort Salonga', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.897214, 'lon': -73.278708, 'elev': 99, 'network': 'newa', 'state': 'NY'},
 'gai': {'name': 'Gainesville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'toolow', 'lon': -78.162607, 'elev': 1600.0, 'lat': 42.652126, 'network': 'newa', 'state': 'NY'},
