@@ -88,6 +88,7 @@ function statePlaceMarkers (cur_data, event_type, state) {
 		'NJ': {lat: 40.1907, lon: -74.6733, zoom: 7, name: 'New Jersey'},
 		'NY': {lat: 42.9543, lon: -75.5262, zoom: 6, name: 'New York'},
 		'NC': {lat: 35.5579, lon: -79.3856, zoom: 6, name: 'North Carolina'},
+		'OH': {lat: 40.1905, lon: -82.6707, zoom: 7, name: 'Ohio'},
 		'PA': {lat: 40.8786, lon: -77.7985, zoom: 7, name: 'Pennsylvania'},
 		'RI': {lat: 41.6762, lon: -71.5562, zoom: 9, name: 'Rhode Island'},
 		'SC': {lat: 33.6290, lon: -80.9500, zoom: 6, name: 'South Carolina'},
@@ -96,7 +97,7 @@ function statePlaceMarkers (cur_data, event_type, state) {
 		'VA': {lat: 37.5229, lon: -78.8531, zoom: 7, name: 'Virginia'},
 		'WV': {lat: 38.6409, lon: -80.6230, zoom: 7, name: 'West Virginia'},
 		'WI': {lat: 44.6243, lon: -89.9941, zoom: 6, name: 'Wisconsin'},
-		'AL': {lat: 32.6174, lon: -86.6795, zoom: 6, name:' Alabama'},
+		'AL': {lat: 32.6174, lon: -86.6795, zoom: 7, name:' Alabama'},
 		'ALL':{lat: 42.5000, lon: -75.7000, zoom: 6, name: 'All'},
 	};
 	var stateInfo = stateCenters.hasOwnProperty(state) ? stateCenters[state] : {lat: 42.5, lon: -75.7, zoom: 6, name: 'All'};
@@ -257,6 +258,7 @@ function stateStationMapList (options) {
 			['IA', 'Iowa'],
 			['MD', 'Maryland'],
 			['MA', 'Massachusetts'],
+			['MI', 'Michigan'],
 			['MN', 'Minnesota'],
 			['MO', 'Missouri'],
 			['NE', 'Nebraska'],
@@ -264,6 +266,7 @@ function stateStationMapList (options) {
 			['NJ', 'New Jersey'],
 			['NY', 'New York'],
 			['NC', 'North Carolina'],
+			['OH', 'Ohio'],
 			['PA', 'Pennsylvania'],
 			['RI', 'Rhode Island'],
 			['SC', 'South Carolina'],
