@@ -172,6 +172,8 @@ class newa_weather(general_weather) :
 	def initialize_ucan(self) :
 		ucan = general_ucan(user_name="downy_mildew")
 		self.data = ucan.get_data()
+		if self.type == 'miwx':
+			self.stn_id = self.stn_id[3:]		
 		q = ucan.get_query()
 		r = q.getUcanFromIdAsSeq(self.stn_id,self.type)
 		q.release()
@@ -268,7 +270,18 @@ class culog_vars(newa_weather) :
 		self.lwet_minor = 2
 		newa_weather.__init__(self,stn)
 		
-		
+class miwx_vars(newa_weather) :
+	def __init__(self,stn_id) :
+		self.type = 'miwx'
+		self.tmp_major = 126
+		self.tmp_minor = 7
+		self.rh_major = 143
+		self.rh_minor = 3
+		self.prcp_major = 5
+		self.prcp_minor = 12
+		self.lwet_major = 118
+		self.lwet_minor = 6
+		newa_weather.__init__(self,stn_id)		
 				
 class general_dm_weather(object) :
 
@@ -302,6 +315,9 @@ class general_dm_weather(object) :
 			return obj
 		elif len(stn) == 6 and (stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_" or stn[0:3] == "un_") :
 			obj = culog_vars(stn)
+			return obj
+		elif stn[0:3] == "ew_":
+			obj = miwx_vars(stn)
 			return obj
 		elif len(stn) == 3 or len(stn) == 6 :
 			obj = newa_vars(stn)
