@@ -146,6 +146,16 @@ function statePlaceMarkers (cur_data, event_type, state) {
 		new google.maps.Size(21,14),
 		new google.maps.Point(0,0),
 		new google.maps.Point(7,7));
+	var circleIcon = {
+		path: google.maps.SymbolPath.CIRCLE,
+		scale: 2.5,
+		strokeColor: "gray",
+		strokeWeight: 5
+	};
+	var circleColors = {
+		"miwx": "#497A49",
+		"njwx": "#cc0033"
+	};
 	var marker,
 		markerOptions = {},
 		mapOptions = {
@@ -164,7 +174,7 @@ function statePlaceMarkers (cur_data, event_type, state) {
 	$.each(cur_data.stations, function (i,stn) {
 		markerOptions.position = new google.maps.LatLng(stn.lat, stn.lon);
 		markerOptions.title = stn.name;
-		if (stn.network === "newa" || stn.network === "njwx" || (stn.network === "cu_log" && stn.state !== "NY")) { 
+		if (stn.network === "newa" || (stn.network === "cu_log" && stn.state !== "NY")) { 
 			markerOptions.icon = stn.state === state || state === "ALL" ? newaIcon : newaIconGray; 
 			markerOptions.shadow = newaShadow;
 		} else if (stn.network === "cu_log") { 
@@ -173,6 +183,10 @@ function statePlaceMarkers (cur_data, event_type, state) {
 		} else if (stn.network === "icao") { 
 			markerOptions.icon = stn.state === state || state === "ALL" ? airportIcon : airportIconGray; 
 			markerOptions.shadow = airportShadow;
+		} else if (stn.network === "miwx" || stn.network === "njwx") {
+			markerOptions.icon = circleIcon;
+			markerOptions.icon.strokeColor = stn.state === state || state === "ALL" ? circleColors[stn.network] : "gray";
+			delete markerOptions.shadow;
 		}
 		marker = new google.maps.Marker(markerOptions);
 		
