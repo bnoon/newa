@@ -294,6 +294,9 @@ def get_sister_info (stn):
 					station_type = "cu_log"
 				elif len(sister[var]) == 3 or len(sister[var]) == 6:
 					station_type = "newa"
+				elif sister[var][0:3] == "ew_":
+					sister[var] = sister[var][3:]
+					station_type = 'miwx'
 				est_staid,sister_name = newaCommon.get_metadata (sister[var], station_type)
 				var_sister.append((var,sister_name))
 	except:
@@ -447,6 +450,9 @@ def process_input (request,path):
 			station_type = 'icao'
 		elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_" or stn[0:3] == "un_":
 			station_type = 'cu_log'
+		elif stn[0:3] == "ew_":
+			stn = stn[3:]
+			station_type = 'miwx'
 		elif len(stn) == 3 or len(stn) == 6:
 			station_type = 'newa'
 		else:
