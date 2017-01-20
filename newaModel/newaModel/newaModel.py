@@ -4,10 +4,10 @@ import sys, copy, math
 from mx import DateTime
 from print_exception import print_exception
 import newaModel_io
-if '/Users/kle1/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/kle1/kleWeb/newaCommon')
+if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
 import newaCommon_io
 from newaCommon import *
-if '/Users/kle1/NDFD' not in sys.path: sys.path.insert(1,'/Users/kle1/NDFD')
+if '/Users/keith/NDFD' not in sys.path: sys.path.insert(1,'/Users/keith/NDFD')
 
 miss = -999
 month_names = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -3053,7 +3053,7 @@ class Grape (Base,Apple,Models):
 				#end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +5)
 				#daily_data = self.add_dly_fcst(stn,daily_data,start_fcst_dt,end_fcst_dt)
 				for dt,tave,tmax,tmin,prcp,pop12,rhum,miss,miss,qpf,miss,miss,dflags in daily_data:
-					pm = self.get_pmildew(qpf,(tmax+tmin)/2.)
+					pm = self.get_pmildew(prcp,(tmax+tmin)/2.)
 					pmildew_list.append((dt,pm))
 			else:
 				return self.nodata(stn, station_name, start_date_dt, end_date_dt)

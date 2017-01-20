@@ -9,7 +9,7 @@ from phen_events import phen_events_dict
 if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
 import newaCommon_io
 from newaCommon import *
-if '/Users/keith/kleWeb/newaTools/newaTools/Apple_ET_Model' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaTools/newaTools/Apple_ET_Model')
+if '/Users/keith/progs/Morecs/morecs_hourly/Apple_ET' not in sys.path: sys.path.insert(1,'/Users/keith/progs/Morecs/morecs_hourly/Apple_ET')
 import Apple_ET_model
 if '/Users/keith/kleWeb/newaTools/newaTools/Apple_Thinning_Model' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaTools/newaTools/Apple_Thinning_Model')
 from AppleGrowthModel import AppleGrowthModel
@@ -138,6 +138,7 @@ def apple_thinning_model (staid, start_date_dt, end_date_dt, station_type):
 		hourly_data = collect_hourly_input(staid, start_date_dt, end_date_dt, ['temp','srad'], station_type)
 		ks = hourly_data.keys()
 		ks.sort()
+		
 		for key_date in ks:
 			theDate = DateTime.DateTime(*key_date)
 			doy = theDate.day_of_year
@@ -313,6 +314,9 @@ def run_apple_et (stn,accend,greentip,output):
 			station_type = 'icao'
 		elif stn[0:3] == 'cu_' or stn[0:3] == 'um_':
 			station_type = 'cu_log'
+		elif stn[0:3] == "ew_":
+			stn = stn[3:]
+			station_type = 'miwx'
 		elif len(stn) == 3 or len(stn) == 6:
 			station_type = 'newa'
 		else:
@@ -338,12 +342,16 @@ def run_apple_et_specs (stn,accend,output):
 	start_date_dt = accend + DateTime.RelativeDate(days=-7) + DateTime.RelativeDate(hour=0,minute=0,second=0.0)
 	end_date_dt = accend + DateTime.RelativeDate(days=+6) + DateTime.RelativeDate(hour=23,minute=0,second=0.0)	
 	
+	fcst_stn = copy.deepcopy(stn)
 	if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 		station_type = 'njwx'
 	elif len(stn) == 4:
 		station_type = 'icao'
 	elif stn[0:3] == 'cu_' or stn[0:3] == 'um_':
 		station_type = 'cu_log'
+	elif stn[0:3] == "ew_":
+		stn = stn[3:]
+		station_type = 'miwx'
 	elif len(stn) == 3 or len(stn) == 6:
 		station_type = 'newa'
 	else:
@@ -353,7 +361,7 @@ def run_apple_et_specs (stn,accend,output):
 	biofix_dd = phen_events_dict['macph_greentip_43']['dd'][2]					#green tip degree day accumulation
 	hourly_data = {}
 	jan1_dt = DateTime.DateTime(end_date_dt.year,1,1,0,0,0)
-	fcst_data = get_fcst_data (stn, 'temp', jan1_dt, end_date_dt)
+	fcst_data = get_fcst_data (fcst_stn, 'temp', jan1_dt, end_date_dt)
 	hourly_data = get_hourly_data (stn, 'temp', jan1_dt, end_date_dt, hourly_data, fcst_data, station_type)
 	biofix_dt, ddmiss = BaseTools().find_biofix (hourly_data, jan1_dt, end_date_dt, 'dd43be', biofix_dd)
 	if biofix_dt and ddmiss <= 7: 
@@ -371,8 +379,11 @@ def run_apple_thin (stn,accend,greentip,bloom,output):
 			station_type = 'njwx'
 		elif len(stn) == 4:
 			station_type = 'icao'
-		elif stn[0:3] == 'cu_' or stn[0:3] == 'um_':
+		elif stn[0:3] == 'cu_' or stn[0:3] == 'um_' or stn[0:3] == 'un_' or stn[0:3] == 'uc_':
 			station_type = 'cu_log'
+		elif stn[0:3] == "ew_":
+			stn = stn[3:]
+			station_type = 'miwx'
 		elif len(stn) == 3 or len(stn) == 6:
 			station_type = 'newa'
 		else:
@@ -411,12 +422,16 @@ def run_apple_thin_specs (stn,accend,output):
 	start_date_dt = accend + DateTime.RelativeDate(days=-7) + DateTime.RelativeDate(hour=0,minute=0,second=0.0)
 	end_date_dt = accend + DateTime.RelativeDate(days=+6) + DateTime.RelativeDate(hour=23,minute=0,second=0.0)	
 	
+	fcst_stn = copy.deepcopy(stn)
 	if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 		station_type = 'njwx'
 	elif len(stn) == 4:
 		station_type = 'icao'
-	elif stn[0:3] == 'cu_' or stn[0:3] == 'um_':
+	elif stn[0:3] == 'cu_' or stn[0:3] == 'um_' or stn[0:3] == 'un_' or stn[0:3] == 'uc_':
 		station_type = 'cu_log'
+	elif stn[0:3] == "ew_":
+		stn = stn[3:]
+		station_type = 'miwx'
 	elif len(stn) == 3 or len(stn) == 6:
 		station_type = 'newa'
 	else:
@@ -428,7 +443,7 @@ def run_apple_thin_specs (stn,accend,output):
 	
 	hourly_data = {}
 	jan1_dt = DateTime.DateTime(end_date_dt.year,1,1,0,0,0)
-	fcst_data = get_fcst_data (stn, 'temp', jan1_dt, end_date_dt)
+	fcst_data = get_fcst_data (fcst_stn, 'temp', jan1_dt, end_date_dt)
 	hourly_data = get_hourly_data (stn, 'temp', jan1_dt, end_date_dt, hourly_data, fcst_data, station_type)
 	biofix_dt, ddmiss = BaseTools().find_biofix (hourly_data, jan1_dt, end_date_dt, 'dd43be', biofix_dd)
 	bloom_dt, bloom_ddmiss = BaseTools().find_biofix (hourly_data, jan1_dt, end_date_dt, 'dd43be', bloom_dd)
@@ -468,11 +483,11 @@ def process_help (request, path):
 
 # 		send input to appropriate routine
 		if smry_type == 'apple_et':
-			return newaTools_io.helppage([("Model overview","http://newa.nrcc.cornell.edu/apple_et_help.html"),
-										  ("Station inclusion","http://newa.nrcc.cornell.edu/apple_tool_stations.html")])
+			return newaTools_io.helppage([("Model overview","http://newatest.nrcc.cornell.edu/apple_et_help.html"),
+										  ("Station inclusion","http://newatest.nrcc.cornell.edu/apple_tool_stations.html")])
 		elif smry_type == 'apple_thin':
-			return newaTools_io.helppage([("Model overview","http://newa.nrcc.cornell.edu/apple_thin_help.html"),
-										  ("Station inclusion","http://newa.nrcc.cornell.edu/apple_tool_stations.html")])
+			return newaTools_io.helppage([("Model overview","http://newatest.nrcc.cornell.edu/apple_thin_help.html"),
+										  ("Station inclusion","http://newatest.nrcc.cornell.edu/apple_tool_stations.html")])
 		else:
 			return newaCommon_io.errmsg('Error processing input')
 	except program_exit,msg:

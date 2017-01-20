@@ -396,6 +396,9 @@ class Pottom (Base, general_simcast):
 				station_type = 'cu_log'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
+			elif stn[0:3] == "ew_":
+				stn = stn[3:]
+				station_type = 'miwx'
 			else:
 				print 'Cannot determine station type for %s'%stn
 				return newaCommon_io.errmsg('Invalid station selection')
@@ -458,89 +461,6 @@ class Pottom (Base, general_simcast):
 #--------------------------------------------------------------------------------------------		
 class Potato (Pottom):
 	#--------------------------------------------------------------------------------------------		
-	# determine wet and dry periods from hourly data provided  ####### used by potato_lb_old
-#	def get_wetting_rh_old (self,hourly_data):
-#		wet_periods = []
-#		try:
-#			wet_hrs = 0
-#			temp_sum = 0.
-#			temp_cnt = 0.
-#			prcp_sum = 0.
-#			prcp_cnt = 0.
-#			severity_sum = 0.
-#			date_sev = []
-#			for theTime,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags in hourly_data:
-#				if rhum >= 90:
-#					wet_hrs = wet_hrs + 1
-#					if wet_hrs == 1: 
-#						wet_start = theTime
-#					if temp != miss:
-#						temp_sum = temp_sum + temp
-#						temp_cnt = temp_cnt + 1
-#					if prcp != miss:
-#						prcp_sum = prcp_sum + prcp
-#						prcp_cnt = prcp_cnt + 1
-#				elif wet_hrs > 0: 
-#					wet_end = theTime
-#					if temp_cnt > 0:
-#						temp_ave = temp_sum/temp_cnt
-#					else:
-#						temp_ave = miss
-#					if prcp_cnt > 0:
-#						prcp_tot = prcp_sum
-#					else:
-#						prcp_tot = miss
-#					severity = self.get_severity(wet_hrs,temp_ave)
-#					wet_end_dt = DateTime.DateTime(wet_end[0],wet_end[1],wet_end[2],wet_end[3])
-#					if severity != miss: 
-#						severity_sum = severity_sum + severity
-#						date_sev.append((wet_end_dt,severity))
-#					else:
-#						severity = 'n/a'
-#					severity_week = 0.
-#					for i in range(len(date_sev)-1,-1,-1):
-#						ldt,lsev = date_sev[i]
-#						if (wet_end_dt-ldt).days > 7:
-#							break
-#						else:
-#							severity_week = severity_week+lsev
-#					wet_periods.append((wet_start,wet_end,wet_hrs,temp_ave,prcp_tot,severity,severity_week,severity_sum))
-#					wet_hrs = 0
-#					temp_sum = 0.
-#					temp_cnt = 0.
-#					prcp_sum = 0.
-#					prcp_cnt = 0.					
-##			end period in progress
-#			if wet_hrs > 0:
-#				wet_end = miss
-#				if temp_cnt > 0:
-#					temp_ave = temp_sum/temp_cnt
-#				else:
-#					temp_ave = miss
-#				if prcp_cnt > 0:
-#					prcp_tot = prcp_sum
-#				else:
-#					prcp_tot = miss
-#				severity = self.get_severity(wet_hrs,temp_ave)
-#				wet_end_dt = DateTime.DateTime(theTime[0],theTime[1],theTime[2],theTime[3])
-#				if severity != miss: 
-#					severity_sum = severity_sum + severity
-#					date_sev.append((wet_end_dt,severity))
-#				else:
-#					severity = 'n/a'
-#				severity_week = 0.
-#				for i in range(len(date_sev)-1,-1,-1):
-#					ldt,lsev = date_sev[i]
-#					if (wet_end_dt-ldt).days > 7:
-#						break
-#					else:
-#						severity_week = severity_week+lsev
-#				wet_periods.append((wet_start,wet_end,wet_hrs,temp_ave,prcp_tot,severity,severity_week,severity_sum))
-#		except:
-#			print_exception()
-#		return wet_periods
-
-	#--------------------------------------------------------------------------------------------		
 	# get p for given temperature (used in p-day calculation)
 	def getp(self,t):
 		if t < 7:
@@ -563,33 +483,6 @@ class Potato (Pottom):
 		pday = round((1./24.)*(5.*self.getp(tminc)+8.*self.getp(at2)+8.*self.getp(at3)+3.*self.getp(tmaxc)),1)
 		return pday
 
-	#--------------------------------------------------------------------------------------------		
-#	def run_potato_lb_old (self,stn,year,month,day):
-#		try:
-#			# obtain hourly data
-#			now = DateTime.now()
-#			start_date_dt = DateTime.DateTime(year,month,day,1)
-#			if year == now.year:
-#				end_date_dt = now
-#			else:
-#				end_date_dt = DateTime.DateTime(year,10,1,1)
-#			hourly_data, download_time, station_name = self.get_hourly (stn, start_date_dt, end_date_dt)
-#			
-#			if len(hourly_data) > 0:
-#				# pick out wet and dry periods
-#				wet_periods = self.get_wetting_rh_old(hourly_data) ########### changed for new
-#			else:
-#				return self.nodata (stn, station_name, start_date_dt, end_date_dt)
-#
-#			if len(wet_periods) > 0:
-#				# convert to html and write to file (single station)
-#				return newaDisease_io.potato_lb_html(station_name,download_time,wet_periods)
-#			else:
-#				return self.nodata(stn, station_name, start_date_dt, end_date_dt)
-#		except:
-#			print_exception()
-#			return newaCommon_io.errmsg('Unable to complete request')
-			
 	#--------------------------------------------------------------------------------------------		
 	def run_potato_lb (self,stn,year,month,day,output):
 		try:
@@ -663,6 +556,9 @@ class Potato (Pottom):
 				station_type = 'cu_log'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
+			elif station_id[0:3] == "ew_":
+				station_id = station_id[3:]
+				station_type = 'miwx'
 			else:
 				print 'Cannot determine station type for %s'%stn
 				return newaCommon_io.errmsg('Invalid station selection')
@@ -1111,59 +1007,8 @@ class Apple (Base):
 		except:
 			print_exception()
 			
-	#--------------------------------------------------------------------------------------------		
-#	THIS IS RUNNING FROM CRON - NO INTERACTIVE INTERFACE
-#	def run_apple_fireblight (self):
-#		stns = ['alb','noa','soa','bar','bat','bra','chz','cli','cln','cro','dre','ede','far','1fr',
-#				'fre','fri','gen','gui','him','hud','ith','kno','lan','1lo','lyn','mar','mex','nap',
-#				'per','pot','pul','loc','red','sav','sod','val','wat','wgl','1wi']
-#		station_names = {}
-#		daily_fire = {}
-#		fb_stns = []
-#		try:
-#			end_date_dt = DateTime.now()
-#			start_date_dt = DateTime.DateTime(end_date_dt.year,3,1,1)	#Leave this March 1			
-#			for stn in stns:
-#				# obtain hourly data
-#				hourly_data, download_time, station_name = self.get_hourly (stn, start_date_dt, end_date_dt)
-#				station_names[stn] = station_name
-#				
-#				if len(hourly_data) > 0:
-#					# base 50 GDD and fire blight degree hours
-#					daily_fire[stn] = self.get_deghrs(hourly_data)
-#					fb_stns.append(stn)
-#				else:
-#					continue
-#
-#			if len(fb_stns) > 0:
-#				return newaDisease_io.apple_fireblight_html(fb_stns,station_names,daily_fire)
-#			else:
-#				return self.nodata(stn, station_name, start_date_dt, end_date_dt)
-#		except:
-#			print_exception()
-				
 #--------------------------------------------------------------------------------------------		
 class Cabbage (Base):
-#	def run_cabbage_maggot (self,stn):
-#		try:
-#			# obtain daily data
-#			end_date_dt = DateTime.now()
-#			start_date_dt = DateTime.DateTime(end_date_dt.year,1,1,1)		
-#			daily_data, station_name = self.get_daily (stn, start_date_dt, end_date_dt)
-#			
-#			if len(daily_data) > 0:
-#				# base 4deg C GDD 
-#				daily_degday = self.degday_calcs (daily_data,start_date_dt,end_date_dt,'dd4c')
-#			else:
-#				return self.nodata (stn, station_name, start_date_dt, end_date_dt)
-#
-#			if len(daily_degday) > 0:
-#				return newaDisease_io.cabbage_maggot_html(station_name,daily_degday)
-#			else:
-#				return self.nodata(stn, station_name, start_date_dt, end_date_dt)
-#		except:
-#			print_exception()
-
 	#  save dates for use later
 	def setup_dates (self,smry_dict,end_date_dt):
 		try:
@@ -2014,26 +1859,6 @@ class Onion (Base, Cabbage):
 		except:
 			print_exception()
 
-	#--------------------------------------------------------------------------------------------		
-	def run_onion_maggot_old (self,stn):
-		try:
-			# obtain daily data
-			end_date_dt = DateTime.now()
-			start_date_dt = DateTime.DateTime(end_date_dt.year,1,1,1)		
-			daily_data, station_name = self.get_daily (stn, start_date_dt, end_date_dt)
-			
-			if len(daily_data) > 0:
-				# base 4deg C GDD 
-				daily_degday = self.degday_calcs (daily_data,start_date_dt,end_date_dt,'dd40')
-			else:
-				return self.nodata (stn, station_name, start_date_dt, end_date_dt)
-
-			if len(daily_degday) > 0:
-				return newaDisease_io.onion_maggot_html(station_name,daily_degday)
-			else:
-				return self.nodata(stn, station_name, start_date_dt, end_date_dt)
-		except:
-			print_exception()
 #--------------------------------------------------------------------------------------------		
 class Alfalfa (Base):
 	def run_alf_weev (self,stn):
