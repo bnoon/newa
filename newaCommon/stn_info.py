@@ -199,6 +199,7 @@ stn_info = {
 'ct_rid': {'name': 'Ridgefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.291379, 'lon': -73.462419, 'elev': 670, 'network': 'newa', 'state': 'CT'},
 'ct_was': {'name': 'Washington, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.602175, 'lon': -73.306449, 'elev': 868, 'network': 'newa', 'state': 'CT'},
 'ct_oak': {'name': 'Oakdale School, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.470199, 'lon': -72.192813, 'elev': 499, 'network': 'newa', 'state': 'CT'},
+'ct_nor': {'name': 'Northford, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'lat': 41.404938, 'lon': -72.785981, 'elev': 283, 'network': 'newa', 'state': 'CT'},
 'ia_ccy': {'name': 'Central City, IA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.224159, 'lon': -91.494571, 'elev': 958, 'network': 'newa', 'state': 'IA'},
 'il_pgr': {'name': 'Poplar Grove, IL', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.391312, 'lon': -88.800936, 'elev': 916, 'network': 'newa', 'state': 'IL'},
 'il_bel': {'name': 'Belleville, IL', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 38.480416, 'lon': -89.939040, 'elev': 539, 'network': 'newa', 'state': 'IL'},
