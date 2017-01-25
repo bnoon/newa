@@ -84,5 +84,6 @@ stn_info_inactive = {
 'ew_dmo': {'name': 'East Lansing (Ag Expo), MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.7136, 'lon': -84.4913, 'elev': -9999, 'network': 'miwx', 'state': 'MI', 'disconnected': 'yes'},
 'ew_gde': {'name': 'Goodells, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.9864, 'lon': -82.6563, 'elev': 213, 'network': 'miwx', 'state': 'MI', 'disconnected': 'yes'},
 'ew_sga': {'name': 'Saginaw, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.3787, 'lon': -84.1128, 'elev': 180.125, 'network': 'miwx', 'state': 'MI', 'disconnected': 'yes'},
+'ew_ptr': {'name': 'Petersburg, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.9301, 'lon': -83.7011, 'elev': 212, 'network': 'miwx', 'state': 'MI', 'disconnected': 'yes'},
 'me_bhb': {'name': 'Bar Harbor, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.389786, 'lon': -68.208026, 'elev': 55, 'network': 'newa', 'state': 'ME', 'disconnected': 'yes'}
 }
