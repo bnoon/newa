@@ -80,5 +80,9 @@ stn_info_inactive = {
 'um_tff': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -71.67833, 'elev': 610, 'lat': 42.34611, 'network': 'cu_log', 'state': 'MA'},
 'um_ces': {'name': 'Weston (Case Estates), MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -71.29889, 'elev': 246, 'lat': 42.35806, 'network': 'cu_log', 'state': 'MA', 'disconnected': 'yes'},
 'um_new': {'name': 'Middletown, RI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.529167, 'lon': -71.27250, 'elev': 197, 'network': 'cu_log', 'state': 'RI', 'disconnected': 'yes'},
+'ew_bat': {'name': 'Bath, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.8269, 'lon': -84.365, 'elev': -9999, 'network': 'miwx', 'state': 'MI', 'disconnected': 'yes'},
+'ew_dmo': {'name': 'East Lansing (Ag Expo), MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.7136, 'lon': -84.4913, 'elev': -9999, 'network': 'miwx', 'state': 'MI', 'disconnected': 'yes'},
+'ew_gde': {'name': 'Goodells, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.9864, 'lon': -82.6563, 'elev': 213, 'network': 'miwx', 'state': 'MI', 'disconnected': 'yes'},
+'ew_sga': {'name': 'Saginaw, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.3787, 'lon': -84.1128, 'elev': 180.125, 'network': 'miwx', 'state': 'MI', 'disconnected': 'yes'},
 'me_bhb': {'name': 'Bar Harbor, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.389786, 'lon': -68.208026, 'elev': 55, 'network': 'newa', 'state': 'ME', 'disconnected': 'yes'}
 }
