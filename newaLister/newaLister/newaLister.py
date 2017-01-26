@@ -292,11 +292,11 @@ def get_sister_info (stn):
 					station_type = "icao"
 				elif sister[var][0:3] == "cu_" or sister[var][0:3] == "um_" or sister[var][0:3] == "uc_" or sister[var][0:3] == "un_":
 					station_type = "cu_log"
-				elif len(sister[var]) == 3 or len(sister[var]) == 6:
-					station_type = "newa"
 				elif sister[var][0:3] == "ew_":
 					sister[var] = sister[var][3:]
 					station_type = 'miwx'
+				elif len(sister[var]) == 3 or len(sister[var]) == 6:
+					station_type = "newa"
 				est_staid,sister_name = newaCommon.get_metadata (sister[var], station_type)
 				var_sister.append((var,sister_name))
 	except:
@@ -444,6 +444,7 @@ def process_input (request,path):
 			start_date_dt = DateTime.DateTime(year,1,1,0)
 		end_date_dt = req_date_dt + DateTime.RelativeDate(months=+1)
 
+		orig_stn = copy.deepcopy(stn)
 		if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 			station_type = 'njwx'
 		elif len(stn) == 4:
@@ -466,7 +467,7 @@ def process_input (request,path):
 			staid = ucanid
 		
 		if smry_type == 'est_info':
-			var_sister = get_sister_info (stn)
+			var_sister = get_sister_info (orig_stn)
 			return newaLister_io.estimation_info(stn,station_name,var_sister,year,month)
 	
 # 		obtain all hourly and daily data for station
@@ -481,7 +482,7 @@ def process_input (request,path):
 				return newaLister_io.dly_list_html(stn,station_name,year,month,daily_data,monthly_data,avail_vars,numcols,miss)
 			elif smry_type == 'hly':	
 				if 'dwpt' not in avail_vars and 'temp' in avail_vars and 'rhum' in avail_vars: avail_vars.append('dwpt')
-				return newaLister_io.hly_list_html(stn,station_name,year,month,hourly_data,avail_vars,miss,station_type)
+				return newaLister_io.hly_list_html(orig_stn,station_name,year,month,hourly_data,avail_vars,miss,station_type)
 			if smry_type in ['dd4c','dd143c','dd32','dd39','dd40','dd43','dd45','dd48','dd50','dd8650','dd55','dd43be','dd50be','dd4714']:
 				degday_data, degday_miss = degday_summary(daily_data,year,month,smry_type)
 				if len(degday_data) == 0:

@@ -260,7 +260,7 @@ def getSR(sid, date) :
 	return json.loads(response.read())
 
 #--------------------------------------------------------------------------------------------		
-def sister_est(stn,var,var_date,end_period,tsvars,dataForEst, datesForEst, vflagsForEst):
+def sister_est(stn,var,var_date,end_period,tsvars,dataForEst, datesForEst, vflagsForEst, stn_type='newa'):
 	replacement = miss
 	try:
 		if sister_info.has_key(stn) and sister_info[stn].has_key(var):
@@ -348,6 +348,10 @@ def get_newa_data (stn,native_id,start_date_dt,end_date_dt,station_type='newa'):
 	hourly_data = []
 	daily_data = []
 	avail_vars = []
+	if station_type == 'miwx' and len(native_id) == 3:
+		orig_id = 'ew_%s' % native_id
+	else:
+		orig_id = native_id
 	try:
 #		don't try to go into the future
 		now = DateTime.now()
@@ -524,14 +528,14 @@ def get_newa_data (stn,native_id,start_date_dt,end_date_dt,station_type='newa'):
 							else:
 								val = miss
 							if val == miss: 					# if still missing, use sister station
-								val,est_tsvars,dataForEst,datesForEst,vflagsForEst = sister_est(native_id,var,dates[hindx],end_period,est_tsvars,dataForEst, datesForEst, vflagsForEst)
+								val,est_tsvars,dataForEst,datesForEst,vflagsForEst = sister_est(orig_id,var,dates[hindx],end_period,est_tsvars,dataForEst, datesForEst, vflagsForEst,station_type)
 								val_eflag = 'S'
 								if val == miss:
 									val_eflag = 'M'
 
 ### Following added 10/2/2014 - kle
 							if val == miss and (var == 'temp' or var == 'rhum'):
-								val = get_fcst_hour(native_id, var, lt_dt)
+								val = get_fcst_hour(orig_id, var, lt_dt)
 								val_eflag = 'N'
 ###
 
@@ -745,6 +749,11 @@ def get_hourly_data (native_id, requested_var, start_date_dt, end_date_dt, hourl
 	dataForEst = {}
 	datesForEst = {}
 	vflagsForEst = {}
+	if station_type == 'miwx' and len(native_id) == 3:
+		orig_id = 'ew_%s' % native_id
+	else:
+		orig_id = native_id
+
 	try:
 #		start and end dates are provided in Local Time, adjust for DST if necessary
 		start_date_dt = start_date_dt + DateTime.RelativeDate(hours=-start_date_dt.dst)
@@ -819,7 +828,7 @@ def get_hourly_data (native_id, requested_var, start_date_dt, end_date_dt, hourl
 							val = estmiss(temp,hindx,miss)
 							val_eflag = 'I'
 						if val == miss: 		# if still missing, use sister station
-							val,est_tsvars,dataForEst,datesForEst,vflagsForEst = sister_est(native_id,requested_var,temp_dates[hindx],end_period,est_tsvars,dataForEst, datesForEst, vflagsForEst)
+							val,est_tsvars,dataForEst,datesForEst,vflagsForEst = sister_est(orig_id,requested_var,temp_dates[hindx],end_period,est_tsvars,dataForEst, datesForEst, vflagsForEst,station_type)
 ##							if requested_var == 'srad' and station_type == 'newa' and val != miss:
 ##								val = val * 0.086		#newa stations are coming back in w/m2 here; convert to langleys
 							val_eflag = 'S'
