@@ -6,8 +6,9 @@ function update_help() {
   }
 
 function getresults(bfcnt) {
-	var params = {type: 'apple_pest'};
-	$('select[name=pest], select[name=stn], input[name=accend], input[name=output]').each(function () { params[this.name] = this.value; });
+	var params = {type: 'apple_pest', accend: $("#enddpick").val()};
+//	$('select[name=pest], select[name=stn], input[name=accend], input[name=output]').each(function () { params[this.name] = this.value; });
+	$('select[name=pest], select[name=stn], input[name=output]').each(function () { params[this.name] = this.value; });
 	if (bfcnt >= 1) {
 		$('input[name=bf_date]').each(function () { params[this.name] = this.value; }); }
 	if (bfcnt >= 2) {
@@ -42,7 +43,7 @@ function getresults(bfcnt) {
 	});
 	$("form .button").click(function (evt) { getresults(0); });
 	stateStationMapList({
-		reqval: 'all',
+		reqvar: 'all',
 		event_type: 'select_station',
 		where: '#station_area'
 	});
