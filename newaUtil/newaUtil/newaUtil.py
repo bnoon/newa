@@ -259,6 +259,35 @@ def run_stationList(list_options='all'):
 	except:
 		return newaCommon_io.errmsg('Error processing request')
 
+# FOR A GIVEN STATION and NETWORK, return sister station info
+def run_stationSisterInfo(options):
+	from sister_info import sister_info
+	try:
+		stn = options['station']
+		network = options['network']
+		sister_dict = {}
+		if network == 'miwx' and stn[0:3] != 'ew_':
+			stn = "ew_%s" % stn
+		if sister_info.has_key(stn):
+			sister = sister_info[stn]
+			for var in sister.keys():
+				if sister[var][0:1] >= '1' and sister[var][0:1] <= '9' and sister[var][1:2] >= '0' and sister[var][1:2] <= '9':
+					station_type = 'njwx'
+				elif len(sister[var]) == 4:
+					station_type = "icao"
+				elif sister[var][0:3] == "cu_" or sister[var][0:3] == "um_" or sister[var][0:3] == "uc_" or sister[var][0:3] == "un_":
+					station_type = "culog"
+				elif sister[var][0:3] == "ew_":
+					sister[var] = sister[var][3:]
+					station_type = 'miwx'
+				else:
+					station_type = "newa"
+				sister_dict[var] = "%s %s" % (sister[var], station_type)
+		json_return = json.dumps(sister_dict)
+		return json_return
+	except:
+		return newaCommon_io.errmsg('Error processing request')
+
 # FOR A GIVEN STATE, get stations that report element specified in list_options and return list in alpha order by station name
 def run_stateStationList(options):
 	try:
@@ -371,7 +400,7 @@ def run_stationInfo(stn):
 def process_input (request,path):
 	try:
 #	 	retrieve input
-		if path[0] in ['stationList','stateStationList','stateInactiveStationList','diseaseStations','getForecastUrl','stationInfo','stationModels']:
+		if path[0] in ['stationList','stateStationList','stateInactiveStationList','stationSisterInfo','diseaseStations','getForecastUrl','stationInfo','stationModels']:
 			try:
 				smry_type = path[0]
 				if len(path) > 1:
@@ -382,6 +411,10 @@ def process_input (request,path):
 							list_options['state'] = path[2].upper()
 						else:
 							list_options['state'] = ''
+					elif path[0] == 'stationSisterInfo':
+						list_options = {}
+						list_options['station'] = path[1]
+						list_options['network'] = path[2]
 					else:
 						list_options = path[1]
 						if list_options == 'robots.txt': return newaUtil_io.robots()
@@ -402,6 +435,8 @@ def process_input (request,path):
 			return run_stationList(list_options)
 		if smry_type == 'stateStationList':
 			return run_stateStationList(list_options)
+		if smry_type == 'stationSisterInfo':
+			return run_stationSisterInfo(list_options)
 		if smry_type == 'stateInactiveStationList':
 			return run_stateInactiveStationList(list_options)
 		if smry_type == 'stationInfo':

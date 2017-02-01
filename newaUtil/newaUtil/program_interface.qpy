@@ -8,7 +8,7 @@ stationInfo_cache = {}
 
 class RootDirectory(Directory):
 
-	_q_exports = ["","process_input","stationList","stateStationList","stateInactiveStationList","diseaseStations","getForecastUrl","stationMap","stateStationMap","zoomStationMap","stationInfo","stationModels"]
+	_q_exports = ["","process_input","stationList","stateStationList","stateInactiveStationList","stationSisterInfo","diseaseStations","getForecastUrl","stationMap","stateStationMap","zoomStationMap","stationInfo","stationModels"]
 
 #	put up input page for following
 	def _q_index (self):						#default
@@ -37,6 +37,10 @@ class RootDirectory(Directory):
 	def stateInactiveStationList (self, path=None) :
 		from newaUtil import process_input
 		path = ['stateInactiveStationList'] + path
+		return process_input(None,path)
+	def stationSisterInfo (self, path=None) :
+		from newaUtil import process_input
+		path = ['stationSisterInfo'] + path
 		return process_input(None,path)
 	def zoomStationMap (self, path=None) :
 		from newaUtil_io import zoom_station_map
