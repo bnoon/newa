@@ -37,7 +37,6 @@ stn_info_inactive = {
 'mex': {'name': 'Mexico', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.230703, 'elev': 400.0, 'lat': 43.459805, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'nap': {'name': 'Naples', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.387289999999993, 'elev': 700.0, 'lat': 42.626150000000003, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'nea': {'name': 'North Easton', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.00515, 'lon': -73.5495, 'elev': 490, 'network': 'newa', 'state': 'NY'},
-'nee': {'name': 'North East Escarpment, PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.18097, 'lon': -79.85170, 'elev': 1029, 'network': 'newa', 'state': 'PA'},
 'pav': {'name': 'Pavilion', 'vars': ['temp', 'prcp', 'st4i'], 'lon': -77.967309999999998, 'elev': 1100.0, 'lat': 42.831440000000001, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'poe': {'name': 'Portland Escarpment', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 42.34944, 'lon': -79.47194, 'elev': 1076, 'network': 'newa', 'state': 'NY'},
 'pr5': {'name': 'Portland (Route 5)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 42.39027, 'lon': -79.473605, 'elev': 640, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
@@ -86,5 +85,7 @@ stn_info_inactive = {
 'ew_gde': {'name': 'Goodells, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.9864, 'lon': -82.6563, 'elev': 213, 'network': 'miwx', 'state': 'MI', 'disconnected': 'yes'},
 'ew_sga': {'name': 'Saginaw, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.3787, 'lon': -84.1128, 'elev': 180.125, 'network': 'miwx', 'state': 'MI', 'disconnected': 'yes'},
 'ew_ptr': {'name': 'Petersburg, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.9301, 'lon': -83.7011, 'elev': 212, 'network': 'miwx', 'state': 'MI', 'disconnected': 'yes'},
-'me_bhb': {'name': 'Bar Harbor, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.389786, 'lon': -68.208026, 'elev': 55, 'network': 'newa', 'state': 'ME', 'disconnected': 'yes'}
+'me_bhb': {'name': 'Bar Harbor, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.389786, 'lon': -68.208026, 'elev': 55, 'network': 'newa', 'state': 'ME', 'disconnected': 'yes'},
+'un_nec': {'name': 'Nebraska City 2N, NE', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -95.8833, 'elev': 1076.0, 'lat': 40.7000, 'network': 'cu_log', 'state': 'NE'},
+'klnk': {'name': 'Lincoln Airport, NE', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -96.7475, 'elev': 1190.0,  'lat': 40.8508, 'network': 'icao', 'state': 'NE'},
 }
