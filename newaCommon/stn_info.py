@@ -51,6 +51,7 @@ stn_info = {
 'kin': {'name': 'Kinderhook', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.398814, 'lon': -73.703383, 'elev': 266, 'network': 'newa', 'state': 'NY'},
 'kno': {'name': 'Knowlesville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -78.301944, 'elev': 524.0, 'lat': 43.225833, 'network': 'newa', 'state': 'NY'},
 'laf': {'name': 'Lafayette', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.195206999999996, 'elev': 584.0, 'lat': 42.909686000000001, 'network': 'newa', 'state': 'NY'},
+'lan': {'name': 'Lansing', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toohigh', 'lon': -76.595127, 'elev': 407.0, 'lat': 42.572295, 'network': 'newa', 'state': 'NY'},
 'loc': {'name': 'Ransomville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'toolow', 'lon': -78.901556999999997, 'elev': 387.0, 'lat': 43.187325000000001, 'network': 'newa', 'state': 'NY'},
 'lod': {'name': 'Lodi (Standing Stone)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.874138, 'elev': 719.0, 'lat': 42.543054, 'network': 'newa', 'state': 'NY'},
 'lol': {'name': 'Lodi (Lamoreaux)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 42.57664, 'lon': -76.85844, 'elev': 853, 'network': 'newa', 'state': 'NY'},

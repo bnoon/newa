@@ -30,7 +30,6 @@ stn_info_inactive = {
 'hig': {'name': 'Highland HVL', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -73.966990, 'elev': 436.0, 'lat': 41.746139, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'him': {'name': 'Himrod', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -76.922259999999994, 'elev': 500.0, 'lat': 42.617629999999998, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'lak': {'name': 'Lakemont', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.510207, 'lon': -76.927440, 'elev': 880, 'network': 'newa', 'state': 'NY'},
-'lan': {'name': 'Lansing', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toohigh', 'lon': -76.595127, 'elev': 407.0, 'lat': 42.572295, 'network': 'newa', 'state': 'NY'},
 'lkp': {'name': 'Lake Placid', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.273768, 'lon': -73.94865, 'elev': 1680, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'los': {'name': 'Lodi (Shalestone)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.87803, 'elev': 522.0, 'lat': 42.56253, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'mat': {'name': 'Mattituck (Harbes)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.986493, 'lon': -72.578489, 'elev': 96, 'network': 'newa', 'state': 'NY'},
