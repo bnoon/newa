@@ -22,7 +22,6 @@ stn_info_inactive = {
 'ede': {'name': 'Eden', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -78.858780, 'elev': 800.0, 'lat': 42.692416, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'fay': {'name': 'Fayette 3 Brothers', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.92445, 'elev': 615.0, 'lat': 42.8235, 'network': 'newa', 'state': 'NY'},
 'fis': {'name': 'Fishkill', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.517978, 'lon': -73.824541, 'elev': 114, 'network': 'newa', 'state': 'NY'},
-'fre': {'name': 'Freeville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'bad', 'lon': -76.331130000000002, 'elev': 1100.0, 'lat': 42.51914, 'network': 'newa', 'state': 'NY'},
 'fri': {'name': 'Friend', 'vars': ['temp', 'lwet', 'prcp'], 'lon': -77.192549999999997, 'elev': 1050.0, 'lat': 42.655799999999999, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'gen': {'name': 'Geneva', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir','srad'], 'srqual': 'toolow', 'lon': -77.02818, 'elev': 650.0, 'lat': 42.87295, 'network': 'newa', 'state': 'NY'},
 'gra': {'name': 'Granville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -73.331111, 'elev': 670.0, 'lat': 43.412500, 'network': 'newa', 'state': 'NY'},

@@ -500,7 +500,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "289":  {"temp": "kttn", "rhum": "kttn", "prcp": "kttn", "wspd": "kttn", "wdir": "kttn", "srad": "1029"},
 "295":  {"temp": "3406", "rhum": "3406", "prcp": "3406", "wspd": "3406", "wdir": "3406", "srad": "1032"}, 
 "296":  {"temp": "33", "rhum": "33", "prcp": "33", "wspd": "33", "wdir": "33", "srad": "284"},
-"317":  {"temp": "198", "rhum": "198", "prcp": "198", "wspd": "198", "wdir": "198", "srad": "1032"},
+"317":  {"temp": "1032", "rhum": "1032", "prcp": "1032", "wspd": "1032", "wdir": "1032", "srad": "1032"},
 "471":  {"temp": "kfwn", "rhum": "kfwn", "prcp": "kfwn", "wspd": "kfwn", "wdir": "kfwn", "srad": "286"},
 "1029": {"temp": "289", "rhum": "289", "prcp": "289", "wspd": "289", "wdir": "289", "srad": "289"},
 "1032": {"temp": "knel", "rhum": "knel", "prcp": "knel", "wspd": "knel", "wdir": "knel", "srad": "317"},
