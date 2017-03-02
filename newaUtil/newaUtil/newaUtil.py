@@ -396,11 +396,50 @@ def run_stationInfo(stn):
 	json_return = json.dumps(station_dict)
 	return json_return
 			
+# FOR A GIVEN STATION, NETWORK, VARIABLE, START AND END DATE - return NDFD 
+def run_getFcstData(options):
+	from mx import DateTime
+	from bsddb import hashopen
+	from cPickle import loads
+	miss = -999
+	try:
+		requested_var = options['variable']
+		yyyymmdd = options['startdate'].split("-")
+		start_date_dt = DateTime.DateTime(int(yyyymmdd[0]), int(yyyymmdd[1]), int(yyyymmdd[2]))
+		yyyymmdd = options['enddate'].split("-")
+		end_date_dt = DateTime.DateTime(int(yyyymmdd[0]), int(yyyymmdd[1]), int(yyyymmdd[2]))
+		stn = options['station'].upper()
+		network = options['network']
+		if network == 'miwx' and stn[0:3] != 'EW_':
+			stn = "EW_%s" % stn
+		hourly_fcst = []
+		try:
+			forecast_db = hashopen('/Users/keith/NDFD/hourly_forecasts.db','r')		
+			stn_dict = loads(forecast_db[stn])
+			forecast_db.close()
+			if stn_dict.has_key(requested_var):
+				theDate = start_date_dt
+				while theDate <= end_date_dt:
+					dkey = (theDate.year, theDate.month, theDate.day)
+					ymd = "%s-%02d-%02d" % (dkey[0],dkey[1],dkey[2])
+					if stn_dict[requested_var].has_key(dkey):
+						stn_dict[requested_var][dkey] = ["M" if x==-999 else x for x in stn_dict[requested_var][dkey]]
+						hourly_fcst.append([ymd,stn_dict[requested_var][dkey]])
+					else:
+						hourly_fcst.append([ymd,["M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M"]])
+					theDate = theDate + DateTime.RelativeDate(days=+1)
+		except:
+			print_exception()
+		return json.dumps({"data": hourly_fcst})
+	except:
+		print_exception()
+		return json.dumps({"error": "Error in getFcstData"})
+
 #--------------------------------------------------------------------------------------------					
 def process_input (request,path):
 	try:
 #	 	retrieve input
-		if path[0] in ['stationList','stateStationList','stateInactiveStationList','stationSisterInfo','diseaseStations','getForecastUrl','stationInfo','stationModels']:
+		if path[0] in ['stationList','stateStationList','stateInactiveStationList','stationSisterInfo','diseaseStations','getForecastUrl','stationInfo','stationModels','getFcstData']:
 			try:
 				smry_type = path[0]
 				if len(path) > 1:
@@ -415,6 +454,13 @@ def process_input (request,path):
 						list_options = {}
 						list_options['station'] = path[1]
 						list_options['network'] = path[2]
+					elif path[0] == 'getFcstData':
+						list_options = {}
+						list_options['station'] = path[1]
+						list_options['network'] = path[2]
+						list_options['variable'] = path[3]
+						list_options['startdate'] = path[4]
+						list_options['enddate'] = path[5]
 					else:
 						list_options = path[1]
 						if list_options == 'robots.txt': return newaUtil_io.robots()
@@ -447,6 +493,8 @@ def process_input (request,path):
 			return run_diseaseStations(list_options)
 		elif smry_type == 'getForecastUrl':
 			return getForecastUrl(list_options)
+		elif smry_type == 'getFcstData':
+			return run_getFcstData(list_options)
 		else:
 			return program_exit('Error processing request')
 	except program_exit,msg:

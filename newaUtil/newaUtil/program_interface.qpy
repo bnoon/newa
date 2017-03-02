@@ -8,7 +8,8 @@ stationInfo_cache = {}
 
 class RootDirectory(Directory):
 
-	_q_exports = ["","process_input","stationList","stateStationList","stateInactiveStationList","stationSisterInfo","diseaseStations","getForecastUrl","stationMap","stateStationMap","zoomStationMap","stationInfo","stationModels"]
+	_q_exports = ["","process_input","stationList","stateStationList","stateInactiveStationList","stationSisterInfo",
+	"diseaseStations","getForecastUrl","stationMap","stateStationMap","zoomStationMap","stationInfo","stationModels","getFcstData"]
 
 #	put up input page for following
 	def _q_index (self):						#default
@@ -71,6 +72,10 @@ class RootDirectory(Directory):
 	def getForecastUrl (self, path=None) :
 		from newaUtil import process_input
 		path = ['getForecastUrl'] + path
+		return process_input(None,path)
+	def getFcstData (self, path=None) :
+		from newaUtil import process_input
+		path = ['getFcstData'] + path
 		return process_input(None,path)
 
 #	received request form to be processed
