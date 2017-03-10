@@ -2,13 +2,13 @@ import sys
 import string
 import math
 import random
-import solar_routines
 from mx import DateTime
 
+from morecs import solar_routines
 from ucanStandardRequests import *
-from station_searches import getNearestCoop
-from stationInfo import stationInfo
-from morecs_hourly import getHourlyVars
+from util.station_searches import getNearestCoop
+from morecs.stationInfo import stationInfo
+from morecs.morecs_hourly import getHourlyVars
 
 def SOLAR_MAIN(ICAO,sd,ed,stpr0,wthr0,dwpt0,visi0,ccnd0,chgt0,ceil0,tsky0):
 # 	Define units 1=langleys; 2=MJ/m2; 3=W/m2; 4=BTU/ft2
