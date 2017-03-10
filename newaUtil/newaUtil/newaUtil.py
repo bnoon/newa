@@ -3,8 +3,7 @@
 import sys, copy
 from print_exception import print_exception
 import newaUtil_io
-if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
-import newaCommon_io
+from newaCommon import newaCommon_io
 
 try :
     import json
@@ -23,9 +22,9 @@ def NameAny_to_dict(na) :
 def getForecastUrl(stn):
 	forecastUrl = ""
 	try:
-		from stn_info import stn_info
+		from newaCommon.stn_info import stn_info
 		if not stn_info.has_key(stn):
-			from stn_info_ma import stn_info
+			from newaCommon.stn_info_ma import stn_info
 		lat = stn_info[stn]['lat']
 		lon = stn_info[stn]['lon']
 		forecastUrl = 'http://forecast.weather.gov/MapClick.php?textField1=%s&textField2=%s' % (lat,lon)
@@ -81,7 +80,7 @@ def get_stations_with_var (state,varMajors=None,start=None,end=None) :
 
 # return list of tuples containing stations that report all variables needed for given disease
 def run_diseaseStations (disease):
-	from disease_vars_dict import disease_vars
+	from newaUtil.disease_vars_dict import disease_vars
 	# var majors for disease variables
 	majors = {'temp': [23,126], 'prcp': [5], 'lwet': [118], 'rhum': [24], 'wspd': [28,128], 'srad': [119,132] }
 	# variables recorded at all airports
@@ -202,8 +201,8 @@ def run_stationModels(stn):
 	station_dict = {}
 	model_list = []
 	try:
-		from stn_info import stn_info
-		from pest_models import pest_models
+		from newaCommon.stn_info import stn_info
+		from newaUtil.pest_models import pest_models
 		stn = stn.lower()
 		if stn_info.has_key(stn):
 			stn_vars = copy.deepcopy(stn_info[stn]['vars'])
@@ -232,7 +231,7 @@ def run_stationModels(stn):
 # get stations that report element specified in list_options and return list in alpha order by station name
 def run_stationList(list_options='all'):
 	try:
-		from stn_info import stn_info
+		from newaCommon.stn_info import stn_info
 		station_dict = {}
 		station_dict['stations'] = []
 		unsortedDict = {}
@@ -261,7 +260,7 @@ def run_stationList(list_options='all'):
 
 # FOR A GIVEN STATION and NETWORK, return sister station info
 def run_stationSisterInfo(options):
-	from sister_info import sister_info
+	from newaCommon.sister_info import sister_info
 	try:
 		stn = options['station']
 		network = options['network']
@@ -299,7 +298,7 @@ def run_stateStationList(options):
 		station_dict['stations'] = []
 		unsortedDict = {}
 		try:
-			exec("from stn_info_" + state.lower() + " import stn_info")
+			exec("from newaCommon.stn_info_" + state.lower() + " import stn_info")
 		except:
 			pass
 		for stn in stn_info.keys():
@@ -337,7 +336,7 @@ def run_stateInactiveStationList(options):
 		unsortedDict = {}
 		try:
 			# only line that's different from stateStationList
-			exec("from stn_info_" + state.lower() + "_inactive import stn_info")
+			exec("from newaCommon.stn_info_" + state.lower() + "_inactive import stn_info")
 		except:
 			pass
 		for stn in stn_info.keys():
@@ -364,10 +363,10 @@ def run_stateInactiveStationList(options):
 
 # get basic info for a given station
 def run_stationInfo(stn):
-	from get_downloadtime import get_downloadtime
+	from newaUtil.get_downloadtime import get_downloadtime
 	station_dict = {}
 	try:
-		from stn_info import stn_info
+		from newaCommon.stn_info import stn_info
 		stn = stn.lower()
 		sdict = {}
 		if stn_info.has_key(stn):
@@ -414,7 +413,7 @@ def run_getFcstData(options):
 			stn = "EW_%s" % stn
 		hourly_fcst = []
 		try:
-			forecast_db = hashopen('/Users/keith/NDFD/hourly_forecasts.db','r')		
+			forecast_db = hashopen('/ndfd/hourly_forecasts.db','r')
 			stn_dict = loads(forecast_db[stn])
 			forecast_db.close()
 			if stn_dict.has_key(requested_var):
