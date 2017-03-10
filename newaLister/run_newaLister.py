@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import sys
 sys.path.insert(1,'/usr/local/share/tsvar')
+sys.path.insert(1,'/newa')
 
 from quixote.publish import Publisher
 from quixote.server.scgi_server import QuixoteHandler
@@ -15,8 +16,8 @@ script_name = '/%s'%pname
 
 def create_publisher():
 	return Publisher(RootDirectory(),
-					 error_log="newaLister_err.log",
-					 access_log="newaLister_acc.log",
+					 error_log="/logs/%s_err.log"%pname,
+					 access_log="/logs/%s_acc.log"%pname,
 					 display_exceptions="plain" )
 
 def create_handler(parent_fd):
