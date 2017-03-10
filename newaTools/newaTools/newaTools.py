@@ -4,14 +4,14 @@ import sys, copy, math
 from mx import DateTime
 from print_exception import print_exception
 import newaTools_io
-if '/Users/keith/kleWeb/newaModel/newaModel' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaModel/newaModel')
+if '/newa/newaModel/newaModel' not in sys.path: sys.path.insert(1,'/newa/newaModel/newaModel')
 from phen_events import phen_events_dict	
-if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
+if '/newa/newaCommon' not in sys.path: sys.path.insert(1,'/newa/newaCommon')
 import newaCommon_io
 from newaCommon import *
 if '/Users/keith/progs/Morecs/morecs_hourly/Apple_ET' not in sys.path: sys.path.insert(1,'/Users/keith/progs/Morecs/morecs_hourly/Apple_ET')
 import Apple_ET_model
-if '/Users/keith/kleWeb/newaTools/newaTools/Apple_Thinning_Model' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaTools/newaTools/Apple_Thinning_Model')
+if '/newa/newaTools/newaTools/Apple_Thinning_Model' not in sys.path: sys.path.insert(1,'/newa/newaTools/newaTools/Apple_Thinning_Model')
 from AppleGrowthModel import AppleGrowthModel
 import csv
 import collections

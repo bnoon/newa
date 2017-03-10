@@ -3,7 +3,7 @@
 import sys, copy
 from print_exception import print_exception
 import newaUtil_io
-if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
+if '/newa/newaCommon' not in sys.path: sys.path.insert(1,'/newa/newaCommon')
 import newaCommon_io
 
 try :

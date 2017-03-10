@@ -4,15 +4,15 @@ import sys, copy, math
 from mx import DateTime
 from print_exception import print_exception
 import newaModel_io
-if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
+if '/newa/newaCommon' not in sys.path: sys.path.insert(1,'/newa/newaCommon')
 import newaCommon_io
 from newaCommon import *
-if '/Users/keith/NDFD' not in sys.path: sys.path.insert(1,'/Users/keith/NDFD')
+if '/ndfd' not in sys.path: sys.path.insert(1,'/ndfd')
 
 miss = -999
 month_names = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
 
-biofixfile = '/Users/keith/Sites/NEWA/apple_biofix.txt'
+biofixfile = '/static/NEWA/apple_biofix.txt'
 
 class program_exit (Exception):
 	pass
@@ -2771,7 +2771,7 @@ class Grape (Base,Apple,Models):
 	#--------------------------------------------------------------------------------------------		
 	#	obtain everything necessary for dmcast
 	def run_dmcast(self,stn,end_date_dt,cultivar,output):
-		if '/Users/keith/kleweb/newaModel/newaModel/dmcast' not in sys.path: sys.path.insert(1,'/Users/keith/kleweb/newaModel/newaModel/dmcast')
+		if '/newa/newaModel/newaModel/dmcast' not in sys.path: sys.path.insert(1,'/newa/newaModel/newaModel/dmcast')
 		import downy_mildew
 		from sister_info import sister_info
 		from stn_info import stn_info

@@ -4,7 +4,7 @@ import sys, imp
 from mx import DateTime
 from print_exception import print_exception
 import newaVegModel_io
-if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
+if '/newa/newaCommon' not in sys.path: sys.path.insert(1,'/newa/newaCommon')
 import newaCommon_io
 from newaCommon import *
 
@@ -13,7 +13,7 @@ class program_exit (Exception):
 
 # import the dictionarey containing information about the specified veg pest (assumes sys and imp have already been imported)
 def import_info_dict(pest):
-	if '/Users/keith/kleWeb/newaVegModel/newaVegModel' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaVegModel/newaVegModel')
+	if '/newa/newaVegModel/newaVegModel' not in sys.path: sys.path.insert(1,'/newa/newaVegModel/newaVegModel')
 	if pest in newaVegModel_io.disease_dict:
 		name = pest + '_info_dict'
 	else:

@@ -14,7 +14,7 @@ def apple_biofix_process (request):
 			try:
 				now = DateTime.now()
 				if request.form['submit field'] == 'Submit':
-					outfil = open('/Users/keith/Sites/NEWA/apple_biofix_%s.txt'%now.year,'w')
+					outfil = open('/static/NEWA/apple_biofix_%s.txt'%now.year,'w')
 					for key in request.form.keys():
 						if key != 'submit field' and request.form[key] != '':
 							outfil.write('%s, %s\n' % (key,request.form[key]))
@@ -38,7 +38,7 @@ def apple_biofix_input ():
 	try:
 		now = DateTime.now()
 		biofix_dict = {}
-		outfil = open('/Users/keith/Sites/NEWA/apple_biofix_%s.txt'%now.year,'r')
+		outfil = open('/static/NEWA/apple_biofix_%s.txt'%now.year,'r')
 		for line in outfil.readlines():
 			key,val = line.split(',')
 			biofix_dict[key] = val

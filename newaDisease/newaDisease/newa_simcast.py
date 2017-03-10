@@ -867,7 +867,7 @@ class general_simcast(object) :
 
 
 #if __name__=='__main__':
-#	if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
+#	if '/newa/newaCommon' not in sys.path: sys.path.insert(1,'/newa/newaCommon')
 #	import newaCommon_io
 #	from newaCommon import *
 #	stn = 'ith'

@@ -9,7 +9,7 @@ import Data
 import sys
 from mx import DateTime
 import subprocess
-if '/Users/keith/kleWeb/newaModel/newaModel' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaModel/newaModel')
+if '/newa/newaModel/newaModel' not in sys.path: sys.path.insert(1,'/newa/newaModel/newaModel')
 import newaModel_io
 from bsddb import hashopen
 from cPickle import loads
@@ -382,7 +382,7 @@ class general_dm_weather(object) :
 	def get_fcst_data (self, stn, requested_var, requested_time):
 		hourly_fcst = -999
 		try:
-			forecast_db = hashopen('/Users/keith/NDFD/hourly_forecasts.db','r')		
+			forecast_db = hashopen('/ndfd/hourly_forecasts.db','r')		
 			stn_dict = loads(forecast_db[stn.upper()])
 			forecast_db.close()
 			if requested_var == 'prcp': requested_var = 'qpf'

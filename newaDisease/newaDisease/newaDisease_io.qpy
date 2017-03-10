@@ -3,7 +3,7 @@
 ############################################
 import sys, math
 from mx import DateTime
-if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
+if '/newa/newaCommon' not in sys.path: sys.path.insert(1,'/newa/newaCommon')
 from newaCommon_io import display_station_list, monyr_listing_tall
 miss = -999
 month_abbrev = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']

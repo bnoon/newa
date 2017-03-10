@@ -4,12 +4,12 @@ import sys, os, math
 from mx import DateTime
 from print_exception import print_exception
 import newaGraph_io
-if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
+if '/newa/newaCommon' not in sys.path: sys.path.insert(1,'/newa/newaCommon')
 import newaCommon_io, newaCommon
-if '/Users/keith/kleWeb/newaModel/newaModel' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaModel/newaModel')
+if '/newa/newaModel/newaModel' not in sys.path: sys.path.insert(1,'/newa/newaModel/newaModel')
 import newaModel
 from phen_events import phen_events_dict		
-if '/Users/keith/NDFD' not in sys.path: sys.path.insert(1,'/Users/keith/NDFD')
+if '/ndfd' not in sys.path: sys.path.insert(1,'/ndfd')
 from get_daily_forecast import get_daily_forecast
 
 miss = -999

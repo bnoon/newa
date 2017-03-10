@@ -4,10 +4,10 @@ import sys, copy, math
 from mx import DateTime
 from print_exception import print_exception
 import newaLister_io
-if '/Users/keith/kleWeb/newaCommon' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaCommon')
+if '/newa/newaCommon' not in sys.path: sys.path.insert(1,'/newa/newaCommon')
 import newaCommon_io
 import newaCommon
-if '/Users/keith/kleWeb/newaDisease/newaDisease' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaDisease/newaDisease')
+if '/newa/newaDisease/newaDisease' not in sys.path: sys.path.insert(1,'/newa/newaDisease/newaDisease')
 import newaDisease
 
 miss = -999

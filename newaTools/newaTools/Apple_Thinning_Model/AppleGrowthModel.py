@@ -8,7 +8,7 @@
 import sys, collections, array
 from math import sin, pi, exp
 from mx import DateTime
-if '/Users/keith/kleWeb/newaTools/newaTools/Apple_Thinning_Model' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaTools/newaTools/Apple_Thinning_Model')
+if '/newa/newaTools/newaTools/Apple_Thinning_Model' not in sys.path: sys.path.insert(1,'/newa/newaTools/newaTools/Apple_Thinning_Model')
 from NewaWeatherData import WeatherData
 
 FALSE = 0

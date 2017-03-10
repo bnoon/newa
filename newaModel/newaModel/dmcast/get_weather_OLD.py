@@ -9,7 +9,7 @@ import Data
 import sys
 from mx import DateTime
 import subprocess
-if '/Users/keith/kleWeb/newaModel/newaModel' not in sys.path: sys.path.insert(1,'/Users/keith/kleWeb/newaModel/newaModel')
+if '/newa/newaModel/newaModel' not in sys.path: sys.path.insert(1,'/newa/newaModel/newaModel')
 import newaModel_io
 
 
