@@ -3,12 +3,9 @@
 import sys, copy, math
 from mx import DateTime
 from print_exception import print_exception
-import newaLister_io
-if '/newa/newaCommon' not in sys.path: sys.path.insert(1,'/newa/newaCommon')
-import newaCommon_io
-import newaCommon
-if '/newa/newaDisease/newaDisease' not in sys.path: sys.path.insert(1,'/newa/newaDisease/newaDisease')
-import newaDisease
+from newaLister import newaLister_io
+from newaCommon import newaCommon, newaCommon_io
+from newaDisease import newaDisease
 
 miss = -999
 month_names = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -281,7 +278,7 @@ def monthly_summary(daily_data,year,month):
 def get_sister_info (stn):
 	var_sister= []
 	try:
-		from sister_info import sister_info
+		from newaCommon.sister_info import sister_info
 		if sister_info.has_key(stn):
 			sister = sister_info[stn]
 			for var in sister.keys():

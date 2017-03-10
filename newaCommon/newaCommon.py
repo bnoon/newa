@@ -6,10 +6,8 @@ from sister_info import sister_info
 import ucanCallMethods
 from bsddb import hashopen
 from cPickle import loads
-if '/Users/keith/progs/Morecs/morecs_hourly' not in sys.path: sys.path.insert(1,'/Users/keith/progs/Morecs/morecs_hourly')
-from solar_main_routine import SOLAR_MAIN
-if '/Users/keith/progs/Morecs/morecs_hourly/Apple_ET' not in sys.path: sys.path.insert(1,'/Users/keith/progs/Morecs/morecs_hourly/Apple_ET')
-from solar_fcst2 import solar_main_fcst2
+from morecs.solar_main_routine import SOLAR_MAIN
+from morecs.solar_fcst2 import solar_main_fcst2
 
 sta_por = { "1fr": ('20010323','20100330'),  "1wi": ('19970401','99991231'),  "alb": ('20001224','99991231'),
 			"ark": ('19960419','99991231'),  "bat": ('19960402','99991231'),  "bra": ('19960531','99991231'),
