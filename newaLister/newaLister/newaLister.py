@@ -3,7 +3,7 @@
 import sys, copy, math
 from mx import DateTime
 from print_exception import print_exception
-from newaLister import newaLister_io
+import newaLister_io
 from newaCommon import newaCommon, newaCommon_io
 from newaDisease import newaDisease
 

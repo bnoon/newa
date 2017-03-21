@@ -3,9 +3,7 @@
 ############################################
 import sys
 from mx import DateTime
-if '/newa/newaCommon' not in sys.path: sys.path.insert(1,'/newa/newaCommon')
-import newaCommon
-from newaCommon_io import display_station_list, build_station_list, build_inactive_list, station_listing, monyr_listing_tall, monyr_listing
+from newaCommon.newaCommon_io import display_station_list, build_station_list, build_inactive_list, station_listing, monyr_listing_tall, monyr_listing
 miss = -999
 month_list = [(1,"January"),(2,"February"),(3,"March"),(4,"April"),(5,"May"),(6,"June"),
 			  (7,"July"),(8,"August"),(9,"September"),(10,"October"),(11,"November"),(12,"December")]
