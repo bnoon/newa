@@ -4,15 +4,15 @@
   <head>
 	<meta http-equiv="content-type" content="text/html"/>
 	<title>NEWA Apple Insect Models</title>
-	<link rel="stylesheet" href="http://newa.nrcc.cornell.edu/humanity/ui.all.css" type="text/css" media="screen">
-	<link rel="stylesheet" href="http://newa.nrcc.cornell.edu/newa_styles.css" type="text/css">
-    <link rel="stylesheet" href="http://newa.nrcc.cornell.edu/map.css" type="text/css" />
+	<link rel="stylesheet" href="/humanity/ui.all.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
+    <link rel="stylesheet" href="/map.css" type="text/css" />
     <script src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAYdOz4fjwWGZL7jy4b_9SvBStJMtSJFp7tyvoXtgKd0qQevLlZxQFqa3WVLv4W42TQwK7-2Khkk2Wyg"></script>
-	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery-1.3.2.min.js"></script>
-	<script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jquery-ui-1.6rc6.min.js"></script>
-    <script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/mm.js"></script>
-    <script type="text/javascript" src="http://newa.nrcc.cornell.edu/js/jq_label.js"></script>
+	<script type="text/javascript" src="/js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="/js/jquery-ui-1.6rc6.min.js"></script>
+    <script type="text/javascript" src="/js/mm.js"></script>
+    <script type="text/javascript" src="/js/jq_label.js"></script>
     <script type="text/javascript">
 
     //<![CDATA[
@@ -57,7 +57,7 @@
         };
 
         var updateLatLon = function() {
-          $.getJSON("http://newa.nrcc.cornell.edu/newaUtil/stationList/all", 
+          $.getJSON("/newaUtil/stationList/all", 
                 function(result){
                   if (result.error) {
                   } else {
@@ -106,7 +106,7 @@
 			getresults(0);
 			var params = {type: 'apple_pest'};
 			$('select[name=pest]').each(function () { params[this.name] = this.value; });
-			$.get('http://newa.nrcc.cornell.edu/newaTester/process_help',params,function(data) { $('#third').html(data); });
+			$.get('/newaTester/process_help',params,function(data) { $('#third').html(data); });
 		});
 	  });
 	</script>
@@ -119,7 +119,7 @@
 			$('input[name=bf_date]').each(function () { params[this.name] = this.value; }); }
 		if (bfcnt >= 2) {
 			$('input[name=bf2_date]').each(function () { params[this.name] = this.value; }); }
-		$.get('http://newa.nrcc.cornell.edu/newaTester/process_input',params,function(data) {
+		$.get('/newaTester/process_input',params,function(data) {
 			$("#second").html(data);
 			$("#bfdpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "+7d", changeMonth: true, changeYear: true });
 			$("#bf2dpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "+7d", changeMonth: true, changeYear: true });
