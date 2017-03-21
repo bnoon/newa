@@ -66,7 +66,6 @@ stn_info_inactive = {
 '3520': {'name': 'Tomasello Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 39.6569, 'lon': -74.8347, 'elev': 105, 'network': 'njwx', 'state': 'NJ', 'disconnected': 'yes'},
 'mn_buf': {'name': 'Buffalo, MN', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 45.22, 'lon': -93.84, 'elev': 1015, 'network': 'newa', 'state': 'MN'},
 'mn_lac': {'name': 'La Crescent, MN', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.858199, 'lon': -91.318371, 'elev': 1231, 'network': 'newa', 'state': 'MN'},
-'nj_mil': {'name': 'Milford, NJ', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.585858, 'lon': -75.157788, 'elev': 123, 'network': 'newa', 'state': 'NJ'},
 'mno': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.345831, 'lon': -71.677843, 'elev': 610, 'network': 'newa', 'state': 'MA', 'disconnected': 'yes'},
 'mmi': {'name': 'Middlefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.71083, 'elev': 180,  'lat': 41.49667, 'network': 'newa', 'state': 'CT', 'disconnected': 'yes'},
 'mst': {'name': 'Stow, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.409444, 'lon': -71.513889, 'elev': 239, 'network': 'newa', 'state': 'MA', 'county': 'Middlesex', 'climate_div': 'MA02'},

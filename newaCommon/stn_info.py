@@ -236,6 +236,7 @@ stn_info = {
 'nj_pri': {'name': 'Princeton (Terhune), NJ', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 40.3218, 'lon': -74.7292, 'elev': 186, 'network': 'newa', 'state': 'NJ'},
 'nj_elk': {'name': 'Elk Township, NJ', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 39.6664019, 'lon': -75.184658, 'elev': 136, 'network': 'newa', 'state': 'NJ'},
 'nj_blu': {'name': 'Blue Anchor (Sharrott Winery), NJ', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 39.677, 'lon': -74.874, 'elev': 131, 'network': 'newa', 'state': 'NJ'},
+'nj_mil': {'name': 'Milford, NJ', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.585858, 'lon': -75.157788, 'elev': 123, 'network': 'newa', 'state': 'NJ'},
 'va_bat': {'name': 'Batesville (Crown Orchard), VA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 37.974299, 'lon': -78.730016, 'elev': 832, 'network': 'newa', 'state': 'VA'},
 'va_cha': {'name': 'Charlottesville (Carter Mtn Orchard), VA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st1i', 'sm1i'], 'srqual': 'ok', 'lat': 37.9906478, 'lon': -78.472665, 'elev': 1148, 'network': 'newa', 'state': 'VA'},
 'va_cov': {'name': 'Covesville (Purvis Orchard), VA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 37.868371, 'lon': -78.717696, 'elev': 747, 'network': 'newa', 'state': 'VA'},
