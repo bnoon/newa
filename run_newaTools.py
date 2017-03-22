@@ -17,8 +17,8 @@ script_name = '/%s'%pname
 
 def create_publisher():
 	return Publisher(RootDirectory(),
-					 error_log="%s_err.log"%pname,
-					 access_log="%s_acc.log"%pname,
+					 error_log="/logs/%s_err.log"%pname,
+					 access_log="/logs/%s_acc.log"%pname,
 					 display_exceptions="plain" )
 
 def create_handler(parent_fd):
