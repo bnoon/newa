@@ -3,6 +3,8 @@ from quixote.directory import Directory
 from quixote import get_request
 from quixote.errors import TraversalError
 
+from newaUtil import process_input
+from newaUtil_io import station_map, stateStation_map, zoom_station_map
 stationList_cache = {}
 stationInfo_cache = {}
 
@@ -13,13 +15,10 @@ class RootDirectory(Directory):
 
 #	put up input page for following
 	def _q_index (self):						#default
-		from newaUtil import process_input
 		return process_input()
 	def stationMap (self) :
-		from newaUtil_io import station_map
 		return station_map()
 	def stateStationMap (self, path=None) :
-		from newaUtil_io import stateStation_map
 		return stateStation_map(path[0])
 	def stationList (self, path=None) :
 		ltype = path[0]
@@ -27,24 +26,19 @@ class RootDirectory(Directory):
 			results = stationList_cache[ltype]
 		else:
 			wholepath = ['stationList'] + path
-			from newaUtil import process_input
 			results = process_input(None,wholepath)
 			stationList_cache[ltype] = results
 		return results
 	def stateStationList (self, path=None) :
-		from newaUtil import process_input
 		path = ['stateStationList'] + path
 		return process_input(None,path)
 	def stateInactiveStationList (self, path=None) :
-		from newaUtil import process_input
 		path = ['stateInactiveStationList'] + path
 		return process_input(None,path)
 	def stationSisterInfo (self, path=None) :
-		from newaUtil import process_input
 		path = ['stationSisterInfo'] + path
 		return process_input(None,path)
 	def zoomStationMap (self, path=None) :
-		from newaUtil_io import zoom_station_map
 		return zoom_station_map(path[0])
 	def stationInfo (self, path=None) :
 		stn = path[0]
@@ -53,7 +47,6 @@ class RootDirectory(Directory):
 			results = stationInfo_cache[stn][1]
 		else:
 			wholepath = ['stationInfo'] + path
-			from newaUtil import process_input
 			results = process_input(None,wholepath)
 			if now.minute < 8:
 				expires = now + DateTime.RelativeDate(minute=8)
@@ -62,19 +55,15 @@ class RootDirectory(Directory):
 			stationInfo_cache[stn] = (expires,results)
 		return results
 	def stationModels (self, path=None) :
-		from newaUtil import process_input
 		path = ['stationModels'] + path
 		return process_input(None,path)
 	def diseaseStations (self, path=None) :
-		from newaUtil import process_input
 		path = ['diseaseStations'] + path
 		return process_input(None,path)
 	def getForecastUrl (self, path=None) :
-		from newaUtil import process_input
 		path = ['getForecastUrl'] + path
 		return process_input(None,path)
 	def getFcstData (self, path=None) :
-		from newaUtil import process_input
 		path = ['getFcstData'] + path
 		return process_input(None,path)
 
@@ -82,7 +71,6 @@ class RootDirectory(Directory):
 
 #	process information provided in url
 	def _q_lookup(self, component, path=None):
-		from newaUtil import process_input
 		if path: 
 			path = [component] + path
 		else:
