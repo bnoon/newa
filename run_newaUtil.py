@@ -4,7 +4,6 @@ sys.path[0]='.'
 sys.path.insert(1,'/usr/local/share/tsvar')
 sys.path.insert(1,'/newa')
 
-
 from quixote.publish import Publisher
 from quixote.server.scgi_server import QuixoteHandler
 from scgi.quixote_handler import main
