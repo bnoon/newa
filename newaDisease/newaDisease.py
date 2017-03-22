@@ -5,9 +5,8 @@ from mx import DateTime
 from print_exception import print_exception
 import newaDisease_io
 from newa_simcast import *
-if '/newa/newaCommon' not in sys.path: sys.path.insert(1,'/newa/newaCommon')
-import newaCommon_io
-from newaCommon import *
+from newaCommon import newaCommon_io
+from newaCommon.newaCommon import *
 if '/ndfd' not in sys.path: sys.path.insert(1,'/ndfd')
 
 miss = -999
