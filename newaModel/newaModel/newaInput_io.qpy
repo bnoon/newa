@@ -18,7 +18,7 @@ def apple_biofix_input [html] (biofix_dict):
 	<html>
 	<head>
 	<title>Apple Biofix Input Page</title>
-	<link rel="STYLESHEET" type="text/css" href="http://newa.nrcc.cornell.edu/newa_styles.css">
+	<link rel="STYLESHEET" type="text/css" href="/newa_styles.css">
 	</head>
 	<body>
 	<FORM ACTION="/newaModel/apple_biofix_process" METHOD="post">

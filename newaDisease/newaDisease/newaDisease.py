@@ -2350,9 +2350,9 @@ def process_help (request,path):
 # 		send input to appropriate routine
 		if smry_type == 'cabbage_maggot':
 ##			return newaDisease_io.helppage([
-##				("About Cabbage Maggot","http://newa.nrcc.cornell.edu/cabbage_maggot_about.htm"),
-##				("How to Use Cabbage Maggot Forecasts","http://newa.nrcc.cornell.edu/cabbage_maggot_howto.htm"),
-##				("Degree Day Accumulations for Cabbage Maggot Stages","http://newa.nrcc.cornell.edu/cabbage_maggot_dd.htm")
+##				("About Cabbage Maggot","/cabbage_maggot_about.htm"),
+##				("How to Use Cabbage Maggot Forecasts","/cabbage_maggot_howto.htm"),
+##				("Degree Day Accumulations for Cabbage Maggot Stages","/cabbage_maggot_dd.htm")
 ##				])
 			pass
 		else:

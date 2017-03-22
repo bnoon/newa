@@ -1732,12 +1732,12 @@ def add_footer [html] (smry_dict=None,add_logo=None):
 	'''
 	
 	if add_logo == 'pmep':
-		'<tr><td align=left width="33%%"><a href="http://newa.cornell.edu" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
-		'<td align=center width="34%%"><a href="http://treefruitipm.info" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/pmep_logo.jpg" alt="PMEP" width="70" height="25" border="0"></a></td>'
-		'<td align=right width="33%%"><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
+		'<tr><td align=left width="33%%"><a href="http://newa.cornell.edu" target="_blank"><img src="/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
+		'<td align=center width="34%%"><a href="http://treefruitipm.info" target="_blank"><img src="/gifs/pmep_logo.jpg" alt="PMEP" width="70" height="25" border="0"></a></td>'
+		'<td align=right width="33%%"><a href="http://www.rcc-acis.org" target="_blank"><img src="/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
 	else:
-		'<tr><td align=left><a href="http://newa.cornell.edu" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
-		'<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newa.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
+		'<tr><td align=left><a href="http://newa.cornell.edu" target="_blank"><img src="/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
+		'<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
 	'</table></span>'
 
 	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
@@ -2357,7 +2357,7 @@ def onion_dis_html [html] (station_name,blight_alert,plant_date,alternaria,botry
 		<head>
 		<title>Onion Disease Forecast</title>
 		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/humanity/jquery-ui.css">
-		<link rel="stylesheet" type="text/css" href="http://newa.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		</head>
@@ -2404,7 +2404,7 @@ def onion_dis_html [html] (station_name,blight_alert,plant_date,alternaria,botry
 
 	if smry_dict['this_year']:
 		'<tr>'
-		'<th class=plain_back colspan=2> Rain Prob (%)<br>Night|Day&nbsp;<img src="http://newa.nrcc.cornell.edu/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo();"></th>'
+		'<th class=plain_back colspan=2> Rain Prob (%)<br>Night|Day&nbsp;<img src="/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo();"></th>'
 		'<td class=plain_back>&nbsp;</td>'
 		'<td class="plain_back double_right">&nbsp;</td>'
 		for d in ['day0','fday1','fday2','fday3','fday4','fday5']:
@@ -2706,7 +2706,7 @@ def onion_dis_dormant [html] (smry_dict):
 		<html>
 		<head>
 		<title>Onion Disease</title>
-		<link rel="stylesheet" type="text/css" href="http://newa.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		</head>
 		<body>
 		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
@@ -3932,7 +3932,7 @@ def cabbage_maggot_dormant [html] (smry_dict):
 		<html>
 		<head>
 		<title>Cabbage Maggot</title>
-		<link rel="stylesheet" type="text/css" href="http://newa.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		</head>
 		<body>
 		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
@@ -4072,7 +4072,7 @@ def onion_maggot_dormant [html] (smry_dict):
 		<html>
 		<head>
 		<title>onion Maggot</title>
-		<link rel="stylesheet" type="text/css" href="http://newa.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		</head>
 		<body>
 		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
