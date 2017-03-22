@@ -15,7 +15,7 @@
 		}
         
 		function updateLatLon (list_type) {
-			$.getJSON("http://newa.nrcc.cornell.edu/newaUtil/stationList/"+list_type, function(result){
+			$.getJSON("/newaUtil/stationList/"+list_type, function(result){
 			 if (result.error) {
 				$("#msg").show().text(result.error); }
 			  else {

@@ -53,32 +53,32 @@ function getLocation() {
 
 function placeMarkers (cur_data, event_type) {
 	var newaIcon = new google.maps.MarkerImage(
-		'http://newa.nrcc.cornell.edu/gifs/newa_small.png',
+		'/gifs/newa_small.png',
 		new google.maps.Size(16,16),
 		new google.maps.Point(0,0),
 		new google.maps.Point(8,8));
 	var airportIcon = new google.maps.MarkerImage(
-		'http://newa.nrcc.cornell.edu/gifs/airport.png',
+		'/gifs/airport.png',
 		new google.maps.Size(15,15),
 		new google.maps.Point(0,0),
 		new google.maps.Point(8,8));
 	var culogIcon = new google.maps.MarkerImage(
-		'http://newa.nrcc.cornell.edu/gifs/culog.png',
+		'/gifs/culog.png',
 		new google.maps.Size(14,14),
 		new google.maps.Point(0,0),
 		new google.maps.Point(7,7));
 	var newaShadow = new google.maps.MarkerImage(
-		'http://newa.nrcc.cornell.edu/gifs/newa_small_shdw.png',
+		'/gifs/newa_small_shdw.png',
 		new google.maps.Size(24,16),
 		new google.maps.Point(0,0),
 		new google.maps.Point(8,8));
 	var airportShadow = new google.maps.MarkerImage(
-		'http://newa.nrcc.cornell.edu/gifs/airport_shdw.png',
+		'/gifs/airport_shdw.png',
 		new google.maps.Size(23,15),
 		new google.maps.Point(0,0),
 		new google.maps.Point(8,8));
 	var culogShadow = new google.maps.MarkerImage(
-		'http://newa.nrcc.cornell.edu/gifs/culog_shdw.png',
+		'/gifs/culog_shdw.png',
 		new google.maps.Size(21,14),
 		new google.maps.Point(0,0),
 		new google.maps.Point(7,7));
@@ -133,7 +133,7 @@ function placeMarkers (cur_data, event_type) {
 function stationMap (list_type,event_type) {
 	list_type = list_type || 'all';
 	event_type = event_type || 'station_page';
-	$.getJSON("http://newa.nrcc.cornell.edu/newaUtil/stationList/"+list_type)
+	$.getJSON("/newaUtil/stationList/"+list_type)
 		.success( function(results) { placeMarkers(results,event_type); } )
 		.error( function() {
 			$('<div id="msg" style="border:1px solid black; padding:0.25em; position:absolute; left:168px; bottom:0px; width:225px; z-index:1; font-size:0.9em; text-align:center; background-color:red; color:white;"></div>').appendTo($("#map"));
@@ -163,7 +163,7 @@ function zoomMarkCenter(results) {
 }
 
 function zoomStation (reqstn) {
-	$.getJSON("http://newa.nrcc.cornell.edu/newaUtil/stationInfo/"+reqstn)
+	$.getJSON("/newaUtil/stationInfo/"+reqstn)
 		.success( zoomMarkCenter )  
 		.error( function() { 
 			return false;

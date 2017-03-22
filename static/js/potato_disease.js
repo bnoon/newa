@@ -6,9 +6,9 @@ function getforecast() {
 	if (!params.year) {
 		params.year = $('input[name=year]').val();
 	}
-	$('#second').empty().html('<img src="http://newa.nrcc.cornell.edu/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
+	$('#second').empty().html('<img src="/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
 	$('#righttabs').tabs('select', 1);
-	$.get('http://newa.nrcc.cornell.edu/newaDisease/process_input', params, function (data) {
+	$.get('/newaDisease/process_input', params, function (data) {
 		$('#loading').fadeOut(500, function () {
 			$(this).remove();
 		});

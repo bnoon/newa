@@ -102,47 +102,47 @@ function statePlaceMarkers (cur_data, event_type, state) {
 	};
 	var stateInfo = stateCenters.hasOwnProperty(state) ? stateCenters[state] : {lat: 42.5, lon: -75.7, zoom: 6, name: 'All'};
 	var newaIcon = new google.maps.MarkerImage(
-		'http://newa.nrcc.cornell.edu/gifs/newa_small.png',
+		'/gifs/newa_small.png',
 		new google.maps.Size(16,16),
 		new google.maps.Point(0,0),
 		new google.maps.Point(8,8));
 	var airportIcon = new google.maps.MarkerImage(
-		'http://newa.nrcc.cornell.edu/gifs/airport.png',
+		'/gifs/airport.png',
 		new google.maps.Size(15,15),
 		new google.maps.Point(0,0),
 		new google.maps.Point(8,8));
 	var culogIcon = new google.maps.MarkerImage(
-		'http://newa.nrcc.cornell.edu/gifs/culog.png',
+		'/gifs/culog.png',
 		new google.maps.Size(14,14),
 		new google.maps.Point(0,0),
 		new google.maps.Point(7,7));
 	var newaIconGray = new google.maps.MarkerImage(
-		'http://newa.nrcc.cornell.edu/gifs/newa_smallGray.png',
+		'/gifs/newa_smallGray.png',
 		new google.maps.Size(16,16),
 		new google.maps.Point(0,0),
 		new google.maps.Point(8,8));
 	var airportIconGray = new google.maps.MarkerImage(
-		'http://newa.nrcc.cornell.edu/gifs/airportGray.png',
+		'/gifs/airportGray.png',
 		new google.maps.Size(15,15),
 		new google.maps.Point(0,0),
 		new google.maps.Point(8,8));
 	var culogIconGray = new google.maps.MarkerImage(
-		'http://newa.nrcc.cornell.edu/gifs/culogGray.png',
+		'/gifs/culogGray.png',
 		new google.maps.Size(14,14),
 		new google.maps.Point(0,0),
 		new google.maps.Point(7,7));
 	var newaShadow = new google.maps.MarkerImage(
-		'http://newa.nrcc.cornell.edu/gifs/newa_small_shdw.png',
+		'/gifs/newa_small_shdw.png',
 		new google.maps.Size(24,16),
 		new google.maps.Point(0,0),
 		new google.maps.Point(8,8));
 	var airportShadow = new google.maps.MarkerImage(
-		'http://newa.nrcc.cornell.edu/gifs/airport_shdw.png',
+		'/gifs/airport_shdw.png',
 		new google.maps.Size(23,15),
 		new google.maps.Point(0,0),
 		new google.maps.Point(8,8));
 	var culogShadow = new google.maps.MarkerImage(
-		'http://newa.nrcc.cornell.edu/gifs/culog_shdw.png',
+		'/gifs/culog_shdw.png',
 		new google.maps.Size(21,14),
 		new google.maps.Point(0,0),
 		new google.maps.Point(7,7));
@@ -354,7 +354,7 @@ function zoomMarkCenter(results) {
 }
 
 function zoomStation (reqstn) {
-	$.getJSON("http://newa.nrcc.cornell.edu/newaUtil/stationInfo/"+reqstn)
+	$.getJSON("/newaUtil/stationInfo/"+reqstn)
 		.success( zoomMarkCenter )  
 		.error( function() { 
 			return false;

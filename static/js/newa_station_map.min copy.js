@@ -2,7 +2,7 @@ var cur_data=null;var mMgr=null;function updateStations(){var newaIcon=new GIcon
 else if(stn.network=="newa"){marker=new GMarker(point,newaIcon);}
 else if(stn.network=="icao"){marker=new GMarker(point,airportIcon);}
 markers.push(marker);GEvent.addListener(marker,'click',function(){top.location.href="http://newa.cornell.edu/index.php?page=weather-station-page&WeatherStation="+stn.id;});GEvent.addListener(marker,"mouseover",function(){$("#msg").show().text(stn.name);});GEvent.addListener(marker,"mouseout",function(){$("#msg").empty().hide();});});mMgr.addMarkers(markers,6);mMgr.refresh();}
-function updateLatLon(){$.getJSON("http://newa.nrcc.cornell.edu/newaUtil/stationList/all",function(result){if(result.error){$("#msg").show().text(result.error);}
+function updateLatLon(){$.getJSON("/newaUtil/stationList/all",function(result){if(result.error){$("#msg").show().text(result.error);}
 else{cur_data=result;setTimeout(updateStations,0);}});}
 function set_up(){if(GBrowserIsCompatible()){var map=new GMap2(document.getElementById("map"));map.addMapType(G_PHYSICAL_MAP)
 map.setMapType(G_PHYSICAL_MAP);map.addControl(new GSmallMapControl());map.addControl(new GHierarchicalMapTypeControl());map.enableDoubleClickZoom();map.enableContinuousZoom();map.setCenter(new GLatLng(42.95,-76.35),7);mMgr=new MarkerManager(map);$('<div id="msg" style="border:1px solid black; padding:0.25em; position:absolute; left:168px; bottom:0px; width:225px; z-index:1; font-size:0.7em; text-align:center; background-color:white; color:black; display:none;"></div>').appendTo($("#map"));updateLatLon();}}

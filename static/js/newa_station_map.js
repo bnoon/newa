@@ -104,7 +104,7 @@ function zoomMarkCenter(results) {
 }
 
 function stationMap () {
-	$.getJSON("http://newa.nrcc.cornell.edu/newaUtil/stationList/all")
+	$.getJSON("/newaUtil/stationList/all")
 		.success( placeMarkers )
 		.error( function() {
 			$('<div id="msg" style="border:1px solid black; padding:0.25em; position:absolute; left:168px; bottom:0px; width:225px; z-index:1; font-size:0.9em; text-align:center; background-color:red; color:white;"></div>').appendTo($("#map"));
@@ -114,7 +114,7 @@ function stationMap () {
 }
 
 function zoomStation (reqstn) {
-	$.getJSON("http://newa.nrcc.cornell.edu/newaUtil/stationInfo/"+reqstn)
+	$.getJSON("/newaUtil/stationInfo/"+reqstn)
 		.success( zoomMarkCenter )  
 		.error( function() { 
 			return false;

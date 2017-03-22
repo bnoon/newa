@@ -8,9 +8,9 @@
 		function getdmcast() {
 			var params = {type: 'dmcast'};
 			$('select[name=stn], input[name=accend], select[name=cultivar]').each(function () { params[this.name] = this.value; });
-			$('#second').empty().html('<img src="http://newa.nrcc.cornell.edu/gifs/ajax-loader.gif" alt="Processing" id="loading" /> Loading');
+			$('#second').empty().html('<img src="/gifs/ajax-loader.gif" alt="Processing" id="loading" /> Loading');
 			$('#righttabs').tabs('select',1);
-			$.get('http://newa.nrcc.cornell.edu/newaModel/process_input',params,function(data) {
+			$.get('/newaModel/process_input',params,function(data) {
 				$('#loading').fadeOut(500, function() { $(this).remove(); });
 				$("#second").html(data);
 			});
@@ -19,7 +19,7 @@
 
 		function update_help() {
 			var params = {type: 'dmcast'};
-			$.get('http://newa.nrcc.cornell.edu/newaModel/process_help',params,function(data) { $('#third').html(data); });
+			$.get('/newaModel/process_help',params,function(data) { $('#third').html(data); });
 			return false;
 		  }
 

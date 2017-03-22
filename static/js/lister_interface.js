@@ -22,7 +22,7 @@ function buildStationLists(state) {
 					trow = "";
 					for (m = 0; m < 12; m += 1) {
 						if (m <= crntMonth) {
-							trow += '<td><A HREF="http://newa.nrcc.cornell.edu/newaLister/' + otype + '/' + stn.id + '/' + crntYear + '/' + (m + 1) + '">' + month_list[m] + '</A> |</td>';
+							trow += '<td><A HREF="/newaLister/' + otype + '/' + stn.id + '/' + crntYear + '/' + (m + 1) + '">' + month_list[m] + '</A> |</td>';
 						} else {
 							break;
 						}
