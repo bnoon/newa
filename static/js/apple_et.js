@@ -1,6 +1,6 @@
 function update_help() {
 	var params = {type: 'apple_et'};
-	$.get('http://newatest.nrcc.cornell.edu/newaTools/process_help',params,function(data) { $('#third').html(data); });
+	$.get('/newaTools/process_help',params,function(data) { $('#third').html(data); });
 	return false;
   }
 
@@ -81,9 +81,9 @@ function calculateGallons() {
 function apple_et() {
 	var params = {type: 'apple_et'};
 	$('select[name=stn], input[name=accend], input[name=greentip]').each(function () { params[this.name] = this.value; });
-	$('#results_div').empty().show().html('<img src="http://newatest.nrcc.cornell.edu/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
+	$('#results_div').empty().show().html('<img src="/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
 	$('#righttabs').tabs('option', 'active',1);
-	$.get('http://newatest.nrcc.cornell.edu/newaTools/process_input',params,function(data) {
+	$.get('/newaTools/process_input',params,function(data) {
 		$('#loading').fadeOut(500, function() {
 			$(this).remove();
 		});
@@ -110,9 +110,9 @@ function apple_et() {
 function apple_et_specs() {
 	var params = {type: 'apple_et_specs'};
 	$('select[name=stn], input[name=accend]').each(function () { params[this.name] = this.value; });
-	$('#second').empty().html('<img src="http://newatest.nrcc.cornell.edu/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
+	$('#second').empty().html('<img src="/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
 	$('#righttabs').tabs('option', 'active',1);
-	$.get('http://newatest.nrcc.cornell.edu/newaTools/process_input',params,function(data) {
+	$.get('/newaTools/process_input',params,function(data) {
 		$('#loading').fadeOut(500, function() {
 			$(this).remove();
 		});

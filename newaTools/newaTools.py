@@ -483,11 +483,11 @@ def process_help (request, path):
 
 # 		send input to appropriate routine
 		if smry_type == 'apple_et':
-			return newaTools_io.helppage([("Model overview","http://newatest.nrcc.cornell.edu/apple_et_help.html"),
-										  ("Station inclusion","http://newatest.nrcc.cornell.edu/apple_tool_stations.html")])
+			return newaTools_io.helppage([("Model overview","/apple_et_help.html"),
+										  ("Station inclusion","/apple_tool_stations.html")])
 		elif smry_type == 'apple_thin':
-			return newaTools_io.helppage([("Model overview","http://newatest.nrcc.cornell.edu/apple_thin_help.html"),
-										  ("Station inclusion","http://newatest.nrcc.cornell.edu/apple_tool_stations.html")])
+			return newaTools_io.helppage([("Model overview","/apple_thin_help.html"),
+										  ("Station inclusion","/apple_tool_stations.html")])
 		else:
 			return newaCommon_io.errmsg('Error processing input')
 	except program_exit,msg:

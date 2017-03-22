@@ -16,16 +16,16 @@ def apple_disease_input [html] (disease_type=None):
 	<HEAD>
 		<TITLE>NEWA Apple Disease Models</TITLE>
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/humanity/jquery-ui.css" type="text/css">
-		<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+		<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
 		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
-		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
-		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping4.js"></script>
-		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/apple_disease.js"></script>
+		<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="/js/mapping4.js"></script>
+		<script type="text/javascript" src="/js/apple_disease.js"></script>
 		<style type="text/css">
 			.ui-helper-reset {
 				font-size:75%; }
@@ -112,15 +112,15 @@ def apple_scab_estlw_input [html] (disease_type="apple_scab_estlw"):
 	<HTML>
 	<HEAD>
 		<TITLE>NEWA Apple Disease Models</TITLE>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-		<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
-		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
-		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/apple_disease.js"></script>
+		<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="/js/mapping3.js"></script>
+		<script type="text/javascript" src="/js/apple_disease.js"></script>
 		<style type="text/css">
 			#leftbox {
 				position: absolute;
@@ -205,16 +205,16 @@ def grape_disease_input [html] (disease_type=None):
 	<HTML>
 	<HEAD>
 		<TITLE>NEWA Grape Forecast Models</TITLE>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-		<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
-		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
-		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/grape_disease.js"></script>
-		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.fixedheader.js"></script>
+		<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="/js/mapping3.js"></script>
+		<script type="text/javascript" src="/js/grape_disease.js"></script>
+		<script type="text/javascript" src="/js/jquery.fixedheader.js"></script>
 		<style type="text/css">
 			#leftbox {
 				position: absolute;
@@ -321,15 +321,15 @@ def apple_pest_input [html] (pest_type=None):
 	  <head>
 		<meta http-equiv="content-type" content="text/html"/>
 		<title>NEWA Apple Insect Models</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-		<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.cookie.js"></script>
-		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/mapping3.js"></script>
-		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/apple_pest.js"></script>
+		<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="/js/mapping3.js"></script>
+		<script type="text/javascript" src="/js/apple_pest.js"></script>
 		<style type="text/css">
 			#leftbox {
 				position: absolute;
@@ -437,12 +437,12 @@ def add_footer [html] (smry_dict=None,add_logo=None):
 	'''
 	
 	if add_logo == 'pmep':
-		'<tr><td align=left width="33%"><a href="http://newa.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
-		'<td align=center width="34%"><a href="http://treefruitipm.info" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/pmep_logo.jpg" alt="PMEP" width="70" height="25" border="0"></a></td>'
-		'<td align=right width="33%"><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
+		'<tr><td align=left width="33%"><a href="http://newa.cornell.edu" target="_blank"><img src="/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
+		'<td align=center width="34%"><a href="http://treefruitipm.info" target="_blank"><img src="/gifs/pmep_logo.jpg" alt="PMEP" width="70" height="25" border="0"></a></td>'
+		'<td align=right width="33%"><a href="http://www.rcc-acis.org" target="_blank"><img src="/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
 	else:
-		'<tr><td align=left><a href="http://newa.cornell.edu" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
-		'<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
+		'<tr><td align=left><a href="http://newa.cornell.edu" target="_blank"><img src="/gifs/newa_logo.jpg" alt="NEWA" width="58" height="22" border="0"></a></td>'
+		'<td align=right><a href="http://www.rcc-acis.org" target="_blank"><img src="/gifs/PoweredbyACIS_NRCC.jpg" alt="NRCC" width="86" height="37" border="0"></a></td></tr>'
 	'</table></span>'
 
 
@@ -478,8 +478,8 @@ def apple_scab_log [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Apple Scab Models</title>
-			<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+			<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 		<script type="text/javascript">
@@ -487,7 +487,7 @@ def apple_scab_log [html] (smry_dict):
 			$('#dpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: "", changeMonth: true, changeYear: true });
 			$('button.forecast').click(function() {
 				req_stn = $('input[name=stn]').val();
-				$.get('http://newatest.nrcc.cornell.edu/newaUtil/getForecastUrl/'+req_stn, function(data) { 
+				$.get('/newaUtil/getForecastUrl/'+req_stn, function(data) { 
 					window.open(data);
 				});
 				return false;
@@ -497,7 +497,7 @@ def apple_scab_log [html] (smry_dict):
 				$('input[name=stn], input[name=accend], input[name=greentip]').each(function () { 
 					paramStr += "&" + this.name + "=" + this.value;
 				});
-				window.open('http://newatest.nrcc.cornell.edu/newaGraph/apple_scab_grf?' + paramStr,"asgraph","resizable=1,scrollbars=1,status=0,toolbar=0,location=0,menubar=0,height=760,width=630");
+				window.open('/newaGraph/apple_scab_grf?' + paramStr,"asgraph","resizable=1,scrollbars=1,status=0,toolbar=0,location=0,menubar=0,height=760,width=630");
 				return false;
 			});
 			$("#moreinfo").dialog({
@@ -522,8 +522,8 @@ def apple_scab_log [html] (smry_dict):
 	'''
 	<script type="text/javascript">
 	function show_moreinfo (opt) {
-		if (opt == 1) { $("#moreinfo").load('http://newatest.nrcc.cornell.edu/pops_notes.htm'); }
-		else { $("#moreinfo").load('http://newatest.nrcc.cornell.edu/dew_notes.htm'); }
+		if (opt == 1) { $("#moreinfo").load('/pops_notes.htm'); }
+		else { $("#moreinfo").load('/dew_notes.htm'); }
 		$("#moreinfo").dialog('open');
 	}
 	</script>
@@ -804,7 +804,7 @@ def apple_scab_log [html] (smry_dict):
 	
 	if smry_dict['this_year']:
 		'<tr>'	
-		'<td class=plain_back> Rain Prob (%)<br>Night|Day&nbsp;<img src="http://newatest.nrcc.cornell.edu/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(1);"></td>'
+		'<td class=plain_back> Rain Prob (%)<br>Night|Day&nbsp;<img src="/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(1);"></td>'
 		'<td class=plain_back>&nbsp;</td>'
 		'<td class=plain_back>&nbsp;</td>'
 		for d in ['day0','fday1','fday2','fday3','fday4','fday5']:
@@ -950,8 +950,8 @@ def apple_scab_early [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Apple Scab Model</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 		<script type="text/javascript">
@@ -1004,7 +1004,7 @@ def apple_scab_dormant [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Apple Scab Model</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		</head>
 		<body>
 		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
@@ -1027,8 +1027,8 @@ def fire_blight_log [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Fire Blight Model</title>
-			<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+			<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 		<script type="text/javascript">
@@ -1039,7 +1039,7 @@ def fire_blight_log [html] (smry_dict):
 			$('#sodpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '', changeMonth: true, changeYear: true });
 			$('#forecast').click(function() {
 				req_stn = $('input[name=stn]').val();
-				$.get('http://newatest.nrcc.cornell.edu/newaUtil/getForecastUrl/'+req_stn, function(data) { 
+				$.get('/newaUtil/getForecastUrl/'+req_stn, function(data) { 
 					window.open(data);
 				});
 				return false;
@@ -1049,7 +1049,7 @@ def fire_blight_log [html] (smry_dict):
 				$('input[name=stn], input[name=accend], input[name=firstblossom], select[name=orchard_history]').each(function () { 
 					paramStr += "&" + this.name + "=" + this.value;
 				});
-				window.open('http://newatest.nrcc.cornell.edu/newaGraph/fire_blight_grf?' + paramStr,"fbgraph","resizable=1,scrollbars=1,status=0,toolbar=0,location=0,menubar=0,height=760,width=630");
+				window.open('/newaGraph/fire_blight_grf?' + paramStr,"fbgraph","resizable=1,scrollbars=1,status=0,toolbar=0,location=0,menubar=0,height=760,width=630");
 				return false;
 			});
 			$("#moreinfo").dialog({
@@ -1111,8 +1111,8 @@ def fire_blight_log [html] (smry_dict):
 	'''
 	<script type="text/javascript">
 	function show_moreinfo (opt) {
-		if (opt == 1) { $("#moreinfo").load('http://newatest.nrcc.cornell.edu/pops_notes.htm'); }
-		else { $("#moreinfo").load('http://newatest.nrcc.cornell.edu/dew_notes.htm'); }
+		if (opt == 1) { $("#moreinfo").load('/pops_notes.htm'); }
+		else { $("#moreinfo").load('/dew_notes.htm'); }
 		$("#moreinfo").dialog('open');
 	}
 	</script>
@@ -1269,7 +1269,7 @@ def fire_blight_log [html] (smry_dict):
 		'<td class=%s_back>%s</td>' % (rcolor,rain)
 	'</TR>'
 	'<tr>'	
-	'<th class=plain_back> Rain Prob (%)<br>Night|Day&nbsp;<img src="http://newatest.nrcc.cornell.edu/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(1);"></th>'
+	'<th class=plain_back> Rain Prob (%)<br>Night|Day&nbsp;<img src="/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(1);"></th>'
 	'<td class=plain_back>&nbsp;</td>'
 	'<td class=plain_back>&nbsp;</td>'
 	for d in ['day0','fday1','fday2','fday3','fday4','fday5']:
@@ -1284,7 +1284,7 @@ def fire_blight_log [html] (smry_dict):
 		'<td class=plain_back_smaller_c>%s | %s</td>' % (am_rain,pm_rain)
 	'</TR>'
 	'<tr>'	
-	'<th class=plain_back> Dew &nbsp;<img src="http://newatest.nrcc.cornell.edu/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(0);"></th>'
+	'<th class=plain_back> Dew &nbsp;<img src="/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(0);"></th>'
 	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
 		if smry_dict[d]['wetness'][2] > 0:
 			rcolor = 'redonplain'
@@ -1417,8 +1417,8 @@ def fire_blight_early [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Fire Blight Model</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 		<script type="text/javascript">
@@ -1486,8 +1486,8 @@ def fire_blight_late [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Fire Blight Model</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 		<script type="text/javascript">
@@ -1618,7 +1618,7 @@ def fire_blight_dormant [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Fire Blight Model</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		</head>
 		<body>
 		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
@@ -1640,7 +1640,7 @@ def shoot_blight_infection_log [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Shoot Blight Model</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		</head>
 		<body>
 		'''
@@ -1676,7 +1676,7 @@ def shoot_blight_symptoms_log [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Shoot Blight Model</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		</head>
 		<body>
 		'''
@@ -1719,8 +1719,8 @@ def apple_pest_results [html] (smry_dict):
 		  <head>
 			<meta http-equiv="content-type" content="text/html"/>
 			<title>NEWA Apple Pest Calculator</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-			<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+			<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 			<script type="text/javascript">
@@ -1749,7 +1749,7 @@ def apple_pest_results [html] (smry_dict):
 	function updateStatus() {
 		var params = {type: 'apple_pest'};
 		$('input[name=pest], input[name=output], select[name=pest], select[name=altref]').each(function () { params[this.name] = this.value; });
-		$.get('http://newatest.nrcc.cornell.edu/newaModel/updateStatus',params,function(data) { $("#manage_status").html(data); });
+		$.get('/newaModel/updateStatus',params,function(data) { $("#manage_status").html(data); });
 		$('#phen_pic').hide();		
 		$('#ppl').hide();		
 		$('#ppr').hide();
@@ -1877,7 +1877,7 @@ def apple_pest_results [html] (smry_dict):
 			'<div style="float:  left; width: 100px; height: 50px;" id="ppl">&nbsp;</div>'
 			'<div style="float: right; width:  50px; height: 50px; font-size:8.0pt;" id="ppr">Click to enlarge</div>'
 			'<div style="float: right; width:  50px; height: 50px;" id="phen_pic">'
-			'<a href="http://newatest.nrcc.cornell.edu/gifs/apple/%s.jpg" target="_blank"><img src="http://newatest.nrcc.cornell.edu/gifs/apple/%s_sm.png" alt="%s" width=48 height=48></a>' % (smry_dict['phen_pic'],smry_dict['phen_pic'],smry_dict['phen_pic'])
+			'<a href="/gifs/apple/%s.jpg" target="_blank"><img src="/gifs/apple/%s_sm.png" alt="%s" width=48 height=48></a>' % (smry_dict['phen_pic'],smry_dict['phen_pic'],smry_dict['phen_pic'])
 			'</div>'
 		'<p><b>Phenological stage: </b>'
 		'<select name="altref" onChange="updateStatus();">'
@@ -1961,8 +1961,8 @@ def dmcast_results [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA DMCast Results</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		</head>
 		<body>
 		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
@@ -1981,7 +1981,7 @@ def dmcast_results [html] (smry_dict):
 		else:
 			'<li><b>Eichhorn and Lorenz Stage (ELS) 12</b> for <b>%s</b> was <b>NOT</b> reached by %d %s %d</li>' % (smry_dict['cultivar'],smry_dict['accend'].day,month_abb[smry_dict['accend'].month],smry_dict['accend'].year)
 		'<ul>'
-		'<li><i><a href="http://newatest.nrcc.cornell.edu/gifs/eichorn.12.jpg" target=_new>ELS12</a>: Five to six leaves unfolded, inflorescences clearly visible</i></li>'
+		'<li><i><a href="/gifs/eichorn.12.jpg" target=_new>ELS12</a>: Five to six leaves unfolded, inflorescences clearly visible</i></li>'
 		'</ul>'
 		if smry_dict['primary']:
 			'<li><b>Primary infection</b> occurred on <b>%d %s %d</b></li>' % (smry_dict['primary'].day,month_abb[smry_dict['primary'].month],smry_dict['primary'].year)
@@ -1999,11 +1999,11 @@ def dmcast_results [html] (smry_dict):
 		warning_keys = smry_dict['warnings'].keys()
 		warning_keys.sort()
 		'<div class="gray_back_l" style="margin-top:15px;">'
-		'<div class="header_line_s" style="color:green; text-align:center;">Downy Mildew Infection Risk Warnings (<img src="http://newatest.nrcc.cornell.edu/gifs/bar.jpg" height=5 width=14>) during the Last 2 Weeks (%s - %s)</div>' % (warning_keys[0],warning_keys[-1])
+		'<div class="header_line_s" style="color:green; text-align:center;">Downy Mildew Infection Risk Warnings (<img src="/gifs/bar.jpg" height=5 width=14>) during the Last 2 Weeks (%s - %s)</div>' % (warning_keys[0],warning_keys[-1])
 		'<table cellpadding="2" cellspacing="0" border="1" width="100%" style="text-align: center; margin-top:10px;">'
 		'<caption style="text-align:center; vertical-align:middle;">'
-		'<img src="http://newatest.nrcc.cornell.edu/gifs/warning.jpg" width=20> Blue bar with green shade indicates minimum conditions for infection were exceeded.<br>'
-		'<img src="http://newatest.nrcc.cornell.edu/gifs/precip.jpg" width=20> P indicates precipitation - rain or snow was observed at that hour.</caption>'
+		'<img src="/gifs/warning.jpg" width=20> Blue bar with green shade indicates minimum conditions for infection were exceeded.<br>'
+		'<img src="/gifs/precip.jpg" width=20> P indicates precipitation - rain or snow was observed at that hour.</caption>'
 		'<tr style="background-color: rgb(204, 255, 255);">'
 		'<th rowspan=3>Date</th>'
 		'<th rowspan=2 colspan=24>Hourly Indication of DMCast Warning</th>'
@@ -2031,9 +2031,9 @@ def dmcast_results [html] (smry_dict):
 				elif smry_dict['warnings'][k]['hours'][hr] == "P":
 					'<td width="14" valign="bottom"> <small>P</small></td>'
 				elif smry_dict['warnings'][k]['hours'][hr] == "W":
-					'<td bgcolor="#99ff99" width="14" valign="bottom"><img src="http://newatest.nrcc.cornell.edu/gifs/bar.jpg" height=5 width=14></td>'
+					'<td bgcolor="#99ff99" width="14" valign="bottom"><img src="/gifs/bar.jpg" height=5 width=14></td>'
 				elif smry_dict['warnings'][k]['hours'][hr] == "WP":
-					'<td bgcolor="#99ff99" width="14" valign="bottom"><small>P</small><img src="http://newatest.nrcc.cornell.edu/gifs/bar.jpg" height=5 width=14></td>'
+					'<td bgcolor="#99ff99" width="14" valign="bottom"><small>P</small><img src="/gifs/bar.jpg" height=5 width=14></td>'
 			if smry_dict['warnings'][k]['lwet'] == -999:
 				'<td align="right">-&nbsp;</td>'
 			else:
@@ -2097,8 +2097,8 @@ def berry_moth_results [html] (smry_dict):
 		  <head>
 			<meta http-equiv="content-type" content="text/html"/>
 			<title>NEWA Grape Forecast Model</title>
-			<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-			<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+			<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+			<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 			<script type="text/javascript">
@@ -2111,7 +2111,7 @@ def berry_moth_results [html] (smry_dict):
 				});
 				$('#forecast').click(function() {
 					var req_stn = $('input[name=stn]').val();
-					$.get('http://newatest.nrcc.cornell.edu/newaUtil/getForecastUrl/'+req_stn, function(data) { 
+					$.get('/newaUtil/getForecastUrl/'+req_stn, function(data) { 
 						window.open(data);
 					});
 					return false;
@@ -2264,8 +2264,8 @@ def berry_moth_dormant [html] (smry_dict):
 		  <head>
 			<meta http-equiv="content-type" content="text/html"/>
 			<title>NEWA Grape Forecast Model</title>
-			<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-			<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+			<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+			<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	    <head>
 		<body>
 		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
@@ -2302,10 +2302,10 @@ def grape_dis_results [html] (smry_dict):
 		<head>
 		<meta http-equiv="content-type" content="text/html"/>
 		<title>NEWA Grape Disease Model</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-		<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/jquery.fixedheader.js"></script>
+		<script type="text/javascript" src="/js/jquery.fixedheader.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$("#data").fixedHeader({ width:"100%",height: 490 });
@@ -2399,7 +2399,7 @@ def grape_dis_dormant [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Grape Disease Model</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		</head>
 		<body>
 		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
@@ -2416,8 +2416,8 @@ def sooty_blotch_log [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Sooty Blotch/Flyspeck Model</title>
-			<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+			<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 		<script type="text/javascript">
@@ -2427,7 +2427,7 @@ def sooty_blotch_log [html] (smry_dict):
 			$('#ahdpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: '', changeMonth: true, changeYear: true });
 			$('#forecast').click(function() {
 				req_stn = $('input[name=stn]').val();
-				$.get('http://newatest.nrcc.cornell.edu/newaUtil/getForecastUrl/'+req_stn, function(data) { 
+				$.get('/newaUtil/getForecastUrl/'+req_stn, function(data) { 
 					window.open(data);
 				});
 				return false;
@@ -2472,8 +2472,8 @@ def sooty_blotch_log [html] (smry_dict):
 	'''
 	<script type="text/javascript">
 	function show_moreinfo (opt) {
-		if (opt == 1) { $("#moreinfo").load('http://newatest.nrcc.cornell.edu/pops_notes.htm'); }
-		else { $("#moreinfo").load('http://newatest.nrcc.cornell.edu/dew_notes.htm'); }
+		if (opt == 1) { $("#moreinfo").load('/pops_notes.htm'); }
+		else { $("#moreinfo").load('/dew_notes.htm'); }
 		$("#moreinfo").dialog('open');
 	}
 	function showfr() {
@@ -2661,7 +2661,7 @@ def sooty_blotch_log [html] (smry_dict):
 		'<td class=plain_back>%s</td>' % (rain)
 	'</TR>'
 	'<tr>'	
-	'<th class=plain_back> Rain probability (%)<br>Night|Day&nbsp;<img src="http://newatest.nrcc.cornell.edu/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(1);"></th>'
+	'<th class=plain_back> Rain probability (%)<br>Night|Day&nbsp;<img src="/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(1);"></th>'
 	'<td class=plain_back>&nbsp;</td>'
 	'<td class=plain_back>&nbsp;</td>'
 	for d in ['day0','fday1','fday2','fday3','fday4','fday5']:
@@ -2742,8 +2742,8 @@ def sooty_blotch_early [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Sooty Blotch/Flyspeck Model</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 		<script type="text/javascript">
@@ -2797,7 +2797,7 @@ def sooty_blotch_dormant [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Sooty Blotch/Flyspeck Model</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		</head>
 		<body>
 		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
@@ -2821,8 +2821,8 @@ def grape_disease_results [html] (smry_dict):
 		  <head>
 			<meta http-equiv="content-type" content="text/html"/>
 			<title>NEWA Grape Disease Models</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/Humanity/ui.all.css">
-			<link rel="stylesheet" href="http://newatest.nrcc.cornell.edu/newa_styles.css" type="text/css">
+		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+			<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
 	    <head>
@@ -2841,7 +2841,7 @@ def grape_disease_results [html] (smry_dict):
 	function updateStatus() {
 		var params = {type: 'grape_dis'};
 		$('input[name=output], select[name=altref]').each(function () { params[this.name] = this.value; });
-		$.get('http://newatest.nrcc.cornell.edu/newaModel/update_grape_status',params,function(data) { $("#manage_status").html(data); });
+		$.get('/newaModel/update_grape_status',params,function(data) { $("#manage_status").html(data); });
 		return false;
 		}
 	function updateTable() {
@@ -2879,7 +2879,7 @@ def grape_disease_results [html] (smry_dict):
 	$(document).ready(function() {
 		$('#forecast').click(function() {
 			req_stn = $('input[name=stn]').val();
-			$.get('http://newatest.nrcc.cornell.edu/newaUtil/getForecastUrl/'+req_stn, function(data) { 
+			$.get('/newaUtil/getForecastUrl/'+req_stn, function(data) { 
 				window.open(data);
 			});
 			return false;

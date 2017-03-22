@@ -11,7 +11,7 @@ def apple_disease_plot [html] (onLoadFunction):
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript" src="http://code.highcharts.com/4.0.4/highcharts.js"></script>
 	<script type="text/javascript" src="http://code.highcharts.com/4.0.4/highcharts-more.js"></script>
-	<script type="text/javascript" src="http://newatest.nrcc.cornell.edu/js/newaGraph.js"></script>
+	<script type="text/javascript" src="/js/newaGraph.js"></script>
 	</head>
 	'''
 	'<body onload="%s">' % (onLoadFunction)

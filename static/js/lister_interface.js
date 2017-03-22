@@ -1,5 +1,5 @@
 function buildStationLists(state) {
-	$.getJSON("http://newatest.nrcc.cornell.edu/newaUtil/stateStationList/all/ALL")
+	$.getJSON("/newaUtil/stateStationList/all/ALL")
 		.success( function(results) {
 			var saved_stn = $.jStorage.get("stn"),
 				otype = $("input[name=type]").val(),
@@ -31,7 +31,7 @@ function buildStationLists(state) {
 				}
 			});
 			// now get inactive stations
-			$.getJSON("http://newatest.nrcc.cornell.edu/newaUtil/stateInactiveStationList/all/ALL")
+			$.getJSON("/newaUtil/stateInactiveStationList/all/ALL")
 				.success( function(inactive_results) {
 					$.each(inactive_results.stations, function (i,stn) {
 						if (stn.state === state || state === 'ALL') {

@@ -17,9 +17,9 @@ function getresults() {
 		params.accend = null;
 		params.year = myDate.getFullYear();
 	}
-	$('#second').empty().html('<img src="http://newatest.nrcc.cornell.edu/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
+	$('#second').empty().html('<img src="/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
 	$('#righttabs').tabs('option', 'active', 1);
-	$.get('http://newatest.nrcc.cornell.edu/newaDisease/process_input', params, function (data) {
+	$.get('/newaDisease/process_input', params, function (data) {
 		$('#loading').fadeOut(500, function () {
 			$(this).remove();
 		});
@@ -28,7 +28,7 @@ function getresults() {
 		$(".getReport").prop("disabled", false).on("click", getresults);
 		
 		$("#forecast").on("click", function() {
-			$.get("http://newatest.nrcc.cornell.edu/newaUtil/getForecastUrl/"+params.stn, function(fcst) { 
+			$.get("/newaUtil/getForecastUrl/"+params.stn, function(fcst) { 
 				window.open(fcst);
 			});
 		});
@@ -121,7 +121,7 @@ function checkFungicide(where, pest) {
 		// cultivar menu, stored in json file in Sites
 		$(where).append('<p style="margin-bottom:3px;">Cultivar:<\/p><select name="cultivar" id="cultivar"><\/select>');
 		$('select[name=cultivar]').append('<option value="" selected>Select cultivar<\/option>');
-		$.getJSON('http://newatest.nrcc.cornell.edu/' + pottom.toLowerCase() + '_cultivars.json', function (results) {
+		$.getJSON('/' + pottom.toLowerCase() + '_cultivars.json', function (results) {
 			$.each(results, function(key, val) {
 				if (key.search("---") >= 0) {
 					$('select[name=cultivar]').append('<optgroup label="' + key + '"><\/optgroup>');
@@ -132,7 +132,7 @@ function checkFungicide(where, pest) {
 		}).fail(function (d, textStatus, error) {
 			console.log("getJSON failed, status: " + textStatus + ", error: " + error);
 		});
-		$('.getReport').after('<p id="cultivar_link" style="text-align:center;font-weight:normal;"><a href="http://newatest.nrcc.cornell.edu/' + pottom + 'CultivarsPop.html" target="_blank">' + pottom + ' Cultivar Susceptibility</a></p>');
+		$('.getReport').after('<p id="cultivar_link" style="text-align:center;font-weight:normal;"><a href="/' + pottom + 'CultivarsPop.html" target="_blank">' + pottom + ' Cultivar Susceptibility</a></p>');
 		$(".getReport").show();
 		$("#reset_link").show();
 	});

@@ -247,7 +247,7 @@ function stateStationMap (options) {
 	if (options.state && state.toUpperCase() !== 'ALL') {
 		$.jStorage.set("state", state);
 	}
-	$.getJSON("http://newatest.nrcc.cornell.edu/newaUtil/stateStationList/"+list_type+"/"+"ALL")
+	$.getJSON("/newaUtil/stateStationList/"+list_type+"/"+"ALL")
 		.success( function(results) { statePlaceMarkers(results,event_type,state); } )
 		.error( function() {
 			$('<div id="msg" style="border:1px solid black; padding:0.25em; position:absolute; left:168px; bottom:0px; width:225px; z-index:1; font-size:0.9em; text-align:center; background-color:red; color:white;"></div>').appendTo($("#map"));
@@ -292,7 +292,7 @@ function stateStationMapList (options) {
 			['ALL', 'All states']
 		],
 		showStations = function () {
-			$.getJSON("http://newatest.nrcc.cornell.edu/newaUtil/stateStationList/"+list_type+"/"+"ALL")
+			$.getJSON("/newaUtil/stateStationList/"+list_type+"/"+"ALL")
 				.success( function(results) {
 					if (drawmap) {
 						statePlaceMarkers(results, event_type, state);

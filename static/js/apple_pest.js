@@ -1,7 +1,7 @@
 function update_help() {
 	var params = {type: 'apple_pest'};
 	$('select[name=pest]').each(function () { params[this.name] = this.value; });
-	$.get('http://newatest.nrcc.cornell.edu/newaModel/process_help',params,function(data) { $('#third').html(data); });
+	$.get('/newaModel/process_help',params,function(data) { $('#third').html(data); });
 	return false;
   }
 
@@ -15,9 +15,9 @@ function getresults(bfcnt) {
 		$('input[name=bf2_date]').each(function () { params[this.name] = this.value; }); }
 	if (bfcnt >= 3) {
 		$('input[name=bf3_date]').each(function () { params[this.name] = this.value; }); }
-	$('#second').empty().html('<img src="http://newatest.nrcc.cornell.edu/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
+	$('#second').empty().html('<img src="/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
 	$('#righttabs').tabs('option', 'active',1);
-	$.get('http://newatest.nrcc.cornell.edu/newaModel/process_input',params,function(data) {
+	$.get('/newaModel/process_input',params,function(data) {
 		$('#loading').fadeOut(500, function() {
 			$(this).remove();
 		});
