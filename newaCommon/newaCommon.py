@@ -60,7 +60,7 @@ def get_metadata (station_id,id_type=None):
 		elif id_type == 'miwx' and len(station_id) == 6:
 			station_id = station_id[3:]
 		query = ucan.get_query()
-		r = query.getUcanFromIdAsSeq(station_id,id_type)
+		r = query.getUcanFromIdAsSeq(str(station_id),str(id_type))
 		if len(r) > 0:
 			ucanid = r[-1].ucan_id
 			info = query.getInfoForUcanIdAsSeq(ucanid,())
