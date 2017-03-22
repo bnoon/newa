@@ -426,6 +426,9 @@
 .button:hover
 	{background-color: #FFFF66;
 	color: maroon;}
+#forecast.button, #fbgraph.button {
+	color: blue;
+	text-decoration: underline; }
 .fixedTable 
 	{ border-collapse: collapse;
 	margin: 0px;
