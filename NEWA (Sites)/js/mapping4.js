@@ -5,7 +5,8 @@ function setSelectValue(clickedStn) {
 	for (var i = 0; i < stnList.length; i += 1) {
 		if (stnList[i].value === clickedStn) {
 			stnList[i].selected = true;
-			$.jStorage.set("stn", stnList[i].value);		
+			$.jStorage.set("stn", stnList[i].value);
+			localStorage.setItem("station", JSON.stringify({"id": stnList[i].value}));
 			break;
 		}
 	}
@@ -106,6 +107,21 @@ function statePlaceMarkers (cur_data, event_type, state) {
 		new google.maps.Size(16,16),
 		new google.maps.Point(0,0),
 		new google.maps.Point(8,8));
+	var newaIcon2 = new google.maps.MarkerImage(
+		'http://newatest.nrcc.cornell.edu/gifs/newa_small2.png',
+		new google.maps.Size(14,14),
+		new google.maps.Point(0,0),
+		new google.maps.Point(8,8));
+	var newaIcon21 = new google.maps.MarkerImage(
+		'http://newatest.nrcc.cornell.edu/gifs/newa_small2.1.png',
+		new google.maps.Size(14,14),
+		new google.maps.Point(0,0),
+		new google.maps.Point(8,8));
+	var newaIconRed = new google.maps.MarkerImage(
+		'http://newatest.nrcc.cornell.edu/gifs/newa_small_red.png',
+		new google.maps.Size(14,14),
+		new google.maps.Point(0,0),
+		new google.maps.Point(8,8));
 	var airportIcon = new google.maps.MarkerImage(
 		'http://newa.nrcc.cornell.edu/gifs/airport.png',
 		new google.maps.Size(15,15),
@@ -174,19 +190,24 @@ function statePlaceMarkers (cur_data, event_type, state) {
 	$.each(cur_data.stations, function (i,stn) {
 		markerOptions.position = new google.maps.LatLng(stn.lat, stn.lon);
 		markerOptions.title = stn.name;
-		if (stn.network === "newa" || (stn.network === "cu_log" && stn.state !== "NY")) { 
-			markerOptions.icon = stn.state === state || state === "ALL" ? newaIcon : newaIconGray; 
+		if (stn.network === "newa" || stn.network === "njwx" || stn.network === "miwx" || (stn.network === "cu_log" && stn.state !== "NY")) { /////
+			if (stn.name.substr(0,1) >= "S") { /////
+			markerOptions.icon = stn.state === state || state === "ALL" ? newaIcon : newaIconGray; 	/////////
+			} else if (stn.name.substr(0,1) >= "H") {
+			markerOptions.icon = stn.state === state || state === "ALL" ? newaIcon2 : newaIconGray;		/////////
+			} else {
+			markerOptions.icon = stn.state === state || state === "ALL" ? newaIcon21 : newaIconGray;		/////////
+			}
 			markerOptions.shadow = newaShadow;
+//		} else if (stn.network === "njwx") { //
+//			markerOptions.icon = stn.state === state || state === "ALL" ? newaIconRed : newaIconGray; //
+//			markerOptions.shadow = newaShadow;//
 		} else if (stn.network === "cu_log") { 
 			markerOptions.icon = stn.state === state || state === "ALL" ? culogIcon : culogIconGray; 
 			markerOptions.shadow = culogShadow;
 		} else if (stn.network === "icao") { 
 			markerOptions.icon = stn.state === state || state === "ALL" ? airportIcon : airportIconGray; 
 			markerOptions.shadow = airportShadow;
-		} else if (stn.network === "miwx" || stn.network === "njwx") {
-			markerOptions.icon = circleIcon;
-			markerOptions.icon.strokeColor = stn.state === state || state === "ALL" ? circleColors[stn.network] : "gray";
-			delete markerOptions.shadow;
 		}
 		marker = new google.maps.Marker(markerOptions);
 		
@@ -195,6 +216,7 @@ function statePlaceMarkers (cur_data, event_type, state) {
 				google.maps.event.addListener(marker, "click", function() {
 					top.location.href="http://newa.cornell.edu/index.php?page=weather-station-page&WeatherStation="+stn.id;
 					$.jStorage.set("stn", stn.id);
+					localStorage.setItem("station", JSON.stringify({"id": stn.id}));
 				});
 			} else if (event_type === "select_station") {
 				google.maps.event.addListener(marker, "click", function() {
@@ -214,7 +236,8 @@ function statePlaceMarkers (cur_data, event_type, state) {
 }
 
 function buildStationMenu(results, where, state) {
-	var saved_stn = $.jStorage.get("stn");
+	var sid = JSON.parse(localStorage.getItem("station")) || null,
+		saved_stn = sid ? sid.id : null || $.jStorage.get("stn");
 	if (!where) {
 		where = "#station_area";
 	}
@@ -237,6 +260,7 @@ function buildStationMenu(results, where, state) {
 	});	
 	$('select[name=stn]').on("change", function () {
 		$.jStorage.set("stn", $(this).val());		
+		localStorage.setItem("station", JSON.stringify({"id": $(this).val()}));
 	});
 }
 
@@ -246,6 +270,7 @@ function stateStationMap (options) {
 		state = options.state || "ALL";
 	if (options.state && state.toUpperCase() !== 'ALL') {
 		$.jStorage.set("state", state);
+		localStorage.setItem("state", JSON.stringify({"postalCode": state}));		
 	}
 	$.getJSON("http://newatest.nrcc.cornell.edu/newaUtil/stateStationList/"+list_type+"/"+"ALL")
 		.success( function(results) { statePlaceMarkers(results,event_type,state); } )
@@ -260,7 +285,8 @@ function stateStationMapList (options) {
 	var i,
 		list_type = options.reqvar || 'all',
 		event_type = options.event_type || 'select_station',
-		state = options.state || $.jStorage.get("state"),
+		postalCode = JSON.parse(localStorage.getItem("state")) || null,
+		state = options.state || postalCode ? postalCode.postalCode : null || $.jStorage.get("state"),
 		where = options.where || "#station_area",
 		drawmap = options.drawmap || true,
 		state_list = [
@@ -314,6 +340,7 @@ function stateStationMapList (options) {
 		.on("change", function() {
 			state = $("select[name=stabb]").val();
 			$.jStorage.set("state", state);
+			localStorage.setItem("state", JSON.stringify({"postalCode": state}));
 			$("#noStateMsg").hide();
 			showStations();
 		});
@@ -322,6 +349,7 @@ function stateStationMapList (options) {
 			if (state_list[i][0] === state) {
 				$('select[name=stabb]').prop('selectedIndex', i + 1);
 				$.jStorage.set("state", state);
+				localStorage.setItem("state", JSON.stringify({"postalCode": state}));
 				showStations();
 				break;
 			}

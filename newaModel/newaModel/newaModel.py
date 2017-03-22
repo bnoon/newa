@@ -481,6 +481,16 @@ class Models(Base):
 #			print 'Error obtaining nearest biofix from file'
 			pass
 		return closest
+		
+	#--------------------------------------------------------------------------------------------	
+	# get time of last qpf in hourly data
+	def getLastPrecip(self, hourly_data):
+		last_pcpn = None
+		for theTime,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags in hourly_data:
+			if prcp != miss:
+				last_pcpn = theTime
+		return last_pcpn
+
 
 #--------------------------------------------------------------------------------------------		
 class Apple (Base,Models):
@@ -561,6 +571,126 @@ class Apple (Base,Models):
 			print 'Error calculating degree hours'
 			print_exception()
 		return wetness_data
+		
+	# calculate wetness events from hourly values - include more variables in the return
+	def wetness_moreevent_calcs (self,hourly_data,start_date,end_date,start_fcst,stn,estimate="no"):
+		wetness_data = []
+		try:
+			dly_rain = 0.
+			dly_rain_msg = 0
+			dly_lwet = 0.
+			dly_lwet_msg = 0
+			dly_dew = 0.
+			dly_dew_msg = 0
+			cnt_rhum = 0
+			max_rhum = -999
+			min_rhum = 999
+			dly_rhum_msg = 0
+###			dly_temp = 0.
+			dly_temp_cnt = 0
+			dly_maxt = -9999
+			dly_mint = 9999
+##			start_date = start_date + DateTime.RelativeDate(days=+1)		#start wetness calcs day after biofix
+			start_date = start_date + DateTime.RelativeDate(hour=0,minute=0,second=0)
+			end_date = end_date + DateTime.RelativeDate(hour=23,minute=59,second=59)
+			for theTime,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags in hourly_data:
+				temp_eflag, prcp_eflag, lwet_eflag, rhum_eflag, wspd_eflag, wdir_eflag, srad_eflag, st4i_eflag = eflags
+				########################################################################
+				# only thing different when estimate is "yes" - always estimate lwet   #
+				########################################################################
+				if estimate == "yes":
+					if rhum == miss:
+						lwet = miss
+					elif rhum >= 90 or prcp > 0.00:
+						lwet = 60
+					else:
+						lwet = 0
+				else:
+					if lwet == miss and rhum != miss:
+						if rhum >= 90 or prcp > 0.00:
+							lwet = 60
+						else:
+							lwet = 0
+				this_date = DateTime.DateTime(*theTime)
+				if this_date >= start_date and this_date <= end_date:
+					if prcp != miss:
+						dly_rain = dly_rain+prcp
+					else:
+						dly_rain_msg = dly_rain_msg+1
+					if lwet != miss:
+						if lwet > 0: dly_lwet = dly_lwet+1
+					else:
+						dly_lwet_msg = dly_lwet_msg+1
+						
+					# determine if there was dew formation		
+					#  First, adjust relative humidity for icao stations and forecast values for all stations
+					if (this_date >= start_fcst or (len(stn) == 4 and stn[0:1].upper() == 'K')) and rhum != miss:
+						rh = rhum/(rhum*0.0047+0.53)
+					else:
+						rh = rhum
+					# determine dewpoint temperature
+					dwpt = self.calc_dewpoint(temp,rh)
+					# estimate dew formation if difference between temp and dewpoint is <= 3 degrees and it is not raining
+					if dwpt != miss and temp != miss:
+						if temp-dwpt <= 3 and prcp == 0.00:
+							dly_dew = dly_dew+1
+					else:
+						dly_dew_msg = dly_dew_msg+1
+					if temp != miss:
+						if temp > dly_maxt:
+							dly_maxt = copy.deepcopy(temp)
+						if temp < dly_mint:
+							dly_mint = copy.deepcopy(temp)
+###						dly_temp += temp
+						dly_temp_cnt += 1
+					if rhum != miss:
+						if rhum > 90: cnt_rhum += 1
+						if rhum > max_rhum: max_rhum = copy.deepcopy(rhum)
+						if rhum < min_rhum: min_rhum = copy.deepcopy(rhum)
+					else:
+						dly_rhum_msg += 1
+						
+		#			save daily values
+					if theTime[3] == 23:
+						if dly_rain_msg >= 5: dly_rain = miss
+						if dly_lwet_msg >= 2: dly_lwet = miss
+						if dly_dew_msg >= 2: dly_dew = miss
+						if dly_rhum_msg >= 2:
+							cnt_rhum = miss
+							max_rhum = miss
+							min_rhum = miss
+						if dly_temp_cnt >= 22:
+							avg_temp = (dly_maxt + dly_mint) / 2.0
+###							avg_temp = dly_temp / dly_temp_cnt
+						else:
+							avg_temp = miss
+						wetness_data.append((theTime[:3],dly_rain,dly_lwet,dly_dew,max_rhum,min_rhum,cnt_rhum,avg_temp))
+						dly_rain = 0.
+						dly_rain_msg = 0
+						dly_lwet = 0.
+						dly_lwet_msg = 0
+						dly_dew = 0.
+						dly_dew_msg = 0
+						cnt_rhum = 0
+						max_rhum = -999
+						min_rhum = 999
+						dly_rhum_msg = 0
+###						dly_temp = 0.
+						dly_temp_cnt = 0
+						dly_maxt = -9999
+						dly_mint = 9999
+		#	get last partial day
+			if theTime[3] != 23:
+				if dly_temp_cnt > 0:
+					avg_temp = (dly_maxt + dly_mint) / 2.0
+###					avg_temp = dly_temp / dly_temp_cnt
+				else:
+					avg_temp = miss
+				wetness_data.append((theTime[:3],dly_rain,dly_lwet,dly_dew,max_rhum,min_rhum,cnt_rhum,avg_temp))
+		except:
+			print 'Error calculating wetness more events'
+			print_exception()
+		return wetness_data		
 
 	# calculate wetting variables and avg temp during wet hours from hourly values
 	def wettemp_event_calcs (self,hourly_data,start_date,end_date,start_fcst,stn,estimate="no"):
@@ -680,24 +810,24 @@ class Apple (Base,Models):
 			smry_dict['fday5']['wetness'] = (miss,miss,miss)
 
 			# add wetness events for last three days, forecast next 5 days
-			for theDate,dly_rain,dly_lwet,dly_dew in wetness:
+			for theDate,dly_rain,dly_lwet,dly_dew,max_rhum,min_rhum,cnt_rhum,avg_temp in wetness:
 				theDate_dt = DateTime.DateTime(*theDate) + DateTime.RelativeDate(hour=0,minute=0,second=0)
 				if day0 == theDate_dt:
-					smry_dict['day0']['wetness'] =  (dly_rain, dly_lwet, dly_dew)
+					smry_dict['day0']['wetness'] =  (dly_rain, dly_lwet, dly_dew, max_rhum, min_rhum, cnt_rhum, avg_temp)
 				elif pday1 == theDate_dt:
-					smry_dict['pday1']['wetness'] = (dly_rain, dly_lwet, dly_dew)
+					smry_dict['pday1']['wetness'] = (dly_rain, dly_lwet, dly_dew, max_rhum, min_rhum, cnt_rhum, avg_temp)
 				elif pday2 == theDate_dt:
-					smry_dict['pday2']['wetness'] = (dly_rain, dly_lwet, dly_dew)
+					smry_dict['pday2']['wetness'] = (dly_rain, dly_lwet, dly_dew, max_rhum, min_rhum, cnt_rhum, avg_temp)
 				elif fday1 == theDate_dt:
-					smry_dict['fday1']['wetness'] = (dly_rain, dly_lwet, dly_dew)
+					smry_dict['fday1']['wetness'] = (dly_rain, dly_lwet, dly_dew, max_rhum, min_rhum, cnt_rhum, avg_temp)
 				elif fday2 == theDate_dt:
-					smry_dict['fday2']['wetness'] = (dly_rain, dly_lwet, dly_dew)
+					smry_dict['fday2']['wetness'] = (dly_rain, dly_lwet, dly_dew, max_rhum, min_rhum, cnt_rhum, avg_temp)
 				elif fday3 == theDate_dt:
-					smry_dict['fday3']['wetness'] = (dly_rain, dly_lwet, dly_dew)
+					smry_dict['fday3']['wetness'] = (dly_rain, dly_lwet, dly_dew, max_rhum, min_rhum, cnt_rhum, avg_temp)
 				elif fday4 == theDate_dt:
-					smry_dict['fday4']['wetness'] = (dly_rain, dly_lwet, dly_dew)
+					smry_dict['fday4']['wetness'] = (dly_rain, dly_lwet, dly_dew, max_rhum, min_rhum, cnt_rhum, avg_temp)
 				elif fday5 == theDate_dt:
-					smry_dict['fday5']['wetness'] = (dly_rain, dly_lwet, dly_dew)
+					smry_dict['fday5']['wetness'] = (dly_rain, dly_lwet, dly_dew, max_rhum, min_rhum, cnt_rhum, avg_temp)
 		except:
 			print_exception()
 		return smry_dict
@@ -1428,6 +1558,165 @@ class Apple (Base,Models):
 		return deghr_data
 
 	#--------------------------------------------------------------------------------------------		
+	# calculate EIP for fire blight
+	def eip_calcs (self,hourly_data,wetness_dict,start_date,end_date,strep_spray):
+		risk_level = {0: 'Low', 1: 'Moderate', 2: 'High', 3: 'Infection'}
+		dly_data = {}
+		eip_results = {}
+		wetness_data = {}
+		try:
+			if strep_spray:
+				strep_tuple = (strep_spray.year,strep_spray.month,strep_spray.day)
+				strep_nxtdy_dt = strep_spray + DateTime.RelativeDate(days=+1)
+			else:
+				strep_tuple = None
+		#	convert wetness_dict to object keyed on date
+			for item in wetness_dict:
+				#(theTime[:3],dly_rain,dly_lwet,dly_dew,max_rhum,min_rhum,cnt_rhum,avg_temp)
+				wetness_data[item[0]] = {
+					'dly_pcpn': item[1],
+					'dly_lwet': item[2],
+					'dly_dew': item[3]
+				}
+		#	process hourly data
+			dly_dh65 = 0
+			dly_msg = 0.
+			dly_max = -9999
+			dly_min = 9999
+			start_date = start_date + DateTime.RelativeDate(hour=0,minute=0,second=0)
+			end_date = end_date + DateTime.RelativeDate(hour=23,minute=59,second=59)
+		#	get daily maxt, mint, gdd (base 40), and gdh (base 65)
+			for theTime,temp,prcp,lwet,rhum,wspd,wdir,srad,st4i,eflags in hourly_data:
+				this_date = DateTime.DateTime(*theTime)
+				temp = round(temp, 0)
+				if this_date >= start_date and this_date <= end_date:
+					if temp != miss:
+						if temp > dly_max:
+							dly_max = copy.deepcopy(temp)
+						if temp < dly_min:
+							dly_min = copy.deepcopy(temp)
+						if temp > 65:
+							dly_dh65 += (temp - 65)
+					else:
+						dly_msg = dly_msg + 1
+		#			save daily values
+					if theTime[3] == 23:
+						if dly_msg >= 5:
+							dly_dd40 = miss
+							dly_dh65 = miss
+							dly_max = miss
+							dly_avg = miss
+						else:
+							dly_avgt = round(((dly_max + dly_min) / 2.0), 0)
+							if dly_avgt  > 40:
+								dly_dd40 = dly_avgt - 40
+							else:
+								dly_dd40 = 0
+						dly_data[theTime[:3]] = {'dly_max':dly_max, 'dly_min':dly_min, 'dly_avgt':dly_avgt, 'dly_dd40':dly_dd40, 'dly_dh65':dly_dh65}
+						dly_dh65 = 0
+						dly_msg = 0.
+						dly_max = -9999
+						dly_min = 9999
+		#	get last partial day
+			if theTime[3] != 23:
+				dly_avgt = round(((dly_max + dly_min) / 2.0), 0)
+				dly_data[theTime[:3]] = {'dly_max':dly_max, 'dly_min':dly_min, 'dly_avgt':dly_avgt, 'dly_dd40':dly_dd40, 'dly_dh65':dly_dh65}
+				
+		#	now calculate eip for each day
+			dys = dly_data.keys()
+			dys.sort()
+			dh_start_date = start_date	#start of eip calculation window
+			accum_dd40 = 0
+			for this_date in dys:
+##				print this_date,'Daily data:',dly_data[this_date]
+		#		when accumulated gdd exceed 80, shift window one day until it is less than 80; accumulation thru yesterday
+##				print 'dd>40 accum',accum_dd40
+				while accum_dd40 >= 80:
+					dh_start_tuple = (dh_start_date.year,dh_start_date.month,dh_start_date.day)
+					accum_dd40 -= dly_data[dh_start_tuple]["dly_dd40"]
+					dh_start_date = dh_start_date + DateTime.RelativeDate(days=+1)
+##					print 'dd>40 reduced to',accum_dd40,'and window moved to',(dh_start_date.year,dh_start_date.month,dh_start_date.day)
+					
+		#		accumulate dh over epi calculation period
+				accum_dh65 = 0
+				this_date_dt = DateTime.DateTime(*this_date)
+				this_date_dt = this_date_dt + DateTime.RelativeDate(hour=0,minute=0,second=1)
+				td = dh_start_date + DateTime.RelativeDate(hour=0,minute=0,second=0)
+				while td <= this_date_dt:
+					td_tuple = (td.year,td.month,td.day)
+					yest_dt = td + DateTime.RelativeDate(days=-1)
+					yest_tuple = (yest_dt.year,yest_dt.month,yest_dt.day)
+					yest2_dt = td + DateTime.RelativeDate(days=-2)
+					yest2_tuple = (yest2_dt.year,yest2_dt.month,yest2_dt.day)
+
+		#			max <65 for three consecutive days; reset window to current day					
+					if dly_data[td_tuple]["dly_max"] <= 65 and \
+					   dly_data.has_key(yest2_tuple) and dly_data[yest2_tuple]["dly_max"] <= 65 and \
+					   dly_data.has_key(yest_tuple) and dly_data[yest_tuple]["dly_max"] <= 65:
+						dh_start_date = this_date_dt
+						td = this_date_dt
+						td_tuple = (td.year,td.month,td.day)
+						yest_dt = td + DateTime.RelativeDate(days=-1)
+						yest_tuple = (yest_dt.year,yest_dt.month,yest_dt.day)
+						yest2_dt = td + DateTime.RelativeDate(days=-2)
+						yest2_tuple = (yest2_dt.year,yest2_dt.month,yest2_dt.day)
+						accum_dd40 = 0
+						accum_dh65 = 0
+##						print 'dh>65 for three days; moved window to',(dh_start_date.year,dh_start_date.month,dh_start_date.day)
+							
+					accum_dh65 += dly_data[td_tuple]["dly_dh65"]
+##					print 'Adding',dly_data[td_tuple]["dly_dh65"],'for',td_tuple,'accum is',accum_dh65
+		#			apply reduction rules; don't reduce once value tops 400 (unless min temp below 24)
+					if dly_data[td_tuple]["dly_min"] < 24:
+##						print accum_dh65,'reduced to zero (min < 24)'
+						accum_dh65 = 0
+					elif dly_data[td_tuple]["dly_min"] < 33 and accum_dh65 < 400:
+##						print accum_dh65,'reduced to zero (min < 33)'
+						accum_dh65 = 0
+					elif dly_data[td_tuple]["dly_max"] <= 65 and accum_dh65 < 400:
+						if dly_data.has_key(yest2_tuple) and dly_data[yest2_tuple]["dly_max"] <= 65 and \
+						   dly_data.has_key(yest_tuple) and dly_data[yest_tuple]["dly_max"] <= 65:
+##							print accum_dh65,'reduced to zero (3 max < 65)'
+							accum_dh65 = 0
+						elif dly_data.has_key(yest_tuple) and dly_data[yest_tuple]["dly_max"] <= 65:
+##							print accum_dh65,'reduced by 1/2'
+							accum_dh65 *= 0.50
+						else:
+##							print accum_dh65,'reduced by 1/3'
+							accum_dh65 *= 0.667
+					td = td + DateTime.RelativeDate(days=+1)
+		#		strep spray resets everything
+				if this_date == strep_tuple:
+					dh_start_date = strep_nxtdy_dt
+					accum_dd40 = 0
+					accum_dh65 = 0
+##					print 'strep applied; moved window to',(dh_start_date.year,dh_start_date.month,dh_start_date.day)
+				else:
+					accum_dd40 += dly_data[this_date]["dly_dd40"]				
+		#		calculate risk
+				risk_pts = 0
+				twd = wetness_data[this_date]
+				yest_dt = this_date_dt + DateTime.RelativeDate(days=-1)
+				yest_tuple = (yest_dt.year,yest_dt.month,yest_dt.day)
+				eip = int(round((accum_dh65/198.0) * 100, 0))
+				if eip > 100: risk_pts += 1
+				if dly_data[this_date]["dly_avgt"] > 60: risk_pts += 1
+				if twd['dly_pcpn'] > 0 or twd['dly_lwet'] > 0 or twd['dly_dew'] > 0 or (wetness_data.has_key(yest_tuple) and wetness_data[yest_tuple]['dly_pcpn'] > 0.10):
+					risk_pts += 1
+		#		update results for the day	
+				eip_results[this_date] = {	
+					'eip_start': (dh_start_date.year,dh_start_date.month,dh_start_date.day),
+					'accum_dh65': round(accum_dh65, 0),
+					'eip': eip,
+					'eip_risk': risk_level[risk_pts]
+				}
+##				print this_date,'Results:',eip_results[this_date]
+		except:
+			print 'Error calculating eip'
+			print_exception()
+		return eip_results
+
+	#--------------------------------------------------------------------------------------------		
 	# accumulate 4-day degree hour totals and blight risk
 	def fbrisk (self,d4_dh,dly_dh,orchard_history):
 		bl_threshold = {'Low':      [300,150,100],
@@ -1461,7 +1750,7 @@ class Apple (Base,Models):
 
 	#--------------------------------------------------------------------------------------------		
 	# check blight risk for today, yesterday and day before, and 5-day forecast
-	def check_blight (self,smry_dict,deghrs,end_date_dt,orchard_history,start_date_dt,strep_spray):
+	def add_risks (self,smry_dict,deghrs,eip_dict,end_date_dt,orchard_history,start_date_dt,strep_spray):
 		smry_dict['day0'] = {}
 		smry_dict['pday1'] = {}
 		smry_dict['pday2'] = {}
@@ -1490,6 +1779,14 @@ class Apple (Base,Models):
 			smry_dict['fday3']['risk'] = ('-',miss)
 			smry_dict['fday4']['risk'] = ('-',miss)
 			smry_dict['fday5']['risk'] = ('-',miss)
+			smry_dict['day0']['eip']  = ('-',miss)
+			smry_dict['pday1']['eip'] = ('-',miss)
+			smry_dict['pday2']['eip'] = ('-',miss)
+			smry_dict['fday1']['eip'] = ('-',miss)
+			smry_dict['fday2']['eip'] = ('-',miss)
+			smry_dict['fday3']['eip'] = ('-',miss)
+			smry_dict['fday4']['eip'] = ('-',miss)
+			smry_dict['fday5']['eip'] = ('-',miss)
 			
 			if strep_spray:
 				strep_spray_dt = strep_spray + DateTime.RelativeDate(hour=0,minute=0,second=0)  #for comparisons
@@ -1510,20 +1807,36 @@ class Apple (Base,Models):
 					
 				if day0 == theDate_dt:
 					smry_dict['day0']['risk'] =  (d4_risk, d4_sum)
+					if eip_dict.has_key(theDate):
+						smry_dict['day0']['eip'] = (eip_dict[theDate]['eip_risk'],eip_dict[theDate]['eip'])
 				elif pday1 == theDate_dt:
 					smry_dict['pday1']['risk'] = (d4_risk, d4_sum)
+					if eip_dict.has_key(theDate):
+						smry_dict['pday1']['eip'] = (eip_dict[theDate]['eip_risk'],eip_dict[theDate]['eip'])
 				elif pday2 == theDate_dt:
 					smry_dict['pday2']['risk'] = (d4_risk, d4_sum)
+					if eip_dict.has_key(theDate):
+						smry_dict['pday2']['eip'] = (eip_dict[theDate]['eip_risk'],eip_dict[theDate]['eip'])
 				elif fday1 == theDate_dt:
 					smry_dict['fday1']['risk'] = (d4_risk, d4_sum)
+					if eip_dict.has_key(theDate):
+						smry_dict['fday1']['eip'] = (eip_dict[theDate]['eip_risk'],eip_dict[theDate]['eip'])
 				elif fday2 == theDate_dt:
 					smry_dict['fday2']['risk'] = (d4_risk, d4_sum)
+					if eip_dict.has_key(theDate):
+						smry_dict['fday2']['eip'] = (eip_dict[theDate]['eip_risk'],eip_dict[theDate]['eip'])
 				elif fday3 == theDate_dt:
 					smry_dict['fday3']['risk'] = (d4_risk, d4_sum)
+					if eip_dict.has_key(theDate):
+						smry_dict['fday3']['eip'] = (eip_dict[theDate]['eip_risk'],eip_dict[theDate]['eip'])
 				elif fday4 == theDate_dt:
 					smry_dict['fday4']['risk'] = (d4_risk, d4_sum)
+					if eip_dict.has_key(theDate):
+						smry_dict['fday4']['eip'] = (eip_dict[theDate]['eip_risk'],eip_dict[theDate]['eip'])
 				elif fday5 == theDate_dt:
 					smry_dict['fday5']['risk'] = (d4_risk, d4_sum)
+					if eip_dict.has_key(theDate):
+						smry_dict['fday5']['eip'] = (eip_dict[theDate]['eip_risk'],eip_dict[theDate]['eip'])
 		except:
 			print_exception()
 		return smry_dict
@@ -1543,7 +1856,7 @@ class Apple (Base,Models):
 					last_day = dly_dt
 					if ddaccum >= 90: break
 			if ddaccum >= 90:
-				recommend = "Check for symptoms starting on %s %d" % (month_names[last_day[1]],last_day[2])
+				recommend = "Check for trauma blight symptoms starting on %s %d" % (month_names[last_day[1]],last_day[2])
 			else:
 				recommend = "No symptoms yet"
 		except:
@@ -1727,6 +2040,7 @@ class Apple (Base,Models):
 		try:
 			now = DateTime.now()
 			from phen_events import phen_events_dict		
+			from applescab_dict import disease_cycle_management		
 			smry_dict = {}
 			smry_dict['output'] = output
 			smry_dict['stn'] = stn
@@ -1735,8 +2049,11 @@ class Apple (Base,Models):
 			if not end_date_dt: end_date_dt = now
 			smry_dict['accend'] = end_date_dt
 			
-			if end_date_dt >= DateTime.DateTime(end_date_dt.year,11,1):		#off-season
-				return newaModel_io.apple_scab_dormant(smry_dict)
+			if end_date_dt >= DateTime.DateTime(end_date_dt.year,11,1):		#November 1-December 31
+				ucanid,smry_dict['station_name'] = get_metadata(stn)
+				smry_dict['cycle'] = disease_cycle_management['overwinter']['cycle']
+				smry_dict['manage'] = disease_cycle_management['overwinter']['management']
+				return newaModel_io.apple_scab_overwinter(smry_dict)
 			
 			# greentip can either be passed into this program, read from a file, or estimated from degree day accumulation
 			if not greentip:
@@ -1752,13 +2069,14 @@ class Apple (Base,Models):
 						# before beginning of season
 						smry_dict['station_name'] = station_name
 						if ddmiss <= 2:
-							smry_dict['message'] = 'You are approximately %d degree days from green tip. ' % (phen_events_dict['macph_greentip_43']['dd'][2]-ddaccum)
+							smry_dict['message'] = 'You are approximately %d degree days (base 43F) from green tip. ' % (phen_events_dict['macph_greentip_43']['dd'][2]-ddaccum)
 						else:
 							smry_dict['message'] = ''
-						smry_dict['message'] = smry_dict['message'] + 'The primary infection components of the apple scab model (i.e. ascospore maturity, release, and infection events) begin at 50 percent green tip on McIntosh flower buds.'
 						smry_dict['ddaccum'] = int(round(ddaccum,0))
 						smry_dict['ddmiss'] = ddmiss
 						smry_dict['last_time'] = daily_data[-1][0]
+						smry_dict['cycle'] = disease_cycle_management['early']['cycle']
+						smry_dict['manage'] = disease_cycle_management['early']['management']
 						return newaModel_io.apple_scab_early(smry_dict)
 
 			smry_dict['greentip'] = greentip
@@ -1852,91 +2170,103 @@ class Apple (Base,Models):
 		try:
 			smry_dict = {}
 			smry_dict['output'] = output
-			from phen_events import phen_events_dict		
-			if not end_date_dt: end_date_dt = DateTime.now()
-			
-			if end_date_dt >= DateTime.DateTime(end_date_dt.year,9,16):		#off-season
-				return newaModel_io.fire_blight_dormant(smry_dict)
-			
 			smry_dict['stn'] = stn
+			if not end_date_dt: end_date_dt = DateTime.now()
 			smry_dict['accend'] = end_date_dt
-			ddaccum = miss
-			ddmiss = miss
-
-			if not firstblossom:
-				# check for end of season (petal fall) if the user has not provided a first blossom date
-#				jan1_dt = DateTime.DateTime(end_date_dt.year,1,1)						
-#				daily_data, station_name = self.get_daily (stn, jan1_dt, end_date_dt)
-#				if len(daily_data) > 0:
-#					biofix_dd = phen_events_dict['macph_pf_43']['dd'][3]				#use latest occurrence
-#					ret_bf_date, ddaccum, ddmiss = self.accum_degday(daily_data, jan1_dt, end_date_dt, 'dd43be', biofix_dd, stn, station_name)
-#					if ret_bf_date:
-				# change that to June 15th for end of season
-				if 1:	#just to preserve formating in regard to commented out section above
-					if end_date_dt >= DateTime.DateTime(end_date_dt.year,6,15):
-						smry_dict['station_name'] = None 							#station_name
-						if orchard_history:
-							smry_dict['orchard_history'] = orchard_history
-						else:
-							smry_dict['orchard_history'] = 2
-						return newaModel_io.fire_blight_late(smry_dict)
-				else:
-					return self.nodata(stn, station_name, jan1_dt, end_date_dt)
-
-			# first blossom can either be passed into this program, read from a file, or estimated from degree day accumulation
-			if not firstblossom:
-				firstblossom = self.get_biofix(stn,'fb',end_date_dt.year)					#from file
-				if not firstblossom:
-					jan1_dt = DateTime.DateTime(end_date_dt.year,1,1)						
-					daily_data, station_name = self.get_daily (stn, jan1_dt, end_date_dt)
-					biofix_dd = phen_events_dict['macph_firstblossom_43']['dd'][2]					#by degree day accumulation
-					ret_bf_date, ddaccum, ddmiss = self.accum_degday(daily_data, jan1_dt, end_date_dt, 'dd43be', biofix_dd, stn, station_name)
-					if ret_bf_date: 
-						firstblossom = ret_bf_date + DateTime.RelativeDate(hour=23)
-					else:
-						# before beginning of season
-						smry_dict['station_name'] = station_name
-						if ddmiss <= 2:
-							smry_dict['message'] = 'You are approximately %d degree days from bloom - the critical period for protection.' % (phen_events_dict['macph_bloom_43']['dd'][2]-ddaccum)
-						else:
-							smry_dict['message'] = 'You are approximately %d degree days from bloom, but 2 or more days of GDD are missing; accumulation could be low.' % (phen_events_dict['macph_bloom_43']['dd'][2]-ddaccum)
-						smry_dict['ddaccum'] = int(round(ddaccum,0))
-						smry_dict['ddmiss'] = ddmiss
-						smry_dict['last_time'] = daily_data[-1][0]
-						if orchard_history:
-							smry_dict['orchard_history'] = orchard_history
-						else:
-							smry_dict['orchard_history'] = 2
-						return newaModel_io.fire_blight_early(smry_dict)
-			
-			# get starting date depending on what button was selected (default biofix)
-#			if selbutton:
-#				if selbutton == 'strep':
-#					start_date_dt = strep_spray
-#				else:				#biofix, orhist, infect, symptoms
-#					start_date_dt = firstblossom
-#					strep_spray = None
-#			else:
-			start_date_dt = firstblossom
-
+			jan1_dt = DateTime.DateTime(end_date_dt.year,1,1)						
 			if not orchard_history: orchard_history = 2    #default
+			smry_dict['orchard_history'] = orchard_history
+			from phen_events import phen_events_dict
+			from fireblight_dict import disease_cycle_management		
+			
+			# "fall" branch runs 9/16 to 10/31
+			if end_date_dt >= DateTime.DateTime(end_date_dt.year,9,16) and end_date_dt <= DateTime.DateTime(end_date_dt.year,10,31,23):
+				ucanid,smry_dict['station_name'] = get_metadata(stn)
+				smry_dict['cycle'] = disease_cycle_management['fall']['cycle']
+				smry_dict['manage'] = disease_cycle_management['fall']['management']
+				smry_dict['fall'] = True
+				return newaModel_io.fire_blight_late(smry_dict)
 
-			# obtain hourly data
-			hourly_data, download_time, station_name, avail_vars = self.get_hourly2 (stn, start_date_dt, end_date_dt)
-			if not download_time:
-				start_fcst_dt = start_date_dt
+			# "dormant" branch runs from 11/1 to 3/1
+			if end_date_dt >= DateTime.DateTime(end_date_dt.year,11,1) or end_date_dt < DateTime.DateTime(end_date_dt.year,3,1,0):		#off-season
+				ucanid,smry_dict['station_name'] = get_metadata(stn)
+				smry_dict['cycle'] = disease_cycle_management['dormant']['cycle']
+				smry_dict['manage'] = disease_cycle_management['dormant']['management']
+				return newaModel_io.fire_blight_dormant(smry_dict)
+
+			# do not take these branches if a first blossom date is in the request (i.e. user input)
+			if not firstblossom:
+				# "late" branch runs 6/15 or petal fall to 9/15
+				if end_date_dt >= DateTime.DateTime(end_date_dt.year,6,15) and end_date_dt <= DateTime.DateTime(end_date_dt.year,9,15):
+					ucanid,smry_dict['station_name'] = get_metadata(stn)
+					smry_dict['cycle'] = disease_cycle_management['late']['cycle']
+					smry_dict['manage'] = disease_cycle_management['late']['management']
+					smry_dict['fall'] = False
+					return newaModel_io.fire_blight_late(smry_dict)
+				else:
+					daily_data, station_name = self.get_daily (stn, jan1_dt, end_date_dt)
+					smry_dict['station_name'] = station_name
+					if len(daily_data) > 0:
+						biofix_dd = phen_events_dict['macph_pf_43']['dd'][3]
+						ret_bf_date, ddaccum, ddmiss = self.accum_degday(daily_data, jan1_dt, end_date_dt, 'dd43be', biofix_dd, stn, station_name)
+						if ret_bf_date:
+							smry_dict['cycle'] = disease_cycle_management['late']['cycle']
+							smry_dict['manage'] = disease_cycle_management['late']['management']
+							smry_dict['fall'] = False
+							return newaModel_io.fire_blight_late(smry_dict)
+						else:
+							smry_dict['ddaccum'] = int(round(ddaccum,0))
+							smry_dict['ddmiss'] = ddmiss
+							smry_dict['last_time'] = daily_data[-1][0]
+					else:
+						return self.nodata(stn, station_name, jan1_dt, end_date_dt)
+
+				# check for first blossom open
+				biofix_dd = phen_events_dict['macph_firstblossom_43']['dd'][2]					#by degree day accumulation
+				ret_bf_date, ddaccum, ddmiss = self.accum_degday(daily_data, jan1_dt, end_date_dt, 'dd43be', biofix_dd, stn, station_name)
+				if ret_bf_date: 
+					firstblossom = ret_bf_date + DateTime.RelativeDate(hour=23)
+				else:
+					# "early branch" - before 6/15 and first blossom open
+					ucanid,smry_dict['station_name'] = get_metadata(stn)
+					dd_from_bloom = int(round(phen_events_dict['macph_firstblossom_43']['dd'][2]-ddaccum,0))
+					smry_dict['cycle'] = disease_cycle_management['early']['cycle']
+					smry_dict['manage'] = disease_cycle_management['early']['management'].replace("xxxdddiffxxx",str(dd_from_bloom))
+					return newaModel_io.fire_blight_early(smry_dict)
 			else:
-				start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
-			end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6)
-			hourly_data = self.add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
+				# need degree day accumulation through current date
+				daily_data, station_name = self.get_daily (stn, jan1_dt, end_date_dt)
+				if len(daily_data) > 0:
+					ret_bf_date, ddaccum, ddmiss = self.accum_degday(daily_data, jan1_dt, end_date_dt, 'dd43be', 99999, stn, station_name)
+					smry_dict['ddaccum'] = int(round(ddaccum,0))
+					smry_dict['ddmiss'] = ddmiss
+					smry_dict['last_time'] = daily_data[-1][0]
+
+			# now "in season" - between first blossom and petal fall
+			start_date_dt = firstblossom
+			data_start = min(start_date_dt, smry_dict['accend'] + DateTime.RelativeDate(days=-2))
+			data_start = data_start + DateTime.RelativeDate(hour=0)
+
+			# obtain all hourly data for station (new method - get as much actual as available)
+			end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6) + DateTime.RelativeDate(hour=23,minute=0,second=0)
+			hourly_data, download_time, station_name, avail_vars = self.get_hourly2 (stn, data_start, end_fcst_dt)
+			smry_dict['download_time'] = download_time
+			start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
+			# append any available forecast data after end of observed data
+			if end_fcst_dt >= start_fcst_dt:
+				hourly_data = self.add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
+			# get last (forecast) value with precip amt
+			smry_dict['lastqpf'] = self.getLastPrecip(hourly_data)
 
 			if len(hourly_data) > 0:
 				# calculate degree hours using Tim Smith's table
 				deghrs = self.deghr_calcs(hourly_data,start_date_dt,end_fcst_dt)
-				# determine risk
-				smry_dict = self.check_blight(smry_dict,deghrs,end_date_dt,orchard_history,start_date_dt,strep_spray)
 				# obtain wetness events for output
-				wetness_dict = self.wetness_event_calcs(hourly_data,start_date_dt,end_fcst_dt,start_fcst_dt,stn,'no')
+				wetness_dict = self.wetness_moreevent_calcs(hourly_data,data_start,end_fcst_dt,start_fcst_dt,stn,'no')
+				# calculate eip
+				eip_results = self.eip_calcs(hourly_data,wetness_dict,start_date_dt,end_fcst_dt,strep_spray)
+				# determine risk
+				smry_dict = self.add_risks(smry_dict,deghrs,eip_results,end_date_dt,orchard_history,start_date_dt,strep_spray)
 				smry_dict = self.add_wetness(smry_dict,wetness_dict,start_date_dt,end_date_dt)
 				# get 12-hour pops
 				from get_precip_forecast import get_precip_forecast
@@ -1944,20 +2274,14 @@ class Apple (Base,Models):
 				smry_dict = self.add_pops(smry_dict,end_date_dt,pops_list)
 			else:
 				return self.nodata(stn, station_name, start_date_dt, end_date_dt)
-				
+
 			# add necessary information for display to dictionary
 			smry_dict['firstblossom'] = firstblossom
 			smry_dict['strep_spray'] = strep_spray
-			smry_dict['infection_event'] = None
-			smry_dict['symptoms'] = None
-			smry_dict['orchard_history'] = orchard_history
 			smry_dict['selbutton'] = selbutton
 			smry_dict['station_name'] = station_name
-			if download_time:
-				smry_dict['last_time'] = download_time
-			smry_dict['ddaccum'] = ddaccum
-			smry_dict['ddmiss'] = ddmiss
-			smry_dict['message'] = 'At bloom, apples and pears become susceptible to fire blight blossom infections. First blossom open usually occurs once %d to %d degree days (DD) base 43 have accumulated from January 1.' % (phen_events_dict['macph_bloom_43']['dd'][2],phen_events_dict['macph_bloom_43']['dd'][3])
+			smry_dict['cycle'] = disease_cycle_management['inseason']['cycle']
+			smry_dict['manage'] = disease_cycle_management['inseason']['management']
 			smry_dict['avail_vars'] = avail_vars
 
 #			write out summary table 
@@ -1999,7 +2323,6 @@ class Apple (Base,Models):
 
 			# obtain daily data
 			daily_data, station_name = self.get_daily (stn, start_date_dt, end_date_dt)
-			smry_dict['station_name'] = station_name
 
 			if len(daily_data) > 0:
 				# calculate degree days for period
@@ -3247,20 +3570,14 @@ def process_help (request,path):
 			                               ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references")
 										   ])
 		elif smry_type == 'fire_blight' or (smry_type == 'apple_disease' and pest == 'fire_blight'):
-			return newaModel_io.helppage([("The Development and Use of CougarBlight","http://county.wsu.edu/chelan-douglas/agriculture/treefruit/Pages/CougarBlight_Model_Overview.aspx"),
-										   ("CougarBlight 2010","http://county.wsu.edu/chelan-douglas/agriculture/treefruit/Pages/Cougar_Blight_2010.aspx"),
-										   ("Notes on first blossom open biofix","http://newatest.nrcc.cornell.edu/appfbnotes_pop.htm"),
+			return newaModel_io.helppage([ ("Notes on first blossom open biofix","http://newatest.nrcc.cornell.edu/appfbnotes_pop.htm"),
 										   ("Highly susceptible apple varieties and rootstocks","http://newatest.nrcc.cornell.edu/appsusvar_pop.htm"),
-										   ("Pesticide information","http://treefruitipm.info/PesticidesForPest.aspx?PestID=20"),
 										   ("Pest Management Guidelines for Commercial Tree Fruit Production","http://ipmguidelines.org"),
-										   ("Fire Blight Fact Sheet (html)","http://nysipm.cornell.edu/factsheets/treefruit/diseases/fb/fb.asp"),
-										   ("Fire Blight Fact Sheet (pdf)","http://nysipm.cornell.edu/factsheets/treefruit/diseases/fb/fb.pdf"),
-										   ("Cornell Fruit Resources - Tree Fruit IPM","http://www.fruit.cornell.edu/tree_fruit/IPMGeneral.html"),
+										   ("Fire Blight Fact Sheet (pdf)","https://ecommons.cornell.edu/handle/1813/43095"),
 			                               ("NEWA Default Biofix Dates","http://newa.cornell.edu/index.php?page=default-biofix-dates"),
-			                               ("Download Maryblyt v 7.1 (Windows only)","http://www.caf.wvu.edu/Kearneysville/Maryblyt/"),
-			                               ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references"),
-			                               ("Reference: Smith T. J., 1996. A risk assessment model for fire blight of apple and pear. Acta Hort. 411:97-100.","")
-											])
+			                               ("Download Maryblyt v 7.1 (Windows only)","http://anr.ext.wvu.edu/pests/diseases/forecasting-software"),
+			                               ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references")
+										])
 		elif smry_type == 'sooty_blotch' or (smry_type == 'apple_disease' and pest == 'sooty_blotch'):
 			return newaModel_io.helppage([
 #											("Notes on petal fall biofix - not available",""),

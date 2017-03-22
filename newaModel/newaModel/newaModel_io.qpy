@@ -919,7 +919,7 @@ def apple_scab_log [html] (smry_dict):
 					ampm = 'AM'
 				'<td class=plain_back>%s %d %d:00 %s</td>'%(month_names[mn],dy,hr,ampm)
 				'<td class=plain_back>%d</td>'%wet_hrs
-				'<td class=plain_back>%d</td>'%round(int(avg_temp))
+				'<td class=plain_back>%d</td>'%int(round(avg_temp, 0))
 				'<td class=plain_back>%.2f</td>'%prec_sum
 				if ldys == 9:
 					ldystr = "9-10"
@@ -974,34 +974,38 @@ def apple_scab_early [html] (smry_dict):
 		'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
 
 	'<H3>Apple Scab Results for %s</H3>' % smry_dict['station_name']
+	'<p>%s</p>' % h8(smry_dict['message'])
 
-	'<p>%s' % h8(smry_dict['message'])
-	end_date = '%d/%d/%d' % (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0])
-	'<p><b>Accumulated degree days (base 43&deg;F) through %s:</b> %s (%d days missing)</p>' % (end_date,smry_dict['ddaccum'],smry_dict['ddmiss'])
-	'''
-
-	<p><b>Green Tip Date:</b>
-	'''
+	### green tip selector
+	'<div style="margin:1em 0 0;"><label><b>Green Tip Date:&nbsp;</b></label>'
 	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
 		action = "submit();"
 	else:
 		action = "getapplescab(1);"
-	'&nbsp;&nbsp;<input type="text" name="greentip" id="dpick" value="Click to enter" onChange="%s">' % action
+	'<input type="text" name="greentip" id="dpick" value="Click to enter" onChange="%s">' % (action)
+	'''	
+	<p class="plain_smaller" style="margin-top:0;"><i>Degree day accumulations estimate that greentip may not have occurred yet. <br>If it has, enter the actual date for blocks of interest.</i>
 	'''
-	</p>
-	<p class="plain_smaller"><i>Degree day accumulations estimate that greentip may not have occurred yet. <br>If it has, enter the actual date for blocks of interest.</i></p>
-
-	<p><div style="border: thin black solid; padding:5;">
-	<b>Pest Management: </b>Not available.
-	</div></p>
-	</form>
-	'''
+	if smry_dict['ddaccum'] != miss:
+		end_date = '%d/%d/%d' % (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0])
+		'<br /><b>Accumulated degree days (base 43&deg;F) through %s:</b> %d (%d days missing)</p>' % (end_date,smry_dict['ddaccum'],smry_dict['ddmiss'])
+	'</div>'
+	'</form>'
+	
+	### cycle and management table
+	'<table cellspacing="0" cellpadding="5" border="1" width="100%">'
+	'<tr><th style="width:30%; text-align:left;">Disease Cycle</th><th style="width:70%; text-align:left;">Disease Management</th></tr>'
+	'<tr><td align="left" valign="top">%s</td>' % h8(smry_dict['cycle'])	#h8 so don't escape messages with tags
+	'<td align="left" valign="top">%s</td>' % h8(smry_dict['manage'])
+	'</tr>'
+	'</table>'
+	
 	add_kerik_credit()
 	add_footer(smry_dict,'pmep')
 
 #--------------------------------------------------------------------------------------------		
-# apple scab - dormant (Nov 1-Dec 31)
-def apple_scab_dormant [html] (smry_dict):
+# apple scab - overwinter (Nov 1-Dec 31)
+def apple_scab_overwinter [html] (smry_dict):
 	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
 		'''
 		<html>
@@ -1012,12 +1016,17 @@ def apple_scab_dormant [html] (smry_dict):
 		<body>
 		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
 		'''
-	'''
-	<H3>Apple Scab Model</H3>
-	<p>The apple scab season is over. If apple scab was severe, consider an application of 5 percent urea  
-	to the leaf litter or raking and mowing the leaf litter in the fall or spring. These steps will hasten 
-	degradation of the overwintering inoculum in leaf litter.</p>
-	'''
+
+	'<H3>Apple Scab Results for %s</H3>' % smry_dict['station_name']
+	
+	### status and management table
+	'<p><table cellspacing="0" cellpadding="5" border="1" width="100%">'
+	'<tr><th style="width:30%; text-align:left;">Disease Cycle</th><th style="width:70%; text-align:left;">Disease Management</th></tr>'
+	'<tr><td align="left" valign="top">%s</td>' % h8(smry_dict['cycle'])	#h8 so don't escape messages with tags
+	'<td align="left" valign="top">%s</td>' % h8(smry_dict['manage'])
+	'</tr>'
+	'</table>'
+
 	add_kerik_credit()
 	add_footer(smry_dict,'pmep')
 
@@ -1081,18 +1090,6 @@ def fire_blight_log [html] (smry_dict):
 				document.process.selbutton.value = "orhist";
 				document.process.type.value = "fire_blight";
 				break;
-			case 4:
-				document.process.selbutton.value = "infect";
-				document.process.type.value = "shoot_blight";
-				window.open('','ShootBlight','height=400,width=520');
-				document.process.target = 'ShootBlight';
-				break;
-			case 5:
-				document.process.selbutton.value = "symptoms";
-				document.process.type.value = "shoot_blight";
-				window.open('','ShootBlight','height=400,width=520');
-				document.process.target = 'ShootBlight';
-				break;
 			default:
 				document.process.selbutton.value = "biofix";
 				document.process.type.value = "fire_blight";
@@ -1122,15 +1119,29 @@ def fire_blight_log [html] (smry_dict):
 	'''
 
 	'<H3>Fire Blight Risk Predictions for %s</H3>' % smry_dict['station_name']
-	if not smry_dict['firstblossom']:
-		'<p>%s' % h8(smry_dict['message'])
-		end_date = '%d/%d/%d' % (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0])
-		'<p><b>Accumulated degree days (base 43&deg;F) through %s:</b> %s (%d days missing)</p>' % (end_date,smry_dict['ddaccum'],smry_dict['ddmiss'])
-	'''			
 
-	<p>Blossom blight predictions using the Cougarblight model begin at first blossom open.</p>
-	<p><b>First blossom open date:</b>
-	'''
+	### orchard history selector
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "setandsub(3);"
+	else:
+		action = "getfireblight(3);"
+	'<div style="margin:4px;"><label><b>Orchard Blight History:&nbsp;</b></label><select name="orchard_history" onChange="%s">' % action
+	orchard_choices = [
+		(1,'No fire blight in your neighborhood last year.'),
+		(2,'Fire blight occurred in your neighborhood last year.'),
+		(3,'Fire blight is now active in your neighborhood.')
+	]
+	for val,lab in orchard_choices:
+		if val == smry_dict['orchard_history']:
+			'<option value="%s" selected>%s</option>' % (val,lab)
+		else:
+			'<option value="%s">%s</option>' % (val,lab)
+	'</select>'
+	'<br /><span class="plain_smaller"><i>Select the fire blight history in your orchard block of interest and the tool will calculate risk. Toggle orchard blight history to recalculate risk.</i></span>'
+	'</div>'
+
+	### first blossom open selector
+	'<div style="margin:1em 0 0;"><label><b>First blossom open date:&nbsp;</b></label>'
 	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
 		action = "setandsub(1);"
 	else:
@@ -1139,80 +1150,80 @@ def fire_blight_log [html] (smry_dict):
 		mdy_bf = "%d/%d/%d" % (smry_dict['firstblossom'].month,smry_dict['firstblossom'].day,smry_dict['firstblossom'].year)
 	else:
 		mdy_bf = "Click to enter"
-	'&nbsp;&nbsp;<input type="text" name="firstblossom" id="fbdpick" value="%s" onChange="%s">' % (mdy_bf,action)
+	'<input type="text" name="firstblossom" id="fbdpick" value="%s" onChange="%s">' % (mdy_bf, action)
+	'''	
+	<p class="plain_smaller" style="margin-top:0;"><i>The <a href='http://newatest.nrcc.cornell.edu/appfbnotes_pop.htm' target='_blank'>first blossom open date</a>  
+	above is estimated based on degree day accumulations. Enter the actual first blossom open date for your orchard block 
+	of interest and the tool will calculate the protection period during bloom more accurately.</i>
 	'''
-	</p>
-	<p class="plain_smaller"><i><b>First blossom open date above is estimated </b>based on degree day accumulations. 
-	<u><span style="color:red;">Infection cannot occur without 
-	open blossoms.</span></u> If the predicted bloom date is incorrect, <b>enter the actual date for blocks of interest</b> and the model 
-	will calculate the protection period during bloom more accurately. If bloom in your orchard has not yet occurred, continue to check 
-	Cougarblight daily and monitor your bloom. If bloom in your orchard has not yet occurred, enter a future bloom date, up to five days 
-	into the future, to gauge fire blight risk potential.</i></p>
+	if smry_dict['ddaccum'] != miss:
+		end_date = '%d/%d/%d' % (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0])
+		'<br /><b>Accumulated degree days (base 43&deg;F) through %s:</b> %d (%d days missing)</p>' % (end_date,smry_dict['ddaccum'],smry_dict['ddmiss'])
+	'</div>'
 
-	<p><b>Orchard Blight History:</b>
-	'''
-	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
-		action = "setandsub(3);"
-	else:
-		action = "getfireblight(3);"
-	'<select name="orchard_history" onChange="%s">' % action
-	orchard_choices = [(1,'No fire blight in your neighborhood last year.'), (2,'Fire blight occurred in your neighborhood last year.'), (3,'Fire blight is now active in your neighborhood.')]
-	for val,lab in orchard_choices:
-		if val == smry_dict['orchard_history']:
-			'<option value="%s" selected>%s</option>' % (val,lab)
-		else:
-			'<option value="%s">%s</option>' % (val,lab)
-	'</select></p>'
-	'<p><span class="plain_smaller"><i>'
-	if smry_dict['orchard_history'] == 2:
-		'The orchard blight history above is the NEWA default. '
-	'Select the actual blight history for your orchard <br />and the model will recalculate recommendations.</i></span></p>'
-	'''
-	</p>
+	### summary table
+	'<p><table border=1 cellpadding=3 cellspacing=0 width="100%" style="border-collapse:collapse; table-layout:fixed;">'
+	'<col width=20%><col width=10%><col width=10%><col width=10%><col width=10%><col width=10%><col width=10%><col width=10%><col width=10%>'
 
-	<p><table border=1 cellpadding=3 cellspacing=0 width="100%" style='border-collapse:collapse; table-layout:fixed;'>
-	<col width=122><col width=62><col width=62><col width=62><col width=62><col width=62><col width=62><col width=62><col width=62>
-	<tr>
-	<td class=header_line_silver_back colspan=9 height=38 align=center>Blossom Blight Summary - Cougarblight</td>
-	</tr>
-	<tr>
-	<td class=plain_back>&nbsp;</td>
-	<th class=blue_back>Past</th>
-	<th class=blue_back>Past</th>
-	<th class=blue_back>Current</th>
-	<th class=palegoldenrod_back colspan=5>Blossom Blight 5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast">Forecast Details</button></th>
-	</tr>
-	<tr>
-
-	'''
+	# table header lines
+	#	download_dt = DateTime.DateTime(*smry_dict['last_time']) + DateTime.RelativeDate(minute=0,second=0)
+	download_dt = DateTime.DateTime(*smry_dict['download_time']) + DateTime.RelativeDate(minute=0,second=0)
+	lastqpf_dt = DateTime.DateTime(*smry_dict['lastqpf']) + DateTime.RelativeDate(minute=0,second=0)
 	curr_dt = DateTime.DateTime(*smry_dict['day0']['ymd'])
-	p1 = curr_dt + DateTime.RelativeDate(days=-1)
-	p2 = curr_dt + DateTime.RelativeDate(days=-2)
-	f1 = curr_dt + DateTime.RelativeDate(days=+1)
-	f2 = curr_dt + DateTime.RelativeDate(days=+2)
-	f3 = curr_dt + DateTime.RelativeDate(days=+3)
-	f4 = curr_dt + DateTime.RelativeDate(days=+4)
-	f5 = curr_dt + DateTime.RelativeDate(days=+5)
-	'<th class=plain_back>Date</th>'
-	'<td class=%s_back>%s %d</td>' % ('blue',month_names[p2.month][0:3],p2.day)
-	'<td class=%s_back>%s %d</td>' % ('blue',month_names[p1.month][0:3],p1.day)
-	'<td class=%s_back>%s %d</td>' % ('blue',month_names[curr_dt.month][0:3],curr_dt.day)
-	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f1.month][0:3],f1.day)
-	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f2.month][0:3],f2.day)
-	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f3.month][0:3],f3.day)
-	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f4.month][0:3],f4.day)
-	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f5.month][0:3],f5.day)
+	'<tr>'
+	'<td class=plain_back>&nbsp;</td>'
+	tdt = curr_dt + DateTime.RelativeDate(days=-2)
+	if tdt <= download_dt:
+		color = 'blue'
+	elif tdt > lastqpf_dt:
+		color = 'orange'
+	else:
+		color = 'yellow'
+	'<th class=%s_back>Past</th>'%color
+	tdt = curr_dt + DateTime.RelativeDate(days=-1)
+	if tdt <= download_dt:
+		color = 'blue'
+	elif tdt > lastqpf_dt:
+		color = 'orange'
+	else:
+		color = 'yellow'
+	'<th class=%s_back>Past</th>'%color
+	tdt = curr_dt
+	if tdt <= download_dt:
+		color = 'blue'
+	elif tdt > lastqpf_dt:
+		color = 'orange'
+	else:
+		color = 'yellow'
+	'<th class=%s_back>Current</th>'%color
+	tdt = curr_dt + DateTime.RelativeDate(days=+1)
+	if download_dt < tdt:
+		'<th class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast" style="margin-top:0.2em;">Forecast Details</button></th>'
+	else:
+		'<th class=blue_back colspan=5>Ensuing 5 Days</th>'		
 	'</tr>'
 	'<tr>'
-
+	'<td class=plain_back>Date</td>'
+	for dy in range(-2,6):
+		tdt = curr_dt + DateTime.RelativeDate(days=dy)
+		if tdt <= download_dt:
+			color = 'blue'
+		elif tdt > lastqpf_dt:
+			color = 'brown'
+		else:
+			color = 'yellow'
+		'<td class=%s_back>%d/%d</td>' % (color, tdt.month, tdt.day)	
+	'</tr>'
+	#end header
+	
 	accum_msg = 0
 
-	'<th class=plain_back>4-day DH</th>'
+	'<th class=plain_back>Cougarblight<br />4-Day DH</th>'
 	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
 		if smry_dict[d]['risk'][0].find('Extreme') >= 0:
 			rcolor = 'red'
 		elif smry_dict[d]['risk'][0].find('High') >= 0:
-			rcolor = 'orange'
+			rcolor = 'orange2'
 		elif smry_dict[d]['risk'][0].find('Caution') >= 0:
 			rcolor = 'yellow'
 		elif smry_dict[d]['risk'][0].find('Low') >= 0:
@@ -1226,77 +1237,88 @@ def fire_blight_log [html] (smry_dict):
 			if smry_dict[d]['risk'][0].find('-day') >= 0:
 				drisk = drisk+'*'
 				accum_msg = 1
-		'<td class=%s_back>%s</td>' % (rcolor,drisk)
-	'</tr>'
-
-	'<tr>'	
-	'<th class=plain_back> Risk Level</th>'
-	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
-		if smry_dict[d]['risk'][0].find('Extreme') >= 0:
-			rcolor = 'red'
-		elif smry_dict[d]['risk'][0].find('High') >= 0:
-			rcolor = 'orange'
-		elif smry_dict[d]['risk'][0].find('Caution') >= 0:
-			rcolor = 'yellow'
-		elif smry_dict[d]['risk'][0].find('Low') >= 0:
-			rcolor = 'green'
-		else:
-			rcolor = 'plain'
 		if smry_dict[d]['risk'][0].find('-day') >= 0:
-#			nrisk = '%s'%smry_dict[d]['risk'][0][0:5]
 			nrisk = '%s'%smry_dict[d]['risk'][0][6:] + '*'
 		elif smry_dict[d]['risk'][0] == miss:
 			nrisk = '-'
 		else:
 			nrisk = '%s'%smry_dict[d]['risk'][0]
-		'<td class=%s_back>%s</td>' % (rcolor,nrisk)
-	'</TR>'
-
-	'<tr>'
-	'<th class=palegoldenrod_back_l colspan=9> Wetness Events</th>'
+		'<td class=%s_back>%s<br />%s</td>' % (rcolor,nrisk,drisk)
 	'</tr>'
-
-	'<tr>'	
-	'<th class=plain_back> Rain Amount</th>'
+	
+	'<th class=plain_back>Infection Potential<br />EIP value</th>'
 	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
-		if smry_dict[d]['wetness'][0] > 0:
-			rcolor = 'redonplain'
+		if smry_dict[d]['eip'][0].find('Infection') >= 0:
+			rcolor = 'red'
+		elif smry_dict[d]['eip'][0].find('High') >= 0:
+			rcolor = 'orange2'
+		elif smry_dict[d]['eip'][0].find('Moderate') >= 0:
+			rcolor = 'yellow'
+		elif smry_dict[d]['eip'][0].find('Low') >= 0:
+			rcolor = 'green'
 		else:
 			rcolor = 'plain'
+		if smry_dict[d]['eip'][1] == miss:
+			drisk = '-'
+		else:
+			drisk = '%d'%smry_dict[d]['eip'][1]
+
+		'<td class=%s_back>%s<br />%s</td>' % (rcolor,smry_dict[d]['eip'][0],drisk)
+	'</tr>'
+
+	'<tr>'
+	'<th class="blue_back" colspan=9 style="text-align:center;border-top:1px solid black"> Wetness Events</th>'
+	'</tr>'
+
+	'<tr>'
+	if curr_dt + DateTime.RelativeDate(days=+5) > lastqpf_dt:
+		'<th class=plain_back> Rain Amount <img src="http://newatest.nrcc.cornell.edu/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(1);"></th>'
+	else:
+		'<th class=plain_back> Rain Amount</th>'	
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
 		if smry_dict[d]['wetness'][0] == miss:
-			rain = 'NA'
+#			check for precip probs instead
+			if smry_dict[d]['pops']['am'] == miss:
+				am_rain = '-'
+			else:
+				am_rain = '%d' % round(smry_dict[d]['pops']['am'], 0)
+			if smry_dict[d]['pops']['pm'] == miss:
+				pm_rain = '-'
+			else:
+				pm_rain = '%d' % round(smry_dict[d]['pops']['pm'], 0)
+			if smry_dict[d]['pops']['am'] == miss and smry_dict[d]['pops']['pm'] == miss:
+				rcolor = 'plain'
+				rain = 'NA'
+			elif smry_dict[d]['pops']['am'] > 50 or smry_dict[d]['pops']['pm'] > 50:
+				rcolor = 'blue'
+				rain = 'Night %s&#37;<br>Day %s&#37;' % (am_rain,pm_rain)
+			else:
+				rcolor = 'palegoldenrod'
+				rain = 'Night %s&#37;<br>Day %s&#37;' % (am_rain,pm_rain)
+			'<td class=%s_back style="font-size:9pt;">%s</td>' % (rcolor,rain)
 		elif smry_dict[d]['wetness'][0] > 0.00 and int(round((smry_dict[d]['wetness'][0]*100.),0)) == 0:
 			rain = 'Trace'
+			rcolor = 'blue'
+			'<td class=%s_back>%s</td>' % (rcolor,rain)
 		else:
 			rain = '%.2f'%round(smry_dict[d]['wetness'][0],2)
-		'<td class=%s_back>%s</td>' % (rcolor,rain)
-	'</TR>'
-	'<tr>'	
-	'<th class=plain_back> Rain Prob (%)<br>Night|Day&nbsp;<img src="http://newatest.nrcc.cornell.edu/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(1);"></th>'
-	'<td class=plain_back>&nbsp;</td>'
-	'<td class=plain_back>&nbsp;</td>'
-	for d in ['day0','fday1','fday2','fday3','fday4','fday5']:
-		if smry_dict[d]['pops']['am'] == miss:
-			am_rain = '-'
-		else:
-			am_rain = '%d' % round(smry_dict[d]['pops']['am'], 0)
-		if smry_dict[d]['pops']['pm'] == miss:
-			pm_rain = '-'
-		else:
-			pm_rain = '%d' % round(smry_dict[d]['pops']['pm'], 0)
-		'<td class=plain_back_smaller_c>%s | %s</td>' % (am_rain,pm_rain)
+			if smry_dict[d]['wetness'][0] > 0:
+				rcolor = 'blue'
+			else:
+				rcolor = 'palegoldenrod'
+			'<td class=%s_back>%s</td>' % (rcolor,rain)
 	'</TR>'
 	'<tr>'	
 	'<th class=plain_back> Dew &nbsp;<img src="http://newatest.nrcc.cornell.edu/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(0);"></th>'
 	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
 		if smry_dict[d]['wetness'][2] > 0:
-			rcolor = 'redonplain'
+			rcolor = 'blue'
 			dew = 'Yes'
 		elif smry_dict[d]['wetness'][2] == miss:
 			rcolor = 'plain'
 			dew = 'NA'
 		else:
-			rcolor = 'plain'
+			rcolor = 'palegoldenrod'
 			dew = 'No'
 		'<td class=%s_back>%s</td>' % (rcolor,dew)
 	'</TR>'
@@ -1306,58 +1328,85 @@ def fire_blight_log [html] (smry_dict):
 			'<th class=plain_back> Leaf Wetness Estimate (hours)</th>'			
 		else:
 			'<th class=plain_back> Leaf Wetness (hours)</th>'
-		for d in ['pday2','pday1','day0']:
+		for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
 			if smry_dict[d]['wetness'][1] > 0:
-				rcolor = 'redonplain'
+				rcolor = 'blue'
 			else:
-				rcolor = 'plain'
+				rcolor = 'palegoldenrod'
 			if smry_dict[d]['wetness'][1] == miss:
 				lwet = 'NA'
+				rcolor = 'plain'
 			else:
 				lwet = '%d'%smry_dict[d]['wetness'][1]
 			'<td class=%s_back>%s</td>' % (rcolor,lwet)
-		'<td class=%s_back colspan=5>&nbsp;</td>' % ('plain')
 		'</TR>'
+		'<tr>'
+	'<tr>'	
+	'<th class=plain_back> Hours >90% RH</th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['wetness'][5] > 0:
+			rcolor = 'blue'
+		else:
+			rcolor = 'palegoldenrod'
+		if smry_dict[d]['wetness'][5] == miss:
+			dval = 'NA'
+			rcolor = 'plain'
+		else:
+			dval = '%d'%(smry_dict[d]['wetness'][5])
+		'<td class=%s_back>%s</td>' % (rcolor,dval)
+	'</tr>'
+	'<tr>'	
+	'<th class=plain_back> RH max/min</th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['wetness'][3] == miss:
+			rhmax = 'NA'
+		else:
+			rhmax = '%d'%(smry_dict[d]['wetness'][3])
+		if smry_dict[d]['wetness'][4] == miss:
+			rhmin = 'NA'
+		else:
+			rhmin = '%d'%(smry_dict[d]['wetness'][4])
+		if smry_dict[d]['wetness'][3] > 90:
+			rcolor = 'blue'
+		elif rhmax == 'NA':
+			rcolor = 'plain'
+		else:
+			rcolor = 'palegoldenrod'
+		'<td class=%s_back>%s/%s</td>' % (rcolor,rhmax,rhmin)
+	'</tr>'
+	'<tr>'	
+	'<th class=plain_back> Temp avg F</th>'
+	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
+		if smry_dict[d]['wetness'][6] > 60:
+			rcolor = 'orange'
+		else:
+			rcolor = 'green'
+		if smry_dict[d]['wetness'][6] == miss:
+			dval = 'NA'
+			rcolor = 'plain'
+		else:
+			dval = '%d'%(smry_dict[d]['wetness'][6])
+		'<td class=%s_back>%s</td>' % (rcolor,dval)
+	'</tr>'
 
 	'<tr>'
-	'<td class=plain_back_smaller colspan=3 style="border-right:hidden; border-left:hidden; border-bottom:hidden">NA - data not available</td>'
-	'<td class=plain_back colspan=3 style="border-right:hidden; border-left:hidden; border-bottom:hidden"><button class="button" id="fbgraph">Cougarblight Charts</button></td>'
-	if smry_dict.has_key("last_time"):
-		'<td class=red_text colspan=3 style="border-right:hidden; border-left:hidden; border-bottom:hidden">Download Time: %d/%d/%d %d:00</td>'%(smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0],smry_dict['last_time'][3])
+	'<td class=plain_back_smaller colspan=2 style="padding-top:6px; border-right:hidden; border-left:hidden; border-bottom:hidden; border-top:1px solid black;">NA - data not available</td>'
+	'<td class=plain_back colspan=4 style="padding-top:6px; border-right:hidden; border-left:hidden; border-bottom:hidden; border-top:1px solid black;"><button class="button" id="fbgraph">View Cougarblight Charts</button></td>'
+	if smry_dict.has_key("download_time"):
+		'<td class=red_text colspan=3 style="padding-top:6px; border-right:hidden; border-left:hidden; border-bottom:hidden; border-top:1px solid black;">Download Time: %d/%d/%d %d:00</td>'%(smry_dict['download_time'][1],smry_dict['download_time'][2],smry_dict['download_time'][0],smry_dict['download_time'][3])
 	'</tr>'
 	'</table>'
+
 	if accum_msg:
-#		'<br><i>* indicates incomplete accumulation of the 4-day DH total.</i>'
 		'''
 		<br><i>* Indicates incomplete accumulation of the 4-day DH total. The DH value may reach "Caution", "High" or "Extreme" 
-		levels before spanning the 4-day accumulation cut-off time of Cougarblight. In 
-		such cases, you should use the best judgment of actual bloom stages, fire blight orchard history, prior spray applications, 
-		and forecasted weather to make a decision whether to apply a bactericide to protect from blossom infections. For blossom blight 
-		protection, the bactericide must be applied to the open flowers.</i>
+		levels before spanning the 4-day accumulation cut-off time of Cougarblight.</i>
 		'''
-
-	'<br><i>Scan 4-day degree hour (DH) totals, risk levels, rain, dew, leaf wetness, and note the infection risk level.</i>'
 
 	'<div id="moreinfo" title="" class="plain_back_l"> </div>'
 
-	'''
-	<p><div class=plain_back_l style="margin-bottom:0px;"><b>Pest Management for Cougarblight Risk Level:</b>
-	<ul style="margin-top:0px; margin-bottom:0px;">
-	<li><i><span class="green_back">Low</span></i> - bactericides probably unnecessary, check the 5-day forecast for warm weather (60&deg;F or higher) and wetting events.</li>
-	<li><i><span class="yellow_back">Caution</span></i> - check the 5-day forecast, expect infection if warm weather continues (60&deg;F or higher) and a wetting event occurs.</li>
-	<li><i><span class="orange_back">High</span></i> - expect infection if there is a wetting event, even a heavy dew.</li>
-	<li><i><span class="red_back">Extreme</span></i> - the blossoms should be protected with streptomycin.</li>
-	</ul>
-	</div>
-	</p>
-	'''
-#	'<p class="plain_back_l"><button onClick="%s" class="button">Pesticide Information</button></p>' % plaction
-	'''
-	<p><b>Streptomycin Applications:</b> Enough heat units may accumulate to put the newly open flowers at risk for infection 
-	if rain or heavy dew then occurs. If you applied streptomycin before all flowers were open, enter the date of the streptomycin 
-	application to recalculate fire blight risk predictions.</p>
-	'''
-	'<p><b>Streptomycin Spray Date:</b> '
+	### strep spray selector
+	'<div><b>Streptomycin Spray Date:&nbsp;</b>'
 	if smry_dict['strep_spray']:
 		mdy_strep_spray = "%d/%d/%d" % (smry_dict['strep_spray'].month,smry_dict['strep_spray'].day,smry_dict['strep_spray'].year)
 	else:
@@ -1366,51 +1415,22 @@ def fire_blight_log [html] (smry_dict):
 		action = "setandsub(2);"
 	else:
 		action = "getfireblight(2);"
-	'&nbsp;&nbsp;<input type="text" name="strep_spray" id="ssdpick" value="%s" onChange="%s">' % (mdy_strep_spray,action)
-	'</p>'
+	'<input type="text" name="strep_spray" id="ssdpick" value="%s" onChange="%s">' % (mdy_strep_spray,action)
+	'<p class="plain_smaller" style="margin-top:0;"><i>If you applied streptomycin before all flowers were open, enter the date of the streptomycin application to recalculate fire blight risk predictions.</i></p>'
+	'</div>'
 
-	'''
-	<p><div style="width:628px; border: thin blue solid; padding:5" id="monitoring">
-	<b>Monitoring for Shoot Blight Symptoms:</b> To effectively limit shoot blight damage, strikes should be pruned
-	throughout the terminal growth period. If you have a trauma event such as windy thunderstorm during bloom or a summer hailstorm, begin checking
-	for symptoms 90-100 degree day base 55&deg;F after the event. Enter the date of the infection/weather event:
-	'''
-	'<p><b>Infection Event Date:</b> '
-	if smry_dict.has_key('infection_event') and smry_dict['infection_event']:
-		mdy_infection_date = "%d/%d/%d" % (smry_dict['infection_event'].month,smry_dict['infection_event'].day,smry_dict['infection_event'].year)
-	else:
-		mdy_infection_date = "Click to enter date"
-	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
-		action = "setandsub(4);"
-	else:
-		action = "getshootblight(4);"
-	'&nbsp;&nbsp;<input type="text" name="infection_event" id="iedpick" value="%s" onChange="%s">' % (mdy_infection_date,action)
-	'''
-	</p>
-	<p>If you are seeing fire blight symptoms and want to determine approximately when the infection event occurred, enter the 
-	date of symptoms:</p>
-	'''
-	'<p><b>Symptom Occurrence Date:</b> '
-	if smry_dict.has_key('symptoms') and smry_dict['symptoms']:
-		mdy_symptoms = "%d/%d/%d" % (smry_dict['symptoms'].month,smry_dict['symptoms'].day,smry_dict['symptoms'].year)
-	else:
-		mdy_symptoms = "Click to enter date"
-	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
-		action = "setandsub(5);"
-	else:
-		action = "getshootblight(5);"
-	'&nbsp;&nbsp;<input type="text" name="symptoms" id="sodpick" value="%s" onChange="%s">' % (mdy_symptoms,action)
-	if smry_dict.has_key('output') and smry_dict['output'] != 'standalone':
-		'<div id="shootblight"></div>'
-	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
-		'''
-		</p>
-		<p class="plain_smaller"><i>Results will be displayed in a pop-up window.</i></p>
-		'''
-	'</div></p>'
+	### cycle and management table
+	'<table cellspacing="0" cellpadding="5" border="1" width="100%">'
+	'<tr><th style="width:30%; text-align:left;">Disease Cycle</th><th style="width:70%; text-align:left;">Disease Management</th></tr>'
+	'<tr>'
+	'<td align="left" valign="top">%s</td>' % h8(smry_dict['cycle'])	#h8 so don't escape messages with anchors
+	'<td align="left" valign="top">%s</td>' % h8(smry_dict['manage'])
+	'</tr>'
+	'</table>'
 	'</form>'
+	
 	add_kerik_credit()
-	add_footer(smry_dict,'pmep')
+	add_footer(smry_dict)
 
 #--------------------------------------------------------------------------------------------		
 # fire blight - pre-bloom return
@@ -1442,43 +1462,48 @@ def fire_blight_early [html] (smry_dict):
 
 	'<H3>Fire Blight Risk Predictions for %s</H3>' % smry_dict['station_name']
 
-	'<p>%s' % h8(smry_dict['message'])
-	end_date = '%d/%d/%d' % (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0])
-	'<p><b>Accumulated degree days (base 43&deg;F) through %s:</b> %s (%d days missing)</p>' % (end_date,smry_dict['ddaccum'],smry_dict['ddmiss'])
-	'''
-
-	<p>Blossom blight predictions using the Cougarblight model begin at first blossom open.
-	<p><b>First blossom open date:</b>
-	'''
-	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
-		action = "submit();"
-	else:
-		action = "getfireblight(1);"
-	'&nbsp;&nbsp;<input type="text" name="firstblossom" id="fbdpick" value="Click to enter" onChange="%s">' % action
-	'''
-	</p>
-	<p class="plain_smaller"><i>Degree day accumulations estimate that first blossom open date may not have occurred yet. <br>If it has, enter the actual date for blocks of interest.</i></p>
-
-	<p><b>Orchard Blight History:</b>
-	<select name="orchard_history">
-	'''
-	orchard_choices = [(1,'No fire blight in your neighborhood last year.'), (2,'Fire blight occurred in your neighborhood last year.'), (3,'Fire blight is now active in your neighborhood.')]
+	### orchard history selector
+	'<div style="margin:4px;"><label><b>Orchard Blight History:&nbsp;</b></label><select name="orchard_history">'
+	orchard_choices = [
+		(1,'No fire blight in your neighborhood last year.'),
+		(2,'Fire blight occurred in your neighborhood last year.'),
+		(3,'Fire blight is now active in your neighborhood.')
+	]
 	for val,lab in orchard_choices:
 		if val == smry_dict['orchard_history']:
 			'<option value="%s" selected>%s</option>' % (val,lab)
 		else:
 			'<option value="%s">%s</option>' % (val,lab)
-	'''
-	</select></p>
-	<p><span class="plain_smaller"><i>The orchard blight history above is the NEWA default. Select the actual blight history for your orchard.</i></span></p>
+	'</select>'
+	'<br /><span class="plain_smaller"><i>Select the fire blight history in your orchard block of interest.</i></span>'
+	'</div>'
 
-	<p><div style="border: thin black solid; padding:5;">
-	<b>Pest Management: </b>Scout orchards for active, oozing fire blight cankers. Prune and remove fire blight infected branches.
-	</div></p>
-	</form>
-	'''
+	### first blossom open selector
+	'<div style="margin:1em 0 0;"><label><b>First blossom open date:&nbsp;</b></label>'
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action = "submit();"
+	else:
+		action = "getfireblight(1);"
+	'<input type="text" name="firstblossom" id="fbdpick" value="Click to enter" onChange="%s">' % action
+	'<p class="plain_smaller" style="margin-top:0;"><i>Degree day accumulations estimate that first blossom open date may not have occurred yet.'
+	'<br />If it has, enter the actual date for the orchard block of interest to start the blossom blight tool.</i>'
+
+	end_date = '%d/%d/%d' % (smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0])
+	'<br /><b>Accumulated degree days (base 43&deg;F) through %s:</b> %s (%d days missing)' % (end_date,smry_dict['ddaccum'],smry_dict['ddmiss'])
+	'</div>'
+	'</form>'
+
+	### cycle and management table
+	'<table cellspacing="0" cellpadding="5" border="1" width="100%">'
+	'<tr><th style="width:30%; text-align:left;">Disease Cycle</th><th style="width:70%; text-align:left;">Disease Management</th></tr>'
+	'<tr>'
+	'<td align="left" valign="top">%s</td>' % h8(smry_dict['cycle'])	#h8 so don't escape messages with anchors
+	'<td align="left" valign="top">%s</td>' % h8(smry_dict['manage'])
+	'</tr>'
+	'</table>'
+	
 	add_kerik_credit()
-	add_footer(smry_dict,'pmep')
+	add_footer(smry_dict)
 
 #--------------------------------------------------------------------------------------------		
 # fire blight - post-petal fall
@@ -1536,85 +1561,109 @@ def fire_blight_late [html] (smry_dict):
 		'<input type="hidden" name="accend" value="%d/%d/%d">' % (smry_dict['accend'].month,smry_dict['accend'].day,smry_dict['accend'].year)
 		'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
 
-	'<H3>Fire Blight Risk Predictions</H3>'
-	'''
-	<p>The period of high risk of blossom blight infection (20% bloom to 80% petal fall) has passed. 
-	If bloom is still present in your orchard, recalculate blossom blight predictions using the Cougarblight model 
-	by entering a first blossom open date.</p>
+	'<H3>Fire Blight Risk Predictions for %s</H3>' % smry_dict["station_name"]
 
-	<p><b>First blossom open date:</b>
-	'''
-	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
-		action = "setandsub(1);"
-	else:
-		action = "getfireblight(1);"
-	'&nbsp;&nbsp;<input type="text" name="firstblossom" id="fbdpick" value="Click to enter" onChange="%s">' % action
-	'''
-	</p>
-	<p class="plain_smaller"><i>Enter the first blossom open date for blocks of interest and the model will calculate the protection period during bloom.</i></p>
+	if not smry_dict["fall"]:
+		### orchard history selector
+		'<div style="margin:4px;"><label><b>Orchard Blight History:&nbsp;</b></label><select name="orchard_history">'
+		orchard_choices = [
+			(1,'No fire blight in your neighborhood last year.'),
+			(2,'Fire blight occurred in your neighborhood last year.'),
+			(3,'Fire blight is now active in your neighborhood.')
+		]
+		for val,lab in orchard_choices:
+			if val == smry_dict['orchard_history']:
+				'<option value="%s" selected>%s</option>' % (val,lab)
+			else:
+				'<option value="%s">%s</option>' % (val,lab)
+		'</select>'
+		'<br /><span class="plain_smaller"><i>Degree day accumulations estimate that the bloom period is over. If bloom is still present, select the fire blight history in your orchard block of interest.</i></span>'
+		'</div>'
 
-	<p><b>Orchard Blight History:</b>
-	<select name="orchard_history">
-	'''
-	orchard_choices = [(1,'No fire blight in your neighborhood last year.'), (2,'Fire blight occurred in your neighborhood last year.'), (3,'Fire blight is now active in your neighborhood.')]
-	for val,lab in orchard_choices:
-		if val == smry_dict['orchard_history']:
-			'<option value="%s" selected>%s</option>' % (val,lab)
+		### first blossom open selector
+		'<div style="margin:1em 0 0;"><label><b>First blossom open date:&nbsp;</b></label>'
+		if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+			action = "setandsub(1);"
 		else:
-			'<option value="%s">%s</option>' % (val,lab)
-	'''
-	</select></p>
-	<p><span class="plain_smaller"><i>The orchard blight history above is the NEWA default. Select the actual blight history for your orchard.</i></span></p>
+			action = "getfireblight(1);"
+		'<input type="text" name="firstblossom" id="fbdpick" value="Click to enter" onChange="%s">' % action
+		'<p class="plain_smaller" style="margin-top:0;"><i>Degree day accumulations estimate that the bloom period is over. If bloom is still present, enter the first blossom open date for the orchard block of interest to start the blossom blight tool.</i></p>'
+		'</div>'
 
-	'''
-	'<p class="plain_back_l"><button onClick="%s" class="button">Pesticide Information</button></p>' % plaction
+	### cycle and management table
+	'<table cellspacing="0" cellpadding="5" border="1" width="100%">'
+	'<tr><th style="width:30%; text-align:left;">Disease Cycle</th><th style="width:70%; text-align:left;">Disease Management</th></tr>'
+	'<tr>'
+	'<td align="left" valign="top">%s</td>' % h8(smry_dict['cycle'])	#h8 so don't escape messages with anchors
+	'<td align="left" valign="top">%s</td>' % h8(smry_dict['manage'])
+	'</tr>'
+	'</table>'
 
+	### shoot blight trauma
+	'<div style="border:1pt solid black; padding:5; margin-top:1em;">'
+	'<b>Scouting for Shoot Blight associated with a Trauma Event</b>'
 	'''
-	<p><div style="border: thin blue solid; padding:5">
-	<b>Monitoring for Shoot Blight Symptoms:</b> To effectively limit shoot blight damage, strikes should be pruned
-	throughout the terminal growth period. If you have a trauma event such as windy thunderstorm during bloom or a summer hailstorm, begin checking
-	for symptoms 90-100 degree day base 55&deg;F after the event. Enter the date of the infection/weather event:
+	<p>When a trauma event occurs, such as a windy thunderstorm during bloom or a summer hailstorm, fire blight infections
+	may occur. In such cases, shoot blight symptoms will show up approximately 90 to 100 degree days base 55&deg;F after 
+	the event. To determine when to scout for shoot blight, enter the date of the trauma event.</p>
 	'''
-	'<p><b>Infection Event Date:</b> '
-	if smry_dict.has_key('infection_event') and smry_dict['infection_event']:
-		mdy_infection_date = "%d/%d/%d" % (smry_dict['infection_event'].month,smry_dict['infection_event'].day,smry_dict['infection_event'].year)
-	else:
-		mdy_infection_date = "Click to enter date"
+	'<br /><b>Trauma Event Date:&nbsp;</b> '
 	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
 		action = "setandsub(4);"
 	else:
 		action = "getshootblight(4);"
-	'&nbsp;&nbsp;<input type="text" name="infection_event" id="iedpick" value="%s" onChange="%s">' % (mdy_infection_date,action)
+	'<input type="text" name="infection_event" id="iedpick" value="Click to enter date" onChange="%s">' % (action)
+	if smry_dict.has_key('output') and smry_dict['output'] != 'standalone':
+		'<div id="shootblight1" style="margin-top:1em;"></div>'
+	'</div>'
+
+	### shoot blight infection
+	'<div style="border:1pt solid black; padding:5; margin-top:1em;">'
+	'<b>When did the Shoot Blight Infection occur?</b>'
 	'''
-	</p>
-	<p>
-	If you are seeing fire blight symptoms and want to determine approximately when the infection event occurred, enter the 
-	date of symptoms:
+	<p>Fire blight symptoms on infected shoots show up when approximately
+	90 to 100 degree days base 55&deg;F have accumulated after an infection event. If shoot blight symptoms are 
+	just appearing and you want to determine approximately when the infection event occurred, enter the date of 
+	symptom occurrence.</p>
 	'''
-	'<p><b>Symptom Occurrence Date:</b> '
-	if smry_dict.has_key('symptoms') and smry_dict['symptoms']:
-		mdy_symptoms = "%d/%d/%d" % (smry_dict['symptoms'].month,smry_dict['symptoms'].day,smry_dict['symptoms'].year)
-	else:
-		mdy_symptoms = "Click to enter date"
+	'<p><b>Symptom Occurrence Date:&nbsp;</b> '
 	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
 		action = "setandsub(5);"
 	else:
 		action = "getshootblight(5);"
-	'&nbsp;&nbsp;<input type="text" name="symptoms" id="sodpick" value="%s" onChange="%s">' % (mdy_symptoms,action)
+	'<input type="text" name="symptoms" id="sodpick" value="Click to enter date" onChange="%s">' % (action)
 	if smry_dict.has_key('output') and smry_dict['output'] != 'standalone':
-		'<div id="shootblight" title="Shoot Blight Results">Shoot Blight results will appear here.</div>'
-	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
-		'''
-		</p>
-		<p class="plain_smaller"><i>Results will be displayed in a pop-up window.</i></p>
-		'''
-	'</div></p>'
+		'<div id="shootblight2" style="margin-top:1em;"></div>'
+	'</div>'
+	
 	'</form>'
 	add_kerik_credit()
 	add_footer(smry_dict,'pmep')
 
 #--------------------------------------------------------------------------------------------		
 # fire blight - dormant (Sep 16-Dec 31)
+def fire_blight_dormantPREVIOUS [html] (smry_dict):
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		'''
+		<html>
+		<head>
+		<title>NEWA Fire Blight Model</title>
+		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
+		</head>
+		<body>
+		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
+		'''
+
+	'<H3>Fire Blight Risk Predictions for %s</H3>' % smry_dict['stn']
+	from phen_events import phen_events_dict
+	'<p>At bloom, apples and pears become susceptible to fire blight blossom infections. '
+	'First blossom open usually occurs once %d to %d degree days (DD) base 43 have accumulated from January 1.' % (phen_events_dict['macph_bloom_43']['dd'][2],phen_events_dict['macph_bloom_43']['dd'][3])
+
+	add_kerik_credit()
+	add_footer(smry_dict,'pmep')
+
+#--------------------------------------------------------------------------------------------		
+# fire blight - dormant (Nov 1 - Feb 28/29)
 def fire_blight_dormant [html] (smry_dict):
 	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
 		'''
@@ -1627,13 +1676,24 @@ def fire_blight_dormant [html] (smry_dict):
 		<div class="plain_back" style="width:700px; margin-left:auto; margin-right:auto;">
 		'''
 
-	'<H3>Fire Blight Risk Predictions</H3>'
-	from phen_events import phen_events_dict
-	'<p>At bloom, apples and pears become susceptible to fire blight blossom infections. '
-	'First blossom open usually occurs once %d to %d degree days (DD) base 43 have accumulated from January 1.' % (phen_events_dict['macph_bloom_43']['dd'][2],phen_events_dict['macph_bloom_43']['dd'][3])
+	'<H3>Fire Blight Risk Predictions for %s</H3>' % smry_dict['station_name']
+	
+	### status and management table
+	'<p><table cellspacing="0" cellpadding="5" border="1" width="100%">'
+	'<tr><th style="width:30%; text-align:left;">Disease Cycle</th><th style="width:70%; text-align:left;">Disease Management</th></tr>'
+	if smry_dict['cycle'].find("<a") >= 0:
+		'<tr><td align="left" valign="top">%s</td>' % h8(smry_dict['cycle'])	#don't escape messages with anchors
+	else:
+		'<tr><td align="left" valign="top">%s</td>' % smry_dict['cycle']
+	if smry_dict['manage'].find("<a") >= 0:
+		'<td align="left" valign="top">%s</td>' % h8(smry_dict['manage'])		#same here
+	else:
+		'<td align="left" valign="top">%s</td>' % smry_dict['manage']
+	'</tr>'
+	'</table>'
 
 	add_kerik_credit()
-	add_footer(smry_dict,'pmep')
+	add_footer(smry_dict)
 
 #--------------------------------------------------------------------------------------------		
 # shoot blight infection summary 
@@ -1650,14 +1710,10 @@ def shoot_blight_infection_log [html] (smry_dict):
 		'<div class="plain_back" id="sbresults">'
 	else:
 		'<div class="plain_back" id="sbresults">'
-		'<hr color=blue>'
-	'<h3>Shoot Blight Infection for %s</h3>' % smry_dict['station_name']
-	'<p>Fire blight symptoms on infected shoots show up when about 90 to 100 degree days base 55F have accumulated after an infection event.</p>'
-	'<p><b>Infection event: </b><br>%s %d</p>' % (month_names[smry_dict['infection_event'].month],smry_dict['infection_event'].day)
+	'<p><b>%s</b></p>' % smry_dict['recommend']
 	if smry_dict['ddaccum']:
 		ddaccum = int(round(smry_dict['ddaccum'],0))
-		'<p><b>Degree Days (base 55 BE) %d/%d through %d/%d: </b><br>%s</p>' % (smry_dict['infection_event'].month,smry_dict['infection_event'].day,smry_dict['last_day_accum'][1],smry_dict['last_day_accum'][2],ddaccum)
-	'<p><b>%s</b></p>' % smry_dict['recommend']
+		'<p><b>Degree Days (base 55 BE) %d/%d through %d/%d: </b>%s</p>' % (smry_dict['infection_event'].month,smry_dict['infection_event'].day,smry_dict['last_day_accum'][1],smry_dict['last_day_accum'][2],ddaccum)
 
 	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
 		'''
@@ -1686,17 +1742,13 @@ def shoot_blight_symptoms_log [html] (smry_dict):
 		'<div class="plain_back" id="sbresults">'
 	else:
 		'<div class="plain_back" id="sbresults">'
-		'<hr color=blue>'
-	'<h3>Shoot Blight Infection for %s</h3>' % smry_dict['station_name']
-	'<p>Fire blight symptoms on infected shoots show up when about 90 to 100 degree days base 55F have accumulated after an infection event.</p>'
-	'<p><b>Symptom Occurrence Date: </b><br>%s %d</p>' % (month_names[smry_dict['symptoms'].month],smry_dict['symptoms'].day)
-	'<p><b>Approximate Infection Date: </b>'
 	if smry_dict['infection_est']:
-		'<br>%s %d</p>' % (month_names[smry_dict['infection_est'][1]],smry_dict['infection_est'][2])
-		ddaccum = int(round(smry_dict['ddaccum'],0))
-		'<p><b>Degree Days (base 55 BE) %d/%d through %d/%d: </b><br>%s</p>' % (smry_dict['infection_est'][1],smry_dict['infection_est'][2],smry_dict['last_day_accum'][1],smry_dict['last_day_accum'][2],ddaccum)
+		'<p style="font-weight:bold;">Approximate infection date occurred on %s %d</p>' % (month_names[smry_dict['infection_est'][1]],smry_dict['infection_est'][2])
+		if smry_dict['ddaccum']:
+			ddaccum = int(round(smry_dict['ddaccum'],0))
+			'<p><b>Degree Days (base 55 BE) %d/%d through %d/%d: </b>%s</p>' % (smry_dict['infection_est'][1],smry_dict['infection_est'][2],smry_dict['last_day_accum'][1],smry_dict['last_day_accum'][2],ddaccum)
 	else:
-		'<br>Cannot be determined</p>'
+		'<p>Approximate infection date cannot be determined</p>'
 	
 	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
 		'''
@@ -1789,7 +1841,7 @@ def apple_pest_results [html] (smry_dict):
 	'''
 
 	'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
-	'<input type="hidden" name="accend" value="%s">' % smry_dict['accend']
+	'<input type="hidden" name="accend" value="%d/%d/%d">' % (smry_dict['accend'].month,smry_dict['accend'].day,smry_dict['accend'].year)
 	'<h3>%s Results for %s</h3>' % (smry_dict['pest_name'],smry_dict['station_name'])
 
 	### Messages when you don't have a biofix date yet
@@ -2265,7 +2317,7 @@ def berry_moth_results [html] (smry_dict):
 
 	'<tr>'
 	'<td class=plain_back_smaller colspan=4 style="border-right:hidden; border-left:hidden; border-bottom:hidden">NA - not available</td>'
-	'<td class=red_text colspan=5 style="border-right:hidden; border-left:hidden; border-bottom:hidden">Download Time: %d/%d/%d %d:00</td>'%(smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0],smry_dict['last_time'][3])
+	'<td class=red_text colspan=5 style="border-right:hidden; border-left:hidden; border-bottom:hidden">Download Time: %d/%d/%d</td>'%(smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0])
 	'</tr>'
 	'</table>'
 

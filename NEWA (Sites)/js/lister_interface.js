@@ -1,7 +1,8 @@
 function buildStationLists(state) {
 	$.getJSON("http://newatest.nrcc.cornell.edu/newaUtil/stateStationList/all/ALL")
 		.success( function(results) {
-			var saved_stn = $.jStorage.get("stn"),
+			var sid = JSON.parse(localStorage.getItem("station")),
+				saved_stn = sid ? sid.id : null || $.jStorage.get("stn"),
 				otype = $("input[name=type]").val(),
 				trow = "",
 				today = new Date(),
@@ -46,7 +47,8 @@ function buildStationLists(state) {
 					});
 				});
 			$('select[name=stn]').on("change", function () {
-				$.jStorage.set("stn", $(this).val());		
+				$.jStorage.set("stn", $(this).val());
+				localStorage.setItem("station", JSON.stringify({"id": $(this).val()}));	
 			});
 		})
 		.error( function() {
@@ -56,7 +58,8 @@ function buildStationLists(state) {
 }
 function buildStateStationMenus() {
 	var i,
-		state = $.jStorage.get("state"),
+		postalCode = JSON.parse(localStorage.getItem("state")),
+		state = postalCode ? postalCode.postalCode : null || $.jStorage.get("state"),
 		state_list = [
 			['AL', 'Alabama'],
 			['CT', 'Connecticut'],
@@ -94,6 +97,7 @@ function buildStateStationMenus() {
 		.on("change", function() {
 			state = $("select[name=stabb]").val();
 			$.jStorage.set("state", state);
+			localStorage.setItem("state", JSON.stringify({"postalCode": state}));
 			buildStationLists(state);
 		});
 	if (state) {

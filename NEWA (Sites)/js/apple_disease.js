@@ -74,7 +74,7 @@ function getshootblight(selopt) {
 	$('#shootblight').prepend('<img src="http://newatest.nrcc.cornell.edu/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
 	$.get('http://newatest.nrcc.cornell.edu/newaModel/process_input',params,function(data) {
 		$('#loading').remove();
-		$('#shootblight').append(data);
+		$('#shootblight' + (selopt - 3)).append(data);
 	});
 	return false;
 	}
@@ -222,7 +222,7 @@ $(document).ready(function() {
 		}
 	});
 	stateStationMapList({
-		reqval: document.stationLister.pest.value === 'sooty_blotch' ? 'eslw' : 'all',
+		reqvar: document.stationLister.pest.value === 'sooty_blotch' ? 'eslw' : 'all',
 		event_type: 'select_station',
 		where: '#station_area'
 	});
