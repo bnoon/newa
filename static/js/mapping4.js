@@ -104,16 +104,6 @@ function statePlaceMarkers (cur_data, event_type, state) {
 	var stateInfo = stateCenters.hasOwnProperty(state) ? stateCenters[state] : {lat: 42.5, lon: -75.7, zoom: 6, name: 'All'};
 	var newaIcon = new google.maps.MarkerImage(
 		'/gifs/newa_small.png',
-		new google.maps.Size(16,16),
-		new google.maps.Point(0,0),
-		new google.maps.Point(8,8));
-	var newaIcon2 = new google.maps.MarkerImage(
-		'/gifs/newa_small2.png',
-		new google.maps.Size(14,14),
-		new google.maps.Point(0,0),
-		new google.maps.Point(8,8));
-	var newaIcon21 = new google.maps.MarkerImage(
-		'/gifs/newa_small2.1.png',
 		new google.maps.Size(14,14),
 		new google.maps.Point(0,0),
 		new google.maps.Point(8,8));
@@ -134,7 +124,7 @@ function statePlaceMarkers (cur_data, event_type, state) {
 		new google.maps.Point(7,7));
 	var newaIconGray = new google.maps.MarkerImage(
 		'/gifs/newa_smallGray.png',
-		new google.maps.Size(16,16),
+		new google.maps.Size(14,14),
 		new google.maps.Point(0,0),
 		new google.maps.Point(8,8));
 	var airportIconGray = new google.maps.MarkerImage(
@@ -168,10 +158,6 @@ function statePlaceMarkers (cur_data, event_type, state) {
 		strokeColor: "gray",
 		strokeWeight: 5
 	};
-	var circleColors = {
-		"miwx": "#497A49",
-		"njwx": "#cc0033"
-	};
 	var marker,
 		markerOptions = {},
 		mapOptions = {
@@ -191,23 +177,11 @@ function statePlaceMarkers (cur_data, event_type, state) {
 		markerOptions.position = new google.maps.LatLng(stn.lat, stn.lon);
 		markerOptions.title = stn.name;
 		if (stn.network === "newa" || stn.network === "njwx" || stn.network === "miwx" || (stn.network === "cu_log" && stn.state !== "NY")) { /////
-			if (stn.name.substr(0,1) >= "S") { /////
-			markerOptions.icon = stn.state === state || state === "ALL" ? newaIcon : newaIconGray; 	/////////
-			} else if (stn.name.substr(0,1) >= "H") {
-			markerOptions.icon = stn.state === state || state === "ALL" ? newaIcon2 : newaIconGray;		/////////
-			} else {
-			markerOptions.icon = stn.state === state || state === "ALL" ? newaIcon21 : newaIconGray;		/////////
-			}
-			markerOptions.shadow = newaShadow;
-//		} else if (stn.network === "njwx") { //
-//			markerOptions.icon = stn.state === state || state === "ALL" ? newaIconRed : newaIconGray; //
-//			markerOptions.shadow = newaShadow;//
+			markerOptions.icon = stn.state === state || state === "ALL" ? newaIcon : newaIconGray;
 		} else if (stn.network === "cu_log") { 
 			markerOptions.icon = stn.state === state || state === "ALL" ? culogIcon : culogIconGray; 
-			markerOptions.shadow = culogShadow;
 		} else if (stn.network === "icao") { 
 			markerOptions.icon = stn.state === state || state === "ALL" ? airportIcon : airportIconGray; 
-			markerOptions.shadow = airportShadow;
 		}
 		marker = new google.maps.Marker(markerOptions);
 		
