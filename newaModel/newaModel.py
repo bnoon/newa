@@ -4,9 +4,8 @@ import sys, copy, math
 from mx import DateTime
 from print_exception import print_exception
 import newaModel_io
-if '/newa/newaCommon' not in sys.path: sys.path.insert(1,'/newa/newaCommon')
-import newaCommon_io
-from newaCommon import *
+import newaCommon.newaCommon_io
+from newaCommon.newaCommon import *
 if '/ndfd' not in sys.path: sys.path.insert(1,'/ndfd')
 
 miss = -999
