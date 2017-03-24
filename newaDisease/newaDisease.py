@@ -7,7 +7,6 @@ import newaDisease_io
 from newa_simcast import *
 from newaCommon import newaCommon_io
 from newaCommon.newaCommon import *
-if '/ndfd' not in sys.path: sys.path.insert(1,'/ndfd')
 
 miss = -999
 month_names = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -19,10 +18,10 @@ class program_exit (Exception):
 def add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt,estp=False):
 	try:
 		if (estp):
-			from get_hourly_forecast_estp import get_hourly_forecast_estp
+			from ndfd.get_hourly_forecast_estp import get_hourly_forecast_estp
 			forecast_data = get_hourly_forecast_estp(stn,start_fcst_dt,end_fcst_dt)		
 		else:
-			from get_hourly_forecast import get_hourly_forecast
+			from ndfd.get_hourly_forecast import get_hourly_forecast
 			forecast_data = get_hourly_forecast(stn,start_fcst_dt,end_fcst_dt)		
 		hourly_data = hourly_data+forecast_data
 	except:
@@ -33,7 +32,7 @@ def add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt,estp=False):
 # add daily forecast data to end of daily_data
 def add_dly_fcst(stn,daily_data,start_fcst_dt,end_fcst_dt):
 	try:
-		from get_daily_forecast import get_daily_forecast
+		from ndfd.get_daily_forecast import get_daily_forecast
 		forecast_data = get_daily_forecast(stn,start_fcst_dt,end_fcst_dt)
 		daily_data = daily_data+forecast_data
 	except:
@@ -1582,7 +1581,7 @@ class Onion (Base, Cabbage):
 	
 	#--------------------------------------------------------------------------------------------		
 	def run_onion_dis(self,stn,month,day,product,accend,output):
-		from get_precip_forecast import get_precip_forecast
+		from ndfd.get_precip_forecast import get_precip_forecast
 		now = DateTime.now()
 		if not accend:
 			accend = now

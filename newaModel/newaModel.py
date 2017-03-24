@@ -6,7 +6,6 @@ from print_exception import print_exception
 import newaModel_io
 import newaCommon.newaCommon_io
 from newaCommon.newaCommon import *
-if '/ndfd' not in sys.path: sys.path.insert(1,'/ndfd')
 
 miss = -999
 month_names = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -64,10 +63,10 @@ class Models(Base):
 	def add_hrly_fcst(self,stn,hourly_data,start_fcst_dt,end_fcst_dt,estp=False):
 		try:
 			if (estp):
-				from get_hourly_forecast_estp import get_hourly_forecast_estp
+				from ndfd.get_hourly_forecast_estp import get_hourly_forecast_estp
 				forecast_data = get_hourly_forecast_estp(stn,start_fcst_dt,end_fcst_dt)		
 			else:
-				from get_hourly_forecast import get_hourly_forecast
+				from ndfd.get_hourly_forecast import get_hourly_forecast
 				forecast_data = get_hourly_forecast(stn,start_fcst_dt,end_fcst_dt)		
 			hourly_data = hourly_data+forecast_data
 		except:
@@ -78,7 +77,7 @@ class Models(Base):
 	# add daily forecast data to end of daily_data
 	def add_dly_fcst(self,stn,daily_data,start_fcst_dt,end_fcst_dt):
 		try:
-			from get_daily_forecast import get_daily_forecast
+			from ndfd.get_daily_forecast import get_daily_forecast
 			forecast_data = get_daily_forecast(stn,start_fcst_dt,end_fcst_dt)
 			daily_data = daily_data+forecast_data
 		except:
@@ -2268,7 +2267,7 @@ class Apple (Base,Models):
 				smry_dict = self.add_risks(smry_dict,deghrs,eip_results,end_date_dt,orchard_history,start_date_dt,strep_spray)
 				smry_dict = self.add_wetness(smry_dict,wetness_dict,start_date_dt,end_date_dt)
 				# get 12-hour pops
-				from get_precip_forecast import get_precip_forecast
+				from ndfd.get_precip_forecast import get_precip_forecast
 				pops_list = get_precip_forecast (stn,DateTime.now(),end_fcst_dt)
 				smry_dict = self.add_pops(smry_dict,end_date_dt,pops_list)
 			else:
@@ -2403,7 +2402,7 @@ class Apple (Base,Models):
 				# determine risk and add required output to smry_dict
 				smry_dict = self.process_sooty_blotch (smry_dict,wetness_dict,petalfall,fungicide,end_date_dt,start_date_dt)
 				# get 12-hour pops and add to dictionary
-				from get_precip_forecast import get_precip_forecast
+				from ndfd.get_precip_forecast import get_precip_forecast
 				pops_list = get_precip_forecast (stn,DateTime.now(),end_fcst_dt)
 				smry_dict = self.add_pops(smry_dict,end_date_dt,pops_list)
 			else:
@@ -3093,10 +3092,9 @@ class Grape (Base,Apple,Models):
 	#--------------------------------------------------------------------------------------------		
 	#	obtain everything necessary for dmcast
 	def run_dmcast(self,stn,end_date_dt,cultivar,output):
-		if '/newa/newaModel/newaModel/dmcast' not in sys.path: sys.path.insert(1,'/newa/newaModel/newaModel/dmcast')
-		import downy_mildew
-		from sister_info import sister_info
-		from stn_info import stn_info
+		from dmcast import downy_mildew
+		from newaCommon.sister_info import sister_info
+		from newaCommon.stn_info import stn_info
 
 		try:
 			smry_dict = {}

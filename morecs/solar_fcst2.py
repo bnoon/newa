@@ -15,7 +15,7 @@ def get_srfcst_data (stn, start_date, end_date):
 		start_date_dt = DateTime.DateTime(*start_date)
 		end_date_dt = DateTime.DateTime(*end_date)
 		stn = stn.upper()
-		forecast_db = hashopen('/Users/keith/NDFD/hourly_forecasts.db','r')		
+		forecast_db = hashopen('/ndfd/hourly_forecasts.db','r')		
 		stn_dict = loads(forecast_db[stn])
 		latlon = stn_dict['ll']
 		for requested_var in ['tsky','dwpt']:
