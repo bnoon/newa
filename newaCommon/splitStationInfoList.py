@@ -1,4 +1,4 @@
-from print_exception import print_exception
+from traceback import print_exc as print_exception
 
 try:
 	from stn_info import stn_info
