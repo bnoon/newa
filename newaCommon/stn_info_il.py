@@ -1,5 +1,8 @@
-stn_info = {'karr': {'srqual': 'ok', 'state': 'IL', 'name': 'Aurora', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.77, 'elev': 710, 'lon': -88.4814, 'network': 'icao'},
-'il_bel': {'srqual': 'ok', 'state': 'IL', 'name': 'Belleville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 38.480416, 'elev': 539, 'lon': -89.93904, 'network': 'newa'},
-'il_pgr': {'srqual': 'ok', 'state': 'IL', 'name': 'Poplar Grove', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.391312, 'elev': 916, 'lon': -88.800936, 'network': 'newa'},
-'krfd': {'srqual': 'ok', 'state': 'IL', 'name': 'Rockford', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 42.1928, 'elev': 730, 'lon': -89.0931, 'network': 'icao'},
+stn_info = {'karr': {'srqual': 'ok', 'state': 'IL', 'name': 'Aurora', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.770000000000003, 'elev': 710, 'lon': -88.481399999999994, 'network': 'icao'},
+'il_pgr': {'srqual': 'ok', 'state': 'IL', 'name': 'Poplar Grove', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.391311999999999, 'elev': 916, 'lon': -88.800935999999993, 'network': 'newa'},
+'il_woo': {'srqual': 'ok', 'state': 'IL', 'name': 'Woodstock', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.259405999999998, 'elev': 876, 'lon': -88.485386000000005, 'network': 'newa'},
+'il_bel': {'srqual': 'ok', 'state': 'IL', 'name': 'Belleville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 38.480415999999998, 'elev': 539, 'lon': -89.939040000000006, 'network': 'newa'},
+'il_mil': {'srqual': 'toolow', 'state': 'IL', 'name': 'Millstadt', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 38.511049999999997, 'elev': 545, 'lon': -90.127009999999999, 'network': 'newa'},
+'il_gra': {'srqual': 'ok', 'state': 'IL', 'name': 'Grafton', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 39.015709999999999, 'elev': 670, 'lon': -90.407830000000004, 'network': 'newa'},
+'krfd': {'srqual': 'ok', 'state': 'IL', 'name': 'Rockford', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 42.192799999999998, 'elev': 730, 'lon': -89.093100000000007, 'network': 'icao'},
 }

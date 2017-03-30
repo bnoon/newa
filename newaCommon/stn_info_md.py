@@ -1,4 +1,5 @@
-stn_info = {'ksby': {'srqual': 'ok', 'state': 'MD', 'name': 'Salisbury', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 38.3406, 'elev': 48, 'lon': -75.5103, 'network': 'icao'},
-'md_wdb': {'srqual': 'ok', 'state': 'MD', 'name': 'Woodbine', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 39.31527, 'elev': 628, 'lon': -77.10401, 'network': 'newa'},
-'kbwi': {'srqual': 'ok', 'state': 'MD', 'name': 'Baltimore', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.1667, 'elev': 156, 'lon': -76.6833, 'network': 'icao'},
+stn_info = {'ksby': {'srqual': 'ok', 'state': 'MD', 'name': 'Salisbury', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 38.340600000000002, 'elev': 48, 'lon': -75.510300000000001, 'network': 'icao'},
+'khgr': {'srqual': 'ok', 'state': 'MD', 'name': 'Hagerstown', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.707799999999999, 'elev': 698, 'lon': -77.729699999999994, 'network': 'icao'},
+'md_wdb': {'srqual': 'ok', 'state': 'MD', 'name': 'Woodbine', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 39.315269999999998, 'elev': 628, 'lon': -77.104010000000002, 'network': 'newa'},
+'kbwi': {'srqual': 'ok', 'state': 'MD', 'name': 'Baltimore', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.166699999999999, 'elev': 156, 'lon': -76.683300000000003, 'network': 'icao'},
 }

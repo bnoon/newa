@@ -1,4 +1,4 @@
-stn_info = {'ia_ccy': {'srqual': 'ok', 'state': 'IA', 'name': 'Central City', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.224159, 'elev': 958, 'lon': -91.494571, 'network': 'newa'},
-'kcid': {'srqual': 'ok', 'state': 'IA', 'name': 'Cedar Rapids', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.8833, 'elev': 868.0, 'lon': -91.7167, 'network': 'icao'},
-'kiow': {'srqual': 'ok', 'state': 'IA', 'name': 'Iowa City', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.6328, 'elev': 650.0, 'lon': -91.5431, 'network': 'icao'},
+stn_info = {'kiow': {'srqual': 'ok', 'state': 'IA', 'name': 'Iowa City', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.632800000000003, 'elev': 650.0, 'lon': -91.543099999999995, 'network': 'icao'},
+'kcid': {'srqual': 'ok', 'state': 'IA', 'name': 'Cedar Rapids', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.883299999999998, 'elev': 868.0, 'lon': -91.716700000000003, 'network': 'icao'},
+'ia_ccy': {'srqual': 'ok', 'state': 'IA', 'name': 'Central City', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.224159, 'elev': 958, 'lon': -91.494570999999993, 'network': 'newa'},
 }

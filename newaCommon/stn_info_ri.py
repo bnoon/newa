@@ -1,3 +1,3 @@
-stn_info = {'kuuu': {'srqual': 'ok', 'state': 'RI', 'name': 'Newport', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.53333, 'elev': 155.0, 'lon': -71.28333, 'network': 'icao'},
-'kpvd': {'srqual': 'ok', 'state': 'RI', 'name': 'Providence', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.71667, 'elev': 60.0, 'lon': -71.43333, 'network': 'icao'},
+stn_info = {'kuuu': {'srqual': 'ok', 'state': 'RI', 'name': 'Newport', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.533329999999999, 'elev': 155.0, 'lon': -71.283330000000007, 'network': 'icao'},
+'kpvd': {'srqual': 'ok', 'state': 'RI', 'name': 'Providence', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.716670000000001, 'elev': 60.0, 'lon': -71.433329999999998, 'network': 'icao'},
 }

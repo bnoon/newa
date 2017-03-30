@@ -1,0 +1,2 @@
+stn_info = {'kmrb': {'srqual': 'ok', 'state': 'WV', 'name': 'Martinsburg', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.401899999999998, 'elev': 534, 'lon': -77.984399999999994, 'network': 'icao'},
+}
