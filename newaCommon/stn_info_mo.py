@@ -1,2 +1,0 @@
-stn_info = {'kstl': {'srqual': 'ok', 'state': 'MO', 'name': 'St. Louis', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 38.752499999999998, 'elev': 531, 'lon': -90.373599999999996, 'network': 'icao'},
-}

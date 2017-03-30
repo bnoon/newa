@@ -1,2 +1,0 @@
-stn_info = {'kfsd': {'srqual': 'ok', 'state': 'SD', 'name': 'Sioux Falls', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 43.577800000000003, 'elev': 1428, 'lon': -96.753900000000002, 'network': 'icao'},
-}

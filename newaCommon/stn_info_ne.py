@@ -1,3 +1,0 @@
-stn_info = {'koma': {'srqual': 'ok', 'state': 'NE', 'name': 'Omaha', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.310299999999998, 'elev': 982, 'lon': -95.899199999999993, 'network': 'icao'},
-'ne_gre': {'srqual': 'toolow', 'state': 'NE', 'name': 'Gretna', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 41.128805999999997, 'elev': 354, 'lon': -96.201132999999999, 'network': 'newa'},
-}
