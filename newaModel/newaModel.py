@@ -10,7 +10,7 @@ from newaCommon.newaCommon import *
 miss = -999
 month_names = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
 
-biofixfile = '/static/NEWA/apple_biofix.txt'
+biofixfile = '/newa/static/apple_biofix.txt'
 
 class program_exit (Exception):
 	pass
