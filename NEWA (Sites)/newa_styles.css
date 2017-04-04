@@ -426,7 +426,7 @@
 .button:hover
 	{background-color: #FFFF66;
 	color: maroon;}
-#forecast.button, #fbgraph.button {
+#forecast.button, #fbgraph.button, #asgraph.button, button.forecast {
 	color: blue;
 	text-decoration: underline; }
 .fixedTable 
