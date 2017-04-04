@@ -78,10 +78,11 @@ function statePlaceMarkers (cur_data, event_type, state) {
 		'DC': {lat: 38.9101, lon: -77.0147, zoom: 8, name: 'DC'},
 		'IL': {lat: 40.0411, lon: -89.1965, zoom: 6, name: 'Illinois'},
 		'IA': {lat: 42.0753, lon: -93.4959, zoom: 6, name: 'Iowa'},
+		'KY': {lat: 37.5347, lon: -85.3021, zoom: 6, name: 'Kentucky'},
 		'ME': {lat: 45.3702, lon: -69.2438, zoom: 7, name: 'Maine'}, //no stations
 		'MD': {lat: 39.0550, lon: -76.7909, zoom: 7, name: 'Maryland'},
 		'MA': {lat: 42.2596, lon: -71.8083, zoom: 7, name: 'Massachusetts'},
-		'MI': {lat: 44.3461, lon: -85.4114, zoom: 6, name: 'Michigan'}, //no stations
+		'MI': {lat: 44.3461, lon: -85.4114, zoom: 6, name: 'Michigan'},
 		'MN': {lat: 46.2810, lon: -94.3046, zoom: 6, name: 'Minnesota'},
 		'MO': {lat: 38.3568, lon: -92.4571, zoom: 6, name: 'Missouri'},
 		'NE': {lat: 41.5392, lon: -99.7968, zoom: 6, name: 'Nebraska'},
@@ -270,6 +271,7 @@ function stateStationMapList (options) {
 			['DC', 'DC'],
 			['IL', 'Illinois'],
 			['IA', 'Iowa'],
+			['KY', 'Kentucky'],
 			['MD', 'Maryland'],
 			['MA', 'Massachusetts'],
 			['MI', 'Michigan'],
