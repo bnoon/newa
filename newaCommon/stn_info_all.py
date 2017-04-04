@@ -543,5 +543,7 @@ stn_info = {'kged': {'srqual': 'ok', 'state': 'DE', 'name': 'Georgetown', 'vars'
 'kbtl': {'srqual': 'ok', 'state': 'MI', 'name': 'Battle Creek (AP)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 42.3075, 'elev': 956, 'lon': -85.2511, 'network': 'icao'},
 'ew_sdk': {'srqual': 'ok', 'state': 'MI', 'name': 'Sandusky', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 43.4556, 'elev': 237, 'lon': -82.8375, 'network': 'miwx'},
 'kgsp': {'srqual': 'ok', 'state': 'SC', 'name': 'Greer', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 34.8842, 'elev': 943, 'lon': -82.2208, 'network': 'icao'},
+'kfft': {'srqual': 'ok', 'state': 'KY', 'name': 'Frankfort', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 38.1847, 'elev': 804, 'lon': -84.9033, 'network': 'icao'},
+'klex': {'srqual': 'ok', 'state': 'KY', 'name': 'Lexington', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 38.0408, 'elev': 980, 'lon': -84.6058, 'network': 'icao'},
 'kfsd': {'srqual': 'ok', 'state': 'SD', 'name': 'Sioux Falls', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 43.5778, 'elev': 1428, 'lon': -96.7539, 'network': 'icao'},
 }

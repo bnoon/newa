@@ -7,7 +7,7 @@ def display_station_list [html] (list_type='all',state='all'):
 	from stn_info import stn_info
 	state = state.upper()
 	if state == 'ALL':
-		state_list = ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','SD','MO']
+		state_list = ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','IL','SD','MO','VA','SC','WV','AL','KY']
 	else:
 		state_list = [state]
 	sortdict = {}
@@ -63,7 +63,7 @@ def build_station_list (list_type='all',state='all'):
 	from stn_info import stn_info
 	state = state.upper()
 	if state == 'ALL':
-		state_list = ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','SD','MO']
+		state_list = ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','IL','SD','MO','VA','SC','WV','AL','KY']
 	else:
 		state_list = [state]
 	sortdict = {}
@@ -110,7 +110,7 @@ def build_inactive_list ():
 	sky = sortdict.keys()
 	sky.sort()
 	station_list = []
-	for st in ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','SD','MO']:
+	for st in ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','IL','SD','MO','VA','SC','WV','AL','KY']:
 		for k in sky:
 			if sortdict[k]['state'] == st:
 				station_list.append((sortdict[k]['id'],k))

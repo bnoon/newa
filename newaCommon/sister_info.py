@@ -395,6 +395,8 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "kaoh": {"temp": "kdfi", "rhum": "kdfi", "prcp": "kdfi", "wspd": "kdfi", "wdir": "kdfi"},
 "kzzv": {"temp": "kcmh", "rhum": "kcmh", "prcp": "kcmh", "wspd": "kcmh", "wdir": "kcmh"},
 "khsv": {"temp": "kbhm", "rhum": "kbhm", "prcp": "kbhm", "wspd": "kbhm", "wdir": "kbhm"},
+"klex": {"temp": "kfft", "rhum": "kfft", "prcp": "kfft", "wspd": "kfft", "wdir": "kfft"},
+"kfft": {"temp": "klex", "rhum": "klex", "prcp": "klex", "wspd": "klex", "wdir": "klex"},
 "kstl": {"temp": "il_bel", "rhum": "il_bel", "prcp": "il_bel", "wspd": "il_bel", "wdir": "il_bel"},
 "pa_big": {"temp": "kmdt", "rhum": "kmdt", "prcp": "kmdt", "wspd": "kmdt", "wdir": "kmdt", "lwet": "pa_npa", "srad": "pa_npa"},
 "pa_pin": {"temp": "kmdt", "rhum": "kmdt", "prcp": "kmdt", "wspd": "kmdt", "wdir": "kmdt", "lwet": "pa_big", "srad": "pa_big"},
