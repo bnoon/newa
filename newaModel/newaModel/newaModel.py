@@ -1868,7 +1868,7 @@ class Apple (Base,Models):
 			if strep_spray:
 				strep_spray_dt = strep_spray + DateTime.RelativeDate(hour=0,minute=0,second=0)  #for comparisons
 			else:
-				strep_spray_dt =  DateTime.DateTime(*deghrs[0][0]) + DateTime.RelativeDate(days=-1)	#out of the way
+				strep_spray_dt = enddate_dt + DateTime.RelativeDate(days=-15)	#out of the way of useful calculations
 
 			# check for risk last three days, forecast next 5 days
 			for theDate,dly_dhr in deghrs:
