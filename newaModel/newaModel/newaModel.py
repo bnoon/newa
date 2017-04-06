@@ -1868,7 +1868,7 @@ class Apple (Base,Models):
 			if strep_spray:
 				strep_spray_dt = strep_spray + DateTime.RelativeDate(hour=0,minute=0,second=0)  #for comparisons
 			else:
-				strep_spray_dt = enddate_dt + DateTime.RelativeDate(days=-15)	#out of the way of useful calculations
+				strep_spray_dt = end_date_dt + DateTime.RelativeDate(days=-15)	#out of the way of useful calculations
 
 			# check for risk last three days, forecast next 5 days
 			for theDate,dly_dhr in deghrs:
@@ -2589,7 +2589,7 @@ class Apple (Base,Models):
 				from ofm_info_dict import pest_status_management	
 				biofix_dd = 378			#updated from 450  4/2016
 				biofix2_dd = 1241		#updated from 1100  4/2016, not 1066
-				biofix3_dd = 1820		#updated from 1500  4/2016
+				biofix3_dd = 1820		#updated from 1500  4/2016, not 2436
 				biofix4_dd = 99999
 			elif pest == 'apple-maggot':
 				from am_info_dict import pest_status_management	
@@ -3790,6 +3790,8 @@ def process_input (request,path):
 		output = "tab"
 		estimate = "no"
 #	 	retrieve input
+#		print 'path:',path
+
 		if path is None:
 			if request and request.form:
 #				print 'form',request.form

@@ -1605,30 +1605,25 @@ def fire_blight_late [html] (smry_dict):
 		  });
 		</script>
 		<script type="text/javascript">
-			function setandsub (selbut) {
-				switch (selbut)
-				{
-				case 1:
-					document.process.selbutton.value = "biofix";
-					document.process.type.value = "fire_blight";
-					break;
-				case 4:
-					document.process.selbutton.value = "infect";
-					document.process.type.value = "shoot_blight";
-					window.open('','ShootBlight','height=400,width=520');
-					document.process.target = 'ShootBlight';
-					break;
-				case 5:
-					document.process.selbutton.value = "symptoms";
-					document.process.type.value = "shoot_blight";
-					window.open('','ShootBlight','height=400,width=520');
-					document.process.target = 'ShootBlight';
-					break;
-				default:
-					document.process.selbutton.value = "biofix";
-					document.process.type.value = "fire_blight";
+		    function igetshootblight(selopt) {
+				var params = {
+					type: 'shoot_blight',
+					stn: $('input[name=stn]').val(),
+					accend: $('input[name=accend]').val(),
+					selbutton: selopt === 4 ? 'infect' : 'symptoms'
+				};
+				if (selopt === 4) { 
+					params.infection_event = $('input[name=infection_event]').val();
+				} else if (selopt === 5) { 
+					params.symptoms = $('input[name=symptoms]').val();
 				}
-				document.process.submit();
+				$('#sbresults').remove();
+				$('#shootblight' + (selopt - 3)).prepend('<img src="http://newatest.nrcc.cornell.edu/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
+				$.get('http://newatest.nrcc.cornell.edu/newaModel/process_input',params,function(data) {
+					$('#loading').remove();
+					$('#shootblight' + (selopt - 3)).append(data);
+				});
+				return false;
 			}
 		</script>
 		</head>
@@ -1639,6 +1634,8 @@ def fire_blight_late [html] (smry_dict):
 		'''
 		'<input type="hidden" name="accend" value="%d/%d/%d">' % (smry_dict['accend'].month,smry_dict['accend'].day,smry_dict['accend'].year)
 		'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
+		'<input type="hidden" name="selbutton" value="biofix">'
+		'<input type="hidden" name="type" value="fire_blight">'
 
 	'<H3>Fire Blight Risk Predictions for %s</H3>' % smry_dict["station_name"]
 
@@ -1662,7 +1659,7 @@ def fire_blight_late [html] (smry_dict):
 		### first blossom open selector
 		'<div style="margin:1em 0 0;"><label><b>First blossom open date:&nbsp;</b></label>'
 		if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
-			action = "setandsub(1);"
+			action = "submit();"
 		else:
 			action = "getfireblight(1);"
 		'<input type="text" name="firstblossom" id="fbdpick" value="Click to enter" onChange="%s">' % action
@@ -1688,11 +1685,11 @@ def fire_blight_late [html] (smry_dict):
 	'''
 	'<br /><b>Trauma Event Date:&nbsp;</b> '
 	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
-		action = "setandsub(4);"
+		action = "igetshootblight(4);"
 	else:
 		action = "getshootblight(4);"
 	'<input type="text" name="infection_event" id="iedpick" value="Click to enter date" onChange="%s">' % (action)
-	if smry_dict.has_key('output') and smry_dict['output'] != 'standalone':
+	if smry_dict.has_key('output'):
 		'<div id="shootblight1" style="margin-top:1em;"></div>'
 	'</div>'
 
@@ -1707,11 +1704,11 @@ def fire_blight_late [html] (smry_dict):
 	'''
 	'<p><b>Symptom Occurrence Date:&nbsp;</b> '
 	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
-		action = "setandsub(5);"
+		action = "igetshootblight(5);"
 	else:
 		action = "getshootblight(5);"
 	'<input type="text" name="symptoms" id="sodpick" value="Click to enter date" onChange="%s">' % (action)
-	if smry_dict.has_key('output') and smry_dict['output'] != 'standalone':
+	if smry_dict.has_key('output'):
 		'<div id="shootblight2" style="margin-top:1em;"></div>'
 	'</div>'
 	
@@ -1777,34 +1774,12 @@ def fire_blight_dormant [html] (smry_dict):
 #--------------------------------------------------------------------------------------------		
 # shoot blight infection summary 
 def shoot_blight_infection_log [html] (smry_dict):
-	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
-		'''
-		<html>
-		<head>
-		<title>NEWA Shoot Blight Model</title>
-		<link rel="stylesheet" type="text/css" href="http://newatest.nrcc.cornell.edu/newa_styles.css">
-		</head>
-		<body>
-		'''
-		'<div class="plain_back" id="sbresults">'
-	else:
-		'<div class="plain_back" id="sbresults">'
+	'<div class="plain_back" id="sbresults">'
 	'<p><b>%s</b></p>' % smry_dict['recommend']
 	if smry_dict['ddaccum']:
 		ddaccum = int(round(smry_dict['ddaccum'],0))
 		'<p><b>Degree Days (base 55 BE) %d/%d through %d/%d: </b>%s</p>' % (smry_dict['infection_event'].month,smry_dict['infection_event'].day,smry_dict['last_day_accum'][1],smry_dict['last_day_accum'][2],ddaccum)
-
-	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
-		'''
-		<p>
-		<div style="width:500;">
-		<a href="JavaScript:window.close()">Close window</a>
-		</div>
-		</p>
-		</div>
-		</body>
-		</html>
-		'''
+	'</div>'
 
 #--------------------------------------------------------------------------------------------		
 # shoot blight sypmptoms summary 
