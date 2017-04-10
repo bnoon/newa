@@ -8,6 +8,6 @@ stn_info = {'nc_hen': {'srqual': 'ok', 'state': 'NC', 'name': 'Hendersonville (K
 'nc_fla': {'srqual': 'ok', 'state': 'NC', 'name': 'Flat Rock (Richmind)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 35.307008, 'elev': 2264, 'lon': -82.370352, 'network': 'newa'},
 'nc_esm': {'srqual': 'ok', 'state': 'NC', 'name': 'Edneyville (Sugarloaf Mtn)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 35.391921, 'elev': 2964, 'lon': -82.275268, 'network': 'newa'},
 'nc_edn': {'srqual': 'ok', 'state': 'NC', 'name': 'Edneyville (Lewis Creek)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 35.368132, 'elev': 2223, 'lon': -82.338506, 'network': 'newa'},
-'nc_gre': {'name': 'Green Creek (Polk Co Ag)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -81.971, 'state': 'NC', 'elev': 1002, 'lat': 35.199, 'network': 'newa'},
+'nc_gre': {'srqual': 'ok', 'state': 'NC', 'name': 'Green Creek (Polk Co Ag)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 35.199, 'elev': 1002, 'lon': -81.971, 'network': 'newa'},
 'nc_eaw': {'srqual': 'ok', 'state': 'NC', 'name': 'Edneyville (Apple Wedge)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 35.40492, 'elev': 2248, 'lon': -82.3536, 'network': 'newa'},
 }

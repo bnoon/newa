@@ -3,7 +3,7 @@ stn_info = {'kmsp': {'srqual': 'ok', 'state': 'MN', 'name': 'Minneapolis', 'vars
 'mn_sha': {'srqual': 'ok', 'state': 'MN', 'name': 'Shafer', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 45.352665, 'elev': 938, 'lon': -92.753021, 'network': 'newa'},
 'mn_elg': {'srqual': 'ok', 'state': 'MN', 'name': 'Elgin', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 44.1364, 'elev': 1050, 'lon': -92.242435, 'network': 'newa'},
 'kdlh': {'srqual': 'ok', 'state': 'MN', 'name': 'Diluth', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 46.8369, 'elev': 1433, 'lon': -92.1833, 'network': 'icao'},
-'mn_lac': {'srqual': 'not_rated', 'state': 'MN', 'name': 'La Crescent', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 43.858199, 'elev': 1231, 'lon': -91.318371, 'network': 'newa'},
+'mn_lac': {'srqual': 'ok', 'state': 'MN', 'name': 'La Crescent', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 43.858199, 'elev': 1231, 'lon': -91.318371, 'network': 'newa'},
 'mn_aft': {'srqual': 'ok', 'state': 'MN', 'name': 'Afton', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 44.819, 'elev': 881, 'lon': -92.796, 'network': 'newa'},
 'mn_cha': {'srqual': 'sensoroff', 'state': 'MN', 'name': 'Chaska (Univ MN HRC)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 44.86252, 'elev': 1029, 'lon': -93.634693, 'network': 'newa'},
 'krst': {'srqual': 'ok', 'state': 'MN', 'name': 'Rochester', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 43.9042, 'elev': 1304, 'lon': -92.4917, 'network': 'icao'},
