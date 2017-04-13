@@ -87,6 +87,7 @@ stn_info = {'kalb': {'srqual': 'ok', 'state': 'NY', 'name': 'Albany', 'vars': ['
 'poe': {'srqual': 'ok', 'state': 'NY', 'name': 'Portland Escarpment', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.34944, 'elev': 1076, 'lon': -79.47194, 'network': 'newa'},
 'bra': {'srqual': 'ok', 'state': 'NY', 'name': 'Branchport', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.584167, 'elev': 1043, 'lon': -77.167778, 'network': 'newa'},
 'loc': {'srqual': 'toolow', 'state': 'NY', 'name': 'Ransomville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 43.187325, 'elev': 387.0, 'lon': -78.901557, 'network': 'newa'},
+'wal': {'name': 'Walden (Crist)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -74.167, 'state': 'NY', 'elev': 445, 'lat': 41.5529, 'network': 'newa'},
 'eag': {'srqual': 'ok', 'state': 'NY', 'name': 'Eagle Bridge', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.964861, 'elev': 687, 'lon': -73.339623, 'network': 'newa'},
 'dun': {'srqual': 'ok', 'state': 'NY', 'name': 'Dundee (Wiemer)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.570677, 'elev': 702, 'lon': -76.928593, 'network': 'newa'},
 'cu_gfr': {'srqual': 'ok', 'state': 'NY', 'name': 'Ithaca Cornell', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 42.4492, 'elev': 960.0, 'lon': -76.4492, 'network': 'cu_log'},

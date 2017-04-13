@@ -12,6 +12,6 @@ stn_info = {'kleb': {'srqual': 'ok', 'state': 'NH', 'name': 'Lebanon', 'vars': [
 'kdaw': {'srqual': 'ok', 'state': 'NH', 'name': 'Rochester', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 43.2781, 'elev': 323, 'lon': -70.9222, 'network': 'icao'},
 'kafn': {'srqual': 'ok', 'state': 'NH', 'name': 'Jaffrey', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 42.805, 'elev': 1040, 'lon': -72.0036, 'network': 'icao'},
 'nh_dur': {'srqual': 'toolow', 'state': 'NH', 'name': 'Durham', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 43.150628, 'elev': 151, 'lon': -70.942607, 'network': 'newa'},
-'nh_mer': {'srqual': 'ok', 'state': 'NH', 'name': 'Meredith', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 43.676673, 'elev': 642, 'lon': -71.652851, 'network': 'newa'},
+'nh_mer': {'srqual': 'ok', 'state': 'NH', 'name': 'Meredith', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 43.676673, 'elev': 642, 'lon': -71.470985, 'network': 'newa'},
 'nh_wal': {'srqual': 'ok', 'state': 'NH', 'name': 'Walpole', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 43.033883, 'elev': 642, 'lon': -72.430225, 'network': 'newa'},
 }
