@@ -2,7 +2,7 @@ stn_info = {'kaoh': {'srqual': 'ok', 'state': 'OH', 'name': 'Lima', 'vars': ['te
 'kcvg': {'srqual': 'ok', 'state': 'OH', 'name': 'Cincinnati', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.0444, 'elev': 888, 'lon': -84.6725, 'network': 'icao'},
 'kmfd': {'srqual': 'ok', 'state': 'OH', 'name': 'Mansfield', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 40.8203, 'elev': 1241, 'lon': -82.5178, 'network': 'icao'},
 'kcmh': {'srqual': 'ok', 'state': 'OH', 'name': 'Columbus', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.9908, 'elev': 813, 'lon': -82.8769, 'network': 'icao'},
-'oh_ber': {'name': 'Berlin Heights', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -82.47252, 'state': 'OH', 'elev': 793, 'lat': 41.336259, 'network': 'newa'},
+'oh_ber': {'srqual': 'ok', 'state': 'OH', 'name': 'Berlin Heights', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 41.336259, 'elev': 793, 'lon': -82.47252, 'network': 'newa'},
 'kyng': {'srqual': 'ok', 'state': 'OH', 'name': 'Youngstown', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.2547, 'elev': 1199, 'lon': -80.6736, 'network': 'icao'},
 'kzzv': {'srqual': 'ok', 'state': 'OH', 'name': 'Zanesville', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.9444, 'elev': 880, 'lon': -81.8922, 'network': 'icao'},
 'kdfi': {'srqual': 'ok', 'state': 'OH', 'name': 'Defiance', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.3375, 'elev': 707, 'lon': -84.4289, 'network': 'icao'},
