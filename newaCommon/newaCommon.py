@@ -116,7 +116,7 @@ def initHourlyVar (staid, var, miss, station_type='newa'):
 	try:
 		data = ucan.get_data()
 		if station_type == 'icao':
-			v = data.newTSVarNative(major,0,staid)
+			v = data.newTSVarNative(major,0,str(staid))
 		else:
 			v = data.newTSVar(major,0,staid)
 		if units: v.setUnits (units)
