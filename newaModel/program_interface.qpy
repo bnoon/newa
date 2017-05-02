@@ -2,6 +2,7 @@ from quixote.directory import Directory
 from quixote import get_request
 from quixote.errors import TraversalError
 
+from newaModel import process_input, process_help, updateStatus, update_grape_status
 class RootDirectory(Directory):
 
 	_q_exports = ["","process_input","process_help","updateStatus","apple_scab","apple_scab_estlw","fire_blight","sooty_blotch","apple_disease",
@@ -18,7 +19,6 @@ class RootDirectory(Directory):
 			from newaModel_io import apple_disease_input
 			return apple_disease_input('apple_scab')
 		else:
-			from newaModel import process_input
 			path = ['apple_scab'] + path
 			return process_input(None,path)
 	def apple_scab_estlw (self, path=None) :
@@ -26,7 +26,6 @@ class RootDirectory(Directory):
 			from newaModel_io import apple_scab_estlw_input
 			return apple_scab_estlw_input()
 		else:
-			from newaModel import process_input
 			path = ['apple_scab_estlw'] + path
 			return process_input(None,path)
 	def fire_blight (self, path=None) :
@@ -34,7 +33,6 @@ class RootDirectory(Directory):
 			from newaModel_io import apple_disease_input
 			return apple_disease_input('fire_blight')
 		else:
-			from newaModel import process_input
 			path = ['fire_blight'] + path
 			return process_input(None,path)
 	def sooty_blotch (self, path=None) :
@@ -42,7 +40,6 @@ class RootDirectory(Directory):
 			from newaModel_io import apple_disease_input
 			return apple_disease_input('sooty_blotch')
 		else:
-			from newaModel import process_input
 			path = ['sooty_blotch'] + path
 			return process_input(None,path)
 	def berry_moth (self, path=None) :
@@ -50,7 +47,6 @@ class RootDirectory(Directory):
 			from newaModel_io import grape_disease_input
 			return grape_disease_input('berry_moth')
 		else:
-			from newaModel import process_input
 			path = ['berry_moth'] + path
 			return process_input(None,path)
 	def grape_dis (self, path=None) :
@@ -58,7 +54,6 @@ class RootDirectory(Directory):
 			from newaModel_io import grape_disease_input
 			return grape_disease_input('grape_dis')
 		else:
-			from newaModel import process_input
 			path = ['grape_dis'] + path
 			return process_input(None,path)
 	def dmcast (self, path=None) :
@@ -66,7 +61,6 @@ class RootDirectory(Directory):
 			from newaModel_io import grape_disease_input
 			return grape_disease_input('dmcast')
 		else:
-			from newaModel import process_input
 			path = ['dmcast'] + path
 			return process_input(None,path)
 	def apple_stlm (self, path=None) :
@@ -74,7 +68,6 @@ class RootDirectory(Directory):
 			from newaModel_io import apple_pest_input
 			return apple_pest_input('apple-stlm')
 		else:
-			from newaModel import process_input
 			path = ['apple-stlm'] + path
 			return process_input(None,path)
 	def apple_ofm (self, path=None) :
@@ -82,7 +75,6 @@ class RootDirectory(Directory):
 			from newaModel_io import apple_pest_input
 			return apple_pest_input('apple-ofm')
 		else:
-			from newaModel import process_input
 			path = ['apple-ofm'] + path
 			return process_input(None,path)
 	def apple_cm (self, path=None) :
@@ -90,7 +82,6 @@ class RootDirectory(Directory):
 			from newaModel_io import apple_pest_input
 			return apple_pest_input('apple-cm')
 		else:
-			from newaModel import process_input
 			path = ['apple-cm'] + path
 			return process_input(None,path)
 	def apple_pc (self, path=None) :
@@ -98,7 +89,6 @@ class RootDirectory(Directory):
 			from newaModel_io import apple_pest_input
 			return apple_pest_input('apple-pc')
 		else:
-			from newaModel import process_input
 			path = ['apple-pc'] + path
 			return process_input(None,path)
 	def apple_oblr (self, path=None) :
@@ -106,7 +96,6 @@ class RootDirectory(Directory):
 			from newaModel_io import apple_pest_input
 			return apple_pest_input('apple-oblr')
 		else:
-			from newaModel import process_input
 			path = ['apple-oblr'] + path
 			return process_input(None,path)
 	def apple_maggot (self, path=None) :
@@ -114,7 +103,6 @@ class RootDirectory(Directory):
 			from newaModel_io import apple_pest_input
 			return apple_pest_input('apple-maggot')
 		else:
-			from newaModel import process_input
 			path = ['apple-maggot'] + path
 			return process_input(None,path)
 	def apple_disease (self, path=None) :
@@ -122,7 +110,6 @@ class RootDirectory(Directory):
 			from newaModel_io import apple_disease_input
 			return apple_disease_input(None)
 		else:
-			from newaModel import process_input
 			path = ['apple_disease'] + path
 			return process_input(None,path)
 	def grape_disease (self, path=None) :
@@ -130,7 +117,6 @@ class RootDirectory(Directory):
 			from newaModel_io import grape_disease_input
 			return grape_disease_input(None)
 		else:
-			from newaModel import process_input
 			path = ['grape_disease'] + path
 			return process_input(None,path)
 	def apple_pest (self, path=None) :
@@ -138,7 +124,6 @@ class RootDirectory(Directory):
 			from newaModel_io import apple_pest_input
 			return apple_pest_input(None)
 		else:
-			from newaModel import process_input
 			path = ['apple_pest'] + path
 			return process_input(None,path)
 	def apple_biofix (self) :
@@ -152,33 +137,27 @@ class RootDirectory(Directory):
 		request = get_request()
 		return apple_biofix_process(request)
 	def process_input (self, path=None) :
-		from newaModel import process_input
 		request = get_request()
 		return process_input(request,path)
 	def process_help (self, path=None) :
-		from newaModel import process_help
 		request = get_request()
 		return process_help(request,path)
 	def updateStatus (self, path=None) :
-		from newaModel import updateStatus
 		request = get_request()
 		return updateStatus(request,path)
 	def update_grape_status (self, path=None) :
-		from newaModel import update_grape_status
 		request = get_request()
 		return update_grape_status(request,path)
 
 #	process information provided in url
 	def _q_lookup(self, component, path=None):
 		if component == 'process_help':
-			from newaModel import process_help
 			if path: 
 				path = [component] + path
 			else:
 				path = [component]
 			return process_help(None,path)
 		else:
-			from newaModel import process_input
 			if path: 
 				path = [component] + path
 			else:
