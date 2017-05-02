@@ -151,18 +151,21 @@ class RootDirectory(Directory):
 
 #	process information provided in url
 	def _q_lookup(self, component, path=None):
+		req = get_request()
+
+		if component.find('?') > 0 :
+			component,query = component.split('?',1)
 		if component == 'process_help':
-			if path: 
-				path = [component] + path
-			else:
-				path = [component]
-			return process_help(None,path)
-		else:
-			if path: 
-				path = [component] + path
-			else:
-				path = [component]
-			return process_input(None,path)
+			return process_help(req,None)
+		elif component == 'process_input':
+			return process_input(req,None)
+		else :
+			return None
+
+	def _q_translate(self, component) :
+		if component.find('?') > 0 :
+			component,query = component.split('?',1)
+		return super(RootDirectory, self)._q_translate(component)
 
 	def _q_traverse(self, path):
 		assert len(path) > 0
