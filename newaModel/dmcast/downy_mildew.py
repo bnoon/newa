@@ -73,9 +73,9 @@ global systemInfo
 systemInfo = os.uname()
 if systemInfo[0] == 'Darwin' :
 	#_dmC  = C.cdll.LoadLibrary("/newa/newaModel/newaModel/dmcast/libdmcast.dylib")
-	_dmC  = C.cdll.LoadLibrary("./libdmcast.dylib")
+	_dmC  = C.cdll.LoadLibrary("newaModel/dmcast/libdmcast.dylib")
 else :
-	_dmC  = C.cdll.LoadLibrary("./libdmcast.so")
+	_dmC  = C.cdll.LoadLibrary("newaModel/dmcast/libdmcast.so")
 
 
 

@@ -360,6 +360,10 @@ def process_input (request,path):
 	try:
 # 		retrieve input
 		if path is None:
+			newForm = {}
+			for k,v in request.form.items() :
+				newForm[str(k)] = str(v)
+			request.form = newForm
 			if request and request.form:
 				try:
 					stn = request.form['stn'].strip()

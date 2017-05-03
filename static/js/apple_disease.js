@@ -38,13 +38,19 @@ function getfireblight(selopt) {
 		$('#forecast').click(function() {
 			req_stn = $('select[name=stn] option:selected').val();
 			$.get('/newaUtil/getForecastUrl/'+req_stn, function(data) { 
-				window.open(data);
+					var popup_window = window.open(data);
+					try {
+						popup_window.focus();
+					} catch (e) {
+						alert('Popup windows are blocked. Unblock popup windows to see forecast.');
+					}
 			});
+			return false;
 		});
 		$('#fbgraph').click(function() {
 			var paramStr = "type=fire_blight_grf";
 			$('select[name=stn], input[name=accend], input[name=firstblossom], select[name=orchard_history]').each(function () { 
-				paramStr += "&" + this.name + "=" + this.value;
+				paramStr += "&" + this.name + "=" + this.value.split("/").join("-");
 			});
 			window.open('/newaGraph/fire_blight_grf?' + paramStr,"fbgraph","resizable=1,scrollbars=1,status=0,toolbar=0,location=0,menubar=0,height=760,width=630");
 		});
@@ -95,13 +101,19 @@ function getapplescab(selopt) {
 		$('#dpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: "", changeMonth: true, changeYear: true });
 		$('button.forecast').click(function() {
 			$.get('/newaUtil/getForecastUrl/'+req_stn, function(data) { 
-				window.open(data);
+					var popup_window = window.open(data);
+					try {
+						popup_window.focus();
+					} catch (e) {
+						alert('Popup windows are blocked. Unblock popup windows to see forecast.');
+					}
 			});
+			return false;
 		});
 		$('#asgraph').click(function() {
 			var paramStr = "type=apple_scab_grf&stn=" + req_stn;
 			$('input[name=accend], input[name=greentip]').each(function () { 
-				paramStr += "&" + this.name + "=" + this.value;
+				paramStr += "&" + this.name + "=" + this.value.split("/").join("-");
 			});
 			window.open('/newaGraph/apple_scab_grf?' + paramStr,"asgraph","resizable=1,scrollbars=1,status=0,toolbar=0,location=0,menubar=0,height=760,width=630");
 		});
@@ -134,13 +146,19 @@ function getapplescab_estlw(selopt) {
 		$('#dpick').datepicker({ minDate: new Date(2000, 0, 1), maxDate: "", changeMonth: true, changeYear: true });
 		$('#forecast').click(function() {
 			$.get('/newaUtil/getForecastUrl/'+req_stn, function(data) { 
-				window.open(data);
+					var popup_window = window.open(data);
+					try {
+						popup_window.focus();
+					} catch (e) {
+						alert('Popup windows are blocked. Unblock popup windows to see forecast.');
+					}
 			});
+			return false;
 		});
 		$('#asgraph').click(function() {
 			var paramStr = "type=apple_scab_grf&stn=" + req_stn;
 			$('input[name=accend], input[name=greentip]').each(function () { 
-				paramStr += "&" + this.name + "=" + this.value;
+				paramStr += "&" + this.name + "=" + this.value.split("/").join("-");
 			});
 			window.open('/newaGraph/apple_scab_grf?' + paramStr,"asgraph","resizable=1,scrollbars=1,status=0,toolbar=0,location=0,menubar=0,height=760,width=630");
 		});
@@ -179,8 +197,14 @@ function getsootyblotch(selopt) {
 		$('#forecast').click(function() {
 			req_stn = $('select[name=stn] option:selected').val();
 			$.get('/newaUtil/getForecastUrl/'+req_stn, function(data) { 
-				window.open(data);
+					var popup_window = window.open(data);
+					try {
+						popup_window.focus();
+					} catch (e) {
+						alert('Popup windows are blocked. Unblock popup windows to see forecast.');
+					}
 			});
+			return false;
 		});
 		$("#moreinfo").dialog({
 			show: 'blind',

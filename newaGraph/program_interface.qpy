@@ -4,39 +4,36 @@ from quixote.errors import TraversalError
 
 class RootDirectory(Directory):
 
-	_q_exports = ["","process_input","process_help","apple_et","apple_thin"]
-
+	_q_exports = ["","process_input","apple_scab_grf","fire_blight_grf"]
+	
 #	put up input page for following
 	def _q_index (self):						#default
-		from newaTools_io import apple_et_input
-		return apple_et_input()
-	def apple_et (self, path=None) :
+		from newaGraph_io import apple_disease_input
+		return apple_disease_input()
+	def apple_scab_grf (self, path=None) :
 		if not path or path == ['']:
-			from newaTools_io import apple_et_input
-			return apple_et_input()
+			from newaGraph import process_input
+			request = get_request()
+			return process_input(request,path)
 		else:
-			from newaTools import process_input
-			path = ['apple_et'] + path
+			from newaGraph import process_input
+			path = ['apple_scab_grf'] + path
 			return process_input(None,path)
-	def apple_thin (self, path=None) :
+	def fire_blight_grf (self, path=None) :
 		if not path or path == ['']:
-			from newaTools_io import apple_thin_input
-			return apple_thin_input()
+			from newaGraph import process_input
+			request = get_request()
+			return process_input(request,path)
 		else:
-			from newaTools import process_input
-			path = ['apple_thin'] + path
+			from newaGraph import process_input
+			path = ['fire_blight_grf'] + path
 			return process_input(None,path)
-
 
 #	received request form to be processed
 	def process_input (self, path=None) :
-		from newaTools import process_input
+		from newaGraph import process_input
 		request = get_request()
 		return process_input(request,path)
-	def process_help (self, path=None) :
-		from newaTools import process_help
-		request = get_request()
-		return process_help(request,path)
 
 #	process information provided in url
 	def _q_lookup(self, component, path=None):
@@ -44,13 +41,15 @@ class RootDirectory(Directory):
 		if component.find('?') > 0 :
 			component,query = component.split('?',1)
 		if component == 'process_help':
-			from newaTools import process_help
 			return process_help(req,None)
 		elif component == 'process_input':
-			from newaTools import process_input
 			return process_input(req,None)
 		else :
-			return None
+			if path: 
+				path = [component] + path
+			else:
+				path = [component]
+			return process_input(None,path)
 
 	def _q_translate(self, component) :
 		if component.find('?') > 0 :

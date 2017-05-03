@@ -5,10 +5,10 @@ from mx import DateTime
 from print_exception import print_exception
 import newaTools_io
 from newaModel.phen_events import phen_events_dict	
-import newaCommon_io
+import newaCommon.newaCommon_io
 from newaCommon.newaCommon import *
-from newaTools.Apple_ET_Model import Apple_ET_model
-from newaTools.Apple_Thinning_Model.AppleGrowthModel import AppleGrowthModel
+from Apple_Thinning_Model.AppleGrowthModel import AppleGrowthModel
+from Apple_ET_Model import Apple_ET_model
 import csv
 import collections
 
@@ -457,6 +457,10 @@ def process_help (request, path):
 	try:
 		smry_type = None
 #	 	retrieve input
+		newForm = {}
+		for k,v in request.form.items() :
+			newForm[str(k)] = str(v)
+		request.form = newForm
 		if path is None:
 			if request and request.form:
 				try:
@@ -502,6 +506,10 @@ def process_input (request,path):
 		bloom = None
 		output = "tab"
 #	 	retrieve input
+		newForm = {}
+		for k,v in request.form.items() :
+			newForm[str(k)] = str(v)
+		request.form = newForm
 		if path is None:
 			if request and request.form:
 				try:

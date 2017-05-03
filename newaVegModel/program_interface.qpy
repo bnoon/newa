@@ -10,6 +10,7 @@ class RootDirectory(Directory):
 				  "cruc_lesionnt","cruc_scleroti","cruc_sbcystnt",
 				  "cruc_zclooper","cruc_zicworm","cruc_zaphids","cruc_zdbmoth","cruc_zothrips","cruc_zfleabtl",
 				  "cruc_zsmidge","cruc_zslugs","cruc_zslugs","cruc_zcrmaggot"]
+	### Only crucifer_disease entry point is working.  - kle 5/3/2017 ###
 
 #	put up input page for following
 	def _q_index (self):						#default
@@ -205,20 +206,22 @@ class RootDirectory(Directory):
 
 #	process information provided in url
 	def _q_lookup(self, component, path=None):
+		req = get_request()
+		if component.find('?') > 0 :
+			component,query = component.split('?',1)
 		if component == 'process_help':
 			from newaVegModel import process_help
-			if path: 
-				path = [component] + path
-			else:
-				path = [component]
-			return process_help(None,path)
-		else:
+			return process_help(req,None)
+		elif component == 'process_input':
 			from newaVegModel import process_input
-			if path: 
-				path = [component] + path
-			else:
-				path = [component]
-			return process_input(None,path)
+			return process_input(req,None)
+		else :
+			return None
+
+	def _q_translate(self, component) :
+		if component.find('?') > 0 :
+			component,query = component.split('?',1)
+		return super(RootDirectory, self)._q_translate(component)
 
 	def _q_traverse(self, path):
 		assert len(path) > 0

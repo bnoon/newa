@@ -10,140 +10,140 @@ month_abbrev = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','
 month_list = [(1,"January"),(2,"February"),(3,"March"),(4,"April"),(5,"May"),(6,"June"),
 			  (7,"July"),(8,"August"),(9,"September"),(10,"October"),(11,"November"),(12,"December")]
 
-def potato_inputs [html] (station_type):
-	display_station_list(station_type)
-	now = DateTime.now()
-	'<P>Year:<BR>' 
-	'<select name="year">'
-	'<option value="%d" selected>%d</option>'%(now.year,now.year)
-	for yr in range(now.year-1,1995,-1):
-		'<option value="%d">%d</option>'%(yr,yr)
-	'</select>'
-	'<P>Emergence Date:<BR>'
-	'<select name="month">'
-	for mon_num,mon_name in month_list:
-		if mon_num == 5:
-			'<option value="%d" selected>%s</option>' % (mon_num,mon_name)
-		else:
-			'<option value="%d">%s</option>' % (mon_num,mon_name)
-	'</select>'
-	'<select name="day">'
-	for dy in range(1,32):
-		if dy == 1:
-			'<option value="%d" selected>%d</option>'%(dy,dy)
-		else:
-			'<option value="%d">%d</option>'%(dy,dy)
-	'</select>'
-
-def potato_inputs_simcast [html] (station_type):
-	from potato_dictionary import potatoD
-	from tomato_dictionary import tomatoD
-	display_station_list(station_type)
-	yest = DateTime.now() + DateTime.RelativeDate(days=-1)
-	'<input type="hidden" name="year" value="%s">' % yest.year
-	'<P>Last fungicide application:<BR>'
-	'<select name="month">'
-	for mon_num,mon_name in month_list:
-		if mon_num == yest.month:
-			'<option value="%d" selected>%s</option>' % (mon_num,mon_name)
-		else:
-			'<option value="%d">%s</option>' % (mon_num,mon_name)
-	'</select>'
-	'<select name="day">'
-	for dy in range(1,32):
-		if dy == yest.day:
-			'<option value="%d" selected>%d</option>'%(dy,dy)
-		else:
-			'<option value="%d">%d</option>'%(dy,dy)
-	'</select>'
-
-	'''
-	<P>Crop:</br>
-	<select name="crop" id="crop" onChange="setCultivarMenu();">
-	<option value="potato" SELECTED >Potato</option>
-	<option value="tomato" >Tomato</option>
-	</select>
-	'''
-	potKeys = potatoD.keys()
-	potKeys.sort()
-	'''
-	<div id="potato_options">
-	<P>Cultivar:</br>
-	<select name="potato_cultivar" id="potato_cultivar">
-	<option value="" SELECTED >Select potato cultivar</option>
-	'''
-	for this_key in potKeys :
-		if this_key == "" :
-			continue
-		'<option value="%s" >%s</option>'%(this_key,this_key)
-	'</select>'
-	'</div>'
-
-	tomKeys = tomatoD.keys()
-	tomKeys.sort()
-	'''
-	<div id="tomato_options" style="display:none;">
-	<P>Cultivar:</br>
-	<select name="tomato_cultivar" id="tomato_cultivar">
-	<option value="" SELECTED >Select tomato cultivar</option>
-	'''
-	for this_key in tomKeys :
-		if this_key == "" :
-			continue
-		'<option value="%s" >%s</option>'%(this_key,this_key)
-	'</select>'
-	'</div>'
-
-def onion_inputs [html] (station_type):
-	display_station_list(station_type)
-	now = DateTime.now()
-	'<P>Year:<BR>' 
-	'<select name="year">'
-	'<option value="%d" selected>%d</option>'%(now.year,now.year)
-	for yr in range(now.year-1,1995,-1):
-		'<option value="%d">%d</option>'%(yr,yr)
-	'</select>'
-	'<P>Planting Date:<BR>'
-	'<select name="month">'
-	for mon_num,mon_name in month_list:
-		if mon_num == 4:
-			'<option value="%d" selected>%s</option>' % (mon_num,mon_name)
-		else:
-			'<option value="%d">%s</option>' % (mon_num,mon_name)
-	'</select>'
-	'<select name="day">'
-	for dy in range(1,32):
-		if dy == 21:
-			'<option value="%d" selected>%d</option>'%(dy,dy)
-		else:
-			'<option value="%d">%d</option>'%(dy,dy)
-	'</select>'
-
-def tomato_inputs [html] (station_type):
-	display_station_list(station_type)
-	now = DateTime.now()
-	'<P>Year:<BR>' 
-	'<select name="year">'
-	'<option value="%d" selected>%d</option>'%(now.year,now.year)
-	for yr in range(now.year-1,1995,-1):
-		'<option value="%d">%d</option>'%(yr,yr)
-	'</select>'
-	'<P>Accumulation Start Date:<BR>'
-	'<select name="month">'
-	for mon_num,mon_name in month_list:
-		if mon_num == 5:
-			'<option value="%d" selected>%s</option>' % (mon_num,mon_name)
-		else:
-			'<option value="%d">%s</option>' % (mon_num,mon_name)
-	'</select>'
-	'<select name="day">'
-	for dy in range(1,32):
-		if dy == 1:
-			'<option value="%d" selected>%d</option>'%(dy,dy)
-		else:
-			'<option value="%d">%d</option>'%(dy,dy)
-	'</select>'
-
+#def potato_inputs [html] (station_type):
+#	display_station_list(station_type)
+#	now = DateTime.now()
+#	'<P>Year:<BR>' 
+#	'<select name="year">'
+#	'<option value="%d" selected>%d</option>'%(now.year,now.year)
+#	for yr in range(now.year-1,1995,-1):
+#		'<option value="%d">%d</option>'%(yr,yr)
+#	'</select>'
+#	'<P>Emergence Date:<BR>'
+#	'<select name="month">'
+#	for mon_num,mon_name in month_list:
+#		if mon_num == 5:
+#			'<option value="%d" selected>%s</option>' % (mon_num,mon_name)
+#		else:
+#			'<option value="%d">%s</option>' % (mon_num,mon_name)
+#	'</select>'
+#	'<select name="day">'
+#	for dy in range(1,32):
+#		if dy == 1:
+#			'<option value="%d" selected>%d</option>'%(dy,dy)
+#		else:
+#			'<option value="%d">%d</option>'%(dy,dy)
+#	'</select>'
+#
+#def potato_inputs_simcast [html] (station_type):
+#	from potato_dictionary import potatoD
+#	from tomato_dictionary import tomatoD
+#	display_station_list(station_type)
+#	yest = DateTime.now() + DateTime.RelativeDate(days=-1)
+#	'<input type="hidden" name="year" value="%s">' % yest.year
+#	'<P>Last fungicide application:<BR>'
+#	'<select name="month">'
+#	for mon_num,mon_name in month_list:
+#		if mon_num == yest.month:
+#			'<option value="%d" selected>%s</option>' % (mon_num,mon_name)
+#		else:
+#			'<option value="%d">%s</option>' % (mon_num,mon_name)
+#	'</select>'
+#	'<select name="day">'
+#	for dy in range(1,32):
+#		if dy == yest.day:
+#			'<option value="%d" selected>%d</option>'%(dy,dy)
+#		else:
+#			'<option value="%d">%d</option>'%(dy,dy)
+#	'</select>'
+#
+#	'''
+#	<P>Crop:</br>
+#	<select name="crop" id="crop" onChange="setCultivarMenu();">
+#	<option value="potato" SELECTED >Potato</option>
+#	<option value="tomato" >Tomato</option>
+#	</select>
+#	'''
+#	potKeys = potatoD.keys()
+#	potKeys.sort()
+#	'''
+#	<div id="potato_options">
+#	<P>Cultivar:</br>
+#	<select name="potato_cultivar" id="potato_cultivar">
+#	<option value="" SELECTED >Select potato cultivar</option>
+#	'''
+#	for this_key in potKeys :
+#		if this_key == "" :
+#			continue
+#		'<option value="%s" >%s</option>'%(this_key,this_key)
+#	'</select>'
+#	'</div>'
+#
+#	tomKeys = tomatoD.keys()
+#	tomKeys.sort()
+#	'''
+#	<div id="tomato_options" style="display:none;">
+#	<P>Cultivar:</br>
+#	<select name="tomato_cultivar" id="tomato_cultivar">
+#	<option value="" SELECTED >Select tomato cultivar</option>
+#	'''
+#	for this_key in tomKeys :
+#		if this_key == "" :
+#			continue
+#		'<option value="%s" >%s</option>'%(this_key,this_key)
+#	'</select>'
+#	'</div>'
+#
+#def onion_inputs [html] (station_type):
+#	display_station_list(station_type)
+#	now = DateTime.now()
+#	'<P>Year:<BR>' 
+#	'<select name="year">'
+#	'<option value="%d" selected>%d</option>'%(now.year,now.year)
+#	for yr in range(now.year-1,1995,-1):
+#		'<option value="%d">%d</option>'%(yr,yr)
+#	'</select>'
+#	'<P>Planting Date:<BR>'
+#	'<select name="month">'
+#	for mon_num,mon_name in month_list:
+#		if mon_num == 4:
+#			'<option value="%d" selected>%s</option>' % (mon_num,mon_name)
+#		else:
+#			'<option value="%d">%s</option>' % (mon_num,mon_name)
+#	'</select>'
+#	'<select name="day">'
+#	for dy in range(1,32):
+#		if dy == 21:
+#			'<option value="%d" selected>%d</option>'%(dy,dy)
+#		else:
+#			'<option value="%d">%d</option>'%(dy,dy)
+#	'</select>'
+#
+#def tomato_inputs [html] (station_type):
+#	display_station_list(station_type)
+#	now = DateTime.now()
+#	'<P>Year:<BR>' 
+#	'<select name="year">'
+#	'<option value="%d" selected>%d</option>'%(now.year,now.year)
+#	for yr in range(now.year-1,1995,-1):
+#		'<option value="%d">%d</option>'%(yr,yr)
+#	'</select>'
+#	'<P>Accumulation Start Date:<BR>'
+#	'<select name="month">'
+#	for mon_num,mon_name in month_list:
+#		if mon_num == 5:
+#			'<option value="%d" selected>%s</option>' % (mon_num,mon_name)
+#		else:
+#			'<option value="%d">%s</option>' % (mon_num,mon_name)
+#	'</select>'
+#	'<select name="day">'
+#	for dy in range(1,32):
+#		if dy == 1:
+#			'<option value="%d" selected>%d</option>'%(dy,dy)
+#		else:
+#			'<option value="%d">%d</option>'%(dy,dy)
+#	'</select>'
+#
 def get_input [html] ():
 	'''
 	<HTML>
@@ -194,7 +194,7 @@ def apple_lw_input [html] ():
 	<TITLE>Apple Wet/Dry Conditions</TITLE>
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
@@ -321,622 +321,622 @@ def apple_lw_input [html] ():
 #	</BODY>
 #	</HTML>
 #	'''
-
-def potato_lb_old_input [html] ():
-	'''
-	<HTML>
-	<HEAD>
-	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="/js/mapping3.js"></script>
-	<TITLE>Potato Late Blight</TITLE>
-	<STYLE TYPE="text/css">
-	TD
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   font-weight:bold;
-	   }
-	BODY
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   }
-	</STYLE>
-	<script  language="JavaScript">
-		function setSelectValue(oVal) {
-			var oSel = document.stationLister.stn;
-			for ( var i = 0; i < oSel.options.length; i++ ) {
-				if( oSel.options[i].value == oVal ) {
-					oSel.options[i].selected = true;
-				}
-			}
-		}
-	</script>
-	</HEAD>
-	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
-	<p class="banner">NEWA Potato Late Blight - OLD VERSION</p>
-	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
-	<table border="1" cellspacing="0" cellpadding="5">
-	<tr>
-	<td valign="top">
-	'''
-	potato_inputs("rh")
-	'''
-	<input type="hidden" name="type" value="potato_lb_old">
-	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
-	</td>
-	<td>
-	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
-	</td>
-	</tr>
-	</table>
-	</FORM>
-	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
-	<script type="text/javascript">
-	try {
-	var pageTracker = _gat._getTracker("UA-8808137-1");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>
-	</BODY>
-	</HTML>
-	'''
-
-def potato_disease [html] ():
-	'''
-	<HTML>
-	<HEAD>
-	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
-	<TITLE>Potato Disease Forecasts</TITLE>
-	<STYLE TYPE="text/css">
-	BODY
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   }
-	</STYLE>
-	</HEAD>
-	<BODY BGCOLOR="#FFFFFF">
-	<p class="banner">Welcome to the NEWA Potato Home Page</p>
-	<h2>Late Blight</h2>
-	<ul>
-		<li>Use <a href="/newaDisease/potato_lb">Blitecast</a> to help time your first fungicide application.
-		<li>Use <a href="/newaDisease/potato_simcast">Simcast</a> to help time later fungicide applications.
-		<li>Sign up for an account with the <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss">BlightPro Decision Support System</a> 
-		for more detailed, farm-specific reports that combine both Blitecast and Simcast forecasts.
-	</ul>
-	<h2>Early Blight</h2>
-	<ul>
-		<li>View <a href="/newaDisease/potato_pdays">accumulated P-Day values</a>.
-	</ul>
-	<h2><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively">Using Potato Disease Forecasts Effectively</a></h2>
-	</BODY>
-	</HTML>
-	'''
-
-def potato_lb_input [html] ():
-	'''
-	<HTML>
-	<HEAD>
-	<link rel="stylesheet" href="/Humanity_1.8.21/ui.all.css" type="text/css">
-	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="/js/mapping3.js"></script>
-	<script type="text/javascript" src="/js/potato_disease.js"></script>
-	<TITLE>Late Blight Blitecast</TITLE>
-	<STYLE TYPE="text/css">
-	BODY
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt; }
-	#leftbox {
-		position: absolute;
-		margin: 0 0 0 0px;
-		padding: 2px;
-		width: 194px;
-		border: 1px gray solid; }
-	#leftbox p {
-		font-weight: bold; }
-	#rightbox {
-		position: absolute;
-		margin: 0 0 0 200px;
-		padding: 0px;
-		width: 643px;
-		border: 0px gray solid; }
-	</STYLE>
-	<script  language="JavaScript">
-		function setSelectValue(oVal) {
-			var oSel = document.stationLister.stn;
-			for ( var i = 0; i < oSel.options.length; i++ ) {
-				if( oSel.options[i].value == oVal ) {
-					oSel.options[i].selected = true;
-				}
-			}
-		}
-	</script>
-	</HEAD>
-	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
-	<p class="banner">Potato Late Blight Blitecast</p>
-	<div id="leftbox">
-	<FORM ACTION="#" NAME="stationLister">
-	'''
-	potato_inputs("rh")
-	'''
-	<input type="hidden" name="type" id="pest" value="potato_lb">
-	<p><input type="button" value="Get report" class="button">
-	<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
-	</FORM>
-	</div>
-	<div id="rightbox">
-		<div id="righttabs">
-			<ul>
-				<li><a href="#first"> Map</a></li>
-				<li><a href="#second">Results</a></li>
-				<li><a href="#third"> More info</a></li>
-			</ul>
-			<div id="first" style="padding:0px;">
-				<div id="map" style="width: 635px; height: 560px"></div>
-			</div>
-			<div id="second" class="plain_back" style="padding:3px;">
-				<p>Results will appear here.</p>
-			</div>
-			<div id="third"  class="plain_back_l">
-				<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
-			</div>
-		</div>
-	</div>
-	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
-	<script type="text/javascript">
-	try {
-	var pageTracker = _gat._getTracker("UA-8808137-1");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>
-	</BODY>
-	</HTML>
-	'''
-
-def potato_simcast_input [html] (stn_default):
-	'''
-	<HTML>
-	<HEAD>
-	<link rel="stylesheet" href="/Humanity_1.8.21/ui.all.css" type="text/css">
-	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="/js/mapping3.js"></script>
-	<script type="text/javascript" src="/js/potato_disease.js"></script>
-	<TITLE>Simcast</TITLE>
-	<STYLE TYPE="text/css">
-	BODY
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt; }
-	#leftbox {
-		position: absolute;
-		margin: 0 0 0 0px;
-		padding: 2px;
-		width: 194px;
-		border: 1px gray solid; }
-	#leftbox p {
-		font-weight: bold; }
-	#rightbox {
-		position: absolute;
-		margin: 0 0 0 200px;
-		padding: 0px;
-		width: 643px;
-		border: 0px gray solid; }
-	</STYLE>
-	<script type="text/javascript">
-		function setCultivarMenu() {
-			if ($("#crop").val() === 'potato') {
-				$("#potato_options").show();
-				$("#tomato_options").hide();
-			} else {
-				$("#tomato_options").show();
-				$("#potato_options").hide();
-			}
-		}
-		function startup(stn) {
-			setCultivarMenu();
-			if (stn && stn.length > 0) {
-				setSelectValue(stn[0]);
-			}
-		}
-	</script>
-	</HEAD>
-	'''
-	'<BODY BGCOLOR="#FFFFFF" onload="startup(%s);">' % stn_default
-	'''
-	<p class="banner">Potato and Tomato Late Blight Simcast</p>
-	<div id="leftbox">
-	<FORM ACTION="#" NAME="stationLister">
-	'''
-	potato_inputs_simcast("rh")
-	'''
-	<input type="hidden" name="type" id="pest" value="potato_simcast">
-	<p><input type="button" value="Get report" class="button">
-	<p><a href="/PotatoCultivarsPop.html" target="_blank">Potato Cultivar Susceptibility</a></p>
-	<p><a href="/TomatoCultivarsPop.html" target="_blank">Tomato Cultivar Susceptibility</a></p>
-	<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
-	<p><a href="http://newa.cornell.edu/index.php?page=Using-Tomcast-and-Blitecast-Forecasts-Effectively" target="_blank">Using Tomato Disease Forecasts Effectively</a></p>
-	</FORM>
-	</div>
-	<div id="rightbox">
-		<div id="righttabs">
-			<ul>
-				<li><a href="#first"> Map</a></li>
-				<li><a href="#second">Results</a></li>
-				<li><a href="#third"> More info</a></li>
-			</ul>
-			<div id="first" style="padding:0px;">
-				<div id="map" style="width: 635px; height: 560px"></div>
-			</div>
-			<div id="second" class="plain_back" style="padding:3px;">
-				<p>Results will appear here.</p>
-			</div>
-			<div id="third"  class="plain_back_l">
-				<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
-				<p><a href="http://newa.cornell.edu/index.php?page=Using-Tomcast-and-Blitecast-Forecasts-Effectively" target="_blank">Using Tomato Disease Forecasts Effectively</a></p>
-			</div>
-		</div>
-	</div>
-	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
-	<script type="text/javascript">
-	try {
-	var pageTracker = _gat._getTracker("UA-8808137-1");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>
-	</BODY>
-	</HTML>
-	'''
-
-def potato_pdays_input [html] ():
-	'''
-	<HTML>
-	<HEAD>
-	<link rel="stylesheet" href="/Humanity_1.8.21/ui.all.css" type="text/css">
-	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="/js/mapping3.js"></script>
-	<script type="text/javascript" src="/js/potato_disease.js"></script>
-	<TITLE>Potato Early Blight</TITLE>
-	<STYLE TYPE="text/css">
-	BODY
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt; }
-	#leftbox {
-		position: absolute;
-		margin: 0 0 0 0px;
-		padding: 2px;
-		width: 194px;
-		border: 1px gray solid; }
-	#leftbox p {
-		font-weight: bold; }
-	#rightbox {
-		position: absolute;
-		margin: 0 0 0 200px;
-		padding: 0px;
-		width: 643px;
-		border: 0px gray solid; }
-	</STYLE>
-	<script  language="JavaScript">
-		function setSelectValue(oVal) {
-			var oSel = document.stationLister.stn;
-			for ( var i = 0; i < oSel.options.length; i++ ) {
-				if( oSel.options[i].value == oVal ) {
-					oSel.options[i].selected = true;
-				}
-			}
-		}
-	</script>
-	</HEAD>
-	<BODY BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
-	<p class="banner">NEWA Potato Early Blight P-Days</p>
-	<div id="leftbox">
-	<FORM ACTION="#" NAME="stationLister">
-	'''
-	potato_inputs("all")
-	'''
-	<input type="hidden" name="type" id="pest" value="potato_pdays">
-	<p><input type="button" value="Get report" class="button">
-	<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
-	</FORM>
-	</div>
-	<div id="rightbox">
-		<div id="righttabs">
-			<ul>
-				<li><a href="#first"> Map</a></li>
-				<li><a href="#second">Results</a></li>
-				<li><a href="#third"> More info</a></li>
-			</ul>
-			<div id="first" style="padding:0px;">
-				<div id="map" style="width: 635px; height: 560px"></div>
-			</div>
-			<div id="second" class="plain_back" style="padding:3px;">
-				<p>Results will appear here.</p>
-			</div>
-			<div id="third"  class="plain_back_l">
-				<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
-			</div>
-		</div>
-	</div>
-	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
-	<script type="text/javascript">
-	try {
-	var pageTracker = _gat._getTracker("UA-8808137-1");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>
-	</BODY>
-	</HTML>
-	'''
-
-def onion_dis_input_OLD [html] ():
-	'''
-	<HTML>
-	<HEAD>
-	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="/js/mapping3.js"></script>
-	<TITLE>Onion Disease Forecast</TITLE>
-	<STYLE TYPE="text/css">
-	TD
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   font-weight:bold;
-	   }
-	BODY
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   }
-	</STYLE>
-	<script  language="JavaScript">
-		function setSelectValue(oVal) {
-			var oSel = document.stationLister.stn;
-			for ( var i = 0; i < oSel.options.length; i++ ) {
-				if( oSel.options[i].value == oVal ) {
-					oSel.options[i].selected = true;
-				}
-			}
-		}
-	</script>
-	</HEAD>
-	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
-	<H1>NEWA Onion Disease Forecast</H1>
-	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
-	<table border="1" cellspacing="0" cellpadding="5">
-	<tr>
-	<td valign="top">
-	'''
-	onion_inputs("rh")
-	'''
-	<input type="hidden" name="type" value="onion_dis">
-	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
-	</td>
-	<td>
-	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
-	</td>
-	</tr>
-	</table>
-	</FORM>
-	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
-	<script type="text/javascript">
-	try {
-	var pageTracker = _gat._getTracker("UA-8808137-1");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>
-	</BODY>
-	</HTML>
-	'''
-
-def onion_onlog_input [html] ():
-	'''
-	<HTML>
-	<HEAD>
-	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="/js/mapping3.js"></script>
-	<TITLE>Onion Disease Log</TITLE>
-	<STYLE TYPE="text/css">
-	TD
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   font-weight:bold;
-	   }
-	BODY
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   }
-	</STYLE>
-	<script  language="JavaScript">
-		function setSelectValue(oVal) {
-			var oSel = document.stationLister.stn;
-			for ( var i = 0; i < oSel.options.length; i++ ) {
-				if( oSel.options[i].value == oVal ) {
-					oSel.options[i].selected = true;
-				}
-			}
-		}
-	</script>
-	</HEAD>
-	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
-	<p class="banner">NEWA Onion Disease Log</p>
-	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
-	<table border="1" cellspacing="0" cellpadding="5">
-	<tr>
-	<td valign="top">
-	'''
-	onion_inputs("rh")
-	'''
-	<input type="hidden" name="type" value="onion_onlog">
-	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
-	</td>
-	<td>
-	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
-	</td>
-	</tr>
-	</table>
-	</FORM>
-	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
-	<script type="text/javascript">
-	try {
-	var pageTracker = _gat._getTracker("UA-8808137-1");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>
-	</BODY>
-	</HTML>
-	'''
-
-def onion_sbalog_input [html] ():
-	'''
-	<HTML>
-	<HEAD>
-	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="/js/mapping3.js"></script>
-	<TITLE>Onion Blight Alert Log</TITLE>
-	<STYLE TYPE="text/css">
-	TD
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   font-weight:bold;
-	   }
-	BODY
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   }
-	</STYLE>
-	<script  language="JavaScript">
-		function setSelectValue(oVal) {
-			var oSel = document.stationLister.stn;
-			for ( var i = 0; i < oSel.options.length; i++ ) {
-				if( oSel.options[i].value == oVal ) {
-					oSel.options[i].selected = true;
-				}
-			}
-		}
-	</script>
-	</HEAD>
-	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
-	<p class="banner">NEWA Onion Blight Alert Log</p>
-	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
-	<table border="1" cellspacing="0" cellpadding="5">
-	<tr>
-	<td valign="top">
-	'''
-	onion_inputs("rh")
-	'''
-	<input type="hidden" name="type" value="onion_sbalog">
-	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
-	</td>
-	<td>
-	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
-	</td>
-	</tr>
-	</table>
-	</FORM>
-	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
-	<script type="text/javascript">
-	try {
-	var pageTracker = _gat._getTracker("UA-8808137-1");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>
-	</BODY>
-	</HTML>
-	'''
-
-def onion_smbalog_input [html] ():
-	'''
-	<HTML>
-	<HEAD>
-	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="/js/mapping3.js"></script>
-	<TITLE>Onion Modified Blight Alert Log</TITLE>
-	<STYLE TYPE="text/css">
-	TD
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   font-weight:bold;
-	   }
-	BODY
-	   {
-	   font-family: 'Arial', 'Helvetica', sans-serif;
-	   font-size: 9pt;
-	   }
-	</STYLE>
-	<script  language="JavaScript">
-		function setSelectValue(oVal) {
-			var oSel = document.stationLister.stn;
-			for ( var i = 0; i < oSel.options.length; i++ ) {
-				if( oSel.options[i].value == oVal ) {
-					oSel.options[i].selected = true;
-				}
-			}
-		}
-	</script>
-	</HEAD>
-	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
-	<p class="banner">NEWA Onion Modified Blight Alert Log</p>
-	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
-	<table border="1" cellspacing="0" cellpadding="5">
-	<tr>
-	<td valign="top">
-	'''
-	onion_inputs("rh")
-	'''
-	<input type="hidden" name="type" value="onion_smbalog">
-	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
-	</td>
-	<td>
-	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
-	</td>
-	</tr>
-	</table>
-	</FORM>
-	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
-	<script type="text/javascript">
-	try {
-	var pageTracker = _gat._getTracker("UA-8808137-1");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>
-	</BODY>
-	</HTML>
-	'''
-
+#
+#def potato_lb_old_input [html] ():
+#	'''
+#	<HTML>
+#	<HEAD>
+#	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
+#	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+#	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+#	<script type="text/javascript" src="/js/mapping3.js"></script>
+#	<TITLE>Potato Late Blight</TITLE>
+#	<STYLE TYPE="text/css">
+#	TD
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt;
+#	   font-weight:bold;
+#	   }
+#	BODY
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt;
+#	   }
+#	</STYLE>
+#	<script  language="JavaScript">
+#		function setSelectValue(oVal) {
+#			var oSel = document.stationLister.stn;
+#			for ( var i = 0; i < oSel.options.length; i++ ) {
+#				if( oSel.options[i].value == oVal ) {
+#					oSel.options[i].selected = true;
+#				}
+#			}
+#		}
+#	</script>
+#	</HEAD>
+#	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
+#	<p class="banner">NEWA Potato Late Blight - OLD VERSION</p>
+#	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+#	<table border="1" cellspacing="0" cellpadding="5">
+#	<tr>
+#	<td valign="top">
+#	'''
+#	potato_inputs("rh")
+#	'''
+#	<input type="hidden" name="type" value="potato_lb_old">
+#	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+#	</td>
+#	<td>
+#	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+#	</td>
+#	</tr>
+#	</table>
+#	</FORM>
+#	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+#	<script type="text/javascript">
+#	try {
+#	var pageTracker = _gat._getTracker("UA-8808137-1");
+#	pageTracker._trackPageview();
+#	} catch(err) {}</script>
+#	</BODY>
+#	</HTML>
+#	'''
+#
+#def potato_disease [html] ():
+#	'''
+#	<HTML>
+#	<HEAD>
+#	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
+#	<TITLE>Potato Disease Forecasts</TITLE>
+#	<STYLE TYPE="text/css">
+#	BODY
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt;
+#	   }
+#	</STYLE>
+#	</HEAD>
+#	<BODY BGCOLOR="#FFFFFF">
+#	<p class="banner">Welcome to the NEWA Potato Home Page</p>
+#	<h2>Late Blight</h2>
+#	<ul>
+#		<li>Use <a href="/newaDisease/potato_lb">Blitecast</a> to help time your first fungicide application.
+#		<li>Use <a href="/newaDisease/potato_simcast">Simcast</a> to help time later fungicide applications.
+#		<li>Sign up for an account with the <a href="http://newa.cornell.edu/index.php?page=potato-late-blight-dss">BlightPro Decision Support System</a> 
+#		for more detailed, farm-specific reports that combine both Blitecast and Simcast forecasts.
+#	</ul>
+#	<h2>Early Blight</h2>
+#	<ul>
+#		<li>View <a href="/newaDisease/potato_pdays">accumulated P-Day values</a>.
+#	</ul>
+#	<h2><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively">Using Potato Disease Forecasts Effectively</a></h2>
+#	</BODY>
+#	</HTML>
+#	'''
+#
+#def potato_lb_input [html] ():
+#	'''
+#	<HTML>
+#	<HEAD>
+#	<link rel="stylesheet" href="/Humanity_1.8.21/ui.all.css" type="text/css">
+#	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
+#	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+#	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+#	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+#	<script type="text/javascript" src="/js/mapping3.js"></script>
+#	<script type="text/javascript" src="/js/potato_disease.js"></script>
+#	<TITLE>Late Blight Blitecast</TITLE>
+#	<STYLE TYPE="text/css">
+#	BODY
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt; }
+#	#leftbox {
+#		position: absolute;
+#		margin: 0 0 0 0px;
+#		padding: 2px;
+#		width: 194px;
+#		border: 1px gray solid; }
+#	#leftbox p {
+#		font-weight: bold; }
+#	#rightbox {
+#		position: absolute;
+#		margin: 0 0 0 200px;
+#		padding: 0px;
+#		width: 643px;
+#		border: 0px gray solid; }
+#	</STYLE>
+#	<script  language="JavaScript">
+#		function setSelectValue(oVal) {
+#			var oSel = document.stationLister.stn;
+#			for ( var i = 0; i < oSel.options.length; i++ ) {
+#				if( oSel.options[i].value == oVal ) {
+#					oSel.options[i].selected = true;
+#				}
+#			}
+#		}
+#	</script>
+#	</HEAD>
+#	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
+#	<p class="banner">Potato Late Blight Blitecast</p>
+#	<div id="leftbox">
+#	<FORM ACTION="#" NAME="stationLister">
+#	'''
+#	potato_inputs("rh")
+#	'''
+#	<input type="hidden" name="type" id="pest" value="potato_lb">
+#	<p><input type="button" value="Get report" class="button">
+#	<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
+#	</FORM>
+#	</div>
+#	<div id="rightbox">
+#		<div id="righttabs">
+#			<ul>
+#				<li><a href="#first"> Map</a></li>
+#				<li><a href="#second">Results</a></li>
+#				<li><a href="#third"> More info</a></li>
+#			</ul>
+#			<div id="first" style="padding:0px;">
+#				<div id="map" style="width: 635px; height: 560px"></div>
+#			</div>
+#			<div id="second" class="plain_back" style="padding:3px;">
+#				<p>Results will appear here.</p>
+#			</div>
+#			<div id="third"  class="plain_back_l">
+#				<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
+#			</div>
+#		</div>
+#	</div>
+#	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+#	<script type="text/javascript">
+#	try {
+#	var pageTracker = _gat._getTracker("UA-8808137-1");
+#	pageTracker._trackPageview();
+#	} catch(err) {}</script>
+#	</BODY>
+#	</HTML>
+#	'''
+#
+#def potato_simcast_input [html] (stn_default):
+#	'''
+#	<HTML>
+#	<HEAD>
+#	<link rel="stylesheet" href="/Humanity_1.8.21/ui.all.css" type="text/css">
+#	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
+#	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+#	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+#	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+#	<script type="text/javascript" src="/js/mapping3.js"></script>
+#	<script type="text/javascript" src="/js/potato_disease.js"></script>
+#	<TITLE>Simcast</TITLE>
+#	<STYLE TYPE="text/css">
+#	BODY
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt; }
+#	#leftbox {
+#		position: absolute;
+#		margin: 0 0 0 0px;
+#		padding: 2px;
+#		width: 194px;
+#		border: 1px gray solid; }
+#	#leftbox p {
+#		font-weight: bold; }
+#	#rightbox {
+#		position: absolute;
+#		margin: 0 0 0 200px;
+#		padding: 0px;
+#		width: 643px;
+#		border: 0px gray solid; }
+#	</STYLE>
+#	<script type="text/javascript">
+#		function setCultivarMenu() {
+#			if ($("#crop").val() === 'potato') {
+#				$("#potato_options").show();
+#				$("#tomato_options").hide();
+#			} else {
+#				$("#tomato_options").show();
+#				$("#potato_options").hide();
+#			}
+#		}
+#		function startup(stn) {
+#			setCultivarMenu();
+#			if (stn && stn.length > 0) {
+#				setSelectValue(stn[0]);
+#			}
+#		}
+#	</script>
+#	</HEAD>
+#	'''
+#	'<BODY BGCOLOR="#FFFFFF" onload="startup(%s);">' % stn_default
+#	'''
+#	<p class="banner">Potato and Tomato Late Blight Simcast</p>
+#	<div id="leftbox">
+#	<FORM ACTION="#" NAME="stationLister">
+#	'''
+#	potato_inputs_simcast("rh")
+#	'''
+#	<input type="hidden" name="type" id="pest" value="potato_simcast">
+#	<p><input type="button" value="Get report" class="button">
+#	<p><a href="/PotatoCultivarsPop.html" target="_blank">Potato Cultivar Susceptibility</a></p>
+#	<p><a href="/TomatoCultivarsPop.html" target="_blank">Tomato Cultivar Susceptibility</a></p>
+#	<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
+#	<p><a href="http://newa.cornell.edu/index.php?page=Using-Tomcast-and-Blitecast-Forecasts-Effectively" target="_blank">Using Tomato Disease Forecasts Effectively</a></p>
+#	</FORM>
+#	</div>
+#	<div id="rightbox">
+#		<div id="righttabs">
+#			<ul>
+#				<li><a href="#first"> Map</a></li>
+#				<li><a href="#second">Results</a></li>
+#				<li><a href="#third"> More info</a></li>
+#			</ul>
+#			<div id="first" style="padding:0px;">
+#				<div id="map" style="width: 635px; height: 560px"></div>
+#			</div>
+#			<div id="second" class="plain_back" style="padding:3px;">
+#				<p>Results will appear here.</p>
+#			</div>
+#			<div id="third"  class="plain_back_l">
+#				<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
+#				<p><a href="http://newa.cornell.edu/index.php?page=Using-Tomcast-and-Blitecast-Forecasts-Effectively" target="_blank">Using Tomato Disease Forecasts Effectively</a></p>
+#			</div>
+#		</div>
+#	</div>
+#	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+#	<script type="text/javascript">
+#	try {
+#	var pageTracker = _gat._getTracker("UA-8808137-1");
+#	pageTracker._trackPageview();
+#	} catch(err) {}</script>
+#	</BODY>
+#	</HTML>
+#	'''
+#
+#def potato_pdays_input [html] ():
+#	'''
+#	<HTML>
+#	<HEAD>
+#	<link rel="stylesheet" href="/Humanity_1.8.21/ui.all.css" type="text/css">
+#	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
+#	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+#	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+#	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+#	<script type="text/javascript" src="/js/mapping3.js"></script>
+#	<script type="text/javascript" src="/js/potato_disease.js"></script>
+#	<TITLE>Potato Early Blight</TITLE>
+#	<STYLE TYPE="text/css">
+#	BODY
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt; }
+#	#leftbox {
+#		position: absolute;
+#		margin: 0 0 0 0px;
+#		padding: 2px;
+#		width: 194px;
+#		border: 1px gray solid; }
+#	#leftbox p {
+#		font-weight: bold; }
+#	#rightbox {
+#		position: absolute;
+#		margin: 0 0 0 200px;
+#		padding: 0px;
+#		width: 643px;
+#		border: 0px gray solid; }
+#	</STYLE>
+#	<script  language="JavaScript">
+#		function setSelectValue(oVal) {
+#			var oSel = document.stationLister.stn;
+#			for ( var i = 0; i < oSel.options.length; i++ ) {
+#				if( oSel.options[i].value == oVal ) {
+#					oSel.options[i].selected = true;
+#				}
+#			}
+#		}
+#	</script>
+#	</HEAD>
+#	<BODY BGCOLOR="#FFFFFF" onload="stationMap('all','select_station');">
+#	<p class="banner">NEWA Potato Early Blight P-Days</p>
+#	<div id="leftbox">
+#	<FORM ACTION="#" NAME="stationLister">
+#	'''
+#	potato_inputs("all")
+#	'''
+#	<input type="hidden" name="type" id="pest" value="potato_pdays">
+#	<p><input type="button" value="Get report" class="button">
+#	<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
+#	</FORM>
+#	</div>
+#	<div id="rightbox">
+#		<div id="righttabs">
+#			<ul>
+#				<li><a href="#first"> Map</a></li>
+#				<li><a href="#second">Results</a></li>
+#				<li><a href="#third"> More info</a></li>
+#			</ul>
+#			<div id="first" style="padding:0px;">
+#				<div id="map" style="width: 635px; height: 560px"></div>
+#			</div>
+#			<div id="second" class="plain_back" style="padding:3px;">
+#				<p>Results will appear here.</p>
+#			</div>
+#			<div id="third"  class="plain_back_l">
+#				<p><a href="http://newa.cornell.edu/index.php?page=Using-Blitecast-and-P-Day-Forecasts-Effectively" target="_blank">Using Potato Disease Forecasts Effectively</a></p>
+#			</div>
+#		</div>
+#	</div>
+#	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+#	<script type="text/javascript">
+#	try {
+#	var pageTracker = _gat._getTracker("UA-8808137-1");
+#	pageTracker._trackPageview();
+#	} catch(err) {}</script>
+#	</BODY>
+#	</HTML>
+#	'''
+#
+#def onion_dis_input_OLD [html] ():
+#	'''
+#	<HTML>
+#	<HEAD>
+#	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
+#	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+#	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+#	<script type="text/javascript" src="/js/mapping3.js"></script>
+#	<TITLE>Onion Disease Forecast</TITLE>
+#	<STYLE TYPE="text/css">
+#	TD
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt;
+#	   font-weight:bold;
+#	   }
+#	BODY
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt;
+#	   }
+#	</STYLE>
+#	<script  language="JavaScript">
+#		function setSelectValue(oVal) {
+#			var oSel = document.stationLister.stn;
+#			for ( var i = 0; i < oSel.options.length; i++ ) {
+#				if( oSel.options[i].value == oVal ) {
+#					oSel.options[i].selected = true;
+#				}
+#			}
+#		}
+#	</script>
+#	</HEAD>
+#	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
+#	<H1>NEWA Onion Disease Forecast</H1>
+#	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+#	<table border="1" cellspacing="0" cellpadding="5">
+#	<tr>
+#	<td valign="top">
+#	'''
+#	onion_inputs("rh")
+#	'''
+#	<input type="hidden" name="type" value="onion_dis">
+#	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+#	</td>
+#	<td>
+#	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+#	</td>
+#	</tr>
+#	</table>
+#	</FORM>
+#	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+#	<script type="text/javascript">
+#	try {
+#	var pageTracker = _gat._getTracker("UA-8808137-1");
+#	pageTracker._trackPageview();
+#	} catch(err) {}</script>
+#	</BODY>
+#	</HTML>
+#	'''
+#
+#def onion_onlog_input [html] ():
+#	'''
+#	<HTML>
+#	<HEAD>
+#	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
+#	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+#	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+#	<script type="text/javascript" src="/js/mapping3.js"></script>
+#	<TITLE>Onion Disease Log</TITLE>
+#	<STYLE TYPE="text/css">
+#	TD
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt;
+#	   font-weight:bold;
+#	   }
+#	BODY
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt;
+#	   }
+#	</STYLE>
+#	<script  language="JavaScript">
+#		function setSelectValue(oVal) {
+#			var oSel = document.stationLister.stn;
+#			for ( var i = 0; i < oSel.options.length; i++ ) {
+#				if( oSel.options[i].value == oVal ) {
+#					oSel.options[i].selected = true;
+#				}
+#			}
+#		}
+#	</script>
+#	</HEAD>
+#	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
+#	<p class="banner">NEWA Onion Disease Log</p>
+#	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+#	<table border="1" cellspacing="0" cellpadding="5">
+#	<tr>
+#	<td valign="top">
+#	'''
+#	onion_inputs("rh")
+#	'''
+#	<input type="hidden" name="type" value="onion_onlog">
+#	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+#	</td>
+#	<td>
+#	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+#	</td>
+#	</tr>
+#	</table>
+#	</FORM>
+#	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+#	<script type="text/javascript">
+#	try {
+#	var pageTracker = _gat._getTracker("UA-8808137-1");
+#	pageTracker._trackPageview();
+#	} catch(err) {}</script>
+#	</BODY>
+#	</HTML>
+#	'''
+#
+#def onion_sbalog_input [html] ():
+#	'''
+#	<HTML>
+#	<HEAD>
+#	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
+#	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+#	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+#	<script type="text/javascript" src="/js/mapping3.js"></script>
+#	<TITLE>Onion Blight Alert Log</TITLE>
+#	<STYLE TYPE="text/css">
+#	TD
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt;
+#	   font-weight:bold;
+#	   }
+#	BODY
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt;
+#	   }
+#	</STYLE>
+#	<script  language="JavaScript">
+#		function setSelectValue(oVal) {
+#			var oSel = document.stationLister.stn;
+#			for ( var i = 0; i < oSel.options.length; i++ ) {
+#				if( oSel.options[i].value == oVal ) {
+#					oSel.options[i].selected = true;
+#				}
+#			}
+#		}
+#	</script>
+#	</HEAD>
+#	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
+#	<p class="banner">NEWA Onion Blight Alert Log</p>
+#	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+#	<table border="1" cellspacing="0" cellpadding="5">
+#	<tr>
+#	<td valign="top">
+#	'''
+#	onion_inputs("rh")
+#	'''
+#	<input type="hidden" name="type" value="onion_sbalog">
+#	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+#	</td>
+#	<td>
+#	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+#	</td>
+#	</tr>
+#	</table>
+#	</FORM>
+#	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+#	<script type="text/javascript">
+#	try {
+#	var pageTracker = _gat._getTracker("UA-8808137-1");
+#	pageTracker._trackPageview();
+#	} catch(err) {}</script>
+#	</BODY>
+#	</HTML>
+#	'''
+#
+#def onion_smbalog_input [html] ():
+#	'''
+#	<HTML>
+#	<HEAD>
+#	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
+#	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+#	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+#	<script type="text/javascript" src="/js/mapping3.js"></script>
+#	<TITLE>Onion Modified Blight Alert Log</TITLE>
+#	<STYLE TYPE="text/css">
+#	TD
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt;
+#	   font-weight:bold;
+#	   }
+#	BODY
+#	   {
+#	   font-family: 'Arial', 'Helvetica', sans-serif;
+#	   font-size: 9pt;
+#	   }
+#	</STYLE>
+#	<script  language="JavaScript">
+#		function setSelectValue(oVal) {
+#			var oSel = document.stationLister.stn;
+#			for ( var i = 0; i < oSel.options.length; i++ ) {
+#				if( oSel.options[i].value == oVal ) {
+#					oSel.options[i].selected = true;
+#				}
+#			}
+#		}
+#	</script>
+#	</HEAD>
+#	<BODY BGCOLOR="#FFFFFF" onload="stationMap('rhum','select_station');">
+#	<p class="banner">NEWA Onion Modified Blight Alert Log</p>
+#	<FORM ACTION="/newaDisease/process_input" METHOD="post" NAME="stationLister">
+#	<table border="1" cellspacing="0" cellpadding="5">
+#	<tr>
+#	<td valign="top">
+#	'''
+#	onion_inputs("rh")
+#	'''
+#	<input type="hidden" name="type" value="onion_smbalog">
+#	<p><input type="button" value="Get report" onClick="submit();" style="background-color:#FFFFCC; font-weight:bold;">
+#	</td>
+#	<td>
+#	<div id="map" style="width: 635px; height: 560px; font-size:12pt;"></div>
+#	</td>
+#	</tr>
+#	</table>
+#	</FORM>
+#	<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+#	<script type="text/javascript">
+#	try {
+#	var pageTracker = _gat._getTracker("UA-8808137-1");
+#	pageTracker._trackPageview();
+#	} catch(err) {}</script>
+#	</BODY>
+#	</HTML>
+#	'''
+#
 #def tomato_for_input [html] ():
 #	'''
 #	<HTML>
@@ -1031,7 +1031,7 @@ def tomato_for_input [html] ():
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
@@ -1115,7 +1115,7 @@ def potato_for_input [html] ():
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
@@ -1182,7 +1182,6 @@ def potato_for_input [html] ():
 	</HTML>
 	'''
 
-#don't believe following is used any more
 #def grape_dis_input [html] ():
 #	'''
 #	<HTML>
@@ -1261,7 +1260,7 @@ def alf_weev_input [html] ():
 	<TITLE>Alfalfa Weevil</TITLE>
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
@@ -1325,7 +1324,7 @@ def cabbage_maggot_input [html] ():
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
@@ -1366,8 +1365,14 @@ def cabbage_maggot_input [html] ():
 				produce_cabbagemaggot_graph();
 				$("#forecast").on("click", function() {
 					$.get("/newaUtil/getForecastUrl/"+req_stn, function(fcst) { 
-						window.open(fcst);
+						var popup_window = window.open(fcst);
+						try {
+							popup_window.focus();
+						} catch (e) {
+							alert('Popup windows are blocked. Unblock popup windows to see forecast.');
+						}
 					});
+					return false;
 				});
 			});
 			return false;
@@ -1447,7 +1452,7 @@ def onion_maggot_input [html] ():
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
@@ -1488,8 +1493,14 @@ def onion_maggot_input [html] ():
 				produce_onionmaggot_graph();
 				$("#forecast").on("click", function() {
 					$.get("/newaUtil/getForecastUrl/"+req_stn, function(fcst) { 
-						window.open(fcst);
+						var popup_window = window.open(fcst);
+						try {
+							popup_window.focus();
+						} catch (e) {
+							alert('Popup windows are blocked. Unblock popup windows to see forecast.');
+						}
 					});
+					return false;
 				});
 			});
 			return false;
@@ -1569,7 +1580,7 @@ def onion_dis_input [html] ():
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
@@ -1611,8 +1622,14 @@ def onion_dis_input [html] ():
 				$("#second").html(data);
 				$("#forecast").on("click", function() {
 					$.get("/newaUtil/getForecastUrl/"+req_stn, function(fcst) { 
-						window.open(fcst);
+						var popup_window = window.open(fcst);
+						try {
+							popup_window.focus();
+						} catch (e) {
+							alert('Popup windows are blocked. Unblock popup windows to see forecast.');
+						}
 					});
+					return false;
 				});
 				$("#gotomoreinfo").on("click", function() {
 					$("#righttabs").tabs({active:2});

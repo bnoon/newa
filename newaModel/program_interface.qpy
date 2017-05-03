@@ -152,7 +152,6 @@ class RootDirectory(Directory):
 #	process information provided in url
 	def _q_lookup(self, component, path=None):
 		req = get_request()
-
 		if component.find('?') > 0 :
 			component,query = component.split('?',1)
 		if component == 'process_help':
@@ -160,7 +159,11 @@ class RootDirectory(Directory):
 		elif component == 'process_input':
 			return process_input(req,None)
 		else :
-			return None
+			if path: 
+				path = [component] + path
+			else:
+				path = [component]
+			return process_input(None,path)
 
 	def _q_translate(self, component) :
 		if component.find('?') > 0 :

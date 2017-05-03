@@ -4,25 +4,24 @@ import sys, imp
 from mx import DateTime
 from print_exception import print_exception
 import newaVegModel_io
-if '/newa/newaCommon' not in sys.path: sys.path.insert(1,'/newa/newaCommon')
-import newaCommon_io
-from newaCommon import *
+import newaCommon.newaCommon_io
+from newaCommon.newaCommon import *
 
 class program_exit (Exception):
 	pass
 
 # import the dictionarey containing information about the specified veg pest (assumes sys and imp have already been imported)
 def import_info_dict(pest):
-	if '/newa/newaVegModel/newaVegModel' not in sys.path: sys.path.insert(1,'/newa/newaVegModel/newaVegModel')
 	if pest in newaVegModel_io.disease_dict:
 		name = pest + '_info_dict'
 	else:
 		return None
 	try:
-		file, pathname, description = imp.find_module(name)
+		file, pathname, description = imp.find_module(name,['newaVegModel'])
 		pmd = imp.load_module(name, file, pathname, description)
 		return pmd.pest_status_management
 	except:
+		print_exception()
 		return None
 	
 #--------------------------------------------------------------------------------------------		
@@ -155,6 +154,10 @@ def process_update (request,path):
 		altref = None
 		tech_choice = 'conventional'
 #	 	retrieve input
+		newForm = {}
+		for k,v in request.form.items() :
+			newForm[str(k)] = str(v)
+		request.form = newForm
 		if path is None:
 			if request and request.form:
 				try:
@@ -188,6 +191,10 @@ def process_help (request,path):
 		pest = None
 		tech_choice = 'conventional'
 #	 	retrieve input
+		newForm = {}
+		for k,v in request.form.items() :
+			newForm[str(k)] = str(v)
+		request.form = newForm
 		if path is None:
 			if request and request.form:
 #				print 'update form:',request.form
@@ -240,6 +247,10 @@ def process_input (request,path):
 		tech_choice = "conventional"
 		output = "tab"
 #	 	retrieve input
+		newForm = {}
+		for k,v in request.form.items() :
+			newForm[str(k)] = str(v)
+		request.form = newForm
 		if path is None:
 			if request and request.form:
 #				print 'form',request.form

@@ -356,6 +356,10 @@ def process_input (request,path):
 		output = "tab"
 #	 	retrieve input
 		if path is None:
+			newForm = {}
+			for k,v in request.form.items() :
+				newForm[str(k)] = str(v)
+			request.form = newForm
 			if request and request.form:
 				try:
 					smry_type = request.form['type'].strip()
@@ -365,19 +369,19 @@ def process_input (request,path):
 					if request.form.has_key('output'): output = request.form['output']
 					if request.form.has_key('greentip'):
 						try:
-							mm,dd,yy = request.form['greentip'].split("/")
+							mm,dd,yy = request.form['greentip'].replace("-","/").split("/")
 							greentip = DateTime.DateTime(int(yy),int(mm),int(dd),23)
 						except:
 							greentip = None
 					if request.form.has_key('firstblossom'):
 						try:
-							mm,dd,yy = request.form['firstblossom'].split("/")
+							mm,dd,yy = request.form['firstblossom'].replace("-","/").split("/")
 							firstblossom = DateTime.DateTime(int(yy),int(mm),int(dd),23)
 						except:
 							firstblossom = None
 					if request.form.has_key('accend'):
 						try:
-							mm,dd,yy = request.form['accend'].split("/")
+							mm,dd,yy = request.form['accend'].replace("-","/").split("/")
 							accend = DateTime.DateTime(int(yy),int(mm),int(dd),23)
 						except:
 							accend = None

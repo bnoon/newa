@@ -29,8 +29,14 @@ function getresults() {
 		
 		$("#forecast").on("click", function() {
 			$.get("/newaUtil/getForecastUrl/"+params.stn, function(fcst) { 
-				window.open(fcst);
+					var popup_window = window.open(fcst);
+					try {
+						popup_window.focus();
+					} catch (e) {
+						alert('Popup windows are blocked. Unblock popup windows to see forecast.');
+					}
 			});
+			return false;
 		});
 		$("#showTomLog").on("click", function() {
 			var btntext = $("#showTomLog").text(),

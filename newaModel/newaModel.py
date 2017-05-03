@@ -3665,11 +3665,11 @@ def process_input (request,path):
 		output = "tab"
 		estimate = "no"
 #	 	retrieve input
-		newForm = {}
-		for k,v in request.form.items() :
-			newForm[str(k)] = str(v)
-		request.form = newForm
 		if path is None:
+			newForm = {}
+			for k,v in request.form.items() :
+				newForm[str(k)] = str(v)
+			request.form = newForm
 			if request and request.form:
 #				print 'form',request.form
 				try:

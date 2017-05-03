@@ -115,7 +115,7 @@ def solar_main_fcst2(stnid,sd,ed):
 				cl = tsky_list[i]
 				
 			if cl == miss:
-				print 'tsky missing for:',d,i
+#				print 'tsky missing for:',d,i
 				trans[i] = 1.0
 				cl_alb[i] = miss
 			else:

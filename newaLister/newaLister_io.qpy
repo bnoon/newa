@@ -15,7 +15,7 @@ def get_weapage_input [html] ():
 	<TITLE>Weather Data Page</TITLE>
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
 	<script type="text/javascript" src="/js/mapping4.js"></script>
@@ -196,7 +196,7 @@ def get_dday_input [html] ():
 	<TITLE>Degree Day Data Page</TITLE>
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
 	<script type="text/javascript" src="/js/mapping4.js"></script>
@@ -271,7 +271,7 @@ def get_ddayrange_input [html] ():
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
 	<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
@@ -318,8 +318,14 @@ def get_ddayrange_input [html] ():
 			$('#forecast').click(function() {
 				req_stn = $('select[name=stn] option:selected').val();
 				$.get('/newaUtil/getForecastUrl/'+req_stn, function(data) { 
-					window.open(data);
+					var popup_window = window.open(data);
+					try {
+						popup_window.focus();
+					} catch (e) {
+						alert('Popup windows are blocked. Unblock popup windows to see forecast.');
+					}
 				});
+				return false;
 			});
 		});
 		return false;

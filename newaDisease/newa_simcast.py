@@ -151,7 +151,7 @@ class general_simcast(object) :
 			self.blightList.append(blightUnits)
 			self.blightDateList.append(dateString)
 			self.blightCritList.append(critFlag)
-		print 'end of saveBlightTableValues',self.blightList
+#		print 'end of saveBlightTableValues',self.blightList
 			
 
 	def update_blightTableValues(self,monthDay) :
@@ -184,7 +184,7 @@ class general_simcast(object) :
 			self.blightDateList.append(monthDay)
 			self.blightList.append(last_blight_value)
 			self.blightCritList.append(last_crit_value)
-		print 'end of update_blightTableValues',self.blightList
+#		print 'end of update_blightTableValues',self.blightList
 
 
 	def saveFungicideTableValues(self,fungicideUnit) :
@@ -730,7 +730,7 @@ class general_simcast(object) :
 
 	def process_simcast(self,stn_name,resistance,doseVars,stnWeather) :
 #		print 'here in general simcast'
-		print 'stnWeather:',stnWeather #####
+#		print 'stnWeather:',stnWeather #####
 		resultsD = {'length':0}
 
 		try:
@@ -756,7 +756,7 @@ class general_simcast(object) :
 			resultsD = self.finish_up()
 		except:
 			print_exception()
-		print 'resultsD', resultsD #####
+#		print 'resultsD', resultsD #####
 		return resultsD
 
 			

@@ -9,8 +9,7 @@ import Data
 import sys
 from mx import DateTime
 import subprocess
-if '/newa/newaModel/newaModel' not in sys.path: sys.path.insert(1,'/newa/newaModel/newaModel')
-import newaModel_io
+import newaModel.newaModel_io
 from bsddb import hashopen
 from cPickle import loads
 

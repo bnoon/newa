@@ -2,8 +2,7 @@ from quixote.directory import Directory
 from quixote import get_request
 from quixote.errors import TraversalError
 
-#from newaLister import process_input
-#from newaLister_io import *
+from newaLister import process_input
 
 class RootDirectory(Directory):
 
@@ -37,18 +36,29 @@ class RootDirectory(Directory):
 
 #	received request form to be processed
 	def process_input (self, path=None) :
-		from newaLister import process_input
 		request = get_request()
 		return process_input(request,None)
 
 #	process information provided in url
 	def _q_lookup(self, component, path=None):
-		from newaLister import process_input
-		if path: 
-			path = [component] + path
-		else:
-			path = [component]
-		return process_input(None,path)
+		req = get_request()
+		if component.find('?') > 0 :
+			component,query = component.split('?',1)
+		if component == 'process_help':
+			return process_help(req,None)
+		elif component == 'process_input':
+			return process_input(req,None)
+		else :
+			if path: 
+				path = [component] + path
+			else:
+				path = [component]
+			return process_input(None,path)
+
+	def _q_translate(self, component) :
+		if component.find('?') > 0 :
+			component,query = component.split('?',1)
+		return super(RootDirectory, self)._q_translate(component)
 
 	def _q_traverse(self, path):
 		assert len(path) > 0

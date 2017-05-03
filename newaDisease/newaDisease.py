@@ -2326,6 +2326,10 @@ def process_help (request,path):
 		smry_type = None
 #	 	retrieve input
 		if path is None:
+			newForm = {}
+			for k,v in request.form.items() :
+				newForm[str(k)] = str(v)
+			request.form = newForm
 			if request and request.form:
 				try:
 					smry_type = request.form['type'].strip()
@@ -2369,6 +2373,10 @@ def process_input (request,path):
 		emonth = None
 		eday = None
 		if path is None:
+			newForm = {}
+			for k,v in request.form.items() :
+				newForm[str(k)] = str(v)
+			request.form = newForm
 			if request and request.form:
 				try:
 					smry_type = request.form['type'].strip()
@@ -2487,10 +2495,15 @@ def process_input (request,path):
 				raise program_exit('Error processing request')
 		elif path[0] in ('onion_dis','onion_sbalog','onion_smbalog','onion_onlog'):
 			try:
+				output = 'standalone'
 				smry_type = path[0]
 				if len(path) > 1:
 					stn = path[1]
-					year = int(path[2])
+					if len(path) > 2:
+						year = int(path[2])
+					else:
+						year = 9999
+						accend = None
 					if len(path) > 3:
 						month = int(path[3])
 						day = int(path[4])
