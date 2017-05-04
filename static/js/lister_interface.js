@@ -67,6 +67,7 @@ function buildStateStationMenus() {
 			['DC', 'DC'],
 			['IA', 'Iowa'],
 			['IL', 'Illinois'],
+			['KY', 'Kentucky'],
 			['MD', 'Maryland'],
 			['MA', 'Massachusetts'],
 			['MI', 'Michigan'],

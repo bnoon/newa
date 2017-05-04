@@ -689,7 +689,7 @@ def get_newa_data (stn,native_id,start_date_dt,end_date_dt,station_type='newa'):
 			start_period_dt = end_period_dt
 	except DateMismatch, logmsg:
 		sys.stdout.write('%s\n' % logmsg)		
-		sys.exit(0)
+		return ([],[],[])
 	except:
 		print_exception()
 	
@@ -970,6 +970,7 @@ class Base:
 		hourly_data = []
 		download_time = ''
 		station_name = ''
+		avail_vars = []
 		try:
 			if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 				station_type = 'njwx'

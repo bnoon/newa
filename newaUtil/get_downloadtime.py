@@ -63,6 +63,8 @@ def get_downloadtime (stn,station_type):
 		if station_type == 'icao': 
 			staid = stn.upper()
 		else:
+			if stn[0:3] == "ew_":
+				stn = stn[3:]
 			staid = get_metadata (stn, station_type)
 			if not staid: 
 				print 'Exiting get_downloadtime: Error retrieving metadata for',stn,station_type
@@ -102,6 +104,6 @@ def get_downloadtime (stn,station_type):
 	return download_time_dt
 
 #Tests
-#for id,type in [('KALB','icao'),('alb','newa'),('cu_gfr','cu_log'),('pav','newa'),('xxx','newa'),('zzz','bogus')]:
+#for id,type in [('KALB','icao'),('gen','newa'),('cu_gfr','cu_log'),('pav','newa'),('xxx','newa'),('zzz','bogus')]:
 #	result = get_downloadtime(id,type)
 #	print 'Result for ',id,type,result
