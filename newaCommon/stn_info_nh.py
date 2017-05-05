@@ -5,6 +5,7 @@ stn_info = {'kleb': {'srqual': 'ok', 'state': 'NH', 'name': 'Lebanon', 'vars': [
 'nh_bre': {'srqual': 'ok', 'state': 'NH', 'name': 'Brentwood', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 43.008804, 'elev': 121, 'lon': -71.050185, 'network': 'newa'},
 'nh_bos': {'srqual': 'ok', 'state': 'NH', 'name': 'Boscawen', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 43.369903, 'elev': 282, 'lon': -71.652851, 'network': 'newa'},
 'nh_oss': {'srqual': 'ok', 'state': 'NH', 'name': 'Ossipee', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 43.683564, 'elev': 851, 'lon': -71.134999, 'network': 'newa'},
+'nh_col': {'name': 'Columbia', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -71.441442, 'state': 'NH', 'elev': 1700, 'lat': 44.857051, 'network': 'newa'},
 'kcon': {'srqual': 'ok', 'state': 'NH', 'name': 'Concord', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 43.1953, 'elev': 346, 'lon': -71.5011, 'network': 'icao'},
 'kmht': {'srqual': 'ok', 'state': 'NH', 'name': 'Manchester', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 42.9333, 'elev': 225, 'lon': -71.4383, 'network': 'icao'},
 'kash': {'srqual': 'ok', 'state': 'NH', 'name': 'Nashua', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 42.7824, 'elev': 200, 'lon': -71.5141, 'network': 'icao'},

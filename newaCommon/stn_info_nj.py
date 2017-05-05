@@ -27,7 +27,7 @@ stn_info = {'nj_elk': {'srqual': 'ok', 'state': 'NJ', 'name': 'Elk Township', 'v
 '284': {'srqual': 'ok', 'state': 'NJ', 'name': 'Upper Deerfield', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 39.5243, 'elev': 33, 'lon': -75.2009, 'network': 'njwx'},
 '1034': {'srqual': 'ok', 'state': 'NJ', 'name': 'Sicklerville', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 39.7638, 'elev': 45, 'lon': -74.9785, 'network': 'njwx'},
 '286': {'srqual': 'ok', 'state': 'NJ', 'name': 'High Point', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 41.305, 'elev': 422, 'lon': -74.666, 'network': 'njwx'},
-'nj_pri': {'srqual': 'toolow', 'state': 'NJ', 'name': 'Princeton (Terhune)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 40.3218, 'elev': 186, 'lon': -74.7292, 'network': 'newa'},
+'nj_pri': {'srqual': 'ok', 'state': 'NJ', 'name': 'Princeton (Terhune)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 40.3218, 'elev': 186, 'lon': -74.7292, 'network': 'newa'},
 '202': {'name': 'Bethel Mill Park', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -75.1138, 'state': 'NJ', 'elev': 30, 'lat': 39.7485, 'network': 'njwx'},
 'knel': {'srqual': 'bad', 'state': 'NJ', 'name': 'Lakehurst NAS', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 40.03, 'elev': 112, 'lon': -74.35, 'network': 'icao'},
 'kmiv': {'srqual': 'ok', 'state': 'NJ', 'name': 'Millville', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.37, 'elev': 70, 'lon': -75.07, 'network': 'icao'},

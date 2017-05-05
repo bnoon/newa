@@ -1,4 +1,4 @@
-disease_vars = {'alfalfa-weevil':     ['temp'],
+disease_vars = {#'alfalfa-weevil':     ['temp'],
 				'apple-scab':         ['temp', 'lwet', 'prcp'],
 				'apple-ascospore':    ['temp', 'prcp'],
 				'apple-cougarblight': ['temp'],

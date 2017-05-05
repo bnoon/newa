@@ -202,7 +202,7 @@ def run_stationModels(stn):
 	model_list = []
 	try:
 		from newaCommon.stn_info import stn_info
-		from newaUtil.pest_models import pest_models
+		from pest_models import pest_models
 		stn = stn.lower()
 		if stn_info.has_key(stn):
 			stn_vars = copy.deepcopy(stn_info[stn]['vars'])
