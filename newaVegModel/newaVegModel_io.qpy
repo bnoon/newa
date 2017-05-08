@@ -44,7 +44,7 @@ def crucifer_disease_input [html] (disease_type=None):
 	<HTML>
 	<HEAD>
 		<TITLE>NEWA Crucifer Models</TITLE>
-		<link type="text/css" rel="stylesheet" href="/Humanity/ui.all.css">
+		<link type="text/css" rel="stylesheet" href="/humanity/ui.all.css">
 		<link type="text/css" rel="stylesheet" href="/vegModel_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
@@ -243,7 +243,7 @@ def crucifer_results [html] (smry_dict):
 		<head>
 			<meta http-equiv="content-type" content="text/html"/>
 			<title>NEWA Crucifer Pest Models</title>
-			<link type="text/css" rel="stylesheet" href="/Humanity/ui.all.css">
+			<link type="text/css" rel="stylesheet" href="/humanity/ui.all.css">
 			<link type="text/css" rel="stylesheet" href="/vegModel_styles.css">
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 			<script type="text/javascript" src="/js/crucifer_disease.js"></script>

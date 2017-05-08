@@ -481,7 +481,7 @@ def apple_scab_log [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Apple Scab Models</title>
-			<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+			<link rel="stylesheet" type="text/css" href="/humanity/ui.all.css">
 		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
@@ -1037,7 +1037,7 @@ def apple_scab_early [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Apple Scab Model</title>
-		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/humanity/ui.all.css">
 		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
@@ -1123,7 +1123,7 @@ def fire_blight_log [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Fire Blight Model</title>
-			<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+			<link rel="stylesheet" type="text/css" href="/humanity/ui.all.css">
 		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
@@ -1529,7 +1529,7 @@ def fire_blight_early [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Fire Blight Model</title>
-		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/humanity/ui.all.css">
 		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
@@ -1603,7 +1603,7 @@ def fire_blight_late [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Fire Blight Model</title>
-		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/humanity/ui.all.css">
 		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
@@ -1838,7 +1838,7 @@ def apple_pest_results [html] (smry_dict):
 		  <head>
 			<meta http-equiv="content-type" content="text/html"/>
 			<title>NEWA Apple Pest Calculator</title>
-		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/humanity/ui.all.css">
 			<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
@@ -2120,7 +2120,7 @@ def dmcast_results [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA DMCast Results</title>
-		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/humanity/ui.all.css">
 		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		</head>
 		<body>
@@ -2256,7 +2256,7 @@ def berry_moth_results [html] (smry_dict):
 		  <head>
 			<meta http-equiv="content-type" content="text/html"/>
 			<title>NEWA Grape Forecast Model</title>
-			<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+			<link rel="stylesheet" type="text/css" href="/humanity/ui.all.css">
 			<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
@@ -2428,7 +2428,7 @@ def berry_moth_dormant [html] (smry_dict):
 		  <head>
 			<meta http-equiv="content-type" content="text/html"/>
 			<title>NEWA Grape Forecast Model</title>
-			<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+			<link rel="stylesheet" type="text/css" href="/humanity/ui.all.css">
 			<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	    <head>
 		<body>
@@ -2466,7 +2466,7 @@ def grape_dis_results [html] (smry_dict):
 		<head>
 		<meta http-equiv="content-type" content="text/html"/>
 		<title>NEWA Grape Disease Model</title>
-		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/humanity/ui.all.css">
 		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="/js/jquery.fixedheader.js"></script>
@@ -2580,7 +2580,7 @@ def sooty_blotch_log [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Sooty Blotch/Flyspeck Model</title>
-			<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+			<link rel="stylesheet" type="text/css" href="/humanity/ui.all.css">
 		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
@@ -2911,7 +2911,7 @@ def sooty_blotch_early [html] (smry_dict):
 		<html>
 		<head>
 		<title>NEWA Sooty Blotch/Flyspeck Model</title>
-		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/humanity/ui.all.css">
 		<link rel="stylesheet" type="text/css" href="/newa_styles.css">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
@@ -2990,7 +2990,7 @@ def grape_disease_results [html] (smry_dict):
 		  <head>
 			<meta http-equiv="content-type" content="text/html"/>
 			<title>NEWA Grape Disease Models</title>
-		<link rel="stylesheet" type="text/css" href="/Humanity/ui.all.css">
+		<link rel="stylesheet" type="text/css" href="/humanity/ui.all.css">
 			<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
