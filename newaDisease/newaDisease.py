@@ -1587,6 +1587,7 @@ class Onion (Base, Cabbage):
 			accend = now
 		smry_dict = {}
 		smry_dict["output"] = output
+		smry_dict["stn"] = stn
 		try:
 			# obtain daily data
 			year = accend.year
@@ -1808,6 +1809,7 @@ class Onion (Base, Cabbage):
 			if not accend:
 				accend = now
 			smry_dict = {'output':output}
+			smry_dict['stn'] = stn
 			# obtain daily data
 			end_date_dt = accend
 			midOctober = DateTime.DateTime(end_date_dt.year,10,15,23)

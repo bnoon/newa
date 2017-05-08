@@ -1894,7 +1894,7 @@ def apple_pest_results [html] (smry_dict):
 			$("#chart_area").html('<a id="showgraph" href="#">Show Degree Day Graph</a>');
 			$('#showgraph').click(produce_accumdegday_graph);
 			$('#forecast').click(function() {
-				req_stn = $('select[name=stn] option:selected').val();
+				req_stn = $('select[name=stn] option:selected').val() || $('input[name=stn]').val();
 				$.get('/newaUtil/getForecastUrl/'+req_stn, function(data) { 
 					var popup_window = window.open(data);
 					try {

@@ -2389,7 +2389,24 @@ def onion_dis_html [html] (station_name,blight_alert,plant_date,alternaria,botry
 			$("#moreinfo").load('/pops_notes.htm');
 			$("#moreinfo").dialog('open');
 		}
+		$(document).ready(function() {
+			$('#forecast').click(function() {
+				req_stn = $('select[name=stn] option:selected').val() || $('input[name=stn]').val();
+				$.get('/newaUtil/getForecastUrl/'+req_stn, function(data) { 
+					var popup_window = window.open(data);
+					try {
+						popup_window.focus();
+					} catch (e) {
+						alert('Popup windows are blocked. Unblock popup windows to see forecast.');
+					}
+				});
+				return false;
+			});
+		});
 	</script>
+	'''
+	'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
+	'''
 	<table id="results_table" border=1 style='border-collapse:collapse; table-layout:fixed; margin-top:0.5em; width:100%;'>
 	'''
 	'<tr><td class=header_line_silver_back colspan=10 height=38 align=center>Onion Disease for %s</td></tr>' % (station_name)
@@ -3982,6 +3999,18 @@ def onion_maggot_html [html] (stn_name,smry_dict,degday_dict):
 		<script type="text/javascript" src="/js/newaGraph.js"></script>
 		<script>
 			$(document).ready(function() {	
+				$('#forecast').click(function() {
+					req_stn = $('input[name=stn]').val();
+					$.get('/newaUtil/getForecastUrl/'+req_stn, function(data) { 
+						var popup_window = window.open(data);
+						try {
+							popup_window.focus();
+						} catch (e) {
+							alert('Popup windows are blocked. Unblock popup windows to see forecast.');
+						}
+					});
+					return false;
+				});
 				produce_onionmaggot_graph();			
 			});
 		</script>
@@ -4080,6 +4109,7 @@ def onion_maggot_html [html] (stn_name,smry_dict,degday_dict):
 	</div>
 	'''
 	'<div id="dd_dict" style="display:none;">%s</div>' % degday_dict
+	'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
 	add_footer(smry_dict)
 
 # onion maggot end (Oct 15-Dec 31)
