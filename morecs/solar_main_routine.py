@@ -6,7 +6,7 @@ import solar_routines
 from mx import DateTime
 
 from ucanStandardRequests import *
-from util.station_searches import getNearestCoop
+from station_searches import getNearestCoop
 from stationInfo import stationInfo
 from morecs_hourly import getHourlyVars
 
