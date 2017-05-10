@@ -271,17 +271,21 @@ def run_stationSisterInfo(options):
 			sister = sister_info[stn]
 			for var in sister.keys():
 				if sister[var][0:1] >= '1' and sister[var][0:1] <= '9' and sister[var][1:2] >= '0' and sister[var][1:2] <= '9':
+					station_id = sister[var]
 					station_type = 'njwx'
 				elif len(sister[var]) == 4:
+					station_id = sister[var]
 					station_type = "icao"
 				elif sister[var][0:3] == "cu_" or sister[var][0:3] == "um_" or sister[var][0:3] == "uc_" or sister[var][0:3] == "un_":
+					station_id = sister[var]
 					station_type = "culog"
 				elif sister[var][0:3] == "ew_":
-					sister[var] = sister[var][3:]
+					station_id = sister[var][3:]
 					station_type = 'miwx'
 				else:
+					station_id = sister[var]
 					station_type = "newa"
-				sister_dict[var] = "%s %s" % (sister[var], station_type)
+				sister_dict[var] = "%s %s" % (station_id, station_type)
 		json_return = json.dumps(sister_dict)
 		return json_return
 	except:
