@@ -1015,7 +1015,7 @@ def apple_scab_log [html] (smry_dict):
 					ldystr = "%d"%ldys
 				'<td class=plain_back>%s</td>'%ldystr
 				if combined:
-					'<td class=plain_back><A HREF="http://newa.cornell.edu/index.php?page=weather-station-details&WeatherStation=%s&WSDetail=/newaDisease/apple_lw/%s/%s" target="_blank">Yes</a></td>' % (smry_dict['stn'],smry_dict['stn'],smry_dict['last_time'][0])
+					'<td class=plain_back><A HREF="http://newa.cornell.edu/index.php?page=weather-station-details&WeatherStation=%s&WSDetail=http://newa.nrcc.cornell.edu/newaDisease/apple_lw/%s/%s" target="_blank">Yes</a></td>' % (smry_dict['stn'],smry_dict['stn'],smry_dict['last_time'][0])
 				else:
 					'<td class=plain_back>&nbsp;</td>'
 				'</TR>'
