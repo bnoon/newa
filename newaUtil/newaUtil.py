@@ -213,7 +213,10 @@ def run_stationModels(stn):
 				for model_var in mvars:
 					if not model_var in stn_vars: break
 				else:
-					whole_url = "/"+murl+"/"+stn
+					if murl != "newaDisease/onion_dis":
+						whole_url = "/"+murl+"/"+stn
+					else:
+						whole_url = "/"+murl
 #					if murl == "newaDisease/onion_dis" or murl == "newaDisease/onion_onlog" or murl == "newaDisease/onion_smbalog" or murl == "newaDisease/onion_sbalog":
 #						whole_url = whole_url+"/9999"
 #					elif murl == "newaDisease/potato_pdays" or murl == "newaDisease/potato_lb":
