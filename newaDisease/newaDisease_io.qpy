@@ -2389,20 +2389,6 @@ def onion_dis_html [html] (station_name,blight_alert,plant_date,alternaria,botry
 			$("#moreinfo").load('/pops_notes.htm');
 			$("#moreinfo").dialog('open');
 		}
-		$(document).ready(function() {
-			$('#forecast').click(function() {
-				req_stn = $('select[name=stn] option:selected').val() || $('input[name=stn]').val();
-				$.get('/newaUtil/getForecastUrl/'+req_stn, function(data) { 
-					var popup_window = window.open(data);
-					try {
-						popup_window.focus();
-					} catch (e) {
-						alert('Popup windows are blocked. Unblock popup windows to see forecast.');
-					}
-				});
-				return false;
-			});
-		});
 	</script>
 	'''
 	'<input type="hidden" name="stn" value="%s">' % smry_dict['stn']
