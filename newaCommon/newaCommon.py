@@ -1128,11 +1128,15 @@ class Base:
 						if smry_type == 'dd4c':
 							tave = (tmax+tmin)/2.
 							tave_c = (5./9.) * (tave-32.)
-							ddval = tave_c - 4.
+							ddval = tave_c - 4.0
 						elif smry_type == 'dd0c':
 							tave = (tmax+tmin)/2.
 							tave_c = (5./9.) * (tave-32.)
-							ddval = tave_c - 0.
+							ddval = tave_c - 0.0
+						elif smry_type == 'dd143c':
+							tave = (tmax+tmin)/2.
+							tave_c = (5./9.) * (tave-32.)
+							ddval = tave_c - 14.3
 						elif smry_type == 'dd8650':
 							if tmax > 86: 
 								adjtmax = 86.
