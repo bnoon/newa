@@ -1875,7 +1875,7 @@ def apple_pest_results [html] (smry_dict):
 		return false;
 	}
 	$(document).ready(function() {
-		var pest = $("select[name=pest]").val(),
+		var pest = $("select[name=pest]").val() || $("input[name=pest]").val(),
 			ddbase = $.inArray(pest, ['apple-pc', 'apple-maggot', 'apple-cm', 'apple-sjs']) >= 0 ? '50' : '43',
 			params = {
 				type: 'ddrange',
