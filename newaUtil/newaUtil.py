@@ -214,13 +214,9 @@ def run_stationModels(stn):
 					if not model_var in stn_vars: break
 				else:
 					if murl != "newaDisease/onion_dis":
-						whole_url = "/"+murl+"/"+stn
+						whole_url = "http://newa.nrcc.cornell.edu/"+murl+"/"+stn
 					else:
-						whole_url = "/"+murl
-#					if murl == "newaDisease/onion_dis" or murl == "newaDisease/onion_onlog" or murl == "newaDisease/onion_smbalog" or murl == "newaDisease/onion_sbalog":
-#						whole_url = whole_url+"/9999"
-#					elif murl == "newaDisease/potato_pdays" or murl == "newaDisease/potato_lb":
-#						whole_url = whole_url+"/9999/5/1"
+						whole_url = "http://newa.nrcc.cornell.edu/"+murl
 					model_list.append([mtitle,whole_url])
 	except:
 		print 'Error processing request for',stn
