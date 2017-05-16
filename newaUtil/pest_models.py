@@ -15,12 +15,7 @@ pest_models = [ ('Apple Scab',                  'newaModel/apple_scab',         
 #				('Alfalfa Weevil', 	            'newaDisease/alf_weev',              ['temp']),
 				('Cabbage Maggot',              'newaDisease/cabbage_maggot',        ['temp']),
 				('Onion Maggot',                'newaDisease/onion_maggot',          ['temp']),
-				('Onion Disease Forecast',      'newaDisease/onion_dis',             ['rhum', 'temp', 'prcp']),
-				('Onion Disease Log',           'newaDisease/onion_onlog',           ['rhum', 'temp', 'prcp']),
-				('Onion Blight Alert',          'newaDisease/onion_sbalog',          ['rhum', 'temp', 'prcp']),
-				('Onion Modified Blight Alert', 'newaDisease/onion_smbalog',         ['rhum', 'temp', 'prcp']),
-				('Potato Early Blight',         'newaDisease/potato_pdays',          ['temp']),
-				('Potato Late Blight Blitecast','newaDisease/potato_lb',             ['rhum', 'temp', 'prcp']),
-				('Tomato Diseases, Tomcast',    'newaDisease/tomato_for',            ['eslw', 'temp', 'prcp']),
-				('Late Blight Simcast',         'newaDisease/potato_simcast',        ['rhum', 'temp', 'prcp'])
+				('Onion Diseases',              'newaDisease/onion_dis',             ['rhum', 'temp', 'prcp']),
+				('Potato Diseases',             'newaDisease/potato_for',            ['rhum', 'temp', 'prcp']),
+				('Tomato Diseases',             'newaDisease/tomato_for',            ['eslw', 'temp', 'prcp'])
 				]

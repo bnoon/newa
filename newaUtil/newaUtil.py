@@ -366,7 +366,7 @@ def run_stateInactiveStationList(options):
 
 # get basic info for a given station
 def run_stationInfo(stn):
-	from newaUtil.get_downloadtime import get_downloadtime
+	from get_downloadtime import get_downloadtime
 	station_dict = {}
 	try:
 		from newaCommon.stn_info import stn_info
