@@ -402,6 +402,8 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "klex": {"temp": "kfft", "rhum": "kfft", "prcp": "kfft", "wspd": "kfft", "wdir": "kfft"},
 "kfft": {"temp": "klex", "rhum": "klex", "prcp": "klex", "wspd": "klex", "wdir": "klex"},
 "kcmi": {"temp": "kdec", "rhum": "kdec", "prcp": "kdec", "wspd": "kdec", "wdir": "kdec"},
+"kaug": {"temp": "klew", "rhum": "klew", "prcp": "klew", "wspd": "klew", "wdir": "klew"},
+"klew": {"temp": "kaug", "rhum": "kaug", "prcp": "kaug", "wspd": "kaug", "wdir": "kaug"},
 "kstl": {"temp": "il_gra", "rhum": "il_gra", "prcp": "il_gra", "wspd": "il_gra", "wdir": "il_gra"},
 "pa_big": {"temp": "kmdt", "rhum": "kmdt", "prcp": "kmdt", "wspd": "kmdt", "wdir": "kmdt", "lwet": "pa_npa", "srad": "pa_npa"},
 "pa_pin": {"temp": "kmdt", "rhum": "kmdt", "prcp": "kmdt", "wspd": "kmdt", "wdir": "kmdt", "lwet": "pa_big", "srad": "pa_big"},
