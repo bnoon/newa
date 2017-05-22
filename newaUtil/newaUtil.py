@@ -425,7 +425,9 @@ def run_getFcstData(options):
 					dkey = (theDate.year, theDate.month, theDate.day)
 					ymd = "%s-%02d-%02d" % (dkey[0],dkey[1],dkey[2])
 					if stn_dict[requested_var].has_key(dkey):
-						if requested_var != 'pop12':
+						if requested_var == 'tsky':
+							stn_dict[requested_var][dkey] = ["M" if x==-999 else (round(x*100,0)) for x in stn_dict[requested_var][dkey]]
+						elif requested_var != 'pop12':
 							stn_dict[requested_var][dkey] = ["M" if x==-999 else x for x in stn_dict[requested_var][dkey]]
 						else:
 							#need this to prevent serialization error

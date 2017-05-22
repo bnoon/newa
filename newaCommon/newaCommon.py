@@ -251,11 +251,20 @@ def estmiss (var,hindx,miss):
 #--------------------------------------------------------------------------------------------		
 def getSR(sid, date) :
 	import urllib2, json
-	params = {'sid':sid, 'sdate':date, 'edate':date}
-	req = urllib2.Request('http://adhoc.rcc-acis.org/SolarRadiation',
-		  json.dumps(params), {'Content-Type':'application/json'})
-	response = urllib2.urlopen(req)
-	return json.loads(response.read())
+	try:
+		params = {'sid':sid, 'sdate':date, 'edate':date}
+		req = urllib2.Request('http://adhoc.rcc-acis.org/SolarRadiation',
+			  json.dumps(params), {'Content-Type':'application/json'})
+		response = urllib2.urlopen(req)
+		results = json.loads(response.read())
+		# check for error returned from web services
+		if results.has_key("error"):
+			print "Error returned from solar rad web service call:",results["error"]
+			return None
+	except:
+		print "Error returned from solar rad web service call with",params
+		return None
+	return results
 
 #--------------------------------------------------------------------------------------------		
 def sister_est(stn,var,var_date,end_period,tsvars,dataForEst, datesForEst, vflagsForEst, stn_type='newa'):
@@ -288,7 +297,7 @@ def sister_est(stn,var,var_date,end_period,tsvars,dataForEst, datesForEst, vflag
 				if var == 'srad' and station_type == 'icao':
 					estdate = "%04d%02d%02d%02d" % (var_date[0],var_date[1],var_date[2],var_date[3])
 					replacement_dict = getSR(est_staid, estdate)
-					if replacement_dict['data'][0][1] == "M":
+					if not replacement_dict or replacement_dict['data'][0][1] == "M":
 						replacement = miss
 					else:
 						replacement = float(replacement_dict['data'][0][1])
