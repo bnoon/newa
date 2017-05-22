@@ -339,7 +339,9 @@ def get_fcst_hour (stn, requested_var, date_dt):
 	try:
 		if requested_var in ['temp','rhum']:
 			stn = stn.upper()
-			forecast_db = hashopen('/ndfd/hourly_forecasts.db','r')		
+			forecast_db = hashopen('/ndfd/hourly_forecasts.db','r')
+			if not forecast_db.has_key(stn):
+				return hourly_fcst
 			stn_dict = loads(forecast_db[stn])
 			forecast_db.close()
 			if stn_dict.has_key(requested_var):					
