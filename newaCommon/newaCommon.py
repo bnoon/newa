@@ -348,6 +348,7 @@ def get_fcst_hour (stn, requested_var, date_dt):
 					hourly_fcst = stn_dict[requested_var][dkey][date_dt.hour]
 	except:
 		print_exception()
+		print 'for',stn,requested_var,date_dt
 	return hourly_fcst
 
 #--------------------------------------------------------------------------------------------		
