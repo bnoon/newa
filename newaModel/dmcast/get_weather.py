@@ -429,7 +429,7 @@ class general_dm_weather(object) :
 						fval = self.get_fcst_data (self.nativeStnID, 'temp', sDates[index])
 						if fval != -999:
 							flags[index] = 1
-							values[index] = fval
+							values[index] = (5.0/9.0) * (fval - 32.0)
 							fixed = fixed + 1
 						
 		self.dates = self.dates + dates
