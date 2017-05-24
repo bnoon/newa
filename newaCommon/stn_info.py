@@ -564,5 +564,7 @@ stn_info = {
 'kcho': {'name': 'Charlottesville (Arpt), VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.1386, 'lon': -78.4531, 'elev': 641, 'network': 'icao', 'state': 'VA'},
 'kshd': {'name': 'Staunton, VA', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.27, 'lon': -78.85, 'elev': 1188, 'network': 'icao', 'state': 'VA'},
 'klex': {'name': 'Lexington, KY', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.0408, 'lon': -84.6058, 'elev': 980, 'network': 'icao', 'state': 'KY'},
-'kfft': {'name': 'Frankfort, KY', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.1847, 'lon': -84.9033, 'elev': 804, 'network': 'icao', 'state': 'KY'}
+'kfft': {'name': 'Frankfort, KY', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 38.1847, 'lon': -84.9033, 'elev': 804, 'network': 'icao', 'state': 'KY'},
+'klew': {'name': 'Lewiston, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 44.05, 'lon': -70.2833, 'elev': 288, 'network': 'icao', 'state': 'ME'},
+'kaug': {'name': 'Augusta, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lat': 44.3156, 'lon': -69.7972, 'elev': 351, 'network': 'icao', 'state': 'ME'}
 }
