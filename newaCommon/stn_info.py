@@ -4,6 +4,7 @@ stn_info = {
 'alb': {'name': 'Albion', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -78.134927, 'elev': 430.0, 'lat': 43.275135, 'network': 'newa', 'state': 'NY'},
 'alt': {'name': 'Altamont (Indian Ladder Farms)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.654948, 'lon': -73.967705, 'elev': 360.9, 'network': 'newa', 'state': 'NY'},
 'ams': {'name': 'Amsterdam (Stony Brook Farm)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 42.874326, 'lon': -74.249408, 'elev': 651, 'network': 'newa', 'state': 'NY'},
+'arm': {'name': 'Arkport (Mahany)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toohigh', 'lon': -77.68430, 'elev': 1300.0, 'lat': 42.42882, 'network': 'newa', 'state': 'NY'},
 'ash': {'name': 'Ashwood', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -78.309579999999997, 'elev': 330.0, 'lat': 43.338540000000002, 'network': 'newa', 'state': 'NY'},
 'aur': {'name': 'Aurora', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.73367, 'lon': -76.65383, 'elev': 840, 'network': 'newa', 'state': 'NY'},
 'bal': {'name': 'Baldwinsville', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.169525, 'lon': -76.400886, 'elev': 443, 'network': 'newa', 'state': 'NY'},
