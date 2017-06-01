@@ -399,6 +399,8 @@ def run_stationInfo(stn):
 	return json_return
 			
 # FOR A GIVEN STATION, NETWORK, VARIABLE, START AND END DATE - return NDFD 
+#  convert from data in db stored as a day consisting of hours 0-23 and time in ET
+#  to a day with hours 1-24 and time in EST
 def run_getFcstData(options):
 	from mx import DateTime
 	from bsddb import hashopen
@@ -407,9 +409,9 @@ def run_getFcstData(options):
 	try:
 		requested_var = options['variable']
 		yyyymmdd = options['startdate'].split("-")
-		start_date_dt = DateTime.DateTime(int(yyyymmdd[0]), int(yyyymmdd[1]), int(yyyymmdd[2]))
+		start_date_dt = DateTime.DateTime(int(yyyymmdd[0]), int(yyyymmdd[1]), int(yyyymmdd[2]), 0, 0, 0)
 		yyyymmdd = options['enddate'].split("-")
-		end_date_dt = DateTime.DateTime(int(yyyymmdd[0]), int(yyyymmdd[1]), int(yyyymmdd[2]))
+		end_date_dt = DateTime.DateTime(int(yyyymmdd[0]), int(yyyymmdd[1]), int(yyyymmdd[2]), 0, 0, 0)
 		stn = options['station'].upper()
 		network = options['network']
 		if network == 'miwx' and stn[0:3] != 'EW_':
@@ -420,21 +422,46 @@ def run_getFcstData(options):
 			stn_dict = loads(forecast_db[stn])
 			forecast_db.close()
 			if stn_dict.has_key(requested_var):
+				# put values into dictionary keyed on time in EST; hour 00 changed to hour 24 previous day
+				sd = {}
+				theDate = start_date_dt
+				stopDate = end_date_dt + DateTime.RelativeDate(days=+1)
+				while theDate <= stopDate:
+					dkey = (theDate.year, theDate.month, theDate.day)
+					for h in range(0, 24):
+						if stn_dict[requested_var].has_key(dkey):
+							hval = stn_dict[requested_var][dkey][h]
+						else:
+							hval = miss
+						est = theDate + DateTime.RelativeDate(hour=h)
+						if est.dst == 1:
+							est = est + DateTime.RelativeDate(hours=-1)
+						if est.hour == 0:
+							yest = theDate + DateTime.RelativeDate(days=-1)
+							key_est = (yest.year,yest.month,yest.day,24)
+						else:
+							key_est = (est.year,est.month,est.day,est.hour)		
+						if hval == -999:
+							sd[key_est] = 'M'
+						elif requested_var == 'tsky':
+							sd[key_est] = round(hval*10, 0)
+						elif requested_var != 'pop12':
+							sd[key_est] = hval
+						else:
+							sd[key_est] = int(hval)	#need this to prevent serialization error for pop12
+					theDate = theDate + DateTime.RelativeDate(days=+1)
+				# put values into daily arrays (hours 1-24)	
 				theDate = start_date_dt
 				while theDate <= end_date_dt:
-					dkey = (theDate.year, theDate.month, theDate.day)
-					ymd = "%s-%02d-%02d" % (dkey[0],dkey[1],dkey[2])
-					if stn_dict[requested_var].has_key(dkey):
-						if requested_var == 'tsky':
-							stn_dict[requested_var][dkey] = ["M" if x==-999 else (round(x*10,0)) for x in stn_dict[requested_var][dkey]]
-						elif requested_var != 'pop12':
-							stn_dict[requested_var][dkey] = ["M" if x==-999 else x for x in stn_dict[requested_var][dkey]]
+					ymd = "%s-%02d-%02d" % (theDate.year,theDate.month,theDate.day)
+					hourly_vals = []
+					for h in range(1, 25):
+						hkey = (theDate.year,theDate.month,theDate.day,h)
+						if sd.has_key(hkey):
+							hourly_vals.append(sd[hkey])
 						else:
-							#need this to prevent serialization error
-							stn_dict[requested_var][dkey] = ["M" if x==-999 else int(x) for x in stn_dict[requested_var][dkey]]
-						hourly_fcst.append([ymd,stn_dict[requested_var][dkey]])
-					else:
-						hourly_fcst.append([ymd,["M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M"]])
+							hourly_vals.append("M")
+					hourly_fcst.append([ymd,hourly_vals])
 					theDate = theDate + DateTime.RelativeDate(days=+1)
 		except:
 			print_exception()
