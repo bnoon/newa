@@ -9,7 +9,7 @@ function recommendation (dy4_thin) {
 	var recommend, miss = -999;
 	if (dy4_thin === miss) {
 		recommend = "-";
-	} else if (dy4_thin > 20 {
+	} else if (dy4_thin > 20) {
 		recommend = "Increase chemical thinner rate by 30%";
 	} else if (dy4_thin > 0) {
 		recommend = "Increase chemical thinner rate by 15%";
