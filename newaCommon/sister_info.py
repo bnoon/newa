@@ -27,7 +27,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "crc" : {"temp": "chz", "rhum": "chz", "prcp": "chz", "wspd": "chz", "wdir": "chz"},
 "cho" : {"temp": "cas", "rhum": "cas", "prcp": "cas", "wspd": "cas", "wdir": "cas"},
 "cro" : {"temp": "vsh", "rhum": "vsh", "prcp": "vsh", "wspd": "vsh", "wdir": "vsh", "srad": "vsh", "lwet": "vsh"},
-"cns" : {"temp": "cut", "lwet": "cut", "rhum": "cut", "prcp": "cut", "wspd": "cut", "wdir": "cut", "srad": "cut"},
+"cns" : {"temp": "shc", "lwet": "shc", "rhum": "shc", "prcp": "shc", "wspd": "shc", "wdir": "shc", "srad": "shc"},
 "cut" : {"temp": "kfok", "lwet": "mat", "rhum": "kfok", "prcp": "kfok", "wspd": "kfok", "wdir": "kfok", "srad": "cns"},
 "den" : {"temp": "hud", "rhum": "hud", "prcp": "hud", "wspd": "hud", "wdir": "hud", "lwet": "hud", "srad": "hud"},
 "dre" : {"temp": "gbe", "lwet": "gbe", "prcp": "gbe"},
