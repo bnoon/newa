@@ -3749,7 +3749,7 @@ def process_help (request,path):
 										   ])
 		elif smry_type == 'dmcast' or (smry_type == 'grape_disease' and pest == 'dmcast'):
 			return newaModel_io.helppage([("DMCast Notes","/dmcast/dmcast_notes.html"),
-			                               ("NEWA Model References","http://newatest.cornell.edu/index.php?page=newa-pest-forecast-model-references")
+			                               ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references")
 			                               ])
 		else:
 			return newaCommon_io.errmsg('Error processing input')

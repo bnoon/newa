@@ -272,17 +272,17 @@ def apple_hourly (staid, start_date_dt, end_date_dt, biofix_dt, station_type):
 #				save daily values to dictionary
 				tkey = (theDate.year,theDate.month,theDate.day)
 				et_dict[tkey] = {}
-				et_dict[tkey]['date'] = '%s %d' % (month_abb[theDate.month],theDate.day)
+				et_dict[tkey]["date"] = '%s %d' % (month_abb[theDate.month],theDate.day)
 				if dly_miss == 0:
-					et_dict[tkey]['et'] = dly_evap
-					et_dict[tkey]['srad'] = dly_srad
+					et_dict[tkey]["et"] = dly_evap
+					et_dict[tkey]["srad"] = dly_srad
 				else:
-					et_dict[tkey]['et'] = miss
-					et_dict[tkey]['srad'] = miss
+					et_dict[tkey]["et"] = miss
+					et_dict[tkey]["srad"] = miss
 				if dly_prcp_miss <= 3:
-					et_dict[tkey]['prcp'] = dly_prcp
+					et_dict[tkey]["prcp"] = dly_prcp
 				else:
-					et_dict[tkey]['prcp'] = miss
+					et_dict[tkey]["prcp"] = miss
 
 				dly_evap = 0.0
 				dly_srad = 0.0
@@ -328,7 +328,17 @@ def run_apple_et (stn,accend,greentip,output):
 	except:
 		print_exception()
 	
-	return newaTools_io.apple_et_results(et_dict)
+	if output == 'json':
+		import json
+		results_list = []
+		etkeys = et_dict['data'].keys()
+		etkeys.sort()
+		for key in etkeys:
+			results_list.append([et_dict['data'][key]['date'],round(et_dict['data'][key]['et'],2),round(et_dict['data'][key]['prcp'],2)])
+		json_dict = json.dumps({"data":results_list})
+		return json_dict
+	else:
+		return newaTools_io.apple_et_results(et_dict)
 
 #--------------------------------------------------------------------------------------------		
 def run_apple_et_specs (stn,accend,output):
@@ -518,19 +528,19 @@ def process_input (request,path):
 					if request.form.has_key('output'):          output = request.form['output']
 					if request.form.has_key('greentip'):
 						try:
-							mm,dd,yy = request.form['greentip'].split("/")
+							mm,dd,yy = request.form['greentip'].replace("-","/").split("/")
 							greentip = DateTime.DateTime(int(yy),int(mm),int(dd),23)
 						except:
 							greentip = None
 					if request.form.has_key('bloom'):
 						try:
-							mm,dd,yy = request.form['bloom'].split("/")
+							mm,dd,yy = request.form['bloom'].replace("-","/").split("/")
 							bloom = DateTime.DateTime(int(yy),int(mm),int(dd),23)
 						except:
 							bloom = None
 					if request.form.has_key('accend'):
 						try:
-							mm,dd,yy = request.form['accend'].split("/")
+							mm,dd,yy = request.form['accend'].replace("-","/").split("/")
 							accend = DateTime.DateTime(int(yy),int(mm),int(dd),23)
 						except:
 							accend = None

@@ -1,5 +1,5 @@
 import sys
-from math import log, exp
+from math import log, exp, ceil
 
 def etsoil_calc (gtype,soil_type,month,day,hour,tmp,dewpt,wind,rain,sun_cloud,tsky,snow,daily_ppt,
 				loc_constants,sc_status,sc_constants):
@@ -469,7 +469,7 @@ def chk_default (rain, snow, tsky, wind, sun_cloud, hour, sunrise, sunset):
 	if snow < 0: snow = 0
 	if tsky < 0: tsky = 0.5
 	if wind < 0: wind = 5.0
-	if (hour <= sunrise or hour > int(sunset)+1) and sun_cloud != 0:
+	if (hour <= sunrise or hour > ceil(sunset+1)) and sun_cloud != 0:
 		print 'CHK_DEFAULT: Hour=',hour,'sr/ss',sunrise,sunset,'; solar rad of',sun_cloud,'set to zero.'
 		sun_cloud = 0.0
 		
