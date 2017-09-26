@@ -11,7 +11,8 @@ stationInfo_cache = {}
 class RootDirectory(Directory):
 
 	_q_exports = ["","process_input","stationList","stateStationList","stateInactiveStationList","stationSisterInfo",
-	"diseaseStations","getForecastUrl","stationMap","stateStationMap","zoomStationMap","stationInfo","stationModels","getFcstData"]
+	"diseaseStations","getForecastUrl","stationMap","stateStationMap","zoomStationMap","stationInfo","stationModels","getFcstData",
+	"gridSoilTemps"]
 
 #	put up input page for following
 	def _q_index (self):						#default
@@ -66,16 +67,30 @@ class RootDirectory(Directory):
 	def getFcstData (self, path=None) :
 		path = ['getFcstData'] + path
 		return process_input(None,path)
+	#following path is not supported
+#	def gridSoilTemps (self, path=None) :
+#		path = ['gridSoilTemps'] + path
+#		return process_input(None,path)
 
 #	received request form to be processed
 
-#	process information provided in url
+#	process information provided in url ... replaced below 9/26/2017 kle
+#	def _q_lookup(self, component, path=None):
+#		if path: 
+#			path = [component] + path
+#		else:
+#			path = [component]
+#		return process_input(None,path)
+
 	def _q_lookup(self, component, path=None):
-		if path: 
-			path = [component] + path
-		else:
-			path = [component]
-		return process_input(None,path)
+		req = get_request()
+		if component.find('?') > 0 :
+			component,query = component.split('?',1)
+		if component == 'gridSoilTemps':
+			from newaUtil import process_gridSoilTemps
+			return process_gridSoilTemps(req)
+		else :
+			return None
 
 	def _q_traverse(self, path):
 		assert len(path) > 0
