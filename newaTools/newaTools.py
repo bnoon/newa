@@ -378,6 +378,90 @@ def run_apple_et_specs (stn,accend,output):
 	return newaTools_io.apple_et_specs(et_dict)
 
 #--------------------------------------------------------------------------------------------		
+def ctof (tempc):
+	if tempc == miss:
+		return "-"
+	else:
+		return int(round((((9.0/5.0) * tempc) + 32.), 0))
+		
+#--------------------------------------------------------------------------------------------	
+# either set missing values to "-" or round value to number of decimal places specified	
+def mround (val, digits):
+	if val == miss:
+		return "-"
+	else:
+		return round(val, digits)
+
+#--------------------------------------------------------------------------------------------	
+# get recommedation for thinning (this is for json; same code is in apple_thin.js for web)
+def get_recommend(dy4_thin):		
+	if (dy4_thin == "-") :
+		recommend = "-"
+	elif (dy4_thin > 20) :
+		recommend = "Increase chemical thinner rate by 30%"
+	elif (dy4_thin > 0) :
+		recommend = "Increase chemical thinner rate by 15%"
+	elif (dy4_thin > -20) :
+		recommend = "Apply standard chemical thinner rate";
+	elif (dy4_thin > -40) :
+		recommend = "Decrease chemical thinner rate by 15%"
+	elif (dy4_thin > -60) :
+		recommend = "Decrease chemical thinner rate by 30%"
+	elif (dy4_thin > -80) :
+		recommend = "Decrease chemical thinner rate by 50%"
+	else :
+		recommend = "Do not thin (many fruits will fall off naturally)"
+	return recommend
+			
+#--------------------------------------------------------------------------------------------
+# Constructs JSON object containing data necessary to build apple thinning table. 
+# Much of this is done in newaTools_io and apple_thin.js for NEWA (html).	
+def apple_thin_json(thin_dict, biofix_dt, bloom_dt):
+	results_list = []
+	notes_list = []
+	try:
+		import json
+		results_list = []
+		notes_list = []
+		tkeys = thin_dict['data'].keys()
+		tkeys.sort()
+		recommendEnd = bloom_dt + DateTime.RelativeDate(days=+35)
+		if len(tkeys) >= 3:
+			list4day = [miss, thin_dict['data'][0]['thinIndex'], thin_dict['data'][1]['thinIndex'], thin_dict['data'][2]['thinIndex']]
+		else:
+			list4day = []
+		for key in tkeys:
+			t_dt = thin_dict['greentipDate'] + DateTime.RelativeDate(days=+key, hour=0, minute=0, second=0.0)
+			tdate = "%s/%s" % (t_dt.month,t_dt.day)
+			if thin_dict['data'][key]['maxt'] == miss or thin_dict['data'][key]['mint'] == miss or thin_dict['data'][key]['srad'] == miss:
+				thin_dict['data'][key]['dlyCarbonBal'] = miss
+				thin_dict['data'][key]['totalDemand'] = miss
+				thin_dict['data'][key]['thinIndex'] = miss
+			if key+3 < len(tkeys) and thin_dict['data'][key+3]['maxt'] != miss and thin_dict['data'][key+3]['mint'] != miss and thin_dict['data'][key+3]['srad'] != miss:
+				list4day.append(thin_dict['data'][key+3]['thinIndex'])
+			else:
+				list4day.append(miss)
+			list4day.pop(0)
+			if len(list4day) == 4 and not miss in list4day:
+				avg4day = round((sum(list4day)/4.0), 2)
+			else:
+				avg4day = "-"
+			if t_dt >= bloom_dt and t_dt <= recommendEnd:
+				recommend = get_recommend(avg4day)
+			else:
+				recommend = "-"
+			results_list.append([tdate, ctof(thin_dict['data'][key]['maxt']), ctof(thin_dict['data'][key]['mint']),\
+				mround(thin_dict['data'][key]['srad'],1), mround(thin_dict['data'][key]['dlyCarbonBal'],2),\
+				mround(thin_dict['data'][key]['totalDemand'],2), mround(thin_dict['data'][key]['thinIndex'],2),\
+				avg4day, recommend])
+		if (bloom_dt - biofix_dt).days < 21:
+			notes_list.append('Difference between Green tip and Bloom is less than 21 days. Results may be unreliable.')
+	except:
+		print_exception()
+	json_dict = json.dumps({"data":results_list, "notes":notes_list})
+	return json_dict
+
+#--------------------------------------------------------------------------------------------		
 def run_apple_thin (stn,accend,greentip,bloom,output):
 	thin_dict = {}
 	try:
@@ -418,7 +502,11 @@ def run_apple_thin (stn,accend,greentip,bloom,output):
 	except:
 		print_exception()
 	
-	return newaTools_io.apple_thin_results(thin_dict)
+	if output == 'json':
+		json_dict = apple_thin_json(thin_dict, biofix_dt, bloom_dt)
+		return json_dict
+	else:
+		return newaTools_io.apple_thin_results(thin_dict)
 
 #--------------------------------------------------------------------------------------------		
 def run_apple_thin_specs (stn,accend,output):
