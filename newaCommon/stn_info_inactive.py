@@ -69,7 +69,6 @@ stn_info_inactive = {
 '3518': {'name': 'Unionville Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 40.4254, 'lon': -74.8256, 'elev': 233, 'network': 'njwx', 'state': 'NJ', 'disconnected': 'yes'},
 '3519': {'name': 'Hawk Haven Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 39.0095, 'lon': -74.8881, 'elev': 16, 'network': 'njwx', 'state': 'NJ', 'disconnected': 'yes'},
 '3520': {'name': 'Tomasello Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 39.6569, 'lon': -74.8347, 'elev': 105, 'network': 'njwx', 'state': 'NJ', 'disconnected': 'yes'},
-'mbe': {'name': 'Belchertown-2, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toohigh', 'lon': -72.35972, 'elev': 623,  'lat': 42.25306, 'network': 'newa', 'state': 'MA'},
 'mno': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.345831, 'lon': -71.677843, 'elev': 610, 'network': 'newa', 'state': 'MA', 'disconnected': 'yes'},
 'mmi': {'name': 'Middlefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.71083, 'elev': 180,  'lat': 41.49667, 'network': 'newa', 'state': 'CT', 'disconnected': 'yes'},
 'ct_ham': {'name': 'Hamden, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.380279, 'lon': -72.912015, 'elev': 83, 'network': 'newa', 'state': 'CT'},

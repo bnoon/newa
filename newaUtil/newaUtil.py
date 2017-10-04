@@ -275,9 +275,12 @@ def run_stationSisterInfo(options):
 				if sister[var][0:1] >= '1' and sister[var][0:1] <= '9' and sister[var][1:2] >= '0' and sister[var][1:2] <= '9':
 					station_id = sister[var]
 					station_type = 'njwx'
-				elif len(sister[var]) == 4:
+				elif len(sister[var]) == 4 and sister[var][0:1].upper() == 'K':
 					station_id = sister[var]
 					station_type = "icao"
+				elif len(sister[var]) == 4:
+					station_id = sister[var]
+					station_type = "oardc"
 				elif sister[var][0:3] == "cu_" or sister[var][0:3] == "um_" or sister[var][0:3] == "uc_" or sister[var][0:3] == "un_":
 					station_id = sister[var]
 					station_type = "culog"

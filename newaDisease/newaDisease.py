@@ -388,8 +388,10 @@ class Pottom (Base, general_simcast):
 			# determine station type
 			if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 				station_type = 'njwx'
-			elif len(stn) == 4:
+			elif len(stn) == 4 and stn[0:1].upper() == 'K':
 				station_type = 'icao'
+			elif len(stn) == 4:
+				station_type = 'oardc'
 			elif stn[0:3] == 'cu_' or stn[0:3] == 'um_' or stn[0:3] == "un_" or stn[0:3] == "uc_":
 				station_type = 'cu_log'
 			elif len(stn) == 3 or len(stn) == 6:
@@ -548,8 +550,10 @@ class Potato (Pottom):
 			# determine station type
 			if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 				station_type = 'njwx'
-			elif len(stn) == 4:
+			elif len(stn) == 4 and stn[0:1].upper() == 'K':
 				station_type = 'icao'
+			elif len(stn) == 4:
+				station_type = 'oardc'
 			elif stn[0:3] == 'cu_' or stn[0:3] == 'um_' or stn[0:3] == "un_" or stn[0:3] == "uc_":
 				station_type = 'cu_log'
 			elif len(stn) == 3 or len(stn) == 6:

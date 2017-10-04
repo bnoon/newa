@@ -46,8 +46,10 @@ def get_metadata (station_id,id_type=None):
 		if not id_type:
 			if station_id[0:1] >= '1' and station_id[0:1] <= '9' and station_id[1:2] >= '0' and station_id[1:2] <= '9':
 				id_type = 'njwx'
-			elif len(station_id) == 4:
+			elif len(station_id) == 4 and station_id[0:1].upper() == 'K':
 				id_type = 'icao'
+			elif len(station_id) == 4:
+				id_type = 'oardc'
 			elif station_id[0:3] == "cu_" or station_id[0:3] == "um_" or station_id[0:3] == "uc_" or station_id[0:3] == "un_":
 				id_type = 'cu_log'
 			elif station_id[0:3] == "ew_":
@@ -105,7 +107,11 @@ def initHourlyVar (staid, var, miss, station_type='newa'):
 						  'wdir': [27,8,'degrees','%.0f'] },
 				'miwx':  {'prcp': [5,12,  'inch', '%.2f'],    'temp': [126,7, 'degF',   '%.1f'],
 						  'lwet': [118,6,'',     '%3.0f'],    'rhum': [143,3, 'percent','%.1f'],
-						  'srad': [132,8, 'langley','%.2f'] }
+						  'srad': [132,8, 'langley','%.2f'] },
+				'oardc': {'prcp': [5,13,  'inch', '%.2f'],    'temp': [23,10, 'degF',   '%.1f'],
+						  'lwet': [118,7,'',     '%3.0f'],    'rhum': [24,12, 'percent','%.1f'],
+						  'srad': [132,9, 'langley','%.2f'],  'wspd': [28,9, 'miles/hour','%.1f'],
+						  'wdir': [27,9,'degrees','%.0f'] }
 				}
 	v = None
 	miss_str = "%s" % miss
@@ -948,8 +954,10 @@ class Base:
 		try:
 			if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 				station_type = 'njwx'
-			elif len(stn) == 4:
+			elif len(stn) == 4 and stn[0:1].upper() == 'K':
 				station_type = 'icao'
+			elif len(stn) == 4:
+				station_type = 'oardc'
 			elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_" or stn[0:3] == "un_":
 				station_type = 'cu_log'
 			elif stn[0:3] == "ew_":
@@ -986,8 +994,10 @@ class Base:
 		try:
 			if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 				station_type = 'njwx'
-			elif len(stn) == 4:
+			elif len(stn) == 4 and stn[0:1].upper() == 'K':
 				station_type = 'icao'
+			elif len(stn) == 4:
+				station_type = 'oardc'
 			elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_" or stn[0:3] == "un_":
 				station_type = 'cu_log'
 			elif stn[0:3] == "ew_":
@@ -1022,8 +1032,10 @@ class Base:
 		try:
 			if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 				station_type = 'njwx'
-			elif len(stn) == 4:
+			elif len(stn) == 4 and stn[0:1].upper() == 'K':
 				station_type = 'icao'
+			elif len(stn) == 4:
+				station_type = 'oardc'
 			elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_" or stn[0:3] == "un_":
 				station_type = 'cu_log'
 			elif stn[0:3] == "ew_":
@@ -1057,8 +1069,10 @@ class Base:
 		try:
 			if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 				station_type = 'njwx'
-			elif len(stn) == 4:
+			elif len(stn) == 4 and stn[0:1].upper() == 'K':
 				station_type = 'icao'
+			elif len(stn) == 4:
+				station_type = 'oardc'
 			elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_" or stn[0:3] == "un_":
 				station_type = 'cu_log'
 			elif stn[0:3] == "ew_":
@@ -1095,8 +1109,10 @@ class Base:
 		try:
 			if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 				station_type = 'njwx'
-			elif len(stn) == 4:
+			elif len(stn) == 4 and stn[0:1].upper() == 'K':
 				station_type = 'icao'
+			elif len(stn) == 4:
+				station_type = 'oardc'
 			elif stn[0:3] == "cu_" or stn[0:3] == "um_" or stn[0:3] == "uc_" or stn[0:3] == "un_":
 				station_type = 'cu_log'
 			elif stn[0:3] == "ew_":
