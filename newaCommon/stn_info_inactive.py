@@ -74,6 +74,8 @@ stn_info_inactive = {
 'ct_ham': {'name': 'Hamden, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.380279, 'lon': -72.912015, 'elev': 83, 'network': 'newa', 'state': 'CT'},
 'ct_nca': {'name': 'New Canaan, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'toolow', 'lat': 41.132771, 'lon': -73.484614, 'elev': 274, 'network': 'newa', 'state': 'CT'},
 'ct_tol': {'name': 'Tolland, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.865470, 'lon': -72.311078, 'elev': 425, 'network': 'newa', 'state': 'CT'},
+'ct_was': {'name': 'Washington, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.602175, 'lon': -73.306449, 'elev': 868, 'network': 'newa', 'state': 'CT'},
+'ct_npr': {'name': 'New Preston, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.665955, 'lon': -73.334845, 'elev': 860, 'network': 'newa', 'state': 'CT'},
 'um_tff': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -71.67833, 'elev': 610, 'lat': 42.34611, 'network': 'cu_log', 'state': 'MA'},
 'um_ces': {'name': 'Weston (Case Estates), MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -71.29889, 'elev': 246, 'lat': 42.35806, 'network': 'cu_log', 'state': 'MA', 'disconnected': 'yes'},
 'um_new': {'name': 'Middletown, RI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.529167, 'lon': -71.27250, 'elev': 197, 'network': 'cu_log', 'state': 'RI', 'disconnected': 'yes'},
