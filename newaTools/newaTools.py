@@ -336,7 +336,8 @@ def run_apple_et (stn,accend,greentip,output):
 		etkeys = et_dict['data'].keys()
 		etkeys.sort()
 		for key in etkeys:
-			results_list.append([et_dict['data'][key]['date'],round(et_dict['data'][key]['et'],2),round(et_dict['data'][key]['prcp'],2)])
+			fdate = "%d-%02d-%02d" % (key[0],key[1],key[2])
+			results_list.append([fdate,round(et_dict['data'][key]['et'],2),round(et_dict['data'][key]['prcp'],2)])
 		json_dict = json.dumps({"data":results_list})
 		return json_dict
 	else:
@@ -436,7 +437,7 @@ def apple_thin_json(thin_dict, biofix_dt, bloom_dt):
 			list4day = []
 		for key in tkeys:
 			t_dt = thin_dict['greentipDate'] + DateTime.RelativeDate(days=+key, hour=0, minute=0, second=0.0)
-			tdate = "%s/%s" % (t_dt.month,t_dt.day)
+			fdate = "%d-%02d-%02d" % (t_dt.year,t_dt.month,t_dt.day)
 			if thin_dict['data'][key]['maxt'] == miss or thin_dict['data'][key]['mint'] == miss or thin_dict['data'][key]['srad'] == miss:
 				thin_dict['data'][key]['dlyCarbonBal'] = miss
 				thin_dict['data'][key]['totalDemand'] = miss
@@ -454,7 +455,7 @@ def apple_thin_json(thin_dict, biofix_dt, bloom_dt):
 				recommend = get_recommend(avg4day)
 			else:
 				recommend = "-"
-			results_list.append([tdate, ctof(thin_dict['data'][key]['maxt']), ctof(thin_dict['data'][key]['mint']),\
+			results_list.append([fdate, ctof(thin_dict['data'][key]['maxt']), ctof(thin_dict['data'][key]['mint']),\
 				mround(thin_dict['data'][key]['srad'],1), mround(thin_dict['data'][key]['dlyCarbonBal'],2),\
 				mround(thin_dict['data'][key]['totalDemand'],2), mround(thin_dict['data'][key]['thinIndex'],2),\
 				avg4day, recommend])
