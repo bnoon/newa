@@ -206,7 +206,7 @@ stn_info = {
 'ct_npr': {'name': 'New Preston, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.665955, 'lon': -73.334845, 'elev': 860, 'network': 'newa', 'state': 'CT'},
 'ct_mid': {'name': 'Middlefield (UConn), CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.4940344, 'lon': -72.726152, 'elev': 364, 'network': 'newa', 'state': 'CT'},
 'ia_ccy': {'name': 'Central City, IA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.224159, 'lon': -91.494571, 'elev': 958, 'network': 'newa', 'state': 'IA'},
-'ia_ely': {'name': 'Ely, IA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', ], 'lat': 41.8583, 'lon': -91.6090, 'elev': 775, 'network': 'newa', 'state': 'IA’},
+'ia_ely': {'name': 'Ely, IA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 41.8583, 'lon': -91.6090, 'elev': 775, 'network': 'newa', 'state': 'IA'},
 'il_pgr': {'name': 'Poplar Grove, IL', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.391312, 'lon': -88.800936, 'elev': 916, 'network': 'newa', 'state': 'IL'},
 'il_bel': {'name': 'Belleville, IL', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 38.480416, 'lon': -89.939040, 'elev': 539, 'network': 'newa', 'state': 'IL'},
 'il_woo': {'name': 'Woodstock, IL', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.259406, 'lon': -88.485386, 'elev': 876, 'network': 'newa', 'state': 'IL'},
