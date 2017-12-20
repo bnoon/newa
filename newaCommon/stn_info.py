@@ -353,7 +353,7 @@ stn_info = {
 'ew_ver': {'name': 'Verona, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.8132, 'lon': -82.8455, 'elev': 231.648, 'network': 'miwx', 'state': 'MI'},
 'ew_weo': {'name': 'West Olive, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'bad', 'lat': 42.9715, 'lon': -86.0765, 'elev': 194.442, 'network': 'miwx', 'state': 'MI'},
 'ew_ehb': {'name': 'Egg Harbor, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'srad'], 'srqual': 'ok', 'lat': 45.0509, 'lon': -87.2598, 'elev': 734, 'network': 'miwx', 'state': 'WI'},
-'ew_kws': {'name': 'Kewaunee/Stangelville, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'srad'], 'srqual': 'ok', 'lat': ,44.4018, 'lon': -87.6646, 'elev': 790, 'network': 'miwx', 'state': 'WI'},
+'ew_kws': {'name': 'Kewaunee/Stangelville, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'srad'], 'srqual': 'ok', 'lat': 44.4018, 'lon': -87.6646, 'elev': 790, 'network': 'miwx', 'state': 'WI'},
 'ew_lux': {'name': 'Casco/Luxemburg, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'srad'], 'srqual': 'ok', 'lat': 44.5554, 'lon': -87.6549, 'elev': 715, 'network': 'miwx', 'state': 'WI'},
 'ew_nsw': {'name': 'Nasewaupee, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'srad'], 'srqual': 'ok', 'lat': 44.7597, 'lon': -87.5056, 'elev': 689, 'network': 'miwx', 'state': 'WI'},
 'ew_sdr': {'name': 'Sturgeon Bay/S. Door, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'srad'], 'srqual': 'ok', 'lat': 44.779, 'lon': -87.3556, 'elev': 696, 'network': 'miwx', 'state': 'WI'},

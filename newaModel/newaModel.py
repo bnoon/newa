@@ -3694,7 +3694,7 @@ def process_help (request,path):
 										   ("Pest Management Guidelines for Commercial Tree Fruit Production","http://ipmguidelines.org"),
 										   ("Fire Blight Fact Sheet (pdf)","https://ecommons.cornell.edu/handle/1813/43095"),
 			                               ("NEWA Default Biofix Dates","http://newa.cornell.edu/index.php?page=default-biofix-dates"),
-			                               ("To download Maryblyt v 7.1 (Windows only), email <a href='mailto:Alan.Biggs@mail.wvu.edu'>Alan Biggs</a>, Professor Emeritus of Plant Pathology at West Virginia University, who developed the first functional Windows version of this fire blight prediction software.)",""),
+			                               ("To download Maryblyt v 7.1 (Windows only), email Alan Biggs, Professor Emeritus of Plant Pathology at West Virginia University, who developed the first functional Windows version of this fire blight prediction software.","mailto:Alan.Biggs@mail.wvu.edu"),
 			                               ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references")
 										])
 		elif smry_type == 'sooty_blotch' or (smry_type == 'apple_disease' and pest == 'sooty_blotch'):
@@ -3719,7 +3719,7 @@ def process_help (request,path):
 			help_list = [("Pest Management Guidelines","http://ipmguidelines.org"),
 			             ("%s Fact Sheet"%(pest_names[pest_abb]),"http://hdl.handle.net/1813/%s"%(pest_id[pest_abb])),
 			             ("Cornell Fruit Resources - Tree Fruit IPM","https://blogs.cornell.edu/treefruit/ipm/"),
-						 ("Pesticide Information","https://cropandpestguides.cce.cornell.edu/",
+						 ("Pesticide Information","https://cropandpestguides.cce.cornell.edu/"),
 			             ("NEWA Default Biofix Dates","http://newa.cornell.edu/index.php?page=default-biofix-dates"),
 			             ("Degree Day Accumulations Table","http://newa.cornell.edu/index.php?page=degree-days"),
 			             ("Hudson Valley Scouting Reports and Trap Data","http://www.hudsonvalleyresearchlab.org/"),
