@@ -451,6 +451,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "pa_cab": {"temp": "kpit", "rhum": "kpit", "prcp": "kpit", "wspd": "kpit", "wdir": "kpit", "lwet": "pa_npa", "srad": "pa_npa"},
 "pa_lew": {"temp": "kipt", "rhum": "kipt", "prcp": "kipt", "wspd": "kipt", "wdir": "kipt", "lwet": "pa_rsp", "srad": "pa_rsp"},
 "pa_heg": {"temp": "kmdt", "rhum": "kmdt", "prcp": "kmdt", "wspd": "kmdt", "wdir": "kmdt", "lwet": "pa_ntr", "srad": "pa_ntr"},
+"pa_lak": {"temp": "keri", "rhum": "keri", "prcp": "keri", "wspd": "keri", "wdir": "keri", "lwet": "har", "srad": "har"},
 "mmi" : {"temp": "khfd", "rhum": "khfd", "prcp": "khfd", "wspd": "khfd", "wdir": "khfd", "lwet": "cli", "srad": "mwe"},
 "ct_gfy": {"temp": "ct_nwi", "rhum": "ct_nwi", "prcp": "ct_nwi", "wspd": "ct_nwi", "wdir": "ct_nwi", "lwet": "ct_nwi", "srad": "ct_pre"},
 "ct_gui": {"temp": "kbdr", "rhum": "kbdr", "prcp": "kbdr", "wspd": "kbdr", "wdir": "kbdr", "lwet": "ct_she", "srad": "ct_she"},
