@@ -39,27 +39,32 @@ def tp_for_grf(stn, daily_data, smry_dict, start_date_dt, end_date_dt):
 		obs_dict['mint'] = mint
 		obs_dict['prcp'] = prcpl
 		obs_dict['obs_days'] = obs_days
+		obs_dict['fmaxt'] = []
+		obs_dict['fmint'] = []
+		obs_dict['fprcp'] = []
+		obs_dict['frobs_days'] = []
 
 		# get daily forecast data
-		fmint = []
-		fmaxt = []
-		fprcp = []
-		fobs_days = []
 		start_fcst_dt = DateTime.DateTime(*daily_data[-1][0]) + DateTime.RelativeDate(days = +1)
 		end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6)
-		forecast_data = get_daily_forecast(stn,start_fcst_dt,end_fcst_dt)
-		for dly_dt,tave_hr,tmax,tmin,prcp,lwet,rhum,wspd,srad,st4a,st4x,st4n,dflags in forecast_data:
-			if tmax != miss and tmin != miss:
-				if first:
-					first = 0
-				fmint.append(int(round(tmin,0)))
-				fmaxt.append(int(round(tmax,0)))
-				fprcp.append(prcp)
-				fobs_days.append("%d-%d-%d" % (dly_dt[0],dly_dt[1],dly_dt[2]))
-		obs_dict['fmaxt'] = fmaxt
-		obs_dict['fmint'] = fmint
-		obs_dict['fprcp'] = fprcp
-		obs_dict['frobs_days'] = fobs_days
+		if end_fcst_dt >= start_fcst_dt:
+			fmint = []
+			fmaxt = []
+			fprcp = []
+			fobs_days = []
+			forecast_data = get_daily_forecast(stn,start_fcst_dt,end_fcst_dt)
+			for dly_dt,tave_hr,tmax,tmin,prcp,lwet,rhum,wspd,srad,st4a,st4x,st4n,dflags in forecast_data:
+				if tmax != miss and tmin != miss:
+					if first:
+						first = 0
+					fmint.append(int(round(tmin,0)))
+					fmaxt.append(int(round(tmax,0)))
+					fprcp.append(prcp)
+					fobs_days.append("%d-%d-%d" % (dly_dt[0],dly_dt[1],dly_dt[2]))
+			obs_dict['fmaxt'] = fmaxt
+			obs_dict['fmint'] = fmint
+			obs_dict['fprcp'] = fprcp
+			obs_dict['frobs_days'] = fobs_days
 	except:
 		print_exception()
 	return obs_dict, smry_dict, forecast_data
@@ -245,8 +250,9 @@ def run_fire_blight_plots (stn,end_date_dt,firstblossom,orchard_history,output):
 		smry_dict['orchard_history'] = orchard_history
 
 		# obtain daily data
+		end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6) + DateTime.RelativeDate(hour=23,minute=0,second=0)
 		if not daily_data:
-			hourly_data, daily_data, download_time, station_name = newaCommon.Base().get_hddata (stn, start_date_dt, end_date_dt)
+			hourly_data, daily_data, download_time, station_name = newaCommon.Base().get_hddata (stn, start_date_dt, end_fcst_dt)
 		smry_dict['station_name'] = station_name
 		
 		# format for plot routine
@@ -254,8 +260,8 @@ def run_fire_blight_plots (stn,end_date_dt,firstblossom,orchard_history,output):
 			
 		# add hourly forecast data
 		start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
-		end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +5)
-		hourly_data = newaModel.Models().add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
+		if end_fcst_dt >= start_fcst_dt:
+			hourly_data = newaModel.Models().add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
 		
 		if firstblossom and len(hourly_data) > 0:
 			# calculate degree hours using Tim Smith's table

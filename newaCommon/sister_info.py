@@ -539,6 +539,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "oh_mtv": {"temp": "kcmh", "rhum": "kcmh", "prcp": "kcmh", "wspd": "kcmh", "wdir": "kcmh", "lwet": "oh_mor", "srad": "oh_mor"},
 "oh_rog": {"temp": "kyng", "rhum": "kyng", "prcp": "kyng", "wspd": "kyng", "wdir": "kyng", "lwet": "oh_mor", "srad": "oh_mor"},
 "oh_pat": {"temp": "kcmh", "rhum": "kcmh", "prcp": "kcmh", "wspd": "kcmh", "wdir": "kcmh", "lwet": "oh_mor", "srad": "oh_mor"},
+"oh_avo": {"temp": "kcle", "rhum": "kcle", "prcp": "kcle", "wspd": "kcle", "wdir": "kcle", "lwet": "oh_ber", "srad": "oh_ber"},
 "asht":   {"temp": "khzy", "lwet": "oh_ber", "prcp": "khzy", "rhum": "khzy", "wspd": "khzy", "wdir": "khzy", "srad": "perr", "st4i": "avon"},
 "perr":   {"temp": "khzy", "prcp": "khzy", "rhum": "khzy", "wspd": "khzy", "wdir": "khzy", "srad": "asht"},
 "avon":   {"temp": "kcle", "prcp": "kcle", "rhum": "kcle", "wspd": "kcle", "wdir": "kcle", "srad": "oh_ber"},
