@@ -404,7 +404,7 @@ def process_input (request,path):
 					raise program_exit('Error processing request')
 			else:
 				return newaCommon_io.errmsg('Error processing request; check input')
-		elif path[0] in ('dly','hly') or path[0][0:2] == 'dd':
+		elif path[0] in ('dly','hly','hly2') or path[0][0:2] == 'dd':
 			try:
 				smry_type = path[0]
 				stn = path[1]
@@ -442,7 +442,7 @@ def process_input (request,path):
 			year = now.year
 
 		req_date_dt = DateTime.DateTime(year,month,1,0)
-		if smry_type == 'hly' or smry_type == 'dly':
+		if smry_type == 'hly' or smry_type == 'dly' or smry_type == 'hly2':
 			start_date_dt = req_date_dt
 		else:
 			start_date_dt = DateTime.DateTime(year,1,1,0)
@@ -466,19 +466,21 @@ def process_input (request,path):
 			return newaCommon_io.errmsg('Error processing request; check station input')
 
 #		get ucanid and station name from metadata
-		ucanid,station_name = newaCommon.get_metadata (stn, station_type)
-		if station_type == 'icao':
-			staid = stn.upper()
-		else:
-			staid = ucanid
+		if smry_type != 'hly2':
+			ucanid,station_name = newaCommon.get_metadata (stn, station_type)
+			if station_type == 'icao':
+				staid = stn.upper()
+			else:
+				staid = ucanid
 		
 		if smry_type == 'est_info':
 			var_sister = get_sister_info (orig_stn)
 			return newaLister_io.estimation_info(stn,station_name,var_sister,year,month)
 	
 # 		obtain all hourly and daily data for station
-		hourly_data,daily_data,avail_vars = newaCommon.get_newa_data (staid,stn,start_date_dt,end_date_dt,station_type)
-		if len(avail_vars) > 0: 
+		if smry_type != 'hly2':
+			hourly_data,daily_data,avail_vars = newaCommon.get_newa_data (staid,stn,start_date_dt,end_date_dt,station_type)
+		if smry_type == 'hly2' or len(avail_vars) > 0: 
 			if smry_type == 'dly':
 				monthly_data = monthly_summary(daily_data,year,month)
 				numcols = len(avail_vars)
@@ -489,6 +491,8 @@ def process_input (request,path):
 			elif smry_type == 'hly':	
 				if 'dwpt' not in avail_vars and 'temp' in avail_vars and 'rhum' in avail_vars: avail_vars.append('dwpt')
 				return newaLister_io.hly_list_html(orig_stn,station_name,year,month,hourly_data,avail_vars,miss,station_type)
+			elif smry_type == 'hly2':	
+				return newaLister_io.hly_listWS_html(stn,station_type,year,month)
 			if smry_type in ['dd4c','dd143c','dd32','dd39','dd40','dd43','dd45','dd48','dd50','dd8650','dd55','dd43be','dd50be','dd4714']:
 				degday_data, degday_miss = degday_summary(daily_data,year,month,smry_type)
 				if len(degday_data) == 0:

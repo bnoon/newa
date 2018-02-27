@@ -1,0 +1,74 @@
+#newaListerResults {
+	width:860px; 
+	height:640px; 
+	border:1px dotted gray;
+}
+#newaListerResults table.dataTable {
+	font-size:90%;
+	font-family: Helvetica, Arial, sans-serif;
+	margin: 0;
+}
+#newaListerResults table.dataTable caption {
+  font-weight: bold;
+  padding: 10px 18px;
+}
+#newaListerResults table.dataTable.compact caption {
+  padding: 3px 10px 3px 5px;
+}
+#newaListerResults table.dataTable tr td, #table tr th {
+	text-align:center;
+}
+#newaListerResults table.dataTable thead tr th, table.dataTable caption {
+  background-color: #f6f5d7;
+}
+#newaListerResults table.dataTable tbody tr td:first-of-type {
+	white-space: nowrap;
+}
+#newaListerResults table.dataTable.compact caption {
+  padding: 3px 10px 3px 5px;
+}
+#newaListerResults table.dataTable.compact thead th,
+table.dataTable.compact thead td {
+  padding: 3px 10px 3px 5px;
+}
+#newaListerResults table.dataTable.compact tbody th,
+#newaListerResults table.dataTable.compact tbody td {
+  padding: 2px 5px;
+}
+
+#newaListerFooter {
+	display:flex; 
+	padding:4px 4px 0;
+}
+#newaListerFooter a.newalogo {
+	width:86px;
+	display:flex;
+	justify-content:flex-start;
+}
+#newaListerFooter a.newalogo img {
+	width:58px; 
+	height:22px; 
+	border:0;"
+}
+#newaListerFooter div.fd-center {
+	flex:1; 
+	display:flex; 
+	justify-content:center; 
+	text-align:center; 
+	padding:0 5em;
+	font-size:90%;
+}
+#newaListerFooter a.acislogo {
+	width:86px; 
+	display:flex; 
+	justify-content:flex-end;
+}
+#newaListerFooter a.acislogo img {
+	width:86px; 
+	height:37px; 
+	border:0;
+}
+.newaListerEstimated {
+	color:saddlebrown;
+	font-style:italic;
+}
