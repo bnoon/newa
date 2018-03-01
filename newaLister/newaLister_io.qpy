@@ -645,6 +645,37 @@ def dly_list_html [html] (stn,station_name,year,month,daily_data,monthly_data,av
 	'''
 
 #--------------------------------------------------------------------------------------------	
+# NEW daily data lister
+def dly_listWS_html [html] (stn,station_type,year,month):
+	'''
+	<html>
+	<head>
+	<link rel="stylesheet" type="text/css" href="/js/DataTables-1.10.16/css/jquery.dataTables.min.css" />
+	<link rel="stylesheet" type="text/css" href="/listerWS.css" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="/js/newaListerWS.js"></script>
+	</head>
+	'''
+	params = "'%s', '%s', '%d', '%d'" % (stn, station_type, year, month)
+	'<body onLoad="runDailyLister(%s);">' % (params)
+	'''
+		<div id="newaListerResults">Processing request ...</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>
+		<script src="/js/DataTables-1.10.16/js/jquery.dataTables.min.js"></script>
+		<script src="/js/moment-timezone.js"></script>
+
+		<script  type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+		<script type="text/javascript">
+		try {
+		var pageTracker = _gat._getTracker("UA-8808137-1");
+		pageTracker._trackPageview();
+		} catch(err) {}
+		</script>
+	</body>
+	</html>
+	'''
+
+#--------------------------------------------------------------------------------------------	
 # NEW hourly data lister
 def hly_listWS_html [html] (stn,station_type,year,month):
 	'''
@@ -975,7 +1006,8 @@ def estimation_info [html] (stn,station_name,var_sister,year,month):
 	vname = {'temp': 'Temperature',        'prcp': 'Precipitation',
 			 'lwet': 'Leaf Wetness',        'rhum': 'Relative Humidity',
 			 'dwpt': 'Dewpoint',           'wspd': 'Wind Speed',        'wdir': 'Wind Direction',
-			 'srad': 'Solar Radiation',    'st4i': 'Soil Temperature' }
+			 'srad': 'Solar Radiation',    'st4i': 'Soil Temperature',
+			 'sm4i': 'Soil Tension' }
 	'''
 	<html>
 	<head>

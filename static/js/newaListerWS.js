@@ -71,6 +71,7 @@ function trimResults(input_params, serialized_array) {
 	// remove any data not in requested month
 	for (i = serialized_array.length - 1; i >= 0; i -= 1) {
 		this_ymd = moment(serialized_array[i].date, 'MM/DD/YYYY HH:00 z');
+		this_ymd.subtract(1, "hours");	// done to retain midnight hour (00 next day)
 		if (parseInt(this_ymd.month() + 1) !== requested_month) {
 			serialized_array.splice(i, 1);
 		}
@@ -99,7 +100,7 @@ function hourlyLister(cb_args) {
 			65:  {title: 'Soil Tension (kPa)'},
 			118: {title: 'Leaf Wetness (minutes)'},
 			120: {title: 'Soil Temp (&#8457;)'},
-			126: {title: 'Temperature (&#8457;)'},
+			126: {title: 'Air Temperature (&#8457;)'},
 			128: {title: 'Wind Spd (mph)'},
 			130: {title: 'Wind Dir (degrees)'},
 			132: {title: 'Solar Rad (langleys)'},
@@ -156,6 +157,194 @@ function hourlyLister(cb_args) {
 	});
 }
 
+function hlyTodly(serialized_array, eVx, elem_info, requested_month) {
+	var m, oneday, msmry, tday, ymdh, smry,
+		smryResults = [], sum = {}, cnt = {}, fills = {}, max = {}, min = {},
+		reset = function() {
+			eVx.forEach(function(vx) {
+				if (vx !== 'date') {
+					sum[vx] = 0;
+					cnt[vx] = 0;
+					max[vx] = -9999;
+					min[vx] = 9999;
+					fills[vx] = false;
+				}
+			});
+		};
+	$("#newaListerResults").append("<br/>...Calculating daily summaries");
+	reset();
+	for (var i = 0; i < serialized_array.length; i += 1) {
+		$.each(serialized_array[i], function(index, value) {
+			if (index !== 'date' && value !== "M") {
+				if (index === '23' || index === '126') {		// max and min air temp	
+					max['maxt'] = Math.max(parseFloat(value.replace(/e|f|s/, '')), max['maxt']);
+					min['mint'] = Math.min(parseFloat(value.replace(/e|f|s/, '')), min['mint']);
+					cnt['maxt'] += 1;
+					cnt['mint'] += 1;
+					if (value.search(/e|s|f/) >= 0) {
+						fills['maxt'] = true;
+						fills['mint'] = true;
+					}
+				}
+				if (index === '24' || index === '14') {		//RH
+					if (parseFloat(value.replace(/e|f|s/, '')) >= 90) {
+						sum[index] += 1;
+					}
+				} else if (index === '118') {		//LWET
+					if (parseFloat(value.replace(/e|f|s/, '')) > 0) {
+						sum[index] += 1;
+					}
+				} else {
+					sum[index] += parseFloat(value.replace(/e|f|s/, ''));
+				}
+				cnt[index] += 1;
+				if (value.search(/e|s|f/) >= 0) {
+					fills[index] = true;
+				}
+			}
+		});
+		ymdh = moment(serialized_array[i].date, "MM/DD/YYYY HH:00 Z");
+		if (ymdh.hour() === 0 || i === serialized_array.length - 1) {
+			tday = ymdh.subtract(1, 'minutes');
+			if (parseInt(tday.month() + 1) === requested_month) {
+				oneday = {date: tday.format('MM/DD/YYYY')};
+				eVx.forEach(function(vx) {
+					if (cnt[vx] > 0) {
+						if (elem_info[vx].summary === 'max') {
+							smry = max[vx];
+						} else if (elem_info[vx].summary === 'min') {
+							smry = min[vx];
+						} else {
+							smry = elem_info[vx].summary === 'mean' ? sum[vx]/cnt[vx] : (sum[vx]);
+						}
+						m = Math.pow(10.0, elem_info[vx].decimal)
+						oneday[vx] = ((Math.round(smry * m)) / m).toFixed(elem_info[vx].decimal);
+						if (cnt[vx] < 24) {
+							oneday[vx] += "i";
+						}
+						if (fills[vx]) {
+							oneday[vx] += "e";
+						}
+					} else if (vx !== 'date') {
+						oneday[vx] = "M";
+					}
+				});
+				smryResults.push(oneday);
+			}
+			reset();
+		}
+	}
+	// now get monthly summary
+	for (var i = 0; i < smryResults.length; i += 1) {
+		$.each(smryResults[i], function(index, value) {
+			if (index !== 'date' && value !== "M") {
+				if (index === 'maxt') {		// max air temp	
+					max['maxt'] = Math.max(parseFloat(value.replace(/e|f|s/, '')), max['maxt']);
+					cnt['maxt'] += 1;
+				} else if (index === 'mint') {		// min air temp	
+					min['mint'] = Math.min(parseFloat(value.replace(/e|f|s/, '')), min['mint']);
+					cnt['mint'] += 1;
+				}
+				sum[index] += parseFloat(value.replace(/e|f|s/, ''));
+				cnt[index] += 1;
+			}
+		});
+	}
+	msmry = {date: 'Monthly summary'};
+	eVx.forEach(function(vx) {
+		if (cnt[vx] > 0) {
+			if (elem_info[vx].summary === 'max') {
+				smry = max[vx];
+			} else if (elem_info[vx].summary === 'min') {
+				smry = min[vx];
+			} else {
+				smry = elem_info[vx].summary === 'mean' ? sum[vx]/cnt[vx] : (sum[vx]);
+			}
+			m = Math.pow(10.0, elem_info[vx].decimal)
+			msmry[vx] = ((Math.round(smry * m)) / m).toFixed(elem_info[vx].decimal);
+		} else if (vx !== 'date') {
+			msmry[vx] = "M";
+		}
+	});
+	smryResults.push(msmry);
+	return smryResults;
+}
+
+// display daily data lister table
+function dailyLister(cb_args) {
+	var input_params = cb_args.input_params,
+		stnid = input_params.sid.split(" "),
+		ymd = input_params.edate.split("-"),
+		eVx = ['date'].concat(input_params.elems.map(function(elem){return elem.vX;})),
+		all_results = Object.values(cb_args.hrly_data),	// convert serialized results object into array of objects (formatted for DataTables)
+		trimmed_array = trimResults(input_params, all_results),
+		elem_info = {
+			date:   {title: 'Date'},
+			5:   {title: 'Total Precip (inches)', summary: 'sum', decimal: 2},
+			23:  {title: 'Avg Air Temp (&#8457;)', summary: 'mean', decimal: 1},
+			maxt:  {title: 'Max Air Temp (&#8457;)', summary: 'max', decimal: 1},
+			mint:  {title: 'Min Air Temp (&#8457;)', summary: 'min', decimal: 1},
+			24:  {title: 'RH Hrs &ge; 90%', summary: 'cnt', decimal: 0},
+			28:  {title: 'Avg Wind Spd (mph)', summary: 'mean', decimal: 1},
+			65:  {title: 'Avg Soil Tension (kPa)', summary: 'mean', decimal: 1},
+			118: {title: 'Leaf Wetness Hours', summary: 'cnt', decimal: 0},
+			120: {title: 'Avg Soil Temp (&#8457;)', summary: 'mean', decimal: 1},
+			126: {title: 'Avg Air Temperature (&#8457;)', summary: 'mean', decimal: 1},
+			128: {title: 'Avg Wind Spd (mph)', summary: 'mean', decimal: 1},
+			132: {title: 'Solar Rad (langleys)', summary: 'sum', decimal: 0},
+			143: {title: 'RH Hrs &ge; 90%', summary: 'cnt', decimal: 0},
+			149: {title: 'Solar Rad (watts/m2)', summary: 'sum', decimal: 0},
+		},
+		dt_options = {
+			searching: false,
+			paging: false,
+			info: false,
+			scrollX: true,
+			scrollY: 520,
+			order: [[ 0, 'asc' ]],
+			data: null,
+			columns: null,
+			rowCallback: null,
+		},
+		footer_message = '<div><span>Values followed by "i" indicate incomplete set of hourly data. ' +
+			'Values in </span><span class="newaListerEstimated">brown italics </span>' +
+			'<span>include estimated data. ' +
+			'<a href="http://newa.nrcc.cornell.edu/newaLister/est_info/' + 
+			stnid[0] + '/' + ymd[0] + '/' +  ymd[1] + '">' + 
+			'More information</a> is available on the estimation technique.</span></div>';
+	// summarize hourly data to daily values for table
+	if (eVx.indexOf(23) >= 0) {
+		eVx.splice(eVx.indexOf(23) + 1, 0, 'maxt', 'mint');
+	} else if (eVx.indexOf(126) >= 0) {
+		eVx.splice(eVx.indexOf(126) + 1, 0, 'maxt', 'mint');
+	}
+	$.extend(dt_options, {
+		data: hlyTodly(trimmed_array, eVx, elem_info, parseInt(ymd[1])),
+		columns: eVx.map(function(vx) {
+			return { data: vx, title: elem_info[vx].title };
+		}),
+		rowCallback: function(row, data, index) {
+			eVx.forEach(function(vx, i) {;
+				if (data[vx] === 'Monthly summary') {
+					$('td:eq(' + i + ')', row).html("<b>Monthly<br />summary</b>");
+				} else if (data[vx].search(/e|s|f/) >= 0) {
+					$('td:eq(' + i + ')', row).addClass('newaListerEstimated').html(data[vx].replace('e', ''));
+				} else if (data[vx] === 'M') {
+					$('td:eq(' + i + ')', row).html("-");
+				}
+			});
+		}
+	});
+	// table element
+	$("#newaListerResults").empty().append('<table id="dtable" class="stripe compact hover cell-border"></table>');
+	// table caption is station name
+	$("#dtable").append('<caption>' + cb_args.stnName + ' - Daily Data Summary</caption>');
+	// load data into DataTable
+	$('#dtable').DataTable(dt_options);
+	// add page footer with text and logos
+	addFooter(footer_message);
+}
+
 // convert time in local standard time to local time (based on time zone and dst)
 function formatTime (day, hour, tzo) {
 	var time_zone_name = {
@@ -208,7 +397,6 @@ function forecastEstimates(results, cb_args) {
 	newaLister_estimates_togo -= 1;								// ***** GLOBAL *****
 	if (newaLister_estimates_togo === 0) {
 		cb_args.productCallback($.extend(cb_args, { hrly_data: hrly_data }));
-//		hourlyLister( $.extend(cb_args, { hrly_data: hrly_data }));
 	}
 }
 
@@ -265,7 +453,6 @@ function sisterEstimates(results, cb_args) {
 	// all sister data processed; produce table
 	if (newaLister_estimates_togo === 0) {
 		cb_args.productCallback($.extend(cb_args, { hrly_data: hrly_data }));
-//		hourlyLister( $.extend(cb_args, { hrly_data: hrly_data }));
 	}
 }
 
@@ -392,13 +579,11 @@ function doEstimation(results, cb_args) {
 			error: function (err) {
 				console.log('Error obtaining sister station data for ' + input_params.sid + '; continuing with no filling');
 				cb_args.productCallback(cb_args);
-//				hourlyLister(cb_args);
 				return false;
 			}
 		});
 	} else {
 		cb_args.productCallback(cb_args);
-//		hourlyLister(cb_args);
 	}
 }
 
@@ -530,6 +715,17 @@ function runHourlyLister(stn_id, stn_type, year, month) {
 			edate: moment([year, month-1, 1]).endOf('month').format("YYYY-MM-DD"),
 			requested_elems: ['temp','dwpt','pcpn','lwet','rhum','wspd','wdir','srad','st4i','sm4i'],
 			productCallback: hourlyLister
+		};
+	getMeta(rinput);
+}
+function runDailyLister(stn_id, stn_type, year, month) {
+	var rinput = {
+			stn_id: stn_id,
+			stn_type: stn_type,
+			sdate: moment([year, month-1, 1]).subtract(1, 'day').format("YYYY-MM-DD"),
+			edate: moment([year, month-1, 1]).endOf('month').format("YYYY-MM-DD"),
+			requested_elems: ['temp','st4i','pcpn','lwet','rhum','wspd','srad','sm4i'],
+			productCallback: dailyLister
 		};
 	getMeta(rinput);
 }
