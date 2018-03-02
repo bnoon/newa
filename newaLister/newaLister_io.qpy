@@ -1030,12 +1030,14 @@ def estimation_info [html] (stn,station_name,var_sister,year,month):
 	</ol>
 	<p>For precipitation and wind direction, data extrapolation is not a valid method. Missing precipitation
 	and wind direction data are sourced from the designated sister weather station.
+	<p>Soil moisture is highly location dependent, so sister stations are not evaluated when soil moisture is missing.
 	'''
 	if len(var_sister):
 		'<p>For %s the following sister stations are assigned:'%station_name
 		'<ul>'
 		for var,sister_name in var_sister:
-			'<li>%s: %s</li>' % (vname[var],sister_name)
+			if var != 'sm4i':
+				'<li>%s: %s</li>' % (vname[var],sister_name)
 		'</ul>'
 	if year != 0:
 		'<p><a href="/newaLister/hly/%s/%s/%s">View the hourly data</a> to see which hours are missing ' %(stn,year,month)

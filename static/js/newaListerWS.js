@@ -131,7 +131,7 @@ function hourlyLister(cb_args) {
 		},
 		footer_message = '<div><span>Values in </span><span class="newaListerEstimated">brown italics </span>' +
 			'<span>were estimated from adjacent hours or a nearby location. ' +
-			'<a href="http://newa.nrcc.cornell.edu/newaLister/est_info/' + 
+			'<a target="_blank" href="http://newa.nrcc.cornell.edu/newaLister/est_info/' + 
 			stnid[0] + '/' + ymd[0] + '/' +  ymd[1] + '">' + 
 			'More information</a> is available on the estimation technique.</span></div>';		
 	// remove unwanted results	
@@ -306,10 +306,10 @@ function dailyLister(cb_args) {
 			columns: null,
 			rowCallback: null,
 		},
-		footer_message = '<div><span>Values followed by "i" indicate incomplete set of hourly data. ' +
+		footer_message = '<div><span>Daily values indicated by "i" indicate missing data within the 24-hour calculation period. ' +
 			'Values in </span><span class="newaListerEstimated">brown italics </span>' +
 			'<span>include estimated data. ' +
-			'<a href="http://newa.nrcc.cornell.edu/newaLister/est_info/' + 
+			'<a target="_blank" href="http://newa.nrcc.cornell.edu/newaLister/est_info/' + 
 			stnid[0] + '/' + ymd[0] + '/' +  ymd[1] + '">' + 
 			'More information</a> is available on the estimation technique.</span></div>';
 	// summarize hourly data to daily values for table
