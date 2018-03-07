@@ -86,7 +86,8 @@ function hourlyLister(cb_args) {
 		stnName = cb_args.stnName,
 		stnid = input_params.sid.split(" "),
 		ymd = input_params.edate.split("-"),
-		serialized_array = Object.values(hrly_data),	// convert serialized results object into array of objects (formatted for DataTables)
+//		serialized_array = Object.values(hrly_data),	// convert serialized results object into array of objects (formatted for DataTables)
+		serialized_array = objectToArray(hrly_data),
 		eVx = ['date'].concat(input_params.elems.map(function(elem){return elem.vX;})),
 		calcDewpt = !eVx.includes(22) && (eVx.includes(23) || eVx.includes(126)) && (eVx.includes(24) || eVx.includes(143)),
 		elem_info = {
@@ -122,7 +123,6 @@ function hourlyLister(cb_args) {
 				eVx.forEach(function(vx, i) {
 					if (data[vx].search(/e|s|f/) >= 0) {
 						$('td:eq(' + i + ')', row).addClass('newaListerEstimated').html(data[vx].replace(/e|f|s/, ''));
-//						$('td:eq(' + i + ')', row).addClass('newaListerEstimated').html(data[vx]);	// replaces above for testing
 					} else if (data[vx] === 'M') {
 						$('td:eq(' + i + ')', row).html("-");
 					}
@@ -171,7 +171,7 @@ function hlyTodly(serialized_array, eVx, elem_info, requested_month) {
 				}
 			});
 		};
-	$("#newaListerResults").append("<br/>...Calculating daily summaries");
+	$("#newaListerResults").append("<br/>&nbsp;&nbsp;&nbsp;... Calculating daily summaries");
 	reset();
 	for (var i = 0; i < serialized_array.length; i += 1) {
 		$.each(serialized_array[i], function(index, value) {
@@ -276,7 +276,8 @@ function dailyLister(cb_args) {
 		stnid = input_params.sid.split(" "),
 		ymd = input_params.edate.split("-"),
 		eVx = ['date'].concat(input_params.elems.map(function(elem){return elem.vX;})),
-		all_results = Object.values(cb_args.hrly_data),	// convert serialized results object into array of objects (formatted for DataTables)
+//		all_results = Object.values(cb_args.hrly_data),	// convert serialized results object into array of objects (formatted for DataTables)
+		all_results = objectToArray(cb_args.hrly_data),
 		trimmed_array = trimResults(input_params, all_results),
 		elem_info = {
 			date:   {title: 'Date'},
@@ -306,9 +307,8 @@ function dailyLister(cb_args) {
 			columns: null,
 			rowCallback: null,
 		},
-		footer_message = '<div><span>Daily values indicated by "i" indicate missing data within the 24-hour calculation period. ' +
-			'Values in </span><span class="newaListerEstimated">brown italics </span>' +
-			'<span>include estimated data. ' +
+		footer_message = '<div><span>Daily values followed by "i" indicate missing data within the 24-hour calculation period. ' +
+			'Values in </span><span class="newaListerEstimated">brown italics</span><span> include estimated data. ' +
 			'<a target="_blank" href="http://newa.nrcc.cornell.edu/newaLister/est_info/' + 
 			stnid[0] + '/' + ymd[0] + '/' +  ymd[1] + '">' + 
 			'More information</a> is available on the estimation technique.</span></div>';
@@ -354,6 +354,15 @@ function formatTime (day, hour, tzo) {
 		8: 'America/Los_Angeles'
 	};
 	return moment.utc(day).hour(hour).add(tzo, "hours").tz(time_zone_name[tzo]).format('MM/DD/YYYY HH:00 z');
+}
+
+// convert serialized object to array
+function objectToArray(recs) {
+	var serialized_array = [];
+	$.each(recs, function(key, rec) {
+		serialized_array.push(rec);
+	});
+	return serialized_array;
 }
 
 // convert from ACIS results object to new object keyed on date/time (i.e. one record per hour)
@@ -568,7 +577,7 @@ function doEstimation(results, cb_args) {
 	if (moreMissing.length) {
 		// sister station estimation begins; first get sister stations
 		var url = 'http://newa.nrcc.cornell.edu/newaUtil/stationSisterInfo/' + input_params.sid.replace(' ', '/');
-		$("#newaListerResults").append("<br/>...Attempting to fill missing data");
+		$("#newaListerResults").append("<br/>&nbsp;&nbsp;&nbsp;... Attempting to fill missing data");
 		$.ajax(url, {
 			type: 'POST',
 			dataType: 'json',
@@ -606,7 +615,7 @@ function getHourlyData(cb_args) {
 		}
 		input_params.elems.push(addElem);
 	});
-	$("#newaListerResults").append("<br/>...Obtaining station data");
+	$("#newaListerResults").append("<br/>&nbsp;&nbsp;&nbsp;... Obtaining station data");
 	$.ajax(url, {
 		type: 'POST',
 		data: JSON.stringify({params:input_params}),
@@ -695,7 +704,7 @@ function getMeta(rinput) {
 			input_params.elems.push(vx_defs[rinput.stn_type][elem]);
 		}
 	});
-	$("#newaListerResults").append("<br/>...Determining available data");
+	$("#newaListerResults").append("<br/>&nbsp;&nbsp;&nbsp;... Determining available data");
 	$.ajax(url, {
 		type: 'POST',
 		data: JSON.stringify({params:input_params}),
