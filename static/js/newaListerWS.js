@@ -89,7 +89,7 @@ function hourlyLister(cb_args) {
 //		serialized_array = Object.values(hrly_data),	// convert serialized results object into array of objects (formatted for DataTables)
 		serialized_array = objectToArray(hrly_data),
 		eVx = ['date'].concat(input_params.elems.map(function(elem){return elem.vX;})),
-		calcDewpt = !eVx.includes(22) && (eVx.includes(23) || eVx.includes(126)) && (eVx.includes(24) || eVx.includes(143)),
+		calcDewpt = eVx.indexOf(22) === -1 && (eVx.indexOf(23) >= 0 || eVx.indexOf(126) >= 0) && (eVx.indexOf(24) >= 0 || eVx.indexOf(143) >= 0),
 		elem_info = {
 			date:   {title: 'Date/Time'},
 			5:   {title: 'Precip (inches)'},
@@ -99,6 +99,7 @@ function hourlyLister(cb_args) {
 			27:  {title: 'Wind Dir (degrees)'},
 			28:  {title: 'Wind Spd (mph)'},
 			65:  {title: 'Soil Tension (kPa)'},
+			104: {title: 'Soil Moisture (m3/m3)'},
 			118: {title: 'Leaf Wetness (minutes)'},
 			120: {title: 'Soil Temp (&#8457;)'},
 			126: {title: 'Air Temperature (&#8457;)'},
@@ -288,6 +289,7 @@ function dailyLister(cb_args) {
 			24:  {title: 'RH Hrs &ge; 90%', summary: 'cnt', decimal: 0},
 			28:  {title: 'Avg Wind Spd (mph)', summary: 'mean', decimal: 1},
 			65:  {title: 'Avg Soil Tension (kPa)', summary: 'mean', decimal: 1},
+			104: {title: 'Avg Soil Moisture (m3/m3)', summary: 'mean', decimal: 2},
 			118: {title: 'Leaf Wetness Hours', summary: 'cnt', decimal: 0},
 			120: {title: 'Avg Soil Temp (&#8457;)', summary: 'mean', decimal: 1},
 			126: {title: 'Avg Air Temperature (&#8457;)', summary: 'mean', decimal: 1},
@@ -454,7 +456,7 @@ function sisterEstimates(results, cb_args) {
 			}
 		});
 	}
-	if (moreMissing && ['23','126','24','143','28','128'].includes(est_for_elem)) {
+	if (moreMissing && ['23','126','24','143','28','128'].indexOf(est_for_elem) >= 0) {
 		getForecastData($.extend(cb_args, { hrly_data: hrly_data }));
 		return false;
 	}
@@ -476,6 +478,7 @@ function getSisterData(sister_station, cb_args) {
 			27:  'wdir',
 			28:  'wspd',
 			65:  'sm4i',
+			104: 'sm2i',
 			118: 'lwet',
 			120: 'st4i',
 			126: 'temp',
@@ -492,7 +495,8 @@ function getSisterData(sister_station, cb_args) {
 			'culog': {'pcpn': 5, 'temp': 126, 'rhum':  24, 'lwet': 118, 'wspd': 128, 'wdir': 130, 'srad': 132 },
 			'njwx':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 149 },
 			'miwx':  {'pcpn': 5, 'temp': 126, 'rhum': 143, 'lwet': 118, 'srad': 132 },
-			'oardc': {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132 }
+			'oardc': {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132 },
+			'nysm':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm2i': 104 }
 		};
 	newaLister_estimates_togo = missing_elems.length;		// ***** GLOBAL *****
 	missing_elems.forEach(function(vx) {
@@ -507,7 +511,7 @@ function getSisterData(sister_station, cb_args) {
 			};	
 		if (sister_sid_type) {
 			est_input_params.elems = [{vX: vx_defs[sister_sid_type][vx_abbr[vx].replace('prcp','pcpn')]}];
-			if (['temp','wspd'].includes(vx_abbr[vx])) {
+			if (vx_abbr[vx] === 'temp' || vx_abbr[vx] ==='wspd') {
 				$.extend(est_input_params.elems[0], {"prec":1});
 			}
 			$.ajax(url, {
@@ -548,7 +552,7 @@ function doEstimation(results, cb_args) {
 			var next = ymdh.slice(0,3).join("-") + "-" + (hour +  1);
 			var prev = hour !== 1 ? key_moment.add(-1, "hours").format("YYYY-MM-DD-H") : key_moment.add(-2, "hours").format("YYYY-MM-DD-24");
 			$.each(record, function(elem, elem_val) {
-				if (elem_val === "M" && ['22','23','24','28','118','126','128','132','143','149','120','65'].includes(elem)) {
+				if (elem_val === "M" && ['22','23','24','28','118','126','128','132','143','149','120','65','104'].indexOf(elem) >= 0) {
 					var next_val = hrly_data.hasOwnProperty(next) ? hrly_data[next][elem] : "M";
 					var prev_val = hrly_data.hasOwnProperty(prev) ? hrly_data[prev][elem] : "M";
 					var estimate = (prev_val !== "M" && next_val != "M") ? ((parseFloat(prev_val) + parseFloat(next_val)) / 2.0).toFixed(1) : null;
@@ -556,15 +560,15 @@ function doEstimation(results, cb_args) {
 						if (!replacements.hasOwnProperty(key)) {
 							replacements[key] = {};
 						}
-						if (['24', '118', '143'].includes(elem)) {	//round leaf wetness and RH
+						if (elem === '24' || elem === '118' || elem === '143') {	//round leaf wetness and RH
 							estimate = Math.round(estimate);
 						}
 						replacements[key][elem] = estimate + "e";
-					} else if (!moreMissing.includes(elem) && elem !== '65') {
+					} else if (moreMissing.indexOf(elem) === -1 && elem !== '65' && elem !== '104') {
 						moreMissing.push(elem);
 					}
 				} else if (elem_val === "M") {
-					if (!moreMissing.includes(elem)) {
+					if (moreMissing.indexOf(elem) === -1) {
 						moreMissing.push(elem);
 					}
 				}
@@ -610,7 +614,7 @@ function getHourlyData(cb_args) {
 		tempAndWspd = [23, 126, 28, 128];
 	rinput.elems.forEach(function(elem) {
 		var addElem = {vX: elem};
-		if (tempAndWspd.includes(elem)) {
+		if (tempAndWspd.indexOf(elem) >= 0) {
 			$.extend(addElem, {"prec":1});
 		}
 		input_params.elems.push(addElem);
@@ -642,6 +646,7 @@ function filterElems(results, cb_args) {
 			27:  'Wind Direction',
 			28:  'Wind Speed',
 			65:  'Soil Tension',
+			104: 'Soil Moisture',
 			118: 'Leaf Wetness',
 			120: 'Soil Temperature',
 			126: 'Temperature',
@@ -690,7 +695,8 @@ function getMeta(rinput) {
 			'culog': {'pcpn': 5, 'temp': 126, 'rhum':  24, 'lwet': 118, 'wspd': 128, 'wdir': 130, 'srad': 132 },
 			'njwx':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 149 },
 			'miwx':  {'pcpn': 5, 'temp': 126, 'rhum': 143, 'lwet': 118, 'srad': 132 },
-			'oardc': {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120 }
+			'oardc': {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120 },
+			'nysm':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm2i': 104 }	
 		},
 		input_params = {
 			sids: [rinput.stn_id, rinput.stn_type].join(" "),
@@ -722,7 +728,7 @@ function runHourlyLister(stn_id, stn_type, year, month) {
 			stn_type: stn_type,
 			sdate: moment([year, month-1, 1]).subtract(1, 'day').format("YYYY-MM-DD"),
 			edate: moment([year, month-1, 1]).endOf('month').format("YYYY-MM-DD"),
-			requested_elems: ['temp','dwpt','pcpn','lwet','rhum','wspd','wdir','srad','st4i','sm4i'],
+			requested_elems: ['temp','dwpt','pcpn','lwet','rhum','wspd','wdir','srad','st4i','sm4i','sm2i'],
 			productCallback: hourlyLister
 		};
 	getMeta(rinput);
@@ -733,7 +739,7 @@ function runDailyLister(stn_id, stn_type, year, month) {
 			stn_type: stn_type,
 			sdate: moment([year, month-1, 1]).subtract(1, 'day').format("YYYY-MM-DD"),
 			edate: moment([year, month-1, 1]).endOf('month').format("YYYY-MM-DD"),
-			requested_elems: ['temp','st4i','pcpn','lwet','rhum','wspd','srad','sm4i'],
+			requested_elems: ['temp','st4i','pcpn','lwet','rhum','wspd','srad','sm4i','sm2i'],
 			productCallback: dailyLister
 		};
 	getMeta(rinput);

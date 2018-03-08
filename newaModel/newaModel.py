@@ -3690,11 +3690,11 @@ def process_help (request,path):
 										   ])
 		elif smry_type == 'fire_blight' or (smry_type == 'apple_disease' and pest == 'fire_blight'):
 			return newaModel_io.helppage([ ("Notes on first blossom open biofix","/appfbnotes_pop.htm"),
-										   ("Highly susceptible apple varieties and rootstocks","http://newa.cornell.edu/index.php?page=fire-blight-susceptible-cultivars-and-rootstocks"),
+										   ("Fire Blight Susceptible Cultivars and Rootstocks","http://newa.cornell.edu/index.php?page=fire-blight-susceptible-cultivars-and-rootstocks"),
 										   ("Pest Management Guidelines for Commercial Tree Fruit Production","http://ipmguidelines.org"),
 										   ("Fire Blight Fact Sheet (pdf)","https://ecommons.cornell.edu/handle/1813/43095"),
 			                               ("NEWA Default Biofix Dates","http://newa.cornell.edu/index.php?page=default-biofix-dates"),
-			                               ("To download Maryblyt v 7.1 (Windows only), email Alan Biggs, Professor Emeritus of Plant Pathology at West Virginia University, who developed the first functional Windows version of this fire blight prediction software.","mailto:Alan.Biggs@mail.wvu.edu"),
+			                               ("To download Maryblyt v 7.1 (Windows only), use the link <http://grapepathology.org/maryblyt> or email Alan Biggs at Alan.Biggs@mail.wvu.edu.", "http://grapepathology.org/maryblyt"),
 			                               ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references")
 										])
 		elif smry_type == 'sooty_blotch' or (smry_type == 'apple_disease' and pest == 'sooty_blotch'):
