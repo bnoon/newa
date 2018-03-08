@@ -92,7 +92,6 @@ stn_info_inactive = {
 'ct_nia': {'name': 'Niantic, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.349326, 'lon': -72.213006, 'elev': 28, 'network': 'newa', 'state': 'CT'},
 'ct_new': {'name': 'Newtown, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.404534, 'lon': -73.287750, 'elev': 400, 'network': 'newa', 'state': 'CT'},
 'mmi': {'name': 'Middlefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.71083, 'elev': 180,  'lat': 41.49667, 'network': 'newa', 'state': 'CT', 'disconnected': 'yes'},
-'nh_mer': {'name': 'Meredith, NH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', ], 'srqual': 'ok', 'lat': 43.676673, 'lon': -71.470985, 'elev': 642, 'network': 'newa', 'state': 'NH'},
 'pa_heg': {'name': 'Hegins (Schwalm), PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.6568, 'lon': -76.4887, 'elev': 237, 'network': 'newa', 'state': 'PA'},
 'pa_ysp': {'name': 'York Springs (Lerew), PA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat':40.038978, 'lon': -77.136408, 'elev': 740, 'network': 'newa', 'state': 'PA'},
 'um_tff': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -71.67833, 'elev': 610, 'lat': 42.34611, 'network': 'cu_log', 'state': 'MA'},
