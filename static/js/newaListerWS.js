@@ -159,7 +159,7 @@ function hourlyLister(cb_args) {
 }
 
 function hlyTodly(serialized_array, eVx, elem_info, requested_month) {
-	var m, oneday, msmry, tday, ymdh, smry,
+	var m, oneday, msmry, tday, ymdh, smry, hid, d1, d3,
 		smryResults = [], sum = {}, cnt = {}, fills = {}, max = {}, min = {},
 		reset = function() {
 			eVx.forEach(function(vx) {
@@ -207,6 +207,14 @@ function hlyTodly(serialized_array, eVx, elem_info, requested_month) {
 		ymdh = moment(serialized_array[i].date, "MM/DD/YYYY HH:00 Z");
 		if (ymdh.hour() === 0 || i === serialized_array.length - 1) {
 			tday = ymdh.subtract(1, 'minutes');
+			// day of change from EST to EDT only has 23 hours (second Sunday in March)
+			if (tday.month() === 2) {
+				d1 = parseInt(moment(ymdh).hour(1).format('Z').split(":")[0]);
+				d3 = parseInt(moment(ymdh).hour(3).format('Z').split(":")[0]);
+				hid = 24 + d1 - d3;
+			} else {
+				hid = 24;
+			}
 			if (parseInt(tday.month() + 1) === requested_month) {
 				oneday = {date: tday.format('MM/DD/YYYY')};
 				eVx.forEach(function(vx) {
@@ -220,7 +228,7 @@ function hlyTodly(serialized_array, eVx, elem_info, requested_month) {
 						}
 						m = Math.pow(10.0, elem_info[vx].decimal)
 						oneday[vx] = ((Math.round(smry * m)) / m).toFixed(elem_info[vx].decimal);
-						if (cnt[vx] < 24) {
+						if (cnt[vx] < hid) {
 							oneday[vx] += "i";
 						}
 						if (fills[vx]) {
@@ -374,7 +382,7 @@ function objectToArray(recs) {
 function serializeObject(results, input_params) {
 	var hlydate, dt_key, hrly_data = {},
 		data = results.data,
-		tzo = -results.meta.tzo,
+		tzo = Math.abs(results.meta.tzo),
 		elems = typeof input_params === 'string' ? [input_params] : input_params.elems.map(function(elem){return elem.vX;});
 	if (data && data.length > 0) {
 		data.forEach(function(dlyrec) {
@@ -393,7 +401,7 @@ function serializeObject(results, input_params) {
 }
 
 function forecastEstimates(results, cb_args) {
-	var meta = {meta: {tzo: -cb_args.tzo}},
+	var meta = {meta: {tzo: cb_args.tzo}},
 		hrly_data = cb_args.hrly_data,
 		forecast_data = (results.data && results.data.length) ? serializeObject($.extend(results, meta), cb_args.est_for_elem) : null;
 	// fill in forecast data for missing values
@@ -707,7 +715,7 @@ function filterElems(results, cb_args) {
 		if (input_params.edate > late_date) {
 			input_params.edate = late_date;
 		}
-		getHourlyData($.extend(cb_args, {"input_params":input_params, "stnName": results.meta[0].name, "tzo": -results.meta[0].tzo}));
+		getHourlyData($.extend(cb_args, {"input_params":input_params, "stnName": results.meta[0].name, "tzo": Math.abs(results.meta[0].tzo)}));
 	} else {
 		$("#newaListerResults").empty().append("<p>No data for requested date range for this station. Available date ranges:</p>");
 		$("#newaListerResults").append("<ul id='adrs'></ul>");
