@@ -55,6 +55,9 @@ def get_metadata (station_id,id_type=None):
 			elif station_id[0:3] == "ew_":
 				station_id = station_id[3:]
 				id_type = 'miwx'
+			elif station_id[0:5] == "nysm_":
+				station_id = station_id[5:]
+				id_type = 'nysm'
 			elif len(station_id) == 3 or len(station_id) == 6:
 				id_type = 'newa'
 			else:
@@ -82,8 +85,7 @@ def initHourlyVar (staid, var, miss, station_type='newa'):
 	var_dict = {'newa':  {'prcp': [5,6,  'inch','%.2f'],      'temp': [23,6, 'degF',   '%.1f'],
 						  'lwet': [118,1,'',    '%3.0f'],     'rhum': [24,5, 'percent','%.1f'],
 						  'wspd': [128,5, 'miles/hour','%.1f'],'srad': [132,1,'langley','%.2f'],
-						  'st4i': [120,1,'degF','%.1f'],	  'wdir': [130,5,'degrees','%.0f'],
-						  'st8i': [120,2,'degF','%.1f'] },
+						  'st4i': [120,2,'degF','%.1f'],	  'wdir': [130,5,'degrees','%.0f']},
 				'icao':  {'prcp': [5,3,  'inch','%.2f'],      'temp': [23,3, 'degF',   '%.0f'],
 						  'dwpt': [22,3, 'degF',    '%4.0f'], 'rhum': [24,3, None,'%.0f'],
 						  'wspd': [28,3, 'miles/hour','%.1f'],'tsky': [33,3,'count',   '%3.1f'], 
@@ -94,8 +96,7 @@ def initHourlyVar (staid, var, miss, station_type='newa'):
 				'cu_log':{'prcp': [5,7,  'inch','%.2f'],      'temp': [126,1,'degF',   '%.1f'],
 						  'lwet': [118,2,'',    '%3.0f'],     'rhum': [24,6, None,'%.0f'],
 						  'wspd': [128,1,'miles/hour','%.1f'],'srad': [132,1,'langley','%.1f'],
-						  'wdir': [130,1,'degrees','%.0f'],   'st4i': [121,265,'degF','%.1f'],
-						  'st8i': [121,393,'degF','%.1f'] },
+						  'wdir': [130,1,'degrees','%.0f'],   'st4i': [123,1,'degF','%.1f'] },
 				'njwx':  {'prcp': [5,6,  'inch','%.2f'],      'temp': [23,6, 'degF',   '%.1f'],
 						  'rhum': [24,5, 'percent','%.1f'],   'lwet': [118,999,'',    '%3.0f'],
 						  'wspd': [28,5, 'miles/hour','%.1f'],
@@ -111,7 +112,11 @@ def initHourlyVar (staid, var, miss, station_type='newa'):
 				'oardc': {'prcp': [5,13,  'inch', '%.2f'],    'temp': [23,10, 'degF',   '%.1f'],
 						  'lwet': [118,7,'',     '%3.0f'],    'rhum': [24,12, 'percent','%.1f'],
 						  'srad': [132,9, 'langley','%.2f'],  'wspd': [28,9, 'miles/hour','%.1f'],
-						  'wdir': [27,9,'degrees','%.0f'] }
+						  'wdir': [27,9,'degrees','%.0f'] },
+				'nysm':  {'prcp': [5,13,  'inch', '%.2f'],    'temp': [23,11, 'degF',   '%.1f'],
+						  'rhum': [24,13, 'percent','%.1f'],  'st4i': [120,5, ' degF','%.1f'],
+						  'srad': [132,9, 'langley','%.2f'],  'wspd': [28,10, 'miles/hour','%.1f'],
+						  'wdir': [27,10,'degrees','%.0f'] }
 				}
 	v = None
 	miss_str = "%s" % miss
@@ -963,6 +968,9 @@ class Base:
 			elif stn[0:3] == "ew_":
 				stn = stn[3:]
 				station_type = 'miwx'
+			elif stn[0:5] == "nysm_":
+				stn = stn[5:]
+				station_type = 'nysm'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
 			else:
@@ -1003,6 +1011,9 @@ class Base:
 			elif stn[0:3] == "ew_":
 				stn = stn[3:]
 				station_type = 'miwx'
+			elif stn[0:5] == "nysm_":
+				stn = stn[5:]
+				station_type = 'nysm'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
 			else:
@@ -1041,6 +1052,9 @@ class Base:
 			elif stn[0:3] == "ew_":
 				stn = stn[3:]
 				station_type = 'miwx'
+			elif stn[0:5] == "nysm_":
+				stn = stn[5:]
+				station_type = 'nysm'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
 			else:
@@ -1078,6 +1092,9 @@ class Base:
 			elif stn[0:3] == "ew_":
 				stn = stn[3:]
 				station_type = 'miwx'
+			elif stn[0:5] == "nysm_":
+				stn = stn[5:]
+				station_type = 'nysm'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
 			else:
@@ -1118,6 +1135,9 @@ class Base:
 			elif stn[0:3] == "ew_":
 				stn = stn[3:]
 				station_type = 'miwx'
+			elif stn[0:5] == "nysm_":
+				stn = stn[5:]
+				station_type = 'nysm'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
 			else:
