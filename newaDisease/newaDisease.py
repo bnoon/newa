@@ -399,6 +399,9 @@ class Pottom (Base, general_simcast):
 			elif stn[0:3] == "ew_":
 				stn = stn[3:]
 				station_type = 'miwx'
+			elif stn[0:5] == "nysm_":
+				stn = stn[5:]
+				station_type = 'nysm'
 			else:
 				print 'Cannot determine station type for %s'%stn
 				return newaCommon_io.errmsg('Invalid station selection')
@@ -561,6 +564,9 @@ class Potato (Pottom):
 			elif station_id[0:3] == "ew_":
 				station_id = station_id[3:]
 				station_type = 'miwx'
+			elif station_id[0:5] == "nysm_":
+				station_id = station_id[5:]
+				station_type = 'nysm'
 			else:
 				print 'Cannot determine station type for %s'%stn
 				return newaCommon_io.errmsg('Invalid station selection')

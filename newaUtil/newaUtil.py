@@ -269,6 +269,8 @@ def run_stationSisterInfo(options):
 		sister_dict = {}
 		if network == 'miwx' and stn[0:3] != 'ew_':
 			stn = "ew_%s" % stn
+		elif network == 'nysm' and stn[0:5] != 'nysm_':
+			stn = "nysm_%s" % stn
 		if sister_info.has_key(stn):
 			sister = sister_info[stn]
 			for var in sister.keys():
@@ -287,6 +289,9 @@ def run_stationSisterInfo(options):
 				elif sister[var][0:3] == "ew_":
 					station_id = sister[var][3:]
 					station_type = 'miwx'
+				elif sister[var][0:5] == "nysm_":
+					station_id = sister[var][5:]
+					station_type = 'nysm'
 				else:
 					station_id = sister[var]
 					station_type = "newa"
@@ -422,6 +427,8 @@ def run_getFcstData(options):
 		network = options['network']
 		if network == 'miwx' and stn[0:3] != 'EW_':
 			stn = "EW_%s" % stn
+		elif network == 'nysm' and stn[0:5] != 'NYSM_':
+			stn = "NYSM_%s" % stn
 		hourly_fcst = []
 		try:
 			forecast_db = hashopen('/ndfd/hourly_forecasts.db','r')
