@@ -26,6 +26,8 @@ def apple_disease_input [html] (disease_type=None):
 		<script type="text/javascript" src="/js/mapping4.js"></script>
 		<script type="text/javascript" src="/js/apple_disease.js"></script>
 		<style type="text/css">
+			.ui-widget-content a {
+				color: #00C; }
 			.ui-helper-reset {
 				font-size:75%; }
 			#leftbox {
@@ -831,17 +833,17 @@ def apple_scab_log [html] (smry_dict):
 		'<td class=%s_back>%s</td>' % (f4_color,smry_dict['fday4']['infection'][0])
 		'<td class=%s_back>%s</td>' % (f5_color,smry_dict['fday5']['infection'][0])
 		'</TR>'
-		'<TR>'
-		'<td class=plain_back height=38>Days to Symptoms</td>'
-		'<td class=%s_back>%s</td>' % (p2_color,smry_dict['pday2']['infection'][1])
-		'<td class=%s_back>%s</td>' % (p1_color,smry_dict['pday1']['infection'][1])
-		'<td class=%s_back>%s</td>' % (d0_color,smry_dict['day0']['infection'][1])
-		'<td class=%s_back>%s</td>' % (f1_color,smry_dict['fday1']['infection'][1])
-		'<td class=%s_back>%s</td>' % (f2_color,smry_dict['fday2']['infection'][1])
-		'<td class=%s_back>%s</td>' % (f3_color,smry_dict['fday3']['infection'][1])
-		'<td class=%s_back>%s</td>' % (f4_color,smry_dict['fday4']['infection'][1])
-		'<td class=%s_back>%s</td>' % (f5_color,smry_dict['fday5']['infection'][1])
-		'</TR>'
+#		'<TR>'
+#		'<td class=plain_back height=38>Days to Symptoms</td>'
+#		'<td class=%s_back>%s</td>' % (p2_color,smry_dict['pday2']['infection'][1])
+#		'<td class=%s_back>%s</td>' % (p1_color,smry_dict['pday1']['infection'][1])
+#		'<td class=%s_back>%s</td>' % (d0_color,smry_dict['day0']['infection'][1])
+#		'<td class=%s_back>%s</td>' % (f1_color,smry_dict['fday1']['infection'][1])
+#		'<td class=%s_back>%s</td>' % (f2_color,smry_dict['fday2']['infection'][1])
+#		'<td class=%s_back>%s</td>' % (f3_color,smry_dict['fday3']['infection'][1])
+#		'<td class=%s_back>%s</td>' % (f4_color,smry_dict['fday4']['infection'][1])
+#		'<td class=%s_back>%s</td>' % (f5_color,smry_dict['fday5']['infection'][1])
+#		'</TR>'
 
 	'<tr>'	
 	'<td class=plain_back> Average Temp (F) for wet hours</td>'
@@ -958,9 +960,11 @@ def apple_scab_log [html] (smry_dict):
 
 	if smry_dict.has_key('infection_events'):
 		'<p><table border=1 cellpadding=3 cellspacing=0 width="100%" style="margin-top:1em;border-collapse:collapse;table-layout:fixed">'
-		'<col width=150><col width=150><col width=59><col width=59><col width=59><col width=74><col width=74>'
+#		'<col width=150><col width=150><col width=59><col width=59><col width=59><col width=74><col width=74>'
+		'<col width=150><col width=150><col width=59><col width=59><col width=59><col width=74>'
 		'<tr>'
-		'<td class=header_line height=30 align=left colspan=7> <a name="events">Apple Scab Infection Events (March 1 - %s %d)</a></td>' % (month_names[smry_dict['last_time'][1]],smry_dict['last_time'][2])
+#		'<td class=header_line height=30 align=left colspan=7> <a name="events">Apple Scab Infection Events (March 1 - %s %d)</a></td>' % (month_names[smry_dict['last_time'][1]],smry_dict['last_time'][2])
+		'<td class=header_line height=30 align=left colspan=6> <a name="events">Apple Scab Infection Events (March 1 - %s %d)</a></td>' % (month_names[smry_dict['last_time'][1]],smry_dict['last_time'][2])
 		'</tr>'
 		'<tr>'
 		'<td class=colhead_center height=42>Start<br>Date &amp; Time</td>'
@@ -968,12 +972,13 @@ def apple_scab_log [html] (smry_dict):
 		'<td class=colhead_center>Wet<br>Hours</td>'
 		'<td class=colhead_center>Temp<br>Avg. (F)</td>'
 		'<td class=colhead_center>Rain<br>(in.)</td>'
-		'<td class=colhead_center>Days to<br>Symptoms</td>'
+#		'<td class=colhead_center>Days to<br>Symptoms</td>'
 		'<td class=colhead_center>Combined<br>Event</td>'
 		'</tr>'
 
 		if len(smry_dict['infection_events']) == 0:
-			'<TR><TD class=brown_back height=25 colspan=7> No infection events</TD</TR>'
+#			'<TR><TD class=brown_back height=25 colspan=7> No infection events</TD</TR>'
+			'<TR><TD class=brown_back height=25 colspan=6> No infection events</TD</TR>'
 		else:
 			for i in range(len(smry_dict['infection_events'])-1,-1,-1):
 				wet_start,wet_end,wet_hrs,avg_temp,prec_sum,ldys,combined = smry_dict['infection_events'][i]
@@ -1013,7 +1018,7 @@ def apple_scab_log [html] (smry_dict):
 					ldystr = "-"
 				else:
 					ldystr = "%d"%ldys
-				'<td class=plain_back>%s</td>'%ldystr
+#				'<td class=plain_back>%s</td>'%ldystr
 				if combined:
 					'<td class=plain_back><A HREF="http://newa.cornell.edu/index.php?page=weather-station-details&WeatherStation=%s&WSDetail=http://newa.nrcc.cornell.edu/newaDisease/apple_lw/%s/%s" target="_blank">Yes</a></td>' % (smry_dict['stn'],smry_dict['stn'],smry_dict['last_time'][0])
 				else:
@@ -1021,7 +1026,8 @@ def apple_scab_log [html] (smry_dict):
 				'</TR>'
 		'<tr>'
 		'<td class=red_text_center colspan=2> %s conditions last %d hours at download</td>' % smry_dict['stat']
-		'<td class=red_text colspan=5>Download Time: %d/%d/%d %d:00</td>'%(smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0],smry_dict['last_time'][3])
+#		'<td class=red_text colspan=5>Download Time: %d/%d/%d %d:00</td>'%(smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0],smry_dict['last_time'][3])
+		'<td class=red_text colspan=4>Download Time: %d/%d/%d %d:00</td>'%(smry_dict['last_time'][1],smry_dict['last_time'][2],smry_dict['last_time'][0],smry_dict['last_time'][3])
 		'</tr>'
 		'</table>'
 	'</form>'
@@ -1179,6 +1185,11 @@ def fire_blight_log [html] (smry_dict):
 				document.process.selbutton.value = "orhist";
 				document.process.type.value = "fire_blight";
 				break;
+			case 4:
+				document.process.firstblossom.value = "noocc";
+				document.process.selbutton.value = "biofix";
+				document.process.type.value = "fire_blight";
+				break;
 			default:
 				document.process.selbutton.value = "biofix";
 				document.process.type.value = "fire_blight";
@@ -1239,7 +1250,12 @@ def fire_blight_log [html] (smry_dict):
 		mdy_bf = "%d/%d/%d" % (smry_dict['firstblossom'].month,smry_dict['firstblossom'].day,smry_dict['firstblossom'].year)
 	else:
 		mdy_bf = "Click to enter"
-	'<input type="text" name="firstblossom" id="fbdpick" value="%s" onChange="%s">' % (mdy_bf, action)
+	'<input type="text" name="firstblossom" id="fbdpick" size="11" value="%s" onChange="%s">' % (mdy_bf, action)
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action2 = "setandsub(4);"
+	else:
+		action2 = "getfireblight(4);"
+	'<button class="button" id="fbnooc" onClick="%s" style="margin-left:0.5em;">Click if bloom has not occurred</button>' % (action2)
 	'''	
 	<p class="plain_smaller" style="margin-top:0;"><i>The <a href='/appfbnotes_pop.htm' target='_blank'>first blossom open date</a>  
 	above is estimated based on degree day accumulations. Enter the actual first blossom open date for your orchard block 
@@ -1307,7 +1323,7 @@ def fire_blight_log [html] (smry_dict):
 	
 	accum_msg = 0
 
-	'<th class=plain_back>Cougarblight<br />4-Day DH</th>'
+	'<tr><th class=plain_back>Cougarblight<br />4-Day DH</th>'
 	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
 		if smry_dict[d]['risk'][0].find('Extreme') >= 0:
 			rcolor = 'red'
@@ -1335,7 +1351,7 @@ def fire_blight_log [html] (smry_dict):
 		'<td class=%s_back>%s<br />%s</td>' % (rcolor,nrisk,drisk)
 	'</tr>'
 	
-	'<th class=plain_back>Infection Potential<br />EIP value</th>'
+	'<tr><th class=plain_back>Infection Potential<br />EIP value</th>'
 	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
 		if smry_dict[d]['eip'][0].find('Infection') >= 0:
 			rcolor = 'red'
@@ -1396,7 +1412,7 @@ def fire_blight_log [html] (smry_dict):
 			else:
 				rcolor = 'palegoldenrod'
 			'<td class=%s_back>%s</td>' % (rcolor,rain)
-	'</TR>'
+	'</tr>'
 	'<tr>'	
 	'<th class=plain_back> Dew &nbsp;<img src="/gifs/question_mark.gif" alt="Help" border="0" width="16" height="16" onClick="show_moreinfo(0);"></th>'
 	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
@@ -1429,52 +1445,66 @@ def fire_blight_log [html] (smry_dict):
 				lwet = '%d'%smry_dict[d]['wetness'][1]
 			'<td class=%s_back>%s</td>' % (rcolor,lwet)
 		'</TR>'
-		'<tr>'
+		
 	'<tr>'	
 	'<th class=plain_back> Hours >90% RH</th>'
 	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
-		if smry_dict[d]['wetness'][5] > 0:
-			rcolor = 'blue'
+		if len(smry_dict[d]['wetness']) >= 5:
+			if smry_dict[d]['wetness'][5] > 0:
+				rcolor = 'blue'
+			else:
+				rcolor = 'palegoldenrod'
+			if smry_dict[d]['wetness'][5] == miss:
+				dval = 'NA'
+				rcolor = 'plain'
+			else:
+				dval = '%d'%(smry_dict[d]['wetness'][5])
 		else:
-			rcolor = 'palegoldenrod'
-		if smry_dict[d]['wetness'][5] == miss:
 			dval = 'NA'
 			rcolor = 'plain'
-		else:
-			dval = '%d'%(smry_dict[d]['wetness'][5])
 		'<td class=%s_back>%s</td>' % (rcolor,dval)
 	'</tr>'
+	
 	'<tr>'	
 	'<th class=plain_back> RH max/min</th>'
 	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
-		if smry_dict[d]['wetness'][3] == miss:
+		if len(smry_dict[d]['wetness']) >= 4:
+			if smry_dict[d]['wetness'][3] == miss:
+				rhmax = 'NA'
+			else:
+				rhmax = '%d'%(smry_dict[d]['wetness'][3])
+			if smry_dict[d]['wetness'][4] == miss:
+				rhmin = 'NA'
+			else:
+				rhmin = '%d'%(smry_dict[d]['wetness'][4])
+			if smry_dict[d]['wetness'][3] > 90:
+				rcolor = 'blue'
+			elif rhmax == 'NA':
+				rcolor = 'plain'
+			else:
+				rcolor = 'palegoldenrod'
+		else:
 			rhmax = 'NA'
-		else:
-			rhmax = '%d'%(smry_dict[d]['wetness'][3])
-		if smry_dict[d]['wetness'][4] == miss:
 			rhmin = 'NA'
-		else:
-			rhmin = '%d'%(smry_dict[d]['wetness'][4])
-		if smry_dict[d]['wetness'][3] > 90:
-			rcolor = 'blue'
-		elif rhmax == 'NA':
 			rcolor = 'plain'
-		else:
-			rcolor = 'palegoldenrod'
 		'<td class=%s_back>%s/%s</td>' % (rcolor,rhmax,rhmin)
 	'</tr>'
 	'<tr>'	
 	'<th class=plain_back> Temp avg F</th>'
 	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
-		if smry_dict[d]['wetness'][6] > 60:
-			rcolor = 'orange'
+		if len(smry_dict[d]['wetness']) >= 6:
+			if smry_dict[d]['wetness'][6] > 60:
+				rcolor = 'orange'
+			else:
+				rcolor = 'green'
+			if smry_dict[d]['wetness'][6] == miss:
+				dval = 'NA'
+				rcolor = 'plain'
+			else:
+				dval = '%d'%(smry_dict[d]['wetness'][6])
 		else:
-			rcolor = 'green'
-		if smry_dict[d]['wetness'][6] == miss:
 			dval = 'NA'
 			rcolor = 'plain'
-		else:
-			dval = '%d'%(smry_dict[d]['wetness'][6])
 		'<td class=%s_back>%s</td>' % (rcolor,dval)
 	'</tr>'
 

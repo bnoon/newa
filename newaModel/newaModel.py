@@ -2314,6 +2314,21 @@ class Apple (Base,Models):
 				smry_dict['cycle'] = disease_cycle_management['dormant']['cycle']
 				smry_dict['manage'] = disease_cycle_management['dormant']['management']
 				return newaModel_io.fire_blight_dormant(smry_dict)
+				
+			# user has set first blossom date to "no occurrence"
+			if firstblossom == 'noocc':
+				# alternate path to "early branch"
+				daily_data, station_name = self.get_daily (stn, jan1_dt, end_date_dt)
+				biofix_dd = phen_events_dict['macph_pf_43']['dd'][3]
+				ret_bf_date, ddaccum, ddmiss = self.accum_degday(daily_data, jan1_dt, end_date_dt, 'dd43be', biofix_dd, stn, station_name)
+				smry_dict['ddaccum'] = int(round(ddaccum,0))
+				smry_dict['ddmiss'] = ddmiss
+				smry_dict['last_time'] = daily_data[-1][0]
+				smry_dict['station_name'] = station_name
+				smry_dict['firstblossom'] = None
+				smry_dict['cycle'] = disease_cycle_management['early']['cycle']
+				smry_dict['manage'] = disease_cycle_management['early']['management']
+				return newaModel_io.fire_blight_early(smry_dict)
 
 			# do not take these branches if a first blossom date is in the request (i.e. user input)
 			if not firstblossom:
@@ -2350,9 +2365,9 @@ class Apple (Base,Models):
 				else:
 					# "early branch" - before 6/15 and first blossom open
 					ucanid,smry_dict['station_name'] = get_metadata(stn)
-					dd_from_bloom = int(round(phen_events_dict['macph_firstblossom_43']['dd'][2]-ddaccum,0))
+#					dd_from_bloom = int(round(phen_events_dict['macph_firstblossom_43']['dd'][2]-ddaccum,0))
 					smry_dict['cycle'] = disease_cycle_management['early']['cycle']
-					smry_dict['manage'] = disease_cycle_management['early']['management'].replace("xxxdddiffxxx",str(dd_from_bloom))
+					smry_dict['manage'] = disease_cycle_management['early']['management']
 					return newaModel_io.fire_blight_early(smry_dict)
 			else:
 				# need degree day accumulation through current date
@@ -3813,8 +3828,11 @@ def process_input (request,path):
 							greentip = None
 					if request.form.has_key('firstblossom'):
 						try:
-							mm,dd,yy = request.form['firstblossom'].split("/")
-							firstblossom = DateTime.DateTime(int(yy),int(mm),int(dd),23)
+							if request.form['firstblossom'] != "noocc":
+								mm,dd,yy = request.form['firstblossom'].split("/")
+								firstblossom = DateTime.DateTime(int(yy),int(mm),int(dd),23)
+							else:
+								firstblossom = request.form['firstblossom']
 						except:
 							firstblossom = None
 					if request.form.has_key('petalfall'):

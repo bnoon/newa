@@ -20,10 +20,15 @@ function getfireblight(selopt) {
 	$('select[name=stn], input[name=accend], select[name=pest]').each(function () { params[this.name] = this.value; });
 	if (selopt === 1 | selopt === 3) {
 		params.selbutton = 'biofix';
-		$('input[name=firstblossom], select[name=orchard_history]').each(function () { params[this.name] = this.value; }); }
-	if (selopt === 2) { 
+		$('input[name=firstblossom], select[name=orchard_history]').each(function () { params[this.name] = this.value; });
+	} else if (selopt === 2) { 
 		params.selbutton = 'strep';
-		$('input[name=strep_spray], select[name=orchard_history], input[name=firstblossom]').each(function () { params[this.name] = this.value; }); }
+		$('input[name=strep_spray], select[name=orchard_history], input[name=firstblossom]').each(function () { params[this.name] = this.value; });
+	} else if (selopt === 4) {
+		params.selbutton = 'biofix';
+		params.firstblossom = 'noocc';
+		$('select[name=orchard_history]').each(function () { params[this.name] = this.value; });
+	}
 	$('#second').empty().html('<img src="/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
 	$('#righttabs').tabs('option', 'active',1);
 	$.get('/newaModel/process_input',params,function(data) {
