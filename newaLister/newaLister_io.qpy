@@ -657,7 +657,7 @@ def dly_listWS_html [html] (stn,station_type,year,month):
 	</head>
 	'''
 	params = "'%s', '%s', '%d', '%d'" % (stn, station_type, year, month)
-	'<body onLoad="runDailyLister(%s);">' % (params)
+	'<body style="margin:0px;" onLoad="runDailyLister(%s);">' % (params)
 	'''
 		<div id="newaListerResults">Processing request ...</div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>
@@ -688,7 +688,7 @@ def hly_listWS_html [html] (stn,station_type,year,month):
 	</head>
 	'''
 	params = "'%s', '%s', '%d', '%d'" % (stn, station_type, year, month)
-	'<body onLoad="runHourlyLister(%s);">' % (params)
+	'<body style="margin:0px;" onLoad="runHourlyLister(%s);">' % (params)
 	'''
 		<div id="newaListerResults">Processing request ...</div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>

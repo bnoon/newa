@@ -99,9 +99,9 @@ function hourlyLister(cb_args) {
 			27:  {title: 'Wind Dir (degrees)'},
 			28:  {title: 'Wind Spd (mph)'},
 			65:  {title: 'Soil Tension (kPa)'},
-			104: {title: 'Soil Moisture (m3/m3)'},
+			104: {title: stnid[1] !== 'nysm' ? 'Soil Moisture (m3/m3)' : 'Soil Moisture @ 2" (m3/m3)'},
 			118: {title: 'Leaf Wetness (minutes)'},
-			120: {title: 'Soil Temp (&#8457;)'},
+			120: {title: stnid[1] !== 'nysm' && stnid[1] !== 'oardc' ? 'Soil Temp (&#8457;)' : 'Soil Temp @ 2" (&#8457;)'},
 			126: {title: 'Air Temperature (&#8457;)'},
 			128: {title: 'Wind Spd (mph)'},
 			130: {title: 'Wind Dir (degrees)'},
@@ -289,9 +289,9 @@ function dailyLister(cb_args) {
 			24:  {title: 'RH Hrs &ge; 90%', summary: 'cnt', decimal: 0},
 			28:  {title: 'Avg Wind Spd (mph)', summary: 'mean', decimal: 1},
 			65:  {title: 'Avg Soil Tension (kPa)', summary: 'mean', decimal: 1},
-			104: {title: 'Avg Soil Moisture (m3/m3)', summary: 'mean', decimal: 2},
+			104: {title: stnid[1] !== 'nysm' ? 'Avg Soil Moisture (m3/m3)' : 'Avg 2" Soil Moisture (m3/m3)', summary: 'mean', decimal: 2},
 			118: {title: 'Leaf Wetness Hours', summary: 'cnt', decimal: 0},
-			120: {title: 'Avg Soil Temp (&#8457;)', summary: 'mean', decimal: 1},
+			120: {title: stnid[1] !== 'nysm' && stnid[1] !== 'oardc' ? 'Avg Soil Temp (&#8457;)' : 'Avg 2" Soil Temp (&#8457;)', summary: 'mean', decimal: 1},
 			126: {title: 'Avg Air Temperature (&#8457;)', summary: 'mean', decimal: 1},
 			128: {title: 'Avg Wind Spd (mph)', summary: 'mean', decimal: 1},
 			132: {title: 'Solar Rad (langleys)', summary: 'sum', decimal: 0},
@@ -345,6 +345,9 @@ function dailyLister(cb_args) {
 	$('#dtable').DataTable(dt_options);
 	// add page footer with text and logos
 	addFooter(footer_message);
+	$("div.dataTables_scrollBody").one("scroll", function() {
+		$("table.dataTable caption").remove();
+	});
 }
 
 // convert time in local standard time to local time (based on time zone and dst)
@@ -497,6 +500,16 @@ function getSisterData(sister_station, cb_args) {
 			'miwx':  {'pcpn': 5, 'temp': 126, 'rhum': 143, 'lwet': 118, 'srad': 132 },
 			'oardc': {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132 },
 			'nysm':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm2i': 104 }
+		},
+		vn_defs = {
+			'newa':  {},
+			'icao':  {},
+			'cu_log':{},
+			'culog': {},
+			'njwx':  {},
+			'miwx':  {},
+			'oardc': {'st4i': 68 },
+			'nysm':  {'st4i': 1093, 'sm2i': 1091 }	
 		};
 	newaLister_estimates_togo = missing_elems.length;		// ***** GLOBAL *****
 	missing_elems.forEach(function(vx) {
@@ -513,6 +526,9 @@ function getSisterData(sister_station, cb_args) {
 			est_input_params.elems = [{vX: vx_defs[sister_sid_type][vx_abbr[vx].replace('prcp','pcpn')]}];
 			if (vx_abbr[vx] === 'temp' || vx_abbr[vx] ==='wspd') {
 				$.extend(est_input_params.elems[0], {"prec":1});
+			}
+			if (vn_defs[sister_sid_type][vx_abbr[vx]]) {
+				$.extend(est_input_params.elems[0], {"vN": vx_defs[sister_sid_type][vx_abbr[vx]]});
 			}
 			$.ajax(url, {
 				type: 'POST',
@@ -604,6 +620,7 @@ function doEstimation(results, cb_args) {
 function getHourlyData(cb_args) {
 	var url = "http://data.nrcc.rcc-acis.org/StnData",
 		rinput = cb_args.input_params,
+		station_type = rinput.sids.split(" ")[1],
 		input_params = {
 			sid: rinput.sids,
 			sdate: rinput.sdate,
@@ -611,11 +628,24 @@ function getHourlyData(cb_args) {
 			elems: [],
 			meta: "tzo"
 		},
-		tempAndWspd = [23, 126, 28, 128];
+		tempAndWspd = [23, 126, 28, 128],
+		vn_defs = {
+			'newa':  {},
+			'icao':  {},
+			'cu_log':{},
+			'culog': {},
+			'njwx':  {},
+			'miwx':  {},
+			'oardc': {120: 68 },
+			'nysm':  {120: 1093, 104: 1091 }	
+		};
 	rinput.elems.forEach(function(elem) {
 		var addElem = {vX: elem};
 		if (tempAndWspd.indexOf(elem) >= 0) {
 			$.extend(addElem, {"prec":1});
+		}
+		if (vn_defs[station_type][elem]) {
+			$.extend(addElem, {"vN": vn_defs[station_type][elem]});
 		}
 		input_params.elems.push(addElem);
 	});
@@ -658,7 +688,11 @@ function filterElems(results, cb_args) {
 		};
 	vdr.forEach(function(elemdr, i) {
 		if (elemdr.length && input_params.sdate <= elemdr[1] && input_params.edate >= elemdr[0]) {
-			avail_elems.push(evx[i]);
+			if (typeof evx[i] === 'number') {
+				avail_elems.push(evx[i]);
+			} else {
+				avail_elems.push(evx[i].vX);
+			}
 			data_starts.push(elemdr[0]);
 			data_ends.push(elemdr[1]);
 		}
@@ -696,7 +730,17 @@ function getMeta(rinput) {
 			'njwx':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 149 },
 			'miwx':  {'pcpn': 5, 'temp': 126, 'rhum': 143, 'lwet': 118, 'srad': 132 },
 			'oardc': {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120 },
-			'nysm':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm2i': 104 }	
+			'nysm':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm2i': 104 }
+		},
+		vn_defs = {
+			'newa':  {},
+			'icao':  {},
+			'cu_log':{},
+			'culog': {},
+			'njwx':  {},
+			'miwx':  {},
+			'oardc': {'st4i': 68},
+			'nysm':  {'st4i': 1093, 'sm2i': 1091 }	
 		},
 		input_params = {
 			sids: [rinput.stn_id, rinput.stn_type].join(" "),
@@ -707,7 +751,11 @@ function getMeta(rinput) {
 		};
 	rinput.requested_elems.forEach(function(elem) {
 		if (vx_defs[rinput.stn_type].hasOwnProperty(elem)) {
-			input_params.elems.push(vx_defs[rinput.stn_type][elem]);
+			if (vn_defs[rinput.stn_type][elem]) {
+				input_params.elems.push({"vX": vx_defs[rinput.stn_type][elem], "vN": vn_defs[rinput.stn_type][elem]});
+			} else {
+				input_params.elems.push(vx_defs[rinput.stn_type][elem]);
+			}
 		}
 	});
 	$("#newaListerResults").append("<br/>&nbsp;&nbsp;&nbsp;... Determining available data");
