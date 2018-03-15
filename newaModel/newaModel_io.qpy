@@ -2681,6 +2681,9 @@ def sooty_blotch_log [html] (smry_dict):
 	}
 	</script>
 	'''
+	day0_dt = DateTime.DateTime(*smry_dict['day0']['ymd'])
+	fdy5 = day0_dt + DateTime.RelativeDate(days=+5)
+	lasttime_dt = DateTime.DateTime(*smry_dict['last_time']) + DateTime.RelativeDate(minute=0,second=0)
 
 	'<H3>Sooty Blotch and Flyspeck Risk Predictions for %s</H3>' % smry_dict['station_name']
 	if not smry_dict['petalfall']:
@@ -2702,7 +2705,7 @@ def sooty_blotch_log [html] (smry_dict):
 	'&nbsp;&nbsp;<input type="text" name="petalfall" id="bfdpick" value="%s" onChange="%s">' % (mdy_bf,action)
 	'''
 	<br><span class="plain_smaller"><i>Petal fall date above is estimated based on degree day accumulations or user input.
-	<br>Enter the actual date for blocks of interest and the model will calculate the accumulated leaf wetness hours since petal fall more accurately.</i></span>
+	<br>Enter the actual date for blocks of interest and the model will calculate the accumulated leaf wetness hours since 10 days after petal fall more accurately.</i></span>
 
 	<p><b>Most recent fungicide application date:</b>
 	'''
@@ -2734,28 +2737,21 @@ def sooty_blotch_log [html] (smry_dict):
 	<th class=blue_back>Past</th>
 	<th class=blue_back>Past</th>
 	<th class=blue_back>Current</th>
-	<th class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button class="button" id="forecast">Forecast Details</button></th>
-	</tr>
-	<tr>
-
 	'''
-	curr_dt = DateTime.DateTime(*smry_dict['day0']['ymd'])
-	p1 = curr_dt + DateTime.RelativeDate(days=-1)
-	p2 = curr_dt + DateTime.RelativeDate(days=-2)
-	f1 = curr_dt + DateTime.RelativeDate(days=+1)
-	f2 = curr_dt + DateTime.RelativeDate(days=+2)
-	f3 = curr_dt + DateTime.RelativeDate(days=+3)
-	f4 = curr_dt + DateTime.RelativeDate(days=+4)
-	f5 = curr_dt + DateTime.RelativeDate(days=+5)
+	if fdy5 > lasttime_dt:
+		'<th class=palegoldenrod_back colspan=5>5-Day Forecast &nbsp;&nbsp; <button id="forecast" class="button forecast" style="margin-top:0.2em;">Forecast Details</button></th>'
+	else:
+		'<th class=blue_back colspan=5>Ensuing 5 Days</th>'	
+	'</tr>'
+	'<tr>'
 	'<th class=plain_back>Date</th>'
-	'<td class=%s_back>%s %d</td>' % ('blue',month_names[p2.month][0:3],p2.day)
-	'<td class=%s_back>%s %d</td>' % ('blue',month_names[p1.month][0:3],p1.day)
-	'<td class=%s_back>%s %d</td>' % ('blue',month_names[curr_dt.month][0:3],curr_dt.day)
-	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f1.month][0:3],f1.day)
-	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f2.month][0:3],f2.day)
-	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f3.month][0:3],f3.day)
-	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f4.month][0:3],f4.day)
-	'<td class=%s_back>%s %d</td>' % ('palegoldenrod',month_names[f5.month][0:3],f5.day)
+	for dy in range(-2,6):
+		tdt = day0_dt + DateTime.RelativeDate(days=dy)
+		if tdt <= lasttime_dt:
+			color = 'blue'
+		else:
+			color = 'yellow'
+		'<td class=%s_back>%d/%d</td>' % (color, tdt.month, tdt.day)	
 	'</tr>'
 	'<tr>'
 
@@ -2790,10 +2786,10 @@ def sooty_blotch_log [html] (smry_dict):
 			rcolor = 'green'
 		else:
 			rcolor = 'plain'
-		if smry_dict[d]['alwh'] == '-':
-			nval = '-'
-		elif smry_dict[d]['alwh'] == miss:
+		if smry_dict[d]['alwh'] == miss:
 			nval = 'NA'
+		elif smry_dict[d]['alwh'] == '-' or smry_dict[d]['alwh'] == '...' or smry_dict[d]['alwh'] == 'Pre-biofix':
+			nval = smry_dict[d]['alwh']
 		else:
 			nval = '%d'%int(smry_dict[d]['alwh'])
 		'<td class=%s_back>%s</td>' % (rcolor,nval)
@@ -2853,7 +2849,7 @@ def sooty_blotch_log [html] (smry_dict):
 			rain = '-'
 		elif smry_dict[d]['rain'] == miss:
 			rain = 'NA'
-		elif smry_dict[d]['rain'] > 0.00 and int(round((smry_dict[d]['rain']*100.),0)) == 0:
+		elif smry_dict[d]['rain'] == 'Trace' or (smry_dict[d]['rain'] > 0.00 and int(round((smry_dict[d]['rain']*100.),0)) == 0):
 			rain = 'Trace'
 		else:
 			rain = '%.2f'%round(smry_dict[d]['rain'],2)

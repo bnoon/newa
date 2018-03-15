@@ -1973,7 +1973,9 @@ class Apple (Base,Models):
 		if alwh == miss:
 			risk = 'NA'
 		elif alwh < 100:
-			if ndays < 10:
+			if ndays == miss:
+				risk="Pre-biofix"
+			elif ndays < 10:
 				risk = "No Risk"
 			else:
 				risk = "Low"
@@ -2008,7 +2010,7 @@ class Apple (Base,Models):
 	# check sooty blotch risk for today, yesterday and day before, and 5-day forecast
 	def process_sooty_blotch (self,smry_dict,wetness_dict,petalfall,fungicide,end_date_dt,start_date_dt):
 		for key in ['day0','pday1','pday2','fday1','fday2','fday3','fday4','fday5']:
-			smry_dict[key] = {'risk':miss, 'alwh':'-', 'pfdys':miss, 'fadys':miss, 'rain':'-', 'farain':miss}
+			smry_dict[key] = {'risk':'Pre-biofix', 'alwh':'-', 'pfdys':miss, 'fadys':miss, 'rain':'-', 'farain':miss}
 		try:
 			# today (day0), yesterday (pday1), day before (pday2)
 			day0 = end_date_dt + DateTime.RelativeDate(hour=0,minute=0,second=0)
@@ -2028,14 +2030,15 @@ class Apple (Base,Models):
 			# for desired days, get items of interest and calculate risk
 			for theDate,dly_rain,dly_lw,dly_dew in wetness_dict:
 				theDate_dt = DateTime.DateTime(*theDate) + DateTime.RelativeDate(hour=0,minute=0,second=0)
-				if dly_lw != miss and alwh != miss:
-					alwh = alwh + dly_lw
-				else:
-					alwh = miss
 				if petalfall:
 					days_since_petalfall = (theDate_dt - petalfall).days
 				else:
 					days_since_petalfall = miss
+				if days_since_petalfall >= 10:
+					if dly_lw != miss and alwh != miss:
+						alwh = alwh + dly_lw
+					else:
+						alwh = miss
 				if fungicide and theDate_dt > fungicide:
 					days_since_fungicide = (theDate_dt - fungicide).days
 					if days_since_fungicide == 1: rain_since_fungicide = 0.0
@@ -2048,58 +2051,65 @@ class Apple (Base,Models):
 					rain_since_fungicide = '-'
 				risk = self.get_sootyblotch_risk(days_since_petalfall,days_since_fungicide,alwh,rain_since_fungicide)
 				
+				if days_since_petalfall == miss:
+					palwh = '-'
+				elif days_since_petalfall < 10:
+					palwh =  '...'
+				else:
+					palwh =  alwh
+					
 				if day0 == theDate_dt:
 					smry_dict['day0']['risk'] = risk
-					smry_dict['day0']['alwh'] =  alwh
+					smry_dict['day0']['alwh'] =  palwh
 					smry_dict['day0']['pfdys'] =  days_since_petalfall
 					smry_dict['day0']['fadys'] =  days_since_fungicide
 					smry_dict['day0']['rain'] = dly_rain
 					smry_dict['day0']['farain'] = rain_since_fungicide
 				elif pday1 == theDate_dt:
 					smry_dict['pday1']['risk'] = risk
-					smry_dict['pday1']['alwh'] =  alwh
+					smry_dict['pday1']['alwh'] =  palwh
 					smry_dict['pday1']['pfdys'] =  days_since_petalfall
 					smry_dict['pday1']['fadys'] =  days_since_fungicide
 					smry_dict['pday1']['rain'] = dly_rain
 					smry_dict['pday1']['farain'] = rain_since_fungicide
 				elif pday2 == theDate_dt:
 					smry_dict['pday2']['risk'] = risk
-					smry_dict['pday2']['alwh'] =  alwh
+					smry_dict['pday2']['alwh'] =  palwh
 					smry_dict['pday2']['pfdys'] =  days_since_petalfall
 					smry_dict['pday2']['fadys'] =  days_since_fungicide
 					smry_dict['pday2']['rain'] = dly_rain
 					smry_dict['pday2']['farain'] = rain_since_fungicide
 				elif fday1 == theDate_dt:
 					smry_dict['fday1']['risk'] = risk
-					smry_dict['fday1']['alwh'] =  alwh
+					smry_dict['fday1']['alwh'] =  palwh
 					smry_dict['fday1']['pfdys'] =  days_since_petalfall
 					smry_dict['fday1']['fadys'] =  days_since_fungicide
 					smry_dict['fday1']['rain'] = dly_rain
 					smry_dict['fday1']['farain'] = rain_since_fungicide
 				elif fday2 == theDate_dt:
 					smry_dict['fday2']['risk'] = risk
-					smry_dict['fday2']['alwh'] =  alwh
+					smry_dict['fday2']['alwh'] =  palwh
 					smry_dict['fday2']['pfdys'] =  days_since_petalfall
 					smry_dict['fday2']['fadys'] =  days_since_fungicide
 					smry_dict['fday2']['rain'] = dly_rain
 					smry_dict['fday2']['farain'] = rain_since_fungicide
 				elif fday3 == theDate_dt:
 					smry_dict['fday3']['risk'] = risk
-					smry_dict['fday3']['alwh'] =  alwh
+					smry_dict['fday3']['alwh'] =  palwh
 					smry_dict['fday3']['pfdys'] =  days_since_petalfall
 					smry_dict['fday3']['fadys'] =  days_since_fungicide
 					smry_dict['fday3']['rain'] = dly_rain
 					smry_dict['fday3']['farain'] = rain_since_fungicide
 				elif fday4 == theDate_dt:
 					smry_dict['fday4']['risk'] = risk
-					smry_dict['fday4']['alwh'] =  alwh
+					smry_dict['fday4']['alwh'] =  palwh
 					smry_dict['fday4']['pfdys'] =  days_since_petalfall
 					smry_dict['fday4']['fadys'] =  days_since_fungicide
 					smry_dict['fday4']['rain'] = dly_rain
 					smry_dict['fday4']['farain'] = rain_since_fungicide
 				elif fday5 == theDate_dt:
 					smry_dict['fday5']['risk'] = risk
-					smry_dict['fday5']['alwh'] =  alwh
+					smry_dict['fday5']['alwh'] =  palwh
 					smry_dict['fday5']['pfdys'] =  days_since_petalfall
 					smry_dict['fday5']['fadys'] =  days_since_fungicide
 					smry_dict['fday5']['rain'] = dly_rain
@@ -2528,13 +2538,20 @@ class Apple (Base,Models):
 			start_date_dt = petalfall
 
 			# obtain hourly data
-			hourly_data, download_time, station_name, avail_vars = self.get_hourly2 (stn, start_date_dt, end_date_dt)
+			end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6) + DateTime.RelativeDate(hour=23,minute=0,second=0)
+			hourly_data, download_time, station_name, avail_vars = self.get_hourly2 (stn, start_date_dt, end_fcst_dt)
+			start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
+			# append any available forecast data after end of observed data
+			if end_fcst_dt >= start_fcst_dt:
+				hourly_data = self.add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt,True)
+
+#			hourly_data, download_time, station_name, avail_vars = self.get_hourly2 (stn, start_date_dt, end_date_dt)
 
 			if len(hourly_data) > 0:
 				# append forecast data
-				start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
-				end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6)
-				hourly_data = self.add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
+#				start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
+#				end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6)
+#				hourly_data = self.add_hrly_fcst(stn,hourly_data,start_fcst_dt,end_fcst_dt)
 				#get daily rain, leaf wetness and dew
 				wetness_dict = self.wetness_event_calcs(hourly_data,start_date_dt,end_fcst_dt,start_fcst_dt,stn,'no')
 				# determine risk and add required output to smry_dict
