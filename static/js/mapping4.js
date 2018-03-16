@@ -12,6 +12,37 @@ function setSelectValue(clickedStn) {
 	}
 }
 
+function setupNav() {
+	var i, navItems = {},
+		stateList = $("select[name=stabb] option")
+	$('input[name=requestedState], input[name=requestedStation]').each(function () { navItems[this.name] = this.value; });	
+	if (navItems.requestedState !== "") {
+		for (i = 1; i < stateList.length; i += 1) {
+			if (stateList[i].value === navItems.requestedState.toUpperCase()) {
+				stateList[i].selected = true;
+				$("select[name=stabb]").trigger("change");
+				break;
+			}
+		}
+		if (navItems.requestedStation !== "") {
+			setTimeout(function() {
+				var stnList = $("select[name=stn] option");
+				for (i = 1; i < stnList.length; i += 1) {
+					if (stnList[i].value === navItems.requestedStation) {
+						stnList[i].selected = true;
+						$("select[name=stn]").trigger("change");
+						break;
+					}
+				}
+			}, 300);
+			setTimeout(function() {
+				$("form .button").trigger("click");
+			}, 500);
+			
+		}
+	}
+}
+
 function centerMap (latlngCoords) {
 	var center = new google.maps.LatLng(latlngCoords.latitude,latlngCoords.longitude);
 	google.maps.event.trigger(map, 'resize');
@@ -234,7 +265,6 @@ function buildStationMenu(results, where, state) {
 		}
 	});	
 	$('select[name=stn]').on("change", function () {
-		$.jStorage.set("stn", $(this).val());		
 		localStorage.setItem("station", JSON.stringify({"id": $(this).val()}));
 	});
 }
@@ -258,6 +288,7 @@ function stateStationMap (options) {
 
 function stateStationMapList (options) {
 	var i,
+		selected_index = 0,
 		list_type = options.reqvar || 'all',
 		event_type = options.event_type || 'select_station',
 		postalCode = JSON.parse(localStorage.getItem("state")) || null,
@@ -309,31 +340,23 @@ function stateStationMapList (options) {
 	$(where).empty().append('<p style="margin-bottom:3px;">State:<\/p><select name="stabb"><\/select>');
 	$.each(state_list, function (i, st) {
 		$("select[name=stabb]").append('<option value=' + st[0] + '>' + st[1] + '<\/option>');
+		if (st[0] === state) {
+			selected_index = i+1;
+		}
 	});
 	$('select[name=stabb]')
 		.prepend('<option value="">Select state<\/option>')
-		.prop('selectedIndex', 0)
+		.prop('selectedIndex', selected_index)
 		.on("change", function() {
 			state = $("select[name=stabb]").val();
-			$.jStorage.set("state", state);
 			localStorage.setItem("state", JSON.stringify({"postalCode": state}));
 			$("#noStateMsg").hide();
 			showStations();
 		});
-	if (state) {
-		for (i = 0; i < state_list.length; i += 1) {
-			if (state_list[i][0] === state) {
-				$('select[name=stabb]').prop('selectedIndex', i + 1);
-				$.jStorage.set("state", state);
-				localStorage.setItem("state", JSON.stringify({"postalCode": state}));
-				showStations();
-				break;
-			}
-		}
+	if (! state && $('#first').length > 0) {
+		$("#first").prepend('<div id="noStateMsg" style="margin:2em;"><p>Select a state from the menu to the left.</p></div>');
 	} else {
-		if ($('#first').length > 0) {
-			$("#first").prepend('<div id="noStateMsg" style="margin:2em;"><p>Select a state from the menu to the left.</p></div>');
-		}
+		$('select[name=stabb]').trigger("change");
 	}
 }
 

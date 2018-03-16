@@ -10,7 +10,7 @@ miss = -999
 month_abb = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 month_names = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
 
-def apple_disease_input [html] (disease_type=None):
+def apple_disease_input [html] (disease_type=None,path=None):
 	'''
 	<HTML>
 	<HEAD>
@@ -46,18 +46,22 @@ def apple_disease_input [html] (disease_type=None):
 	</head>
 	  
 	'''
-	if disease_type:
-		'''
-		<body onload="update_help();">
-		'''
-	else:
-		'''
-		<body>
-		'''		
+	navItems = {"state": "", "station": ""}
+	if path:
+		if len(path) >= 1:
+			navItems["station"] = path[-1]
+		if len(path) == 2:
+			navItems["state"] = path[0]
+			
 	'''
+	<body>
 	<div class="banner">NEWA Apple Disease Models</div>
 		<div id="leftbox">
 			<form action="#" name="stationLister">
+	'''
+	'<input type="hidden" name="requestedState" value="%s">' % navItems["state"]
+	'<input type="hidden" name="requestedStation" value="%s">' % navItems["station"]
+	'''
 			Select a disease:
 			<br><select name="pest" onChange="update_page();" style="margin-top:5px;">
 	'''		
@@ -571,6 +575,12 @@ def apple_scab_log [html] (smry_dict):
 		action = "getapplescab(1);"
 	mdy_greentip = "%d/%d/%d" % (smry_dict['greentip'].month,smry_dict['greentip'].day,smry_dict['greentip'].year)
 	'<input type="text" name="greentip" id="dpick" value="%s" onChange="%s">' % (mdy_greentip, action)
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action2 = "submit();"
+	else:
+		action2 = "getapplescab(4);"
+	'<button class="button" id="gtnooc" onClick="%s" style="margin-left:0.5em;">Click if greentip has not occurred</button>' % (action2)
+
 
 	### ascospore maturity table
 	if not late_season:
@@ -855,7 +865,7 @@ def apple_scab_log [html] (smry_dict):
 			avgt = '%d'%round(smry_dict[d]['wetness'][3],0)
 		'<td class=%s_back>%s</td>' % (rcolor,avgt)
 	'</TR>'
-	
+
 	if smry_dict['pday2']['wetness'][1] != miss or smry_dict['pday1']['wetness'][1] != miss or smry_dict['day0']['wetness'][1] != miss:
 		'<tr>'	
 		if 'lwet' not in smry_dict['avail_vars']:
@@ -878,15 +888,19 @@ def apple_scab_log [html] (smry_dict):
 	'<tr>'	
 	'<td class=plain_back> Hours &ge;90% RH</td>'
 	for d in ['pday2','pday1','day0','fday1','fday2','fday3','fday4','fday5']:
-		if smry_dict[d]['wetness'][4] == miss:
-			rcolor = 'plain'
-			rhum = '-'
-		else:
-			if smry_dict[d]['wetness'][4] > 0:
-				rcolor = 'blue'
+		if len(smry_dict[d]['wetness']) >= 5:
+			if smry_dict[d]['wetness'][4] == miss:
+				rcolor = 'plain'
+				rhum = '-'
 			else:
-				rcolor = 'palegoldenrod'	
-			rhum = '%d'%smry_dict[d]['wetness'][4]
+				if smry_dict[d]['wetness'][4] > 0:
+					rcolor = 'blue'
+				else:
+					rcolor = 'palegoldenrod'	
+				rhum = '%d'%smry_dict[d]['wetness'][4]
+		else:
+			rhum = 'NA'
+			rcolor = 'plain'
 		'<td class=%s_back>%s</td>' % (rcolor,rhum)
 	'</TR>'
 
@@ -929,7 +943,7 @@ def apple_scab_log [html] (smry_dict):
 				rcolor = 'palegoldenrod'
 			'<td class=%s_back>%s</td>' % (rcolor,rain)
 	'</TR>'
-	
+
 	'<tr>'
 	'<td class=plain_back_smaller colspan=2 style="border-right:hidden; border-left:hidden; border-bottom:hidden">&nbsp;</td>'
 	'<td class=plain_back colspan=4 style="border-right:hidden; border-left:hidden; border-bottom:hidden">&nbsp;</td>'

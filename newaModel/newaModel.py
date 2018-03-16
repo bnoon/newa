@@ -788,7 +788,11 @@ class Apple (Base,Models):
 						dly_rhum_msg = 0
 		#	get last partial day
 			if theTime[3] != 23:
-				wetness_data.append((theTime[:3],dly_rain,dly_lwet,dly_dew,dly_rhum_cnt))
+				if dly_temp_cnt == 0:
+					dly_temp = miss
+				else:
+					dly_temp = dly_temp / dly_temp_cnt
+				wetness_data.append((theTime[:3],dly_rain,dly_lwet,dly_dew,dly_temp,dly_rhum_cnt))
 		except:
 			print 'Error calculating degree hours'
 			print_exception()
@@ -2134,6 +2138,7 @@ class Apple (Base,Models):
 			if not end_date_dt: end_date_dt = now
 			smry_dict['accend'] = end_date_dt
 			end_date_tuple = (end_date_dt.year,end_date_dt.month,end_date_dt.day)
+			jan1_dt = DateTime.DateTime(end_date_dt.year,1,1)						
 			
 			if end_date_dt >= DateTime.DateTime(end_date_dt.year,11,1):		#November 1-December 31
 				ucanid,smry_dict['station_name'] = get_metadata(stn)
@@ -2141,9 +2146,24 @@ class Apple (Base,Models):
 				smry_dict['manage'] = disease_cycle_management['overwinter']['management']
 				return newaModel_io.apple_scab_overwinter(smry_dict)
 			
+			# user has set greentip date to "no occurrence"
+			if greentip == 'noocc':
+				# alternate path to "early branch"
+				daily_data, station_name = self.get_daily (stn, jan1_dt, end_date_dt)
+				biofix_dd = phen_events_dict['macph_greentip_43']['dd'][2]
+				ret_bf_date, ddaccum, ddmiss = self.accum_degday(daily_data, jan1_dt, end_date_dt, 'dd43be', biofix_dd, stn, station_name)
+				smry_dict['ddaccum'] = int(round(ddaccum,0))
+				smry_dict['ddmiss'] = ddmiss
+				smry_dict['last_time'] = daily_data[-1][0]
+				smry_dict['station_name'] = station_name
+				smry_dict['greentip'] = None
+				smry_dict['message'] = ''
+				smry_dict['cycle'] = disease_cycle_management['early']['cycle']
+				smry_dict['manage'] = disease_cycle_management['early']['management']
+				return newaModel_io.apple_scab_early(smry_dict)
+
 			# greentip can either be passed into this program, read from a file, or estimated from degree day accumulation
 			if not greentip:
-				jan1_dt = DateTime.DateTime(end_date_dt.year,1,1)						
 				daily_data, station_name = self.get_daily (stn, jan1_dt, end_date_dt)
 				biofix_dd = phen_events_dict['macph_greentip_43']['dd'][2]					#by degree day accumulation
 				ret_bf_date, ddaccum, ddmiss = self.accum_degday(daily_data, jan1_dt, end_date_dt, 'dd43be', biofix_dd, stn, station_name)
@@ -3839,8 +3859,11 @@ def process_input (request,path):
 					if request.form.has_key('estimate'):		estimate = request.form['estimate']
 					if request.form.has_key('greentip'):
 						try:
-							mm,dd,yy = request.form['greentip'].split("/")
-							greentip = DateTime.DateTime(int(yy),int(mm),int(dd),23)
+							if request.form['greentip'] != "noocc":
+								mm,dd,yy = request.form['greentip'].split("/")
+								greentip = DateTime.DateTime(int(yy),int(mm),int(dd),23)
+							else:
+								greentip = request.form['greentip']
 						except:
 							greentip = None
 					if request.form.has_key('firstblossom'):

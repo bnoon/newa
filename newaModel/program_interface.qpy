@@ -15,32 +15,38 @@ class RootDirectory(Directory):
 		from newaModel_io import apple_disease_input
 		return apple_disease_input()
 	def apple_scab (self, path=None) :
-		if not path or path == ['']:
-			from newaModel_io import apple_disease_input
-			return apple_disease_input('apple_scab')
-		else:
-			path = ['apple_scab'] + path
-			return process_input(None,path)
+		from newaModel_io import apple_disease_input
+		return apple_disease_input('apple_scab', path)
+#		if not path or path == ['']:
+#			from newaModel_io import apple_disease_input
+#			return apple_disease_input('apple_scab')
+#		else:
+#			path = ['apple_scab'] + path
+#			return process_input(None,path)
+	def fire_blight (self, path=None) :
+		from newaModel_io import apple_disease_input
+		return apple_disease_input('fire_blight', path)
+#		if not path or path == ['']:
+#			from newaModel_io import apple_disease_input
+#			return apple_disease_input('fire_blight')
+#		else:
+#			path = ['fire_blight'] + path
+#			return process_input(None,path)
+	def sooty_blotch (self, path=None) :
+		from newaModel_io import apple_disease_input
+		return apple_disease_input('sooty_blotch', path)
+#		if not path or path == ['']:
+#			from newaModel_io import apple_disease_input
+#			return apple_disease_input('sooty_blotch')
+#		else:
+#			path = ['sooty_blotch'] + path
+#			return process_input(None,path)
 	def apple_scab_estlw (self, path=None) :
 		if not path or path == ['']:
 			from newaModel_io import apple_scab_estlw_input
 			return apple_scab_estlw_input()
 		else:
 			path = ['apple_scab_estlw'] + path
-			return process_input(None,path)
-	def fire_blight (self, path=None) :
-		if not path or path == ['']:
-			from newaModel_io import apple_disease_input
-			return apple_disease_input('fire_blight')
-		else:
-			path = ['fire_blight'] + path
-			return process_input(None,path)
-	def sooty_blotch (self, path=None) :
-		if not path or path == ['']:
-			from newaModel_io import apple_disease_input
-			return apple_disease_input('sooty_blotch')
-		else:
-			path = ['sooty_blotch'] + path
 			return process_input(None,path)
 	def berry_moth (self, path=None) :
 		if not path or path == ['']:

@@ -1,8 +1,9 @@
 function update_help() {
-	var params = {type: 'apple_disease'};
-	$('select[name=pest]').each(function () { params[this.name] = this.value; });
-	$.get('/newaModel/process_help',params,function(data) { $('#third').html(data); });
-	return false;
+	var params = {type: 'apple_disease', pest: $('select[name=pest]').val()};
+	if (params.pest) {
+		$.get('/newaModel/process_help', params, function(data) { $('#third').html(data); });
+		return false;
+	}
   }
 
 function update_page() {
@@ -95,7 +96,10 @@ function getapplescab(selopt) {
 	var params = {type: 'apple_disease'};
 	$('select[name=stn], input[name=accend], select[name=pest]').each(function () { params[this.name] = this.value; });
 	if (selopt === 1) {
-		$('input[name=greentip]').each(function () { params[this.name] = this.value; }); }
+		$('input[name=greentip]').each(function () { params[this.name] = this.value; }); 
+	} else if (selopt === 4) {
+		params.greentip = 'noocc'; 
+	}
 	$('#second').empty().html('<img src="/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
 	$('#righttabs').tabs('option', 'active',1);
 	$.get('/newaModel/process_input',params,function(data) {
@@ -255,4 +259,6 @@ $(document).ready(function() {
 		event_type: 'select_station',
 		where: '#station_area'
 	});
+	setupNav();
+	update_help();
 });
