@@ -186,6 +186,7 @@ stn_info = {
 'ct_ely': {'name': 'East Lyme, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.353398, 'lon': -72.247315, 'elev': 150, 'network': 'newa', 'state': 'CT'},
 'ct_enf': {'name': 'Enfield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.976093, 'lon': -72.504194, 'elev': 250, 'network': 'newa', 'state': 'CT'},
 'ct_kil': {'name': 'Killingworth, CT', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.412717, 'lon': -72.581164, 'elev': 506, 'network': 'newa', 'state': 'CT'},
+'ct_oak': {'name': 'Oakdale School, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.470199, 'lon': -72.192813, 'elev': 499, 'network': 'newa', 'state': 'CT'},
 'uc_sto': {'name': 'Storrs (UConn), CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.79417, 'lon': -72.22889, 'elev': 663, 'network': 'cu_log', 'state': 'CT'},
 'ct_woo': {'name': 'Woodstock, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.930842, 'lon': -71.985308, 'elev': 201, 'network': 'newa', 'state': 'CT'},
 'ct_mad': {'name': 'Madison, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.295110, 'lon': -72.621420, 'elev': 30, 'network': 'newa', 'state': 'CT'},

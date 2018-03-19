@@ -89,7 +89,6 @@ stn_info_inactive = {
 'ct_nca': {'name': 'New Canaan, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'toolow', 'lat': 41.132771, 'lon': -73.484614, 'elev': 274, 'network': 'newa', 'state': 'CT'},
 'ct_ham': {'name': 'Hamden, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.380279, 'lon': -72.912015, 'elev': 83, 'network': 'newa', 'state': 'CT'},
 'ct_ewi': {'name': 'East Windsor, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'bad', 'lat': 41.870777, 'lon': -72.530493, 'elev': 220, 'network': 'newa', 'state': 'CT'},
-'ct_oak': {'name': 'Oakdale School, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.470199, 'lon': -72.192813, 'elev': 499, 'network': 'newa', 'state': 'CT'},
 'ct_nia': {'name': 'Niantic, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.349326, 'lon': -72.213006, 'elev': 28, 'network': 'newa', 'state': 'CT'},
 'ct_new': {'name': 'Newtown, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.404534, 'lon': -73.287750, 'elev': 400, 'network': 'newa', 'state': 'CT'},
 'mmi': {'name': 'Middlefield, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.71083, 'elev': 180,  'lat': 41.49667, 'network': 'newa', 'state': 'CT', 'disconnected': 'yes'},
