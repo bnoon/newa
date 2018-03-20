@@ -2527,17 +2527,30 @@ class Apple (Base,Models):
 			
 			if end_date_dt >= DateTime.DateTime(end_date_dt.year,9,16):		#off-season#################### CHECK DORMANT DATE ##########
 				return newaModel_io.sooty_blotch_dormant(smry_dict)
+			jan1_dt = DateTime.DateTime(end_date_dt.year,1,1)						
 			
 			smry_dict['stn'] = stn
 			smry_dict['accend'] = end_date_dt
 			ddaccum = miss
 			ddmiss = miss
 
+			# user has set petal fall date to "no occurrence"
+			if petalfall == 'noocc':
+				# alternate path to "early branch"
+				daily_data, station_name = self.get_daily (stn, jan1_dt, end_date_dt)
+				biofix_dd = phen_events_dict['macph_pf_43']['dd'][2]
+				ret_bf_date, ddaccum, ddmiss = self.accum_degday(daily_data, jan1_dt, end_date_dt, 'dd43be', biofix_dd, stn, station_name)
+				smry_dict['station_name'] = station_name
+				smry_dict['message'] = ""
+				smry_dict['ddaccum'] = int(round(ddaccum,0))
+				smry_dict['ddmiss'] = ddmiss
+				smry_dict['last_time'] = daily_data[-1][0]
+				return newaModel_io.sooty_blotch_early(smry_dict)
+
 			# biofix can either be passed into this program, read from a file, or estimated from degree day accumulation
 			if not petalfall:
 				petalfall = self.get_biofix(stn,'pf',end_date_dt.year)					#from file
 				if not petalfall:
-					jan1_dt = DateTime.DateTime(end_date_dt.year,1,1)						
 					daily_data, station_name = self.get_daily (stn, jan1_dt, end_date_dt)
 					biofix_dd = phen_events_dict['macph_pf_43']['dd'][2]					#by degree day accumulation
 					ret_bf_date, ddaccum, ddmiss = self.accum_degday(daily_data, jan1_dt, end_date_dt, 'dd43be', biofix_dd, stn, station_name)
@@ -3877,8 +3890,11 @@ def process_input (request,path):
 							firstblossom = None
 					if request.form.has_key('petalfall'):
 						try:
-							mm,dd,yy = request.form['petalfall'].split("/")
-							petalfall = DateTime.DateTime(int(yy),int(mm),int(dd),23)
+							if request.form['petalfall'] != "noocc":
+								mm,dd,yy = request.form['petalfall'].split("/")
+								petalfall = DateTime.DateTime(int(yy),int(mm),int(dd),23)
+							else:
+								petalfall = request.form['petalfall']
 						except:
 							petalfall = None
 					if request.form.has_key('fungicide'):

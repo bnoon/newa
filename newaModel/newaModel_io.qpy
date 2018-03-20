@@ -574,7 +574,7 @@ def apple_scab_log [html] (smry_dict):
 	else:
 		action = "getapplescab(1);"
 	mdy_greentip = "%d/%d/%d" % (smry_dict['greentip'].month,smry_dict['greentip'].day,smry_dict['greentip'].year)
-	'<input type="text" name="greentip" id="dpick" value="%s" onChange="%s">' % (mdy_greentip, action)
+	'<input type="text" name="greentip" id="dpick" size="11" value="%s" onChange="%s">' % (mdy_greentip, action)
 	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
 		action2 = "submit();"
 	else:
@@ -2664,6 +2664,10 @@ def sooty_blotch_log [html] (smry_dict):
 				document.process.selbutton.value = "fungicide";
 				document.process.type.value = "sooty_blotch";
 				break;
+			case 4:
+				document.process.petalfall.value = "noocc";
+				document.process.selbutton.value = "biofix";
+				document.process.type.value = "sooty_blotch";
 			default:
 				document.process.selbutton.value = "biofix";
 				document.process.type.value = "sooty_blotch";
@@ -2716,7 +2720,13 @@ def sooty_blotch_log [html] (smry_dict):
 		mdy_bf = "%d/%d/%d" % (smry_dict['petalfall'].month,smry_dict['petalfall'].day,smry_dict['petalfall'].year)
 	else:
 		mdy_bf = "Click to enter"
-	'&nbsp;&nbsp;<input type="text" name="petalfall" id="bfdpick" value="%s" onChange="%s">' % (mdy_bf,action)
+	'&nbsp;&nbsp;<input type="text" name="petalfall" id="bfdpick" size="11" value="%s" onChange="%s">' % (mdy_bf,action)
+	if smry_dict.has_key('output') and smry_dict['output'] == 'standalone':
+		action2 = "setandsub(4);"
+	else:
+		action2 = "getsootyblotch(4);"
+	'<button class="button" id="pfnooc" onClick="%s" style="margin-left:0.5em;">Click if petal fall has not occurred</button>' % (action2)
+
 	'''
 	<br><span class="plain_smaller"><i>Petal fall date above is estimated based on degree day accumulations or user input.
 	<br>Enter the actual date for blocks of interest and the model will calculate the accumulated leaf wetness hours since 10 days after petal fall more accurately.</i></span>
@@ -2988,7 +2998,7 @@ def sooty_blotch_early [html] (smry_dict):
 		action = "getsootyblotch(1);"
 	'&nbsp;&nbsp;<input type="text" name="petalfall" id="bfdpick" value="Click to enter" onChange="%s">' % action
 	'''
-	<br><span class="plain_smaller"><i>Degree day accumulations estimate that petal fall may not have occurred yet. <br>If it has, enter the actual date for blocks of interest.</i></span>
+	<br><span class="plain_smaller"><i>Petal fall may not have occurred yet. <br>If it has, enter the actual date for blocks of interest.</i></span>
 
 	<p><div style="border: thin black solid; padding:5;">
 	<b>Pest Management: </b>At this time, pest management is unnecessary.

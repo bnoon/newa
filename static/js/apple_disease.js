@@ -15,13 +15,64 @@ function update_page() {
 	}
 }
 
+function saveAppleinfo(stn, year, event, event_value) {
+	var appleinfo, appleinfojson,
+		storageKey = "appleinfo";
+	if (localStorage) {
+		appleinfojson = localStorage.getItem(storageKey);
+		if (appleinfojson) {
+			appleinfo = JSON.parse(appleinfojson);
+		} else {
+			appleinfo = {};
+		}
+		if (!appleinfo.hasOwnProperty(stn)) {
+			appleinfo[stn] = {};
+		}
+		if (!appleinfo[stn].hasOwnProperty(year)) {
+			appleinfo[stn][year] = {};
+		}
+		appleinfo[stn][year][event] = event_value;
+		localStorage.setItem(storageKey, JSON.stringify(appleinfo));
+	}
+}
+
+function getAppleinfo(stn, year, event) {
+	var appleinfojson, event_value = null,
+		storageKey = "appleinfo";;
+	if (localStorage) {
+		appleinfojson = localStorage.getItem(storageKey);
+		if (appleinfojson) {
+			appleinfo = JSON.parse(appleinfojson);
+			if (appleinfo.hasOwnProperty(stn) && appleinfo[stn].hasOwnProperty(year) && appleinfo[stn][year].hasOwnProperty(event)) {
+				event_value = appleinfo[stn][year][event];
+			}
+		}
+	}
+	return event_value;
+}
+
 function getfireblight(selopt) {
 	var req_stn;
 	var params = {type: 'apple_disease'};
 	$('select[name=stn], input[name=accend], select[name=pest]').each(function () { params[this.name] = this.value; });
-	if (selopt === 1 | selopt === 3) {
+	if (selopt === 0) {
+		var fbFromStorage = getAppleinfo(params.stn, params.accend.slice(-4), "firstblossom");
+		if (fbFromStorage) {
+			params.firstblossom = fbFromStorage;
+		}
+		var ohFromStorage = getAppleinfo(params.stn, params.accend.slice(-4), "blighthistory");
+		if (ohFromStorage) {
+			params.orchard_history = ohFromStorage;
+		}
+	} else if (selopt === 1) {
+		params.selbutton = 'biofix';
+		params.orchard_history = $('select[name=orchard_history]').val()
+		params.firstblossom = $('input[name=firstblossom]').val();
+		saveAppleinfo(params.stn, params.accend.slice(-4), "firstblossom", params.firstblossom);
+	} else if (selopt === 3) {
 		params.selbutton = 'biofix';
 		$('input[name=firstblossom], select[name=orchard_history]').each(function () { params[this.name] = this.value; });
+		saveAppleinfo(params.stn, params.accend.slice(-4), "blighthistory", params.orchard_history);
 	} else if (selopt === 2) { 
 		params.selbutton = 'strep';
 		$('input[name=strep_spray], select[name=orchard_history], input[name=firstblossom]').each(function () { params[this.name] = this.value; });
@@ -92,14 +143,22 @@ function getshootblight(selopt) {
 	}
 
 function getapplescab(selopt) {
-	var req_stn = $('select[name=stn] option:selected').val();
-	var params = {type: 'apple_disease'};
-	$('select[name=stn], input[name=accend], select[name=pest]').each(function () { params[this.name] = this.value; });
-	if (selopt === 1) {
-		$('input[name=greentip]').each(function () { params[this.name] = this.value; }); 
+	var req_stn = $('select[name=stn] option:selected').val(),
+		params = {type: 'apple_disease'};
+	$('select[name=stn], input[name=accend], select[name=pest]').each(function () { 
+		params[this.name] = this.value;
+	});
+	if (selopt === 0) {
+		var greentipFromStorage = getAppleinfo(params.stn, params.accend.slice(-4), "greentip");
+		if (greentipFromStorage) {
+			params.greentip = greentipFromStorage;
+		}
+	} else if (selopt === 1) {
+		params.greentip = $('input[name=greentip]').val();
+		saveAppleinfo(params.stn, params.accend.slice(-4), "greentip", params.greentip);
 	} else if (selopt === 4) {
 		params.greentip = 'noocc'; 
-	}
+	}	
 	$('#second').empty().html('<img src="/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
 	$('#righttabs').tabs('option', 'active',1);
 	$.get('/newaModel/process_input',params,function(data) {
@@ -188,12 +247,21 @@ function getsootyblotch(selopt) {
 	var req_stn;
 	var params = {type: 'apple_disease'};
 	$('select[name=stn], input[name=accend], select[name=pest]').each(function () { params[this.name] = this.value; });
-	if (selopt === 1) {
+	if (selopt === 0) {
+		var petalfallFromStorage = getAppleinfo(params.stn, params.accend.slice(-4), "petalfall");
+		if (petalfallFromStorage) {
+			params.petalfall = petalfallFromStorage;
+		}
+	} else if (selopt === 1) {
 		params.selbutton = 'biofix';
-		$('input[name=petalfall]').each(function () { params[this.name] = this.value; }); }
-	if (selopt === 2) { 
+		params.petalfall = $('input[name=petalfall]').val();
+		saveAppleinfo(params.stn, params.accend.slice(-4), "petalfall", params.petalfall);
+	} else if (selopt === 2) { 
 		params.selbutton = 'fungicide';
-		$('input[name=fungicide], input[name=petalfall]').each(function () { params[this.name] = this.value; }); }
+		$('input[name=fungicide], input[name=petalfall]').each(function () { params[this.name] = this.value; });
+	} else if (selopt === 4) {
+		params.petalfall = 'noocc';
+	}	
 	$('#second').empty().html('<img src="/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
 	$('#righttabs').tabs('option', 'active',1);
 	$.get('/newaModel/process_input',params,function(data) {
