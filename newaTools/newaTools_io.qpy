@@ -26,6 +26,7 @@ def apple_et_input [html] ():
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
 		<script type="text/javascript" src="/js/mapping4.js"></script>
 		<script type="text/javascript" src="/js/apple_et.js"></script>
+		<script type="text/javascript" src="/js/appleinfo.js"></script>
 		<style type="text/css">
 			.ui-helper-reset {
 				font-size:75%; }
@@ -100,6 +101,7 @@ def apple_thin_input [html] ():
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
 		<script type="text/javascript" src="/js/mapping4.js"></script>
 		<script type="text/javascript" src="/js/apple_thin.js"></script>
+		<script type="text/javascript" src="/js/appleinfo.js"></script>
 		<script type="text/javascript" src="/js/apple_thin_graph.js"></script>
 		<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
 		<script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
@@ -234,34 +236,6 @@ def apple_et_specs [html] (smry_dict):
 		.et_table tbody { width: 628px; overflow:scroll; }
 		#results_div { margin-top:2em; }
 	</style>
-	<script>
-		$(function () {
-			$("#calc_button").on('click', function () {
-				apple_et();
-			});
-			$("#inrow").keyup(function () {
-				updateTrees();
-			});
-			$("#betrow").keyup(function () {
-				updateTrees();
-			});
-			$("#trees_acre").keyup(function (e) {
-				if (e.keyCode === 13) {
-					if ($("#calc_button").is(":visible")) {
-						$("#calc_button").trigger('click');
-					}
-				} else if (e.keyCode !== 9) {
-					enterTrees();
-				}
-			}).focus();
-			$("#greentip").datepicker({ changeMonth: true }).change(function () {
-				$("#results_div").empty();
-				$("#calc_button").show().off('click').on('click', function () {
-					apple_et();
-				});
-			});
-		});
-	</script>
 	'''
 	'<h3>Apple ET Model for %s</h3>' % smry_dict['station_name']
 	'''
@@ -645,22 +619,6 @@ def apple_thin_specs [html] (smry_dict):
 		.thin_table tbody { width: 628px; overflow:scroll; }
 		#results_div { margin-top:2em; }
 	</style>
-	<script>
-		$(function () {
-			$("#calc_button").on('click', function () {
-				$(this).hide();
-				apple_thin();
-			});
-			$("#greentip").datepicker({ changeMonth: true }).change(function () {
-				$("#results_div").empty();
-				$("#calc_button").show();
-			});
-			$("#bloom").datepicker({ changeMonth: true }).change(function () {
-				$("#results_div").empty();
-				$("#calc_button").show();
-			});
-		});
-	</script>
 	'''
 	'<h3>Apple Carbohydrate Thinning Model for %s</h3>' % smry_dict['station_name']
 	'''

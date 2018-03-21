@@ -83,6 +83,9 @@ function apple_et() {
 	$('select[name=stn], input[name=accend], input[name=greentip]').each(function () { params[this.name] = this.value; });
 	$('#results_div').empty().show().html('<img src="/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
 	$('#righttabs').tabs('option', 'active',1);
+	saveAppleinfo(params.stn, params.accend.slice(-4), "greentip", params.greentip);
+	saveAppleinfo(params.stn, params.accend.slice(-4), "treesacre", $("#trees_acre").val());
+	saveAppleinfo(params.stn, params.accend.slice(-4), "orchardage", $("#orchard_age").val());
 	$.get('/newaTools/process_input',params,function(data) {
 		$('#loading').fadeOut(500, function() {
 			$(this).remove();
@@ -97,15 +100,63 @@ function apple_et() {
 		});
 	});
 	$('#calc_button').off('click').on('click', function () {
+		saveAppleinfo(params.stn, params.accend.slice(-4), "greentip", params.greentip);
+		saveAppleinfo(params.stn, params.accend.slice(-4), "treesacre", $("#trees_acre").val());
 		calculateGallons();
 	});
 	$('#orchard_age').change(function () {
+		saveAppleinfo(params.stn, params.accend.slice(-4), "orchardage", $("#orchard_age").val());
 		calculateGallons();
 	});
 	$("#spec_text").html('Change green tip date or tree density and click "Calculate" to recalculate results. Changing "Age of Orchard" will ' +
 						 'automatically recalculate table.')
 	return false;
 	}
+	
+function updateFromStorage(params) {
+	var gtFromStorage = getAppleinfo(params.stn, params.accend.slice(-4), "greentip");
+	if (gtFromStorage) {
+		$("#greentip").val(gtFromStorage);
+	}
+	var taFromStorage = getAppleinfo(params.stn, params.accend.slice(-4), "treesacre");
+	if (taFromStorage) {
+		$("#trees_acre").val(taFromStorage);
+	}
+	var oaFromStorage = getAppleinfo(params.stn, params.accend.slice(-4), "orchardage");
+	if (oaFromStorage) {
+		$("#orchard_age").val(oaFromStorage);
+	}
+	if (gtFromStorage && taFromStorage && oaFromStorage) {
+		$("#calc_button").show();
+	}
+}
+
+function apple_et_specs_loaded() {
+	$("#calc_button").on('click', function () {
+		apple_et();
+	});
+	$("#inrow").keyup(function () {
+		updateTrees();
+	});
+	$("#betrow").keyup(function () {
+		updateTrees();
+	});
+	$("#trees_acre").keyup(function (e) {
+		if (e.keyCode === 13) {
+			if ($("#calc_button").is(":visible")) {
+				$("#calc_button").trigger('click');
+			}
+		} else if (e.keyCode !== 9) {
+			enterTrees();
+		}
+	}).focus();
+	$("#greentip").datepicker({ changeMonth: true }).change(function () {
+		$("#results_div").empty();
+		$("#calc_button").show().off('click').on('click', function () {
+			apple_et();
+		});
+	});
+}
 
 function apple_et_specs() {
 	var params = {type: 'apple_et_specs'};
@@ -117,6 +168,8 @@ function apple_et_specs() {
 			$(this).remove();
 		});
 		$("#second").html(data);
+		updateFromStorage(params);
+		apple_et_specs_loaded();
 	  });
 	return false;
 	}

@@ -5,10 +5,11 @@ from quixote.errors import TraversalError
 from newaModel import process_input, process_help, updateStatus, update_grape_status
 class RootDirectory(Directory):
 
-	_q_exports = ["","process_input","process_help","updateStatus","apple_scab","apple_scab_estlw","fire_blight","sooty_blotch","apple_disease",
+	_q_exports = ["","process_input","process_help","updateStatus","apple_scab","fire_blight","sooty_blotch","apple_disease",
 	"berry_moth","dmcast","grape_dis","grape_disease","update_grape_status",
 	"apple_stlm","apple_ofm","apple_cm","apple_pc","apple_oblr","apple_maggot","apple_pest",
 	"apple_biofix","apple_biofix_process"]
+#	"apple_scab_estlw", - deprecated
 
 #	put up input page for following
 	def _q_index (self):						#default
@@ -41,13 +42,13 @@ class RootDirectory(Directory):
 #		else:
 #			path = ['sooty_blotch'] + path
 #			return process_input(None,path)
-	def apple_scab_estlw (self, path=None) :
-		if not path or path == ['']:
-			from newaModel_io import apple_scab_estlw_input
-			return apple_scab_estlw_input()
-		else:
-			path = ['apple_scab_estlw'] + path
-			return process_input(None,path)
+#	def apple_scab_estlw (self, path=None) :
+#		if not path or path == ['']:
+#			from newaModel_io import apple_scab_estlw_input
+#			return apple_scab_estlw_input()
+#		else:
+#			path = ['apple_scab_estlw'] + path
+#			return process_input(None,path)
 	def berry_moth (self, path=None) :
 		if not path or path == ['']:
 			from newaModel_io import grape_disease_input

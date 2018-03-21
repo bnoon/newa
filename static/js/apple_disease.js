@@ -15,42 +15,6 @@ function update_page() {
 	}
 }
 
-function saveAppleinfo(stn, year, event, event_value) {
-	var appleinfo, appleinfojson,
-		storageKey = "appleinfo";
-	if (localStorage) {
-		appleinfojson = localStorage.getItem(storageKey);
-		if (appleinfojson) {
-			appleinfo = JSON.parse(appleinfojson);
-		} else {
-			appleinfo = {};
-		}
-		if (!appleinfo.hasOwnProperty(stn)) {
-			appleinfo[stn] = {};
-		}
-		if (!appleinfo[stn].hasOwnProperty(year)) {
-			appleinfo[stn][year] = {};
-		}
-		appleinfo[stn][year][event] = event_value;
-		localStorage.setItem(storageKey, JSON.stringify(appleinfo));
-	}
-}
-
-function getAppleinfo(stn, year, event) {
-	var appleinfojson, event_value = null,
-		storageKey = "appleinfo";;
-	if (localStorage) {
-		appleinfojson = localStorage.getItem(storageKey);
-		if (appleinfojson) {
-			appleinfo = JSON.parse(appleinfojson);
-			if (appleinfo.hasOwnProperty(stn) && appleinfo[stn].hasOwnProperty(year) && appleinfo[stn][year].hasOwnProperty(event)) {
-				event_value = appleinfo[stn][year][event];
-			}
-		}
-	}
-	return event_value;
-}
-
 function getfireblight(selopt) {
 	var req_stn;
 	var params = {type: 'apple_disease'};
@@ -198,6 +162,8 @@ function getapplescab(selopt) {
 	return false;
 	}
 
+/*
+ DEPRECATED 3/21/2018
 function getapplescab_estlw(selopt) {
 	var req_stn = $('select[name=stn] option:selected').val();
 	var params = {type: 'apple_scab_estlw'};
@@ -242,6 +208,7 @@ function getapplescab_estlw(selopt) {
 	});
 	return false;
 	}
+*/
 
 function getsootyblotch(selopt) {
 	var req_stn;

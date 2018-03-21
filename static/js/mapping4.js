@@ -201,7 +201,8 @@ function statePlaceMarkers (cur_data, event_type, state) {
 				style: google.maps.MapTypeControlStyle.DROPDOWN_MENU 
 			},
 			streetViewControl: false,
-			scaleControl: true
+			scaleControl: true,
+			gestureHandling: 'greedy'
 		};
 	map = new google.maps.Map(document.getElementById("map"), mapOptions);
 	markerOptions.map = map;

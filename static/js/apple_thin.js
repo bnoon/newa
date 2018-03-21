@@ -66,6 +66,8 @@ function apple_thin() {
 	if (! isNaN(dateDiff) && dateDiff < 21) {
 		$(".thin_table").append("<tr class='dateMsg'><td colspan=3 style='color:red;'>Difference between Green tip and Bloom is less than 21 days. Results may be unreliable.<\/td><\/tr>");
 	}
+	saveAppleinfo(params.stn, params.accend.slice(-4), "greentip", params.greentip);
+	saveAppleinfo(params.stn, params.accend.slice(-4), "bloom", params.bloom);
 	$.get('/newaTools/process_input', params, function (data) {
 		$('#loading').fadeOut(500, function () {
 			$(this).remove();
@@ -81,6 +83,35 @@ function apple_thin() {
 	return false;
 }
 
+function updateFromStorage(params) {
+	var gtFromStorage = getAppleinfo(params.stn, params.accend.slice(-4), "greentip");
+	if (gtFromStorage) {
+		$("#greentip").val(gtFromStorage);
+	}
+	var blFromStorage = getAppleinfo(params.stn, params.accend.slice(-4), "bloom");
+	if (blFromStorage) {
+		$("#bloom").val(blFromStorage);
+	}
+	if (gtFromStorage && blFromStorage) {
+		$("#calc_button").show();
+	}
+}	
+
+function apple_thin_specs_loaded() {
+	$("#calc_button").on('click', function () {
+		$(this).hide();
+		apple_thin();
+	});
+	$("#greentip").datepicker({ changeMonth: true }).change(function () {
+		$("#results_div").empty();
+		$("#calc_button").show();
+	});
+	$("#bloom").datepicker({ changeMonth: true }).change(function () {
+		$("#results_div").empty();
+		$("#calc_button").show();
+	});
+}
+
 function apple_thin_specs() {
 	var params = {type: 'apple_thin_specs'};
 	$('select[name=stn], input[name=accend]').each(function () { params[this.name] = this.value; });
@@ -91,6 +122,8 @@ function apple_thin_specs() {
 			$(this).remove();
 		});
 		$("#second").html(data);
+		updateFromStorage(params);
+		apple_thin_specs_loaded();
 	});
 	return false;
 }
