@@ -3967,19 +3967,31 @@ def process_input (request,path):
 			except:
 				print_exception()
 				raise program_exit('Error processing request')
-		elif path[0] in ['apple_scab_estlw']:
+#		elif path[0] in ['apple_scab_estlw']:
+#			print 'path:',path
+#			try:
+#				smry_type = path[0]
+#				estimate = "yes"
+#				if len(path) > 1: stn = path[1]
+#				output = "standalone"
+#			except IndexError:
+#				raise program_exit('Error processing request - index error')
+#			except:
+#				print_exception()
+#				raise program_exit('Error processing request')
+		elif path[0] in ['apple_pest']:
 #			print 'path:',path
 			try:
 				smry_type = path[0]
-				estimate = "yes"
-				if len(path) > 1: stn = path[1]
+				pest = path[1]
+				if len(path) > 2: stn = path[2]
 				output = "standalone"
 			except IndexError:
 				raise program_exit('Error processing request - index error')
 			except:
 				print_exception()
 				raise program_exit('Error processing request')
-		elif path[0] in ['apple_pest','apple_disease','grape_disease']:
+		elif path[0] in ['apple_disease','grape_disease']:
 #			print 'path:',path
 			try:
 				smry_type = path[0]

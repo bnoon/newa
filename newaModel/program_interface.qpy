@@ -71,47 +71,59 @@ class RootDirectory(Directory):
 			path = ['dmcast'] + path
 			return process_input(None,path)
 	def apple_stlm (self, path=None) :
-		if not path or path == ['']:
-			from newaModel_io import apple_pest_input
-			return apple_pest_input('apple-stlm')
-		else:
-			path = ['apple-stlm'] + path
-			return process_input(None,path)
+		from newaModel_io import apple_pest_input
+		return apple_pest_input('apple-stlm', path)
+#		if not path or path == ['']:
+#			from newaModel_io import apple_pest_input
+#			return apple_pest_input('apple-stlm')
+#		else:
+#			path = ['apple-stlm'] + path
+#			return process_input(None,path)
 	def apple_ofm (self, path=None) :
-		if not path or path == ['']:
-			from newaModel_io import apple_pest_input
-			return apple_pest_input('apple-ofm')
-		else:
-			path = ['apple-ofm'] + path
-			return process_input(None,path)
+		from newaModel_io import apple_pest_input
+		return apple_pest_input('apple-ofm', path)
+#		if not path or path == ['']:
+#			from newaModel_io import apple_pest_input
+#			return apple_pest_input('apple-ofm')
+#		else:
+#			path = ['apple-ofm'] + path
+#			return process_input(None,path)
 	def apple_cm (self, path=None) :
-		if not path or path == ['']:
-			from newaModel_io import apple_pest_input
-			return apple_pest_input('apple-cm')
-		else:
-			path = ['apple-cm'] + path
-			return process_input(None,path)
+		from newaModel_io import apple_pest_input
+		return apple_pest_input('apple-cm', path)
+#		if not path or path == ['']:
+#			from newaModel_io import apple_pest_input
+#			return apple_pest_input('apple-cm')
+#		else:
+#			path = ['apple-cm'] + path
+#			return process_input(None,path)
 	def apple_pc (self, path=None) :
-		if not path or path == ['']:
-			from newaModel_io import apple_pest_input
-			return apple_pest_input('apple-pc')
-		else:
-			path = ['apple-pc'] + path
-			return process_input(None,path)
+		from newaModel_io import apple_pest_input
+		return apple_pest_input('apple-pc', path)
+#		if not path or path == ['']:
+#			from newaModel_io import apple_pest_input
+#			return apple_pest_input('apple-pc')
+#		else:
+#			path = ['apple-pc'] + path
+#			return process_input(None,path)
 	def apple_oblr (self, path=None) :
-		if not path or path == ['']:
-			from newaModel_io import apple_pest_input
-			return apple_pest_input('apple-oblr')
-		else:
-			path = ['apple-oblr'] + path
-			return process_input(None,path)
+		from newaModel_io import apple_pest_input
+		return apple_pest_input('apple-oblr', path)
+#		if not path or path == ['']:
+#			from newaModel_io import apple_pest_input
+#			return apple_pest_input('apple-oblr')
+#		else:
+#			path = ['apple-oblr'] + path
+#			return process_input(None,path)
 	def apple_maggot (self, path=None) :
-		if not path or path == ['']:
-			from newaModel_io import apple_pest_input
-			return apple_pest_input('apple-maggot')
-		else:
-			path = ['apple-maggot'] + path
-			return process_input(None,path)
+		from newaModel_io import apple_pest_input
+		return apple_pest_input('apple-maggot', path)
+#		if not path or path == ['']:
+#			from newaModel_io import apple_pest_input
+#			return apple_pest_input('apple-maggot')
+#		else:
+#			path = ['apple-maggot'] + path
+#			return process_input(None,path)
 	def apple_disease (self, path=None) :
 		if not path or path == ['']:
 			from newaModel_io import apple_disease_input

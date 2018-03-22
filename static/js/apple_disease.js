@@ -282,9 +282,9 @@ $(document).ready(function() {
 		else if (document.stationLister.pest.value == 'sooty_blotch') {
 			getsootyblotch(0);
 		}
-		else if (document.stationLister.pest.value == 'apple_scab_estlw') {
-			getapplescab_estlw(0);
-		}
+//		else if (document.stationLister.pest.value == 'apple_scab_estlw') {
+//			getapplescab_estlw(0);
+//		}
 		else {
 			getapplescab(0);
 		}

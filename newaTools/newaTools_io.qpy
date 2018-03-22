@@ -649,16 +649,13 @@ def apple_thin_specs [html] (smry_dict):
 	</table>
 
 	<div style="text-align:left;border:1pt solid black;padding:3px;margin-top:1em;font-size:90%;">
-	<b>Note of caution from the model developer (May 11, 2017):</b><br />
-	&bull; The apple carbohydrate model assumes that the trees are healthy, normal vigor, have no significant stress (frost, 
-	drought, nutrient) and no significant carry-over effects from previous years that might change the tree response 
-	to the weather.  With the severe drought in 2016, there may be orchards that will have a weakened state coming into 
-	2017 which would likely make the tree abnormally sensitive to thinners.  So in those cases the model may suggest a 
-	stronger thinner concentration than is appropriate. Conversely, if irrigated last year, with the warm season and 
-	lots of sun, those trees may be in better than normal condition and harder to thin.<br />
-	&bull; With the current cold period, flowering, pollination, initial set and early fruit growth may not be very well 
-	modeled as we did not have much data under these very cold (or also excessively hot) conditions when the model was developed.<br />
-	For all these reasons, you should have less confidence in the model this year.  Use your experience with your unique situation.
+	<b>Note from the model developer (March 22, 2018):</b><br />
+	&bull; The apple carbohydrate model simulates the response to weather of trees that are 
+	healthy with normal vigor and bloom, no significant water, nutrient or winter or spring 
+	freeze stress, and no significant carry-over stress from a previous year that will 
+	change tree responses. We are less confident in the model if temperatures are extremely 
+	cold or hot.  Each orchard is unique, so use this tool, as any other, in the context 
+	of your own experience.  For more information click on the "More Info" tab.
 	</div>
 	
 	<div id="results_div">

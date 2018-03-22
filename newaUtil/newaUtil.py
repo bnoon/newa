@@ -218,6 +218,8 @@ def run_stationModels(stn):
 				else:
 					if murl == "newaModel/apple_scab" or murl == "newaModel/fire_blight" or murl == "newaModel/sooty_blotch":
 						whole_url = "http://newa.nrcc.cornell.edu/"+murl+"/"+stn_info[stn]['state']+"/"+stn
+					elif "newaModel/apple_pest" in murl:
+						whole_url = "http://newa.nrcc.cornell.edu/"+murl.replace('/apple_pest','')+"/"+stn_info[stn]['state']+"/"+stn
 					elif murl != "newaDisease/onion_dis":
 						whole_url = "http://newa.nrcc.cornell.edu/"+murl+"/"+stn
 					else:

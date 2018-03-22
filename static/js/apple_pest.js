@@ -47,4 +47,6 @@ function getresults(bfcnt) {
 		event_type: 'select_station',
 		where: '#station_area'
 	});
+	setupNav();
+	update_help();
   });

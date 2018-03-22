@@ -319,7 +319,7 @@ def grape_disease_input [html] (disease_type=None):
 	</html>
 	'''
 
-def apple_pest_input [html] (pest_type=None):
+def apple_pest_input [html] (pest_type=None, path=None):
 	'''
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -359,12 +359,15 @@ def apple_pest_input [html] (pest_type=None):
 	  </head>
 	
 	'''
-	if pest_type:
-		'<body onload="update_help();">'
-	else:
-		'<body>'
+	navItems = {"state": "", "station": ""}
+	if path:
+		if len(path) >= 1:
+			navItems["station"] = path[-1]
+		if len(path) == 2:
+			navItems["state"] = path[0]
 		
 	'''	
+	<body>
 	  <div class="banner">NEWA Apple Insect Models</div>
 		<div id="leftbox">
 			<form action="#" name="stationLister">
@@ -382,6 +385,9 @@ def apple_pest_input [html] (pest_type=None):
 		else:
 			'<option value="%s">%s</option>' % (distypval,distypnam)
 	'</select>'
+	'<input type="hidden" name="requestedState" value="%s">' % navItems["state"]
+	'<input type="hidden" name="requestedStation" value="%s">' % navItems["station"]
+
 	'''		
 			<div id="station_area"></div>		
 			<p>Accumulation End Date:
