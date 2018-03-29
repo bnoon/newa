@@ -83,7 +83,7 @@ function apple_et() {
 	$('select[name=stn], input[name=accend], input[name=greentip]').each(function () { params[this.name] = this.value; });
 	$('#results_div').empty().show().html('<img src="/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
 	$('#righttabs').tabs('option', 'active',1);
-	saveAppleinfo(params.stn, params.accend.slice(-4), "greentip", params.greentip);
+	saveAppleinfo(params.stn, params.accend.slice(-4), "et-greentip", params.greentip);
 	saveAppleinfo(params.stn, params.accend.slice(-4), "treesacre", $("#trees_acre").val());
 	saveAppleinfo(params.stn, params.accend.slice(-4), "orchardage", $("#orchard_age").val());
 	$.get('/newaTools/process_input',params,function(data) {
@@ -100,7 +100,7 @@ function apple_et() {
 		});
 	});
 	$('#calc_button').off('click').on('click', function () {
-		saveAppleinfo(params.stn, params.accend.slice(-4), "greentip", params.greentip);
+		saveAppleinfo(params.stn, params.accend.slice(-4), "et-greentip", params.greentip);
 		saveAppleinfo(params.stn, params.accend.slice(-4), "treesacre", $("#trees_acre").val());
 		calculateGallons();
 	});
@@ -114,7 +114,7 @@ function apple_et() {
 	}
 	
 function updateFromStorage(params) {
-	var gtFromStorage = getAppleinfo(params.stn, params.accend.slice(-4), "greentip");
+	var gtFromStorage = getAppleinfo(params.stn, params.accend.slice(-4), "et-greentip");
 	if (gtFromStorage) {
 		$("#greentip").val(gtFromStorage);
 	}

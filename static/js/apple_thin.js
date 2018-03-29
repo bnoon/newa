@@ -66,7 +66,7 @@ function apple_thin() {
 	if (! isNaN(dateDiff) && dateDiff < 21) {
 		$(".thin_table").append("<tr class='dateMsg'><td colspan=3 style='color:red;'>Difference between Green tip and Bloom is less than 21 days. Results may be unreliable.<\/td><\/tr>");
 	}
-	saveAppleinfo(params.stn, params.accend.slice(-4), "greentip", params.greentip);
+	saveAppleinfo(params.stn, params.accend.slice(-4), "thin-greentip", params.greentip);
 	saveAppleinfo(params.stn, params.accend.slice(-4), "bloom", params.bloom);
 	$.get('/newaTools/process_input', params, function (data) {
 		$('#loading').fadeOut(500, function () {
@@ -84,7 +84,7 @@ function apple_thin() {
 }
 
 function updateFromStorage(params) {
-	var gtFromStorage = getAppleinfo(params.stn, params.accend.slice(-4), "greentip");
+	var gtFromStorage = getAppleinfo(params.stn, params.accend.slice(-4), "thin-greentip");
 	if (gtFromStorage) {
 		$("#greentip").val(gtFromStorage);
 	}
