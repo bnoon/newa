@@ -80,7 +80,6 @@ stn_info_inactive = {
 '3519': {'name': 'Hawk Haven Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 39.0095, 'lon': -74.8881, 'elev': 16, 'network': 'njwx', 'state': 'NJ', 'disconnected': 'yes'},
 '3520': {'name': 'Tomasello Winery, NJ', 'vars': ['temp', 'lwet', 'rhum', 'wspd'], 'lat': 39.6569, 'lon': -74.8347, 'elev': 105, 'network': 'njwx', 'state': 'NJ', 'disconnected': 'yes'},
 'mno': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.345831, 'lon': -71.677843, 'elev': 610, 'network': 'newa', 'state': 'MA', 'disconnected': 'yes'},
-'ct_gos': {'name': 'Goshen, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.792852, 'lon': -73.20965, 'elev': 1255, 'network': 'newa', 'state': 'CT'},
 'ct_nca': {'name': 'New Canaan, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'toolow', 'lat': 41.132771, 'lon': -73.484614, 'elev': 274, 'network': 'newa', 'state': 'CT'},
 'ct_ham': {'name': 'Hamden, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.380279, 'lon': -72.912015, 'elev': 83, 'network': 'newa', 'state': 'CT'},
 'ct_ewi': {'name': 'East Windsor, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'bad', 'lat': 41.870777, 'lon': -72.530493, 'elev': 220, 'network': 'newa', 'state': 'CT'},

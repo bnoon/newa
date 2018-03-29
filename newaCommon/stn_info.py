@@ -183,6 +183,7 @@ stn_info = {
 'ct_eha': {'name': 'Moodus, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.520094, 'lon': -72.444341, 'elev': 422, 'network': 'newa', 'state': 'CT'},
 'ct_eki': {'name': 'East Killingly, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.871175, 'lon': -71.809891, 'elev': 748, 'network': 'newa', 'state': 'CT'},
 'ct_gfy': {'name': 'Gales Ferry, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.468442, 'lon': -72.057294, 'elev': 160, 'network': 'newa', 'state': 'CT'},
+'ct_gos': {'name': 'Goshen, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.792852, 'lon': -73.20965, 'elev': 1255, 'network': 'newa', 'state': 'CT'},
 'ct_gui': {'name': 'Guilford, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.293201, 'lon': -72.694292, 'elev': 58, 'network': 'newa', 'state': 'CT'},
 'ct_sgl': {'name': 'S. Glastonbury, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 41.652024, 'lon': -72.576445, 'elev': 350, 'network': 'newa', 'state': 'CT'},
 'ct_nwi': {'name': 'North Windham, CT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'toolow', 'lat': 41.721570, 'lon': -72.167526, 'elev': 301, 'network': 'newa', 'state': 'CT'},
