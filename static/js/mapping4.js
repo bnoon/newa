@@ -12,7 +12,7 @@ function setSelectValue(clickedStn) {
 	}
 }
 
-function setupNav() {
+function setupNav(triggerClick) {
 	var i, navItems = {},
 		stateList = $("select[name=stabb] option")
 	$('input[name=requestedState], input[name=requestedStation]').each(function () { navItems[this.name] = this.value; });	
@@ -35,10 +35,11 @@ function setupNav() {
 					}
 				}
 			}, 300);
-			setTimeout(function() {
-				$("form .button").trigger("click");
-			}, 500);
-			
+			if (triggerClick) {
+				setTimeout(function() {
+					$("form .button").trigger("click");
+				}, 500);
+			}
 		}
 	}
 }

@@ -30,6 +30,7 @@ function getresults(bfcnt) {
 	}
 
  $(document).ready(function() {
+ 	var triggerClick = true;
 	$("#enddpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "", changeMonth: true, changeYear: true });
 	var myDate = new Date();
 	var todayDate = (myDate.getMonth()+1) + "/" + myDate.getDate() + "/" + myDate.getFullYear();
@@ -47,6 +48,6 @@ function getresults(bfcnt) {
 		event_type: 'select_station',
 		where: '#station_area'
 	});
-	setupNav();
+	setupNav(triggerClick);
 	update_help();
   });

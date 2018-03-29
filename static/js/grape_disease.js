@@ -72,6 +72,7 @@ function getgrapedis() {
 
 $(document).ready(function() {
 	var elem,
+		triggerClick = document.stationLister.pest.value !== 'dmcast',
 		myDate = new Date(),
 		todayDate = (myDate.getMonth()+1) + "/" + myDate.getDate() + "/" + myDate.getFullYear();
 	$("#enddpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "", changeMonth: true, changeYear: true });
@@ -104,5 +105,6 @@ $(document).ready(function() {
 		event_type: 'select_station',
 		where: '#station_area'
 	});
-
+	setupNav(triggerClick);
+	update_help();
 });

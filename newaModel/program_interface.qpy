@@ -7,7 +7,7 @@ class RootDirectory(Directory):
 
 	_q_exports = ["","process_input","process_help","updateStatus","apple_scab","fire_blight","sooty_blotch","apple_disease",
 	"berry_moth","dmcast","grape_dis","grape_disease","update_grape_status",
-	"apple_stlm","apple_ofm","apple_cm","apple_pc","apple_oblr","apple_maggot","apple_pest",
+	"apple_stlm","apple_ofm","apple_cm","apple_pc","apple_oblr","apple_maggot","apple_sjs","apple_pest",
 	"apple_biofix","apple_biofix_process"]
 #	"apple_scab_estlw", - deprecated
 
@@ -50,26 +50,32 @@ class RootDirectory(Directory):
 #			path = ['apple_scab_estlw'] + path
 #			return process_input(None,path)
 	def berry_moth (self, path=None) :
-		if not path or path == ['']:
-			from newaModel_io import grape_disease_input
-			return grape_disease_input('berry_moth')
-		else:
-			path = ['berry_moth'] + path
-			return process_input(None,path)
+		from newaModel_io import grape_disease_input
+		return grape_disease_input('berry_moth',path)
+#		if not path or path == ['']:
+#			from newaModel_io import grape_disease_input
+#			return grape_disease_input('berry_moth')
+#		else:
+#			path = ['berry_moth'] + path
+#			return process_input(None,path)
 	def grape_dis (self, path=None) :
-		if not path or path == ['']:
-			from newaModel_io import grape_disease_input
-			return grape_disease_input('grape_dis')
-		else:
-			path = ['grape_dis'] + path
-			return process_input(None,path)
+		from newaModel_io import grape_disease_input
+		return grape_disease_input('grape_dis',path)
+#		if not path or path == ['']:
+#			from newaModel_io import grape_disease_input
+#			return grape_disease_input('grape_dis')
+#		else:
+#			path = ['grape_dis'] + path
+#			return process_input(None,path)
 	def dmcast (self, path=None) :
-		if not path or path == ['']:
-			from newaModel_io import grape_disease_input
-			return grape_disease_input('dmcast')
-		else:
-			path = ['dmcast'] + path
-			return process_input(None,path)
+		from newaModel_io import grape_disease_input
+		return grape_disease_input('dmcast',path)
+#		if not path or path == ['']:
+#			from newaModel_io import grape_disease_input
+#			return grape_disease_input('dmcast')
+#		else:
+#			path = ['dmcast'] + path
+#			return process_input(None,path)
 	def apple_stlm (self, path=None) :
 		from newaModel_io import apple_pest_input
 		return apple_pest_input('apple-stlm', path)
@@ -124,6 +130,9 @@ class RootDirectory(Directory):
 #		else:
 #			path = ['apple-maggot'] + path
 #			return process_input(None,path)
+	def apple_sjs (self, path=None) :
+		from newaModel_io import apple_pest_input
+		return apple_pest_input('apple-sjs', path)
 	def apple_disease (self, path=None) :
 		if not path or path == ['']:
 			from newaModel_io import apple_disease_input

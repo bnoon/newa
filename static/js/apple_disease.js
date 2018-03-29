@@ -264,6 +264,7 @@ function getsootyblotch(selopt) {
 	}
 
 $(document).ready(function() {
+	var triggerClick = true;
 	var myDate = new Date();
 	var todayDate = (myDate.getMonth()+1) + "/" + myDate.getDate() + "/" + myDate.getFullYear();
 	$("#enddpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "", changeMonth: true, changeYear: true });
@@ -294,6 +295,6 @@ $(document).ready(function() {
 		event_type: 'select_station',
 		where: '#station_area'
 	});
-	setupNav();
+	setupNav(triggerClick);
 	update_help();
 });

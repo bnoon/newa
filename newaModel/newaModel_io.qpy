@@ -204,7 +204,7 @@ def apple_disease_input [html] (disease_type=None,path=None):
 #	</html>
 #	'''
 
-def grape_disease_input [html] (disease_type=None):
+def grape_disease_input [html] (disease_type=None, path=None):
 	from dm_cultivars import cultivars
 	'''
 	<HTML>
@@ -239,15 +239,15 @@ def grape_disease_input [html] (disease_type=None):
 	</head>
 	  
 	'''
-	if disease_type:
-		'''
-		<body onload="update_help();">
-		'''
-	else:
-		'''
-		<body>
-		'''		
+	navItems = {"state": "", "station": ""}
+	if path:
+		if len(path) >= 1:
+			navItems["station"] = path[-1]
+		if len(path) == 2:
+			navItems["state"] = path[0]
+			
 	'''
+	<body>
 	<div class="banner">NEWA Grape Forecast Models</div>
 		<div id="leftbox">
 			<form action="#" name="stationLister">
@@ -264,7 +264,9 @@ def grape_disease_input [html] (disease_type=None):
 		else:
 			'<option value="%s">%s</option>' % (distypval,distypnam)
 	'</select>'
-	
+	'<input type="hidden" name="requestedState" value="%s">' % navItems["state"]
+	'<input type="hidden" name="requestedStation" value="%s">' % navItems["station"]
+
 	'<div id="station_area"></div>'
 	
 	if disease_type == "dmcast":
