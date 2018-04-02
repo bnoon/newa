@@ -122,12 +122,14 @@ class RootDirectory(Directory):
 #			path = ['cabbage_maggot'] + path
 #			return process_input(None,path)
 	def onion_maggot (self, path=None) :
-		if not path or path == ['']:
-			from newaDisease_io import onion_maggot_input
-			return onion_maggot_input()
-		else:
-			path = ['onion_maggot'] + path
-			return process_input(None,path)
+		from newaDisease_io import onion_maggot_input
+		return onion_maggot_input(path)
+#		if not path or path == ['']:
+#			from newaDisease_io import onion_maggot_input
+#			return onion_maggot_input()
+#		else:
+#			path = ['onion_maggot'] + path
+#			return process_input(None,path)
 
 #	received request form to be processed
 	def process_input (self, path=None) :

@@ -1442,7 +1442,7 @@ def cabbage_maggot_input [html] ():
 	</HTML>
 	'''
 
-def onion_maggot_input [html] ():
+def onion_maggot_input [html] (path=None):
 	'''
 	<HTML>
 	<HEAD>
@@ -1457,6 +1457,7 @@ def onion_maggot_input [html] ():
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
 	<script type="text/javascript" src="/js/mapping4.js"></script>
+	<script type="text/javascript" src="/js/onion_maggot.js"></script>
 	<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
 	<script type="text/javascript" src="/js/newaGraph.js"></script>
 	<STYLE TYPE="text/css">
@@ -1478,58 +1479,16 @@ def onion_maggot_input [html] ():
 		width: 643px;
 		border: 0px gray solid; }
 	</STYLE>
-	<script  language="JavaScript">
-		function getOnionMaggot() {
-			var req_stn = $("select[name=stn] option:selected").val(),
-				accend = $("#dpick").val(),
-				params = {type: "onion_maggot", stn: req_stn, accend: accend};	
-			$("#righttabs").tabs().tabs("option","active",1);
-			$("#second").empty().html('<img src="/gifs/ajax-loader.gif" alt="Processing" id="loading" />');
-			$.get("/newaDisease/process_input",params,function(data) {
-				$("#loading").fadeOut(500, function() {
-					$(this).remove();
-				});
-				$("#second").html(data);
-				produce_onionmaggot_graph();
-				$("#forecast").on("click", function() {
-					$.get("/newaUtil/getForecastUrl/"+req_stn, function(fcst) { 
-						var popup_window = window.open(fcst);
-						try {
-							popup_window.focus();
-						} catch (e) {
-							alert('Popup windows are blocked. Unblock popup windows to see forecast.');
-						}
-					});
-					return false;
-				});
-			});
-			return false;
-		}
-		$(document).ready(function() {
-			var myDate = new Date(),
-				todayDate = (myDate.getMonth()+1) + "/" + myDate.getDate() + "/" + myDate.getFullYear();
-			$("#dpick").datepicker({ minDate: new Date(2000, 0, 1), maxDate: "", changeMonth: true, changeYear: true }).val(todayDate);
-			$("#righttabs").tabs({
-				activate: function () {
-					var center = map.getCenter();
-					google.maps.event.trigger(map, 'resize');
-					map.setCenter(center);
-				}
-			});
-			$("form .button").on("click", function () {
-				getOnionMaggot();
-			});
-			stateStationMapList({
-				reqval: 'all',
-				event_type: 'select_station',
-				where: '#station_area'
-			});
-			$.get('/onion_maggot_info.htm',function(helpdata) {
-				$('#third').html(helpdata);
-			});
-		});
-	</script>
 	</HEAD>
+	'''
+	navItems = {"state": "", "station": ""}
+	if path:
+		if len(path) >= 1:
+			navItems["station"] = path[-1]
+		if len(path) == 2:
+			navItems["state"] = path[0]
+		
+	'''	
 	<body BGCOLOR="#FFFFFF">
 	<p class="banner">NEWA Onion Maggot</p>
 	<div id="leftbox">
@@ -1538,6 +1497,10 @@ def onion_maggot_input [html] ():
 		<p>Date of Interest:
 		<br><input type="text" id="dpick" value="">
 		<input type="hidden" name="pest" value="onion_maggot">
+	'''
+	'<input type="hidden" name="requestedState" value="%s">' % navItems["state"]
+	'<input type="hidden" name="requestedStation" value="%s">' % navItems["station"]
+	'''
 		<p><input type="button" class="button" value="Get report"></p>
 		</FORM>
 	</div>

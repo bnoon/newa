@@ -216,7 +216,9 @@ def run_stationModels(stn):
 				for model_var in mvars:
 					if not model_var in stn_vars: break
 				else:
-					if murl == "newaModel/apple_scab" or murl == "newaModel/fire_blight" or murl == "newaModel/sooty_blotch" or murl == "newaModel/berry_moth" or murl == "newaModel/grape_dis" or murl == "newaModel/dmcast":
+					if murl == "newaModel/apple_scab" or murl == "newaModel/fire_blight" or murl == "newaModel/sooty_blotch" or \
+					   murl == "newaModel/berry_moth" or murl == "newaModel/grape_dis" or murl == "newaModel/dmcast" or \
+					   murl == "newaDisease/onion_maggot":
 						whole_url = "http://newa.nrcc.cornell.edu/"+murl+"/"+stn_info[stn]['state']+"/"+stn
 					elif "newaModel/apple_pest" in murl:
 						whole_url = "http://newa.nrcc.cornell.edu/"+murl.replace('/apple_pest','')+"/"+stn_info[stn]['state']+"/"+stn
