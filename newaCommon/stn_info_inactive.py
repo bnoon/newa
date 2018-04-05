@@ -64,7 +64,6 @@ stn_info_inactive = {
 'wat': {'name': 'Waterport', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -78.214060, 'elev': 330.0, 'lat': 43.34422, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'way': {'name': 'Wayland', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -77.578797, 'elev': 1600.0, 'lat': 42.604968, 'network': 'newa', 'state': 'NY'},
 'wes': {'name': 'Westfield', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.341379, 'lon': -79.572976, 'elev': 671, 'network': 'newa', 'state': 'NY'},
-'wbs': {'name': 'Williamson (Bear Swamp)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 43.250549, 'lon': -77.160323, 'elev': 367, 'network': 'newa', 'state': 'NY'},
 'vca': {'name': 'Calais, VT','vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.5293, 'elev': 1434, 'lat': 44.3395, 'network': 'newa', 'state': 'VT', 'disconnected': 'yes'},
 'vsa': {'name': 'Saxtons River, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.153611, 'lon': -72.533611, 'elev': 802, 'network': 'newa', 'state': 'VT', 'disconnected': 'yes'},
 'hwa': {'name': 'Walpole, NH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.033333, 'lon': -72.433056, 'elev': 605, 'network': 'newa', 'state': 'NH', 'disconnected': 'yes'},
