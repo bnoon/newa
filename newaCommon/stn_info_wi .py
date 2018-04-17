@@ -1,4 +1,0 @@
-stn_info = {'wi_meq': {'name': 'Mequon (Barthel), WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -88.02989, 'state': 'WI ', 'elev': 809, 'lat': 43.24202, 'network': 'newa'},
-'wi_mau': {'name': 'Mauston (Northwoods), WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -90.13777, 'state': 'WI ', 'elev': 934, 'lat': 43.78981, 'network': 'newa'},
-'wi_ric': {'name': 'Richland Center (Oakwood), WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -90.24077, 'state': 'WI ', 'elev': 1084, 'lat': 43.31993, 'network': 'newa'},
-}
