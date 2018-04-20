@@ -173,6 +173,8 @@ class newa_weather(general_weather) :
 		self.data = ucan.get_data()
 		if self.type == 'miwx':
 			self.stn_id = self.stn_id[3:]		
+		elif self.type == 'nysm':
+			self.stn_id = self.stn_id[5:]		
 		q = ucan.get_query()
 		r = q.getUcanFromIdAsSeq(self.stn_id,self.type)
 		q.release()
@@ -413,8 +415,11 @@ class general_dm_weather(object) :
 	def get_fcst_data (self, stn, requested_var, requested_time):
 		hourly_fcst = -999
 		try:
-			forecast_db = hashopen('/ndfd/hourly_forecasts.db','r')		
-			stn_dict = loads(forecast_db[stn.upper()])
+			forecast_db = hashopen('/ndfd/hourly_forecasts.db','r')
+			try:
+				stn_dict = loads(forecast_db[stn.upper()])
+			except:
+				stn_dict = {}
 			forecast_db.close()
 			if requested_var == 'prcp': requested_var = 'qpf'
 			dkey = tuple(requested_time[0:3])

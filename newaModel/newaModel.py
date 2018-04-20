@@ -3280,9 +3280,12 @@ class Grape (Base,Apple,Models):
 	#--------------------------------------------------------------------------------------------		
 	#	obtain everything necessary for dmcast
 	def run_dmcast(self,stn,end_date_dt,cultivar,output):
+		try :
+			import json
+		except ImportError :
+			import simplejson as json
 		from dmcast import downy_mildew
-		from newaCommon.sister_info import sister_info
-		from newaCommon.stn_info import stn_info
+		from newaUtil.newaUtil import run_stationInfo, run_stationSisterInfo
 
 		try:
 			smry_dict = {}
@@ -3292,8 +3295,25 @@ class Grape (Base,Apple,Models):
 			smry_dict['accend'] = end_date_dt
 			if not cultivar: cultivar = "Concord"
 			smry_dict['cultivar'] = cultivar
-			smry_dict['station_name'] = stn_info[stn]["name"]
-			smry_dict['sister'] = sister_info[stn]
+			# get station name
+			stn_meta_json = run_stationInfo(stn)
+			stn_meta = json.loads(stn_meta_json)
+			smry_dict['station_name'] = stn_meta['metadata']['name']
+			# get sister station info with type stripped and saved as ascii (not unicode)
+			sister_meta_json = run_stationSisterInfo({'station':stn, 'network':stn_meta['metadata']['network']})
+			sister_meta = json.loads(sister_meta_json)
+			sister_stns = {}
+			for ky in sister_meta.keys():
+				aky = ky.encode('ascii','ignore')
+				sstn_info = sister_meta[ky].split(" ")
+				sstn = sstn_info[0]
+				snet = sstn_info[1]
+				if snet == 'nysm':
+					sstn = 'nysm_' + sstn
+				elif snet == 'miwx':
+					sstn = 'ew_' + sstn
+				sister_stns[aky] = sstn.encode('ascii','ignore')
+			smry_dict['sister'] = sister_stns
 				
 			# add necessary information for display to dictionary
 			obj = downy_mildew.general_dm(smry_dict)
@@ -3779,9 +3799,10 @@ def process_help (request,path):
 			pest_names = {"stlm": "Spotted Tentiform Leafminer", "ofm":"Oriental Fruit Moth", "cm":"Codling Moth",
 						  "pc":"Plum Curculio", "oblr":"Obliquebanded Leafroller", "sjs":"San Jose Scale", "am":"Apple Maggot"}
 			pest_id = {"stlm": 43130, "ofm":43112, "cm":43086, "sjs":43128, "pc":43118, "oblr":43111, "am":43071}
-			pest_abb = pest[pest.find('-')+1:]
-			if pest_abb == 'maggot': pest_abb = 'am'
-			help_list = [("Pest Management Guidelines","http://ipmguidelines.org"),
+			if pest:
+				pest_abb = pest[pest.find('-')+1:]
+				if pest_abb == 'maggot': pest_abb = 'am'
+				help_list = [("Pest Management Guidelines","http://ipmguidelines.org"),
 			             ("%s Fact Sheet"%(pest_names[pest_abb]),"http://hdl.handle.net/1813/%s"%(pest_id[pest_abb])),
 			             ("Cornell Fruit Resources - Tree Fruit IPM","https://blogs.cornell.edu/treefruit/ipm/"),
 						 ("Pesticide Information","https://cropandpestguides.cce.cornell.edu/"),
@@ -3790,6 +3811,8 @@ def process_help (request,path):
 			             ("Hudson Valley Scouting Reports and Trap Data","http://www.hudsonvalleyresearchlab.org/"),
 			             ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references")
 						 ]
+			else:
+				help_list = []
 			return newaModel_io.helppage(help_list)
 		elif smry_type == 'berry_moth' or (smry_type == 'grape_disease' and pest == 'berry_moth'):
 			return newaModel_io.helppage([("Risk Assessment of Grape Berry Moth and Guidelines for Management of the Eastern Grape Leafhopper (pdf)","http://hdl.handle.net/1813/5202"),
