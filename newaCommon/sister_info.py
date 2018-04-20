@@ -36,7 +36,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "dun" : {"temp": "kpeo", "rhum": "kpeo", "prcp": "kpeo", "wspd": "kpeo", "wdir": "kpeo", "lwet": "bar", "srad": "wla"},
 "eag" : {"temp": "kddh", "rhum": "kddh", "prcp": "kddh", "wspd": "kddh", "wdir": "kddh", "lwet": "vbe", "srad": "vbe"},
 "ede" : {"temp": "kbuf", "rhum": "kbuf", "prcp": "kbuf", "lwet": "bat"},
-"efr" : {"temp": "nysm_fred", "lwet": "she", "rhum": "nysm_fred", "prcp": "nysm_fred", "wspd": "nysm_fred", "wdir": "nysm_fred", "srad": "nysm_fred"},
+"efr" : {"temp": "kdkk", "lwet": "she", "rhum": "kdkk", "prcp": "kdkk", "wspd": "kdkk", "wdir": "kdkk", "srad": "she"},
 "elb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kno", "wspd": "kno", "wdir": "kno", "srad": "kno"},
 "emo" : {"temp": "khwv", "rhum": "khwv", "prcp": "khwv", "wspd": "khwv", "wdir": "khwv", "lwet": "man", "srad": "man"},
 "ewe" : {"temp": "poe", "rhum": "poe", "prcp": "poe", "wspd": "poe", "wdir": "poe", "srad": "poe", "lwet": "poe"},
