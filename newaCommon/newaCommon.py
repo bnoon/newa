@@ -270,7 +270,7 @@ def getSR(sid, date) :
 		results = json.loads(response.read())
 		# check for error returned from web services
 		if results.has_key("error"):
-			print "Error returned from solar rad web service call:",results["error"]
+			print "Error returned from solar rad web service call for",sid,":",results["error"]
 			return None
 	except:
 		print "Error returned from solar rad web service call with",params
