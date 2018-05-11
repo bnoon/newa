@@ -45,7 +45,6 @@ stn_info_inactive = {
 'pot': {'name': 'Potter', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -77.191759050000002, 'elev': 915.0, 'lat': 42.715445000000003, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'pra': {'name': 'Prattsburg', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -77.266594, 'elev': 1300.0, 'lat': 42.481937, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'pul': {'name': 'Pulteney', 'vars': ['temp', 'lwet', 'prcp', 'rhum'], 'lon': -77.170930, 'elev': 1450.0, 'lat': 42.497750, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
-'riv': {'name': 'Riverhead (LIHREC)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'unknown', 'lat': 40.96222, 'lon': -72.71611, 'elev': 112, 'network': 'newa', 'state': 'NY'},
 'rvm': {'name': 'Riverhead (MCV)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.98, 'lon': -72.58, 'elev': 54, 'network': 'newa', 'state': 'NY'},
 'sav': {'name': 'Savannah', 'vars': ['temp', 'prcp', 'rhum'], 'lon': -76.741219, 'elev': 400.0, 'lat': 43.022533, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'scr': {'name': 'Scriba', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lon': -76.402453, 'elev': 400.0, 'lat': 43.410025, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
