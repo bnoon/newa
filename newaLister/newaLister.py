@@ -104,7 +104,7 @@ def degday_summary(daily_data,year,month,smry_type):
 						ddval = miss
 #				save values above zero and round
 				if ddval > 0:
-					ddval = round(ddval+.01,1)
+					ddval = round(ddval+.001,2)
 				else:
 					ddval = 0.
 			else:
@@ -343,6 +343,7 @@ def run_ddrange(stn,ddtype,accstr,accend):
 			start_fcst_dt = end_date_dt + DateTime.RelativeDate(hours = +1)
 			end_fcst_dt = end_date_dt	
 			end_date_dt = end_date_dt + DateTime.RelativeDate(days = -6)
+
 
 		if len(daily_data) > 0:
 			degday_dict = base.degday_calcs (daily_data,start_date_dt,end_fcst_dt, ddtype, "accum")

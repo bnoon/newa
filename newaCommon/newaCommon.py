@@ -1218,6 +1218,7 @@ class Base:
 		#				save values above zero and round
 						if ddval > 0:
 							ddval = round(ddval+.001,2)
+		#					print dly_dt,tmax,tmin,tave,ddval
 						else:
 							ddval = 0.
 					else:

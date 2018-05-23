@@ -134,6 +134,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "var" : {"temp": "rom", "rhum": "rom", "prcp": "rom", "wspd": "rom", "wdir": "rom", "lwet": "rom", "srad": "ovi"},
 "vca" : {"temp": "kmpv", "rhum": "kmpv", "prcp": "kmpv", "wspd": "kmpv", "wdir": "kmpv", "lwet": "vsb", "srad": "vsb"},
 "vem" : {"temp": "kmpv", "rhum": "kmpv", "prcp": "kmpv", "wspd": "kmpv", "wdir": "kmpv", "lwet": "vex", "srad": "vex"},
+"vmo" : {"temp": "kmpv", "rhum": "kmpv", "prcp": "kmpv", "wspd": "kmpv", "wdir": "kmpv", "lwet": "vem", "srad": "nh_nha"},
 "vet" : {"temp": "kleb", "rhum": "kleb", "prcp": "kleb", "wspd": "kleb", "wdir": "kleb", "lwet": "nh_pla", "srad": "nh_pla"},
 "vco" : {"temp": "vsh", "rhum": "vsh", "prcp": "vsh", "wspd": "vsh", "wdir": "vsh", "srad": "wlb", "lwet": "vsh"},
 "vdu" : {"temp": "vpu", "rhum": "vpu", "prcp": "vpu", "wspd": "vpu", "wdir": "vpu", "lwet": "vpu", "srad": "vpu"},

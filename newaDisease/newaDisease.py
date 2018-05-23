@@ -94,7 +94,9 @@ def hrly_to_dly (hourly_data, lt_end_hour = 23):
 				if rhum_eflag in ['S','I','F']: rhum_dflag = 'E'
 			
 #			end of "day" update
-			last_hr = lt_end_hour-theDate.dst
+#			Changed 5/21/2018 -kle:  hourly data are alreay in LT, so do not need to accomodate for dst here
+#			last_hr = lt_end_hour-theDate.dst   CHANGED TO
+			last_hr = lt_end_hour
 			if last_hr == 24:
 				last_hr = 0
 				day_diff = -1
