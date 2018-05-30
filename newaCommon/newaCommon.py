@@ -64,6 +64,8 @@ def get_metadata (station_id,id_type=None):
 				return newaCommon_io.errmsg('Error processing form; check station input')
 		elif id_type == 'miwx' and len(station_id) == 6:
 			station_id = station_id[3:]
+		elif id_type == 'nysm' and len(station_id) == 9:
+			station_id = station_id[5:]
 		query = ucan.get_query()
 		r = query.getUcanFromIdAsSeq(str(station_id),str(id_type))
 		if len(r) > 0:
@@ -299,6 +301,10 @@ def sister_est(stn,var,var_date,end_period,tsvars,dataForEst, datesForEst, vflag
 					sister = sister[3:]
 					station_type = 'miwx'
 					est_staid,station_name = get_metadata (sister, station_type)
+				elif sister[0:5] == "nysm_":
+					sister = sister[5:]
+					station_type = 'nysm'
+					est_staid,station_name = get_metadata (sister, station_type)
 				elif len(sister) == 3 or len(sister) == 6:
 					station_type = 'newa'
 					est_staid,station_name = get_metadata (sister, station_type)
@@ -371,6 +377,8 @@ def get_newa_data (stn,native_id,start_date_dt,end_date_dt,station_type='newa'):
 	avail_vars = []
 	if station_type == 'miwx' and len(native_id) == 3:
 		orig_id = 'ew_%s' % native_id
+	elif station_type == 'nysm' and len(native_id) == 5:
+		orig_id = 'nysm_%s' % native_id
 	else:
 		orig_id = native_id
 	try:
@@ -772,6 +780,8 @@ def get_hourly_data (native_id, requested_var, start_date_dt, end_date_dt, hourl
 	vflagsForEst = {}
 	if station_type == 'miwx' and len(native_id) == 3:
 		orig_id = 'ew_%s' % native_id
+	elif station_type == 'nysm' and len(native_id) == 5:
+		orig_id = 'nysm_%s' % native_id
 	else:
 		orig_id = native_id
 
@@ -900,6 +910,8 @@ def collect_hourly_input(native_id, start_date_dt, end_date_dt, vars, station_ty
 	try:
 		if station_type == 'miwx' and len(native_id) == 3:
 			native_id = 'ew_%s' % native_id
+		elif station_type == 'nysm' and len(native_id) == 5:
+			native_id = 'nysm_%s' % native_id
 		for requested_var in vars:
 			# get forecast data
 			fcst_data = get_fcst_data(native_id, requested_var, start_date_dt, end_date_dt)
