@@ -1998,7 +1998,7 @@ def apple_pest_results [html] (smry_dict):
 	### Put up datepicker when you do have a biofix date
 	else:
 		if smry_dict['pest'] == 'apple-pc' and smry_dict['ddaccum'] <= 150:
-			'<p>At petal fall, fruit become susceptible to feeding and oviposition injury. Control measures are only needed until 150 degree days have accumulated since petal fall.</p>'
+			'<p>At petal fall, fruit become susceptible to feeding and oviposition injury. Control measures are only needed until 308 degree days have accumulated since petal fall.</p>'
 			'<b>90% petal fall on McIntosh apple: </b>'
 		else:
 			'<b>%s: </b>' % smry_dict['biofix_phenology']
