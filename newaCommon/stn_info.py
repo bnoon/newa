@@ -306,6 +306,7 @@ stn_info = {
 'oh_rog': {'name': 'Rogers (Peace Valley), OH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.817956, 'lon': -80.588443, 'elev': 1060, 'network': 'newa', 'state': 'OH'},
 'oh_pat': {'name': 'Pataskala, OH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 40.056442, 'lon': -82.664616, 'elev': 1217, 'network': 'newa', 'state': 'OH'},
 'oh_che': {'name': 'Chesterland, OH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.55463, 'lon': -81.3278008, 'elev': 1150, 'network': 'newa', 'state': 'OH'},
+'oh_kin': {'name': 'Kingsville (AARS Ridgetop), OH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.884706, 'lon': -80.697211, 'elev': 750, 'network': 'newa', 'state': 'OH'},
 'asht':   {'name': 'Kingsville (Ashtabula ARS), OH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i'], 'srqual': 'ok', 'lat': 41.8846, 'lon': -80.6978, 'elev': 789, 'network': 'oardc', 'state': 'OH'},
 'avon':   {'name': 'Avon, OH', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toohigh', 'lat': 41.4517, 'lon': -82.0356, 'elev': 670, 'network': 'oardc', 'state': 'OH'},
 'cbus':   {'name': 'Columbus, OH', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i'], 'srqual': 'ok', 'lat': 40.0112, 'lon': -83.0442, 'elev': 800, 'network': 'oardc', 'state': 'OH'},
