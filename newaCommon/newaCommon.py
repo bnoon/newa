@@ -291,9 +291,12 @@ def sister_est(stn,var,var_date,end_period,tsvars,dataForEst, datesForEst, vflag
 				if sister[0:1] >= '1' and sister[0:1] <= '9' and sister[1:2] >= '0' and sister[1:2] <= '9':
 					station_type = 'njwx'
 					est_staid,station_name = get_metadata (sister, station_type)
-				elif len(sister) == 4:
+				elif len(sister) == 4 and sister[0:1].upper() == 'K':
 					station_type = 'icao'
 					est_staid = sister.upper()
+				elif len(sister) == 4:
+					station_type = 'oardc'
+					est_staid,station_name = get_metadata (sister, station_type)
 				elif sister[0:3] == "cu_" or sister[0:3] == "um_" or sister[0:3] == "uc_" or sister[0:3] == "un_":
 					station_type = 'cu_log'
 					est_staid,station_name = get_metadata (sister, station_type)

@@ -582,7 +582,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "oh_avo": {"temp": "kcle", "rhum": "kcle", "prcp": "kcle", "wspd": "kcle", "wdir": "kcle", "lwet": "oh_ber", "srad": "ncen"},
 "oh_che": {"temp": "kcle", "rhum": "kcle", "prcp": "kcle", "wspd": "kcle", "wdir": "kcle", "lwet": "oh_ber", "srad": "asht"},
 "oh_kin": {"temp": "asht", "rhum": "asht", "prcp": "asht", "wspd": "asht", "wdir": "asht", "lwet": "asht", "srad": "asht"},
-"oh_mrw": {"temp": "kcvg", "rhum": "kcvg", "prcp": "kcvg", "wspd": "kcvg", "wdir": "kcvg", "lwet": "kcvg", "srad": "west"},
+"oh_mrw": {"temp": "kcvg", "rhum": "kcvg", "prcp": "kcvg", "wspd": "kcvg", "wdir": "kcvg", "lwet": "west", "srad": "west"},
 "oh_gen": {"temp": "asht", "rhum": "asht", "prcp": "asht", "wspd": "asht", "wdir": "asht", "lwet": "asht", "srad": "asht"},
 "oh_mad": {"temp": "asht", "rhum": "asht", "prcp": "asht", "wspd": "asht", "wdir": "asht", "lwet": "asht", "srad": "asht"},
 "oh_woo": {"temp": "woos", "rhum": "woos", "prcp": "woos", "wspd": "woos", "wdir": "woos", "lwet": "woos", "srad": "woos"},
