@@ -124,6 +124,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "scl" : {"temp": "sdl", "lwet": "sdl", "rhum": "sdl", "prcp": "sdl", "wspd": "sdl", "wdir": "sdl", "srad": "sdl"},
 "scr" : {"temp": "kfzy", "lwet": "laf", "prcp": "kfzy", "rhum": "kfzy", "wspd": "kfzy", "wdir": "kfzy", "srad": "wol"},
 "sdl" : {"temp": "sod", "lwet": "sod", "rhum": "sod", "prcp": "sod", "wspd": "sod", "wdir": "sod", "srad": "3wi"},
+"sha" : {"temp": "acc", "lwet": "acc", "rhum": "acc", "prcp": "acc", "wspd": "acc", "wdir": "acc", "srad": "acc"},
 "shc" : {"temp": "cns", "lwet": "cns", "rhum": "cns", "prcp": "cns", "wspd": "cns", "wdir": "cns", "srad": "nysm_sout"},
 "shd" : {"temp": "shc", "lwet": "shc", "rhum": "shc", "prcp": "shc", "wspd": "shc", "wdir": "shc", "srad": "shc"},
 "shm" : {"temp": "shd", "lwet": "shd", "rhum": "shd", "prcp": "shd", "wspd": "shd", "wdir": "shd", "srad": "shd"},
