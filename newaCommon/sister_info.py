@@ -254,6 +254,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "wi_mal" : {"temp": "kfld", "rhum": "kfld", "prcp": "kfld", "wspd": "kfld", "wdir": "kfld", "lwet": "wi_ply", "srad": "ew_kwd"},
 "wi_mer" : {"temp": "kauw", "rhum": "kauw", "prcp": "kauw", "wspd": "kauw", "wdir": "kauw", "lwet": "wi_mau", "srad": "wi_mau"},
 "wi_bro" : {"temp": "wi_mth", "rhum": "wi_mth", "prcp": "wi_mth", "wspd": "wi_mth", "wdir": "wi_mth", "lwet": "wi_mth", "srad": "wi_mth"},
+"wi_fta" : {"temp": "kmsn", "rhum": "kmsn", "prcp": "kmsn", "wspd": "kmsn", "wdir": "kmsn", "lwet": "wi_roc", "srad": "wi_roc"},
 "um_whs" : {"temp": "kmqe", "rhum": "kmqe", "prcp": "kmqe", "wspd": "kmqe", "wdir": "kmqe", "lwet": "msh", "srad": "mwa"},
 "um_cso" : {"temp": "mbe", "rhum": "mbe", "prcp": "mbe", "wspd": "kcef", "wdir": "kcef", "lwet": "mbe", "srad": "um_clk"},
 "um_tff" : {"temp": "korh", "rhum": "korh", "prcp": "korh", "wspd": "korh", "wdir": "korh", "lwet": "um_cso", "srad": "um_cso"},
