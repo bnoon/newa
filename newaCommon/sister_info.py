@@ -114,6 +114,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "loc" : {"temp": "som", "lwet": "som", "rhum": "som", "prcp": "som", "wspd": "som", "srad": "som"},
 "rbg" : {"temp": "rom", "rhum": "rom", "prcp": "rom", "wspd": "rom", "wdir": "rom", "lwet": "rom", "srad": "rom", "st4i": "gem", "sm4i": "gen"},
 "red" : {"temp": "kpou", "rhum": "kpou", "prcp": "kpou", "lwet": "hud", "wspd": "kpou", "wdir": "kpou", "srad": "hud"},
+"rie" : {"temp": "rip", "rhum": "rip", "prcp": "rip", "lwet": "rip", "wspd": "rip", "wdir": "rip", "srad": "rip"},
 "rip" : {"temp": "por", "rhum": "por", "prcp": "por", "lwet": "por", "wspd": "por", "wdir": "por", "srad": "poe"},
 "riv" : {"temp": "rvp", "rhum": "rvp", "prcp": "rvp", "lwet": "rvp", "wspd": "rvp", "wdir": "rvp", "srad": "rvp"},
 "rtw" : {"temp": "kswf", "rhum": "kswf", "prcp": "wal", "lwet": "mar", "wspd": "kswf", "wdir": "kswf", "srad": "mar"},
