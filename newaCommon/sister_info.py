@@ -756,5 +756,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "ew_alt": {"temp": "kmsn", "rhum": "kmsn", "prcp": "kmsn", "wspd": "kmsn", "wdir": "kmsn", "lwet": "wi_ver", "srad": "wi_ver"},
 "ew_spt": {"temp": "ew_spo", "rhum": "ew_spo", "prcp": "ew_spo", "wspd": "ew_spo", "wdir": "ew_spo", "lwet": "ew_spo", "srad": "ew_spo"},
 "ew_wmt": {"temp": "ktvc", "rhum": "ktvc", "prcp": "ktvc", "wspd": "ktvc", "wdir": "ktvc", "lwet": "ew_elk", "srad": "ew_elk"},
-"ew_wjp": {"temp": "ew_ehb", "rhum": "ew_ehb", "prcp": "ew_ehb", "wspd": "ew_ehb", "wdir": "ew_ehb", "lwet": "ew_ehb", "srad": "ew_ehb"}
+"ew_wjp": {"temp": "ew_ehb", "rhum": "ew_ehb", "prcp": "ew_ehb", "wspd": "ew_ehb", "wdir": "ew_ehb", "lwet": "ew_ehb", "srad": "ew_ehb"},
+"ew_pky": {"temp": "ew_epr", "rhum": "ew_epr", "prcp": "ew_epr", "wspd": "ew_epr", "wdir": "ew_epr", "lwet": "ew_epr", "srad": "ew_epr"},
+"ew_mou": {"temp": "ew_ith", "rhum": "ew_ith", "prcp": "ew_ith", "wspd": "ew_ith", "wdir": "ew_ith", "lwet": "ew_ith", "srad": "ew_ith"}
 }
