@@ -409,7 +409,7 @@ stn_info = {
 'ew_stb': {'name': 'Sturgeon Bay, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'srad'], 'srqual': 'ok', 'lat': 44.8935, 'lon': -87.3678, 'elev': 738, 'network': 'miwx', 'state': 'WI'},
 'ew_wjp': {'name': 'West Jacksonport, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'srad'], 'srqual': 'ok', 'lat': 45.01, 'lon': -87.2335, 'elev': 728, 'network': 'miwx', 'state': 'WI'},
 'ew_pky': {'name': 'Petoskey, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 45.3287, 'lon': -84.9933, 'elev': 800, 'network': 'miwx', 'state': 'MI'},
-'ew_mou': {'name': 'Mount Pleasant, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 45.5759, 'lon': -84.7737, 'elev': 794, 'network': 'miwx', 'state': 'MI'},
+'ew_mou': {'name': 'Mount Pleasant, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.5759, 'lon': -84.7737, 'elev': 794, 'network': 'miwx', 'state': 'MI'},
 'ne_gre': {'name': 'Gretna, NE', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i'], 'srqual': 'toolow', 'lat': 41.128806, 'lon': -96.201133, 'elev': 354, 'network': 'newa', 'state': 'NE'},
 '29': {'name': 'South Harrison, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 39.712359, 'lon': -75.280754, 'elev': 141, 'network': 'njwx', 'state': 'NJ'},
 '33': {'name': 'Dennis Twp, NJ', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 39.2039, 'lon': -74.8923, 'elev': 5, 'network': 'njwx', 'state': 'NJ'},
