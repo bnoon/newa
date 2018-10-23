@@ -21,6 +21,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "cer" : {"temp": "kelz", "rhum": "kelz", "prcp": "kelz", "wspd": "kelz", "wdir": "kelz"},
 "chz" : {"temp": "vso", "rhum": "vso", "prcp": "vso", "wspd": "vso", "wdir": "vso", "lwet": "vso", "srad": "vso", "st4i": "wlb"},
 "czy" : {"temp": "vso", "rhum": "vso", "prcp": "vso", "wspd": "vso", "wdir": "vso", "lwet": "vso", "srad": "vso"},
+"cla" : {"temp": "kin", "rhum": "kin", "prcp": "kin", "wspd": "kin", "wdir": "kin", "lwet": "kin", "srad": "kin"},
 "clc" : {"temp": "npw", "rhum": "npw", "prcp": "npw", "wspd": "npw", "wdir": "npw", "lwet": "npw", "srad": "mil"},
 "cli" : {"temp": "kalb", "rhum": "kalb", "prcp": "kalb", "wspd": "kalb", "wdir": "kalb", "lwet": "cas", "srad": "nysm_voor"},
 "clw" : {"temp": "hig", "rhum": "hig", "prcp": "hig", "wspd": "hig", "wdir": "hig", "lwet": "hig", "srad": "hvl"},
