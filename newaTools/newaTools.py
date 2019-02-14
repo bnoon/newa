@@ -413,7 +413,7 @@ def get_recommend(dy4_thin):
 	elif (dy4_thin > 0) :
 		recommend = "Increase chemical thinner rate by 15%"
 	elif (dy4_thin > -20) :
-		recommend = "Apply standard chemical thinner rate";
+		recommend = "Apply standard chemical thinner rate"
 	elif (dy4_thin > -40) :
 		recommend = "Decrease chemical thinner rate by 15%"
 	elif (dy4_thin > -60) :

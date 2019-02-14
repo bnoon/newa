@@ -3768,6 +3768,7 @@ def process_help (request,path):
 		elif smry_type == 'apple_scab' or (smry_type == 'apple_disease' and pest == 'apple_scab'):
 			return newaModel_io.helppage([("Pest Management Guidelines for Commercial Tree Fruit Production","http://ipmguidelines.org"),
 										   ("Apple Scab Fact Sheet","http://nysipm.cornell.edu/factsheets/treefruit/diseases/as/as.asp"),
+										   ("Disease Susceptibility of Apples","https://blogs.cornell.edu/applevarietydatabase/disease-susceptibility-of-common-apples/"),
 			                               ("Cornell Fruit Resources - Tree Fruit IPM","https://blogs.cornell.edu/treefruit/ipm/"),
 			                               ("NEWA Default Biofix Dates","http://newa.cornell.edu/index.php?page=default-biofix-dates"),
 			                               ("Season-long Leaf Wetness Events","http://newa.cornell.edu/index.php?page=apple-lw"),
@@ -3776,6 +3777,7 @@ def process_help (request,path):
 		elif smry_type == 'fire_blight' or (smry_type == 'apple_disease' and pest == 'fire_blight'):
 			return newaModel_io.helppage([ ("Notes on first blossom open biofix","/appfbnotes_pop.htm"),
 										   ("Fire Blight Susceptible Cultivars and Rootstocks","http://newa.cornell.edu/index.php?page=fire-blight-susceptible-cultivars-and-rootstocks"),
+										   ("Disease Susceptibility of Apples","https://blogs.cornell.edu/applevarietydatabase/disease-susceptibility-of-common-apples/"),
 										   ("Pest Management Guidelines for Commercial Tree Fruit Production","http://ipmguidelines.org"),
 										   ("Fire Blight Fact Sheet (pdf)","https://ecommons.cornell.edu/handle/1813/43095"),
 			                               ("NEWA Default Biofix Dates","http://newa.cornell.edu/index.php?page=default-biofix-dates"),
