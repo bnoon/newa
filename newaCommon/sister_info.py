@@ -163,6 +163,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "wad" : {"temp": "riv", "rhum": "riv", "prcp": "riv", "lwet": "riv", "wspd": "riv", "wdir": "riv", "srad": "man"},
 "wes" : {"temp": "por", "rhum": "por", "prcp": "por", "wspd": "por", "wdir": "por", "srad": "por", "lwet": "por"},
 "wla" : {"temp": "wgl", "rhum": "wgl", "prcp": "wgl", "wspd": "lod", "wdir": "lod", "lwet": "wgl", "srad": "lod"},
+"mon" : {"temp": "wgl", "rhum": "wgl", "prcp": "wgl", "wspd": "wgl", "wdir": "wgl", "lwet": "wgl", "srad": "wgl"},
 "wlb" : {"temp": "vsb", "rhum": "vsb", "prcp": "vsb", "wspd": "vsb", "wdir": "vsb", "lwet": "vsb", "srad": "vsb", "st4i": "chz"},
 "way" : {"temp": "kdsv", "rhum": "kdsv", "prcp": "kdsv", "wspd": "kdsv", "srad": "drs"},
 "wmi" : {"temp": "kmtp", "lwet": "cns", "rhum": "kmtp", "prcp": "kmtp", "wspd": "kmtp", "wdir": "kmtp", "srad": "cns"},
