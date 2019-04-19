@@ -4,7 +4,7 @@ from quixote.errors import TraversalError
 
 class RootDirectory(Directory):
 
-	_q_exports = ["","process_input","process_help","apple_et","apple_thin"]
+	_q_exports = ["","process_input","process_help","apple_et","apple_thin","process_input_new","apple_thin_new"]
 
 #	put up input page for following
 	def _q_index (self):						#default
@@ -26,11 +26,23 @@ class RootDirectory(Directory):
 			from newaTools import process_input
 			path = ['apple_thin'] + path
 			return process_input(None,path)
+	def apple_thin_new (self, path=None) :
+		if not path or path == ['']:
+			from newaTools_io_new import apple_thin_input
+			return apple_thin_input()
+		else:
+			from newaTools_new import process_input
+			path = ['apple_thin_new'] + path
+			return process_input(None,path)
 
 
 #	received request form to be processed
 	def process_input (self, path=None) :
 		from newaTools import process_input
+		request = get_request()
+		return process_input(request,path)
+	def process_input_new (self, path=None) :
+		from newaTools_new import process_input
 		request = get_request()
 		return process_input(request,path)
 	def process_help (self, path=None) :
@@ -48,6 +60,9 @@ class RootDirectory(Directory):
 			return process_help(req,None)
 		elif component == 'process_input':
 			from newaTools import process_input
+			return process_input(req,None)
+		elif component == 'process_input_new':
+			from newaTools_new import process_input
 			return process_input(req,None)
 		else :
 			return None
