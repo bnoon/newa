@@ -185,7 +185,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "mbf" : {"temp": "kmss", "rhum": "kmss", "prcp": "kmss", "wspd": "kmss", "wdir": "kmss"},
 "pbd" : {"temp": "chz", "rhum": "chz", "prcp": "chz", "wspd": "chz", "wdir": "chz"},
 "pcf" : {"temp": "chz", "rhum": "chz", "prcp": "chz", "wspd": "chz", "wdir": "chz"},
-"pdf" : {"temp": "per", "rhum": "per", "prcp": "per", "wspd": "per", "wdir": "per"},
+"pdf" : {"temp": "per", "rhum": "pno", "prcp": "per", "wspd": "per", "wdir": "per"},
 "sar" : {"temp": "gkd", "rhum": "gkd", "prcp": "gkd", "wspd": "gkd", "wdir": "gkd"},
 "hid" : {"temp": "kgfl", "rhum": "kgfl", "prcp": "kgfl", "wspd": "kgfl", "wdir": "kgfl"},
 "chm" : {"temp": "chz", "rhum": "chz", "prcp": "chz", "wspd": "chz", "wdir": "chz"},
