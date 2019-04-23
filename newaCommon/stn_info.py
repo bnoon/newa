@@ -247,6 +247,7 @@ stn_info = {
 'nc_gre': {'name': 'Green Creek (Polk Co Ag), NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lat': 35.199, 'lon': -81.971, 'elev': 1002, 'network': 'newa', 'state': 'NC'},
 'nc_edn': {'name': 'Edneyville (Lewis Creek), NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 35.368132, 'lon': -82.338506, 'elev': 2223, 'network': 'newa', 'state': 'NC'},
 'nc_hsp': {'name': 'Hendersonville (St Paul), NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 35.35161, 'lon': -82.408167, 'elev': 2183, 'network': 'newa', 'state': 'NC'},
+'nc_emm': {'name': 'Edneyville (M&M Berry Farm), NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'],'srqual': 'ok', 'lat': 35.359935, 'lon': -82.357588, 'elev': 2230, 'network': 'newa', 'state': 'NC'},
 'mn_wbl': {'name': 'White Bear Lake, MN', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 45.106320, 'lon': -92.955087, 'elev': 955, 'network': 'newa', 'state': 'MN'},
 'mn_pre': {'name': 'Preston, MN', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.6825, 'lon': -92.0761, 'elev': 1088, 'network': 'newa', 'state': 'MN'},
 'mn_has': {'name': 'Hastings, MN', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.78840, 'lon': -92.81677, 'elev': 904, 'network': 'newa', 'state': 'MN'},

@@ -728,7 +728,7 @@ def apple_thin_results [html] (smry_dict):
 	thisDay = smry_dict['greentipDate']
 	bloomDay = smry_dict['bloomDate']
 	if bloomDay:
-		recommendEnd = bloomDay + DateTime.RelativeDate(days=+35)
+		recommendEnd = bloomDay + DateTime.RelativeDate(days=+34)
 	for daydata in smry_dict['data']:
 		if daydata['maxt'] == miss or daydata['mint'] == miss or daydata['srad'] == miss:
 			daydata['maxt'] = miss
@@ -760,8 +760,25 @@ def apple_thin_results [html] (smry_dict):
 			'<td class="recommend norecommend">-</td>'
 		'</tr>'
 		thisDay = thisDay + DateTime.RelativeDate(days=+1)
+	'</tbody>'
+	if bloomDay:
+		'<tfoot>'
+		'<tr>'
+		'<td></td>'
+		'<td colspan=6>Text color represents expected thinning efficacy:<br />'
+		'<span style="color:%s;">Blue=Mild; </span> \
+			<span style="color:%s;">Green=Good; </span> \
+			<span style="color:%s;">Orange=Very good; </span> \
+			<span style="color:%s;">Red=Excessive </span> \
+		' % (eff_color_defs["Mild"], eff_color_defs["Good"], eff_color_defs["Very Good"], eff_color_defs["Excessive"])
+		'</td>'
+		if bloomDay and thisDay > recommendEnd:
+			'<td>Recommendations only provided for 35 days following bloom.</td>'
+		else:
+			'<td></td>'
+		'</tr>'
+		'</tfoot>'
 	'''
-		</tbody>
 	</table>
 	<div id="chart_area"></div>
 	'''
