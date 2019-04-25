@@ -645,10 +645,10 @@ def apple_thin_specs [html] (smry_dict):
 	'''
 	<td>
 		<select id="percentflowerspurs" name="percentflowerspurs">
-			<option label="0-25%"  value="0">0 to 25%</option>
-			<option label="26-50%" value="1">26 to 50%</option>
-			<option label="51-75%" value="2" selected>51 to 75%</option>
-			<option label="76-100%" value="3">76 to 100%</option>
+			<option label="0-25%"  value="1">0 to 25%</option>
+			<option label="26-50%" value="2">26 to 50%</option>
+			<option label="51-75%" value="3" selected>51 to 75%</option>
+			<option label="76-100%" value="4">76 to 100%</option>
 		</select>
 	</td>
 	'''

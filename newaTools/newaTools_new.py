@@ -540,7 +540,7 @@ def get_recommend(dy7_thin, percentflowerspurs, dd4c_accum):
 				2: {"efficacy": "Good", "riskColor": 1, "recommend": "Do not thin (many fruits will fall off naturally)"},
 				3: {"efficacy": "Good", "riskColor": 1, "recommend": "Do not thin (many fruits will fall off naturally)"}}}
 	}
-	pfscat = int(percentflowerspurs)
+	pfscat = int(percentflowerspurs) - 1
 	if dy7_thin == "-" or percentflowerspurs == miss or dd4c_accum == miss or \
 	   pfscat < 0 or pfscat > 3 or \
 	   dd4c_accum < 0 or dd4c_accum > 450:
