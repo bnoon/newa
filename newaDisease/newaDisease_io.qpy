@@ -194,7 +194,7 @@ def apple_lw_input [html] ():
 	<TITLE>Apple Wet/Dry Conditions</TITLE>
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDjGcB9B9BHFLKWY0SfML51HRA5htne3aE"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
@@ -328,7 +328,7 @@ def apple_lw_input [html] ():
 #	<HEAD>
 #	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 #	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDjGcB9B9BHFLKWY0SfML51HRA5htne3aE"></script>
 #	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 #	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
 #	<script type="text/javascript" src="/js/mapping3.js"></script>
@@ -425,7 +425,7 @@ def apple_lw_input [html] ():
 #	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 #	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 #	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
-#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDjGcB9B9BHFLKWY0SfML51HRA5htne3aE"></script>
 #	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 #	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
 #	<script type="text/javascript" src="/js/mapping3.js"></script>
@@ -510,7 +510,7 @@ def apple_lw_input [html] ():
 #	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 #	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 #	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
-#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDjGcB9B9BHFLKWY0SfML51HRA5htne3aE"></script>
 #	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 #	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
 #	<script type="text/javascript" src="/js/mapping3.js"></script>
@@ -608,7 +608,7 @@ def apple_lw_input [html] ():
 #	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 #	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 #	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
-#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDjGcB9B9BHFLKWY0SfML51HRA5htne3aE"></script>
 #	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 #	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
 #	<script type="text/javascript" src="/js/mapping3.js"></script>
@@ -691,7 +691,7 @@ def apple_lw_input [html] ():
 #	<HEAD>
 #	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 #	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDjGcB9B9BHFLKWY0SfML51HRA5htne3aE"></script>
 #	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 #	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
 #	<script type="text/javascript" src="/js/mapping3.js"></script>
@@ -754,7 +754,7 @@ def apple_lw_input [html] ():
 #	<HEAD>
 #	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 #	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDjGcB9B9BHFLKWY0SfML51HRA5htne3aE"></script>
 #	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 #	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
 #	<script type="text/javascript" src="/js/mapping3.js"></script>
@@ -817,7 +817,7 @@ def apple_lw_input [html] ():
 #	<HEAD>
 #	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 #	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDjGcB9B9BHFLKWY0SfML51HRA5htne3aE"></script>
 #	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 #	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
 #	<script type="text/javascript" src="/js/mapping3.js"></script>
@@ -880,7 +880,7 @@ def apple_lw_input [html] ():
 #	<HEAD>
 #	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 #	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+#	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDjGcB9B9BHFLKWY0SfML51HRA5htne3aE"></script>
 #	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 #	<script type="text/javascript" src="/js/jquery.cookie.js"></script>
 #	<script type="text/javascript" src="/js/mapping3.js"></script>
@@ -1031,7 +1031,7 @@ def tomato_for_input [html] ():
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDjGcB9B9BHFLKWY0SfML51HRA5htne3aE"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
@@ -1115,7 +1115,7 @@ def potato_for_input [html] ():
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDjGcB9B9BHFLKWY0SfML51HRA5htne3aE"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
@@ -1260,7 +1260,7 @@ def alf_weev_input [html] ():
 	<TITLE>Alfalfa Weevil</TITLE>
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDjGcB9B9BHFLKWY0SfML51HRA5htne3aE"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
@@ -1324,7 +1324,7 @@ def cabbage_maggot_input [html] ():
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDjGcB9B9BHFLKWY0SfML51HRA5htne3aE"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
@@ -1452,7 +1452,7 @@ def onion_maggot_input [html] (path=None):
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDjGcB9B9BHFLKWY0SfML51HRA5htne3aE"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
@@ -1543,7 +1543,7 @@ def onion_dis_input [html] ():
 	<link rel="stylesheet" href="/newa_styles.css" type="text/css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCmnBdCJagiYfcloMCTkCAvWg3W7acBCVo"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDjGcB9B9BHFLKWY0SfML51HRA5htne3aE"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
