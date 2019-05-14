@@ -507,7 +507,8 @@ function getSisterData(sister_station, cb_args) {
 			'njwx':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 149 },
 			'miwx':  {'pcpn': 5, 'temp': 126, 'rhum': 143, 'lwet': 118, 'srad': 132 },
 			'oardc': {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132 },
-			'nysm':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm2i': 104 }
+			'nysm':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm2i': 104 },
+			'newa-onset':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm2i': 104 }
 		},
 		vn_defs = {
 			'newa':  {},
@@ -517,7 +518,8 @@ function getSisterData(sister_station, cb_args) {
 			'njwx':  {},
 			'miwx':  {},
 			'oardc': {'st4i': 68 },
-			'nysm':  {'st4i': 1093, 'sm2i': 1091 }	
+			'nysm':  {'st4i': 1093, 'sm2i': 1091 },
+			'newa-onset':  {}	
 		};
 	newaLister_estimates_togo = missing_elems.length;		// ***** GLOBAL *****
 	missing_elems.forEach(function(vx) {
@@ -645,7 +647,8 @@ function getHourlyData(cb_args) {
 			'njwx':  {},
 			'miwx':  {},
 			'oardc': {120: 68 },
-			'nysm':  {120: 1093, 104: 1091 }	
+			'nysm':  {120: 1093, 104: 1091 },
+			'newa-onset': {}
 		};
 	rinput.elems.forEach(function(elem) {
 		var addElem = {vX: elem};
@@ -738,7 +741,8 @@ function getMeta(rinput) {
 			'njwx':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 149 },
 			'miwx':  {'pcpn': 5, 'temp': 126, 'rhum': 143, 'lwet': 118, 'srad': 132 },
 			'oardc': {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120 },
-			'nysm':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm2i': 104 }
+			'nysm':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm2i': 104 },
+			'newa-onset':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm2i': 104 }
 		},
 		vn_defs = {
 			'newa':  {},
@@ -748,7 +752,8 @@ function getMeta(rinput) {
 			'njwx':  {},
 			'miwx':  {},
 			'oardc': {'st4i': 68},
-			'nysm':  {'st4i': 1093, 'sm2i': 1091 }	
+			'nysm':  {'st4i': 1093, 'sm2i': 1091 },
+			'newa-onset': {}
 		},
 		input_params = {
 			sids: [rinput.stn_id, rinput.stn_type].join(" "),

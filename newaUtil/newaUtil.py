@@ -298,6 +298,8 @@ def run_stationSisterInfo(options):
 				elif sister[var][0:5] == "nysm_":
 					station_id = sister[var][5:]
 					station_type = 'nysm'
+				elif len(sister[var]) == 7 and sister[var][2:3] == "_":
+					station_type = 'newa-onset'
 				else:
 					station_id = sister[var]
 					station_type = "newa"

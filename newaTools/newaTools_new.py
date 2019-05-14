@@ -329,6 +329,8 @@ def run_apple_et (stn,accend,greentip,output):
 		elif stn[0:5] == "nysm_":
 			stn = stn[5:]
 			station_type = 'nysm'
+		elif len(stn) == 7 and stn[2:3] == "_":
+			station_type = 'newa-onset'
 		elif len(stn) == 3 or len(stn) == 6:
 			station_type = 'newa'
 		else:
@@ -380,6 +382,8 @@ def run_apple_et_specs (stn,accend,output):
 	elif stn[0:5] == "nysm_":
 		stn = stn[5:]
 		station_type = 'nysm'
+	elif len(stn) == 7 and stn[2:3] == "_":
+		station_type = 'newa-onset'
 	elif len(stn) == 3 or len(stn) == 6:
 		station_type = 'newa'
 	else:
@@ -627,6 +631,8 @@ def run_apple_thin (stn,accend,greentip,bloom,percentflowerspurs,output):
 		elif stn[0:5] == "nysm_":
 			stn = stn[5:]
 			station_type = 'nysm'
+		elif len(stn) == 7 and stn[2:3] == "_":
+			station_type = 'newa-onset'
 		elif len(stn) == 3 or len(stn) == 6:
 			station_type = 'newa'
 		else:
@@ -683,6 +689,8 @@ def run_apple_thin_specs (stn,accend,output):
 	elif stn[0:5] == "nysm_":
 		stn = stn[5:]
 		station_type = 'nysm'
+	elif len(stn) == 7 and stn[2:3] == "_":
+		station_type = 'newa-onset'
 	elif len(stn) == 3 or len(stn) == 6:
 		station_type = 'newa'
 	else:

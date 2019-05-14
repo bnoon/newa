@@ -58,6 +58,8 @@ def get_metadata (station_id,id_type=None):
 			elif station_id[0:5] == "nysm_":
 				station_id = station_id[5:]
 				id_type = 'nysm'
+			elif len(station_id) == 7 and station_id[2:3] == "_":
+				id_type = 'newa-onset'
 			elif len(station_id) == 3 or len(station_id) == 6:
 				id_type = 'newa'
 			else:
@@ -118,7 +120,11 @@ def initHourlyVar (staid, var, miss, station_type='newa'):
 				'nysm':  {'prcp': [5,13,  'inch', '%.2f'],    'temp': [23,11, 'degF',   '%.1f'],
 						  'rhum': [24,13, 'percent','%.1f'],  'st4i': [120,5, ' degF','%.1f'],
 						  'srad': [132,9, 'langley','%.2f'],  'wspd': [28,10, 'miles/hour','%.1f'],
-						  'wdir': [27,10,'degrees','%.0f'] }
+						  'wdir': [27,10,'degrees','%.0f'] },
+				'newa-onset': {'prcp': [5,17,  'inch','%.2f'],      'temp': [23,14, 'degF',   '%.1f'],
+						  'lwet': [118,10,'',    '%3.0f'],     'rhum': [24,16, 'percent','%.1f'],
+						  'wspd': [28,11, 'miles/hour','%.1f'],'srad': [132,11,'langley','%.2f'],
+						  'st4i': [120,8,'degF','%.1f'],	   'wdir': [27,11,'degrees','%.0f'] }
 				}
 	v = None
 	miss_str = "%s" % miss
@@ -307,6 +313,9 @@ def sister_est(stn,var,var_date,end_period,tsvars,dataForEst, datesForEst, vflag
 				elif sister[0:5] == "nysm_":
 					sister = sister[5:]
 					station_type = 'nysm'
+					est_staid,station_name = get_metadata (sister, station_type)
+				elif len(sister) == 7 and sister[2:3] == "_":
+					station_type = 'newa-onset'
 					est_staid,station_name = get_metadata (sister, station_type)
 				elif len(sister) == 3 or len(sister) == 6:
 					station_type = 'newa'
@@ -986,6 +995,8 @@ class Base:
 			elif stn[0:5] == "nysm_":
 				stn = stn[5:]
 				station_type = 'nysm'
+			elif len(stn) == 7 and stn[2:3] == "_":
+				station_type = 'newa-onset'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
 			else:
@@ -1029,6 +1040,8 @@ class Base:
 			elif stn[0:5] == "nysm_":
 				stn = stn[5:]
 				station_type = 'nysm'
+			elif len(stn) == 7 and stn[2:3] == "_":
+				station_type = 'newa-onset'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
 			else:
@@ -1070,6 +1083,8 @@ class Base:
 			elif stn[0:5] == "nysm_":
 				stn = stn[5:]
 				station_type = 'nysm'
+			elif len(stn) == 7 and stn[2:3] == "_":
+				station_type = 'newa-onset'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
 			else:
@@ -1110,6 +1125,8 @@ class Base:
 			elif stn[0:5] == "nysm_":
 				stn = stn[5:]
 				station_type = 'nysm'
+			elif len(stn) == 7 and stn[2:3] == "_":
+				station_type = 'newa-onset'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
 			else:
@@ -1153,6 +1170,8 @@ class Base:
 			elif stn[0:5] == "nysm_":
 				stn = stn[5:]
 				station_type = 'nysm'
+			elif len(stn) == 7 and stn[2:3] == "_":
+				station_type = 'newa-onset'
 			elif len(stn) == 3 or len(stn) == 6:
 				station_type = 'newa'
 			else:

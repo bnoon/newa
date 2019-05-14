@@ -5,7 +5,7 @@ miss = -999
 
 # get hourly data for date range
 def get_HourlyData(stn, id_type, data_start, data_end):
-	temp_major = {'newa':'23', 'icao':'23','njwx':'23', 'cu_log':'126', 'miwx':'126', 'oardc':'23', 'nysm':'23'}
+	temp_major = {'newa':'23', 'icao':'23','njwx':'23', 'cu_log':'126', 'miwx':'126', 'oardc':'23', 'nysm':'23', 'newa-onset':'23'}
 	if not temp_major.has_key(id_type): return None
 	try:
 		# build input dict		

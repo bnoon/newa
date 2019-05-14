@@ -310,6 +310,19 @@ class nysm_vars(newa_weather) :
 		self.lwet_minor = 0		#doesn't exist
 		newa_weather.__init__(self,stn_id)		
 				
+class newa_onset_vars(newa_weather) :
+	def __init__(self,stn_id) :
+		self.type = 'newa-onset'
+		self.tmp_major = 23
+		self.tmp_minor = 14
+		self.rh_major = 24
+		self.rh_minor = 16
+		self.prcp_major = 5
+		self.prcp_minor = 17
+		self.lwet_major = 118
+		self.lwet_minor = 10
+		newa_weather.__init__(self,stn_id)		
+				
 class general_dm_weather(object) :
 
 	def __init__(self,stn,eDate,sister) :
@@ -351,6 +364,9 @@ class general_dm_weather(object) :
 			return obj
 		elif stn[0:5] == "nysm_":
 			obj = nysm_vars(stn)
+			return obj
+		elif len(stn) == 7 and stn[2:3] == '_':
+			obj = newa_onset_vars(stn)
 			return obj
 		elif len(stn) == 3 or len(stn) == 6 :
 			obj = newa_vars(stn)
