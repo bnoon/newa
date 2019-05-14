@@ -41,7 +41,6 @@ stn_info_inactive = {
 'nea': {'name': 'North Easton', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.00515, 'lon': -73.5495, 'elev': 490, 'network': 'newa', 'state': 'NY'},
 'npz': {'name': 'New Paltz', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.7575583, 'lon': -74.0502361, 'elev': 115, 'network': 'newa', 'state': 'NY'},
 'ora': {'name': 'Ogdensburg (Royal J Acres)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 44.641553, 'lon': -75.46004, 'elev': 321, 'network': 'newa', 'state': 'NY'},
-'ovi': {'name': 'Ovid (Hosmer)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.74525, 'elev': 590.0, 'lat': 42.68564, 'network': 'newa', 'state': 'NY'},
 'paf': {'name': 'Peru (Adirondack Farms)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 44.544698, 'lon': -73.526481, 'elev': 427, 'network': 'newa', 'state': 'NY'},
 'pav': {'name': 'Pavilion', 'vars': ['temp', 'prcp', 'st4i'], 'lon': -77.967309999999998, 'elev': 1100.0, 'lat': 42.831440000000001, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'pbd': {'name': 'Plattsburgh (Bubbins Dairy)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 44.761165, 'lon': -73.43563, 'elev': 133, 'network': 'newa', 'state': 'NY'},

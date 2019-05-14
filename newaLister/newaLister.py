@@ -299,7 +299,7 @@ def get_sister_info (stn):
 					sister[var] = sister[var][5:]
 					station_type = 'nysm'
 				elif len(sister) == 7 and sister[2:3] == "_":
-					station_type = 'newa-onset'
+					station_type = 'nwon'
 				elif len(sister[var]) == 3 or len(sister[var]) == 6:
 					station_type = "newa"
 				est_staid,sister_name = newaCommon.get_metadata (sister[var], station_type)
@@ -470,7 +470,7 @@ def process_input (request,path):
 			stn = stn[5:]
 			station_type = 'nysm'
 		elif len(stn) == 7 and stn[2:3] == "_":
-			station_type = 'newa-onset'
+			station_type = 'nwon'
 		elif len(stn) == 3 or len(stn) == 6:
 			station_type = 'newa'
 		else:

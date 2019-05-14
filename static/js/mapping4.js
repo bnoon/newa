@@ -210,7 +210,7 @@ function statePlaceMarkers (cur_data, event_type, state) {
 	$.each(cur_data.stations, function (i,stn) {
 		markerOptions.position = new google.maps.LatLng(stn.lat, stn.lon);
 		markerOptions.title = stn.name;
-		if (stn.network === "newa" || stn.network === "njwx" || stn.network === "miwx" || stn.network === "oardc" || stn.network === "nysm" || stn.network === "newa-onset" || (stn.network === "cu_log" && stn.state !== "NY")) { /////
+		if (stn.network === "newa" || stn.network === "njwx" || stn.network === "miwx" || stn.network === "oardc" || stn.network === "nysm" || stn.network === "nwon" || (stn.network === "cu_log" && stn.state !== "NY")) { /////
 			markerOptions.icon = stn.state === state || state === "ALL" ? newaIcon : newaIconGray;
 		} else if (stn.network === "cu_log") { 
 			markerOptions.icon = stn.state === state || state === "ALL" ? culogIcon : culogIconGray; 
