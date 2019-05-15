@@ -122,6 +122,4 @@ stn_info_inactive = {
 'wi_bro': {'name': 'Brodhead, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.589416, 'lon': -89.410074, 'elev': 860, 'network': 'newa', 'state': 'WI'},
 'wi_bur': {'name': 'Burlington (Munster), WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.5759, 'lon': -88.250796, 'elev': 820, 'network': 'newa', 'state': 'WI'},
 'me_bhb': {'name': 'Bar Harbor, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.389786, 'lon': -68.208026, 'elev': 55, 'network': 'newa', 'state': 'ME', 'disconnected': 'yes'},
-'un_nec': {'name': 'Nebraska City 2N, NE', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -95.8833, 'elev': 1076.0, 'lat': 40.7000, 'network': 'cu_log', 'state': 'NE'},
-'klnk': {'name': 'Lincoln Airport, NE', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'srqual': 'ok', 'lon': -96.7475, 'elev': 1190.0,  'lat': 40.8508, 'network': 'icao', 'state': 'NE'},
 }

@@ -712,7 +712,7 @@ class AppleGrowthModel:
         .setDependencies(['RateFruitR','FruitTotWeight'])\
         .setFormula("self.refCell('RateFruitR',rowIndex,0)*self.refCell('FruitTotWeight',rowIndex,0)*pLightEffectOnResp",-1)
         
-        self.spreadsheet.addColumn('dd4cAccum')
+        self.spreadsheet.addColumn('dd4cAccum')     #added April 2019 -kle
         
         return
 
@@ -723,7 +723,7 @@ class AppleGrowthModel:
         self.spreadsheet.columns['TempMin'].setEvalOrder(2)
         self.spreadsheet.columns['TempMax'].setEvalOrder(3)
         self.spreadsheet.columns['DailyRad'].setEvalOrder(4)
-        self.spreadsheet.columns['dd4cAccum'].setEvalOrder(5)
+        self.spreadsheet.columns['dd4cAccum'].setEvalOrder(5)     #added April 2019 -kle
         self.spreadsheet.evalOrder = 5
         
         for i in range(0, self.weatherData.numberOfDays()):
@@ -731,7 +731,7 @@ class AppleGrowthModel:
             self.spreadsheet.column('TempMin').row(i).setValue(self.weatherData.minTemp(i))
             self.spreadsheet.column('TempMax').row(i).setValue(self.weatherData.maxTemp(i))
             self.spreadsheet.column('DailyRad').row(i).setValue(self.weatherData.totalRadiation(i))
-            self.spreadsheet.column('dd4cAccum').row(i).setValue(self.weatherData.dd4cAccum(i))
+            self.spreadsheet.column('dd4cAccum').row(i).setValue(self.weatherData.dd4cAccum(i))     #added April 2019 -kle
 
         self.spreadsheet.evaluate(self.weatherData.numberOfDays())
         

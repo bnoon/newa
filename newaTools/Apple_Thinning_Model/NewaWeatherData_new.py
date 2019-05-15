@@ -24,8 +24,8 @@ class WeatherData:
 	def totalRadiation(self, index):
 		return self.weatherTable[(index, 3)]
 
-	def dd4cAccum(self, index):
-		return self.weatherTable[(index, 4)]
+	def dd4cAccum(self, index):							     #added April 2019 -kle
+		return self.weatherTable[(index, 4)]				 #added April 2019 -kle
 
 	def numberOfDays(self):
 		return self.numDays
