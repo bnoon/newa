@@ -108,7 +108,6 @@ stn_info_inactive = {
 'um_tff': {'name': 'Northboro, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lon': -71.67833, 'elev': 610, 'lat': 42.34611, 'network': 'cu_log', 'state': 'MA'},
 'um_ces': {'name': 'Weston (Case Estates), MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -71.29889, 'elev': 246, 'lat': 42.35806, 'network': 'cu_log', 'state': 'MA', 'disconnected': 'yes'},
 'um_new': {'name': 'Middletown, RI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 41.529167, 'lon': -71.27250, 'elev': 197, 'network': 'cu_log', 'state': 'RI', 'disconnected': 'yes'},
-'um_bcf': {'name': 'Barnstable County Farm, MA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 41.697834, 'lon': -70.288709, 'elev': 53, 'network': 'cu_log', 'state': 'MA'},
 'ew_bat': {'name': 'Bath, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.8269, 'lon': -84.365, 'elev': -9999, 'network': 'miwx', 'state': 'MI', 'disconnected': 'yes'},
 'ew_dmo': {'name': 'East Lansing (Ag Expo), MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.7136, 'lon': -84.4913, 'elev': -9999, 'network': 'miwx', 'state': 'MI', 'disconnected': 'yes'},
 'ew_gde': {'name': 'Goodells, MI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.9864, 'lon': -82.6563, 'elev': 213, 'network': 'miwx', 'state': 'MI', 'disconnected': 'yes'},
@@ -121,5 +120,6 @@ stn_info_inactive = {
 'il_mil': {'name': 'Millstadt, IL', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 38.51105, 'lon': -90.12701, 'elev': 545, 'network': 'newa', 'state': 'IL'},
 'wi_bro': {'name': 'Brodhead, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.589416, 'lon': -89.410074, 'elev': 860, 'network': 'newa', 'state': 'WI'},
 'wi_bur': {'name': 'Burlington (Munster), WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.5759, 'lon': -88.250796, 'elev': 820, 'network': 'newa', 'state': 'WI'},
+'nc_eaw': {'name': 'Edneyville (Apple Wedge), NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'],'srqual': 'ok', 'lat': 35.40492, 'lon': -82.35360, 'elev': 2248, 'network': 'newa', 'state': 'NC'},
 'me_bhb': {'name': 'Bar Harbor, ME', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 44.389786, 'lon': -68.208026, 'elev': 55, 'network': 'newa', 'state': 'ME', 'disconnected': 'yes'},
 }

@@ -213,6 +213,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "nysm_voor" : {"temp": "kalb", "prcp": "kalb", "rhum": "kalb", "wspd": "kalb", "wdir": "kalb", "srad": "cli", "st4i": "cli"},
 "ny_gend" : {"temp": "gen", "rhum": "gen", "prcp": "gen", "wspd": "gen", "wdir": "gen", "lwet": "gen", "srad": "gen"},
 "ny_genn" : {"temp": "gen", "rhum": "gen", "prcp": "gen", "wspd": "gen", "wdir": "gen", "lwet": "gen", "srad": "gen"},
+"ny_lake" : {"temp": "kdsv", "rhum": "kdsv", "prcp": "kdsv", "wspd": "kdsv", "wdir": "kdsv", "srad": "nysm_sbri"},
 "mbe" : {"temp": "um_cso", "rhum": "um_cso", "prcp": "um_cso", "wspd": "um_cso", "wdir": "um_cso", "lwet": "um_cso", "srad": "um_cso"},
 "msd" : {"temp": "korh", "rhum": "korh", "prcp": "korh", "wspd": "korh", "wdir": "korh", "lwet": "mas", "srad": "mbe"},
 "hwa" : {"temp": "vpu", "rhum": "vpu", "prcp": "vpu", "wspd": "vpu", "wdir": "vpu", "lwet": "vpu", "srad": "vpu"},
@@ -613,6 +614,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "oh_woo": {"temp": "woos", "rhum": "woos", "prcp": "woos", "wspd": "woos", "wdir": "woos", "lwet": "woos", "srad": "woos"},
 "oh_gmc": {"temp": "asht", "rhum": "asht", "prcp": "asht", "wspd": "asht", "wdir": "asht", "lwet": "asht", "srad": "asht"},
 "oh_gko": {"temp": "asht", "rhum": "asht", "prcp": "asht", "wspd": "asht", "wdir": "asht", "lwet": "asht", "srad": "asht"},
+"oh_mid": {"temp": "kyng", "rhum": "kyng", "prcp": "kyng", "wspd": "kyng", "wdir": "kyng", "lwet": "kyng", "srad": "oh_che"},
 "asht":   {"temp": "khzy", "lwet": "oh_ber", "prcp": "khzy", "rhum": "khzy", "wspd": "khzy", "wdir": "khzy", "srad": "oh_che", "st4i": "avon"},
 "perr":   {"temp": "khzy", "prcp": "khzy", "rhum": "khzy", "wspd": "khzy", "wdir": "khzy", "srad": "asht"},
 "avon":   {"temp": "kcle", "prcp": "kcle", "rhum": "kcle", "wspd": "kcle", "wdir": "kcle", "srad": "oh_ber"},
@@ -786,5 +788,9 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "ew_cnk": {"temp": "ew_kct", "rhum": "ew_kct", "prcp": "ew_kct", "wspd": "ew_kct", "wdir": "ew_kct", "lwet": "ew_kct", "srad": "ew_kct"},
 "ew_ner": {"temp": "ew_bna", "rhum": "ew_bna", "prcp": "ew_bna", "wspd": "ew_bna", "wdir": "ew_bna", "lwet": "ew_bna", "srad": "ew_bna"},
 "ew_rfw": {"temp": "ew_frm", "rhum": "ew_frm", "prcp": "ew_frm", "wspd": "ew_frm", "wdir": "ew_frm", "lwet": "ew_frm", "srad": "ew_frm"},
-"ew_mou": {"temp": "ew_ith", "rhum": "ew_ith", "prcp": "ew_ith", "wspd": "ew_ith", "wdir": "ew_ith", "lwet": "ew_ith", "srad": "ew_ith"}
+"ew_mou": {"temp": "ew_ith", "rhum": "ew_ith", "prcp": "ew_ith", "wspd": "ew_ith", "wdir": "ew_ith", "lwet": "ew_ith", "srad": "ew_ith"},
+"ew_aet": {"temp": "ew_rfw", "rhum": "ew_rfw", "prcp": "ew_rfw", "wspd": "ew_rfw", "wdir": "ew_rfw", "lwet": "ew_rfw", "srad": "ew_rfw"},
+"ew_mea": {"temp": "ew_hrt", "rhum": "ew_hrt", "prcp": "ew_hrt", "wspd": "ew_hrt", "wdir": "ew_hrt", "lwet": "ew_hrt", "srad": "ew_hrt"},
+"ew_sbe": {"temp": "ew_ner", "rhum": "ew_ner", "prcp": "ew_ner", "wspd": "ew_ner", "wdir": "ew_ner", "lwet": "ew_ner", "srad": "ew_ner"},
+"ew_spn": {"temp": "ew_cnk", "rhum": "ew_cnk", "prcp": "ew_cnk", "wspd": "ew_cnk", "wdir": "ew_cnk", "lwet": "ew_cnk", "srad": "ew_cnk"}
 }
