@@ -3766,7 +3766,7 @@ def process_help (request,path):
 		elif smry_type == 'apple_scab_estlw':
 			return newaModel_io.helppage(None)
 		elif smry_type == 'apple_scab' or (smry_type == 'apple_disease' and pest == 'apple_scab'):
-			return newaModel_io.helppage([("Pest Management Guidelines for Commercial Tree Fruit Production","http://ipmguidelines.org"),
+			return newaModel_io.helppage([("Pest Management Guidelines for Commercial Tree Fruit Production","https://cropandpestguides.cce.cornell.edu"),
 										   ("Apple Scab Fact Sheet","http://nysipm.cornell.edu/factsheets/treefruit/diseases/as/as.asp"),
 										   ("Disease Susceptibility of Apples","https://blogs.cornell.edu/applevarietydatabase/disease-susceptibility-of-common-apples/"),
 			                               ("Cornell Fruit Resources - Tree Fruit IPM","https://blogs.cornell.edu/treefruit/ipm/"),
@@ -3778,7 +3778,7 @@ def process_help (request,path):
 			return newaModel_io.helppage([ ("Notes on first blossom open biofix","/appfbnotes_pop.htm"),
 										   ("Fire Blight Susceptible Cultivars and Rootstocks","http://newa.cornell.edu/index.php?page=fire-blight-susceptible-cultivars-and-rootstocks"),
 										   ("Disease Susceptibility of Apples","https://blogs.cornell.edu/applevarietydatabase/disease-susceptibility-of-common-apples/"),
-										   ("Pest Management Guidelines for Commercial Tree Fruit Production","http://ipmguidelines.org"),
+										   ("Pest Management Guidelines for Commercial Tree Fruit Production","https://cropandpestguides.cce.cornell.edu"),
 										   ("Fire Blight Fact Sheet (pdf)","https://ecommons.cornell.edu/handle/1813/43095"),
 			                               ("NEWA Default Biofix Dates","http://newa.cornell.edu/index.php?page=default-biofix-dates"),
 			                               ("To download Maryblyt v 7.1 (Windows only), use the link <http://grapepathology.org/maryblyt> or email Alan Biggs at Alan.Biggs@mail.wvu.edu.", "http://grapepathology.org/maryblyt"),
@@ -3787,7 +3787,7 @@ def process_help (request,path):
 		elif smry_type == 'sooty_blotch' or (smry_type == 'apple_disease' and pest == 'sooty_blotch'):
 			return newaModel_io.helppage([
 #											("Notes on petal fall biofix - not available",""),
-										   ("Pest Management Guidelines for Commercial Tree Fruit Production","http://ipmguidelines.org"),
+										   ("Pest Management Guidelines for Commercial Tree Fruit Production","https://cropandpestguides.cce.cornell.edu"),
 										   ("Sooty Blotch/Flyspeck Fact Sheet (html)","http://hdl.handle.net/1813/43129"),
 										   ("Sooty Blotch/Flyspeck Fact Sheet (pdf)","https://ecommons.cornell.edu/bitstream/handle/1813/43129/sooty-blotch-flyspeck-FS-NYSIPM.pdf?sequence=1&isAllowed=y"),
 #										   ("More information about Sooty Blotch/Flyspeck - not available",""),
@@ -3804,10 +3804,10 @@ def process_help (request,path):
 			if pest:
 				pest_abb = pest[pest.find('-')+1:]
 				if pest_abb == 'maggot': pest_abb = 'am'
-				help_list = [("Pest Management Guidelines","http://ipmguidelines.org"),
+				help_list = [("Pest Management Guidelines","https://cropandpestguides.cce.cornell.edu"),
 			             ("%s Fact Sheet"%(pest_names[pest_abb]),"http://hdl.handle.net/1813/%s"%(pest_id[pest_abb])),
 			             ("Cornell Fruit Resources - Tree Fruit IPM","https://blogs.cornell.edu/treefruit/ipm/"),
-						 ("Pesticide Information","https://cropandpestguides.cce.cornell.edu/"),
+						 ("Pesticide Information","https://cropandpestguides.cce.cornell.edu"),
 			             ("NEWA Default Biofix Dates","http://newa.cornell.edu/index.php?page=default-biofix-dates"),
 			             ("Degree Day Accumulations Table","http://newa.cornell.edu/index.php?page=degree-days"),
 			             ("Hudson Valley Scouting Reports and Trap Data","http://www.hudsonvalleyresearchlab.org/"),
@@ -3820,13 +3820,13 @@ def process_help (request,path):
 			return newaModel_io.helppage([("Risk Assessment of Grape Berry Moth and Guidelines for Management of the Eastern Grape Leafhopper (pdf)","http://hdl.handle.net/1813/5202"),
 										   ("Grape Berry Moth IPM fact sheet","http://hdl.handle.net/1813/43096"),
 										   ("Grape Berry Moth IPM fact sheet (pdf)","https://ecommons.cornell.edu/bitstream/handle/1813/43096/grape-berry-moth-FS-NYSIPM.pdf?sequence=1&isAllowed=y"),
-										   ("New York and Pennsylvania Pest Management Guidelines for Grapes","http://ipmguidelines.org"),
+										   ("New York and Pennsylvania Pest Management Guidelines for Grapes","https://cropandpestguides.cce.cornell.edu"),
 										   ("Production Guide for Organic Grapes (pdf)","https://ecommons.cornell.edu/bitstream/handle/1813/42888/2016-org-grapes-NYSIPM.pdf?sequence=5&isAllowed=y"),
 										   ("Elements of IPM for Grapes in New York State","http://hdl.handle.net/1813/42720"),
 			                               ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references")
 										   ])
 		elif smry_type == 'grape_dis' or (smry_type == 'grape_disease' and pest == 'grape_dis'):
-			return newaModel_io.helppage([("New York and Pennsylvania Pest Management Guidelines for Grapes","http://ipmguidelines.org"),
+			return newaModel_io.helppage([("New York and Pennsylvania Pest Management Guidelines for Grapes","https://cropandpestguides.cce.cornell.edu"),
 										   ("Black Rot IPM Fact Sheet","http://hdl.handle.net/1813/43076"),
 										   ("Phomopsis Cane and Leaf Spot IPM Fact Sheet","http://hdl.handle.net/1813/43104"),
 										   ("Grapevine Powdery Mildew IPM Fact Sheet","http://hdl.handle.net/1813/43121"),

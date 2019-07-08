@@ -508,7 +508,7 @@ function getSisterData(sister_station, cb_args) {
 			'miwx':  {'pcpn': 5, 'temp': 126, 'rhum': 143, 'lwet': 118, 'srad': 132 },
 			'oardc': {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132 },
 			'nysm':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm2i': 104 },
-			'nwon':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm4i': 104 }
+			'nwon':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm4i': 104 }
 		},
 		vn_defs = {
 			'newa':  {},
