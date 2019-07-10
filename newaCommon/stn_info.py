@@ -156,6 +156,8 @@ stn_info = {
 'wi_col': {'name': 'Colgate, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.195621, 'lon': -88.307373, 'elev': 1076, 'network': 'newa', 'state': 'WI'},
 'wi_bur': {'name': 'Burlington (Munster), WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.5759, 'lon': -88.250796, 'elev': 820, 'network': 'newa', 'state': 'WI'},
 'wi_bro': {'name': 'Brodhead, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.589416, 'lon': -89.410074, 'elev': 860, 'network': 'newa', 'state': 'WI'},
+'wi_wau': {'name': 'Waupaca, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 44.349853, 'lon': -89.153704, 'elev': 914, 'network': 'newa', 'state': 'WI'},
+'wi_bai': {'name': 'Baileys Harbor, WI', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'lat': 45.068074, 'lon': -87.123803, 'elev': 586, 'network': 'newa', 'state': 'WI'},
 'vbe': {'name': 'Bennington (SVO), VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.841119, 'lon': -73.218067, 'elev': 1312, 'network': 'newa', 'state': 'VT'},
 'vco': {'name': 'Cornwall, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.962033, 'lon': -73.239449, 'elev': 398, 'network': 'newa', 'state': 'VT'},
 'vdu': {'name': 'Dummerston, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.904167, 'lon': -72.568466, 'elev': 561, 'network': 'newa', 'state': 'VT'},
