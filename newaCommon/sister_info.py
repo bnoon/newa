@@ -518,6 +518,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "pa_nsh": {"temp": "nee", "rhum": "nee", "prcp": "nee", "wspd": "nee", "wdir": "nee", "lwet": "nee", "srad": "rie"},
 "pa_nsl": {"temp": "nee", "rhum": "nee", "prcp": "nee", "wspd": "nee", "wdir": "nee", "lwet": "nee", "srad": "rie"},
 "pa_mcd": {"temp": "kpit", "rhum": "kpit", "prcp": "kpit", "wspd": "kpit", "wdir": "kpit", "lwet": "oh_rog", "srad": "pa_cab"},
+"pa_bai": {"temp": "kmdt", "rhum": "kmdt", "prcp": "kmdt", "wspd": "kmdt", "wdir": "kmdt", "lwet": "pa_big", "srad": "pa_big"},
 "pa_have": {"temp": "kphl", "rhum": "kphl", "prcp": "kphl", "wspd": "kphl", "wdir": "kphl", "srad": "3527"},
 "mmi" : {"temp": "khfd", "rhum": "khfd", "prcp": "khfd", "wspd": "khfd", "wdir": "khfd", "lwet": "cli", "srad": "mwe"},
 "ct_gfy": {"temp": "ct_nwi", "rhum": "ct_nwi", "prcp": "ct_nwi", "wspd": "ct_nwi", "wdir": "ct_nwi", "lwet": "ct_nwi", "srad": "ct_nia", "st4i": "ct_nwi", "sm4i": "ct_nwi"},
