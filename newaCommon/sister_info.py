@@ -259,6 +259,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "nh_pla" : {"temp": "kleb", "rhum": "kleb", "prcp": "kleb", "wspd": "kleb", "wdir": "kleb", "lwet": "nh_bos", "srad": "nh_bos"},
 "nh_gof" : {"temp": "kmht", "rhum": "kmht", "prcp": "kmht", "wspd": "kmht", "wdir": "kmht", "lwet": "nh_hol", "srad": "nh_hol"},
 "nh_nha" : {"temp": "kmpv", "rhum": "kmpv", "prcp": "kmpv", "wspd": "kmpv", "wdir": "kmpv", "lwet": "vem", "srad": "nh_col"},
+"nh_nlo" : {"temp": "kleb", "rhum": "kleb", "prcp": "kleb", "wspd": "kleb", "wdir": "kleb", "lwet": "nh_bos", "srad": "nh_bos"},
 "wi_gay" : {"temp": "kovs", "rhum": "kovs", "prcp": "kovs", "wspd": "kovs", "wdir": "kovs", "lwet": "mn_lac", "srad": "wi_ric"},
 "wi_ver" : {"temp": "kmsn", "rhum": "kmsn", "prcp": "kmsn", "wspd": "kmsn", "wdir": "kmsn", "lwet": "wi_gay", "srad": "wi_gay"},
 "wi_eau" : {"temp": "keau", "rhum": "keau", "prcp": "keau", "wspd": "keau", "wdir": "keau", "lwet": "mn_lkc", "srad": "mn_lkc"},
