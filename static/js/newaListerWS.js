@@ -638,25 +638,11 @@ function getHourlyData(cb_args) {
 			elems: [],
 			meta: "tzo"
 		},
-		tempAndWspd = [23, 126, 28, 128],
-		vn_defs = {
-			'newa':  {},
-			'icao':  {},
-			'cu_log':{},
-			'culog': {},
-			'njwx':  {},
-			'miwx':  {},
-			'oardc': {120: 68 },
-			'nysm':  {120: 1093, 104: 1091 },
-			'nwon':  {120: 136, 104: 134}
-		};
+		tempAndWspd = [23, 126, 28, 128];
 	rinput.elems.forEach(function(elem) {
-		var addElem = {vX: elem};
+		var addElem = typeof elem === 'number' ? {vX: elem} : elem;
 		if (tempAndWspd.indexOf(elem) >= 0) {
 			$.extend(addElem, {"prec":1});
-		}
-		if (vn_defs[station_type][elem]) {
-			$.extend(addElem, {"vN": vn_defs[station_type][elem]});
 		}
 		input_params.elems.push(addElem);
 	});
@@ -699,11 +685,7 @@ function filterElems(results, cb_args) {
 		};
 	vdr.forEach(function(elemdr, i) {
 		if (elemdr.length && input_params.sdate <= elemdr[1] && input_params.edate >= elemdr[0]) {
-			if (typeof evx[i] === 'number') {
-				avail_elems.push(evx[i]);
-			} else {
-				avail_elems.push(evx[i].vX);
-			}
+			avail_elems.push(evx[i]);
 			data_starts.push(elemdr[0]);
 			data_ends.push(elemdr[1]);
 		}
@@ -742,7 +724,7 @@ function getMeta(rinput) {
 			'miwx':  {'pcpn': 5, 'temp': 126, 'rhum': 143, 'lwet': 118, 'srad': 132 },
 			'oardc': {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120 },
 			'nysm':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm2i': 104 },
-			'nwon':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm4i': 104 }
+			'nwon':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st6i': 120, 'sm6i': 104, 'st4i': 120, 'sm4i': 104 }
 		},
 		vn_defs = {
 			'newa':  {},
@@ -753,7 +735,7 @@ function getMeta(rinput) {
 			'miwx':  {},
 			'oardc': {'st4i': 68},
 			'nysm':  {'st4i': 1093, 'sm2i': 1091 },
-			'nwon':  {'st4i': 136, 'sm4i': 134}	//These are actually 15cm
+			'nwon':  {'st6i': 136, 'sm6i': 134, 'st4i': 104, 'sm4i': 102}
 		},
 		input_params = {
 			sids: [rinput.stn_id, rinput.stn_type].join(" "),
@@ -789,7 +771,7 @@ function runHourlyLister(stn_id, stn_type, year, month) {
 			stn_type: stn_type,
 			sdate: moment([year, month-1, 1]).subtract(1, 'day').format("YYYY-MM-DD"),
 			edate: moment([year, month-1, 1]).endOf('month').format("YYYY-MM-DD"),
-			requested_elems: ['temp','dwpt','pcpn','lwet','rhum','wspd','wdir','srad','st4i','sm4i','sm2i'],
+			requested_elems: ['temp','dwpt','pcpn','lwet','rhum','wspd','wdir','srad','st4i','sm4i','sm2i','st6i','sm6i'],
 			productCallback: hourlyLister
 		};
 	getMeta(rinput);

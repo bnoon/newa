@@ -298,7 +298,7 @@ def get_sister_info (stn):
 				elif sister[var][0:5] == "nysm_":
 					sister[var] = sister[var][5:]
 					station_type = 'nysm'
-				elif len(sister) == 7 and sister[2:3] == "_":
+				elif len(sister[var]) == 7 and sister[var][2:3] == "_":
 					station_type = 'nwon'
 				elif len(sister[var]) == 3 or len(sister[var]) == 6:
 					station_type = "newa"
