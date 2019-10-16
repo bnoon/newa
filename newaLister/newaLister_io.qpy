@@ -1007,7 +1007,7 @@ def estimation_info [html] (stn,station_name,var_sister,year,month):
 			 'lwet': 'Leaf Wetness',        'rhum': 'Relative Humidity',
 			 'dwpt': 'Dewpoint',           'wspd': 'Wind Speed',        'wdir': 'Wind Direction',
 			 'srad': 'Solar Radiation',    'st4i': 'Soil Temperature',
-			 'sm4i': 'Soil Tension' }
+			 'sm4i': 'Soil Moisture',      'st6i': 'Soil Temperature',  'sm6i': 'Soil Moisture' }
 	'''
 	<html>
 	<head>
