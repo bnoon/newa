@@ -44,7 +44,9 @@ def get_metadata (station_id,id_type=None):
 	station_name = station_id
 	try:
 		if not id_type:
-			if station_id[0:1] >= '1' and station_id[0:1] <= '9' and station_id[1:2] >= '0' and station_id[1:2] <= '9':
+			if station_id[0:3] == '42.' or station_id[0:3] == '43.':
+				id_type  = 'ucc'
+			elif station_id[0:1] >= '1' and station_id[0:1] <= '9' and station_id[1:2] >= '0' and station_id[1:2] <= '9':
 				id_type = 'njwx'
 			elif len(station_id) == 4 and station_id[0:1].upper() == 'K':
 				id_type = 'icao'
@@ -124,7 +126,11 @@ def initHourlyVar (staid, var, miss, station_type='newa'):
 				'nwon': {'prcp': [5,17,  'inch','%.2f'],      'temp': [23,14, 'degF',   '%.1f'],
 						  'lwet': [118,10,'',    '%3.0f'],     'rhum': [24,16, 'percent','%.1f'],
 						  'wspd': [28,11, 'miles/hour','%.1f'],'srad': [132,11,'langley','%.2f'],
-						  'st4i': [120,8,'degF','%.1f'],	   'wdir': [27,11,'degrees','%.0f'] }
+						  'st4i': [120,8,'degF','%.1f'],	   'wdir': [27,11,'degrees','%.0f'] },
+				'ucc':   {'prcp': [5,18,  'inch', '%.2f'],      'temp': [126,8, 'degF',   '%.1f'],
+						  'lwet': [118,11,'',     '%3.0f'],     'rhum': [141,3, 'percent','%.1f'],
+						  'wspd': [128,8, 'miles/hour','%.1f'], 'wdir': [130,6,'degrees','%.0f'],
+						  'srad': [149,4, 'langley','%.2f'],    'st4i': [123,193,'degF','%.1f']}
 				}
 	v = None
 	miss_str = "%s" % miss
@@ -294,7 +300,10 @@ def sister_est(stn,var,var_date,end_period,tsvars,dataForEst, datesForEst, vflag
 				est0 = tsvars[var]['tsv']
 			else:
 				sister = sister_info[stn][var]
-				if sister[0:1] >= '1' and sister[0:1] <= '9' and sister[1:2] >= '0' and sister[1:2] <= '9':
+				if sister[0:3] == '42.' or sister[0:3] == '43.':
+					station_type  = 'ucc'
+					est_staid,station_name = get_metadata (sister, station_type)
+				elif sister[0:1] >= '1' and sister[0:1] <= '9' and sister[1:2] >= '0' and sister[1:2] <= '9':
 					station_type = 'njwx'
 					est_staid,station_name = get_metadata (sister, station_type)
 				elif len(sister) == 4 and sister[0:1].upper() == 'K':
@@ -981,7 +990,9 @@ class Base:
 		download_time = ''
 		station_name = ''
 		try:
-			if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
+			if stn[0:3] == '42.' or stn[0:3] == '43.':
+				station_type  = 'ucc'
+			elif stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 				station_type = 'njwx'
 			elif len(stn) == 4 and stn[0:1].upper() == 'K':
 				station_type = 'icao'
@@ -1026,7 +1037,9 @@ class Base:
 		station_name = ''
 		avail_vars = []
 		try:
-			if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
+			if stn[0:3] == '42.' or stn[0:3] == '43.':
+				station_type  = 'ucc'
+			elif stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 				station_type = 'njwx'
 			elif len(stn) == 4 and stn[0:1].upper() == 'K':
 				station_type = 'icao'
@@ -1069,7 +1082,9 @@ class Base:
 		daily_data = []
 		station_name = ''
 		try:
-			if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
+			if stn[0:3] == '42.' or stn[0:3] == '43.':
+				station_type  = 'ucc'
+			elif stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 				station_type = 'njwx'
 			elif len(stn) == 4 and stn[0:1].upper() == 'K':
 				station_type = 'icao'
@@ -1111,7 +1126,9 @@ class Base:
 		download_time = ''
 		station_name = ''
 		try:
-			if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
+			if stn[0:3] == '42.' or stn[0:3] == '43.':
+				station_type  = 'ucc'
+			elif stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 				station_type = 'njwx'
 			elif len(stn) == 4 and stn[0:1].upper() == 'K':
 				station_type = 'icao'
@@ -1156,7 +1173,9 @@ class Base:
 		download_time = ''
 		station_name = ''
 		try:
-			if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
+			if stn[0:3] == '42.' or stn[0:3] == '43.':
+				station_type  = 'ucc'
+			elif stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 				station_type = 'njwx'
 			elif len(stn) == 4 and stn[0:1].upper() == 'K':
 				station_type = 'icao'

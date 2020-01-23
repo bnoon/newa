@@ -282,7 +282,9 @@ def get_sister_info (stn):
 		if sister_info.has_key(stn):
 			sister = sister_info[stn]
 			for var in sister.keys():
-				if sister[var][0:1] >= '1' and sister[var][0:1] <= '9' and sister[var][1:2] >= '0' and sister[var][1:2] <= '9':
+				if sister[var][0:3] == '42.' or sister[var][0:3] == '43.':
+					station_type  = 'ucc'
+				elif sister[var][0:1] >= '1' and sister[var][0:1] <= '9' and sister[var][1:2] >= '0' and sister[var][1:2] <= '9':
 					station_type = 'njwx'
 				elif len(sister[var]) == 4 and sister[var][0:1].upper() == 'K':
 					sister[var] = sister[var].upper()
@@ -455,7 +457,9 @@ def process_input (request,path):
 		end_date_dt = req_date_dt + DateTime.RelativeDate(months=+1)
 
 		orig_stn = copy.deepcopy(stn)
-		if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
+		if stn[0:3] == '42.' or stn[0:3] == '43.':
+			station_type  = 'ucc'
+		elif stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 			station_type = 'njwx'
 		elif len(stn) == 4 and stn[0:1].upper() == 'K':
 			station_type = 'icao'

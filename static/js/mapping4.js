@@ -108,6 +108,7 @@ function statePlaceMarkers (cur_data, event_type, state) {
 		'CT': {lat: 41.6220, lon: -72.7272, zoom: 8, name: 'Connecticut'},
 		'DE': {lat: 38.9895, lon: -75.5051, zoom: 8, name: 'Delaware'},
 		'DC': {lat: 38.9101, lon: -77.0147, zoom: 8, name: 'DC'},
+		'ID': {lat: 45.4946, lon: -114.1433, zoom: 6, name: 'Idaho'},
 		'IL': {lat: 40.0411, lon: -89.1965, zoom: 6, name: 'Illinois'},
 		'IA': {lat: 42.0753, lon: -93.4959, zoom: 6, name: 'Iowa'},
 		'KY': {lat: 37.5347, lon: -85.3021, zoom: 6, name: 'Kentucky'},
@@ -127,6 +128,7 @@ function statePlaceMarkers (cur_data, event_type, state) {
 		'RI': {lat: 41.6762, lon: -71.5562, zoom: 9, name: 'Rhode Island'},
 		'SC': {lat: 33.6290, lon: -80.9500, zoom: 6, name: 'South Carolina'},
 		'SD': {lat: 43.9169, lon: -100.2282, zoom: 6, name: 'South Dakota'},
+		'UT': {lat: 39.4998, lon: -111.5470, zoom: 6, name: 'Utah'},
 		'VT': {lat: 44.0688, lon: -72.6663, zoom: 7, name: 'Vermont'},
 		'VA': {lat: 37.5229, lon: -78.8531, zoom: 7, name: 'Virginia'},
 		'WV': {lat: 38.6409, lon: -80.6230, zoom: 7, name: 'West Virginia'},
@@ -210,7 +212,7 @@ function statePlaceMarkers (cur_data, event_type, state) {
 	$.each(cur_data.stations, function (i,stn) {
 		markerOptions.position = new google.maps.LatLng(stn.lat, stn.lon);
 		markerOptions.title = stn.name;
-		if (stn.network === "newa" || stn.network === "njwx" || stn.network === "miwx" || stn.network === "oardc" || stn.network === "nysm" || stn.network === "nwon" || (stn.network === "cu_log" && stn.state !== "NY")) { /////
+		if (stn.network === "newa" || stn.network === "njwx" || stn.network === "miwx" || stn.network === "ucc" || stn.network === "oardc" || stn.network === "nysm" || stn.network === "nwon" || (stn.network === "cu_log" && stn.state !== "NY")) { /////
 			markerOptions.icon = stn.state === state || state === "ALL" ? newaIcon : newaIconGray;
 		} else if (stn.network === "cu_log") { 
 			markerOptions.icon = stn.state === state || state === "ALL" ? culogIcon : culogIconGray; 
@@ -302,6 +304,7 @@ function stateStationMapList (options) {
 			['CT', 'Connecticut'],
 			['DE', 'Delaware'],
 			['DC', 'DC'],
+			['ID', 'Idaho'],
 			['IL', 'Illinois'],
 			['IA', 'Iowa'],
 			['KY', 'Kentucky'],
@@ -320,6 +323,7 @@ function stateStationMapList (options) {
 			['RI', 'Rhode Island'],
 			['SC', 'South Carolina'],
 			['SD', 'South Dakota'],
+			['UT', 'Utah'],
 			['VT', 'Vermont'],
 			['VA', 'Virginia'],
 			['WV', 'West Virginia'],

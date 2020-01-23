@@ -388,7 +388,9 @@ class Pottom (Base, general_simcast):
 		else:
 			# get station name from metadata
 			# determine station type
-			if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
+			if stn[0:3] == '42.' or stn[0:3] == '43.':
+				station_type  = 'ucc'
+			elif stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 				station_type = 'njwx'
 			elif len(stn) == 4 and stn[0:1].upper() == 'K':
 				station_type = 'icao'
@@ -555,7 +557,9 @@ class Potato (Pottom):
 	
 			# get station name from metadata
 			# determine station type
-			if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
+			if stn[0:3] == '42.' or stn[0:3] == '43.':
+				station_type  = 'ucc'
+			elif stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 				station_type = 'njwx'
 			elif len(stn) == 4 and stn[0:1].upper() == 'K':
 				station_type = 'icao'

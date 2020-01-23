@@ -284,6 +284,19 @@ class miwx_vars(newa_weather) :
 		self.lwet_minor = 6
 		newa_weather.__init__(self,stn_id)		
 
+class ucc_vars(newa_weather) :
+	def __init__(self,stn_id) :
+		self.type = 'ucc'
+		self.tmp_major = 126
+		self.tmp_minor = 8
+		self.rh_major = 141
+		self.rh_minor = 3
+		self.prcp_major = 5
+		self.prcp_minor = 18
+		self.lwet_major = 118
+		self.lwet_minor = 11
+		newa_weather.__init__(self,stn_id)		
+
 class oardc_vars(newa_weather) :
 	def __init__(self,stn_id) :
 		self.type = 'oardc'
@@ -347,7 +360,10 @@ class general_dm_weather(object) :
 
 
 	def get_tsvar_class(self,stn) :
-		if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
+		if stn[0:3] == '42.' or stn[0:3] == '43.':
+			obj = ucc_vars(stn)
+			return obj
+		elif stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 			obj = njwx_vars(stn)
 			return obj
 		elif len(stn) == 4 and stn[0:1].upper() == 'K':

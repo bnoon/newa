@@ -102,10 +102,12 @@ function hourlyLister(cb_args) {
 			104: {title: stnid[1] !== 'nysm' ? 'Soil Moisture (m3/m3)' : 'Soil Moisture @ 2" (m3/m3)'},
 			118: {title: 'Leaf Wetness (minutes)'},
 			120: {title: stnid[1] !== 'nysm' && stnid[1] !== 'oardc' ? 'Soil Temp (&#8457;)' : 'Soil Temp @ 2" (&#8457;)'},
+			123: {title: 'Soil Temperature (&#8457;)'},
 			126: {title: 'Air Temperature (&#8457;)'},
 			128: {title: 'Wind Spd (mph)'},
 			130: {title: 'Wind Dir (degrees)'},
 			132: {title: 'Solar Rad (langleys)'},
+			141: {title: 'Max RH (percent)'},
 			143: {title: 'RH (percent)'},
 			149: {title: 'Solar Rad (watts/m2)'},
 		},
@@ -300,9 +302,11 @@ function dailyLister(cb_args) {
 			104: {title: stnid[1] !== 'nysm' ? 'Avg Soil Moisture (m3/m3)' : 'Avg 2" Soil Moisture (m3/m3)', summary: 'mean', decimal: 2},
 			118: {title: 'Leaf Wetness Hours', summary: 'cnt', decimal: 0},
 			120: {title: stnid[1] !== 'nysm' && stnid[1] !== 'oardc' ? 'Avg Soil Temp (&#8457;)' : 'Avg 2" Soil Temp (&#8457;)', summary: 'mean', decimal: 1},
+			123: {title: 'Avg Soil Temperature (&#8457;)', summary: 'mean', decimal: 1},
 			126: {title: 'Avg Air Temperature (&#8457;)', summary: 'mean', decimal: 1},
 			128: {title: 'Avg Wind Spd (mph)', summary: 'mean', decimal: 1},
 			132: {title: 'Solar Rad (langleys)', summary: 'sum', decimal: 0},
+			141: {title: 'RH Hrs &ge; 90%', summary: 'cnt', decimal: 0},
 			143: {title: 'RH Hrs &ge; 90%', summary: 'cnt', decimal: 0},
 			149: {title: 'Solar Rad (watts/m2)', summary: 'sum', decimal: 0},
 		},
@@ -430,6 +434,7 @@ function getForecastData(cb_args) {
 			28:  'wspd',
 			126: 'temp',
 			128: 'wspd',
+			141: 'rhum',
 			143: 'rhum'
 		},
 		est_for_elem = cb_args.est_for_elem,
@@ -492,10 +497,12 @@ function getSisterData(sister_station, cb_args) {
 			104: 'sm2i',
 			118: 'lwet',
 			120: 'st4i',
+			123: 'st4i',
 			126: 'temp',
 			128: 'wspd',
 			130: 'wdir',
 			132: 'srad',
+			141: 'rhum',
 			143: 'rhum',
 			149: 'srad'
 		},
@@ -508,7 +515,8 @@ function getSisterData(sister_station, cb_args) {
 			'miwx':  {'pcpn': 5, 'temp': 126, 'rhum': 143, 'lwet': 118, 'srad': 132 },
 			'oardc': {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132 },
 			'nysm':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm2i': 104 },
-			'nwon':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm4i': 104 }
+			'nwon':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm4i': 104 },
+			'ucc':   {'pcpn': 5, 'temp': 126, 'rhum': 141, 'lwet': 118, 'wspd': 128, 'wdir': 130, 'srad': 149, 'st4i': 123, 'sm4i': 104 }
 		},
 		vn_defs = {
 			'newa':  {},
@@ -519,7 +527,8 @@ function getSisterData(sister_station, cb_args) {
 			'miwx':  {},
 			'oardc': {'st4i': 68 },
 			'nysm':  {'st4i': 1093, 'sm2i': 1091 },
-			'nwon':  {'st4i': 136, 'sm4i': 134} //these are actually 15cm
+			'nwon':  {'st4i': 136, 'sm4i': 134}, //these are actually 15cm
+			'ucc':   {'st4i': 193, 'sm4i': 199}  //thease are actually 10 inches
 		};
 	newaLister_estimates_togo = missing_elems.length;		// ***** GLOBAL *****
 	missing_elems.forEach(function(vx) {
@@ -676,10 +685,12 @@ function filterElems(results, cb_args) {
 			104: 'Soil Moisture',
 			118: 'Leaf Wetness',
 			120: 'Soil Temperature',
+			123: 'Soil Temperature',
 			126: 'Temperature',
 			128: 'Wind Speed',
 			130: 'Wind Direction',
 			132: 'Solar Radiation',
+			141: 'Relative Humidity',
 			143: 'Relative Humidity',
 			149: 'Solar Radiation',
 		};
@@ -724,7 +735,8 @@ function getMeta(rinput) {
 			'miwx':  {'pcpn': 5, 'temp': 126, 'rhum': 143, 'lwet': 118, 'srad': 132 },
 			'oardc': {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120 },
 			'nysm':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st4i': 120, 'sm2i': 104 },
-			'nwon':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st6i': 120, 'sm6i': 104, 'st4i': 120, 'sm4i': 104 }
+			'nwon':  {'pcpn': 5, 'temp':  23, 'rhum':  24, 'lwet': 118, 'wspd':  28, 'wdir':  27, 'srad': 132, 'st6i': 120, 'sm6i': 104, 'st4i': 120, 'sm4i': 104 },
+			'ucc':   {'pcpn': 5, 'temp': 126, 'rhum': 141, 'lwet': 118, 'wspd': 128, 'wdir': 130, 'srad': 149, 'st4i': 123, 'sm4i': 104 }
 		},
 		vn_defs = {
 			'newa':  {},
@@ -735,7 +747,8 @@ function getMeta(rinput) {
 			'miwx':  {},
 			'oardc': {'st4i': 68},
 			'nysm':  {'st4i': 1093, 'sm2i': 1091 },
-			'nwon':  {'st6i': 136, 'sm6i': 134, 'st4i': 104, 'sm4i': 102}
+			'nwon':  {'st6i': 136, 'sm6i': 134, 'st4i': 104, 'sm4i': 102},
+			'ucc':   {'st4i': 193, 'sm4i': 199}  //thease are actually 10 inches
 		},
 		input_params = {
 			sids: [rinput.stn_id, rinput.stn_type].join(" "),

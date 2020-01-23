@@ -315,7 +315,9 @@ def run_apple_et (stn,accend,greentip,output):
 		start_date_dt = accend + DateTime.RelativeDate(days=-7) + DateTime.RelativeDate(hour=0,minute=0,second=0.0)
 		end_date_dt = accend + DateTime.RelativeDate(days=+6) + DateTime.RelativeDate(hour=23,minute=0,second=0.0)	
 		
-		if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
+		if stn[0:3] == '42.' or stn[0:3] == '43.':
+			station_type  = 'ucc'
+		elif stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 			station_type = 'njwx'
 		elif len(stn) == 4 and stn[0:1].upper() == 'K':
 			station_type = 'icao'
@@ -368,7 +370,9 @@ def run_apple_et_specs (stn,accend,output):
 	end_date_dt = accend + DateTime.RelativeDate(days=+6) + DateTime.RelativeDate(hour=23,minute=0,second=0.0)	
 	
 	fcst_stn = copy.deepcopy(stn)
-	if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
+	if stn[0:3] == '42.' or stn[0:3] == '43.':
+		station_type  = 'ucc'
+	elif stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 		station_type = 'njwx'
 	elif len(stn) == 4 and stn[0:1].upper() == 'K':
 		station_type = 'icao'
@@ -617,7 +621,9 @@ def apple_thin_json(data_dict, biofix_dt, bloom_dt, percentflowerspurs):
 #--------------------------------------------------------------------------------------------		
 def run_apple_thin (stn,accend,greentip,bloom,percentflowerspurs,output):
 	try:
-		if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
+		if stn[0:3] == '42.' or stn[0:3] == '43.':
+			station_type  = 'ucc'
+		elif stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 			station_type = 'njwx'
 		elif len(stn) == 4 and stn[0:1].upper() == 'K':
 			station_type = 'icao'
@@ -675,7 +681,9 @@ def run_apple_thin_specs (stn,accend,output):
 	end_date_dt = accend + DateTime.RelativeDate(days=+6) + DateTime.RelativeDate(hour=23,minute=0,second=0.0)	
 	
 	fcst_stn = copy.deepcopy(stn)
-	if stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
+	if stn[0:3] == '42.' or stn[0:3] == '43.':
+		station_type  = 'ucc'
+	elif stn[0:1] >= '1' and stn[0:1] <= '9' and stn[1:2] >= '0' and stn[1:2] <= '9':
 		station_type = 'njwx'
 	elif len(stn) == 4 and stn[0:1].upper() == 'K':
 		station_type = 'icao'

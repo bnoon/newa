@@ -257,7 +257,7 @@ def run_stationList(list_options='all'):
 		
 		unsortedKeys = unsortedDict.keys()
 		unsortedKeys.sort()
-		for state in ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','IL','SD','MO','VA','SC','WV','AL']:
+		for state in ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','IL','SD','MO','VA','SC','WV','AL','ID','UT']:
 			for usk in unsortedKeys:
 				if state == unsortedDict[usk]['state']:
 					station_dict['stations'].append(unsortedDict[usk])
@@ -280,7 +280,10 @@ def run_stationSisterInfo(options):
 		if sister_info.has_key(stn):
 			sister = sister_info[stn]
 			for var in sister.keys():
-				if sister[var][0:1] >= '1' and sister[var][0:1] <= '9' and sister[var][1:2] >= '0' and sister[var][1:2] <= '9':
+				if sister[var][0:3] == '42.' or sister[var][0:3] == '43.':
+					station_id = sister[var]
+					station_type  = 'ucc'
+				elif sister[var][0:1] >= '1' and sister[var][0:1] <= '9' and sister[var][1:2] >= '0' and sister[var][1:2] <= '9':
 					station_id = sister[var]
 					station_type = 'njwx'
 				elif len(sister[var]) == 4 and sister[var][0:1].upper() == 'K':
