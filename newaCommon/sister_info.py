@@ -82,6 +82,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "lak" : {"temp": "lod", "rhum": "hec", "prcp": "hec", "wspd": "hec", "wdir": "hec", "lwet": "hec", "srad": "hec"},
 "lan" : {"temp": "fre", "lwet": "fre", "rhum": "kith", "prcp": "fre", "wspd": "kith", "srad": "aur", "wdir": "kith"},
 "ny_lans" : {"temp": "kith", "lwet": "ny_itha", "rhum": "kith", "prcp": "fre", "wspd": "kith", "srad": "ny_itha", "wdir": "kith"},
+"ny_port" : {"temp": "bro", "lwet": "bro", "rhum": "bro", "prcp": "bro", "wspd": "bro", "srad": "bro", "wdir": "bro"},
 "1lo" : {"temp": "loc", "lwet": "loc", "rhum": "loc", "prcp": "loc", "wspd": "loc", "srad": "loc", "wdir": "kiag"},
 "lkp" : {"temp": "kslk", "rhum": "kslk", "lwet": "per", "prcp": "kslk", "wspd": "kslk", "wdir": "kslk", "srad": "vso"},
 "lod" : {"temp": "hec", "lwet": "hec", "rhum": "hec", "prcp": "hec", "wspd": "hec", "wdir": "hec", "srad": "hec"},
@@ -651,6 +652,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "oh_gko": {"temp": "asht", "rhum": "asht", "prcp": "asht", "wspd": "asht", "wdir": "asht", "lwet": "asht", "srad": "asht"},
 "oh_mid": {"temp": "kyng", "rhum": "kyng", "prcp": "kyng", "wspd": "kyng", "wdir": "kyng", "lwet": "kyng", "srad": "oh_che"},
 "oh_qua": {"temp": "kzzv", "rhum": "kzzv", "prcp": "kzzv", "wspd": "kzzv", "wdir": "kzzv", "lwet": "east", "srad": "east"},
+"oh_char": {"temp": "oh_che", "rhum": "oh_che", "prcp": "oh_che", "wspd": "oh_che", "wdir": "oh_che", "lwet": "oh_che", "srad": "oh_che"},
 "asht":   {"temp": "khzy", "lwet": "oh_ber", "prcp": "khzy", "rhum": "khzy", "wspd": "khzy", "wdir": "khzy", "srad": "oh_che", "st4i": "avon"},
 "perr":   {"temp": "khzy", "prcp": "khzy", "rhum": "khzy", "wspd": "khzy", "wdir": "khzy", "srad": "asht"},
 "avon":   {"temp": "kcle", "prcp": "kcle", "rhum": "kcle", "wspd": "kcle", "wdir": "kcle", "srad": "oh_ber"},
@@ -851,5 +853,5 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "42.32": {"temp": "42.26", "rhum": "42.26", "prcp": "42.26", "wspd": "42.26", "wdir": "42.26", "lwet": "42.26", "srad": "42.26"},
 "42.33": {"temp": "42.32", "rhum": "42.32", "prcp": "42.32", "wspd": "42.32", "wdir": "42.32", "lwet": "42.32", "srad": "42.32"},
 "43.02": {"temp": "43.01", "rhum": "43.01", "prcp": "43.01", "wspd": "43.01", "wdir": "43.01", "lwet": "43.01", "srad": "43.01"},
-"43.01": {"temp": "43.02", "rhum": "43.02", "prcp": "43.02", "wspd": "43.02", "wdir": "43.02", "lwet": "43.02", "srad": "43.02"},
+"43.01": {"temp": "43.02", "rhum": "43.02", "prcp": "43.02", "wspd": "43.02", "wdir": "43.02", "lwet": "43.02", "srad": "43.02"}
 }
