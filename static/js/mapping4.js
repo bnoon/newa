@@ -133,7 +133,8 @@ function statePlaceMarkers (cur_data, event_type, state) {
 		'VA': {lat: 37.5229, lon: -78.8531, zoom: 7, name: 'Virginia'},
 		'WV': {lat: 38.6409, lon: -80.6230, zoom: 7, name: 'West Virginia'},
 		'WI': {lat: 44.6243, lon: -89.9941, zoom: 6, name: 'Wisconsin'},
-		'AL': {lat: 32.6174, lon: -86.6795, zoom: 7, name:' Alabama'},
+		'AL': {lat: 32.6174, lon: -86.6795, zoom: 7, name: 'Alabama'},
+		'GA': {lat: 32.6793, lon: -83.2224, zoom: 7, name: 'Georgia'},
 		'ALL':{lat: 42.5000, lon: -75.7000, zoom: 6, name: 'All'},
 	};
 	var stateInfo = stateCenters.hasOwnProperty(state) ? stateCenters[state] : {lat: 42.5, lon: -75.7, zoom: 6, name: 'All'};
@@ -304,6 +305,7 @@ function stateStationMapList (options) {
 			['CT', 'Connecticut'],
 			['DE', 'Delaware'],
 			['DC', 'DC'],
+			['GA', 'Georgia'],
 			['ID', 'Idaho'],
 			['IL', 'Illinois'],
 			['IA', 'Iowa'],

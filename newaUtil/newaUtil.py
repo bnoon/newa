@@ -257,7 +257,7 @@ def run_stationList(list_options='all'):
 		
 		unsortedKeys = unsortedDict.keys()
 		unsortedKeys.sort()
-		for state in ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','IL','SD','MO','VA','SC','WV','AL','ID','UT']:
+		for state in ['NY','VT','MA','NH','CT','RI','NJ','PA','DE','MD','ME','DC','WI','IA','NE','MN','NC','IL','SD','MO','VA','SC','WV','AL','ID','UT','GA']:
 			for usk in unsortedKeys:
 				if state == unsortedDict[usk]['state']:
 					station_dict['stations'].append(unsortedDict[usk])
