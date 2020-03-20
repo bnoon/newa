@@ -551,6 +551,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "pa_bai": {"temp": "kmdt", "rhum": "kmdt", "prcp": "kmdt", "wspd": "kmdt", "wdir": "kmdt", "lwet": "pa_big", "srad": "pa_big"},
 "pa_cha": {"temp": "kphl", "rhum": "kphl", "prcp": "kphl", "wspd": "kphl", "wdir": "kphl", "lwet": "pa_have", "srad": "3527"},
 "pa_have": {"temp": "kphl", "rhum": "kphl", "prcp": "kphl", "wspd": "kphl", "wdir": "kphl", "srad": "3527"},
+"pa_bigl": {"temp": "pa_big", "rhum": "pa_big", "prcp": "pa_big", "wspd": "pa_big", "wdir": "pa_big", "srad": "pa_big"},
 "mmi" : {"temp": "khfd", "rhum": "khfd", "prcp": "khfd", "wspd": "khfd", "wdir": "khfd", "lwet": "cli", "srad": "mwe"},
 "ct_gfy": {"temp": "ct_nwi", "rhum": "ct_nwi", "prcp": "ct_nwi", "wspd": "ct_nwi", "wdir": "ct_nwi", "lwet": "ct_nwi", "srad": "ct_nia", "st4i": "ct_nwi", "sm4i": "ct_nwi"},
 "ct_gui": {"temp": "kbdr", "rhum": "kbdr", "prcp": "kbdr", "wspd": "kbdr", "wdir": "kbdr", "lwet": "ct_she", "srad": "ct_she", "st4i": "ct_she", "sm4i": "ct_she"},
