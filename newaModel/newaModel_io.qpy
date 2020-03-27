@@ -3313,6 +3313,7 @@ def grape_disease_results [html] (smry_dict):
 		wet_start_dt = wet_start_dt + DateTime.RelativeDate(hours=-1) 
 		ws_str = '%s %d %d:01' % (month_abb[wet_start_dt.month],wet_start_dt.day,wet_start_dt.hour)
 		
+		'<tr>'
 		'<td class=%s_back_smaller_c>%s</td>'%(color,ws_str)
 		'<td class=%s_back_smaller_c>%s</td>'%(color,we_str)
 		'<td class=%s_back_smaller_c>%d</td>'%(color,wet_hrs)

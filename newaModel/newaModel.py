@@ -417,6 +417,15 @@ class Models(Base):
 								last_end_dt = DateTime.DateTime(*end)
 							else:
 #								print 'This period does not start with rain; skip'
+								#next block added to reinitialize for dry period following by wet period with no precipitaiton -kle 3/27/2020
+								look_for_start = 1
+								combo_start = miss
+								combo_end = miss
+								last_end_dt = miss
+								combo_hrs = 0.
+								temp_sum = 0.
+								prcp_sum = 0.
+								combo = 0
 								continue
 						else:
 #							print 'Last period in combination above; move on'

@@ -263,6 +263,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "ma_sdee" : {"temp": "korh", "rhum": "korh", "prcp": "korh", "wspd": "korh", "wdir": "korh", "lwet": "mas", "srad": "mbe"},
 "ma_rich" : {"temp": "kpsf", "rhum": "kpsf", "prcp": "kpsf", "wspd": "kpsf", "wdir": "kpsf", "lwet": "cla", "srad": "nysm_step"},
 "ma_efal" : {"temp": "kfmh", "rhum": "kfmh", "prcp": "kfmh", "wspd": "kfmh", "wdir": "kfmh", "lwet": "ma_barn", "srad": "ma_barn"},
+"ma_ebri" : {"temp": "ktan", "rhum": "ktan", "prcp": "ktan", "wspd": "ktan", "wdir": "ktan", "lwet": "mpl", "srad": "mpl"},
 "ri_barr" : {"temp": "kpvd", "rhum": "kpvd", "prcp": "kpvd", "wspd": "kpvd", "wdir": "kpvd", "lwet": "ct_gfy", "srad": "ct_gfy"},
 "nh_hol" : {"temp": "kash", "rhum": "kash", "prcp": "kash", "wspd": "kash", "wdir": "kash", "lwet": "mty", "srad": "nh_gof"},
 "nh_bos" : {"temp": "kcon", "rhum": "kcon", "prcp": "kcon", "wspd": "kcon", "wdir": "kcon", "lwet": "nh_hol", "srad": "nh_hol"},
