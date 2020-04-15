@@ -2154,7 +2154,7 @@ class Apple (Base,Models):
 				smry_dict['cycle'] = disease_cycle_management['overwinter']['cycle']
 				smry_dict['manage'] = disease_cycle_management['overwinter']['management']
 				return newaModel_io.apple_scab_overwinter(smry_dict)
-			
+
 			# user has set greentip date to "no occurrence"
 			if greentip == 'noocc':
 				# alternate path to "early branch"

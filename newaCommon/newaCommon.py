@@ -330,7 +330,7 @@ def sister_est(stn,var,var_date,end_period,tsvars,dataForEst, datesForEst, vflag
 					station_type = 'newa'
 					est_staid,station_name = get_metadata (sister, station_type)
 				else:
-					return replacement
+					return replacement, tsvars, dataForEst, datesForEst, vflagsForEst
 					
 				if var == 'srad' and station_type == 'icao':
 					estdate = "%04d%02d%02d%02d" % (var_date[0],var_date[1],var_date[2],var_date[3])
@@ -703,6 +703,7 @@ def get_newa_data (stn,native_id,start_date_dt,end_date_dt,station_type='newa'):
 					         dly_temp_ave, dly_temp_max, dly_temp_min, dly_prcp_tot, dly_lwet_hrs, \
 					         dly_rhum_hrs, dly_wspd_ave, dly_srad_tot, dly_st4i_ave, dly_st4i_max, \
 					         dly_st4i_min, dflags))
+#					print '********* saved daily data',[ddt.year,ddt.month,ddt.day], dly_temp_ave
 						
 					temp_sum = 0.
 					temp_cnt = 0.
@@ -755,7 +756,8 @@ def get_newa_data (stn,native_id,start_date_dt,end_date_dt,station_type='newa'):
 	if srad0: srad0.release()
 	if st4i0: st4i0.release()
 	for key in est_tsvars.keys():
-		if est_tsvars[key]['tsv']: est_tsvars[key]['tsv'].release()
+		if est_tsvars[key]['tsv']: 
+			est_tsvars[key]['tsv'].release()
 	return (hourly_data, daily_data, avail_vars)
 
 #--------------------------------------------------------------------------------------------		

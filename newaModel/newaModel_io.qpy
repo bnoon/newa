@@ -552,6 +552,7 @@ def apple_scab_log [html] (smry_dict):
 	}
 	</script>
 	'''
+
 	day0_dt = DateTime.DateTime(*smry_dict['day0']['ymd'])
 	fdy5 = day0_dt + DateTime.RelativeDate(days=+5)
 	pday1_dt = DateTime.DateTime(*smry_dict['pday1']['ymd']) + DateTime.RelativeDate(hour=23,minute=0,second=0)
@@ -568,6 +569,7 @@ def apple_scab_log [html] (smry_dict):
 	late_season = smry_dict['late_season']
 	
 	'<h3>Apple Scab Results for %s</h3>' % smry_dict['station_name']
+
 	if late_season:
 		'<p>Primary scab season is over. '
 		if smry_dict['all_released']:
