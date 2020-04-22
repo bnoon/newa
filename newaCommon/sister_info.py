@@ -301,6 +301,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "wi_tre" : {"temp": "klse", "rhum": "klse", "prcp": "klse", "wspd": "klse", "wdir": "klse", "lwet": "mn_lkc", "srad": "mn_lkc"},
 "wi_wau" : {"temp": "kisw", "rhum": "kisw", "prcp": "kisw", "wspd": "kisw", "wdir": "kisw", "lwet": "wi_wit", "srad": "wi_wit"},
 "wi_bai" : {"temp": "ew_ehb", "rhum": "ew_ehb", "prcp": "ew_ehb", "wspd": "ew_ehb", "wdir": "ew_ehb", "lwet": "ew_ehb", "srad": "ew_ehb"},
+"wi_bel" : {"temp": "ksbm", "rhum": "ksbm", "prcp": "ksbm", "wspd": "ksbm", "wdir": "ksbm", "lwet": "wi_ply", "srad": "wi_ply"},
 "wi_mtho" : {"temp": "wi_mth", "rhum": "wi_mth", "prcp": "wi_mth", "wspd": "wi_mth", "wdir": "wi_mth", "lwet": "wi_mth", "srad": "wi_mth"},
 "wi_bayf" : {"temp": "kasx", "rhum": "kasx", "prcp": "kasx", "wspd": "kasx", "wdir": "kasx", "lwet": "wi_mer", "srad": "wi_mer"},
 "um_whs" : {"temp": "kowd", "rhum": "kowd", "prcp": "kowd", "wspd": "kowd", "wdir": "kowd", "lwet": "msh", "srad": "mwa"},
