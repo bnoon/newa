@@ -50,6 +50,7 @@ def get_weapage_input [html] ():
 		<option value="dd32">Degree Days - Base 32</option>
 		<option value="dd39">Degree Days - Base 39</option>
 		<option value="dd40">Degree Days - Base 40</option>
+		<option value="dd41">Degree Days - Base 41</option>
 		<option value="dd43">Degree Days - Base 43</option>
 		<option value="dd45">Degree Days - Base 45</option>
 		<option value="dd48">Degree Days - Base 48</option>
@@ -229,6 +230,7 @@ def get_dday_input [html] ():
 		<option value="dd32">Degree Days - Base 32</option>
 		<option value="dd39">Degree Days - Base 39</option>
 		<option value="dd40">Degree Days - Base 40</option>
+		<option value="dd41">Degree Days - Base 41</option>
 		<option value="dd43">Degree Days - Base 43</option>
 		<option value="dd45">Degree Days - Base 45</option>
 		<option value="dd48">Degree Days - Base 48</option>
@@ -367,6 +369,7 @@ def get_ddayrange_input [html] ():
 		<option value="dd32">Degree Days - Base 32</option>
 		<option value="dd39">Degree Days - Base 39</option>
 		<option value="dd40">Degree Days - Base 40</option>
+		<option value="dd41">Degree Days - Base 41</option>
 		<option value="dd43">Degree Days - Base 43</option>
 		<option value="dd45">Degree Days - Base 45</option>
 		<option value="dd48">Degree Days - Base 48</option>
@@ -895,6 +898,7 @@ def degday_list_html [html] (stn,station_name,year,month,degday_data,degday_miss
 				  "dd32":   "Base 32", 
 				  "dd39":   "Base 39",
 				  "dd40":   "Base 40",
+				  "dd41":   "Base 41",
 				  "dd43":   "Base 43",
 				  "dd45":   "Base 45",
 				  "dd48":   "Base 48",
