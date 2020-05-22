@@ -933,7 +933,7 @@ def collect_hourly_input(native_id, start_date_dt, end_date_dt, vars, station_ty
 	try:
 		if station_type == 'miwx' and len(native_id) == 3:
 			native_id = 'ew_%s' % native_id
-		elif station_type == 'nysm' and len(native_id) == 5:
+		elif station_type == 'nysm' and len(native_id) == 4:
 			native_id = 'nysm_%s' % native_id
 		for requested_var in vars:
 			# get forecast data

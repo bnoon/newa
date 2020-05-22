@@ -74,7 +74,6 @@ stn_info_inactive = {
 'wbs': {'name': 'Williamson (Bear Swamp)', 'vars': ['temp', 'prcp', 'rhum', 'wspd', 'wdir'], 'lat': 43.250549, 'lon': -77.160323, 'elev': 367, 'network': 'newa', 'state': 'NY', 'disconnected': 'yes'},
 'wgl': {'name': 'Watkins Glen', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -76.925487, 'elev': 1100.0, 'lat': 42.377077, 'network': 'newa', 'state': 'NY'},
 'ny_genm': {'name': 'Geneva (AgriTech McCarthy)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st6i', 'sm6i'], 'srqual': 'ok', 'lat': 42.896472, 'lon': -77.006888, 'elev': 545, 'network': 'nwon', 'state': 'NY', 'disconnected': 'yes'},
-'ny_genn': {'name': 'Geneva (AgriTech North)', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st6i', 'sm6i'], 'srqual': 'ok', 'lat': 42.873262, 'lon': -77.028175, 'elev': 702, 'network': 'nwon', 'state': 'NY'},
 'vca': {'name': 'Calais, VT','vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lon': -72.5293, 'elev': 1434, 'lat': 44.3395, 'network': 'newa', 'state': 'VT', 'disconnected': 'yes'},
 'vsa': {'name': 'Saxtons River, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 43.153611, 'lon': -72.533611, 'elev': 802, 'network': 'newa', 'state': 'VT', 'disconnected': 'yes'},
 'vsh': {'name': 'Shoreham, VT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lon': -73.3517, 'elev': 351,  'lat': 43.8861, 'network': 'newa', 'state': 'VT'},
