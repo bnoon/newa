@@ -3819,7 +3819,7 @@ def process_help (request,path):
 						 ("Pesticide Information","https://cropandpestguides.cce.cornell.edu"),
 			             ("NEWA Default Biofix Dates","http://newa.cornell.edu/index.php?page=default-biofix-dates"),
 			             ("Degree Day Accumulations Table","http://newa.cornell.edu/index.php?page=degree-days"),
-			             ("Hudson Valley Scouting Reports and Trap Data","http://www.hudsonvalleyresearchlab.org/"),
+#			             ("Hudson Valley Scouting Reports and Trap Data","http://www.hudsonvalleyresearchlab.org/"),
 			             ("NEWA Model References","http://newa.cornell.edu/index.php?page=newa-pest-forecast-model-references")
 						 ]
 			else:

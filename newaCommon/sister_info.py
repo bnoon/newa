@@ -678,6 +678,8 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "oh_mid": {"temp": "kyng", "rhum": "kyng", "prcp": "kyng", "wspd": "kyng", "wdir": "kyng", "lwet": "kyng", "srad": "oh_che"},
 "oh_qua": {"temp": "kzzv", "rhum": "kzzv", "prcp": "kzzv", "wspd": "kzzv", "wdir": "kzzv", "lwet": "east", "srad": "east"},
 "oh_char": {"temp": "oh_che", "rhum": "oh_che", "prcp": "oh_che", "wspd": "oh_che", "wdir": "oh_che", "lwet": "oh_che", "srad": "oh_che"},
+"oh_oakh": {"temp": "ncen", "rhum": "ncen", "prcp": "ncen", "wspd": "ncen", "wdir": "ncen", "lwet": "ncen", "srad": "ncen"},
+"oh_carr": {"temp": "kcak", "rhum": "kcak", "prcp": "kcak", "wspd": "kcak", "wdir": "kcak", "lwet": "pa_mcd", "srad": "pa_mcd"},
 "asht":   {"temp": "khzy", "lwet": "oh_ber", "prcp": "khzy", "rhum": "khzy", "wspd": "khzy", "wdir": "khzy", "srad": "oh_che", "st4i": "avon"},
 "perr":   {"temp": "khzy", "prcp": "khzy", "rhum": "khzy", "wspd": "khzy", "wdir": "khzy", "srad": "asht"},
 "avon":   {"temp": "kcle", "prcp": "kcle", "rhum": "kcle", "wspd": "kcle", "wdir": "kcle", "srad": "oh_ber"},
