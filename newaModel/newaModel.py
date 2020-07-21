@@ -2526,7 +2526,7 @@ class Apple (Base,Models):
 			print_exception()
 
 	#--------------------------------------------------------------------------------------------		
-	#	obtain everything necessary for apple fire blight summary
+	#	obtain everything necessary for sooty blotch
 	def run_sooty_blotch (self,stn,end_date_dt,petalfall,fungicide,harvest,selbutton,output):
 		try:
 			smry_dict = {}
@@ -2582,6 +2582,7 @@ class Apple (Base,Models):
 			# obtain hourly data
 			end_fcst_dt = end_date_dt + DateTime.RelativeDate(days = +6) + DateTime.RelativeDate(hour=23,minute=0,second=0)
 			hourly_data, download_time, station_name, avail_vars = self.get_hourly2 (stn, start_date_dt, end_fcst_dt)
+
 			start_fcst_dt = DateTime.DateTime(*download_time) + DateTime.RelativeDate(hours = +1)
 			# append any available forecast data after end of observed data
 			if end_fcst_dt >= start_fcst_dt:

@@ -398,7 +398,7 @@ def get_newa_data (stn,native_id,start_date_dt,end_date_dt,station_type='newa'):
 	avail_vars = []
 	if station_type == 'miwx' and len(native_id) == 3:
 		orig_id = 'ew_%s' % native_id
-	elif station_type == 'nysm' and len(native_id) == 5:
+	elif station_type == 'nysm' and len(native_id) == 4:
 		orig_id = 'nysm_%s' % native_id
 	else:
 		orig_id = native_id
