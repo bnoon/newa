@@ -1,0 +1,16 @@
+Apple insect biofixes. "dd" is degree day threshold for 1) displaying datepicker, 2) default to autofill date.
+'am_catch1_50':     { 'base': 50, 'dd': (730,1297), 'name': 'First Trap Catch'},               #Apple Maggot
+'macph_pf_50':      { 'base': 50, 'dd': (210, 303), 'name': 'Petal Fall'},                     #Plum Curculio 
+'sjs_catch1_50':    { 'base': 50, 'dd': (145, 340), 'name': 'First Trap Catch'},               #San Jose Scale 
+'sjs_catch1_50':    { 'base': 50, 'dd': (  *,1057), 'name': 'Second Generation Emergence'},    #San Jose Scale 
+'cm_catch1_50':     { 'base': 50, 'dd': (168, 404), 'name': 'First Trap Catch'},               #Codling Moth
+'cm_flight2_50':    { 'base': 50, 'dd': (  *,1501), 'name': 'Second Generation Flight Start'}, #Codling Moth
+'oblr_catch1_43':   { 'base': 43, 'dd': (750,1212), 'name': 'First Trap Catch'},               #Obliquebanded Leafroller
+'stlm_catch1_43':   { 'base': 43, 'dd': ( 81, 274), 'name': 'First Trap Catch'},               #Spotted Tentiform Leafminer
+'stlm_flight2_43':  { 'base': 43, 'dd': (  *, 977), 'name': 'Second Generation Flight Start'}, #Spotted Tentiform Leafminer
+'ofm_catch1_43':    { 'base': 43, 'dd': (173, 378), 'name': 'First Trap Catch'},               #Oriental Fruit Moth
+'ofm_flight2_43':   { 'base': 43, 'dd': (  *,1241), 'name': 'Second Generation Flight Start'}, #Oriental Fruit Moth
+'ofm_flight3_43':   { 'base': 43, 'dd': (  *,1820), 'name': 'Third Generation Flight Start'},  #Oriental Fruit Moth
+
+* - degree day threshold to display datepicker is currently not defined, so the datepicker does not appear until the 
+   default threshold is met. This should be changed in the new model implementation. 

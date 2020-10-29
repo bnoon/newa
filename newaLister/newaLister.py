@@ -76,7 +76,7 @@ def degday_summary(daily_data,year,month,smry_type):
 						adjtmin = tmin
 					tave = (adjtmax+adjtmin)/2.
 					ddval = tave - 50.
-				elif smry_type == 'dd43be' or smry_type == 'dd50be':
+				elif smry_type == 'dd43be' or smry_type == 'dd45be' or smry_type == 'dd50be':
 					base = float(smry_type[2:4])
 					if tmin >= base:
 						tave = (tmax+tmin)/2.
@@ -510,7 +510,7 @@ def process_input (request,path):
 				return newaLister_io.hly_list_html(orig_stn,station_name,year,month,hourly_data,avail_vars,miss,station_type)
 			elif smry_type == 'hly':	
 				return newaLister_io.hly_listWS_html(stn,station_type,year,month)
-			if smry_type in ['dd4c','dd143c','dd32','dd39','dd40','dd41','dd43','dd45','dd48','dd50','dd8650','dd55','dd43be','dd50be','dd4714']:
+			if smry_type in ['dd4c','dd143c','dd32','dd39','dd40','dd41','dd43','dd45','dd48','dd50','dd8650','dd55','dd43be','dd45be','dd50be','dd4714']:
 				degday_data, degday_miss = degday_summary(daily_data,year,month,smry_type)
 				if len(degday_data) == 0:
 		#			no data - try to provide additional information

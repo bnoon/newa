@@ -1251,7 +1251,7 @@ class Base:
 								adjtmin = tmin
 							tave = (adjtmax+adjtmin)/2.
 							ddval = tave - 50.
-						elif smry_type == 'dd43be' or smry_type == 'dd50be' or smry_type == 'dd55be':
+						elif smry_type == 'dd43be' or smry_type == 'dd45be' or smry_type == 'dd50be' or smry_type == 'dd55be':
 							base = float(smry_type[2:4])
 							if tmin >= base:
 								tave = (tmax+tmin)/2.
