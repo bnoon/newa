@@ -38,7 +38,7 @@ pest_status_management = {
 0: { 'ddlo':   0, 'ddhi': 349, 'altref': ["Post_4"],
 							   'stage': "2nd generation crawlers developing",
                                'status': "Second generation crawler emergence has not yet occurred.", 
-                               'management': "No control measures are recommended at this time and it is too early to sample for second generation larvae." },
+                               'management': "If monitoring for crawlers, double-sided sticky tape traps should be placed around tree limbs at this time." },
 1: { 'ddlo': 350, 'ddhi': 450, 'altref': ["Post_5"],
 							   'stage': "2nd generation crawlers emerge",
                                'status': "Second generation crawler emergence is predicted to occur approximately 350-450 DD (base 50F) after biofix of the 2nd generation, or 1450 DD after March 1. If SJS was a serious problem last season, begin treatment.", 
