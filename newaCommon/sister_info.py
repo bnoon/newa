@@ -635,6 +635,7 @@ sister_info = {"alb" : {"temp": "kno", "lwet": "kno", "rhum": "kno", "prcp": "kn
 "mo_mar": {"temp": "kstl", "rhum": "kstl", "prcp": "kstl", "wspd": "kstl", "wdir": "kstl", "lwet": "ia_ccy", "srad": "kstl"},
 "mo_can": {"temp": "kuin", "rhum": "kuin", "prcp": "kuin", "wspd": "kuin", "wdir": "kuin", "lwet": "il_gra", "srad": "il_gra"},
 "ga_dear": {"temp": "kags", "rhum": "kags", "prcp": "kags", "wspd": "kags", "wdir": "kags", "srad": "kags"},
+"ga_lyon": {"temp": "kags", "rhum": "kags", "prcp": "kags", "wspd": "kags", "wdir": "kags", "lwet": "ga_dear", "srad": "ga_dear"},
 "il_bel": {"temp": "kstl", "rhum": "kstl", "prcp": "kstl", "wspd": "kstl", "wdir": "kstl", "lwet": "il_pgr", "srad": "kstl"},
 "il_pgr": {"temp": "krfd", "rhum": "krfd", "prcp": "krfd", "wspd": "krfd", "wdir": "krfd", "lwet": "wi_gay", "srad": "wi_gay"},
 "il_woo": {"temp": "krfd", "rhum": "krfd", "prcp": "krfd", "wspd": "krfd", "wdir": "krfd", "lwet": "il_pgr", "srad": "wi_roc"},

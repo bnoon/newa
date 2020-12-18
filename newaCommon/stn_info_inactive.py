@@ -171,6 +171,7 @@ stn_info_inactive = {
 'nc_edn': {'name': 'Edneyville (Lewis Creek), NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'toolow', 'lat': 35.368132, 'lon': -82.338506, 'elev': 2223, 'network': 'newa', 'state': 'NC'},
 'nc_hsp': {'name': 'Hendersonville (St Paul), NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 35.35161, 'lon': -82.408167, 'elev': 2183, 'network': 'newa', 'state': 'NC'},
 'nc_mof': {'name': 'Moravian Falls, NC', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'],'srqual': 'ok', 'lat': 36.038122, 'lon': -81.206226, 'elev': 2241, 'network': 'newa', 'state': 'NC'},
+'wv_rom': {'name': 'Romney, WV', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'pending', 'lat': 39.345465, 'lon': -78.702546, 'elev': 1401, 'network': 'newa', 'state': 'WV'},
 'ky_ver': {'name': 'Versailles, KY', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 37.999985, 'lon': -84.699025, 'elev': 950, 'network': 'newa', 'state': 'KY'},
 'ia_ccy': {'name': 'Central City, IA', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad'], 'srqual': 'ok', 'lat': 42.224159, 'lon': -91.494571, 'elev': 958, 'network': 'newa', 'state': 'IA'},
 '42.23': {'name': 'American Fork (Riley), UT', 'vars': ['temp', 'lwet', 'prcp', 'rhum', 'wspd', 'wdir', 'srad', 'st4i', 'sm4i'], 'srqual': 'ok', 'lon': -111.818, 'state': 'UT', 'elev': 4617, 'lat': 40.3938, 'network': 'ucc'}, 
